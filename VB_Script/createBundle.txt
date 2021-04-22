@@ -1,0 +1,1041 @@
+option explicit
+on error resume next
+
+Dim strCurDir : strCurDir=getCurrentDirectory()
+Dim strTargetExcelName : strTargetExcelName = getExcelFileName()
+Dim targetFilePathName : targetFilePathName = strCurDir & "\" & strTargetExcelName
+Dim i
+dim mapItems
+dim parentDirectory
+Dim targetQueryRange : targetQueryRange=getUsedRange(targetFilePathName)
+'msgbox "targetQueryRange: " & targetQueryRange
+Dim targetSpreadSheetName : targetSpreadSheetName=getSpreadSheetName(targetFilePathName)
+'msgbox "targetSpreadSheetName: " & targetSpreadSheetName
+
+Dim sql_text: sql_text="Select * FROM [" & targetSpreadSheetName & "$]" 
+
+
+
+Dim currentConnection : Set currentConnection = getExcelConnection(targetFilePathName,targetSpreadSheetName)
+
+Dim bundleTypes : set bundleTypes = getBundleTypes(currentConnection,targetSpreadSheetName)
+
+Dim testBusinessSource : testBusinessSource = getUmtbBusinessSource(currentConnection,targetSpreadSheetName)
+
+Dim bundleDetails : set bundleDetails = getBundleDetails(currentConnection,targetSpreadSheetName)
+
+Dim bundlePathNamesMap : set bundlePathNamesMap = CreateObject("Scripting.Dictionary")
+
+Dim bundleType
+
+For Each bundleType In bundleTypes
+                select case bundleType
+                                case  "it"                                                                                                              
+                                                bundlePathNamesMap.add "it",strCurDir & "\IT" & "\" & testBusinessSource
+                                case  "business"                                                                                                                
+                                                bundlePathNamesMap.add "business",strCurDir & "\Business" & "\" & testBusinessSource
+                end select
+Next 
+
+                
+                
+Dim objFSO
+
+mapItems = bundlePathNamesMap.items
+
+if err.number <>0 then 
+                msgbox "Error_Number_1: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                'err.clear
+end if 
+                
+for i=0 to bundlePathNamesMap.count-1
+                Set objFSO = CreateObject("Scripting.FileSystemObject")
+                
+                parentDirectory  =objFSO.getParentFolderName(mapItems(i))    
+                if objFSO.FolderExists(parentDirectory) then
+                                DoFolder  parentDirectory,objFSO
+                end if
+
+                if             objFSO.fileExists("./importer.xml") then                 
+                                objFSO.deleteFile "./importer.xml"
+
+                end if
+
+                call CreateFolderRecursive( mapItems(i) )             
+
+next
+
+
+Dim writtenDestinationPathNames : set writtenDestinationPathNames = writeToXml( bundleDetails , bundlePathNamesMap)
+'msgbox "Number Of Created Files: " &  writtenDestinationPathNames.Count
+
+
+
+'dim success: success = 
+generateImporter writtenDestinationPathNames
+
+
+
+
+
+
+
+'msgbox "Bundle Types_Length<" & bundleTypes.count & ">"
+'msgbox "Bundle Types 1<" & bundleTypes.item(0) & ">"
+'msgbox "Bundle Types 2<" & bundleTypes.item(1) & ">"
+'msgbox "Connection Type <" & TypeName(currentConnection) & ">"
+
+
+currentConnection.close              
+
+set currentConnection=nothing
+
+
+
+                if err.number <>0 then 
+                                msgbox "Error_Number_5: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                err.clear
+                end if 
+                
+                
+                Function CreateFolderRecursive(FullPath)
+  Dim arr, dir, path
+  Dim oFs
+''msgbox FullPath
+  Set oFs = WScript.CreateObject("Scripting.FileSystemObject")
+  arr = split(FullPath, "\")
+  path = ""
+  For Each dir In arr
+    If path <> "" Then path = path & "\"
+    path = path & dir
+    If oFs.FolderExists(path) = False Then oFs.CreateFolder(path)
+  Next
+End Function
+
+
+
+
+' Recursive function
+Sub DoFolder(strFolder,objFSO)
+                on error resume next
+                Dim objFile,objFolder
+                
+    With objFSO.GetFolder(strFolder)
+
+        For Each objFile In .Files
+            'If objFile.DateCreated < Date - 180 Then objFile.Delete
+                                                objFile.Delete
+        Next
+
+        For Each objFolder In .SubFolders
+            DoFolder objFolder.Path,objFSO
+        Next
+
+        ' Checked every file and subfolder. If this folder is empty, remove it...
+        If .Files.Count = 0 Then If .SubFolders.Count = 0 Then .Delete
+
+    End With
+                if err.number <>0 then 
+                                msgbox "Do_Folder_Error_1: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                err.clear
+                end if 
+End Sub
+
+sub  generateImporter(ByRef writtenDestinationPathNames)
+                on error resume next
+                Const fsoForWriting = 2
+                
+                Dim xmlDoc : Set xmlDoc = CreateObject("Msxml2.DOMDocument.6.0") 
+                xmlDoc.async = false
+                xmlDoc.validateOnParse = TRUE
+                xmlDoc.resolveExternals = TRUE
+                xmlDoc.preserveWhiteSpace = TRUE
+                Dim stylesheet:  Set stylesheet =CreateObject("MSXML2.DOMDocument.6.0")
+                Dim xslTemplate : Set xslTemplate = CreateObject("Msxml2.XSLTemplate.6.0")
+                set xmlDoc  = createImporterRootElement(xmlDoc)
+                
+                stylesheet.async = False
+                stylesheet.Load "stylesheet1.xsl"                 
+                xslTemplate.stylesheet = stylesheet
+
+                Dim processor : Set processor = xslTemplate.createProcessor
+                processor.input = xmlDoc
+                processor.transform()
+                
+                Dim objFSO : Set objFSO = CreateObject("Scripting.FileSystemObject")
+                Dim destinationRelativePathName : destinationRelativePathName ="./importer.xml"
+                Dim objTextStream : Set objTextStream = objFSO.OpenTextFile(destinationRelativePathName, fsoForWriting, True)
+
+                'Display the contents of the text file
+                objTextStream.WriteLine processor.output
+
+                'Close the file and clean up
+                objTextStream.Close
+                Set objTextStream = Nothing
+                set xmlDoc=nothing
+                
+                Dim xmlDoc2 : Set xmlDoc2 = CreateObject("Msxml2.DOMDocument.6.0")
+                xmlDoc2.setProperty "ProhibitDTD",false
+                xmlDoc2.setProperty "ResolveExternals",false
+                xmlDoc2.setProperty "ValidateOnParse",false
+                xmlDoc2.async = false
+                
+                xmlDoc2.load destinationRelativePathName
+                If 0 = xmlDoc2.ParseError Then   
+                                'msgbox "importer is ok"
+                Else
+                   WScript.Echo xmlDoc2.ParseError.Reason
+                End If
+
+                dim absoluteFilePathNameToImport
+                
+                for each absoluteFilePathNameToImport in writtenDestinationPathNames
+                
+                
+                
+                'Dim absoluteFilePathNameToImport : absoluteFilePathNameToImport = writtenDestinationPathNames.item(0)
+                
+                
+                dim xmlToImport : Set xmlToImport = CreateObject("Msxml2.DOMDocument.6.0")          
+                xmlToImport.setProperty "ProhibitDTD",false
+                xmlToImport.setProperty "ResolveExternals",false
+                xmlToImport.setProperty "ValidateOnParse",false
+                xmlToImport.async = false
+                
+                xmlToImport.load absoluteFilePathNameToImport
+                
+                if 0 = xmlToImport.ParseError Then  
+                                'msgbox "OK"
+                Else
+                   WScript.Echo xmlToImport.ParseError.Reason
+                End If
+
+                
+                
+
+                dim importedRoot : set importedRoot = xmlToImport.documentElement
+                
+                dim myNode2 : set myNode2 =importedRoot.cloneNode(true)
+                xmlDoc2.documentElement.appendChild myNode2
+                
+                
+                
+                
+                xmlDoc2.save destinationRelativePathName
+                next 
+                set xmlDoc2=nothing
+                                if err.number <>0 then 
+                                msgbox "Generate_Importer: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                'err.clear
+                end if 
+                
+                msgbox "Generate_Importer_Finish"
+'set generateImporter=TRUE
+end sub
+
+
+function writeToXml(ByRef bundleDetails,ByRef bundlePathNamesMap)
+                on error resume next
+                Dim destinationPathNames : set destinationPathNames = CreateObject("System.Collections.ArrayList")
+                Dim bundleRow
+                Dim xmlDoc,stylesheet,xslTemplate,processor,objFSO
+                Dim destinationAbsolutePath
+                Dim rolename
+                Dim objTextStream
+                Const fsoForWriting = 2
+
+                                
+                                                                  
+                '   xmlDoc.setProperty("SelectionLanguge", "XPath")
+                  ' xmlDoc.setProperty "doctype-system", "test"
+
+                dim index
+
+                for each  bundleRow in bundleDetails
+                                Set xmlDoc = CreateObject("Msxml2.DOMDocument.6.0")           
+                                xmlDoc.async = false
+                                xmlDoc.validateOnParse = TRUE
+                                xmlDoc.resolveExternals = TRUE
+                                xmlDoc.preserveWhiteSpace = TRUE
+                                Set stylesheet =CreateObject("MSXML2.FreeThreadedDOMDocument.6.0")
+                                Set xslTemplate = CreateObject("Msxml2.XSLTemplate.6.0")
+                                set xmlDoc = createRootElement(xmlDoc,bundleRow)                    
+                                set xmlDoc = createAttributesElement(xmlDoc,bundleRow)
+                                set xmlDoc = createOwnerElement(xmlDoc,bundleRow)
+                                set xmlDoc = createInheritanceElement(xmlDoc,bundleRow)
+                                
+                                dim roleType : roleType  = bundleRow.item("Role_Type")
+                                if roleType= "business" then 
+                                                set xmlDoc = createRequirementsElement(xmlDoc,bundleRow)
+                                else
+                                                if roleType= "it" then 
+                                                                set xmlDoc = createProfilesElement(xmlDoc,bundleRow)
+                                                end if 
+                                end if
+                                if err.number <>0 then 
+                                msgbox "Write_To_Xml1: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                err.clear
+                end if 
+                                rolename = bundleRow.item("Role_Name")
+                                'msgbox "Before:" & rolename
+                                rolename = camelCase(rolename)
+                                'rolename = CamelCase(rolename)
+                                stylesheet.async = False
+                                stylesheet.Load "stylesheet1.xsl"                 
+                                xslTemplate.stylesheet = stylesheet
+
+                                Set processor = xslTemplate.createProcessor
+                                processor.input = xmlDoc
+                                
+                                Set objFSO = CreateObject("Scripting.FileSystemObject")
+
+                                'Open the text file
+                                destinationAbsolutePath = bundlePathNamesMap.item(bundleRow.item("Role_Type")) & "\Bundle-"& rolename & ".xml"
+                                destinationPathNames.add destinationAbsolutePath
+                                'Set objTextStream = objFSO.OpenTextFile(destinationAbsolutePath, fsoForWriting, True)
+
+                                Dim oStream : Set oStream = CreateObject("ADODB.Stream")
+                                oStream.Open
+                                
+                                oStream.Charset = "UTF-8"
+                                ''write file without bom                 
+                                'oStream.type=1
+                                
+                                processor.output=oStream
+                                processor.transform
+                                if err.number <>0 then 
+                                                msgbox "Write_To_Xml3: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                                err.clear
+                                end if 
+                
+                                'Display the contents of the text file
+                                oStream.SaveToFile destinationAbsolutePath,2
+                                oStream.close
+                                
+                                Set oStream = Nothing
+                                Set objTextStream = Nothing
+                                Set objFSO = Nothing
+                                '               msgbox "After " & rolename
+                                
+                                
+                next
+                if err.number <>0 then 
+                                msgbox "Write_To_Xml: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                err.clear
+                end if 
+                set writeToXml  = destinationPathNames
+end function
+
+function createImporterRootElement(xmlDoc)
+                Dim sailpointElement : Set sailpointElement = xmlDoc.createElement("sailpoint")
+                xmlDoc.appendChild sailpointElement
+                set createImporterRootElement = xmlDoc
+end function 
+
+function createRootElement(xmlDoc,ByRef bundleDetails)
+                'msgbox "Create_Root_Element_Start"
+                on error resume next
+                Dim bundleElement : Set bundleElement = xmlDoc.createElement("Bundle")
+                bundleElement.setAttribute "name",bundleDetails.item("Role_Name")
+                bundleElement.setAttribute "displayName",bundleDetails.item("Display_Name")
+                bundleElement.setAttribute "type",bundleDetails.item("Role_Type")
+                xmlDoc.appendChild bundleElement
+                'msgbox "Create_Root_Element_Finish"
+                if err.number <>0 then 
+                                msgbox "Create_Root_Element: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                err.clear
+                end if 
+                set createRootElement = xmlDoc
+end function
+function LPad(s,l,c)
+                Dim n: n =0
+                if l>len(s) then n= l-len(s)
+                LPad = String(n,c) & s
+end function
+function createOwnerElement(xmlDoc,ByRef bundleDetails)
+                on error resume next
+                Dim rootElement : Set rootElement = xmlDoc.documentElement
+                Dim ownerElement : Set ownerElement = xmlDoc.createElement("Owner")
+                Dim refrenceElement :Set refrenceElement = xmlDoc.createElement("Reference")
+                refrenceElement.setAttribute "class", "sailpoint.object.Identity"
+                refrenceElement.setAttribute "name", bundleDetails.Item("Role_Owner")
+                ownerElement.appendChild(refrenceElement)
+                rootElement.appendChild ownerElement
+                if err.number <>0 then 
+                                msgbox "createOwnerElement: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                err.clear
+                end if 
+                set createOwnerElement = xmlDoc
+end function
+
+
+
+function createAttributesElement(xmlDoc,ByRef bundleDetails)
+                on error resume next
+                Dim rootElement : Set rootElement = xmlDoc.documentElement
+                Dim attributesElement : Set attributesElement = xmlDoc.createElement("Attributes")
+                Dim mapElement :Set mapElement = xmlDoc.createElement("Map")
+                Dim entryElement :Set entryElement = xmlDoc.createElement("entry")
+                entryElement.setAttribute "key", "accountSelectorRules"
+                
+                mapElement.appendChild entryElement
+                
+                Set entryElement = xmlDoc.createElement("entry")
+                entryElement.setAttribute "key", "allowDuplicateAccounts"
+                entryElement.setAttribute "value", "false"
+                mapElement.appendChild entryElement
+                
+                Set entryElement = xmlDoc.createElement("entry")
+                entryElement.setAttribute "key", "allowMultipleAssignments"
+                entryElement.setAttribute "value", "false"
+                mapElement.appendChild entryElement
+                
+                Set entryElement = xmlDoc.createElement("entry")
+                entryElement.setAttribute "key", "mergeTemplates"
+                entryElement.setAttribute "value", "true"
+                mapElement.appendChild entryElement
+                
+                Set entryElement = xmlDoc.createElement("entry")
+                entryElement.setAttribute "key", "sysDescriptions"
+                Dim sysDescriptionsValueElement :Set sysDescriptionsValueElement = xmlDoc.createElement("value")
+                Dim mapElementDesc : set mapElementDesc = xmlDoc.createElement("Map")
+                dim entryElementDesc : set  entryElementDesc = xmlDoc.createElement("entry")
+                entryElementDesc.setAttribute"key", "en_US"
+                entryElementDesc.setAttribute"value", bundleDetails.item("Role_Description")
+                mapElementDesc.appendChild entryElementDesc
+                sysDEscriptionsValueElement.appendChild mapElementDesc
+                entryElement.appendChild sysDEscriptionsValueElement
+                mapElement.appendChild entryElement
+                
+                Set entryElement = xmlDoc.createElement("entry")
+                entryElement.setAttribute "key", "umtbBusinessSource"
+                entryElement.setAttribute "value", bundleDetails.item("umtbBusinessSource")
+                mapElement.appendChild entryElement
+                
+                Set entryElement = xmlDoc.createElement("entry")
+                entryElement.setAttribute "key", "umtbReviewer"
+                entryElement.setAttribute "value", bundleDetails.item("umtbReviewer")
+                mapElement.appendChild entryElement
+                
+                
+                dim currentFieldValue : currentFieldValue = bundleDetails.item("umtbActionOnMover")
+                
+                Set entryElement = xmlDoc.createElement("entry")
+                entryElement.setAttribute "key", "umtbActionOnMover"
+                if currentFieldValue <> "" then 
+                                entryElement.setAttribute "value", bundleDetails.item("umtbActionOnMover")
+                end if
+                mapElement.appendChild entryElement
+                
+                
+                currentFieldValue = bundleDetails.item("umtbAdditionalParamsRule")
+                Set entryElement = xmlDoc.createElement("entry")
+                entryElement.setAttribute "key", "umtbAdditionalParamsRule"
+                if currentFieldValue <> "" then 
+                entryElement.setAttribute "value", bundleDetails.item("umtbAdditionalParamsRule")
+                end if
+                mapElement.appendChild entryElement
+                
+                
+                currentFieldValue = bundleDetails.item("umtbAdditionalParamsForm")
+                Set entryElement = xmlDoc.createElement("entry")
+                entryElement.setAttribute "key", "umtbAdditionalParamsForm"
+                if currentFieldValue <> "" then 
+                entryElement.setAttribute "value", bundleDetails.item("umtbAdditionalParamsForm")
+                end if
+                mapElement.appendChild entryElement
+                
+
+                currentFieldValue = bundleDetails.item("umtbHierarchy")
+                Set entryElement = xmlDoc.createElement("entry")
+                entryElement.setAttribute "key", "umtbHierarchy"
+                if currentFieldValue <> "" then 
+                entryElement.setAttribute "value", currentFieldValue
+                end if
+                mapElement.appendChild entryElement
+                
+                currentFieldValue = bundleDetails.item("umtbMapprovals")
+                Set entryElement = xmlDoc.createElement("entry")
+                entryElement.setAttribute "key", "umtbMapprovals"
+                if currentFieldValue <> "" then 
+                entryElement.setAttribute "value", currentFieldValue
+                end if
+                mapElement.appendChild entryElement
+                
+                
+                currentFieldValue = bundleDetails.item("umtbOnEffSubAMover")
+                Set entryElement = xmlDoc.createElement("entry")
+                entryElement.setAttribute "key", "umtbOnEffSubAMover"
+                if currentFieldValue <> "" then 
+                entryElement.setAttribute "value", currentFieldValue
+                end if
+                mapElement.appendChild entryElement
+                
+                currentFieldValue = bundleDetails.item("umtbOnJobKeyMover")
+                Set entryElement = xmlDoc.createElement("entry")
+                entryElement.setAttribute "key", "umtbOnJobKeyMover"
+                if currentFieldValue <> "" then 
+                entryElement.setAttribute "value", currentFieldValue
+                end if
+                mapElement.appendChild entryElement
+                
+                currentFieldValue = bundleDetails.item("umtbRequestableRole")
+                Set entryElement = xmlDoc.createElement("entry")
+                entryElement.setAttribute "key", "umtbRequestableRole"
+                if currentFieldValue <> "" then 
+                                Dim requestableValueElement :Set requestableValueElement = xmlDoc.createElement("value")
+                                Dim booleanElement :Set booleanElement = xmlDoc.createElement("Boolean")
+                                if currentFieldValue = "True" then                                            
+                                                booleanElement.Text = "true"
+                                else 
+                                                booleanElement.Text = "false"
+                                end if
+                                requestableValueElement.appendChild booleanElement
+                                entryElement.appendChild requestableValueElement
+                                                
+                end if
+                mapElement.appendChild entryElement
+                
+                currentFieldValue = bundleDetails.item("umtbSapprovals")
+                Set entryElement = xmlDoc.createElement("entry")
+                entryElement.setAttribute "key", "umtbSapprovals"
+                if currentFieldValue <> "" then 
+                entryElement.setAttribute "value", currentFieldValue
+                end if
+                mapElement.appendChild entryElement
+                
+                
+                attributesElement.appendChild mapElement
+                rootElement.appendChild attributesElement
+                if err.number <>0 then 
+                                msgbox "createAttributesElement: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                err.clear
+                end if 
+                set createAttributesElement = xmlDoc
+                
+end function
+
+function createInheritanceElement(xmlDoc,ByRef bundleDetails)
+                on error resume next
+                Dim rootElement : Set rootElement = xmlDoc.documentElement
+                Dim inheritanceElement : set inheritanceElement = xmlDoc.createElement("Inheritance")
+                                
+                Dim  referenceElement : set referenceElement =   xmlDoc.createElement("Reference")
+                Dim currentFieldValue : currentFieldValue= bundleDetails.item("Parent_Role")                  
+                
+                referenceElement.setAttribute "class", "sailpoint.object.Bundle"
+                referenceElement.setAttribute "name",currentFieldValue
+                inheritanceElement.appendChild referenceElement
+                
+                rootElement.appendChild inheritanceElement
+                if err.number <>0 then 
+                                msgbox "createInheritanceElement: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                err.clear
+                end if 
+                set createInheritanceElement = xmlDoc
+end function
+
+function createRequirementsElement(xmlDoc,ByRef bundleDetails)
+                on error resume next
+                Dim rootElement : Set rootElement = xmlDoc.documentElement
+                Dim requirementsElement : set requirementsElement = xmlDoc.createElement("Requirements")
+                Dim requirements : requirements = bundleDetails.item("Sub_Roles_IT_Roles")
+                Dim splittedRequirements : splittedRequirements = Split(requirements,",")
+                
+                Dim  referenceElement
+                Dim splittedRequirement
+                for each splittedRequirement in splittedRequirements
+                                'msgBox "Splitted" & splittedRequirement
+                
+                                set referenceElement =   xmlDoc.createElement("Reference")
+                
+                                referenceElement.setAttribute "class", "sailpoint.object.Bundle"
+                
+                                referenceElement.setAttribute "name", splittedRequirement
+                
+                                
+                                requirementsElement.appendChild referenceElement 
+                next
+                
+                rootElement.appendChild requirementsElement
+                if err.number <>0 then 
+                                msgbox "createRequirementsElement: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                err.clear
+                end if 
+                set createRequirementsElement = xmlDoc
+end function
+
+function createProfilesElement(xmlDoc,ByRef bundleDetails)
+on error resume next
+Dim rootElement : Set rootElement = xmlDoc.documentElement
+Dim rawEntitlements : rawEntitlements = bundleDetails.item("IT_Role_Entitlements")
+Dim splittedRawEntitlements : splittedRawEntitlements = Split(rawEntitlements,"|")
+
+Dim profilesElement : set profilesElement =   xmlDoc.createElement("Profiles")
+
+Dim profileElement
+Dim applicationRefElement
+Dim referenceElement
+Dim applicationName
+Dim attributeName
+Dim entitlementValue
+Dim costraintsElement
+Dim filerElement
+Dim valueElement
+Dim listElement
+Dim stringElement
+Dim splittedRawEntitlement
+if err.number <>0 then 
+                msgbox "createProfilesElement1: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                err.clear
+end if 
+for each splittedRawEntitlement in splittedRawEntitlements
+                set profileElement =   xmlDoc.createElement("Profile")
+                set applicationRefElement =   xmlDoc.createElement("ApplicationRef")
+                set referenceElement =   xmlDoc.createElement("Reference")
+                
+                Dim semicolonSplittedEntitlements : semicolonSplittedEntitlements = Split(splittedRawEntitlement,";")
+                if err.number <>0 then 
+                msgbox "createProfilesElement2: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                err.clear
+end if 
+                applicationName = semicolonSplittedEntitlements(0)
+                referenceElement.setAttribute "class","sailpoint.object.Application"
+                referenceElement.setAttribute "name",applicationName
+                applicationRefElement.appendChild referenceElement
+                
+                set costraintsElement =   xmlDoc.createElement("Constraints")
+                set filerElement =   xmlDoc.createElement("Filter")
+                filerElement.setAttribute "operation","CONTAINS_ALL"
+                
+                
+                attributeName = semicolonSplittedEntitlements(1)
+                filerElement.setAttribute "property",attributeName
+                
+                set valueElement =   xmlDoc.createElement("Value")
+                set listElement =   xmlDoc.createElement("List")
+                set stringElement =   xmlDoc.createElement("String")
+                                if err.number <>0 then 
+                msgbox "createProfilesElement3: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                err.clear
+end if 
+                entitlementValue = semicolonSplittedEntitlements(2)
+                stringElement.Text = entitlementValue
+                listElement.appendChild stringElement
+                valueElement.appendChild listElement
+                filerElement.appendChild valueElement
+                costraintsElement.appendChild filerElement
+                profileElement.appendChild applicationRefElement
+                profileElement.appendChild costraintsElement
+                profilesElement.appendChild profileElement
+next
+rootElement.appendChild profilesElement
+if err.number <>0 then 
+                msgbox "createProfilesElement: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                err.clear
+end if 
+set createProfilesElement = xmlDoc
+end function
+
+' Convert the string into PascalCase.
+function camelCase(the_string) 
+    
+
+    Dim resultStr
+    Dim wordArr : set wordArr = createobject("System.Collections.ArrayList")
+    Dim item
+    wordArr = Split(the_string)
+
+    For Each item In wordArr
+        resultStr = resultStr & UppercaseFirstLetter(item)
+    Next 
+
+    camelCase = resultStr
+
+End Function 
+
+
+
+Function UppercaseFirstLetter(item)
+    UppercaseFirstLetter = UCase(Mid(item, 1, 1)) & Mid(item, 2)
+End Function 'UppercaseFirstLetter
+
+
+
+function getCurrentDirectory()
+                Dim WshShell, strCurDir
+                Set WshShell = CreateObject("WScript.Shell")     
+                getCurrentDirectory    = WshShell.CurrentDirectory         
+end function
+
+function getExcelFileName()
+
+                Dim strCurDir,WshShell
+                Set WshShell = CreateObject("WScript.Shell")
+                strCurDir    = WshShell.CurrentDirectory
+                
+                Set WshShell = Nothing                 
+                Dim oFile
+                Dim goFS    : Set goFS    = CreateObject("Scripting.FileSystemObject")        
+                For Each oFile In goFS.GetFolder(strCurDir).Files
+                  If "xlsx" = LCase(goFS.GetExtensionName(oFile.Name)) Then                                     
+                                getExcelFileName = oFile.Name
+                                exit function
+                                end if 
+                Next
+  
+                If oLstPng Is Nothing Then
+                                WScript.Echo "no excel found"
+                End If
+   
+end function
+
+Public Function ExcelColHead(ByVal ColNum)
+  Dim T 
+  If ColNum > 26 Then
+    T = (ColNum Mod 26)
+    ColNum = (ColNum - T) / 26
+    ExcelColHead = Chr(64 + ColNum) & Chr(64 + T)
+  Else
+    ExcelColHead = Chr(64 + ColNum)
+  End If
+End Function
+
+function getUsedRange(ByVal originFileName)
+                Dim originSheetName
+                Dim objExcel1,originObjSpread,objWorksheet1
+                Set objExcel1 = CreateObject("Excel.Application")
+
+
+                objExcel1.displayalerts = false
+                Set originObjSpread = objExcel1.Workbooks.Open(originFileName)
+                originObjSpread.sheets(1).activate
+                Set objWorksheet1 = originObjSpread.Worksheets(1)
+                originSheetName=objWorksheet1.name
+                objWorksheet1.usedrange.NumberFormat="@"
+                Dim startingColumn : startingColumn = objWorksheet1.usedrange.column
+                Dim numberOfColumns : numberOfColumns = objWorksheet1.usedrange.columns.count
+                Dim startingRow : startingRow = objWorksheet1.usedRange.row
+                Dim numberOfRows: numberOfRows = objWorksheet1.usedRange.rows.count
+                'msgbox "number of used rows: " & numberOfRows
+                Dim rangeName : rangeName = ExcelColHead(numberOfColumns)
+                
+                
+                Dim queryRange : queryRange = "A1:" & rangeName & cstr(numberOfRows)
+                'msgbox "Used Range:" & queryRange & " Number Of Rows:" & numberOfRows & " Name of Spread Sheet:" & originSheetName
+
+
+''workbook.Close      
+                originObjSpread.Save
+                originObjSpread.Close false
+                objExcel1.displayalerts = True
+                objExcel1.quit
+                Set originObjSpread = Nothing
+                Set objExcel1 = Nothing
+                if err.number <>0 then 
+                                msgbox "Get_Spread_Sheet_Name1: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                err.clear
+                end if
+                getUsedRange = queryRange
+end function
+
+function getSpreadSheetName(ByVal originFileName)    
+                on error resume next
+                Dim objExcel1 : Set objExcel1 = CreateObject("Excel.Application")             
+                objExcel1.displayalerts = false    
+                Dim objSpread :  Set objSpread = objExcel1.Workbooks.Open(originFileName)    
+                if err.number <>0 then 
+                                msgbox "Get_Spread_Sheet_Name2: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                err.clear
+                end if
+                Dim objWorksheet1  : Set objWorksheet1 = objSpread.Worksheets(1)     
+                Dim sheetName : sheetName=objWorksheet1.name
+                'msgbox "fileNAme:" & originFileName & " Sheet_Name:" &         sheetName
+                if err.number <>0 then 
+                                msgbox "Get_Spread_Sheet_Name1: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                err.clear
+                end if
+                objSpread.Close               
+                objExcel1.displayalerts = True     
+                objExcel1.quit   
+                Set objSpread = Nothing
+                Set objExcel1 = Nothing 
+                if err.number <>0 then 
+                                msgbox "Get_Spread_Sheet_Name: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                err.clear
+                end if 
+                getSpreadSheetName = sheetName
+end function
+
+
+
+
+function getExcelConnection(ByRef targetFilePathName, byref targetSpreadSheetName)
+                on error resume next
+                'msgbox "Get_Excel_Connection_Started"
+                
+                Const adSchemaColumns=4
+                Const adBSTR = 8 
+                Const  adInput=1
+                'msgbox "FilePathName:" & targetFilePathName & " Spread_sheet_Name: " & targetSpreadSheetName
+                dim VRstatmt,i,j
+                dim sql_text : sql_text="Select * FROM [" & targetSpreadSheetName & "$]" & VRstatmt
+                'msgbox "Get_Excel_ConnectioncheckPost2"
+                Dim objConnection: Set objConnection = CreateObject("ADODB.Connection")
+                
+                with objConnection
+                                .Provider = "Microsoft.ACE.OLEDB.16.0"                
+                                .properties("extended properties").value="excel 12.0;HDR=YES"
+                                .open targetFilePathName                          
+                end with
+                'msgbox "Get_Excel_ConnectioncheckPost3"
+                if err.number <>0 then 
+                                msgbox "Get_Excel_Connection: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                err.clear
+                end if 
+                'msgbox "Get_Excel_Connection_finished"
+                set getExcelConnection = objConnection
+                
+                
+                
+end function
+
+function getBundleTypes(ByRef currentConnection,byRef targetSpreadSheetName)
+                on error resume next
+                'msgbox "Get_Bundle_Types_Called"
+                'msgbox "Target_Spread_Sheet_Name: " & targetSpreadSheetName
+                dim VRstatmt
+                Dim sql_text : sql_text="select distinct Role_Type FROM [" & targetSpreadSheetName & "$]"  & VRstatmt
+                Dim i,j,currentFieldName,csvValue
+                Dim objCommand: Set objCommand = CreateObject("ADODB.Command")
+
+                objCommand.ActiveConnection = currentConnection
+
+                objCommand.commandText = sql_text
+
+                objCommand.prepared=true
+
+                Dim objRecordset : Set objRecordset = objCommand.execute
+                Dim objFields : Set objFields = objRecordset.fields
+                'msgbox "Header Names: " & objFields(0).Name
+                ReDim csvFields ((objFields.count)) 
+                Dim bundleTypes : set bundleTypes = CreateObject("System.Collections.ArrayList")
+                for i=0 to objFields.count-1                         
+                                if len(objFields.Item(i).name) > 0 Then
+                                                csvFields(i)=objFields.Item(i).name
+                                end if
+                next
+                
+                Dim counter : counter=0
+                with objRecordset
+                                if not .bof and not .eof then
+                                                '.movelast
+                                                .movefirst                           
+                                                while( not .eof) 
+                                                                                for j=0 to  objFields.count
+                                                                                                currentFieldName = csvFields(j)                                                                
+                                                                                                if currentFieldName = "" then 
+                                                                                                                'msgbox "current field name is null" 
+                                                                                                end if
+                                                                                                'msgbox currentFieldName
+                                                                                                if currentFieldName <> "" Then 
+                                                                                                                select case currentFieldName
+                                                                                                                                case  "Role_Type" 
+                                                                                                                                csvValue = Cstr(objRecordset.fields.item(currentFieldName))
+                                                                                                                                csvValue = Trim(csvValue)
+                                                                                                                end select
+                                                                                                end if
+                                                                                                if not bundleTypes.contains(csvValue) Then
+                                                                                                bundleTypes.add csvValue
+                                                                                                end if
+                                                                                
+                                                                                '               msgbox "Found_Value:" & csvValue
+                                                                                                ''csvValues(j)=csvValue
+                                                                                next
+                                                                                counter=counter+1
+                                                                .movenext
+                                wend
+                end if
+                end with
+                
+                
+                'msgbox "Bundle_Types_Found: "& counter
+                objRecordset.Close
+                if err.number <>0 then 
+                                msgbox "Get_Bundle_Types_Error: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                'err.clear
+                end if
+                set getBundleTypes=bundleTypes
+end function
+
+function getUmtbBusinessSource(ByRef currentConnection,byRef targetSpreadSheetName)
+                on error resume next
+                'msgbox "START UMTB_BUSINESS_SOURCE"
+                'msgbox "Target_SPreadShett_Name: " & targetSpreadSheetName
+                Dim i,j,VRstatmt,currentFieldName,csvValue
+                Dim sql_text : sql_text="select distinct umtbBusinessSource FROM [" & targetSpreadSheetName & "$]"  & VRstatmt
+                
+                Dim objCommand: Set objCommand = CreateObject("ADODB.Command")
+
+                objCommand.ActiveConnection = currentConnection
+
+                objCommand.commandText = sql_text
+
+                objCommand.prepared=true
+
+                Dim objRecordset : Set objRecordset = objCommand.execute
+                Dim objFields : Set objFields = objRecordset.fields
+                'msgbox "Header Names: " & objFields(0).Name
+                ReDim csvFields ((objFields.count)) 
+                Dim umtbBusinessSource : set umtbBusinessSource = CreateObject("System.Collections.ArrayList")
+                for i=0 to objFields.count-1                         
+                                if len(objFields.Item(i).name) > 0 Then
+                                                csvFields(i)=objFields.Item(i).name
+                                end if
+                next
+                Dim counter : counter=0
+                with objRecordset
+                                if not .bof and not .eof then
+                                                '.movelast
+                                                .movefirst                           
+                                                while( not .eof) 
+                                                                                for j=0 to  objFields.count
+                                                                                                currentFieldName = csvFields(j)                                                                
+                                                                                                if currentFieldName = "" then 
+                                                                                                                'msgbox "current field name is null" 
+                                                                                                end if
+                                                                                                'msgbox currentFieldName
+                                                                                                if currentFieldName <> "" Then 
+                                                                                                                select case currentFieldName
+                                                                                                                                case  "umtbBusinessSource" 
+                                                                                                                                csvValue = Cstr(objRecordset.fields.item(currentFieldName))
+                                                                                                                                csvValue = Trim(csvValue)
+                                                                                                                end select
+                                                                                                end if
+                                                                                                if not umtbBusinessSource.contains(csvValue) Then
+                                                                                                umtbBusinessSource.add csvValue
+                                                                                                end if
+                                                                                                'msgbox "Found_Value:" & csvValue
+                                                                                                ''csvValues(j)=csvValue
+                                                                                next
+                                                                                counter=counter+1
+                                                                .movenext
+                                wend
+                end if
+end with
+                'msgbox "umtbBusinessSource_count: "& umtbBusinessSource.count
+                
+                'set strUmtbBusinessSource = Cstr(umtbBusinessSource.item(0))
+                'msgbox "Result_Business_Source: "& strUmtbBusinessSource
+                'msgbox "FINISH UMTB_BUSINESS_SOURCE"
+                if err.number <>0 then 
+                                msgbox "Get_Umtb_Business_Source_Error: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                'err.clear
+                end if
+                objRecordset.Close
+                getUmtbBusinessSource=umtbBusinessSource.item(0)
+end function
+
+
+function getBundleDetails(ByRef currentConnection,ByRef targetSpreadSheetName)
+on error resume next
+                'msgbox "START_BUNDLE_DETAILS"
+                ''Role_Name      Display_Name   Role_Type
+                'msgbox "Target_SPreadShett_Name: " & targetSpreadSheetName
+                Dim i,j,VRstatmt,currentFieldName,csvValue
+                dim sql_text : sql_text="select Role_Name,Display_Name,Role_Type,Role_Description,Role_Owner,Sub_Roles_IT_Roles,IT_Role_Entitlements,Parent_Role,umtbBusinessSource,umtbReviewer,umtbActionOnMover,umtbAdditionalParamsRule,umtbAdditionalParamsForm,umtbHierarchy,umtbMapprovals,umtbOnEffSubAMover,umtbOnJobKeyMover,umtbRequestableRole,umtbSapprovals   FROM [" & targetSpreadSheetName & "$]"  & VRstatmt
+                
+                Dim objCommand: Set objCommand = CreateObject("ADODB.Command")
+
+                objCommand.ActiveConnection = currentConnection
+
+                objCommand.commandText = sql_text
+
+                objCommand.prepared=true
+
+                Dim objRecordset : Set objRecordset = objCommand.execute
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                Dim objFields : Set objFields = objRecordset.fields
+                'msgbox "Header Names: " & objFields(0).Name
+                ReDim csvFields ((objFields.count)) 
+                Dim bundleDetailsMap : set bundleDetailsMap = CreateObject("Scripting.Dictionary")
+                Dim bundleList : set bundleList = CreateObject("System.Collections.ArrayList")
+                for i=0 to objFields.count-1                         
+                                if len(objFields.Item(i).name) > 0 Then
+                                                csvFields(i)=objFields.Item(i).name
+                                end if
+                next
+                if err.number <>0 then 
+                                msgbox "Get_Bundle_Details0: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                'err.clear
+                end if
+                Dim counter : counter=0
+                with objRecordset
+                                if not .bof and not .eof then
+                                                '.movelast
+                                                .movefirst                           
+                                                while( not .eof) 
+                                                                                for j=0 to  objFields.count
+                                                                                                currentFieldName = csvFields(j)                                                                
+                                                                                                if currentFieldName = "" then 
+                                                                                                                'msgbox "current field name is null" 
+                                                                                                end if
+                                                                                                'msgbox currentFieldName
+                                                                                                dim currentValue
+                                                                                                if currentFieldName <> "" Then 
+                                                                                                                select case currentFieldName
+                                                                                                                                case  "Role_Name" 
+                                                                                                                                                currentValue = objRecordset.fields.item(currentFieldName)
+                                                                                                                                                if not isNull(currentValue) then
+                                                                                                                                                                csvValue = Cstr(objRecordset.fields.item(currentFieldName))
+                                                                                                                                                                csvValue = Trim(csvValue)
+                                                                                                                                                                bundleDetailsMap.add currentFieldName,csvValue        
+                                                                                                                                                else
+                                                                                                                                                                bundleDetailsMap.add currentFieldName,""
+                                                                                                                                                end if
+                                                                                                                                
+                                                                                                                                
+
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                end select
+                                                                                                                
+                                                                                                end if
+                                                                                
+                                                                                                'msgbox "Found_Value:" & csvValue
+                                                                                
+                                                                                next
+                                                                                'msgbox "Current Row Number " & counter
+                                                                                counter=counter+1
+                                                                                bundleList.add bundleDetailsMap
+                                                                                set bundleDetailsMap = CreateObject("Scripting.Dictionary")
+                                                                .movenext
+                                wend
+                end if
+end with
+                'msgbox "umtbBusinessSource_count: "& umtbBusinessSource.count
+                if err.number <>0 then 
+                                msgbox "Get_Bundle_Details: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                'err.clear
+                end if
+                'set strUmtbBusinessSource = Cstr(umtbBusinessSource.item(0))
+                'msgbox "Result_Business_Source: "& strUmtbBusinessSource
+                'msgbox "FINISH BUNDLE_DETAILS"
+                objRecordset.Close
+                set getBundleDetails=bundleList
+
+end function
