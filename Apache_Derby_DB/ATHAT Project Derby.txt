@@ -1,0 +1,207 @@
+CREATE TABLE "ADMIN"."ATHAT_USERS"
+(
+	DATACADASTRO date NOT NULL,
+	DATE_MODIFIED date,
+	ID BIGINT not null  generated always as identity,
+	VERSION INT not null,
+	primary key (ID)
+)
+
+alter table ATHAT_USERS add column enabled  boolean default false;
+
+alter table ATHAT_USERS add column password  varchar(130) not null default 'not_set';
+alter table ATHAT_USERS add column username varchar(21) not null default 'not_set';
+alter table ATHAT_USERS add column name  varchar(50) not null default 'not_set';;
+
+alter table ATHAT_USERS  drop column DATACADASTRO;
+
+alter table ATHAT_USERS add column DATACADASTRO timestamp default CURRENT_TIMESTAMP ;
+
+
+INSERT INTO ATHAT_USERS(version, name,username,password,enabled)
+VALUES (1,'mkyong','mkyong','$2a$10$04TVADrR6/SPLBjsK0N30.Jf5fNjBugSACeGv1S69dZALR7lSov0y', true);
+INSERT INTO ATHAT_USERS(version,name,username,password,enabled)
+VALUES (1,'alex','alex','$2a$10$04TVADrR6/SPLBjsK0N30.Jf5fNjBugSACeGv1S69dZALR7lSov0y', true);
+update ATHAT_USERS set password='$2a$10$7T6nX.ug.5of1FiFzDv7SOOAd5oEJ/2d0zQyoWAyzQeCBntB8XXD.' where id=2
+
+
+
+CREATE TABLE "ADMIN"."ATHAT_CIDADE"
+(
+	DATACADASTRO timestamp NOT NULL  default CURRENT_TIMESTAMP,	
+	ID BIGINT not null  generated always as identity,
+	VERSION INT not null,
+	ibge int not null,
+	nome varchar(100) not null default 'NOT_SET',
+	estadoType varchar(100),
+	primary key (ID)
+)
+alter table ATHAT_CIDADE add primary key (ID);
+alter table ATHAT_CIDADE drop column id;
+
+alter table ATHAT_CIDADE alter column ID set AUTOINCREMENT: start 1 increment 1
+alter table ATHAT_CIDADE add primary key (ID);
+alter table ATHAT_users drop column id;
+alter table ATHAT_users add column id bigint not null default 0;
+alter table ATHAT_users add primary key (ID);
+alter table ATHAT_CIDADE add column id bigint not null default 0;
+
+CREATE SEQUENCE ADMIN.athatid as bigint START WITH     1 INCREMENT BY   1  NO CYCLE;
+CREATE SEQUENCE seq2;
+
+select * from SYSSEQUENCES;
+VALUES SYSCS_UTIL.SYSCS_PEEK_AT_SEQUENCE('SYS', 'seq2');
+
+select VALUES (NEXT VALUE FOR athatid);
+
+create table admin.ATHAT_ENDERECO
+(
+	DATACADASTRO timestamp NOT NULL  default CURRENT_TIMESTAMP,	
+	ID BIGINT not null  default 0,
+	VERSION INT not null,
+	logradouro varchar(70) not null default 'NOT_SET',
+	bairro varchar(70) not null default 'NOT_SET',
+	numero varchar(10) not null default 'NOT_SET',
+	cep varchar(20) not null default 'NOT_SET',
+	complemento varchar(70),
+	cidade_id bigint not null,
+	logradouroType varchar(100),
+	estadoType varchar(100),
+	CONSTRAINT CIDADE_ID_FK
+	FOREIGN KEY (cidade_id)
+	REFERENCES ATHAT_CIDADE (ID),
+	primary key (ID)
+)
+
+create table admin.ATHAT_TELEFONE
+(
+	DATACADASTRO timestamp NOT NULL  default CURRENT_TIMESTAMP,	
+	ID BIGINT not null  default 0,
+	VERSION INT not null,
+	numero varchar(20) not null default 'NOT_SET',
+	enderecoType varchar(100) not null default 'NOT_SET',
+	
+	primary key (ID)
+)
+
+create table admin.ATHAT_PESSOA
+(
+	DATACADASTRO timestamp NOT NULL  default CURRENT_TIMESTAMP,	
+	ID BIGINT not null  default 0,
+	VERSION INT not null,
+	cpfCnpj varchar(20) not null default 'NOT_SET',
+	nomeRazao varchar(100) not null default 'NOT_SET',
+	endereco_id bigint not null,
+	telefone_id bigint noT null,
+	pessoaType VARCHAR(100) NOT NULL,
+	CONSTRAINT ENDERICO_ID_FK
+	FOREIGN KEY (enderEco_id)
+	REFERENCES admin.ATHAT_ENDERECO (ID),
+	CONSTRAINT TELEFONE_ID_FK
+	FOREIGN KEY (telefone_id)
+	REFERENCES admin.ATHAT_telefone (ID),
+	primary key (ID)
+)
+create table admin.ATHAT_EMPRESA
+(
+	DATACADASTRO timestamp NOT NULL  default CURRENT_TIMESTAMP,	
+	ID BIGINT not null  default 0,
+	VERSION INT not null,
+	nome varchar(200) not null default 'NOT_SET',
+	primary key (ID)
+)
+CREATE TABLE "ADMIN"."ATHAT_CLIENTE"
+(
+	DATACADASTRO timestamp NOT NULL  default CURRENT_TIMESTAMP,	
+	ID BIGINT not null  generated always as identity,
+	VERSION INT not null,
+	dataAniversario timestamp NOT NULL  default CURRENT_TIMESTAMP,	
+	primary key (ID)
+)
+
+CREATE TABLE "ADMIN"."ATHAT_FUNCIONARIO"
+(
+	DATACADASTRO timestamp NOT NULL  default CURRENT_TIMESTAMP,	
+	ID BIGINT not null  DEFAULT 0,
+	VERSION INT not null,
+	pessoa_id int not null default 0;
+	dataAniversario timestamp NOT NULL  default CURRENT_TIMESTAMP,	
+	primary key (ID)
+)
+
+CREATE TABLE "ADMIN"."ATHAT_FORNECEDOR"
+
+(
+	DATACADASTRO timestamp NOT NULL  default CURRENT_TIMESTAMP,	
+	ID BIGINT not null  DEFAULT 0,
+	VERSION INT not null,
+	pessoa_id int not null default 0,
+	fornecedorType VARCHAR(120) default 'NOT_SET'	
+)
+
+CREATE TABLE "ADMIN"."ATHAT_Categoria"
+(
+	DATACADASTRO timestamp NOT NULL  default CURRENT_TIMESTAMP,	
+	ID BIGINT not null  DEFAULT 0,
+	VERSION INT not null,
+	descricao varchar(100) not null default 'NOT_SET',
+	unidadeMedidaType VARCHAR(120) default 'NOT_SET',
+	produtoType VARCHAR(120) default 'NOT_SET',
+	identificacaoType VARCHAR(120) default 'NOT_SET'
+)
+
+
+
+
+alter table ATHAT_FUNCIONARIO drop column DataContratacao;
+alter table ATHAT_FUNCIONARIO add column DataContratacao timestamp   default CURRENT_TIMESTAMP;
+alter table ATHAT_FUNCIONARIO add CONSTRAINT funcionario_pessoa_ID_FK 	FOREIGN KEY (pessoa_id) 	REFERENCES admin.ATHAT_PESSOA (ID);
+alter table ATHAT_FUNCIONARIO drop CONSTRAINT funcionario_pessoa_ID_FK;
+
+CREATE TABLE "ADMIN"."ATHAT_PESSOA_ATHAT_ENDERECO"
+(
+	PESSOA_ID BIGINT not null default 0,
+	ENDERECO_ID BIGINT NOT NULL DEFAULT 0,
+	CONSTRAINT ENDERECO_ID_FK 	FOREIGN KEY (ENDERECO_ID) 	REFERENCES admin.ATHAT_ENDERECO (ID),
+	CONSTRAINT PESSOA_ID_FK 	FOREIGN KEY (PESSOA_ID) 	REFERENCES admin.ATHAT_PESSOA (ID)
+)
+
+alter table ATHAT_PESSOA_ATHAT_ENDERECO drop column TELEFONES_ID;
+alter table ATHAT_PESSOA_ATHAT_ENDERECO add CONSTRAINT myTELEFONE_ID_FK 	FOREIGN KEY (TELEFONES_ID) 	REFERENCES admin.ATHAT_TELEFONE (ID);
+
+CREATE TABLE "ADMIN"."ATHAT_PESSOA_ATHAT_TELEFONE"
+(
+	PESSOA_ID BIGINT not null default 0,
+	TELEFONES_ID BIGINT NOT NULL DEFAULT 0,
+	CONSTRAINT TELEFONE_ID_FK 	FOREIGN KEY (TELEFONES_ID) 	REFERENCES admin.ATHAT_TELEFONE (ID),
+	CONSTRAINT PESSOA_TELEFONE_ID_FK 	FOREIGN KEY (PESSOA_ID) 	REFERENCES admin.ATHAT_PESSOA (ID)
+)
+
+
+
+
+	alter table ATHAT_CLIENTE drop column pessoa;
+	alter table ATHAT_FUNCIONARIO add column pessoa_id bigint not null default 0;
+
+	alter table ATHAT_CLIENTE drop column  dataAniversario;
+	alter table ATHAT_CLIENTE add column  dataAniversario timestamp  default CURRENT_TIMESTAMP;
+
+RENAME TABLE "ADMIN"."ATHAT_Categoria" TO ATHAT_CATEGORIA;
+alter table ATHAT_PESSOA drop column endereco_id;
+alter table ATHAT_PESSOA drop column TELEFONE_ID;
+alter table ATHAT_PESSOA add column endereco_id bigint not null default 0;
+
+alter table ATHAT_PESSOA_ATHAT_ENDERECO drop column endereco_id;
+alter table ATHAT_PESSOA_ATHAT_ENDERECO add column enderecos_id bigint not null default 0;
+alter table ATHAT_PESSOA_ATHAT_ENDERECO add
+CONSTRAINT ENDERECOS_ID_FK
+	FOREIGN KEY (enderEcos_id)
+	REFERENCES admin.ATHAT_ENDERECO (ID);
+
+alter table ATHAT_ENDERECO drop column ENDERECOTYOE;
+	alter table ATHAT_ENDERECO add column ENDERECOTYPE varchar(100) not null default 'NOT_SET';
+
+	alter table ATHAT_PESSOA drop column telefone_id;
+
+	alter table ATHAT_PESSOA add column telefone_id bigint not null default 0;
+	alter table ATHAT_PESSOA add 	CONSTRAINT TELEFONE_ID_FK 	FOREIGN KEY (telefone_id) 	REFERENCES admin.ATHAT_telefone (ID);

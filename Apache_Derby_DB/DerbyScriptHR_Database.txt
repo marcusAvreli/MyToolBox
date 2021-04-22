@@ -1,0 +1,67 @@
+//SOURCE https://www.sqltutorial.org/sql-sample-database/
+CREATE TABLE "ADMIN"."REGIONS" (
+	region_id  BIGINT not null  generated always as identity,
+	region_name VARCHAR (25) DEFAULT NULL,
+	primary key (region_id)
+);
+
+CREATE TABLE ADMIN.COUNTRIES(
+	country_id varchar (2) NOT NULL,	
+	country_name VARCHAR (40) DEFAULT NULL,	
+	primary key (country_id)
+)
+alter table ADMIN.COUNTRIES add column region_id bigint default 0;
+
+alter table ADMIN.COUNTRIES add CONSTRAINT REGION_ID_FK FOREIGN KEY (region_id) REFERENCES REGIONS (region_ID);
+
+CREATE TABLE locations (
+	location_id BIGINT not null  generated always as identity,
+	street_address VARCHAR (40) DEFAULT NULL,
+	postal_code VARCHAR (12) DEFAULT NULL,
+	city VARCHAR (30) NOT NULL,
+	state_province VARCHAR (25) DEFAULT NULL,
+	country_id varchar (2) NOT NULL,
+	FOREIGN KEY (country_id) REFERENCES countries (country_id) ON DELETE CASCADE ,
+	primary key (location_id)
+);
+
+CREATE TABLE jobs (
+	job_id BIGINT not null  generated always as identity,
+	job_title VARCHAR (35) NOT NULL,
+	min_salary DECIMAL (8, 2) DEFAULT NULL,
+	max_salary DECIMAL (8, 2) DEFAULT NULL,
+	primary key(job_id)
+);
+CREATE TABLE departments (
+	department_id BIGINT not null  generated always as identity,
+	department_name VARCHAR (30) NOT NULL,
+	location_id BIGINT DEFAULT NULL,
+	FOREIGN KEY (location_id) REFERENCES locations (location_id) ON DELETE CASCADE,
+	primary key(department_id)
+);
+CREATE TABLE employees (
+	employee_id BIGINT not null  generated always as identity,
+	first_name VARCHAR (20) DEFAULT NULL,
+	last_name VARCHAR (25) NOT NULL,
+	email VARCHAR (100) NOT NULL,
+	phone_number VARCHAR (20) DEFAULT NULL,
+	hire_date DATE NOT NULL,
+	job_id BIGINT NOT NULL,
+	salary DECIMAL (8, 2) NOT NULL,
+	manager_id BIGINT DEFAULT NULL,
+	department_id BIGINT DEFAULT NULL,
+	FOREIGN KEY (job_id) REFERENCES jobs (job_id) ON DELETE CASCADE,
+	FOREIGN KEY (department_id) REFERENCES departments (department_id) ON DELETE CASCADE,
+	FOREIGN KEY (manager_id) REFERENCES employees (employee_id) ON DELETE CASCADE,
+	primary key(employee_id)
+);
+CREATE TABLE dependents (
+	dependent_id BIGINT not null  generated always as identity,
+	first_name VARCHAR (50) NOT NULL,
+	last_name VARCHAR (50) NOT NULL,
+	relationship VARCHAR (25) NOT NULL,
+	employee_id BIGINT NOT NULL,
+	FOREIGN KEY (employee_id) REFERENCES employees (employee_id) ON DELETE CASCADE,
+	primary key(dependent_id)
+);
+
