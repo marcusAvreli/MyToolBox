@@ -1,0 +1,14 @@
+Import-Module ActiveDirectory 
+
+$filter = '\d{15}'
+$foundUsers = Get-ADUser -Filter * -properties samaccountname,mail| where {$_.samaccountname -match $filter}
+
+$counter =0
+foreach($foundUser in $foundUsers){
+	if([string]::isnullOrEmpty($foundUser.mail)){
+		$counter = $counter+1
+		write-host $foundUser.samaccountname
+	}
+}
+write-host "found  $counter"
+
