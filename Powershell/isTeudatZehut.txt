@@ -1,0 +1,57 @@
+//powershell
+function IsTeudatZehut{
+    [CmdletBinding()]
+    param(
+        #[Parameter(Mandatory=$True)]
+        [string]$TeudatZehut
+    )
+
+	$CharArray = $TeudatZehut.ToCharArray()
+	$sum=0
+	$size = $CharArray.length
+	$converted = [int[]]::new($size)
+	$supportString = 1,2,1,2,1,2,1,2,1
+
+	for($i=0; $i -lt $size; $i++){
+					$converted[$i]=[int][string]$CharArray[$i]
+	}
+
+	for($i=0;$i -lt $size;$i++){                             
+		$item = $converted[$i]*$supportString[$i]
+		$round = [math]::floor(($item/10))
+		$sum+=$round+($item%10)
+	}
+
+	if($sum%10 -eq 0){
+		return $True
+	}else{
+		return $False
+	}
+	return $True
+}
+//java
+public boolean isTeudatZehut(String umtbIdNum){
+	boolean validTZ=false;
+	char[] arrayString=umtbIdNum.toCharArray();
+	int sum=0;
+	if(Util.isNotNullOrEmpty(umtbIdNum)){         
+		int size=arrayString.length;
+		int[] arrConverted=new int[size];
+		int[] supportString=new int[]{1,2,1,2,1,2,1,2,1};
+		for(int i=0;i<size;i++){
+			 arrConverted[i]=Integer.parseInt(arrayString[i].toString());
+		}
+		for(int i=0;i<size;i++){         
+		int item=arrConverted[i]*supportString[i];           
+		sum+=(((item/10)+(item%10)));
+		umtbDebug("devide " +(item/10) + " modulo " +               (item%10));
+		}             
+		if(sum%10==0){
+			 validTZ=true;
+		}
+		if(sum%10!=0){
+			 validTZ=false;
+		}
+   }
+   return  validTZ;
+}
