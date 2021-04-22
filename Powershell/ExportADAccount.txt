@@ -1,0 +1,13 @@
+Import-module ActiveDirectory
+ 
+$base=Get-Content -Encoding UTF8 .\companyName-unicode.txt
+[System.Collections.ArrayList]$Output=@()
+ 
+Write-Host $base
+$Users=Get-AdUser  -SearchBase $base -Filter {sAMAccountName -eq "123AAAAA"} -Properties Samaccountname
+foreach ($user in $($Users)){
+$Output.Add($user.sAMAccountName)
+ 
+$user|export-csv -path .\result.txt -Encoding UTF8
+Write-Host $user.sAMAccountName
+}

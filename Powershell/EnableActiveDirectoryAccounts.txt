@@ -1,0 +1,14 @@
+companyName-unicode.txt file content:
+OU=test,DC=company,DC=loc
+Enable Active Directory Accounts
+Import-module ActiveDirectory
+
+$base=Get-Content -Encoding UTF8 .\companyName-unicode.txt
+
+Write-Host $base
+$Users=Get-AdUser -SearchBase $base -Filter * -Properties samaccountname
+foreach($user in $($Users)){
+Set-ADUser $user -Enabled $true
+Write-Host $user.sAMAccountName
+
+}
