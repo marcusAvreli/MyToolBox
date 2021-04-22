@@ -1,0 +1,265 @@
+//----------------------Convert to 64 Base--------------------------------------------
+public  String jpgToByteArr(String path, String FileName, boolean stdout)
+     {     
+         BufferedImage img = null;
+         String result=null;
+         File f = null;
+
+         try
+         {
+                 f = new File(path, FileName); //image file path                    
+                  if(f.exists())
+                  {
+                       log.info("jpgToByteArr - File Found!");                   
+                     img = ImageIO.read(f);               
+                     if (img!=null)
+                     {
+                         ByteArrayOutputStream baos=new ByteArrayOutputStream(1000);
+                         ImageIO.write(img, "jpg", baos);
+                         baos.flush();
+                         BASE64Encoder encoder = new BASE64Encoder();
+                         result = encoder.encode(baos.toByteArray()).replaceAll("\n","");                   
+                         baos.close();
+                     }
+                     else
+                     {
+                            log.error("jpgToByteArr - File is empty!");                
+                       result="File is empty";
+                     }
+                  }
+                  else
+                  {
+                            log.error("jpgToByteArr - File not found!");
+                          result="File not found";
+                  }           
+         }
+         catch(IOException e)
+         {
+              log.error("jpgToByteArr -Failed with  - " + e.getMessage());         
+         }
+       
+          return result;
+
+
+
+public Object getLDAPPhotoValueToSync(String upn) throws Exception
+{      
+       Object result="";
+              
+              try
+              {
+                     DirContext ctx1 = null;                                              
+                     ctx1 = new InitialLdapContext(setEnvMapForLdapQuery(), null);                                                       
+                     SearchControls searchControls = new SearchControls();
+                     searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);                                           
+                     String[] array = new String[1];
+                     array[0] ="thumbnailPhoto";                            
+                     searchControls.setReturningAttributes(array);                 
+                     String searchBase = "%%ADSearchBase%%";  
+                     NamingEnumeration list = ctx1.search(searchBase,"(userPrincipalName=" + upn + ")", searchControls);
+              
+                     while (list.hasMore()) 
+                     {
+                           SearchResult nc = (SearchResult) list.next();
+                           //result = nc.getName();
+                           javax.naming.directory.Attributes attrs = nc.getAttributes();
+                           if(attrs.get("thumbnailPhoto")!=null)
+                                  result =attrs.get("thumbnailPhoto");
+                                         
+                           log.info("getLDAPPhotoValueToSync - upn - " + upn);                                      
+                           log.info("getLDAPPhotoValueToSync - attrs - " + attrs);
+                           log.info("getLDAPPhotoValueToSync - result - " + result);                                                                                                    
+                     }                    
+              }                    
+              catch(Exception E)
+              {
+                     log.error("getLDAPPhotoValueToSync throw an Exception - " + E.getMessage(),E);    
+                     throw E;
+              }
+       if(result!=null)           
+              return result;
+       else
+              return null;  
+              
+}
+public Hashtable setEnvMapForLdapQuery()
+{
+              Application application = (Application) context.getObjectByName(Application.class, "%%ADApplicationName%%");
+              Attributes attributes = application.getAttributes();
+              List domainSettingsList = attributes.get("domainSettings");
+              //List domainSettingsList = application.getAttributeValue("domainSettings");
+              String user ="";  
+              String host = "";
+              String port = "";
+              String encryptedPassword = "";
+              String decryptedPassword = "";
+              for(Object obj : domainSettingsList)
+              {
+                    if(obj instanceof Map)     
+                     {      
+                           Map domainSettingsMap  = (Map)obj;
+                           user = "%%ADJavaUser%%";                       
+                            host = "%%ADHost%%";
+                           port = "%%ADGCPort%%";
+                           encryptedPassword = "%%ADencryptedPassword%%";
+                           decryptedPassword = context.decrypt(encryptedPassword);                          
+                     } 
+               }
+                     Hashtable env = new Hashtable();
+                           env.put(Context.INITIAL_CONTEXT_FACTORY,"com.sun.jndi.ldap.LdapCtxFactory");
+                           env.put(Context.PROVIDER_URL, "ldap://" +  host + ":" + port);
+                           env.put(Context.SECURITY_AUTHENTICATION, "simple");
+                           env.put(Context.SECURITY_PRINCIPAL, user);
+                           env.put(Context.SECURITY_CREDENTIALS, decryptedPassword);
+                           env.put(Context.REFERRAL, "follow");                          
+                           env.put(Context.SECURITY_PROTOCOL, "ssl"); // Adapt PROVIDER_URL for LDAPS
+              return env;
+}
+
+//----------------------------------------------
+
+public RpcResponse runPowerShellAutoIdentityPhotoSync(String identityPhotoFromFileBase64 ,String userPrincipalName ,String objectguid,String nativeIdentity,String Operation)
+{
+      Map dataMap = new HashMap();
+      String domain=       userPrincipalName.substring(userPrincipalName.indexOf("@")+1,userPrincipalName.length());
+      
+       Rule psScriptRule = context.getObjectByName(Rule.class,"AD AutoPhotoSync PowerShell");
+      dataMap.put("preScript",psScriptRule);
+      Application app = context.getObjectByName(Application.class,"Clalit Active-Directory");
+                                                                                               
+       dataMap.put("Application",app.getAttributes());
+      AccountRequest photoAccountRST = new AccountRequest();
+      photoAccountRST.setApplication("Clalit Active-Directory");
+      photoAccountRST.setNativeIdentity(nativeIdentity);
+      photoAccountRST.setOperation(AccountRequest.Operation.Modify);
+      //photoAccountRST.addArgument("identityPhotoFromFileBase64",identityPhotoFromFileBase64);
+      //photoAccountRST.addArgument("objectguid",objectguid);
+      
+       AttributeRequest attrOperationRQST = new AttributeRequest();
+      attrOperationRQST.setName("Operation");
+      attrOperationRQST.setValue(Operation);
+      attrOperationRQST.setOperation(ProvisioningPlan.Operation.Set);
+      photoAccountRST.add(attrOperationRQST);
+      
+       AttributeRequest attrDomainRQST = new AttributeRequest();
+      attrDomainRQST.setName("Domain");
+      attrDomainRQST.setValue(domain);
+      attrDomainRQST.setOperation(ProvisioningPlan.Operation.Set);
+      photoAccountRST.add(attrDomainRQST);
+      
+       AttributeRequest attrRQST = new AttributeRequest();
+      attrRQST.setName("identityPhotoFromFileBase64");
+      attrRQST.setValue(identityPhotoFromFileBase64);
+      attrRQST.setOperation(ProvisioningPlan.Operation.Set);
+      photoAccountRST.add(attrRQST);
+      
+       AttributeRequest attrRQST2 = new AttributeRequest();
+      attrRQST2.setName("objectguid");
+      attrRQST2.setValue(objectguid);
+      attrRQST2.setOperation(ProvisioningPlan.Operation.Set);
+      photoAccountRST.add(attrRQST2);
+      
+       
+       dataMap.put("Request",photoAccountRST);
+      
+       int IQServicePort= Integer.valueOf("%%IQServicePort%%");
+      String IQServiceHost = "%%IQServiceHost%%";
+      
+       RPCService service =  new RPCService(IQServiceHost,IQServicePort);
+      service.setConnectorServices(new DefaultConnectorServices());        
+       RpcRequest request = new RpcRequest("ScriptExecutor","runBeforeScript",dataMap);
+      RpcResponse response = service.execute(request);
+      
+       return response;
+}
+
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sailpoint PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<sailpoint><Rule language="beanshell" name="AD AutoPhotoSync PowerShell" type="ConnectorBeforeCreate">
+<Attributes>
+       <Map>
+              <entry key="ObjectOrientedScript" value="true"/>
+              <entry key="disabled" value="false"/>
+              <entry key="extension" value=".ps1"/>           
+              <entry key="program" value="powershell.exe"/>
+              <entry key="timeout" value="100"/>
+       </Map>
+</Attributes>
+  <Source><![CDATA[
+       Add-type -path utils.dll
+       Add-PSSnapin Microsoft.Exchange.Management.PowerShell.E2010
+
+     $sReader = New-Object System.IO.StringReader([System.String]$env:Request);
+     $sResult = New-Object System.IO.StringReader([System.String]$env:Result); 
+   
+   
+     $xmlReader = [ System.xml.XmlTextReader]([sailpoint.utils.xml.XmlUtil]::getReader($sReader)); 
+     $xmlReader_Result = [ System.xml.XmlTextReader]([sailpoint.utils.xml.XmlUtil]::getReader($sResult));
+    
+     $requestObject = New-Object Sailpoint.Utils.objects.AccountRequest($xmlReader); 
+     $resultObject = New-Object Sailpoint.Utils.objects.ServiceResult($xmlReader_Result);
+
+
+       
+
+       $identityPhotoFromFileBase64="";
+       $objectguid;
+       $Operation;
+       $nativeIdentity = $requestObject.NativeIdentity
+       $Domain;
+       
+       
+       foreach($attr in  $requestObject.AttributeRequests)
+       {
+              
+              if($attr.Name -eq "Operation")
+              {
+                     $Operation=$attr.Value;                                                                                                                              
+              }
+              
+              if($attr.Name -eq "identityPhotoFromFileBase64")
+              {
+                     $identityPhotoFromFileBase64=$attr.Value;                                                                                                                                  
+              }
+              if($attr.Name -eq "objectguid")
+              {
+                     $objectguid=$attr.Value;                                                                                                                             
+              }
+              if($attr.Name -eq "Domain")
+              {
+                     $Domain=$attr.Value;                                                                                                                          
+              }
+       
+       }             
+       
+       if($Operation -eq "Sync")
+       {
+              if($Domain)
+              {                    
+                     if($nativeIdentity)
+                     {
+                           if($identityPhotoFromFileBase64)
+                           {                                 
+                                  $Picture = [System.Convert]::FromBase64String($identityPhotoFromFileBase64)                                
+                                  SET-ADUser -Identity "$nativeIdentity" -Replace @{thumbnailPhoto=$Picture} -Server "$Domain"                               
+                           }      
+                     }
+              }      
+       }
+       if($Operation -eq "Remove")
+       {
+              if($Domain)
+              {
+                     if($nativeIdentity)
+                     {
+                           Set-ADUser -Identity "$nativeIdentity" -Clear thumbnailPhoto -Server "$Domain"                     
+                     }                    
+              }
+       }
+       
+       
+       
+       
+                                                             
+  ]]></Source>
+</Rule>
