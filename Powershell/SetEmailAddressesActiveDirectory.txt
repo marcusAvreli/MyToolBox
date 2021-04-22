@@ -1,0 +1,11 @@
+Import-module ActiveDirectory
+
+$base=Get-Content -Encoding UTF8 .\companyName-unicode.txt
+
+Write-Host $base
+$Users=Get-AdUser -SearchBase $base -Filter * -Properties samaccountname
+foreach($user in $($Users)){
+Set-ADUser $user -emailAddress ($user.sAMAccountName+'@mailhost.com')
+Write-Host $user.sAMAccountName
+
+}
