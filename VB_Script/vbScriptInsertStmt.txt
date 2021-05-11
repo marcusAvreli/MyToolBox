@@ -8,7 +8,7 @@ on error resume next
 
 
 Dim resultFileName: resultFileName="Export.csv"
-Dim targetSchema : targetSchema = "IDENTITYIQ"
+Dim targetSchema : targetSchema = "testSchema"
 Dim targetTable : targetTable = "test_test_test_CONVERSION"
 
 'Dim regex 

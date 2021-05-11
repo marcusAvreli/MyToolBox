@@ -1,9 +1,9 @@
 option explicit
 on error resume next
 'generates xml bundle definitions based on excel file
-'Author mark gavrilman employee of one
 
-'Version 1: 25-01-2021
+
+
 Dim strCurDir : strCurDir=getCurrentDirectory()
 Dim strTargetExcelName : strTargetExcelName = getExcelFileName()
 Dim targetFilePathName : targetFilePathName = strCurDir & "\" & strTargetExcelName
