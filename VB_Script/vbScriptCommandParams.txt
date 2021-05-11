@@ -1,0 +1,615 @@
+option explicit
+on error resume next
+'generates xml bundle definitions based on excel file
+'Author mark gavrilman employee of one
+
+'Version 1: 25-01-2021
+Dim strCurDir : strCurDir=getCurrentDirectory()
+Dim strTargetExcelName : strTargetExcelName = getExcelFileName()
+Dim targetFilePathName : targetFilePathName = strCurDir & "\" & strTargetExcelName
+msgbox "ProcessingExcel:" & targetFilePathName
+Dim i
+dim mapItems
+dim parentDirectory
+
+Dim resultFileName: resultFileName="Export.csv"
+Dim targetSchema : targetSchema = "databasetable"
+Dim targetTable : targetTable = "test_ROLES_FIELDS"
+
+Dim mappingSheetName: mappingSheetName="mapping"
+Dim applicationCodesSheetName : applicationCodesSheetName="application_codes"
+Dim fieldCodeSheetName : fieldCodeSheetName = "field_codes"
+
+
+Dim mappingColumns :  set mappingColumns =getUsedRange(targetFilePathName,mappingSheetName)
+Dim applicationColumns :  set applicationColumns =getUsedRange(targetFilePathName,applicationCodesSheetName)
+Dim fieldColumns :  set fieldColumns =getUsedRange(targetFilePathName,fieldCodeSheetName)
+
+
+
+
+
+Dim currentConnection : Set currentConnection = getExcelConnection(targetFilePathName)
+                
+
+dim rowDetails : set rowDetails= getRowDetails(currentConnection,mappingColumns,mappingSheetName)
+
+dim fieldRowDetails : set fieldRowDetails= getRowDetails2(currentConnection,fieldColumns,fieldCodeSheetName)
+msgbox appRowDetails
+dim businessSource
+
+dim fieldName
+dim businessSourceId
+dim fieldId
+
+Dim rowDataList : set rowDataList = CreateObject("System.Collections.ArrayList")
+Dim dataforWriting : set dataforWriting = CreateObject("System.Collections.ArrayList")
+Dim rowDetailsMap : set rowDetailsMap = CreateObject("Scripting.Dictionary")
+for each  businessSource in rowDetails.keys        
+                'msgbox "Test:" & obj '& " " & rowDetails.item(obj)
+                set rowDataList = rowDetails.item(businessSource)          
+                businessSourceId= selectValue(currentConnection,businessSource,applicationCodesSheetName)
+                
+                'msgbox "i here " & businessSourceId
+                for each fieldName in rowDataList
+                                'msgbox index
+                                fieldId =selectValue2(currentConnection,fieldName,fieldCodeSheetName)
+                                'msgbox "generate insert " & businessSourceId & ":" & fieldId
+                                rowDetailsMap.add "businessSourceId",businessSourceId
+                                rowDetailsMap.add "fieldId",fieldId
+                                dataforWriting.add rowDetailsMap
+                                set rowDetailsMap = CreateObject("Scripting.Dictionary")
+                                
+                next       
+next
+generateSqlCommands strCurDir,resultFileName,targetFilePathName,targetSchema,targetTable,dataforWriting
+
+
+
+
+                
+
+
+
+
+
+
+currentConnection.close              
+
+set currentConnection=nothing
+
+msgbox "Finished"
+
+if err.number <>0 then 
+                msgbox "Error_Number_5: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                err.clear
+end if 
+                
+
+
+
+
+
+
+
+sub generateSqlCommands (ByVal strCurDir,ByVal resultFileName,ByVal targetFilePathName,ByRef targetSchema,ByREf targetTable,ByRef rowDetails)
+                on error resume next
+                Const ForWriting = 2
+                Dim csvFilePath : csvFilePath =strCurDir & "\" & resultFileName
+                Dim objFSO : Set objFSO = CreateObject("Scripting.FileSystemObject")
+                dim  objCSVFile : Set objCSVFile = objFSO.CreateTextFile(csvFilePath,ForWriting, True)     
+                dim rowDetailsMap
+                dim sqlString      
+                for each  rowDetailsMap in rowDetails                   
+                                dim businessSourceId : businessSourceId  = rowDetailsMap.item("businessSourceId")
+                                dim fieldId : fieldId  = rowDetailsMap.item("fieldId")       
+                                sqlString = "insert into "&  targetTable & " (test_FILTER_APP_ID,test_FILTER_FIELD_ID) values (" & businessSourceId &","& fieldId & ")"
+                                objCSVFile.Write sqlString
+                                objCSVFile.Writeline
+                next
+                objCSVFile.close
+                set objCSVFile=nothing 
+                if err.number <>0 then 
+                                msgbox "generateSqlCommands: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                err.clear
+                end if 
+end sub
+
+
+
+
+
+
+
+
+function getCurrentDirectory()
+                Dim WshShell, strCurDir
+                Set WshShell = CreateObject("WScript.Shell")     
+                getCurrentDirectory    = WshShell.CurrentDirectory         
+end function
+
+function getExcelFileName()
+
+                Dim strCurDir,WshShell
+                Set WshShell = CreateObject("WScript.Shell")
+                strCurDir    = WshShell.CurrentDirectory
+                
+                Set WshShell = Nothing                 
+                Dim oFile
+                Dim goFS    : Set goFS    = CreateObject("Scripting.FileSystemObject")        
+                For Each oFile In goFS.GetFolder(strCurDir).Files
+                  If "xlsx" = LCase(goFS.GetExtensionName(oFile.Name)) Then                                     
+                                getExcelFileName = oFile.Name
+                                exit function
+                                end if 
+                Next
+  
+                If oLstPng Is Nothing Then
+                                WScript.Echo "no excel found"
+                End If
+   
+end function
+
+Public Function ExcelColHead(ByVal ColNum)
+  Dim T 
+  If ColNum > 26 Then
+    T = (ColNum Mod 26)
+    ColNum = (ColNum - T) / 26
+    ExcelColHead = Chr(64 + ColNum) & Chr(64 + T)
+  Else
+    ExcelColHead = Chr(64 + ColNum)
+  End If
+End Function
+
+function getUsedRange(ByVal originFileName,ByVal inputSheetName)
+                on error resume next
+                Const xlExclusive = 3
+                Const xlLocalSessionChanges = 2   
+                
+                
+                Dim objExcel1: Set objExcel1 = CreateObject("Excel.Application")
+                dim clearenceCounter:clearenceCounter=0         
+                objExcel1.displayalerts = false
+                Dim originObjSpread : Set originObjSpread = objExcel1.Workbooks.Open(originFileName)
+                originObjSpread.sheets(inputSheetName).activate
+                Dim inputSheet : Set inputSheet = originObjSpread.Worksheets(inputSheetName)
+                inputSheet.activate
+                
+                Dim objCells : Set objCells = inputSheet.cells
+                
+                
+                
+                
+                
+                Dim startingColumn : startingColumn = inputSheet.usedrange.column
+                Dim numberOfColumns : numberOfColumns = inputSheet.usedrange.columns.count
+                Dim startingRow : startingRow = inputSheet.usedRange.row
+                Dim numberOfRows: numberOfRows = inputSheet.usedRange.rows.count
+                Dim rowDataList : set rowDataList = CreateObject("System.Collections.ArrayList")
+                Dim nCol
+                
+                
+                for nCol  = 0 to (numberOfColumns-1)    
+                                rowDataList.add objCells(1,nCol+1).value
+                next
+                
+                originObjSpread.Close false
+                objExcel1.displayalerts = True
+                objExcel1.quit
+                Set originObjSpread = Nothing
+                Set objExcel1 = Nothing
+                if err.number <>0 then 
+                                msgbox "getUsedRange3: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                err.clear
+                end if
+                
+                set getUsedRange = rowDataList
+end function
+
+function RemoveWhiteSpace(ByRef valueToProcess)
+
+Dim regExp :set regExp = createobject("VBScript.REgEXp")
+                with regExp
+                                .pattern ="\s"
+                                .Multiline=true
+                                .global=true
+                                RemoveWhiteSpace=.Replace(valueToProcess,vbNullString)
+                end with                              
+end function
+
+
+
+function getSpreadSheetName(ByVal originFileName)    
+                on error resume next
+                Dim objExcel1 : Set objExcel1 = CreateObject("Excel.Application")             
+                objExcel1.displayalerts = false    
+                Dim objSpread :  Set objSpread = objExcel1.Workbooks.Open(originFileName)    
+                if err.number <>0 then 
+                                msgbox "Get_Spread_Sheet_Name2: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                err.clear
+                end if
+                Dim objWorksheet1  : Set objWorksheet1 = objSpread.Worksheets(1)     
+                Dim sheetName : sheetName=objWorksheet1.name
+                'msgbox "fileNAme:" & originFileName & " Sheet_Name:" &         sheetName
+                if err.number <>0 then 
+                                msgbox "Get_Spread_Sheet_Name1: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                err.clear
+                end if
+                objSpread.Close               
+                objExcel1.displayalerts = True     
+                objExcel1.quit   
+                Set objSpread = Nothing
+                Set objExcel1 = Nothing 
+                if err.number <>0 then 
+                                msgbox "Get_Spread_Sheet_Name: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                err.clear
+                end if 
+                getSpreadSheetName = sheetName
+end function
+
+
+
+
+function getExcelConnection(ByRef targetFilePathName)
+                on error resume next     
+                Const adSchemaColumns=4
+                Const adBSTR = 8 
+                Const  adInput=1             
+                dim VRstatmt,i,j               
+                Dim objConnection: Set objConnection = CreateObject("ADODB.Connection")
+                
+                with objConnection
+                                .Provider = "Microsoft.ACE.OLEDB.16.0"                
+                                .properties("extended properties").value="excel 12.0;HDR=YES"
+                                .open targetFilePathName                          
+                end with
+                
+                if err.number <>0 then 
+                                msgbox "Get_Excel_Connection: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                err.clear
+                end if     
+                set getExcelConnection = objConnection               
+end function
+
+
+
+
+function getRowDetails(ByRef currentConnection,ByRef spreadSheetColumns, ByRef targetSpreadSheetName)
+                on error resume next
+                Dim i,j,VRstatmt,currentFieldName,csvValue
+                Dim emptyString : emptyString=""
+                Dim csvColumns : csvColumns = join(spreadSheetColumns.toArray(),",")
+
+
+                dim sql_text : sql_text="select "& csvColumns &"   FROM [" & targetSpreadSheetName & "$]"  & VRstatmt
+                
+                Dim objCommand: Set objCommand = CreateObject("ADODB.Command")
+
+                objCommand.ActiveConnection = currentConnection
+
+                objCommand.commandText = sql_text
+
+                objCommand.prepared=true
+
+                Dim objRecordset : Set objRecordset = objCommand.execute
+                
+                if err.number <>0 then 
+                                msgbox "Get_Bundle_Details0: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                'err.clear
+                end if     
+                
+                Dim objFields : Set objFields = objRecordset.fields
+                'msgbox "Header Names: " & objFields(0).Name
+                ReDim csvFields ((objFields.count)) 
+                Dim rowDetailsMap : set rowDetailsMap = CreateObject("Scripting.Dictionary")
+                'Dim rowDataList : set rowDataList = CreateObject("System.Collections.ArrayList")
+                for i=0 to objFields.count-1                         
+                                if len(objFields.Item(i).name) > 0 Then
+                                                csvFields(i)=objFields.Item(i).name
+                                end if
+                next
+                if err.number <>0 then 
+                                msgbox "Get_Bundle_Details1: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                'err.clear
+                end if
+                Dim counter : counter=0
+                Dim fieldValues 
+                with objRecordset
+                                if not .bof and not .eof then
+                                                '.movelast
+                                                .movefirst                           
+                                                while( not .eof) 
+                                                                                for j=0 to  objFields.count
+                                                                                                currentFieldName = csvFields(j)                                                                
+                                                                                                if currentFieldName = "" then 
+                                                                                                                'msgbox "current field name is null" 
+                                                                                                end if
+                                                                                                'msgbox currentFieldName
+                                                                                                dim currentValue
+                                                                                                if currentFieldName <> "" Then                                                                                                                                  
+                                                                                                                currentValue = objRecordset.fields.item(currentFieldName)
+                                                                                                                if not isNull(currentValue) then
+                                                                                                                                csvValue = Cstr(currentValue)
+                                                                                                                                'msgbox "Counter " & counter & " Value " &csvValue
+                                                                                                                                csvValue = Trim(currentValue)
+                                                                                                                                
+                                                                                                                                
+                                                                                                                                if rowDetailsMap.exists(currentFieldName) then                                                                                                                                                                
+                                                                                                                                                if csvValue <> "" then                                                                                                                     
+                                                                                                                                                                set fieldValues  = rowDetailsMap.item(currentFieldName)                                                                                                                                
+                                                                                                                                                                fieldValues.add csvValue                                                                                                                              
+                                                                                                                                                                set rowDetailsMap.item(currentFieldName)=fieldValues                                                                                                                                       
+                                                                                                                                                end if
+                                                                                                                                else
+                                                                                                                                                
+                                                                                                                                                if csvValue <> "" then                                                                                                                                                                     
+                                                                                                                                                                set fieldValues = CreateObject("System.Collections.ArrayList")
+                                                                                                                                                                fieldValues.add csvValue
+                                                                                                                                                                rowDetailsMap.add currentFieldName,fieldValues                                                                                                                                    
+                                                                                                                                                end if
+                                                                                                                                end if 
+                                                                                                                end if                                                                                                                     
+                                                                                                                if err.number <>0 then 
+                                                                                                                                msgbox "Get_Bundle_Details8: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                                                                                                                'err.clear
+                                                                                                                end if                                                                                                                                                                                     
+                                                                                                end if     
+                                                                                next                                                                       
+                                                                                counter=counter+1
+                                                                                ''rowDataList.add rowDetailsMap
+                                                                                ''set rowDetailsMap = CreateObject("Scripting.Dictionary")
+                                                                                if err.number <>0 then 
+                                                                                                                                msgbox "Get_Bundle_Details9: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                                                                                                                'err.clear
+                                                                                                                end if     
+                                                                .movenext
+                                wend
+                end if
+end with                              
+                objRecordset.Close
+                if err.number <>0 then 
+                                msgbox "Get_Bundle_Details10: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                'err.clear
+                end if
+                set getRowDetails=rowDetailsMap
+
+end function
+
+function selectValue2(ByRef currentConnection,ByRef spreadSheetColumns, ByRef targetSpreadSheetName)
+                on error resume next
+                'msgbox "START_BUNDLE_DETAILS"
+                ''Role_Name      Display_Name   Role_Type
+                'msgbox "Target_SPreadShett_Name: " & targetSpreadSheetName
+                Dim i,j,VRstatmt,currentFieldName,csvValue       
+                Const adBSTR = 8 
+Const  adInput=1
+                
+                dim sql_text : sql_text="select ID   FROM [" & targetSpreadSheetName & "$] where FILED_NAME=@app"  & VRstatmt
+                
+                
+                
+                
+                
+                Dim objCommand: Set objCommand = CreateObject("ADODB.Command")
+                
+                'Dim roleName : set roleName  = objCommand.CreateParameter("Role_Name",adBSTR,adInput)
+                Dim subRoles : set subRoles  = objCommand.CreateParameter("@app",adBSTR,adInput)                
+                objCommand.parameters.append subRoles         
+                objCommand("@app")=spreadSheetColumns
+                objCommand.ActiveConnection = currentConnection
+
+                objCommand.commandText = sql_text
+
+                objCommand.prepared=true
+
+                Dim objRecordset : Set objRecordset = objCommand.execute
+                
+                
+                
+                
+                dim currentValue
+                with objRecordset
+                                if not .bof and not .eof then                                        
+                                                .movefirst                           
+                                                while( not .eof) 
+                                                                                
+                                                                                                
+                                                                                'msgbox "I here" & objRecordset.fields.item("ID")
+                                                                                                
+                                                                
+                                                                                currentValue = objRecordset.fields.item("ID")
+                                                                                
+                                                                
+                                                                                
+                                                                                
+                                                                
+                                                                                
+                                                                                
+                                                                .movenext
+                                wend
+                end if
+end with
+                
+                if err.number <>0 then 
+                                msgbox "Get_Bundle_Details9: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                'err.clear
+                end if
+                
+                
+                
+                objRecordset.Close
+                if err.number <>0 then 
+                                msgbox "Get_Bundle_Details10: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                'err.clear
+                end if
+                
+                selectValue2=currentValue
+
+end function
+
+
+function selectValue(ByRef currentConnection,ByRef spreadSheetColumns, ByRef targetSpreadSheetName)
+                on error resume next
+                'msgbox "START_BUNDLE_DETAILS"
+                ''Role_Name      Display_Name   Role_Type
+                'msgbox "Target_SPreadShett_Name: " & targetSpreadSheetName
+                Dim i,j,VRstatmt,currentFieldName,csvValue       
+                Const adBSTR = 8 
+Const  adInput=1
+                
+                dim sql_text : sql_text="select ID   FROM [" & targetSpreadSheetName & "$] where test_BUSINESS_SOURCE=@app"  & VRstatmt
+                
+                
+                
+                
+                
+                Dim objCommand: Set objCommand = CreateObject("ADODB.Command")
+                
+                'Dim roleName : set roleName  = objCommand.CreateParameter("Role_Name",adBSTR,adInput)
+                Dim subRoles : set subRoles  = objCommand.CreateParameter("@app",adBSTR,adInput)                
+                objCommand.parameters.append subRoles         
+                objCommand("@app")=spreadSheetColumns
+                objCommand.ActiveConnection = currentConnection
+
+                objCommand.commandText = sql_text
+
+                objCommand.prepared=true
+
+                Dim objRecordset : Set objRecordset = objCommand.execute
+                
+                
+                
+                
+                dim currentValue
+                with objRecordset
+                                if not .bof and not .eof then                                        
+                                                .movefirst                           
+                                                while( not .eof) 
+                                                                                
+                                                                                                
+                                                                                'msgbox "I here" & objRecordset.fields.item("ID")
+                                                                                                
+                                                                
+                                                                                currentValue = objRecordset.fields.item("ID")
+                                                                                
+                                                                
+                                                                                
+                                                                                
+                                                                
+                                                                                
+                                                                                
+                                                                .movenext
+                                wend
+                end if
+end with
+                
+                if err.number <>0 then 
+                                msgbox "Get_Bundle_Details9: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                'err.clear
+                end if
+                
+                
+                
+                objRecordset.Close
+                if err.number <>0 then 
+                                msgbox "Get_Bundle_Details10: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                'err.clear
+                end if
+                
+                selectValue=currentValue
+
+end function
+
+function getRowDetails2(ByRef currentConnection,ByRef spreadSheetColumns, ByRef targetSpreadSheetName)
+                on error resume next
+                'msgbox "START_BUNDLE_DETAILS"
+                ''Role_Name      Display_Name   Role_Type
+                'msgbox "Target_SPreadShett_Name: " & targetSpreadSheetName
+                Dim i,j,VRstatmt,currentFieldName,csvValue       
+                Dim csvColumns : csvColumns = join(spreadSheetColumns.toArray(),",")
+                
+                dim sql_text : sql_text="select " & csvColumns &"   FROM [" & targetSpreadSheetName & "$]"  & VRstatmt
+                
+                Dim objCommand: Set objCommand = CreateObject("ADODB.Command")
+
+                objCommand.ActiveConnection = currentConnection
+
+                objCommand.commandText = sql_text
+
+                objCommand.prepared=true
+
+                Dim objRecordset : Set objRecordset = objCommand.execute
+                
+                if err.number <>0 then 
+                                msgbox "Get_Bundle_Details0: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                'err.clear
+                end if
+                
+                Dim objFields : Set objFields = objRecordset.fields
+                'msgbox "Header Names: " & objFields(0).Name
+                ReDim csvFields ((objFields.count)) 
+                Dim rowDetailsMap : set rowDetailsMap = CreateObject("Scripting.Dictionary")
+                Dim rowDataList : set rowDataList = CreateObject("System.Collections.ArrayList")
+                for i=0 to objFields.count-1                         
+                                if len(objFields.Item(i).name) > 0 Then
+                                                csvFields(i)=objFields.Item(i).name
+                                end if
+                next
+                if err.number <>0 then 
+                                msgbox "Get_Bundle_Details1: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                'err.clear
+                end if
+                Dim counter : counter=0
+                with objRecordset
+                                if not .bof and not .eof then                                        
+                                                .movefirst                           
+                                                while( not .eof) 
+                                                                                for j=0 to  objFields.count
+                                                                                                currentFieldName = csvFields(j)                                                                
+                                                                                                if currentFieldName = "" then 
+                                                                                                                'msgbox "current field name is null" 
+                                                                                                end if
+                                                                                
+                                                                                                dim currentValue
+                                                                                                if currentFieldName <> "" Then                                                                                                  
+                                                                                                                currentValue = objRecordset.fields.item(currentFieldName)
+                                                                                                                if not isNull(currentValue) then
+                                                                                                                                csvValue = Cstr(objRecordset.fields.item(currentFieldName))
+                                                                                                                                rowDetailsMap.add currentFieldName,csvValue                                                                                                                 
+                                                                                                                                if err.number <>0 then 
+                                                                                                                                                msgbox "Get_Bundle_Details2: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                                                                                                                                'err.clear
+                                                                                                                                end if                                                                     
+                                                                                                                end if
+                                                                                                end if                                                     
+                                                                                next
+                                                                                
+                                                                                counter=counter+1
+                                                                                rowDataList.add rowDetailsMap
+                                                                                set rowDetailsMap = CreateObject("Scripting.Dictionary")
+                                                                .movenext
+                                wend
+                end if
+end with
+                
+                if err.number <>0 then 
+                                msgbox "Get_Bundle_Details9: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                'err.clear
+                end if
+                
+                
+                
+                objRecordset.Close
+                if err.number <>0 then 
+                                msgbox "Get_Bundle_Details10: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                'err.clear
+                end if
+                set getRowDetails2=rowDataList
+
+end function
+
+function LPad(s,l,c)
+                Dim n: n =0
+                if l>len(s) then n= l-len(s)
+                LPad = String(n,c) & s
+end function
