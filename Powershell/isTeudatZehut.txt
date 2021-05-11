@@ -30,11 +30,11 @@ function IsTeudatZehut{
 	return $True
 }
 //java
-public boolean isTeudatZehut(String umtbIdNum){
+public boolean isTeudatZehut(String testIdNum){
 	boolean validTZ=false;
-	char[] arrayString=umtbIdNum.toCharArray();
+	char[] arrayString=testIdNum.toCharArray();
 	int sum=0;
-	if(Util.isNotNullOrEmpty(umtbIdNum)){         
+	if(Util.isNotNullOrEmpty(testIdNum)){         
 		int size=arrayString.length;
 		int[] arrConverted=new int[size];
 		int[] supportString=new int[]{1,2,1,2,1,2,1,2,1};
@@ -44,7 +44,7 @@ public boolean isTeudatZehut(String umtbIdNum){
 		for(int i=0;i<size;i++){         
 		int item=arrConverted[i]*supportString[i];           
 		sum+=(((item/10)+(item%10)));
-		umtbDebug("devide " +(item/10) + " modulo " +               (item%10));
+		testDebug("devide " +(item/10) + " modulo " +               (item%10));
 		}             
 		if(sum%10==0){
 			 validTZ=true;
