@@ -19,7 +19,7 @@ Dim currentConnection : Set currentConnection = getExcelConnection(targetFilePat
 
 Dim bundleTypes : set bundleTypes = getBundleTypes(currentConnection,targetSpreadSheetName)
 
-Dim umtbBusinessSource : umtbBusinessSource = getUmtbBusinessSource(currentConnection,targetSpreadSheetName)
+Dim testBusinessSource : testBusinessSource = gettestBusinessSource(currentConnection,targetSpreadSheetName)
 
 Dim bundleDetails : set bundleDetails = getBundleDetails(currentConnection,targetSpreadSheetName)
 
@@ -30,9 +30,9 @@ Dim bundleType
 For Each bundleType In bundleTypes
                 select case bundleType
                                 case  "it"                                                                                                              
-                                                bundlePathNamesMap.add "it",strCurDir & "\IT" & "\" & umtbBusinessSource
+                                                bundlePathNamesMap.add "it",strCurDir & "\IT" & "\" & testBusinessSource
                                 case  "business"                                                                                                                
-                                                bundlePathNamesMap.add "business",strCurDir & "\Business" & "\" & umtbBusinessSource
+                                                bundlePathNamesMap.add "business",strCurDir & "\Business" & "\" & testBusinessSource
                 end select
 Next 
 
