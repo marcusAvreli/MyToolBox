@@ -20,7 +20,7 @@ Dim currentConnection : Set currentConnection = getExcelConnection(targetFilePat
 
 Dim bundleTypes : set bundleTypes = getBundleTypes(currentConnection,targetSpreadSheetName)
 
-Dim testBusinessSource : testBusinessSource = getUmtbBusinessSource(currentConnection,targetSpreadSheetName)
+Dim testBusinessSource : testBusinessSource = gettestBusinessSource(currentConnection,targetSpreadSheetName)
 
 Dim bundleDetails : set bundleDetails = getBundleDetails(currentConnection,targetSpreadSheetName)
 
@@ -408,80 +408,80 @@ function createAttributesElement(xmlDoc,ByRef bundleDetails)
                 mapElement.appendChild entryElement
                 
                 Set entryElement = xmlDoc.createElement("entry")
-                entryElement.setAttribute "key", "umtbBusinessSource"
-                entryElement.setAttribute "value", bundleDetails.item("umtbBusinessSource")
+                entryElement.setAttribute "key", "testBusinessSource"
+                entryElement.setAttribute "value", bundleDetails.item("testBusinessSource")
                 mapElement.appendChild entryElement
                 
                 Set entryElement = xmlDoc.createElement("entry")
-                entryElement.setAttribute "key", "umtbReviewer"
-                entryElement.setAttribute "value", bundleDetails.item("umtbReviewer")
+                entryElement.setAttribute "key", "testReviewer"
+                entryElement.setAttribute "value", bundleDetails.item("testReviewer")
                 mapElement.appendChild entryElement
                 
                 
-                dim currentFieldValue : currentFieldValue = bundleDetails.item("umtbActionOnMover")
+                dim currentFieldValue : currentFieldValue = bundleDetails.item("testActionOnMover")
                 
                 Set entryElement = xmlDoc.createElement("entry")
-                entryElement.setAttribute "key", "umtbActionOnMover"
+                entryElement.setAttribute "key", "testActionOnMover"
                 if currentFieldValue <> "" then 
-                                entryElement.setAttribute "value", bundleDetails.item("umtbActionOnMover")
+                                entryElement.setAttribute "value", bundleDetails.item("testActionOnMover")
                 end if
                 mapElement.appendChild entryElement
                 
                 
-                currentFieldValue = bundleDetails.item("umtbAdditionalParamsRule")
+                currentFieldValue = bundleDetails.item("testAdditionalParamsRule")
                 Set entryElement = xmlDoc.createElement("entry")
-                entryElement.setAttribute "key", "umtbAdditionalParamsRule"
+                entryElement.setAttribute "key", "testAdditionalParamsRule"
                 if currentFieldValue <> "" then 
-                entryElement.setAttribute "value", bundleDetails.item("umtbAdditionalParamsRule")
+                entryElement.setAttribute "value", bundleDetails.item("testAdditionalParamsRule")
                 end if
                 mapElement.appendChild entryElement
                 
                 
-                currentFieldValue = bundleDetails.item("umtbAdditionalParamsForm")
+                currentFieldValue = bundleDetails.item("testAdditionalParamsForm")
                 Set entryElement = xmlDoc.createElement("entry")
-                entryElement.setAttribute "key", "umtbAdditionalParamsForm"
+                entryElement.setAttribute "key", "testAdditionalParamsForm"
                 if currentFieldValue <> "" then 
-                entryElement.setAttribute "value", bundleDetails.item("umtbAdditionalParamsForm")
+                entryElement.setAttribute "value", bundleDetails.item("testAdditionalParamsForm")
                 end if
                 mapElement.appendChild entryElement
                 
 
-                currentFieldValue = bundleDetails.item("umtbHierarchy")
+                currentFieldValue = bundleDetails.item("testHierarchy")
                 Set entryElement = xmlDoc.createElement("entry")
-                entryElement.setAttribute "key", "umtbHierarchy"
+                entryElement.setAttribute "key", "testHierarchy"
                 if currentFieldValue <> "" then 
                 entryElement.setAttribute "value", currentFieldValue
                 end if
                 mapElement.appendChild entryElement
                 
-                currentFieldValue = bundleDetails.item("umtbMapprovals")
+                currentFieldValue = bundleDetails.item("testMapprovals")
                 Set entryElement = xmlDoc.createElement("entry")
-                entryElement.setAttribute "key", "umtbMapprovals"
+                entryElement.setAttribute "key", "testMapprovals"
                 if currentFieldValue <> "" then 
                 entryElement.setAttribute "value", currentFieldValue
                 end if
                 mapElement.appendChild entryElement
                 
                 
-                currentFieldValue = bundleDetails.item("umtbOnEffSubAMover")
+                currentFieldValue = bundleDetails.item("testOnEffSubAMover")
                 Set entryElement = xmlDoc.createElement("entry")
-                entryElement.setAttribute "key", "umtbOnEffSubAMover"
+                entryElement.setAttribute "key", "testOnEffSubAMover"
                 if currentFieldValue <> "" then 
                 entryElement.setAttribute "value", currentFieldValue
                 end if
                 mapElement.appendChild entryElement
                 
-                currentFieldValue = bundleDetails.item("umtbOnJobKeyMover")
+                currentFieldValue = bundleDetails.item("testOnJobKeyMover")
                 Set entryElement = xmlDoc.createElement("entry")
-                entryElement.setAttribute "key", "umtbOnJobKeyMover"
+                entryElement.setAttribute "key", "testOnJobKeyMover"
                 if currentFieldValue <> "" then 
                 entryElement.setAttribute "value", currentFieldValue
                 end if
                 mapElement.appendChild entryElement
                 
-                currentFieldValue = bundleDetails.item("umtbRequestableRole")
+                currentFieldValue = bundleDetails.item("testRequestableRole")
                 Set entryElement = xmlDoc.createElement("entry")
-                entryElement.setAttribute "key", "umtbRequestableRole"
+                entryElement.setAttribute "key", "testRequestableRole"
                 if currentFieldValue <> "" then 
                                 Dim requestableValueElement :Set requestableValueElement = xmlDoc.createElement("value")
                                 Dim booleanElement :Set booleanElement = xmlDoc.createElement("Boolean")
@@ -496,9 +496,9 @@ function createAttributesElement(xmlDoc,ByRef bundleDetails)
                 end if
                 mapElement.appendChild entryElement
                 
-                currentFieldValue = bundleDetails.item("umtbSapprovals")
+                currentFieldValue = bundleDetails.item("testSapprovals")
                 Set entryElement = xmlDoc.createElement("entry")
-                entryElement.setAttribute "key", "umtbSapprovals"
+                entryElement.setAttribute "key", "testSapprovals"
                 if currentFieldValue <> "" then 
                 entryElement.setAttribute "value", currentFieldValue
                 end if
@@ -868,12 +868,12 @@ function getBundleTypes(ByRef currentConnection,byRef targetSpreadSheetName)
                 set getBundleTypes=bundleTypes
 end function
 
-function getUmtbBusinessSource(ByRef currentConnection,byRef targetSpreadSheetName)
+function gettestBusinessSource(ByRef currentConnection,byRef targetSpreadSheetName)
                 on error resume next
-                'msgbox "START UMTB_BUSINESS_SOURCE"
+                'msgbox "START test_BUSINESS_SOURCE"
                 'msgbox "Target_SPreadShett_Name: " & targetSpreadSheetName
                 Dim i,j,VRstatmt,currentFieldName,csvValue
-                Dim sql_text : sql_text="select distinct umtbBusinessSource FROM [" & targetSpreadSheetName & "$]"  & VRstatmt
+                Dim sql_text : sql_text="select distinct testBusinessSource FROM [" & targetSpreadSheetName & "$]"  & VRstatmt
                 
                 Dim objCommand: Set objCommand = CreateObject("ADODB.Command")
 
@@ -887,7 +887,7 @@ function getUmtbBusinessSource(ByRef currentConnection,byRef targetSpreadSheetNa
                 Dim objFields : Set objFields = objRecordset.fields
                 'msgbox "Header Names: " & objFields(0).Name
                 ReDim csvFields ((objFields.count)) 
-                Dim umtbBusinessSource : set umtbBusinessSource = CreateObject("System.Collections.ArrayList")
+                Dim testBusinessSource : set testBusinessSource = CreateObject("System.Collections.ArrayList")
                 for i=0 to objFields.count-1                         
                                 if len(objFields.Item(i).name) > 0 Then
                                                 csvFields(i)=objFields.Item(i).name
@@ -907,13 +907,13 @@ function getUmtbBusinessSource(ByRef currentConnection,byRef targetSpreadSheetNa
                                                                                                 'msgbox currentFieldName
                                                                                                 if currentFieldName <> "" Then 
                                                                                                                 select case currentFieldName
-                                                                                                                                case  "umtbBusinessSource" 
+                                                                                                                                case  "testBusinessSource" 
                                                                                                                                 csvValue = Cstr(objRecordset.fields.item(currentFieldName))
                                                                                                                                 csvValue = Trim(csvValue)
                                                                                                                 end select
                                                                                                 end if
-                                                                                                if not umtbBusinessSource.contains(csvValue) Then
-                                                                                                umtbBusinessSource.add csvValue
+                                                                                                if not testBusinessSource.contains(csvValue) Then
+                                                                                                testBusinessSource.add csvValue
                                                                                                 end if
                                                                                                 'msgbox "Found_Value:" & csvValue
                                                                                                 ''csvValues(j)=csvValue
@@ -923,17 +923,17 @@ function getUmtbBusinessSource(ByRef currentConnection,byRef targetSpreadSheetNa
                                 wend
                 end if
 end with
-                'msgbox "umtbBusinessSource_count: "& umtbBusinessSource.count
+                'msgbox "testBusinessSource_count: "& testBusinessSource.count
                 
-                'set strUmtbBusinessSource = Cstr(umtbBusinessSource.item(0))
-                'msgbox "Result_Business_Source: "& strUmtbBusinessSource
-                'msgbox "FINISH UMTB_BUSINESS_SOURCE"
+                'set strtestBusinessSource = Cstr(testBusinessSource.item(0))
+                'msgbox "Result_Business_Source: "& strtestBusinessSource
+                'msgbox "FINISH test_BUSINESS_SOURCE"
                 if err.number <>0 then 
-                                msgbox "Get_Umtb_Business_Source_Error: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                                msgbox "Get_test_Business_Source_Error: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
                                 'err.clear
                 end if
                 objRecordset.Close
-                getUmtbBusinessSource=umtbBusinessSource.item(0)
+                gettestBusinessSource=testBusinessSource.item(0)
 end function
 
 
@@ -943,7 +943,7 @@ on error resume next
                 ''Role_Name      Display_Name   Role_Type
                 'msgbox "Target_SPreadShett_Name: " & targetSpreadSheetName
                 Dim i,j,VRstatmt,currentFieldName,csvValue
-                dim sql_text : sql_text="select Role_Name,Display_Name,Role_Type,Role_Description,Role_Owner,Sub_Roles_IT_Roles,IT_Role_Entitlements,Parent_Role,umtbBusinessSource,umtbReviewer,umtbActionOnMover,umtbAdditionalParamsRule,umtbAdditionalParamsForm,umtbHierarchy,umtbMapprovals,umtbOnEffSubAMover,umtbOnJobKeyMover,umtbRequestableRole,umtbSapprovals   FROM [" & targetSpreadSheetName & "$]"  & VRstatmt
+                dim sql_text : sql_text="select Role_Name,Display_Name,Role_Type,Role_Description,Role_Owner,Sub_Roles_IT_Roles,IT_Role_Entitlements,Parent_Role,testBusinessSource,testReviewer,testActionOnMover,testAdditionalParamsRule,testAdditionalParamsForm,testHierarchy,testMapprovals,testOnEffSubAMover,testOnJobKeyMover,testRequestableRole,testSapprovals   FROM [" & targetSpreadSheetName & "$]"  & VRstatmt
                 
                 Dim objCommand: Set objCommand = CreateObject("ADODB.Command")
 
@@ -1027,13 +1027,13 @@ on error resume next
                                 wend
                 end if
 end with
-                'msgbox "umtbBusinessSource_count: "& umtbBusinessSource.count
+                'msgbox "testBusinessSource_count: "& testBusinessSource.count
                 if err.number <>0 then 
                                 msgbox "Get_Bundle_Details: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
                                 'err.clear
                 end if
-                'set strUmtbBusinessSource = Cstr(umtbBusinessSource.item(0))
-                'msgbox "Result_Business_Source: "& strUmtbBusinessSource
+                'set strtestBusinessSource = Cstr(testBusinessSource.item(0))
+                'msgbox "Result_Business_Source: "& strtestBusinessSource
                 'msgbox "FINISH BUNDLE_DETAILS"
                 objRecordset.Close
                 set getBundleDetails=bundleList
