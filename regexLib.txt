@@ -1,0 +1,11 @@
+To add "); at the end of row
+	FindWhat: ^(.*)$
+	ReplaceWith: \1"\);
+	
+Find key value pair in xml
+	id="(.*?)"
+	created="(.*?)"
+	modified="(.*?)"
+
+Find Leading Zeroes:
+	^0+(?!$)
