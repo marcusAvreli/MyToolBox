@@ -1,0 +1,221 @@
+Static IP
+https://www.putorius.net/2012/10/how-to-configure-static-ip-address-in.html
+https://ie.technion.ac.il/~bravo/secret/Other/apache_compile.phtml
+OpenSSH
+
+Start on boot: chkconfig sshd on
+
+Development tools
+yum groupinstall "Development Tools"
+yum install expat-devel
+yum install libxml2-devel
+yum install libXpm-devel
+
+Autoconf
+tar -zxvf autoconf-2.69.tar.gz
+mv autoconf-2.69 autoconf
+mv /home/admin/autoconf /usr/src/
+chmod -R 700 /usr/src/autoconf
+cd /usr/src/autoconf
+./configure;make;make install
+cd /home/admin
+
+Automake
+tar -zxvf automake-1.15.tar.gz
+mv automake-1.15 automake
+mv /home/admin/automake /usr/src/
+chmod -R 700 /usr/src/automake
+cd /usr/src/automake
+./configure;make;make install
+cd /home/admin
+
+PCRE
+tar -zxvf pcre-8.42.tar.gz
+mv pcre-8.42 pcre
+mv /home/admin/pcre /usr/src/
+chmod -R 700 /usr/src/pcre
+cd /usr/src/pcre
+./configure;make;make install
+
+HTTPD
+cd /home/admin
+tar -zxvf httpd-2.4.33.tar.gz
+mv httpd-2.4.33 httpd
+mv /home/admin/httpd /usr/src
+chmod -R 700 /usr/src/httpd
+cd /home/admin
+
+APR+APR UTIL
+tar -zxvf apr-1.6.3.tar.gz
+tar -zxvf apr-util-1.6.1.tar.gz
+mv apr-1.6.3 apr
+mv apr-util-1.6.1 apr-util
+cp -r /home/admin/apr /usr/src/httpd/srclib
+cp -r /home/admin/apr-util /usr/src/httpd/srclib
+chmod -R 700 /usr/src/httpd/srclib/apr
+chmod -R 700 /usr/src/httpd/srclib/apr-util
+
+yum install openssl-devel
+
+cd /usr/src/httpd/srclib/apr
+./configure;make;make install
+cd /usr/src/httpd/srclib/apr-util
+./configure --with-apr=/usr/src/httpd/srclib/apr/apr-1-config;make;make install
+cd /usr/src/httpd/; make clean; ./configure --enable-so --enable-ssl=shared --with-ssl=/usr/bin/openssl ;make;make install  
+##Run the below-mentioned command to ensure that there are no errors in the above step. (if it returns 0, so there were no errors)
+echo $?
+
+List Modules
+/usr/local/apache2/bin/apachectl -M
+
+
+
+cd /home/admin
+
+/usr/local/apache2/conf/httpd.conf
+navigate to LINE 215:
+change DocumentRoot to be /var/www/html/
+navigate to LINE 216
+change <Directory> to be <Directory /var/www/html>
+cd /home/admin
+
+cd /usr/local/apache2/bin/
+./apachectl restart
+
+
+PHP
+GD
+mv libpng /usr/src/
+mv libgd /usr/src/
+
+cd /usr/src/libpng;make distclean;./configure --prefix=/usr/src/;make;make install
+cd /usr/src/libjpeg;make distclean;./configure --prefix=/usr/src;make;make install
+cd /usr/src/libgd;make disclean; ./configure --prefix=/usr/src --with-png=/usr/src/lib --with-jpeg=/usr/src/lib;make;make install
+
+php -r 'print_r(gd_info());'
+
+
+##which opensll
+##output: /usr/bin/openssl
+##--with-xxx command refers to location where xxx.h file sits
+##--libdir refers to location where so file sits
+http://emboss.open-bio.org/html/adm/ch01s09.html
+https://www.tecmint.com/install-and-compile-php-7-on-centos-7-and-debian-8/
+# yum install gcc libxml2-devel pkgconfig openssl-devel bzip2-devel libpng-devel libpng-devel libjpeg-devel libXpm-devel freetype-devel gmp-devel libmcrypt-devel mariadb-devel aspell-devel recode-devel httpd-devel
+
+
+
+
+mv /home/admin/php /usr/src
+chmod -R 700 /usr/src/php
+cd /usr/src/php
+make distclean; ./configure --with-apxs2=/usr/local/apache2/bin/apxs  --with-gd=/usr/src --with-png-dir=/usr/src/lib --with-jpeg-dir=/usr/src/lib --with-xpm-dir=/usr/ --with-pdo-mysql --enable-mbstring --enable-ftp --enable-opcache --with-openssl --with-curl=/usr;make;make install
+
+
+https://community.hpe.com/t5/System-Administration/how-to-tell-libpng-that-zlib-is-installed/td-p/3984486#.XAVo8ugzZPY
+
+
+
+TO DO verify how to is it: --with-config-file-path=/usr/src
+TO DO what the difference is make clean vs make distclean
+libtool --finish /usr/src/php/libs
+chmod 755 /usr/local/apache2/modules/libphp5.so
+http://slacksite.com/apache/webserver.php
+Where php is looking for php.ini:
+php --ini
+https://board.phpbuilder.com/d/10395817-php70-not-playing-nice-with-openssl/3
+Which php configuration file is currently loaded
+php -i | grep "Loaded Configuration File"
+
+Check php openSSL
+php -i |grep -A 5 openssl
+php -r 'phpinfo();' | grep openssl
+Enable opcache.so
+zend_extension=/usr/src/php/modules/opcache.so
+List php modules
+php -m
+Ext/openssl directory in the PHP installation directory
+find / -name "openssl" | grep php
+
+
+IPTABLES
+For Apache
+/sbin/iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+service iptables save
+service iptables restart
+
+For mySQL
+
+/sbin/iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT
+service iptables save
+service iptables restart
+
+/var/lib/mysql/mysql.sock
+7b9;4/>+ldS
+https://opensourcedbms.com/dbms/installing-mysql-5-7-on-centosredhatfedora/
+https://tecadmin.net/install-mysql-5-7-centos-rhel/
+
+CREATE DATABASE drupal CHARACTER SET utf8 COLLATE utf8_general_ci;
+use mysql;
+CREATE USER drupal@localhost IDENTIFIED BY markgavS30!;
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES ON drupal.* TO 'drupalUsr'@'localhost' IDENTIFIED BY 'zubur1';
+
+
+https://stackoverflow.com/questions/50336378/variable-sql-mode-cant-be-set-to-the-value-of-no-auto-create-user
+SET GLOBAL log_bin_trust_function_creators = 1;
+
+wget http://www-us.apache.org/dist//httpd/httpd-2.4.25.tar.gz .
+
+
+Apache Config File
+vim /usr/local/apache2/conf/httpd.conf 
+navigate to LINE 115:LoadModule proxy_module modules/mod_proxy.so
+navigate to LINE 118:LoadModule proxy_http_module modules/mod_proxy_http.so
+navigate to LINE 150::LoadModule rewrite_module modules/mod_rewrite.so
+navigate to LINE 215: change DocumentRoot to be /var/www/html/
+navigate to LINE 216: change <Directory> to be <Directory /var/www/html>
+
+AddType text/html .php
+AddHandler php5-script .php
+
+
+Start/Stop Server
+cd /usr/local/apache2/bin/
+./apachectl restart
+/usr/local/apache2/bin/apachectl restart
+/usr/local/apache2/bin/apachectl stop
+/usr/local/apache2/bin/apachectl start
+
+Server Version
+/usr/local/apache2/bin/apachectl -v
+/usr/local/apache2/bin/apachectl -V
+
+cd /usr/local/apache2/bin/
+./apachectl stop
+
+Logs
+/usr/local/apache2/logs/
+
+
+http://httpd.apache.org/docs/1.3/misc/rewriteguide.html
+
+CREATE USER 'identityiq'@'localhost' IDENTIFIED BY 'identityiq';
+GRANT ALL PRIVILEGES ON * . * TO 'identityiq'@'localhost';
+drop user 'identityiq'@'localhost';
+FLUSH PRIVILEGES;
+CREATE USER 'identityiq'@'localhost' IDENTIFIED BY 'identityiq';
+
+mySql check version
+mysql -V
+SHOW VARIABLES LIKE "%version%";
+
+
+Check distro version
+/etc/*-release
+Remove mysql rpms
+rpm -qa | grep mysql
+Yum remove mysql*
+
+drupal
+sudo chmod 644 settings.php
+chmod 755 default/
