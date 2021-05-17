@@ -1,0 +1,103 @@
+Environmental variables
+M2_HOME is used for both Maven 2 and 3
+
+export M2_HOME=/Users/xxx/sdk/apache-maven-3.0.5
+export M2=$M2_HOME/bin
+export MAVEN_OPTS="-Xmx1048m -Xms256"
+export PATH=$M2:$PATH
+
+Windows environment variables
+
+Variable Name	Variable Value
+MAVEN_HOME	c:\maven
+PATH		%MAVEN_HOME%\bin
+
+
+Ant
+
+ANT_HOME	c:\ant
+PATH		%ANT_HOME%\bin
+
+
+Gradle
+
+GRADLE_HOME	c:\gradle
+PATH		%GRADLE_HOME%\bin
+
+Download only Dependencies of project into separate folder
+mvn dependency:copy-dependencies -DoutputDirectory=yourfoldername -Dhttps.protocols=TLSv1.2
+
+
+
+https://maven.apache.org/plugins/maven-dependency-plugin/examples/copying-project-dependencies.html
+<plugins>
+  <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-dependency-plugin</artifactId>
+    <version>3.0.0</version>
+    <executions>
+      <execution>
+        <id>copy-dependencies</id>
+        <phase>package</phase>
+        <goals>
+          <goal>copy-dependencies</goal>
+        </goals>
+        <configuration>
+          <outputDirectory>${project.build.directory}/alternateLocation</outputDirectory>
+          <overWriteReleases>false</overWriteReleases>
+          <overWriteSnapshots>false</overWriteSnapshots>
+          <overWriteIfNewer>true</overWriteIfNewer>
+        </configuration>
+      </execution>
+    </executions>
+  </plugin>
+</plugins>
+
+And call maven within the command line mvn dependency:copy-dependencies
+
+
+Using following parameters for creating project from Archetype: maven-archetype-quickstart:1.4
+
+Convert maven project to eclipse project
+mvn eclipse:eclipse
+
+https://www.javadevjournal.com/spring-boot/multi-module-project-with-spring-boot/
+
+Building single module project tutorial2
+
+mvn archetype:generate -DgroupId=tutorial2  -DartifactId=tutorial2 -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+
+Change packaging of tutorial2 to <packaging>war</packaging>
+
+
+
+Building multi module project tutorial2
+
+
+mvn archetype:generate -DgroupId=tutorial2  -DartifactId=tutorial2 -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+
+Change packaging of tutorial2 to <packaging>pom</packaging>
+
+cd tutorial2
+mvn archetype:generate -DgroupId=tutorial2 -DartifactId=tutorial2-server -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+
+Change packaging of tutorial2-server to <packaging>jar</packaging>
+
+mvn archetype:generate -DgroupId=tutorial2 -DartifactId=tutorial2-web -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+
+Change packaging of tutorial2-server to <packaging>war</packaging>
+
+Building angular multi module project myBootAngularV2
+
+mvn archetype:generate -DgroupId=myBootAngularV2  -DartifactId=myBootAngularV2 -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+
+Change packaging of myBootAngularV2 to <packaging>pom</packaging>
+
+cd myBootAngularV2
+mvn archetype:generate -DgroupId=myBootAngularV2 -DartifactId=myBootAngularV2-backend -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+
+Change packaging of myBootAngularV2-server to <packaging>war</packaging>
+
+mvn archetype:generate -DgroupId=myBootAngularV2 -DartifactId=myBootAngularV2-frontend -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+
+Change packaging of myBootAngularV2-server to <packaging>jar</packaging>

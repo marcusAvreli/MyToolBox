@@ -1,0 +1,71 @@
+Static IP
+https://www.putorius.net/2012/10/how-to-configure-static-ip-address-in.html
+
+OpenSSH
+
+Start on boot: chkconfig sshd on
+
+Development tools
+yum groupinstall "Development Tools"
+yum install perl-core zlib-devel -y
+OpenSSL
+http://linux-sxs.org/security/openssl.html
+which openssl
+openssl version
+
+Bind 9.13
+http://linux-sxs.org/internet_serving/bind9.html
+yum install krb5-devel
+./configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --sysconfdir=/etc/bind --localstatedir=/var --enable-threads  --with-dlopen=yes  --enable-largefile --with-libtool --enable-shared --enable-static- -with-openssl=/usr --with-gssapi=/usr --with-gnu-ld --with-atf=no --enable-ipv6 --enable-rrl --enable-filter-aaaa CFLAGS=-fno-strict-aliasing
+
+
+ps -ef | grep named
+START NAMED
+/usr/sbin/named -u named
+IP Tables
+/sbin/iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 53 -j ACCEPT
+/sbin/iptables -I INPUT -m state --state NEW -m udp -p udp --dport 53 -j ACCEPT
+
+service iptables save
+service iptables restart
+
+
+Verifications
+**bind is running and listening on the correct IPs
+netstat -tanpl|grep named
+
+**delete or comment out the 2 lines, so it will listen on all available interfaces (the default)
+listen-on port 53 { 127.0.0.1; 20.198.242.116; };
+listen-on-v6 port 53 { ::1; };
+
+https://www.digitalocean.com/community/tutorials/how-to-configure-bind-as-a-caching-or-forwarding-dns-server-on-ubuntu-14-04
+https://www.linuxtechi.com/install-configure-bind-9-dns-server-ubuntu-debian/
+http://chschneider.eu/linux/server/bind9.shtml
+https://ubuntuforums.org/showthread.php?t=1894799
+**dig -x 192.168.1.17
+**dig @192.168.1.17 oLdap.testDomain
+
+**on your DNS you could try doing
+tcpdump -i any -vvv -s 1600 port 53
+if you see packets from the above command, you know its hitting your machine,
+
+Check conf
+/usr/sbin/named-checkconf /etc/named.conf
+
+Check zone file syntax for errors
+/usr/sbin/named-checkzone 1.168.192.IN-ADDR.ARPA /var/named/192.168.1.rev
+ /usr/sbin/named-checkzone testDomain /var/named/master/bind9t.testDomain
+
+********************************************************************
+/usr/sbin/named-checkzone localhost /var/named/master/bind9t.testDomain
+/usr/sbin/named-checkzone 192.168.1.16 /var/named/master/bind9t.testDomain
+
+
+
+yum install krb5-devel
+./configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --sysconfdir=/etc/bind --localstatedir=/var --enable-threads --enable-largefile --with-libtool --enable-shared --enable-static- -with-openssl=/usr --with-gssapi=/usr --with-gnu-ld --with-atf=no --enable-ipv6 --enable-rrl --enable-filter-aaaa CFLAGS=-fno-strict-aliasing -DDIG_SIGCHASE -O2
+
+running on Linux x86_64 4.9.6-gentoo-r1 #3 SMP Mon Feb 13 21:00:30 EST 2017 
+built by make with '--prefix=/usr' '--build=x86_64-pc-linux-gnu' '--host=x86_64-pc-linux-gnu' '--mandir=/usr/share/man' '--infodir=/usr/share/info' '--datadir=/usr/share' '--sysconfdir=/etc' '--localstatedir=/var/lib' '--libdir=/usr/lib64' '--sysconfdir=/etc/bind' '--localstatedir=/var' '--with-libtool' '--enable-full-report' '--without-readline' '--enable-linux-caps' '--disable-filter-aaaa' '--disable-fixed-rrset' '--enable-ipv6' '--disable-rpz-nsdname' '--disable-rpz-nsip' '--disable-seccomp' '--enable-threads' '--with-dlz-bdb' '--with-dlopen' '--with-dlz-filesystem' '--with-dlz-stub' '--without-gost' '--with-gssapi' '--without-idn' '--without-libjson' '--with-dlz-ldap' '--without-dlz-mysql' '--without-dlz-odbc' '--without-dlz-postgres' '--without-lmdb' '--without-python' '--with-ecdsa' '--with-openssl=/usr' '--without-libxml2' '--with-zlib' '--with-randomdev=/dev/random' '--with-geoip' 'build_alias=x86_64-pc-linux-gnu' 'host_alias=x86_64-pc-linux-gnu' 'CFLAGS=-march=native -mtune=native -O2 -pipe -I/usr/include/db5.3' 'LDFLAGS=-Wl,-O1 -Wl,--as-needed'
+
+https://forums.gentoo.org/viewtopic-t-1059376-start-0.html

@@ -1,0 +1,249 @@
+JAVA
+Install java https://tecadmin.net/install-java-8-on-centos-rhel-and-fedora/
+Install JCE https://cwiki.apache.org/confluence/display/STONEHENGE/Installing+Java+Cryptography+Extension+%28JCE%29+Unlimited+Strength+Jurisdiction+Policy+Files+6
+
+Create a file called ant.sh under /etc/profile.d/ directory.(https://www.unixmen.com/install-apache-ant-maven-tomcat-centos-76-5/)
+/etc/bashrc 
+DEVELOPER TOOLS
+sudo yum groupinstall "Development Tools"
+pcre-8.41
+wget --no-check-certificate https://downloads.sourceforge.net/pcre/pcre-8.41.tar.bz2
+
+tar -xvjf pcre-8.41.tar.bz2; mv pcre-8.41 pcre
+
+mv /home/admin/pcre /usr/src/
+
+chmod -R 700 /usr/src/pcre
+
+cd /usr/src/pcre
+
+./configure;make;make install
+
+cd /home/admin
+APACHE SERVER
+wget http://apache.mivzakim.net//httpd/httpd-2.4.33.tar.gz
+wget http://apache.spd.co.il//apr/apr-1.6.3.tar.gz
+wget http://apache.mivzakim.net//apr/apr-util-1.6.1.tar.gz
+tar -zxvf httpd-2.4.33.tar.gz
+tar -zxvf apr-1.6.3.tar.gz
+tar -zxvf apr-util-1.6.1.tar.gz
+
+mv /home/admin/httpd-2.4.33 /home/admin/httpd
+mv /home/admin/httpd /usr/src
+chmod -R 700 /usr/src/httpd
+
+mv /home/admin/apr-1.6.3 /home/admin/apr
+mv /home/admin/apr-util-1.6.1 /home/admin/apr-util
+
+cp -r /home/admin/apr /usr/src/httpd/srclib
+cp -r /home/admin/apr-util /usr/src/httpd/srclib
+
+chmod -R 700 /usr/src/httpd/srclib/apr
+chmod -R 700 /usr/src/httpd/srclib/apr-util
+
+cd /usr/src/httpd/srclib/apr
+./configure;make;make install
+yum install expat-devel
+cd /usr/src/httpd/srclib/apr-util
+./configure --with-apr=/usr/src/httpd/srclib/apr/apr-1-config;make;make install
+
+cd /usr/src/httpd/; make clean; ./configure --enable-so; --enable-ssl;make;make install  
+
+/sbin/iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+
+service iptables save
+service iptables restart
+
+
+
+
+Config File
+vim /usr/local/apache2/conf/httpd.conf 
+navigate to LINE 115:LoadModule proxy_module modules/mod_proxy.so
+navigate to LINE 118:LoadModule proxy_http_module modules/mod_proxy_http.so
+navigate to LINE 150::LoadModule rewrite_module modules/mod_rewrite.so
+navigate to LINE 215: change DocumentRoot to be /var/www/html/
+navigate to LINE 216: change <Directory> to be <Directory /var/www/html>
+Virtual Host
+<VirtualHost *:80>
+	ServerName 192.168.1.14
+
+	ProxyRequests Off
+        ProxyPreserveHost       On
+RewriteEngine On
+	ProxyPass /midpoint http://192.168.1.14:8080/midpoint
+	ProxyPassReverse /midpoint http://192.168.1.14:8080/midpoint
+
+
+<Proxy http://192.168.1.14:8080>
+	  Order allow,deny
+	  Allow from all
+	</Proxy>
+
+
+</VirtualHost>
+
+Start Server
+cd /usr/local/apache2/bin/
+./apachectl restart
+
+APACHE ANT
+##http://www.techoism.com/how-to-install-apache-ant-on-centos/
+cd /opt
+wget http://www.us.apache.org/dist/ant/binaries/apache-ant-1.9.11-bin.tar.gz
+tar -zxvf apache-ant-1.9.11-bin.tar.gz
+mv /opt/apache-ant-1.9.11 /opt/ant
+
+sh -c 'echo ANT_HOME=/opt/ant >> /etc/environment'
+ln -s /opt/ant/bin/ant /usr/bin/ant
+
+ant -version
+
+
+
+APACHE TOMCAT
+cd /home/admin
+wget --no-check-certificate https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.4/src/apache-tomcat-8.5.4-src.tar.gz
+tar -xzvf apache-tomcat-8.5.4-src.tar.gz
+Exceute : ant
+Contents of ../output/build is actually tomcat server
+
+mv apache-tomcat-8.5.4-src /opt/nova/tomcat85
+chmod -R 750 /opt/nova/tomcat85
+chmod -R 750 webapps temp logs work conf
+#(https://stackoverflow.com/questions/4672082/a-lots-of-permission-denied-in-catalina-out)
+Restart Tomcat
+sudo /etc/init.d/tomcat stop
+sudo /etc/init.d/tomcat start
+
+Open Port
+/sbin/iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8080 -j ACCEPT
+service iptables save
+service iptables restart
+GIT
+
+Install git https://www.digitalocean.com/community/tutorials/how-to-install-git-on-a-centos-6-4-vps
+
+MAVEN 3 
+https://tecadmin.net/install-apache-maven-on-centos/
+
+
+MIDPOINT
+##https://wiki.evolveum.com/display/midPoint/Installing+midPoint+from+Source+Code+v3.5
+
+cd /home/admin
+git clone  git://github.com/Evolveum/midpoint.git
+
+
+Repository Configuration
+#https://wiki.evolveum.com/display/midPoint/MySQL
+source /home/admin/midpoint/config/sql/midpoint/3.7/mysql/mysql-3.7.sql
+source /home/admin/midpoint/config/sql/midpoint/3.7/mysql/mysql-3.8-all.sql
+
+
+Files
+vi /opt/apache-tomcat-854/conf/server.xml
+vi /opt/apache-tomcat-854/conf/context.xml
+vi /opt/apache-tomcat-854/midpoint/config.xml
+useNaming="true"
+
+
+
+1.	midPoint on Ubuntu, Tomcat, PostgreSQL HOWTO(https://wiki.evolveum.com/display/midPoint/midPoint+on+Ubuntu%2C+Tomcat%2C+PostgreSQL+HOWTO)
+
+
+MYSQL
+#https://www.tecmint.com/install-latest-mysql-on-rhel-centos-and-fedora/
+grep 'A temporary password is generated for root@localhost' /var/log/mysqld.log |tail -1
+#For example: yC??0j5Bp8#m
+chown mysql:mysql -R /var/lib/mysql/*
+chmod 755 -R /var/lib/mysql/*
+
+UPDATE mysql.user SET Password=PASSWORD('zubur1') WHERE User='root';
+SET PASSWORD = PASSWORD('zubur1');
+CREATE USER 'identityiq'@'localhost' IDENTIFIED BY 'identityiq';
+ GRANT ALL PRIVILEGES ON * . * TO 'identityiq'@'localhost';
+
+
+/sbin/iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT
+service iptables save
+service iptables restart
+
+#https://wiki.evolveum.com/display/midPoint/MySQL
+
+ CREATE USER 'midpoint'@'localhost' IDENTIFIED BY 'password';
+Commands To Verify
+vi bin/setenv.sh
+MIDPOINT_HOME="/opt/apache-tomcat-854/midpoint/"
+
+
+grep -rl 'JAVA_OPTS' .
+vi /usr/local/apache2/logs/error_log
+vi /etc/bashrc
+netstat -a | grep 8080
+lsof -P | grep :8080
+netstat -pan | grep :8080
+netstat -pa | grep http-alt
+
+midPoint on Ubuntu, Tomcat, PostgreSQL HOWTO
+
+https://wiki.evolveum.com/pages/viewpage.action?pageId=7307769
+
+Deploying MidPoint as Web Application
+https://wiki.evolveum.com/display/midPoint/Deploying+MidPoint+as+Web+Application
+
+
+LOGS
+Midpoint
+sudo /etc/init.d/tomcat stop
+sudo /etc/init.d/tomcat start
+echo “”> /opt/apache-tomcat-854/midpoint/log/midpoint.log
+cp  /opt/apache-tomcat-854/midpoint/log/midpoint.log /home/admin
+
+sudo /etc/init.d/tomcat stop
+echo “”> /opt/apache-tomcat-854/midpoint/log/midpoint.log
+sudo /etc/init.d/tomcat start
+
+vi /var/log/mysqld.log
+
+Supported not supported
+http://blog.dzhuvinov.com/?p=956
+https://github.com/Evolveum/midpoint/blob/master/samples/evolveum/resource-openldap.xml
+
+Extend the User Schema
+https://evolveum.com/blog/how-to-override-administrative-status/
+
+https://evolveum.com/blog/midpoint-goes-multitenant/
+
+https://evolveum.com/blog/storing-extended-attributes-in-system-configuration-extended-attributes/
+
+https://github.com/Evolveum/midpoint/tree/1c1975fa450bbee741314c2822c5715ebf68f6b2/samples/stories/unix-ldap/resources
+https://github.com/Evolveum/midpoint/samples/stories/unix-ldap/resources/
+
+https://docs.oracle.com/cd/E19623-01/820-6169/searching-for-special-entries-and-attributes.html
+
+https://docs.oracle.com/cd/E19623-01/820-6169/deleting-directory-entries.html#to-delete-an-entry-with-ldapmodify
+https://github.com/Evolveum/midpoint/tree/master/samples/evolveum
+https://evolveum.com/blog/simplifying-ldap-group-management-using-midpoint/
+https://spaces.at.internet2.edu/display/MID/Complex+midPoint+integration+demo
+https://wiki.evolveum.com/display/midPoint/LDAP+PosixAccount+and+PosixGroup+Management
+https://spaces.at.internet2.edu/display/MID/Complex+midPoint+integration+demo
+ /opt/apache-tomcat-854/midpoint/schema
+OpenLdap
+ldapmodify -x -D "cn=Manager,dc=oLdap,dc=testDomain" -w zubur1 -H ldap:// -f aci.ldif -d1
+ldapmodify -Y EXTERNAL -H ldapi:///  -f aci.ldif
+vi /etc/openldap/slapd.d/cn=config/olcDatabase={0}config.ldif
+
+/usr/local/bin/ldapmodify -Y EXTERNAL -H ldapi:/// -f aci.ldif
+ldapmodify -a -x -D "cn=admin,dc=example,dc=com" -w password -H ldap:// -f newgroups.ldif
+https://www.linuxquestions.org/questions/linux-from-scratch-13/cyrus-sasl-2-1-23-fails-compiling-on-lfs-846940/
+patch -Np1 -i ../cyrus-sasl-2.1.26-fixes-3.patch && autoreconf -fi && 
+
+
+env CPPFLAGS="-I/usr"
+
+
+Ideas on Open Source IDM:
+Threshold Check
+Requestable Roles
+Role Mining

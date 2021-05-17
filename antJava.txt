@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<project name="filter" default="filter">
+<target name="filter">
+
+  <!--replace file="importer.xml" replacefilterfile="dev.target.properties" encoding="UTF-8"/-->
+  <replace dir="<directory_to_search_in>" replacefilterfile="properties" encoding="UTF-8"/>
+</target>
+</project>
+
+try {
+	 // Process process = Runtime.getRuntime().exec(commandAnt);
+	 String antHome = System.getenv().get("ANT_HOME");
+	 String antExecutable = antHome + File.separator + "bin" + File.separator + "ant.bat";
+	 List<String> command = new ArrayList<String>();
+	 command.add(antExecutable);
+
+	 ProcessBuilder processBuilder = new ProcessBuilder(command);
+	 processBuilder.directory(new File("./resources")); // set working directory
+	 Process process = processBuilder.start(); // run process
+	 InputStream inputStream = process.getInputStream();
+	 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+	 String line = null;
+	 while ((line = reader.readLine()) != null) {
+		   logger.info(line);
+	 }
+	 logger.info("Ant file executed");
+
+} catch (IOException e) {
+	 // TODO Auto-generated catch block
+	 e.printStackTrace();
+}

@@ -1,0 +1,35 @@
+rpm -Uhv --nodeps /home/admin/libxml2-2.7.6-21.el6_8.1.x86_64.rpm
+rpm -Uhv /home/admin/libxml2-devel-2.7.6-21.el6_8.1.x86_64.rpm
+
+
+cd /home/admin
+tar -zxvf php-5.6.25.tar.gz
+mv php-5.6.25 php
+mv /home/admin/php /usr/src
+chmod -R 755 /usr/src/php
+cd /usr/src/php;
+
+
+cp /usr/src/php/php.ini-production /usr/src/php/php.ini
+make clean;
+
+
+
+
+
+./configure  --with-config-file-path=PATH --with-openssl=shared --with-apxs2=/usr/local/apache2/bin/apxs  --enable-mbstring --with-mysql=mysqlnd --with-pdo-mysql --with-config-file-path=/usr/src/php  --with-zlib-dir=/usr/local/include --with-gettext=/usr/local/include  --enable-calendar  --enable-soap --enable-zip ; make;make install
+
+vim /usr/local/apache2/conf/httpd.conf 
+AddType text/html .php
+AddHandler php5-script .php
+
+cd /var/www/html
+
+vi info.php
+<?php
+ // Show all information, defaults to INFO_ALL 
+phpinfo(); 
+?>
+cd /usr/local/apache2/bin/
+./apachectl restart
+

@@ -1,0 +1,1 @@
+Strace -o mylog.txt -f -e trace=file ./startup.sh

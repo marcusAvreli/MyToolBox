@@ -114,7 +114,8 @@ Example commands
 Search
 ldapsearch -x -W -D 'cn=Manager,dc=company,dc=com' -b \ 	'ou=Users,dc=company,dc=com' '(uid=barbara)'
 
-
+Ldap Search Filter for identity
+(&(objectCategory=user)(sAMAccountName=Alan.Bradley))
 
 To check the database suffix, once the server is running, use ldapsearch(1) to read the namingContexts attribute of the root DSE:
 
