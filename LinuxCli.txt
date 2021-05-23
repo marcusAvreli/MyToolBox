@@ -1,1 +1,7 @@
 Strace -o mylog.txt -f -e trace=file ./startup.sh
+
+check kerberos connectivity
+
+env KRB5_TRACE=/pathToLog/krb5.log 
+kinit -V
+kinit -p <username>@domain.name

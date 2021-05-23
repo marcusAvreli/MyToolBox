@@ -1,0 +1,64 @@
+cat testJsonFile | jq '.[] | select(."field to-find"=="valueToFilter")' > testResultfile
+
+cat OutputFile | tr '\r\n' ' ' | jq .
+
+ 
+cat OutputFile.json | jq -c '. |select(.)'
+cat OutputFile.json | jq -c '.groups[] |select(.name=="valueToFilter")'
+cat OutputFile.json | jq -c '.groups[].name |select(.=="valueToFilter")'
+cat OutputFile.json | jq -c '.groups[].name |select(.)'
+Helpful links:
+https://programminghistorian.org/en/lessons/json-and-jq
+JQ
+Problem 1
+Convert json with one-to-many relationship to csv 
+Source: 
+
+https://stackoverflow.com/questions/64326827/nested-array-in-json-to-different-rows-in-csv
+
+Input json
+
+{
+  "transmitterId": "30451155eda2",
+  "rssiSignature": [
+    {
+      "receiverId": "001bc509408201d5",
+      "receiverIdType": 1,
+      "rssi": -52,
+      "numberOfDecodings": 5,
+      "rssiSum": -52
+    },
+    {
+      "receiverId": "001bc50940820228",
+      "receiverIdType": 1,
+      "rssi": -85,
+      "numberOfDecodings": 5,
+      "rssiSum": -85
+    }
+  ],
+  "timestamp": 1574228579837
+}
+
+Expected result
+
+timestamp,transmitterId,receiverId,rssi
+1574228579837,"30451155eda2","001bc509408201d5",-52
+1574228579837,"30451155eda2","001bc50940820228",-85
+
+Solution
+jq -r '.timestamp as $t | .transmitterId as $tid | .rssiSignature[] | [ $t, $tid, .receiverId, .rssi] | @csv      ' file.json
+
+
+Problem 2
+
+Get size of Array by jq
+cat input.json | jq -r '.rows.array[]'| jq -s length
+Problem 3
+Select array nested in specific entity
+jq -r '.rows.array[] | select(.Id | index("x123"))| .Roles[]' input.json
+
+Problem 4
+Select list of entities
+
+jq -r '.rows.array[] | select(.Id ==("x123",”y123”))| .Roles[]' input.json
+
