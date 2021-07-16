@@ -1,0 +1,14 @@
+check_tee_output()
+{
+    # copy (append) stdout and stderr to log file if TEE is unset or true
+    if [[ -z $TEE || "$TEE" == true ]]; then 
+        echo '-------------------------------------------' >> log.txt
+        echo '***' $(date) $0 $@ >> log.txt
+        TEE=false $0 $@ 2>&1 | tee --append log.txt
+        exit $?
+    fi 
+}
+
+check_tee_output $@
+
+##rest of my script
