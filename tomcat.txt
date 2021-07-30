@@ -1,0 +1,19 @@
+##CHECK VERSION 1
+
+cd tomcat/lib 
+java -cp catalina.jar org.apache.catalina.util.ServerInfo
+
+##CHECK VERSION 2
+
+Execute the script ./version.sh or version.bat
+
+##CHECK VERSION 3
+
+Save this code into a file called tomcat_version.jsp:
+
+    Tomcat Version : <%= application.getServerInfo() %><br>    
+    Servlet Specification Version : 
+<%= application.getMajorVersion() %>.<%= application.getMinorVersion() %> <br>    
+    JSP version :
+<%=JspFactory.getDefaultFactory().getEngineInfo().getSpecificationVersion() %><br>
+access, http://example.com/tomcat_version.jsp
