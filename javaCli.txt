@@ -24,3 +24,16 @@ eclipse.exe -clean -clearPersistedState
 Unable to acquire application service. Ensure that the org.eclipse.core.runtime bundle is resolved and started (see config.ini)
 
 java -XshowSettings:all
+
+
+##WHICH TRUSSTORE CURRENTLY IN USE
+#! /bin/bash
+
+CACERTS=$(readlink -e $(dirname $(readlink -e $(which keytool)))/../lib/security/cacerts)
+
+if keytool -list -keystore $CACERTS -storepass changeit > /dev/null ; then
+    echo $CACERTS
+else
+    echo 'Can not find cacerts file.' >&2
+    exit 1
+fi
