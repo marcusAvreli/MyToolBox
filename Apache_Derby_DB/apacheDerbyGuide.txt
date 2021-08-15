@@ -1,7 +1,6 @@
 Apache Derby Guide
 
 	Set Environment variables
-
 		DERBY_INSTALL:	C:\ApacheDerby
 		CLASSPATH:	%DERBY_INSTALL%\lib\derbytools.jar;%DERBY_INSTALL%\lib\derbynet.jar;%DERBY_INSTALL%\lib\derbyclient.jar;
 		
@@ -19,18 +18,18 @@ Apache Derby Guide
 			java -Djava.security.manager -Djava.security.policy=C:/dbDerby/demo/templates/server.policy  org.apache.derby.drda.NetworkServerControl start -h localhost
 
 	Run Client connection from cmd
-	1. Open another cmd
-	2. Run client from cmd by issuing following command:
-		java org.apache.derby.tools.ij
-	3. Connect to a database MyDbTest (if it does not exist create it):
-		connect 'jdbc:derby://localhost:1527/C:/dbDerby/demo/databases/MyDbTest;create=true';
+		1. Open another cmd
+		2. Run client from cmd by issuing following command:
+			java org.apache.derby.tools.ij
+		3. Connect to a database MyDbTest (if it does not exist create it):
+			connect 'jdbc:derby://localhost:1527/C:/dbDerby/demo/databases/MyDbTest;create=true';
 
 	Exit ij console
-	1. If you connected to server:
-		disconnect;
-		exit;
-	2. If you not connected to server:
-		exit;
+		1. If you connected to server:
+			disconnect;
+			exit;
+		2. If you not connected to server:
+			exit;
 
 	In SQuirell client
 	 if you see following error message
