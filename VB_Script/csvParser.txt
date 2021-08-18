@@ -1,0 +1,91 @@
+option explicit
+on error resume next
+
+
+'Dim strCurDir : strCurDir=getCurrentDirectory()
+'Dim strTargetExcelName : strTargetExcelName = getExcelFileName()
+'Dim targetFilePathName : targetFilePathName = strCurDir & "\" & strTargetExcelName
+'msgbox "targetFilePathName" & targetFilePathName
+'msgbox strCurDir
+Dim currentConnection: Set currentConnection = CreateObject("ADODB.Connection")
+with currentConnection
+                                .Provider = "Microsoft.ACE.OLEDB.12.0"                
+                                .properties("extended properties").value="text;HDR=YES;FMT=Delimited"
+                                .open "Data Source=."                   
+                end with
+
+Const ForWriting = 2
+Dim csvFilePath: csvFilePath="bundleRequest.txt"
+dim sql_text : sql_text="select * FROM [output.txt]" 
+Dim objFSO : Set objFSO = CreateObject("Scripting.FileSystemObject")
+dim  objCSVFile : Set objCSVFile = objFSO.CreateTextFile(csvFilePath,True, True)
+                
+Dim objRecordset : Set objRecordset = createObject("ADODB.Recordset")
+
+objRecordset.open sql_text,currentConnection,1,3
+
+Dim SamaccountName
+Dim name
+Dim dn
+
+
+
+
+                
+Do Until objRecordset.EOF
+    SamaccountName = objRecordset.Fields("SamaccountName").Value
+                
+                
+    objRecordset.MoveNext
+Loop
+
+
+
+if err.number <>0 then 
+                msgbox "Error_Number_1: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                err.clear
+end if 
+
+
+objRecordset.Close
+currentConnection.close              
+
+  msgbox "Finished"
+
+if err.number <>0 then 
+                msgbox "Error_Number_2: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+                err.clear
+end if 
+                
+                
+                
+
+
+function getCurrentDirectory()
+                Dim WshShell, strCurDir
+                Set WshShell = CreateObject("WScript.Shell")     
+                getCurrentDirectory    = WshShell.CurrentDirectory         
+end function
+
+function getExcelFileName()
+
+                Dim strCurDir,WshShell
+                Set WshShell = CreateObject("WScript.Shell")
+                strCurDir    = WshShell.CurrentDirectory
+                
+                Set WshShell = Nothing                 
+                Dim oFile
+                Dim goFS    : Set goFS    = CreateObject("Scripting.FileSystemObject")        
+                For Each oFile In goFS.GetFolder(strCurDir).Files
+                  If "csv" = LCase(goFS.GetExtensionName(oFile.Name)) Then                                      
+                                getExcelFileName = oFile.Name
+                                exit function
+                                end if 
+                Next
+  
+                If oLstPng Is Nothing Then
+                                WScript.Echo "no excel found"
+                End If
+   
+end function
+
