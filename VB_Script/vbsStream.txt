@@ -1,0 +1,33 @@
+dim result: result = writeOut("tדגכגדכדגכגest","test")
+                Function writeOut(byRef cText , byRef file ) 
+                       
+                       Dim fsT 
+                       Dim tFilePath 
+                
+                       tFilePath = file + ".txt"
+                
+                       'Create Stream object
+                       Set fsT = CreateObject("ADODB.Stream")
+                
+                       'Specify stream type - we want To save text/string data.
+                       fsT.Type = 2
+                
+                       'Specify charset For the source text data.
+                       fsT.CharSet = "utf-8"
+                
+                       'Open the stream And write binary data To the object
+                       fsT.Open
+                       fsT.writetext cText
+                
+                       'Save binary data To disk
+                       fsT.SaveToFile tFilePath, 2
+                
+                       
+                
+                       
+                       
+                       writeOut = 0
+                       
+                
+                       
+                End Function
