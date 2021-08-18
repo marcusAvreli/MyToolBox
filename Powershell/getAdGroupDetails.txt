@@ -1,0 +1,2 @@
+# group details
+$ADGroups = Import-Csv ".\input.txt"  -Delimiter "," -Encoding UTF8;foreach ($Group in $ADGroups ){$groupName = $Group.groupName;Get-AdGroup -Identity $groupName -properties samaccountname,name,distinguishedName|select samaccountname, name,@{n='DN';e={$_.distinguishedName}} |   export-csv -path ".\output.txt" -NoTypeInformation  -encoding UTF8 -append;}
