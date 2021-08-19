@@ -46,3 +46,20 @@ Regex find last n chars in string
 Remove empty lines
 In the Find what zone, type ^\R ( for exact empty lines) or ^\h*\R ( for empty lines with blanks, only).
 
+convert row to column
+       input: name=="test1" || name=="test2"
+       
+       output:
+              name=="test1" || 
+              name=="test2"
+             
+       in notepad++
+      
+       findWhat:  name=="(.*?)"
+      replaceWith: \n name=="$1"
+      
+ convert column to row in notepad++
+      control+A
+      control+J
+
+
