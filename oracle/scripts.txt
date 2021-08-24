@@ -1,0 +1,5 @@
+##Oracle 12c+ only
+create table t1 (
+    c1 NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
+    c2 VARCHAR2(10)
+    );
