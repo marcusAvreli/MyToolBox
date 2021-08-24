@@ -3,3 +3,25 @@ create table t1 (
     c1 NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
     c2 VARCHAR2(10)
     );
+
+Next we need to add a PRIMARY KEY constraint:
+
+ALTER TABLE books
+  ADD (
+    CONSTRAINT books_pk PRIMARY KEY (id)
+  );
+
+##without auto increment
+CREATE TABLE books (
+  id      NUMBER(10)    NOT NULL,
+  title   VARCHAR2(100) NOT NULL
+);
+Next we need to add a PRIMARY KEY constraint:
+
+ALTER TABLE books
+  ADD (
+    CONSTRAINT books_pk PRIMARY KEY (id)
+  );
+Finally, we’ll create our SEQUENCE that will be utilized later to actually generate the unique, auto incremented value.
+
+CREATE SEQUENCE books_sequence;
