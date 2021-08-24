@@ -1,0 +1,9 @@
+#input
+#csv with search base. field called searchbasename
+output
+#csv with name,labeldescription,distinguishedName,samaccountname,membercount
+#define any directory put input inside
+#run from same directory following command
+#powershell 5
+#get-host| select-object version
+$out=@(); $results = @();$path     = split-path -parent $myinvocation.mycommand.definition  ;$newpath  = ".\input.txt";$adsearchbases = import-csv $newpath  -delimiter "," -encoding utf8;foreach ($adsearchbase in $adsearchbases ){$searchbasename = $adsearchbase.searchbasename; $foundgroups=get-adgroup -searchbase $searchbasename -filter{name -like 'ab_*'}; foreach($foundgroup in $foundgroups){$countUser = (get-adgroupmember $foundGroup.distinguishedName).count; $groupDescription = get-adgroup $foundgroup -properties *;  $props=@{membercount=$countUser}; $props+=@{name=$foundgroup.name};$props+=@{samaccountname=$foundgroup.samaccountname};$props+=@{labeldescription=$groupDescription.description};$props+=@{distinguishedName=$foundgroup.distinguishedName}; $out+=New-Object PsObject -property $props;}    $out|select-object name,labeldescription,distinguishedName,samaccountname,membercount|export-csv -path ".\output.txt" -NoTypeInformation  -encoding UTF8 -append; }
