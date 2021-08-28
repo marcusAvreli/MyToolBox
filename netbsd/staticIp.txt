@@ -1,0 +1,22 @@
+confugre static ip address
+
+hostname
+	vi /etc/myname
+	netbsd
+
+dns name resolving
+	vi /etc/resolv.conf
+	nameserver 127.0.0.53
+	nameserver 10.0.0.138
+
+default gateway
+	/etc/mygate
+	192.168.134.2
+
+set ip address
+	/etc/ifconfig.wm0
+	192.168.134.152 netmask 255.255.255.0 media autoselect
+
+restart the network card
+	/etc/rc.d/network restart
+
