@@ -1,0 +1,11 @@
+user and group management
+on netbsd
+
+#create user
+useradd -m jsmith
+
+#set user password
+passwd jsmith
+
+#add user to sudo
+user mod -G wheel jsmith
