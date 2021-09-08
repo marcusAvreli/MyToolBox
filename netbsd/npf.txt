@@ -1,0 +1,68 @@
+source: https://unix.stackexchange.com/questions/348530/loading-netbsd-kernel-modules	
+	npfctl show
+		# filtering:    inactive
+		# config:       empty
+
+load the driver first:
+
+	modstat | grep npf; echo $?
+		if_npflog                  driver   builtin  -        0       - -
+		npf                        misc     builtin  -        4       - bpf
+		npf_alg_icmp               misc     builtin  -        0       - npf
+		npf_ext_log                misc     builtin  -        0       - npf
+		npf_ext_normalize          misc     builtin  -        0       - npf
+		npf_ext_rndblock           misc     builtin  -        0       - npf
+		0
+		
+	find /stand -name 'npf.kmod'
+		/stand/amd64/9.2/modules/npf/npf.kmod
+		/stand/amd64-xen/9.2/modules/npf/npf.kmod
+
+	uname -sr
+		NetBSD 9.2
+		
+	modload npf
+		modload: npf: File exists
+		
+source: https://wiki.netbsd.org/tutorials/kernel_secure_levels/
+
+kernel secure level
+current
+	sysctl kern.securelevel
+		kern.securelevel = -1
+to_update
+	sysctl -w kern.securelevel=0
+
+source: https://pub.nethence.com/bsd/npf
+IP_FORWARDING
+current
+	sysctl net.inet.ip.forwarding
+to_update    
+    sysctl -w net.inet.ip.forwarding=1
+
+npfctl debug
+npfctl save
+npfctl reload
+npfctl show
+
+
+OpenBSD List Open TCP or UDP Network Ports
+https://www.cyberciti.biz/faq/openbsd-list-open-tcp-or-udp-ports/
+netstat/fstat
+
+
+https://www.tecmint.com/sockstat-command-examples-to-find-open-ports-in-freebsd/
+sockstat
+
+https://www.cyberciti.biz/faq/freebsd-unix-find-the-process-pid-listening-on-a-certain-port-commands/
+netstat command – Use to see network status including open ports, tcp/udp connections, and more.
+sockstat command – Show open sockets.
+lsof command – List open files such as network sockets and files on disks.
+
+guide:
+http://rmind.github.io/npf/configuration.html
+
+example config: http://daemonforums.org/showthread.php?p=67524
+http://cvsweb.netbsd.org/bsdweb.cgi/src/share/examples/npf/host-npf.conf?only_with_tag=MAIN
+
+

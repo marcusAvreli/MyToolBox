@@ -33,5 +33,9 @@
 	a. chmod 555 tomcat10	
 15. execute service tomcat10 start
 16. try access tomcat by http://<IP.address>:8080
-
+17.list tomcat processes
+	https://unix.stackexchange.com/questions/316065/how-to-kill-all-process-with-given-name
+	ps -A | grep tomcat | awk '{print $1}' | xargs -n1
+18.delete all tomcat processes
+	ps -A | grep tomcat | awk '{print $1}' | xargs kill -9 $1
 	
