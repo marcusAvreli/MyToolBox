@@ -1,0 +1,37 @@
+1. Host
+	command: uname -a
+	output: NetBSD netbsd 9.2 NetBSD 9.2 (GENERIC) #0: Wed May 12 13:15:55 UTC 2021  mkrepro@mkrepro.NetBSD.org:/usr/src/sys/arch/amd64/compile/GENERIC amd64
+2. Required soft
+	java jdk
+	ant
+3. download required version of tomcat source distribution
+4. untar
+	command: tar -zxvf apache-tomcat-10.0.10-src.tar.gz
+5. rename
+	mv apache-tomcat-10.0.10-src tomcatSource
+6. enter directory
+	cd tomcatSource
+7. execute command
+	ant
+8. resultant server is in output/build directory
+9. move to opt
+	mv build /opt/tomcat10
+10. cd /opt/tomcat10/bin
+11. if not exist, create setenv.sh
+12. configure npf (network packet filter) (see npf.conf)
+	npfctl debug
+	//-----if no errors
+	npfctl save
+	npfctl reload
+	//--review current rule in human readable
+	npfctl show
+	//--review passed blocked packets
+	npfctl stats
+13. excute ./startup.sh
+14. copy tomcatScript into rc.d directory. 
+	b. mv tomcatScript tomcat10
+	a. chmod 555 tomcat10	
+15. execute service tomcat10 start
+16. try access tomcat by http://<IP.address>:8080
+
+	
