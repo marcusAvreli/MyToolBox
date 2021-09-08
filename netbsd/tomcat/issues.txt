@@ -1,0 +1,10 @@
+https://issues.redhat.com/browse/WFLY-1453?workflowName=GIT+Pull+Request+workflow+&stepId=4
+Caused by: java.io.IOException: Function not implemented
+at sun.nio.ch.EPollArrayWrapper.epollCreate(Native Method)
+The problem is with unimplemented Linux epoll syscall on Linux compatibility layer. The state of compatibility of Linux with FreeBSD can be tracked here:
+
+https://wiki.freebsd.org/linux-kernel
+
+Where, specifically, the workaround for this issue is:
+
+if you run an application in the linux java which wants to use the linux epoll functions (you should see "not implemented" messages in dmesg), you can start java with the argument -Djava.nio.channels.spi.SelectorProvider=sun.nio.ch.PollSelectorProvider
