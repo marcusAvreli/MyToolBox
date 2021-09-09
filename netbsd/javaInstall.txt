@@ -1,0 +1,97 @@
+sysctl kern.osrelease hw.machine_arch
+	kern.osrelease = 9.2
+	hw.machine_arch = x86_64
+check current shell
+	echo "$SHELL"
+	or
+	printf "My current shell - %s\n" "$SHELL"
+
+Preparing for CVS
+
+Add the following to your .profile file if you use sh or bash.
+
+	for all users /etc/profile
+	for jsmith user /home/jsmith/.profile
+	
+	CVSEDITOR=vi
+	CVSROOT=http://cvsweb.netbsd.org/bsdweb.cgi/
+	CVS_RSH=ssh
+	export CVSEDITOR
+	export CVSROOT
+	export CVS_RSH
+
+	
+reload current shell
+	. ./profile
+Output should print the environment variable
+	echo $CVSEDITOR
+	echo $CVSROOT
+
+
+
+groupadd cvsadmin
+usermod -g cvsadmin jsmith
+
+chmod 775 -R /usr/cvs
+su jsmith
+cvs init
+cvs checkout othersrc/bootstrap-pkgsrc
+
+CVSROOT
+The location of the repository. If this is not set, you will have to use the -d repository option every time you use a CVS command.
+CVS_RSH
+Program to use when using connecting to a remote repository. Defaults to "rsh" if not set, although I recommend using "ssh"[6].
+bmake help topic=depends
+install jre
+download jre.tar.gz
+bmake depends
+bmake install
+by default installed in /usr/pkg/bin/oracle8-java
+JAVA_HOME=/usr/pkg/bin/oracle8-java
+/usr/pkg/java/oracle-8/lib/security/java.policy
+
+I then always confirm the JAVA_HOME is correct by testing this works:
+$JAVA_HOME/bin/java -version
+export CLASSPATH
+
+CLASSPATH="/usr/pkg/java/oracle-8/lib/:."
+
+Try setting JAVA_HOME to /usr/pkg/java/sun-1.4
+
+For reference, 'pkg_info -L sun-jre14' will list all the paths
+in sun-jre14.
+
+I also have pkg_alternatives installed which gives me a java
+in /usr/pkg/bin/java
+https://stackoverflow.com/questions/573235/how-do-i-change-the-java-home-for-ant
+You are correct; however, the "ant.java.home" property will always point to a jre because it fleshes out that property from java.lang.System (which by definition is the JRE under the JDK). To definitively set the Java environment in ant, specify java locations using ${env.JAVA_HOME} with exact paths
+
+
+https://www.baeldung.com/maven-java-home-jdk-jre
+
+
+Checking the JAVA_HOME Configuration
+It's pretty simple to check if JAVA_HOME points to an actual JDK. We can either print its content in a terminal, or we can run one of the following shell commands:
+
+4.1. Checking JAVA_HOME on Linux
+Just open a terminal and type:
+
+$JAVA_HOME/bin/javac -version
+If JAVA_HOME points to a JDK, the output should look like:
+
+javac 1.X.0_XX
+If JAVA_HOME doesn't point to a JDK, the OS will throw an error message:
+
+bash: /bin/javac: No such file or directory
+
+
+4.2. Checking JAVA_HOME on Windows
+Open a command prompt and type:
+
+%JAVA_HOME%\bin\javac -version
+If JAVA_HOME points to a JDK, the output should look like:
+
+> javac 1.X.0_XX
+If JAVA_HOME doesn't point to a JDK, the OS will throw an error message:
+
+> The system cannot find the path specified.
