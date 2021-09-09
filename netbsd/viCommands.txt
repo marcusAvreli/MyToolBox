@@ -1,3 +1,5 @@
+https://unix.stackexchange.com/questions/161821/how-can-i-delete-all-lines-in-a-file-using-vi
+
 Delete all lines in file
 	:1,$4
 
