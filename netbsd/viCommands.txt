@@ -1,0 +1,5 @@
+Delete all lines in file
+	:1,$4
+
+leaving only the first 3 and last 2 lines, deleting the rest.
+	:4,$-2d 
