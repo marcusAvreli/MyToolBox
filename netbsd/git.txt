@@ -1,9 +1,47 @@
+Back Up Angular project on git
+	git init
+	git remote add origin https://github.com/marcusAvreli/lazyApp.git
+	echo "node_modules/" >> .gitignore
+	git add .
+	git rm -r --cached node_modules
+	git commit -am "initial_commit"
+	git push origin master
+
+Subsequent commits
+	git status
+	git add tomcat.txt
+	git commit -am "new regex added"
+	git push origin master
+
+Clone existing public git repository
+	git clone https://github.com/doctral/Medium-Module-Loading-Strategies.git
+
+
+Error message:
+	ensure that no other process has an open file handle on the lock file
+Solution:
+		taskkill /F /IM git.exe
+	On linux/unix/gitbash/cygwin, try
+		rm -f .git/index.lock
+	On Windows Command Prompt, try:
+		del .git\index.lock
+
+If you want to remove the file from the Git repository and the filesystem, use:
+	git rm file1.txt 
+	git commit -m "remove file1.txt"
+But if you want to remove the file only from the Git repository and not remove it from the filesystem, use:
+	git rm --cached file1.txt git commit -m "remove file1.txt"
+And to push changes to remote repo
+	git push origin branch_name
+
+
+
 Configure git to use certificate
 
-Get certificate
-	echo -n | openssl s_client -connect www.github.com:443 | openssl x509 > github.com.cert
+	Get certificate
+		echo -n | openssl s_client -connect www.github.com:443 | openssl x509 > github.com.cert
 
-Set configuration
-	git config --global http.sslCAInfo /etc/openssl/certs/github.com.cert
+	Set configuration
+		git config --global http.sslCAInfo /etc/openssl/certs/github.com.cert
 	
-curl -L https://github.com/cyrusimap/cyrus-sasl/releases/download/cyrus-sasl-2.1.27/cyrus-sasl-2.1.27.tar.gz
+curl -L https://github.com/cyrusimap/cyrus-sasl/releases/download/cyrus-sasl-2.1.27/cyrus-sasl-2.1.27.tar.gz --output cyrus-sasl-2.1.27.tar.gz
