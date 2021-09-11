@@ -6,12 +6,17 @@ mozilla-rootcerts-openssl
 bmake
 bmake install
 
+Check path for OpenSSL trusted certificates
+	command: openssl version -d
+	output: OPENSSLDIR: "/etc/openssl"
+
 echo -n | openssl s_client -connect www.github.com:443 | openssl x509 > /etc/openssl/certs/github.com.cert
 
 Let also be sure it has the right owner and rights:
 
 chmod 0644 /etc/openssl/certs/github.com.cert
 chown root:wheel /etc/openssl/certs/github.com.cert
+
 
 
 3. Calculate the hash of your CA certificate
