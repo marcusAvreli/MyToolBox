@@ -1,4 +1,5 @@
 https://unix.stackexchange.com/questions/161821/how-can-i-delete-all-lines-in-a-file-using-vi
+https://www.cs.colostate.edu/helpdocs/vi.html
 
 Delete all lines in file
 	:1,$4
