@@ -1,0 +1,50 @@
+============= U N I X =============
+mozilla-rootcerts
+bmake
+bmake install
+mozilla-rootcerts-openssl
+bmake
+bmake install
+
+echo -n | openssl s_client -connect www.github.com:443 | openssl x509 > /etc/openssl/certs/github.com.cert
+
+Let also be sure it has the right owner and rights:
+
+chmod 0644 /etc/openssl/certs/github.com.cert
+chown root:wheel /etc/openssl/certs/github.com.cert
+
+
+3. Calculate the hash of your CA certificate
+openssl x509 -noout -hash -in /etc/openssl/certs/github.com.cert
+
+4. create a link to your certificate using the calculated hash
+
+cd /etc/openssl/certs
+sudo ln -s ca.crt 5d3b9418.0
+
+Verify settings
+
+openssl s_client -connect github.com:443 | grep -i -e verify
+
+RIGHT OUTPUT
+depth=2 C = US, O = DigiCert Inc, OU = www.digicert.com, CN = DigiCert High Assurance EV Root CA
+verify return:1
+depth=1 C = US, O = "DigiCert, Inc.", CN = DigiCert High Assurance TLS Hybrid ECC SHA256 2020 CA1
+verify return:1
+depth=0 C = US, ST = California, L = San Francisco, O = "GitHub, Inc.", CN = github.com
+verify return:1
+Verify return code: 0 (ok)
+    Verify return code: 0 (ok)
+    Verify return code: 0 (ok)
+
+
+
+ERROR OUTPUT
+depth=1 C = US, O = "DigiCert, Inc.", CN = DigiCert High Assurance TLS Hybrid ECC SHA256 2020 CA1
+verify error:num=20:unable to get local issuer certificate
+verify return:1
+depth=0 C = US, ST = California, L = San Francisco, O = "GitHub, Inc.", CN = github.com
+verify return:1
+Verify return code: 20 (unable to get local issuer certificate)
+    Verify return code: 20 (unable to get local issuer certificate)
+    Verify return code: 20 (unable to get local issuer certificate)
