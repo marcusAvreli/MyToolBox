@@ -1,0 +1,91 @@
+mozilla-rootcerts
+bmake
+bmake install
+mozilla-rootcerts-openssl
+bmake
+bmake install
+
+env CPPFLAGS="-I/usr/local/include/sasl" LDFLAGS="-L/usr/local/lib" ./configure --sysconfdir=/etc  --enable-ldap    --enable-slapd --with-cyrus-sasl  --with-tls=openssl   --enable-rewrite --enable-rlookups    --enable-dynamic --enable-ppolicy  --enable-memberof  --enable-refint ;gmake depend;gmake;gmake install
+
+
+Check that slapd does not missing some referenced libraries
+ldd /usr/local/libexec/slapd
+Configure the OpenLDAP
+Configure the LDAP Server
+Back up default configuration file
+mv /etc/openldap/slapd.conf /etc/openldap/slapd.conf.orig
+
+vi /etc/openldap/slapd.conf
+
+Test Configuration file
+/usr/local/sbin/slaptest -f /etc/openldap/slapd.conf -v
+
+useradd  ldap
+usermod  -G ldap ldap
+
+Re-test configuration file
+/usr/local/sbin/slaptest -f /etc/openldap/slapd.conf -v
+
+Configuring the LDAP Clients
+vi /etc/openldap/ldap.conf
+
+
+Run slapd server
+/usr/local/libexec/slapd
+pidof slapd
+
+At this point you should be able to run following commands
+ldapsearch -x -W -D 'cn=manager,dc=company,dc=com' -b "" -s base
+
+ldapsearch -x -W -D 'cn=manager,dc=company,dc=com' -b "" -s base \  	'(objectclass=*)' +
+ldapsearch -LLL -x -W -D 'cn=manager,dc=company,dc=com' -H \
+ ldap://192.168.1.14 -ZZ '(uid=manny)'
+Import sample data
+from basics.ldif
+
+To import through slapadd
+Run in test mode to verify integrity: slapadd -v -u -c -f /etc/openldap/slapd.conf -l basics.ldif
+Stop Server
+Execute the import: slapadd -v -f /etc/openldap/slapd.conf -l basics.ldif
+Start server
+
+
+
+See active connection
+netstat -tulpn |grep :636
+ps -ef | grep slapd
+netstat -lnp | grep slapd
+
+Verify Installation
+/usr/local/libexec/slapd -VVV
+strings /usr/local/bin/ldapmodify | grep "\.so"
+
+enable logging
+touch /var/log/openldap.log
+vi /etc/syslog.conf
+	local4.*        /var/log/openldap.log
+service syslogd restart
+kill `pgrep slapd`
+/usr/local/libexec/slapd
+
+
+Example commands
+Search
+ldapsearch -x -W -D 'cn=Manager,dc=company,dc=com' -b \ 	'ou=Users,dc=company,dc=com' '(uid=barbara)'
+
+Ldap Search Filter for identity
+(&(objectCategory=user)(sAMAccountName=Alan.Bradley))
+
+To check the database suffix, once the server is running, use ldapsearch(1) to read the namingContexts attribute of the root DSE:
+
+ldapsearch -x -s base -b "" namingContexts
+
+gcc --version
+gcc (nb4 20200810) 7.5.0
+
+which make
+/usr/bin/make
+
+libtool --version
+libtool (GNU libtool) 2.4.6
+Written by Gordon Matzigkeit, 1996
