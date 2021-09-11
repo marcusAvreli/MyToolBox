@@ -39,7 +39,7 @@ And to push changes to remote repo
 Configure git to use certificate
 
 	Get certificate
-		echo -n | openssl s_client -connect www.github.com:443 | openssl x509 > /etc/openssl/github.com.cert
+		echo -n | openssl s_client -connect www.github.com:443 | openssl x509 > /etc/openssl/certs/github.com.cert
 
 	Set configuration
 		git config --global http.sslCAInfo /etc/openssl/certs/github.com.cert
