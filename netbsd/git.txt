@@ -43,5 +43,11 @@ Configure git to use certificate
 
 	Set configuration
 		git config --global http.sslCAInfo /etc/openssl/certs/github.com.cert
+
+	if you already set your git to ignorance of ssl certificates, unset it:
+		git config --global --unset http.sslVerify
+		
+	Verify, that you did it all correctly, without spelling errors:
+		git config --global --list
 	
 curl -L https://github.com/cyrusimap/cyrus-sasl/releases/download/cyrus-sasl-2.1.27/cyrus-sasl-2.1.27.tar.gz --output cyrus-sasl-2.1.27.tar.gz
