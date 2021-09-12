@@ -17,7 +17,7 @@
 9. move to opt
 	mv build /opt/tomcat10
 10. cd /opt/tomcat10/bin
-11. if not exist, create setenv.sh
+11. if not exist, create setenv.sh (see setenv.sh)
 12. configure npf (network packet filter) (see npf.conf)
 	npfctl debug
 	//-----if no errors
@@ -40,4 +40,18 @@
 	ps -A | grep tomcat | awk '{print $1}' | xargs -n1
 18.	delete all tomcat processes
 	ps -A | grep tomcat | awk '{print $1}' | xargs kill -9 $1
+-----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+log rotate
+/etc/logrotate.d/tomcat
+/opt/tomcat10/logs/catalina.out {
+    copytruncate
+    daily
+    rotate 8
+    compress
+    missingok
+    maxsize 1G
+    create 0644 tomcat tomcat
+} 
+
 	

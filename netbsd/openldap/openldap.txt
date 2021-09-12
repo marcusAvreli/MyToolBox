@@ -1,3 +1,4 @@
+https://docs.oracle.com/cd/E29542_01/doc.1111/e29751/ldap_int_appxldif.htm#WBCSC1975
 mozilla-rootcerts
 bmake
 bmake install
