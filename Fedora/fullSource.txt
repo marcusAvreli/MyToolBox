@@ -29,7 +29,7 @@ curl -L  https://zlib.net/zlib-1.2.11.tar.gz --output zlib-1.2.11.tar.gz
 	mv zlib-1.2.11 zlib
 	cd zlib
 	./configure --prefix=/opt/zlib
-    make
+	make
 	make install
 
 	ln -s /opt/autoconf/bin/autoconf /usr/bin/autoconf	
