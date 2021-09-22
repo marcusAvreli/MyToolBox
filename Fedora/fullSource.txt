@@ -1,13 +1,19 @@
 https://medium.com/@darrenjs/building-gcc-from-source-dcc368a3bb70
+https://tldp.org/HOWTO/Postfix-Cyrus-Web-cyradm-HOWTO/install.html
+https://cmake.org/install/
+export OPENSSL_ROOT_DIR="/opt/openssl"
 LD_LIBRARY_PATH
 dnf install gcc-c++
+dnf install  libcom_err-devel libcom_err libss_devel
+dnf install libcap-devel
 
 curl -L https://www.cpan.org/src/5.0/perl-5.34.0.tar.gz --output perl-5.34.0.tar.gz [refer https://metacpan.org/dist/perl/view/INSTALL ]
 	./Configure -Dprefix=/opt/perl -des
 	make
 	make test
 	make install
-
+ln -s /opt/perl/bin/instmodsh /usr/bin/instmodsh
+ln -s /opt/perl/bin/cpan /usr/bin/cpan
 curl -L http://ftp.gnu.org/gnu/m4/m4-1.4.19.tar.gz --output m4-1.4.19.tar.gz
 	tar -zxvf m4-1.4.19.tar.gz
 	mv m4-1.4.19 m4
@@ -17,8 +23,8 @@ curl -L http://ftp.gnu.org/gnu/m4/m4-1.4.19.tar.gz --output m4-1.4.19.tar.gz
 	make install
 	ln -s /opt/m4/bin/m4 /usr/bin/m4
 
-
 curl -L http://ftp.gnu.org/gnu/autoconf/autoconf-2.71.tar.gz --output autoconf-2.71.tar.gz
+	cd /root/autoconf
 	./configure --prefix=/opt/autoconf
 	make
 	make install
@@ -47,9 +53,8 @@ curl -L https://www.openssl.org/source/old/3.0/openssl-3.0.0-beta2.tar.gz --outp
 	
 	ln -s /opt/openssl/bin/openssl /usr/bin/openssl
 	#ln -s /opt/openssl/lib/libssl.so.3 /usr/lib/libssl.so
-
 	
-	https://tldp.org/HOWTO/Postfix-Cyrus-Web-cyradm-HOWTO/install.html
+
 curl -L  https://github.com/cyrusimap/cyrus-sasl/releases/download/cyrus-sasl-2.1.27/cyrus-sasl-2.1.27.tar.gz --output cyrus-sasl-2.1.27.tar.gz
 	tar -zxvf cyrus-sasl-2.1.27.tar.gz
 	mv cyrus-sasl-2.1.27 sasl
@@ -57,9 +62,7 @@ curl -L  https://github.com/cyrusimap/cyrus-sasl/releases/download/cyrus-sasl-2.
 	./configure --prefix=/opt/sasl --sysconfdir=/etc/sasl  --enable-auth-sasldb --with-dbpath=/var/lib/sasl/sasldb2 --with-saslauthd=/var/run/saslauthd  --with-openssl=/opt/openssl | sed --silent '/evp/,/OpenSSL/p'
 	make
 	make install
-/usr/bin/ld  -llmdb --verbose
-
-
+	/usr/bin/ld  -llmdb --verbose
 	
 curl -L https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.5.7.tgz --output openldap-2.5.7.tgz
 	tar -zxvf openldap-2.5.7.tgz
@@ -67,7 +70,6 @@ curl -L https://www.openldap.org/software/download/OpenLDAP/openldap-release/ope
 	cd openldap
 	env CPPFLAGS="-I/usr/include/sasl -I/opt/openssl" LDFLAGS="-L/usr/lib -L/opt/openssl/lib" ./configure --sysconfdir=/etc  --enable-ldap    --enable-slapd --with-cyrus-sasl  --with-tls=openssl   --enable-rewrite --enable-rlookups    --enable-dynamic --enable-ppolicy  --enable-memberof  --enable-refint ;
 	make depend; make;make install
-	
 
 curl -L http://ftp.gnu.org/gnu/bison/bison-3.8.1.tar.gz --output bison-3.8.1.tar.gz
 	tar -zxvf bison-3.8.1.tar.gz
@@ -76,6 +78,7 @@ curl -L http://ftp.gnu.org/gnu/bison/bison-3.8.1.tar.gz --output bison-3.8.1.tar
 	./configure  --prefix=/opt/bison
 	make
 	make install
+	
 curl -L https://github.com/westes/flex/files/981163/flex-2.6.4.tar.gz --output flex-2.6.4.tar.gz
 	tar -zxvf flex-2.6.4.tar.gz
 	mv flex-2.6.4 flex
@@ -84,9 +87,6 @@ curl -L https://github.com/westes/flex/files/981163/flex-2.6.4.tar.gz --output f
 	make
 	make install
 	
-
-	https://cmake.org/install/
-	export OPENSSL_ROOT_DIR="/opt/openssl"
 curl -L https://github.com/Kitware/CMake/releases/download/v3.21.2/cmake-3.21.2.tar.gz	--output cmake-3.21.2.tar.gz
 curl -L https://cmocka.org/files/1.1/cmocka-1.1.3.tar.xz --output cmocka-1.1.3.tar.xz
 	https://github.com/clibs/cmocka/blob/master/INSTALL.md1
@@ -111,6 +111,27 @@ https://github.com/USER/PROJECT/releases/latest/download/package.zip .
 
 
 Package 'libverto', required by 'virtual:world', not found
+curl -L https://ftp.gnu.org/gnu/ncurses/ncurses-6.2.tar.gz --output ncurses-6.2.tar.gz
+	tar -zxvf ncurses-6.2.tar.gz
+	mv ncurses-6.2 ncurses
+	cd ncurses
+	./configure;make;make install
+ extended funcs: yes
+       xterm terminfo: xterm-new
+
+        bin directory: /usr/bin
+        lib directory: /usr/lib
+    include directory: /usr/include
+        man directory: /usr/share/man
+   terminfo directory: /usr/share/terminfo
+
+curl -L https://ftp.gnu.org/gnu/termcap/termcap-1.3.1.tar.gz --output termcap-1.3.1.tar.gz
+tar -zxvf termcap-1.3.1.tar.gz
+mv termcap-1.3.1 termcap
+cd termcap
+./configure  --with-shared;make;make install
+
+
 
 libedit:
 checking for tgetent in -lncurses... no
@@ -120,21 +141,162 @@ checking for tgetent in -ltinfo... no
 
 
 
+
 curl -L https://thrysoee.dk/editline/libedit-20210910-3.1.tar.gz --output libedit-20210910-3.1.tar.gz
 	tar -zxvf libedit-20210910-3.1.tar.gz
 	mv libedit-20210910-3.1 libedit
 	cd libedit
+	ln -s  /usr/local/lib/pkgconfig/libedit.pc /usr/lib64/pkgconfig/libedit.pc
+	
+[source: https://www.linuxfromscratch.org/blfs/view/svn/postlfs/mitkrb.html]
 curl -L https://web.mit.edu/kerberos/dist/krb5/1.19/krb5-1.19.2.tar.gz --output krb5-1.19.2.tar.gz 
 	tar -zxvf krb5-1.19.2.tar.gz 
 	mv krb5-1.19.2 krb5
 	cd krb5
-	env CFLAGS="-I /opt/openssl/include -L /opt/openssl/lib -Wl,-rpath=/opt/openssl/lib" ./configure  --prefix=/opt/krb5
+	cd src &&
+
+	sed -i -e 's@\^u}@^u cols 300}@' tests/dejagnu/config/default.exp     &&
+	sed -i -e '/eq 0/{N;s/12 //}'    plugins/kdb/db2/libdb2/test/run.test &&
+	sed -i '/t_iprop.py/d'           tests/Makefile.in                    &&
+
+	./configure --prefix=/usr            \
+				--sysconfdir=/etc        \
+				--localstatedir=/var/lib \
+				--runstatedir=/run       \
+				--with-system-et         \
+				--with-system-ss         \
+				--with-system-verto=no   \
+				--enable-dns-for-realm &&
 	make
-	make install
+	make install && install -v -dm755 /usr/share/doc/krb5-1.19.2 && cp -vfr ../doc/*  /usr/share/doc/krb5-1.19.2
+
 	ln -s /opt/bison/bin/bison /usr/bin/bison
+	ln -s /opt/autoconf/bin/autoconf /usr/bin/autoconf
 
 export OPENSSL_CONF_INCLUDE="/opt/openssl/include/openssl"
 
+
+
+
+
+[source: https://www.linuxfromscratch.org/blfs/view/cvs/general/python3.html]
+curl -L https://www.python.org/ftp/python/3.9.2/Python-3.9.2.tar.xz --output python-3.9.2.tar.xz
+	tar -xf python-3.9.2.tar.xz
+	mv python-3.9.2 python
+	cd python
+sed 's|cpython/||' -i Include/cpython/pystate.h
+
+CXX="/usr/bin/g++"              ./configure --prefix=/usr                   --enable-shared                 --with-system-expat             --with-system-ffi               --with-ensurepip=yes
+
+
+
+for m in _struct binascii unicodedata _posixsubprocess math pyexpat _md5 _sha1 _sha256 _sha512 select _random _socket zlib fcntl; do     sed -i "s/^#\(${m}\)/\1/" Modules/Setup; done
+
+
+make && make install 
+
+to check: python3
+
+
+curl -L https://ftp.gnu.org/gnu/automake/automake-1.16.4.tar.gz --output automake-1.16.4.tar.gz
+tar -zxvf automake-1.16.4.tar.gz
+mv automake-1.16.4 automake
+dnf install perl-Thread-Queue.noarch
+cd automake
+./configure --prefix=/usr --docdir=/usr/share/doc/automake-1.16.1 && make && make install
+
+curl -L https://ftpmirror.gnu.org/libtool/libtool-2.4.6.tar.gz --output libtool-2.4.6.tar.gz
+tar -zxvf libtool-2.4.6.tar.gz
+mv libtool-2.4.6 libtool
+
+cd libtool
+./configure --prefix=/usr && make && make install
+
+
+[source: https://www.linuxfromscratch.org/blfs/view/svn/general/libuv.html ]
+curl -L  https://dist.libuv.org/dist/v1.42.0/libuv-v1.42.0.tar.gz --output libuv-v1.42.0.tar.gz
+tar -zxvf libuv-v1.42.0.tar.gz
+mv libuv-v1.42.0 libuv
+cd libuv
+sh autogen.sh                              &&
+./configure --prefix=/usr --disable-static &&
+make 
+make install
+ln -s  /usr/lib/pkgconfig/libuv.pc /usr/lib64/pkgconfig/libuv.pc
+
+==========dns bind
+
+
+
+ln -s   /usr/lib/pkgconfig/python3.pc /usr/lib64/pkgconfig/python3.pc
+[source: https://www.linuxfromscratch.org/blfs/view/svn/server/bind.html]
+pip3 install ply
+curl -L  https://downloads.isc.org/isc/bind9/9.16.21/bind-9.16.21.tar.xz --output bind-9.16.21.tar.xz
+	tar -xf bind-9.16.21.tar.xz
+	mv bind-9.16.21 bind
+	cd bind
+	
+	./configure --prefix=/usr           \
+            --sysconfdir=/etc       \
+            --localstatedir=/var    \
+            --mandir=/usr/share/man \
+            --with-libtool          \
+            --disable-static 
+			
+	make;make install
+
+
+curl -L https://digip.org/jansson/releases/jansson-2.13.1.tar.gz --output jansson-2.13.1.tar.gz
+tar -zxvf jansson-2.13.1.tar.gz
+mv jansson-2.13.1 jansson
+cd jansson
+
+./configure --prefix=/usr --disable-static && make && make install
+ln -s /usr/lib/pkgconfig/jansson.pc /usr/lib64/pkgconfig/jansson.pc
+
+curl -L https://github.com/libarchive/libarchive/releases/download/v3.5.2/libarchive-3.5.2.tar.xz --output libarchive-3.5.2.tar.xz
+	tar -xf libarchive-3.5.2.tar.xz
+	mv libarchive-3.5.2 libarchive
+	cd libarchive
+./configure --prefix=/usr --disable-static && make && make install
+ln -s /usr/lib/pkgconfig/libarchive.pc /usr/lib64/pkgconfig/libarchive.pc
+
+[source: https://www.linuxfromscratch.org/blfs/view/7.5/postlfs/attr.html ]
+curl -L http://download.savannah.gnu.org/releases/attr/attr-2.4.47.src.tar.gz --output attr-2.4.47.src.tar.gz
+tar -zxvf attr-2.4.47.src.tar.gz
+mv attr-2.4.47 attr
+cd attr
+
+sed -i -e 's|/@pkg_name@|&-@pkg_version@|' include/builddefs.in
+./configure --prefix=/usr --disable-static && make && make install
+
+[source: https://www.linuxfromscratch.org/blfs/view/7.5/postlfs/acl.html ]
+curl -L http://download.savannah.gnu.org/releases/acl/acl-2.2.52.src.tar.gz --output acl-2.2.52.src.tar.gz
+	tar -zxvf acl-2.2.52.src.tar.gz
+	mv acl-2.2.52 acl
+	cd acl
+	sed -i -e 's|/@pkg_name@|&-@pkg_version@|'      include/builddefs.in
+
+
+./configure --prefix=/usr --libexecdir=/usr/lib --disable-static && make
+ls -ltr  /usr/lib/pkgconfig/
+
+curl -L https://download.samba.org/pub/samba/stable/samba-4.15.0.tar.gz --output samba-4.15.0.tar.gz
+tar -zxvf samba-4.15.0.tar.gz
+mv samba-4.15.0 samba4
+cd samba4
+
+./configure                                \
+    --prefix=/usr                          \
+    --sysconfdir=/etc                      \
+    --localstatedir=/var                   \
+    --with-piddir=/run/samba               \
+    --with-pammodulesdir=/usr/lib/security \
+    --enable-fhs                           \
+    --without-ad-dc                        \
+    --without-systemd       
+make;
+make install;
 https://unix.stackexchange.com/questions/279397/ldd-does-not-find-path-how-to-add
 
 cc1: warning: '-mtune=x86-64' is deprecated; use '-mtune=k8' or '-mtune=generic' instead as appropriate [-Wdeprecated]
@@ -161,3 +323,5 @@ libraries: =./x86_64-redhat-linux/11/:./../lib64/:/opt/openssl/lib/x86_64-redhat
 
 https://unix.stackexchange.com/questions/279397/ldd-does-not-find-path-how-to-add
 
+import libdnf.transaction ModuleNotFoundError: No module named 'libdnf'
+sudo rpm -e --nodeps python3-3.9.2-1.fc34.x86_64
