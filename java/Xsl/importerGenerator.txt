@@ -1,0 +1,219 @@
+public class ImportXmlGenerator {
+       public static final Logger logger = LogManager.getLogger(ImportXmlGenerator.class);
+       String importedFilePath;
+       String importerFilePath;
+
+       public String getImporterFilePath() {
+              return importerFilePath;
+       }
+
+       public void setImporterFilePath(String importerFilePath) {
+              this.importerFilePath = importerFilePath;
+       }
+
+       public String getImportedFilePath() {
+              return importedFilePath;
+       }
+
+       public void setImportedFilePath(String importedFilePath) {
+              this.importedFilePath = importedFilePath;
+       }
+
+       private DocumentBuilder createDocumentBuidler() {
+              DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+              factory.setNamespaceAware(true);
+              factory.setValidating(true);
+              DocumentBuilder builder = null;
+              try {
+                     builder = factory.newDocumentBuilder();
+              } catch (ParserConfigurationException e) {
+                     // TODO Auto-generated catch block
+                     e.printStackTrace();
+              }
+              return builder;
+
+       }
+
+       private Document createDocument() {
+              if(logger.isDebugEnabled()) {
+                     logger.info("enter createDocument");
+              }
+              String sourceFile = "./resources/Importer/importer.xml";
+              // String sourceFile=importerFilePath;
+              
+              File file = new File(sourceFile);
+              // file.getParentFile().mkdirs();
+              
+              Document document = null;
+              if (file.exists()) {
+                     InputStream inputStream;
+                     try {
+              
+
+                           inputStream = new FileInputStream(sourceFile);
+              
+                           Reader reader = new InputStreamReader(inputStream, "UTF-8");
+              
+                           InputSource is = new InputSource(reader);
+              
+                           is.setEncoding("UTF-8");
+                           
+                           DocumentBuilder buidler = createDocumentBuidler();
+                           
+
+                           document = buidler.parse(is);
+                     } catch (SAXException | IOException e) {
+                           // TODO Auto-generated catch block
+                           logger.error("CreatedDocumentError",e);
+                     }
+
+              } else {
+                     try {
+                           file.createNewFile();
+                     } catch (IOException e) {
+                           // TODO Auto-generated catch block
+                           logger.error("CreateDocumentError2",e);
+                     }
+                     DocumentBuilder buidler = createDocumentBuidler();
+                     document = buidler.newDocument();
+                     Element root = document.createElement("sailpoint");
+                     
+                     document.appendChild(root);
+                     writeToXml(document);
+              }
+              if(logger.isDebugEnabled()) {
+                     logger.info("exit createDocument");
+              }
+              return document;
+
+       }
+
+       public void createBundleXml() {
+              if(logger.isDebugEnabled()) {
+                     logger.info("enter createbundleXml");
+              }
+              
+              Document document = createDocument();
+              
+              Element root = document.getDocumentElement();
+              
+              Document xmlToImport = getXmlToImport();
+              
+              Element importedRoot = xmlToImport.getDocumentElement();
+              
+              // document.importNode(importedRoot, true);
+              // create duplicate node
+              Node copied = importedRoot.cloneNode(true);
+              
+              // transfer ownership of the new node into th destination document
+              document.adoptNode(copied);
+              
+              // make the new node an actual item in the target document
+              root.appendChild(copied);
+              
+              // root.appendChild(xmlToImport.adoptNode(importedRoot.cloneNode(true)));
+              
+              writeToXml(document);
+              
+              if(logger.isDebugEnabled()) {
+                     logger.info("exit createbundleXml");
+              }
+
+       }
+
+       private Document getXmlToImport() {
+              String sourceFilePath = getImportedFilePath();
+              
+              //logger.info("sourceFilePath: "+sourceFilePath);
+              File sourceFile = new File(sourceFilePath);
+              
+
+              Document document = null;
+              try {
+                     InputStream inputStream = new FileInputStream(sourceFile);
+                     Reader reader = new InputStreamReader(inputStream, "UTF-8");
+                     InputSource is = new InputSource(reader);
+                     is.setEncoding("UTF-8");
+                     DocumentBuilder buidler = createDocumentBuidler();
+
+                     document = buidler.parse(is);
+
+              } catch (SAXException | IOException e) {
+                     // TODO Auto-generated catch block
+                     e.printStackTrace();
+              }
+              return document;
+
+       }
+
+       private void writeToXml(Document documentToWrite) {
+              
+              if(logger.isDebugEnabled()) {
+                     logger.info("enter writeToXml");
+              }
+              TransformerFactory transformerFactory = TransformerFactory.newInstance();
+
+              Transformer transformer;
+              try {
+                     transformer = transformerFactory.newTransformer();
+
+                     transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                     transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+                     transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+
+                     DOMImplementation domImpl = documentToWrite.getImplementation();
+                     DocumentType doctype = domImpl.createDocumentType("doctype", "sailpoint.dtd", "sailpoint.dtd");
+
+                     transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, doctype.getSystemId());
+                     transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, doctype.getPublicId());
+
+                     DOMSource source = new DOMSource(documentToWrite);
+                     
+                     StreamResult result = new StreamResult(new File(importerFilePath + "importer.xml"));
+                     // StreamResult result = new StreamResult(new File(importerFilePath));
+
+                     transformer.transform(source, result);
+
+              } catch (TransformerException e) {
+                     // TODO Auto-generated catch block
+                     logger.error("writeToXml",e);
+                     e.printStackTrace();
+              }
+              if(logger.isDebugEnabled()) {
+                     logger.info("exit writeToXml");
+              }
+
+       }
+
+}
+
+
+
+
+public List<String> getRequirementNames() {
+              List<String> resultNames = null;
+              Document localSubjectDocument = getSubjectDocument();
+              XPath xPath = XPathFactory.newInstance().newXPath();
+              try {
+                     NodeList reqReferenceNodes = (NodeList) xPath.evaluate("/Bundle/Requirements/Reference",
+                                  localSubjectDocument, XPathConstants.NODESET);
+                     if (null != reqReferenceNodes) {
+                           int length = reqReferenceNodes.getLength();
+                           // logger.info("length:"+length);
+                           for (int i = 0; i < length; i++) {
+                                  Element element = (Element) reqReferenceNodes.item(i);
+                                  String requirementName = element.getAttribute("name");
+                                  if (null == resultNames || resultNames.isEmpty()) {
+                                         resultNames = new ArrayList<String>();
+                                  }
+                                  resultNames.add(requirementName);
+                           }
+
+                     }
+
+              } catch (XPathExpressionException e) {
+                     // TODO Auto-generated catch block
+                     e.printStackTrace();
+              }
+              return resultNames;
+       }

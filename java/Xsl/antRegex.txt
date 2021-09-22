@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<project name="filter" default="filter">
+<target name="filter">
+<replaceregexp file="importer.xml" match="id=&quot;(.*?)&quot;" replace="" flags="g" encoding="UTF-8" />
+</target>
+</project>

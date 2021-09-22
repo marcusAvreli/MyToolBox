@@ -1,0 +1,61 @@
+public class Application {
+       public static String Log4JPath = null;
+       private static final Logger logger = LogManager.getLogger(Application.class);
+
+       public static void main(String[] args) throws IOException {
+              initApp();
+              try {
+                     
+                     String xmlPathName = "./resources/importer.xml";
+                     String xslPathName = "./resources/stylesheet.xsl";
+                     String htmlPathName = "./resources/result.html";
+                     //String htmlPathName = xmlPathName;
+                     Source xslDoc = new StreamSource(xslPathName);
+                     
+                     // Create an XML Stream Reader
+                     XMLStreamReader xmlSR;
+                     BufferedWriter bw =null;
+                     try {
+                           xmlSR = XMLInputFactory.newInstance().createXMLStreamReader(new InputStreamReader(new FileInputStream(xmlPathName), Charset.forName("UTF-8")));                           
+                           // Wrap the XML Stream Reader in a StAXSource
+                           StAXSource source = new StAXSource(xmlSR);
+                           // Create a String Writer
+                           StringWriter stringWriter = new StringWriter();
+                           // Create a Stream Result
+                           StreamResult streamResult = new StreamResult(stringWriter);
+                           // Create a transformer
+                           Transformer transformer = TransformerFactory.newInstance().newTransformer(xslDoc);                 
+                           transformer.transform(source, streamResult);
+                           bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(htmlPathName), StandardCharsets.UTF_8));
+                           bw.write(stringWriter.getBuffer().toString());
+                           //logger.info(stringWriter.getBuffer().toString());
+                     } catch (XMLStreamException e) {
+                           // TODO Auto-generated catch block
+                           e.printStackTrace();
+                     } catch (FactoryConfigurationError e) {
+                           // TODO Auto-generated catch block
+                           e.printStackTrace();
+                     }
+                     finally {
+                           bw.close();                       
+                     }
+
+              } catch (FileNotFoundException e) {
+                     e.printStackTrace();
+              } catch (TransformerConfigurationException e) {
+                     e.printStackTrace();
+              } catch (TransformerFactoryConfigurationError e) {
+                     e.printStackTrace();
+              } catch (TransformerException e) {
+                     e.printStackTrace();
+              }
+
+       }
+
+       public static String getLog4JPath() {
+              return Log4JPath;
+       }
+
+       public static void setLog4JPath(String log4jPath) {
+              Log4JPath = log4jPath;
+       }

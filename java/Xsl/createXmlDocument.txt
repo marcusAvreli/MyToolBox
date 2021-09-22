@@ -1,0 +1,35 @@
+       private DocumentBuilder createDocumentBuidler() {
+              DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+              DocumentBuilder builder = null;
+              try {
+                     builder = factory.newDocumentBuilder();
+              } catch (ParserConfigurationException e) {
+                     // TODO Auto-generated catch block
+                     e.printStackTrace();
+              }
+              return builder;
+
+       }
+
+       public void createDocument() {
+              String sourceFilePath = getAbosulthFilePath();
+              File sourceFile = new File(sourceFilePath);
+              // logger.info("sourceFile ==> "+sourceFile);
+
+              Document document = null;
+              try {
+                     InputStream inputStream = new FileInputStream(sourceFile);
+                     Reader reader = new InputStreamReader(inputStream, "UTF-8");
+                     InputSource is = new InputSource(reader);
+                     is.setEncoding("UTF-8");
+                     DocumentBuilder buidler = createDocumentBuidler();
+
+                     document = buidler.parse(is);
+
+              } catch (SAXException | IOException e) {
+                     // TODO Auto-generated catch block
+                     e.printStackTrace();
+              }
+              setSubjectDocument(document);
+
+       }
