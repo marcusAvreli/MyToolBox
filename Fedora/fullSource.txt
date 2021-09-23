@@ -3,25 +3,33 @@ https://tldp.org/HOWTO/Postfix-Cyrus-Web-cyradm-HOWTO/install.html
 https://cmake.org/install/
 export OPENSSL_ROOT_DIR="/opt/openssl"
 LD_LIBRARY_PATH
-dnf install gcc-c++
-dnf install  libcom_err-devel libcom_err libss_devel
-dnf install libcap-devel
 
-curl -L https://www.cpan.org/src/5.0/perl-5.34.0.tar.gz --output perl-5.34.0.tar.gz [refer https://metacpan.org/dist/perl/view/INSTALL ]
-	./Configure -Dprefix=/opt/perl -des
-	make
-	make test
-	make install
-ln -s /opt/perl/bin/instmodsh /usr/bin/instmodsh
-ln -s /opt/perl/bin/cpan /usr/bin/cpan
-curl -L http://ftp.gnu.org/gnu/m4/m4-1.4.19.tar.gz --output m4-1.4.19.tar.gz
-	tar -zxvf m4-1.4.19.tar.gz
-	mv m4-1.4.19 m4
-	cd m4
-	./configure --prefix=/opt/m4
-	make
-	make install
-	ln -s /opt/m4/bin/m4 /usr/bin/m4
+
+1. COMPILER
+	dnf install gcc-c++
+
+	dnf install  libcom_err-devel libcom_err libss_devel
+	dnf install libcap-devel
+
+2. PERL
+	curl -L https://www.cpan.org/src/5.0/perl-5.34.0.tar.gz --output perl-5.34.0.tar.gz [refer https://metacpan.org/dist/perl/view/INSTALL ]
+			./Configure -Dprefix=/opt/perl -des
+			make
+			make test
+			make install
+			
+	ln -s /opt/perl/bin/instmodsh /usr/bin/instmodsh
+	ln -s /opt/perl/bin/cpan /usr/bin/cpan
+	
+3. M4
+	curl -L http://ftp.gnu.org/gnu/m4/m4-1.4.19.tar.gz --output m4-1.4.19.tar.gz
+		tar -zxvf m4-1.4.19.tar.gz
+		mv m4-1.4.19 m4
+		cd m4
+		./configure --prefix=/opt/m4
+		make
+		make install
+		ln -s /opt/m4/bin/m4 /usr/bin/m4
 
 curl -L http://ftp.gnu.org/gnu/autoconf/autoconf-2.71.tar.gz --output autoconf-2.71.tar.gz
 	cd /root/autoconf
@@ -180,7 +188,10 @@ export OPENSSL_CONF_INCLUDE="/opt/openssl/include/openssl"
 
 
 
-[source: https://www.linuxfromscratch.org/blfs/view/cvs/general/python3.html]
+[source: 
+	https://www.linuxfromscratch.org/blfs/view/cvs/general/python3.html;
+	http://linuxcodemonkey.blogspot.com/2016/12/building-python-36-from-source-on.html;
+]
 curl -L https://www.python.org/ftp/python/3.9.2/Python-3.9.2.tar.xz --output python-3.9.2.tar.xz
 	tar -xf python-3.9.2.tar.xz
 	mv python-3.9.2 python
