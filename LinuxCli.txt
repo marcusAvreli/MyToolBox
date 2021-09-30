@@ -5,3 +5,47 @@ check kerberos connectivity
 env KRB5_TRACE=/pathToLog/krb5.log 
 kinit -V
 kinit -p <username>@domain.name
+
+Delete files by extension
+
+List file to be deleted
+find . -name "*.bak" -type f
+
+Delete files
+find . -name "*.bak" -type f -delete
+-------------------------------------------------------------------------------------------------------------------------------
+Delete files by date of change range
+
+List files that were modified between dates
+find . -type f -newermt '01 jan 2009 00:00:00' -not -newermt '01 jan 2012 00:00:00' -ls
+
+Delete files that were modified between dates
+find . -type f -newermt '01 jan 2009 00:00:00' -not -newermt '01 jan 2012 00:00:00' -delete
+--------------------------------------------------------------------------------------------------------------------------------------------
+Find locks on files
+ 
+lsof +g | grep sailpoint.log | sed "s/[a-z]\+\s\+\([0-9]\+\)\s.*/\\1/" | xargs ps
+
+Text editor
+vim file
+:set bomb
+:set fileencoding=utf-8
+:wq
+
+:set encoding=latin1
+-------------------------------------------------------------------------------------------------------------------------------
+Jq
+
+cat fileName.json | jq -c '. | select(.)' #if this works then json file is correct
+cat fileName.json | jq -c '.groups.name[] | select(.)'
+cat fileName.json | jq -c '.groups.name[] | select(.=="valueToFind")'
+cat fileName.json | jq -c '.groups[] | select(.name=="valueToFind")'
+-------------------------------------------------------------------------------------------------------------------------------
+Tr
+cat fileName.json | tr ‘\r\n’ ‘ ’ | jq .
+192.168.134.128
+echo 'הרשאה לדיווח שעות' |recode ..html
+
+Permissions octal presentation
+$ stat -c '%A %a %n' /etc/passwd
+

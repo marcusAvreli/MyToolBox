@@ -4,52 +4,90 @@ https://cmake.org/install/
 export OPENSSL_ROOT_DIR="/opt/openssl"
 LD_LIBRARY_PATH
 
+0. 
+	dnf install  libcom_err-devel libcom_err libss_devel
+	dnf install libcap-devel
 
 1. COMPILER
 	dnf install gcc-c++
 
-	dnf install  libcom_err-devel libcom_err libss_devel
-	dnf install libcap-devel
-
+(1/16):  binutils-gold-2.35.2-5.fc34.x86_64.rpm  		291 kB/s | 717 kB     00:02
+(2/16): binutils-2.35.2-5.fc34.x86_64.rpm       407 kB/s | 5.5 MB     00:13
+(3/16): cpp-11.2.1-1.fc34.x86_64.rpm            675 kB/s |  10 MB     00:15
+(4/16): kernel-headers-5.13.3-200.fc34.x86_64.r 520 kB/s | 1.3 MB     00:02
+(5/16): libstdc++-devel-11.2.1-1.fc34.x86_64.rp 373 kB/s | 2.2 MB     00:06
+(6/16): glibc-devel-2.33-5.fc34.x86_64.rpm      294 kB/s | 128 kB     00:00
+(7/16): glibc-headers-x86-2.33-5.fc34.noarch.rp 358 kB/s | 515 kB     00:01
+(8/16): gcc-c++-11.2.1-1.fc34.x86_64.rpm        407 kB/s |  12 MB     00:30
+(9/16): libmpc-1.2.1-2.fc34.x86_64.rpm          174 kB/s |  63 kB     00:00
+(10/16): libxcrypt-devel-4.4.18-1.fc34.x86_64.r  32 kB/s |  29 kB     00:00
+(11/16): make-4.3-5.fc34.x86_64.rpm             203 kB/s | 539 kB     00:02
+(12/16): guile22-2.2.7-2.fc34.x86_64.rpm        277 kB/s | 6.5 MB     00:23
+(13/16): libgcc-11.2.1-1.fc34.x86_64.rpm         58 kB/s | 107 kB     00:01
+(14/16): libgomp-11.2.1-1.fc34.x86_64.rpm        70 kB/s | 279 kB     00:03
+(15/16): libstdc++-11.2.1-1.fc34.x86_64.rpm     114
+	
+[source https://metacpan.org/dist/perl/view/INSTALL 
+https://www.linuxfromscratch.org/lfs/view/9.1-systemd/chapter06/perl.html#contents-perl
+]
 2. PERL
-	curl -L https://www.cpan.org/src/5.0/perl-5.34.0.tar.gz --output perl-5.34.0.tar.gz [refer https://metacpan.org/dist/perl/view/INSTALL ]
-			./Configure -Dprefix=/opt/perl -des
-			make
-			make test
-			make install
+	cd /home/admin
+	curl -L https://www.cpan.org/src/5.0/perl-5.34.0.tar.gz --output perl-5.34.0.tar.gz 
+		tar -zxvf perl-5.34.0.tar.gz 
+		mv perl-5.34.0 perl
+		cd perl
+			./Configure -des -Dprefix=/usr                 \
+                  -Dvendorprefix=/usr           \
+                  -Dman1dir=/usr/share/man/man1 \
+                  -Dman3dir=/usr/share/man/man3 \
+                  -Dpager="/usr/bin/less -isR"  \
+                  -Duseshrplib                  \
+                  -Dusethreads
+			make && make test && make install
+		cd /home/admin
 			
 	ln -s /opt/perl/bin/instmodsh /usr/bin/instmodsh
 	ln -s /opt/perl/bin/cpan /usr/bin/cpan
 	
+4. AUTOCONF 
+	##requiremnts
+	cd /home/admin
+	curl -L http://ftp.gnu.org/gnu/autoconf/autoconf-2.71.tar.gz --output autoconf-2.71.tar.gz
+	tar -zxvf autoconf-2.71.tar.gz
+	mv autoconf-2.71 autoconf
+		cd /home/admin/autoconf
+		./configure --prefix=/opt/autoconf 		make && 		make install
+		ln -s /opt/autoconf/bin/autoconf /usr/bin/autoconf
+
+		
 3. M4
+	cd /home/admin
 	curl -L http://ftp.gnu.org/gnu/m4/m4-1.4.19.tar.gz --output m4-1.4.19.tar.gz
 		tar -zxvf m4-1.4.19.tar.gz
 		mv m4-1.4.19 m4
 		cd m4
-		./configure --prefix=/opt/m4
-		make
-		make install
-		ln -s /opt/m4/bin/m4 /usr/bin/m4
+		./configure --prefix=/usr
+          make && make install 
+	cd ../		
+		#ln -s /opt/m4/bin/m4 /usr/bin/m4
 
-curl -L http://ftp.gnu.org/gnu/autoconf/autoconf-2.71.tar.gz --output autoconf-2.71.tar.gz
-	cd /root/autoconf
-	./configure --prefix=/opt/autoconf
-	make
-	make install
-	ln -s /opt/autoconf/bin/autoconf /usr/bin/autoconf
-
-curl -L  https://zlib.net/zlib-1.2.11.tar.gz --output zlib-1.2.11.tar.gz
-	tar -zxvf zlib-1.2.11.tar.gz zlib-1.2.11
-	mv zlib-1.2.11 zlib
-	cd zlib
-	./configure --prefix=/opt/zlib
+ZLIB
+[source: https://www.linuxfromscratch.org/lfs/view/9.1/chapter06/zlib.html ]
+	cd /home/admin
+	curl -L  https://zlib.net/zlib-1.2.11.tar.gz --output /home/admin/zlib-1.2.11.tar.gz
+	tar -zxvf /home/admin/zlib-1.2.11.tar.gz zlib-1.2.11
+	mv /home/admin/zlib-1.2.11 /home/admin/zlib
+	cd /home/admin/zlib
+	./configure --prefix=/usr
 	make
 	make install
 
 	ln -s /opt/autoconf/bin/autoconf /usr/bin/autoconf	
-
-curl -L https://www.openssl.org/source/old/3.0/openssl-3.0.0-beta2.tar.gz --output openssl-3.0.0-beta2.tar.gz
-	tar -zxvf openssl-3.0.0-beta2.tar.gz openssl-3.0.0-beta2
+	
+OPENSSL
+	cd /home/admin
+	curl -L https://www.openssl.org/source/old/3.0/openssl-3.0.0-beta2.tar.gz --output openssl-3.0.0-beta2.tar.gz
+	tar -zxvf openssl-3.0.0-beta2.tar.gz
 	mv openssl-3.0.0-beta2 openssl
 	set environment variable
 		export C_INCLUDE_PATH="$C_INCLUDE_PATH:/opt/zlib/include"
@@ -58,9 +96,15 @@ curl -L https://www.openssl.org/source/old/3.0/openssl-3.0.0-beta2.tar.gz --outp
 	cd openssl
 	
 	./config --prefix=/opt/openssl  --openssldir=/etc/openssl --libdir=lib shared zlib-dynamic
-	
+	make && make install
+	mv /usr/bin/openssl /usr/bin/openssl_OLD
 	ln -s /opt/openssl/bin/openssl /usr/bin/openssl
-	#ln -s /opt/openssl/lib/libssl.so.3 /usr/lib/libssl.so
+	
+	vi /etc/ld.so.conf.d/lib.conf
+		/opt/openssl/lib
+	ldconfig 
+	
+	
 	
 
 curl -L  https://github.com/cyrusimap/cyrus-sasl/releases/download/cyrus-sasl-2.1.27/cyrus-sasl-2.1.27.tar.gz --output cyrus-sasl-2.1.27.tar.gz
@@ -79,7 +123,7 @@ curl -L https://www.openldap.org/software/download/OpenLDAP/openldap-release/ope
 	cd openldap
 	env CPPFLAGS=" -I/opt/openssl" LDFLAGS="-L/usr/lib64 -L/opt/openssl/lib" ./configure --sysconfdir=/etc  --enable-ldap    --enable-slapd --with-cyrus-sasl  --with-tls=openssl   --enable-rewrite --enable-rlookups    --enable-dynamic --enable-ppolicy  --enable-memberof  --enable-refint ;
 	make depend; make;make install
-
+cd /home/admin
 curl -L http://ftp.gnu.org/gnu/bison/bison-3.8.1.tar.gz --output bison-3.8.1.tar.gz
 	tar -zxvf bison-3.8.1.tar.gz
 	mv bison-3.8.1 bison
@@ -95,8 +139,16 @@ curl -L https://github.com/westes/flex/files/981163/flex-2.6.4.tar.gz --output f
 	./configure  --prefix=/opt/flex
 	make
 	make install
-	
-curl -L https://github.com/Kitware/CMake/releases/download/v3.21.2/cmake-3.21.2.tar.gz	--output cmake-3.21.2.tar.gz
+
+[source: https://cmake.org/install/ ]
+cd /home/admin
+curl -L https://github.com/Kitware/CMake/releases/download/v3.21.2/cmake-3.21.2.tar.gz	--output /home/admin/cmake-3.21.2.tar.gz
+tar -zxvf cmake-3.21.2.tar.gz
+mv cmake-3.21.2 cmake
+cd cmake
+ ./bootstrap
+  make
+  make install
 curl -L https://cmocka.org/files/1.1/cmocka-1.1.3.tar.xz --output cmocka-1.1.3.tar.xz
 	https://github.com/clibs/cmocka/blob/master/INSTALL.md1
 	tar -xf cmocka-1.1.3.tar.xz
@@ -120,6 +172,7 @@ https://github.com/USER/PROJECT/releases/latest/download/package.zip .
 
 
 Package 'libverto', required by 'virtual:world', not found
+cd /home/admin
 curl -L https://ftp.gnu.org/gnu/ncurses/ncurses-6.2.tar.gz --output ncurses-6.2.tar.gz
 	tar -zxvf ncurses-6.2.tar.gz
 	mv ncurses-6.2 ncurses
@@ -192,10 +245,12 @@ export OPENSSL_CONF_INCLUDE="/opt/openssl/include/openssl"
 	https://www.linuxfromscratch.org/blfs/view/cvs/general/python3.html;
 	http://linuxcodemonkey.blogspot.com/2016/12/building-python-36-from-source-on.html;
 ]
+cd /home/admin
 curl -L https://www.python.org/ftp/python/3.9.2/Python-3.9.2.tar.xz --output python-3.9.2.tar.xz
 	tar -xf python-3.9.2.tar.xz
-	mv python-3.9.2 python
-	cd python
+	mv  Python-3.9.2 python
+	
+	cd /home/admin/python
 sed 's|cpython/||' -i Include/cpython/pystate.h
 
 CXX="/usr/bin/g++"              ./configure --prefix=/usr                   --enable-shared                 --with-system-expat             --with-system-ffi               --with-ensurepip=yes
@@ -347,29 +402,67 @@ tar -zxvf strongswan-5.9.3.tar.gz
 mv strongswan-5.9.3 strongswan
 cd strongswan
 
-
-curl -L https://ftp.pcre.org/pub/pcre/pcre-8.44.tar.bz2 --output pcre-8.44.tar.bz2
-tar -xvf pcre-8.44.tar.bz2
-mv pcre-8.44 pcre
-cd pcre 
-./configure --prefix=/usr                     \
-            --docdir=/usr/share/doc/pcre-8.44 \
-            --enable-unicode-properties       \
-            --enable-pcre16                   \
-            --enable-pcre32                   \
-            --enable-pcregrep-libz            \
-            --enable-pcregrep-libbz2          \
-            --enable-pcretest-libreadline     \
-            --disable-static                 &&
-make
-
+[source: https://www.linuxfromscratch.org/lfs/view/9.0/chapter06/readline.html ]
+READLINE
+	curl -L https://ftp.gnu.org/gnu/readline/readline-8.0.tar.gz --output readline-8.0.tar.gz
+	tar -zxvf readline-8.0.tar.gz
+	mv readline-8.0 readline
+	cd /home/admin/readline
+	sed -i '/MV.*old/d' Makefile.in
+	sed -i '/{OLDSUFF}/c:' support/shlib-install
+	./configure --prefix=/usr    \
+				--disable-static \
+				--docdir=/usr/share/doc/readline-8.0
+PCRE
+	cd /home/admin
+	curl -L https://ftp.pcre.org/pub/pcre/pcre-8.44.tar.bz2 --output pcre-8.44.tar.bz2
+	tar -xvf pcre-8.44.tar.bz2
+	mv pcre-8.44 pcre
+	cd pcre 
+	env CPPFLAGS="-I/tools/include" LDFLAGS="-L/usr/lib64 -L/tools/lib" ./configure --prefix=/usr                     \
+				--docdir=/usr/share/doc/pcre-8.44 \
+				--enable-unicode-properties       \
+				--enable-pcre16                   \
+				--enable-pcre32                   \
+				--enable-pcregrep-libz            \
+				--enable-pcregrep-libbz2          \
+				--enable-pcretest-libreadline     \
+				--disable-static                 
+	make && make install
+	cd /home/admin
 APR+APR UTIL
 
+cd /home/admin
 curl -L https://archive.apache.org/dist/apr/apr-1.7.0.tar.bz2 --output apr-1.7.0.tar.bz2
 	tar -xvf apr-1.7.0.tar.bz2
 	mv apr-1.7.0 apr
 	cd apr
+./configure --prefix=/usr    \
+            --disable-static \
+            --with-installbuilddir=/usr/share/apr-1/build &&
+make
+make install
 
+Libraries have been installed in:
+   /usr/lib
+
+If you ever happen to want to link against installed libraries
+in a given directory, LIBDIR, you must either use libtool, and
+specify the full pathname of the library, or use the '-LLIBDIR'
+flag during linking and do at least one of the following:
+   - add LIBDIR to the 'LD_LIBRARY_PATH' environment variable
+     during execution
+   - add LIBDIR to the 'LD_RUN_PATH' environment variable
+     during linking
+   - use the '-Wl,-rpath -Wl,LIBDIR' linker flag
+   - have your system administrator add LIBDIR to '/etc/ld.so.conf'
+
+See any operating system documentation about shared libraries for
+more information, such as the ld(1) and ld.so(8) manual pages.
+
+
+[source: https://www.linuxfromscratch.org/lfs/view/10.1/chapter08/expat.html]
+cd /home/admin
 curl -L https://github.com/libexpat/libexpat/releases/download/R_2_4_1/expat-2.4.1.tar.gz --output expat-2.4.1.tar.gz
 	tar -zxvf expat-2.4.1.tar.gz
 	mv expat-2.4.1 expat
@@ -377,12 +470,39 @@ curl -L https://github.com/libexpat/libexpat/releases/download/R_2_4_1/expat-2.4
 	./configure --prefix=/usr    \
             --disable-static \
             --docdir=/usr/share/doc/expat-2.4.1
+			make && make install
 	install -v -m644 doc/*.{html,png,css} /usr/share/doc/expat-2.4.1
 
+cd /home/admin
 curl -L https://archive.apache.org/dist/apr/apr-util-1.6.1.tar.bz2 --output apr-util-1.6.1.tar.bz2
 	tar -xvf apr-util-1.6.1.tar.bz2
 	mv apr-util-1.6.1 apr-util
 	cd apr-util
+	./configure --prefix=/usr       \
+            --with-apr=/usr     \
+            --with-gdbm=/usr    \
+            --with-openssl=/usr \
+            --with-crypto &&
+make
+make install
+
+Libraries have been installed in:
+   /usr/lib
+
+If you ever happen to want to link against installed libraries
+in a given directory, LIBDIR, you must either use libtool, and
+specify the full pathname of the library, or use the '-LLIBDIR'
+flag during linking and do at least one of the following:
+   - add LIBDIR to the 'LD_LIBRARY_PATH' environment variable
+     during execution
+   - add LIBDIR to the 'LD_RUN_PATH' environment variable
+     during linking
+   - use the '-Wl,-rpath -Wl,LIBDIR' linker flag
+   - have your system administrator add LIBDIR to '/etc/ld.so.conf'
+
+See any operating system documentation about shared libraries for
+more information, such as the ld(1) and ld.so(8) manual pages.
+
 	
 tar -zxvf apr-1.6.3.tar.gz
 tar -zxvf apr-util-1.6.1.tar.gz
@@ -397,10 +517,27 @@ cp -r /root/apr /usr/src/httpd/srclib
 cp -r /root/apr-util /usr/src/httpd/srclib
 ./configure --enable-so --enable-ssl=shared --with-ssl=/opt/openssl 
 
+cd /home/admin
 curl -L  https://dlcdn.apache.org//httpd/httpd-2.4.49.tar.gz --output httpd-2.4.49.tar.gz
-tar -zxvf httpd-2.4.49.tar.gz
-mv httpd-2.4.49 httpd
+	tar -zxvf httpd-2.4.49.tar.gz
+	mv httpd-2.4.49 httpd
     Install prefix: /usr/local/apache2
+	
+	groupadd -g 25 apache && useradd -c "Apache_Server" -d /srv/www -g apache -s /bin/false -u 25 apache
+	./configure --enable-authnz-fcgi                              \
+            
+            --enable-mods-shared="all cgi"                    \
+            --enable-mpms-shared=all                          \
+            --enable-suexec=shared                            \
+            --with-apr=/usr/bin/apr-1-config                  \
+            --with-apr-util=/usr/bin/apu-1-config             \
+            --with-suexec-bin=/usr/lib/httpd/suexec           \
+            --with-suexec-caller=apache                       \
+            --with-suexec-docroot=/srv/www                    \
+            --with-suexec-logfile=/var/log/httpd/suexec.log   \
+            --with-suexec-uidmin=100                          \
+            --with-suexec-userdir=public_html
+		
 	env CPPFLAGS="-I/opt/openssl/include"  LDFLAGS="-lcrypto -L/opt/openssl/lib" ./configure --enable-so --enable-ssl=shared --with-ssl=/usr/bin/openssl
 
 curl -L https://downloads.sourceforge.net/libpng/libpng-1.6.37.tar.xz --output libpng-1.6.37.tar.xz
@@ -416,19 +553,40 @@ curl -L https://github.com/libgd/libgd/releases/download/gd-2.3.3/libgd-2.3.3.ta
 	mv libgd-2.3.3 libgd
 	cd libgd
 
+cd /home/admin
+curl -L http://xmlsoft.org/sources/libxml2-2.9.12.tar.gz --output libxml2-2.9.12.tar.gz
+tar -zxvf libxml2-2.9.12.tar.gz
+mv libxml2-2.9.12 libxml2
+cd /home/admin/libxml2
+
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib
+cd /home/admin
 curl -L https://www.php.net/distributions/php-8.0.10.tar.gz --output php-8.0.10.tar.gz
 tar -zxvf php-8.0.10.tar.gz
 mv php-8.0.10 php
-
+PKG_CONFIG_PATH
+cd /home/admin/php
 cd /usr/src/php
 env CPPFLAGS="-I/opt/openssl/include"  LDFLAGS="-lcrypto -L/opt/openssl/lib"
 make distclean; ./configure --with-apxs2=/usr/local/apache2/bin/apxs  --with-gd=/usr/src --with-png-dir=/usr/src/lib  --with-xpm-dir=/usr/ --with-pdo-mysql --enable-mbstring --enable-ftp --enable-opcache --with-openssl --with-curl=/usr;make;make install
 
+cd /home/admin
+curl -L https://ftp.gnu.org/gnu/help2man/help2man-1.48.5.tar.xz --output help2man-1.48.5.tar.xz
+tar -xvf help2man-1.48.5.tar.xz
+mv help2man-1.48.5 help2man
+cd help2man
+./configure --prefix=/usr
+make && make install
 
 
+env CPPFLAGS="-I/tools/include"  LDFLAGS="-l/usr/lib64 -L/tools/lib"
+
+cd /home/admin
 curl -L https://sqlite.org/2021/sqlite-autoconf-3350400.tar.gz --output sqlite-autoconf-3350400.tar.gz
 	tar -zxvf sqlite-autoconf-3350400.tar.gz
 	mv sqlite-autoconf-3350400 sqlite
+	ln -s /usr/lib/pkgconfig/libxml-2.0.pc /usr/lib64/pkgconfig/libxml-2.0.pc
+	ln -s /usr/lib/pkgconfig/zlib.pc /usr/lib64/pkgconfig/zlib.pc
 	ln -s /usr/lib/pkgconfig/sqlite3.pc /usr/lib64/pkgconfig/sqlite3.pc
 	ln -s /usr/lib64/pkgconfig/libcurl.pc /usr/lib/pkgconfig/libcurl.pc
 cc1: warning: '-mtune=x86-64' is deprecated; use '-mtune=k8' or '-mtune=generic' instead as appropriate [-Wdeprecated]
@@ -511,3 +669,46 @@ sed -i -e '/proxy_module/s/^#//'      \
 echo \
 'ProxyPassMatch ^/(.*\.php)$ fcgi://127.0.0.1:9000/srv/www/$1' >> \
 /usr/local/apache2/conf/httpd.conf
+
+cd /home/admin
+curl -L https://ftp.gnu.org/gnu/gdbm/gdbm-1.21.tar.gz --output gdbm-1.21.tar.gz
+tar -zxvf gdbm-1.21.tar.gz
+mv gdbm-1.21 gdbm
+cd /home/admin/gdbm
+https://developerf1.com/how-to/install-php-8-on-windows
+cd /home/admin
+curl -L https://ftp.gnu.org/gnu/gmp/gmp-6.2.1.tar.xz --output gmp-6.2.1.tar.xz
+tar -xvf gmp-6.2.1.tar.xz
+mv /home/admin/gmp-6.2.1 /home/admin/gmp
+cd /home/admin/gmp
+
+cd /home/admin
+curl -L https://downloads.sourceforge.net/libpng/libpng-1.6.37.tar.xz --output libpng-1.6.37.tar.xz
+tar -xvf libpng-1.6.37.tar.xz
+mv /home/admin/libpng-1.6.37 /home/admin/libpng
+cd /home/admin/libpng
+
+./configure --prefix=/usr --disable-static &&
+make
+make install
+
+cd /home/admin
+curl -L https://www.nasm.us/pub/nasm/releasebuilds/2.15.05/nasm-2.15.05.tar.xz --output nasm-2.15.05.tar.xz
+tar -xvf nasm-2.15.05.tar.xz
+mv nasm-2.15.05 nasm
+cd nasm
+
+
+cd /home/admin
+curl -L https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-2.1.1.tar.gz --output libjpeg-turbo-2.1.1.tar.gz
+tar -zxvf libjpeg-turbo-2.1.1.tar.gz
+mv /home/admin/libjpeg-turbo-2.1.1 /home/admin/libjpeg-turbo
+cd /home/admin/libjpeg-turbo
+cmake -DCMAKE_INSTALL_PREFIX=/usr       -DCMAKE_BUILD_TYPE=RELEASE        -DENABLE_STATIC=FALSE             -DCMAKE_INSTALL_DOCDIR=/usr/share/doc/libjpeg-turbo-2.1.1    -DCMAKE_ASM_NASM_COMPILER=/usr/bin/nasm   -DCMAKE_INSTALL_DEFAULT_LIBDIR=lib        ..
+
+abD1234567
+
+aBD1234567
+https://books.google.co.il/books?id=rgYvDwAAQBAJ&pg=PA15&lpg=PA15&dq=autoconf+%22configure%22+build+from+source+debug&source=bl&ots=59-LeGLpG5&sig=ACfU3U01d5dwip5U3WKGeyo2RU108XR-nQ&hl=en&sa=X&ved=2ahUKEwiy_Lfg-5nzAhWjAWMBHUdiC4YQ6AF6BAgQEAM#v=onepage&q=autoconf%20%22configure%22%20build%20from%20source%20debug&f=false
+https://noknow.info/it/os/install_libjpeg_turbo_from_source?lang=en
+https://noknow.info/it/os/install_bzip2_from_source?lang=en
