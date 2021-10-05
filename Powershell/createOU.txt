@@ -1,0 +1,80 @@
+function New-OrganizationalUnitFromDN
+{
+    [CmdletBinding(SupportsShouldProcess=$true)]
+    param(
+        [object[]]$OUNames= '*'
+    )
+                $alreadyPassed=@()
+                foreach ($OUName in $OUNames){
+                                $DN=     $OUName.OUName
+                                
+                                # A regex to split the DN, taking escaped commas into account
+                                $DNRegex = '(?<![\\]),'
+                                [bool] $created=$false
+                                [bool] $braken=$false
+                                # Array to hold each component
+                                [String[]]$MissingOUs = @()
+
+                                # We'll need to traverse the path, level by level, let's figure out the number of possible levels 
+                                $Depth = ($DN -split $DNRegex).Count
+[bool] $exists=[ADSI]::Exists("LDAP://$DN")
+                                if(!$exists){
+                                # Step through each possible parent OU
+                                for($i = 1;$i -le $Depth;$i++)
+                                {
+                                                $NextOU = ($DN -split $DNRegex,$i)[-1]
+                                                if($NextOU.IndexOf("OU=") -ne 0 -or [ADSI]::Exists("LDAP://$NextOU")){                
+                                                                break
+                                                }else{
+                                                                # OU does not exist, remember this for later
+                                                                $MissingOUs += $NextOU
+                                                }
+                                }
+                                if($braken){
+                                                write-host "braken $braken"
+                                }
+
+                                # Reverse the order of missing OUs, we want to create the top-most needed level first
+                                [array]::Reverse($MissingOUs)
+
+                                # Prepare common parameters to be passed to New-ADOrganizationalUnit
+                                $PSBoundParameters.Remove('DN')
+
+                                # Now create the missing part of the tree, including the desired OU
+                                foreach($OU in $MissingOUs)
+                                {
+                                                $newOUName = (($OU -split $DNRegex,2)[0] -split "=")[1]
+                                                $newOUPath = ($OU -split $DNRegex,2)[1]
+                                                New-ADOrganizationalUnit -Name $newOUName -Path $newOUPath 
+                                                #@PSBoundParameters
+                                                if(-not($alreadyPassed -contains $OUName.OUName)){
+                                                $alreadyPassed+=$OUName.OUName
+                                                $report=[pscustomobject]@{"OUName"=$OUName.OUName;"Status"="created"}
+                                                $report|Export-Csv -Path ".\output.txt"  -NoTypeInformation -Append
+}
+                                }
+                                
+                                }else{
+                                                
+                                                $report=[pscustomobject]@{"OUName"=$DN;"Status"="already exists"}
+                                                $report|Export-Csv -Path ".\output.txt" -NoTypeInformation -Append
+                                                
+                                }
+                
+                }
+
+}
+
+$path     = Split-Path -parent $MyInvocation.MyCommand.Definition  
+$newpath  = $path + "\input.txt" 
+$outputFileName = $path+"\output.txt"
+if(Test-Path $outputFileName){
+                Remove-Item $outputFileName
+                write-host $outputFileName " of previous result was deleted"
+}
+Add-Content -Path $outputFileName -Value '"OUName","Status"'
+
+$OUNames      = Import-Csv -Path $newpath -Encoding UTF8
+
+
+New-OrganizationalUnitFromDN -OUNames $OUNames

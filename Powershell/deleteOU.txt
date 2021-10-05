@@ -1,0 +1,41 @@
+function New-OrganizationalUnitFromDN
+{
+    [CmdletBinding(SupportsShouldProcess=$true)]
+    param(
+        [object[]]$OUNames= '*'
+    )
+                $alreadyPassed=@()
+                foreach ($OUName in $OUNames){
+                                $DN=$OUName.OUName                            
+                                [bool] $exists=[ADSI]::Exists("LDAP://$DN")
+                                if($exists){
+                                get-ADOrganizationalUnit -Identity $DN |   set-ADOrganizationalUnit –ProtectedFromAccidentalDeletion $false
+
+                                                Remove-ADOrganizationalUnit -Identity $DN -Confirm:$false
+                                                $report=[pscustomobject]@{"OUName"=$DN;"Status"="deleted"}
+                                                $report|Export-Csv -Path ".\output.txt"  -NoTypeInformation -Append
+                                                                
+                                }else{
+                                                
+                                                $report=[pscustomobject]@{"OUName"=$DN;"Status"="does not eixst"}
+                                                $report|Export-Csv -Path ".\output.txt" -NoTypeInformation -Append
+                                                
+                                }
+                
+                }
+
+}
+
+$path     = Split-Path -parent $MyInvocation.MyCommand.Definition  
+$newpath  = $path + "\input.txt" 
+$outputFileName = $path+"\output.txt"
+if(Test-Path $outputFileName){
+                Remove-Item $outputFileName
+                write-host $outputFileName " of previous result was deleted"
+}
+Add-Content -Path $outputFileName -Value '"OUName","Status"'
+
+$OUNames      = Import-Csv -Path $newpath -Encoding UTF8
+
+
+New-OrganizationalUnitFromDN -OUNames $OUNames
