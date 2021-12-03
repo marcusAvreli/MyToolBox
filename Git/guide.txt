@@ -1,18 +1,3 @@
-Back Up Angular project on git
-	git init
-	git remote add origin https://github.com/marcusAvreli/lazyApp.git
-	echo "node_modules/" >> .gitignore
-	git add .
-	git rm -r --cached node_modules
-	git commit -am "initial_commit"
-	git push origin master
-
-Subsequent commits
-	git status
-	git add tomcat.txt
-	git commit -am "new regex added"
-	git push origin master
-
 Clone existing public git repository
 	git clone https://github.com/doctral/Medium-Module-Loading-Strategies.git
 
