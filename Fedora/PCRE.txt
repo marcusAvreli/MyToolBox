@@ -1,3 +1,6 @@
+get list of MakeFile targets
+ make -qp | awk -F':' '/^[a-zA-Z0-9][^$#\/\t=]*:([^=]|$)/ {split($1,A,/ /);for(i in A)print A[i]}' |     sort -u | grep -w "^install$\|^uninstall$\|^clean$\|^distclean$\|^clean-all$\|^cleanall$"
+
 1. COMPILER
 	dnf install gcc-c++ gcc
 	
@@ -10,7 +13,7 @@
 		./configure --prefix=/usr
           make && make install 
 		
-3.ZLIB 
+3.BISON 
 	[source: https://www.linuxfromscratch.org/lfs/view/development/chapter07/bison.html ]
 	cd /home/admin
 	curl -L http://ftp.gnu.org/gnu/bison/bison-3.8.1.tar.gz --output bison-3.8.1.tar.gz
@@ -20,6 +23,10 @@
 		./configure --prefix=/usr --docdir=/usr/share/doc/bison-3.8.2
 		make
 		make install
+	OPTIONS:
+		make install
+		make uninstall
+		make clean
 
 4. NCURSES
 	[sources: https://www.linuxfromscratch.org/lfs/view/development/chapter06/ncurses.html ]
@@ -50,13 +57,18 @@
 		make DESTDIR=$LFS TIC_PATH=$(pwd)/build/progs/tic install
 		echo "INPUT(-lncursesw)" > $LFS/usr/lib/libncurses.so
 
+	OPTIONS:
+		make install
+		make uninstall
+		make clean
 5. BZIP2	
 	[source: https://www.linuxfromscratch.org/lfs/view/9.1/chapter05/bzip2.html ]
 
+//does not contain configure script
 		cd /home/admin
 		curl -L https://www.sourceware.org/pub/bzip2/bzip2-latest.tar.gz --output bzip2-latest.tar.gz
 			tar -zxvf bzip2-latest.tar.gz
-			mv bzip2-latest bzip2
+			mv bzip2-1.0.8 bzip2
 			cd /home/admin/bzip2
 			make -f Makefile-libbz2_so
 			make clean
@@ -78,6 +90,12 @@
 	./configure --prefix=/usr
 	make
 	make install
+	
+	clean
+distclean
+install
+uninstall
+
 
 7. READLINE	
 	[source: https://www.linuxfromscratch.org/lfs/view/9.0/chapter06/readline.html ]
@@ -99,7 +117,15 @@
 	ln -sfv ../../lib/$(readlink /usr/lib/libreadline.so) /usr/lib/libreadline.so
 	ln -sfv ../../lib/$(readlink /usr/lib/libhistory.so ) /usr/lib/libhistory.so
 
+
+clean
+distclean
+install
+uninstall
+
 8.PCRE
+//required
+//bzlib 
 	cd /home/admin
 	curl -L https://ftp.pcre.org/pub/pcre/pcre-8.44.tar.bz2 --output pcre-8.44.tar.bz2
 	tar -xvf pcre-8.44.tar.bz2
@@ -115,3 +141,9 @@
 				--enable-pcretest-libreadline     \
 				--disable-static                      
 	make && make install
+	
+	clean
+distclean
+install
+uninstall
+

@@ -9,23 +9,9 @@ LD_LIBRARY_PATH
 	dnf install libcap-devel
 
 1. COMPILER
-	dnf install gcc-c++
+	dnf install gcc-c++ gcc
+	dnf install gcc-devel
 
-(1/16):  binutils-gold-2.35.2-5.fc34.x86_64.rpm  		291 kB/s | 717 kB     00:02
-(2/16): binutils-2.35.2-5.fc34.x86_64.rpm       407 kB/s | 5.5 MB     00:13
-(3/16): cpp-11.2.1-1.fc34.x86_64.rpm            675 kB/s |  10 MB     00:15
-(4/16): kernel-headers-5.13.3-200.fc34.x86_64.r 520 kB/s | 1.3 MB     00:02
-(5/16): libstdc++-devel-11.2.1-1.fc34.x86_64.rp 373 kB/s | 2.2 MB     00:06
-(6/16): glibc-devel-2.33-5.fc34.x86_64.rpm      294 kB/s | 128 kB     00:00
-(7/16): glibc-headers-x86-2.33-5.fc34.noarch.rp 358 kB/s | 515 kB     00:01
-(8/16): gcc-c++-11.2.1-1.fc34.x86_64.rpm        407 kB/s |  12 MB     00:30
-(9/16): libmpc-1.2.1-2.fc34.x86_64.rpm          174 kB/s |  63 kB     00:00
-(10/16): libxcrypt-devel-4.4.18-1.fc34.x86_64.r  32 kB/s |  29 kB     00:00
-(11/16): make-4.3-5.fc34.x86_64.rpm             203 kB/s | 539 kB     00:02
-(12/16): guile22-2.2.7-2.fc34.x86_64.rpm        277 kB/s | 6.5 MB     00:23
-(13/16): libgcc-11.2.1-1.fc34.x86_64.rpm         58 kB/s | 107 kB     00:01
-(14/16): libgomp-11.2.1-1.fc34.x86_64.rpm        70 kB/s | 279 kB     00:03
-(15/16): libstdc++-11.2.1-1.fc34.x86_64.rpm     114
 	
 [source https://metacpan.org/dist/perl/view/INSTALL 
 https://www.linuxfromscratch.org/lfs/view/9.1-systemd/chapter06/perl.html#contents-perl
@@ -93,20 +79,28 @@ OPENSSL
 		export C_INCLUDE_PATH="$C_INCLUDE_PATH:/opt/zlib/include"
 	otherwise 
 		before ./config concatenate env CPPFLAGS="-I/opt/zlib/include" ./config
-	cd openssl
 	
-	./config --prefix=/opt/openssl  --openssldir=/etc/openssl --libdir=lib shared zlib-dynamic
-	make && make install
+	
+	cd /home/admin/openssl
+	./config --prefix=/usr         \
+         --openssldir=/etc/ssl \
+         --libdir=lib          \
+         shared                \
+         zlib-dynamic
+	make &
+	sed -i '/INSTALL_LIBS/s/libcrypto.a libssl.a//' Makefile
+	make MANSUFFIX=ssl install
 	mv /usr/bin/openssl /usr/bin/openssl_OLD
-	ln -s /opt/openssl/bin/openssl /usr/bin/openssl
+	//ln -s /opt/openssl/bin/openssl /usr/bin/openssl
 	
 	vi /etc/ld.so.conf.d/lib.conf
 		/opt/openssl/lib
 	ldconfig 
+	ldconfig -v
 	
 	
 	
-
+cd /home/admin
 curl -L  https://github.com/cyrusimap/cyrus-sasl/releases/download/cyrus-sasl-2.1.27/cyrus-sasl-2.1.27.tar.gz --output cyrus-sasl-2.1.27.tar.gz
 	tar -zxvf cyrus-sasl-2.1.27.tar.gz
 	mv cyrus-sasl-2.1.27 sasl
@@ -117,6 +111,7 @@ curl -L  https://github.com/cyrusimap/cyrus-sasl/releases/download/cyrus-sasl-2.
 	/usr/bin/ld  -llmdb --verbose
 	
 	ln -s   /opt/sasl/lib/pkgconfig/libsasl2.pc /usr/lib64/pkgconfig/libsasl2.pc
+	ln -s   /opt/openssl/lib/pkgconfig/openssl.pc /usr/lib64/pkgconfig/openssl.pc
 curl -L https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.5.7.tgz --output openldap-2.5.7.tgz
 	tar -zxvf openldap-2.5.7.tgz
 	mv openldap-2.5.7 openldap
@@ -203,11 +198,12 @@ checking for tgetent in -ltinfo... no
 
 
 
-
-curl -L https://thrysoee.dk/editline/libedit-20210910-3.1.tar.gz --output libedit-20210910-3.1.tar.gz
+cd /home/admin
+curl -L https://thrysoee.dk/editline/libedit-20210910-3.1.tar.gz --output /home/admin/libedit-20210910-3.1.tar.gz
 	tar -zxvf libedit-20210910-3.1.tar.gz
 	mv libedit-20210910-3.1 libedit
-	cd libedit
+	cd /home/admin/libedit
+	./configure &&  make && make install
 	ln -s  /usr/local/lib/pkgconfig/libedit.pc /usr/lib64/pkgconfig/libedit.pc
 	
 [source: https://www.linuxfromscratch.org/blfs/view/svn/postlfs/mitkrb.html]
@@ -243,7 +239,7 @@ export OPENSSL_CONF_INCLUDE="/opt/openssl/include/openssl"
 
 [source: 
 	https://www.linuxfromscratch.org/blfs/view/cvs/general/python3.html;
-	http://linuxcodemonkey.blogspot.com/2016/12/building-python-36-from-source-on.html;
+	http://linuxcodemonkey.blogspot.com/2016/12/building-python-36-from-source-on.html
 ]
 cd /home/admin
 curl -L https://www.python.org/ftp/python/3.9.2/Python-3.9.2.tar.xz --output python-3.9.2.tar.xz
@@ -354,6 +350,7 @@ ls -ltr  /usr/lib/pkgconfig/
  cd Linux-PAM-1.5.1
  
  [source: https://www.linuxfromscratch.org/blfs/view/svn/basicnet/libtirpc.html ]
+ cd /home/admin
 curl -L  https://downloads.sourceforge.net/libtirpc/libtirpc-1.3.2.tar.bz2 --output libtirpc-1.3.2.tar.bz2
 tar -xf libtirpc-1.3.2.tar.bz2
  mv libtirpc-1.3.2 libtirpc
@@ -363,6 +360,7 @@ tar -xf libtirpc-1.3.2.tar.bz2
             --disable-static                                \
             --disable-gssapi                                &&
 make
+make install
 [ source https://www.linuxfromscratch.org/blfs/view/svn/server/lmdb.html]
 curl -L  https://github.com/LMDB/lmdb/archive/LMDB_0.9.29.tar.gz --output LMDB_0.9.29.tar.gz
 tar -zxvf LMDB_0.9.29.tar.gz
@@ -404,32 +402,23 @@ cd strongswan
 
 [source: https://www.linuxfromscratch.org/lfs/view/9.0/chapter06/readline.html ]
 READLINE
+	cd /home/admin
 	curl -L https://ftp.gnu.org/gnu/readline/readline-8.0.tar.gz --output readline-8.0.tar.gz
 	tar -zxvf readline-8.0.tar.gz
 	mv readline-8.0 readline
 	cd /home/admin/readline
 	sed -i '/MV.*old/d' Makefile.in
 	sed -i '/{OLDSUFF}/c:' support/shlib-install
-	./configure --prefix=/usr    \
+	./configure --prefix=/usr   \
 				--disable-static \
 				--docdir=/usr/share/doc/readline-8.0
-PCRE
-	cd /home/admin
-	curl -L https://ftp.pcre.org/pub/pcre/pcre-8.44.tar.bz2 --output pcre-8.44.tar.bz2
-	tar -xvf pcre-8.44.tar.bz2
-	mv pcre-8.44 pcre
-	cd pcre 
-	env CPPFLAGS="-I/tools/include" LDFLAGS="-L/usr/lib64 -L/tools/lib" ./configure --prefix=/usr                     \
-				--docdir=/usr/share/doc/pcre-8.44 \
-				--enable-unicode-properties       \
-				--enable-pcre16                   \
-				--enable-pcre32                   \
-				--enable-pcregrep-libz            \
-				--enable-pcregrep-libbz2          \
-				--enable-pcretest-libreadline     \
-				--disable-static                 
-	make && make install
-	cd /home/admin
+	make SHLIB_LIBS="-L/tools/lib -lncursesw"
+	make SHLIB_LIBS="-L/tools/lib -lncursesw" install
+	mv -v /usr/lib/lib{readline,history}.so.* /lib
+chmod -v u+w /lib/lib{readline,history}.so.*
+ln -sfv ../../lib/$(readlink /usr/lib/libreadline.so) /usr/lib/libreadline.so
+ln -sfv ../../lib/$(readlink /usr/lib/libhistory.so ) /usr/lib/libhistory.so
+
 APR+APR UTIL
 
 cd /home/admin
@@ -521,6 +510,7 @@ cd /home/admin
 curl -L  https://dlcdn.apache.org//httpd/httpd-2.4.49.tar.gz --output httpd-2.4.49.tar.gz
 	tar -zxvf httpd-2.4.49.tar.gz
 	mv httpd-2.4.49 httpd
+	cd /home/admin/httpd
     Install prefix: /usr/local/apache2
 	
 	groupadd -g 25 apache && useradd -c "Apache_Server" -d /srv/www -g apache -s /bin/false -u 25 apache
@@ -564,11 +554,24 @@ cd /home/admin
 curl -L https://www.php.net/distributions/php-8.0.10.tar.gz --output php-8.0.10.tar.gz
 tar -zxvf php-8.0.10.tar.gz
 mv php-8.0.10 php
-PKG_CONFIG_PATH
+
 cd /home/admin/php
 cd /usr/src/php
-env CPPFLAGS="-I/opt/openssl/include"  LDFLAGS="-lcrypto -L/opt/openssl/lib"
-make distclean; ./configure --with-apxs2=/usr/local/apache2/bin/apxs  --with-gd=/usr/src --with-png-dir=/usr/src/lib  --with-xpm-dir=/usr/ --with-pdo-mysql --enable-mbstring --enable-ftp --enable-opcache --with-openssl --with-curl=/usr;make;make install
+cd /home/admin/php
+env CPPFLAGS="-I/opt/openssl/include"  LDFLAGS="-lcrypto -L/opt/openssl/lib" make distclean; ./configure --with-apxs2=/usr/local/apache2/bin/apxs      --enable-mbstring --enable-ftp --with-pdo-mysql --with-curl=/usr --enable-opcache --with-openssl --with-curl=/usr   --with-jpeg --enable-gd --with-external-gd=/usr/src| grep "libgd\|png\|jpeg"
+
+make;make install
+
+cd /home/admin
+curl -L https://www.php.net/distributions/php-8.0.11.tar.gz --output php-8.0.11.tar.gz
+tar -zxvf php-8.0.11.tar.gz
+mv php-8.0.11 php
+
+cd /home/admin/php
+
+curl -L https://www.php.net/distributions/php-8.0.0.tar.gz --output php-8.0.0.tar.gz
+tar -zxvf php-8.0.0.tar.gz
+mv php-8.0.0 php
 
 cd /home/admin
 curl -L https://ftp.gnu.org/gnu/help2man/help2man-1.48.5.tar.xz --output help2man-1.48.5.tar.xz
@@ -648,6 +651,7 @@ https://unix.stackexchange.com/questions/279397/ldd-does-not-find-path-how-to-ad
 
 import libdnf.transaction ModuleNotFoundError: No module named 'libdnf'
 sudo rpm -e --nodeps python3-3.9.2-1.fc34.x86_64
+sudo rpm -e --nodeps python3-dnf-4.6.1-1.fc34.noarch
 
 
 /sbin/iptables -I INPUT -p 50 -j ACCEPT;
@@ -710,5 +714,119 @@ abD1234567
 
 aBD1234567
 https://books.google.co.il/books?id=rgYvDwAAQBAJ&pg=PA15&lpg=PA15&dq=autoconf+%22configure%22+build+from+source+debug&source=bl&ots=59-LeGLpG5&sig=ACfU3U01d5dwip5U3WKGeyo2RU108XR-nQ&hl=en&sa=X&ved=2ahUKEwiy_Lfg-5nzAhWjAWMBHUdiC4YQ6AF6BAgQEAM#v=onepage&q=autoconf%20%22configure%22%20build%20from%20source%20debug&f=false
+
+firewall-cmd --add-port=80/tcp
+firewall-cmd --add-port=80/udp
 https://noknow.info/it/os/install_libjpeg_turbo_from_source?lang=en
 https://noknow.info/it/os/install_bzip2_from_source?lang=en
+
+
+curl -L https://boostorg.jfrog.io/artifactory/main/release/1.69.0/source/boost_1_69_0.tar.gz --output boost_1_69_0.tar.gz
+tar -xvf boost_1_69_0.tar.bz2
+
+
+cd /home/admin
+curl -L https://boostorg.jfrog.io/artifactory/main/release/1.77.0/source/boost_1_77_0.tar.gz --output boost_1_77_0.tar.gz
+tar -zxvf boost_1_77_0.tar.gz
+ mv boost_1_77_0 boost
+ cd boost
+ ./bootstrap.sh --prefix=/usr --with-python=python3 &&
+./b2 stage -j<N> threading=multi link=shared
+
+
+curl -L https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.17.tar.gz --output mysql-8.0.17.tar.gz
+tar -xvfz mysql-8.0.17.tar.gz
+mv mysql-8.0.17 mysql
+cd /home/admin/mysql
+mkdir build
+cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local/mysql/8_0_17 -DDOWNLOAD_BOOST=1 -DWITH_BOOST=/usr/local/boost -DWITH_ZLIB=system -DWITH_SSL=system -DWITH_EDITLINE=system -DWITH_LIBEVENT=system -DENABLE_DOWNLOADS=1
+make
+make install
+
+cd /home/admin
+curl -L  https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz --output libevent-2.1.12-stable.tar.gz
+
+tar -zxvf libevent-2.1.12-stable.tar.gz
+mv libevent-2.1.12-stable libevent
+cd libevent
+
+/usr/lib64/libssl.so
+/usr/lib64/libcrypto.so
+/usr/include/openssl
+
+curl -L https://doxygen.nl/files/doxygen-1.9.2.src.tar.gz --output doxygen-1.9.2.src.tar.gz
+tar -zxvf doxygen-1.9.2.src.tar.gz
+mv doxygen-1.9.2 doxygen
+cd doxygen
+
+mkdir -v build &&
+cd       build &&
+
+cmake -G "Unix Makefiles"         \
+      -DCMAKE_BUILD_TYPE=Release  \
+      -DCMAKE_INSTALL_PREFIX=/usr \
+      -Wno-dev ..
+
+curl -L https://fossies.org/linux/misc/flex-2.6.4.tar.gz --output flex-2.6.4.tar.gz
+tar -zxvf flex-2.6.4.tar.gz
+mv flex-2.6.4 flex
+cd flex
+
+cd /home/admin
+curl -L https://www.kernel.org/pub/software/scm/git/git-2.33.0.tar.xz --output git-2.33.0.tar.xz
+tar -xvf git-2.33.0.tar.xz
+mv git-2.33.0 git
+cd git
+
+make perllibdir= /usr/lib/perl5/site_perl install
+
+cd /home/admin
+curl -L https://github.com/numactl/numactl/releases/download/v2.0.14/numactl-2.0.14.tar.gz --output numactl-2.0.14.tar.gz
+tar -zxvf numactl-2.0.14.tar.gz
+mv numactl-2.0.14 numactl
+cd numactl
+
+ -DCMAKE_CXX_COMPILER=/usr/bin/g++  -DCMAKE_C_COMPILER=/usr/bin/gcc
+ 
+ aBD1234567
+ 
+ 
+ 
+MYSQL_HOME=/usr/local/mysql/5_7_26
+MYSQL_BIN=$MYSQL_HOME/bin
+MYSQL_LIB=$MYSQL_HOME/lib
+MYSQL_PKG_CONFIG=$MYSQL_LIB/pkgconfig
+PATH=$MYSQL_BIN:$PATH:$HOME/.local/bin:$HOME/bin
+export PATH
+
+export LD_LIBRARY_PATH=/usr/local/lib:$MYSQL_LIB:$LD_LIBRARY_PATH
+
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$MYSQL_PKG_CONFIG:$PKG_CONFIG_PATH
+
+chmod 0777 /var/log/mysql/mysqld.log
+chmod 0640 /var/log/mysql/error.log
+chmod 0750 /var/log/mysql
+chmod 0775 /var/log
+chmod 0755 /var
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'zubur1';
+
+cd /home/admin
+curl -L  https://github.com/libgd/libgd/releases/download/gd-2.3.2/libgd-2.3.2.tar.gz --output libgd-2.3.2.tar.gz
+tar -zxvf libgd-2.3.2.tar.gz 
+mv libgd-2.3.2 libgd
+cd /home/admin/libgd
+make disclean; ./configure --prefix=/usr/src --with-png=/usr --with-jpeg=/usr/lib
+make
+make install
+
+cd /home/admin
+curl -L https://github.com/libgd/libgd/releases/download/gd-2.2.4/libgd-2.2.4.tar.gz --output libgd-2.2.4.tar.gz
+
+tar -zxvf libgd-2.2.4.tar.gz 
+mv libgd-2.2.4 libgd
+cd /home/admin/libgd
+make disclean; ./configure --prefix=/usr/src --with-png=/usr --with-jpeg=/usr/lib
+make
+make install

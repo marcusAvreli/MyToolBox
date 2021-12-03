@@ -25,3 +25,20 @@ ALTER TABLE books
 Finally, we’ll create our SEQUENCE that will be utilized later to actually generate the unique, auto incremented value.
 
 CREATE SEQUENCE books_sequence;
+
+
+
+-----------------------------------------------------------
+
+TIMEZONE IN ORACLE
+
+-----------------------------------------------------------
+select dbtimezone, sessiontimezone from dual
+
+
+select TO_CHAR(from_tz(timestamp '2021-11-11 08:00:00','+2:00') at time zone 'Asia/Jerusalem','MM-DD-YYYY HH:MI:SS') from dual
+
+
+---1635831754978 == 02-11-2021 07:42
+select TO_TIMESTAMP('1970-01-01','YYYY-MM-DD')+NUMTODSINTERVAL(1635831754978/1000,'SECOND') from dual
+select TO_CHAR(from_tz(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS')+NUMTODSINTERVAL(1635831754978/1000,'SECOND'),'0:00') at time zone 'Asia/Jerusalem','MM-DD-YYYY HH:MI:SS') from dual

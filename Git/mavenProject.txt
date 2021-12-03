@@ -1,0 +1,21 @@
+Back Up Maven project on git
+	git init
+	git remote add origin "full url to your repository"
+		echo "target/" >> .gitignore
+		echo ".classpath" >> .gitignore
+		echo ".project" >> .gitignore
+		echo ".settings/" >> .gitignore
+	git add .
+		git rm -r --cached target
+		git rm -r --cached ".classpath"
+		git rm -r --cached ".project"
+		git rm -r --cached ".settings/"		
+	git commit -am "initial_commit"
+	git push origin master
+
+
+Subsequent commits
+	git status
+	git add "relative path to file"
+	git commit -am "message"
+	git push origin master
