@@ -39,6 +39,34 @@ select dbtimezone, sessiontimezone from dual
 select TO_CHAR(from_tz(timestamp '2021-11-11 08:00:00','+2:00') at time zone 'Asia/Jerusalem','MM-DD-YYYY HH:MI:SS') from dual
 
 
+--created field is unix epoch like this 1635831754978
+select to_date(TO_CHAR(from_tz(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS')+NUMTODSINTERVAL(created/1000,'SECOND'),(select dbtimezone from dual)) at time zone 'Asia/Jerusalem','MM-DD-YYYY HH24:MI:SS'),'MM-DD-YYYY HH24:MI:SS') from spt_table where name='input_name'
+
+--created field is unix epoch like this 1635831754978
+select to_date(TO_CHAR(from_tz(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS')+NUMTODSINTERVAL(created/1000,'SECOND'),('+2:00')) at time zone 'Asia/Jerusalem','MM-DD-YYYY HH24:MI:SS'),'MM-DD-YYYY HH24:MI:SS') from spt_table where name='input_name'
+
+
+
 ---1635831754978 == 02-11-2021 07:42
 select TO_TIMESTAMP('1970-01-01','YYYY-MM-DD')+NUMTODSINTERVAL(1635831754978/1000,'SECOND') from dual
 select TO_CHAR(from_tz(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS')+NUMTODSINTERVAL(1635831754978/1000,'SECOND'),'0:00') at time zone 'Asia/Jerusalem','MM-DD-YYYY HH:MI:SS') from dual
+
+
+--following statement shows id_number that DOES NOT EXIST!!!! table
+drop type string_tab force;
+create type string_tab is table of varchar(9);
+SELECT *   FROM TABLE(string_tab('id','id1','id2'))
+WHERE COLUMN_VALUE NOT IN (SELECT id_number FROM table);
+--release_variable string_tab
+drop type string_tab force;
+
+
+-count all rows
+select count(*) from table_name
+
+--count doubled rows
+select count(*) from table_name where rowid not in (select min(rowid)   from table_name group by list_of_fields)
+
+--delete doubled rows
+delete from table_name where rowid not in (select min(rowid) from table_name group by list_of_fields)
+
