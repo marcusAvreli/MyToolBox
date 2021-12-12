@@ -51,6 +51,20 @@ select to_date(TO_CHAR(from_tz(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS'
 select TO_TIMESTAMP('1970-01-01','YYYY-MM-DD')+NUMTODSINTERVAL(1635831754978/1000,'SECOND') from dual
 select TO_CHAR(from_tz(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS')+NUMTODSINTERVAL(1635831754978/1000,'SECOND'),'0:00') at time zone 'Asia/Jerusalem','MM-DD-YYYY HH:MI:SS') from dual
 
+select bundle_created_date,bundle_modified_date, trunc (minutes_ /60) || ' Hours, ' || trunc(mod(minutes_,60)) || ' minutes ' diff
+from ( 
+
+select 
+ to_date(TO_CHAR(from_tz(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS')+NUMTODSINTERVAL(created/1000,'SECOND'),(select dbtimezone from dual)) at time zone 'Asia/Jerusalem','MM-DD-YYYY HH24:MI:SS'),'MM-DD-YYYY HH24:MI:SS') bundle_created_date,
+to_date(TO_CHAR(from_tz(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS')+NUMTODSINTERVAL(modified/1000,'SECOND'),(select dbtimezone from dual)) at time zone 'Asia/Jerusalem','MM-DD-YYYY HH24:MI:SS'),'MM-DD-YYYY HH24:MI:SS') bundle_modified_date,
+(to_date(TO_CHAR(from_tz(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS')+NUMTODSINTERVAL(modified/1000,'SECOND'),(select dbtimezone from dual)) at time zone 'Asia/Jerusalem','MM-DD-YYYY HH24:MI:SS'),'MM-DD-YYYY HH24:MI:SS') 
+- to_date(TO_CHAR(from_tz(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS')+NUMTODSINTERVAL(created/1000,'SECOND'),(select dbtimezone from dual)) at time zone 'Asia/Jerusalem','MM-DD-YYYY HH24:MI:SS'),'MM-DD-YYYY HH24:MI:SS')) *24*60 as minutes_
+from spt_bundle
+
+
+)
+
+
 
 --following statement shows id_number that DOES NOT EXIST!!!! table
 drop type string_tab force;
