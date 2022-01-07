@@ -1,4 +1,5 @@
 Option Explicit
+on error resume next
 ''to run script just double click or in cmd line type:
 '' cscript vbSample.vbs
 ''expected output is parsing error
