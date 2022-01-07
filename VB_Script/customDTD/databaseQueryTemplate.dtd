@@ -1,0 +1,7 @@
+<!ELEMENT databaseQueryTemplate (entityName+)>
+<!ELEMENT entityName (action) >
+<!ATTLIST entityName name CDATA #REQUIRED   >
+<!ELEMENT action  (queryTemplate)>
+<!ATTLIST action name CDATA #REQUIRED   >
+<!ELEMENT queryTemplate EMPTY>
+<!ATTLIST queryTemplate query CDATA #REQUIRED   >
