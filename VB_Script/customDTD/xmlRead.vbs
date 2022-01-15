@@ -52,37 +52,23 @@ end function
 Sub Main
 	msgbox "start"
 	strFileName="input.xml"
-
 	Set xmlDoc = customLoadXml(strFileName)
 	if isXmlInvalid(xmlDoc) = True Then
 		Wscript.Quit
 	end if
-   
-
-
 	Set objRoot = xmlDoc.documentElement
 	if IsNull(objRoot) Then
 		msgbox "object is null"
 	end if
-
-
-
-
 	dim objNode : Set objNode = xmlDoc.selectSingleNode("/databaseQueryTemplate/entityName")
-
-
-
-MsgBox objNode.getAttribute("name")  
-
- 
-
-if err.number <>0 then 
-	ErrorOut
-	msgbox "xmlQuery_1: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
-	err.clear
-end if 
-msgbox "finish"
-Wscript.Quit
+	MsgBox objNode.getAttribute("name")  
+	if err.number <>0 then 
+		ErrorOut
+		msgbox "xmlQuery_1: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+		err.clear
+	end if 
+	msgbox "finish"
+	Wscript.Quit
 End Sub
 
 Main

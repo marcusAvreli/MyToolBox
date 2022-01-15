@@ -24,10 +24,12 @@ Gradle
 GRADLE_HOME	c:\gradle
 PATH		%GRADLE_HOME%\bin
 
-Download only Dependencies of project into separate folder
-mvn dependency:copy-dependencies -DoutputDirectory=yourfoldername -Dhttps.protocols=TLSv1.2
+DOWNLOAD ONLY DEPENDENCIES OF PROJECT INTO SEPARATE DIRECTORY
 
+	mvn dependency:copy-dependencies -DoutputDirectory=yourfoldername -Dhttps.protocols=TLSv1.2
+	
 
+================================================================================================================================
 
 https://maven.apache.org/plugins/maven-dependency-plugin/examples/copying-project-dependencies.html
 <plugins>
@@ -63,29 +65,44 @@ mvn eclipse:eclipse
 
 https://www.javadevjournal.com/spring-boot/multi-module-project-with-spring-boot/
 
-Building single module project tutorial2
+BUILDING SINGLE MODULE PROJECT tutorial2
 
-mvn archetype:generate -DgroupId=tutorial2  -DartifactId=tutorial2 -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+	mvn archetype:generate -DgroupId=tutorial2  -DartifactId=tutorial2 -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+	
+	
+================================================================================================================================
 
-Change packaging of tutorial2 to <packaging>war</packaging>
+MAKE PROJECT WEB
 
+	Change packaging of tutorial2 to <packaging>war</packaging>
+	
+	
+================================================================================================================================
 
+INSTALL CUSTOM JAR LIBRARY IN LOCAL MAVEN
 
-Building multi module project tutorial2
+	mvn install:install-file -Dfile=identityiq.jar -DgroupId=identityiq81 -DartifactId=identityiq -Dversion=8 -Dpackaging=jar
+	
+	
+================================================================================================================================	
 
+BUILDING MULTI MODULE PROJECT tutorial2
 
-mvn archetype:generate -DgroupId=tutorial2  -DartifactId=tutorial2 -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+	mvn archetype:generate -DgroupId=tutorial2  -DartifactId=tutorial2 -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
 
-Change packaging of tutorial2 to <packaging>pom</packaging>
+	Change packaging of tutorial2 to <packaging>pom</packaging>
 
-cd tutorial2
-mvn archetype:generate -DgroupId=tutorial2 -DartifactId=tutorial2-server -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+	cd tutorial2
+		mvn archetype:generate -DgroupId=tutorial2 -DartifactId=tutorial2-server -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
 
-Change packaging of tutorial2-server to <packaging>jar</packaging>
+		Change packaging of tutorial2-server to <packaging>jar</packaging>
+]
+		mvn archetype:generate -DgroupId=tutorial2 -DartifactId=tutorial2-web -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
 
-mvn archetype:generate -DgroupId=tutorial2 -DartifactId=tutorial2-web -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
-
-Change packaging of tutorial2-server to <packaging>war</packaging>
+		Change packaging of tutorial2-server to <packaging>war</packaging>
+		
+		
+================================================================================================================================		
 
 Building angular multi module project myBootAngularV2
 
