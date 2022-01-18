@@ -44,8 +44,27 @@ cat fileName.json | jq -c '.groups[] | select(.name=="valueToFind")'
 Tr
 cat fileName.json | tr ‘\r\n’ ‘ ’ | jq .
 192.168.134.128
-echo 'הרשאה לדיווח שעות' |recode ..html
+echo 'טסט מחרוזת' |recode ..html
 
 Permissions octal presentation
 $ stat -c '%A %a %n' /etc/passwd
+
+
+
+ls -ltr --block-size=M
+
+##disk space usage in linux
+df -H 
+
+##size of directory
+du -sh /opt/testDir 
+##sort files by size in directory in reverse
+ls -lShr
+
+##sort files by size in directory in native
+ls -lSh
+
+##find files larger than 4G
+find . -type f -size +4G
+
 
