@@ -1,0 +1,159 @@
+drop  table  detections_report;
+create table detections_report (name varchar2(128)
+                ,d_assignment_id varchar2(32)
+                ,d_date number(19)
+                ,d_role_id varchar2(32)
+                ,d_role_name varchar2(128)
+                ,d_application_id varchar2(32)
+                ,d_application_name varchar2(128)
+                ,d_display_name varchar2(128)
+                ,d_native_identity varchar2(128)
+                ,d_ent_type varchar2(255)
+                ,ent_value varchar2(450)
+                
+                
+                );
+
+
+                insert into detections_report (name,d_date,d_assignment_id,d_role_name,d_role_id,d_application_id,d_application_name,d_display_name,d_native_identity,d_ent_type,ent_value)
+with RoleDetections  as (
+                select name
+                ,x.d_date
+                
+                ,x.d_assignment_id
+                ,x.d_role_name
+                ,x.d_role_id
+                
+                ,x.d_application_id
+                ,x.d_application_name
+                ,x.d_display_name
+                ,x.d_native_identity
+                ,x.d_ent_type
+                ,x.ent_value
+                from spt_identity sptIdentity
+                                ,XMLTABLE ('                                      
+                                                for $g1 in /Map/entry[@key="roleDetections"]/value/List/RoleDetection
+                                                
+                                                return
+                                                                if ($g1/@assignmentIds) then (
+                                                                                (:has assignment id:)
+                                                                                let $assignmentIdList := tokenize($g1/@assignmentIds,",")
+                                                                                
+                                                                                for $i in $assignmentIdList
+                                                                                let $trim := normalize-space($i)
+                                                                                
+                                                                                for  $g2 in $g1/RoleTarget
+                                                                                where exists($g2/AccountItem/@value) 
+                                                                                return element r {
+                                                                                                $g1/@date                                                                                         
+                                                                                                ,element assignmentId {data($trim )}
+                                                                                                ,element roleId { data($g1/@roleId ) }
+                                                                                                ,element roleName {data($g1/@roleName)}
+                                                                                                
+                                                                                                ,element applicationId {data($g2/@applicationId )}
+                                                                                                ,element applicationName {data($g2/@applicationName )}
+                                                                                                ,element displayName {data($g2/@displayName )}
+                                                                                                ,element nativeIdentity {data($g2/@nativeIdentity )}
+                                                                                                ,element ent_type {data($g2/AccountItem/@name)}
+                                                                                                ,element ent_value {data($g2/AccountItem/@value )}
+                                                           }
+                                                          
+                                                          ,
+                                                          let $assignmentIdList := tokenize($g1/@assignmentIds,",")
+                                                          for $i in $assignmentIdList
+                                                                                let $trim := normalize-space($i)
+                                                                                
+                                                                                for  $g2 in $g1/RoleTarget
+                                                                                for  $g3 in $g2/AccountItem/value/Set/String
+                                                                                where exists($g2/AccountItem/value/Set) 
+                                                                                
+                                                                                return element r {
+                                                                                                $g1/@date
+                                                                                                ,element assignmentId {data($trim )}
+                                                                                                ,element roleId { data($g1/@roleId ) }
+                                                                                                ,element roleName {data($g1/@roleName)}
+                                                                                                
+                                                                                                ,element applicationId {data($g2/@applicationId )}
+                                                                                                ,element applicationName {data($g2/@applicationName )}
+                                                                                                ,element displayName {data($g2/@displayName )}
+                                                                                                ,element nativeIdentity {data($g2/@nativeIdentity )}
+                                                                                                ,element ent_type {data($g2/AccountItem/@name)}
+                                                                                                ,element ent_value {data($g3)}
+                                                           }
+                                           )
+                                                                else(
+                                                                (:does not have assignment id:)
+                                                                                
+                                                                                for  $g2 in $g1/RoleTarget
+                                                                                where exists($g2/AccountItem/@value) 
+                                                                                return element r {
+                                                                                                $g1/@date                                                                                         
+                                                                                                ,element assignmentId { data($g1/@assignmentIds ) }
+                                                                                                ,element roleId { data($g1/@roleId ) }
+                                                                                                ,element roleName {data($g1/@roleName)}
+                                                                                                
+                                                                                                ,element applicationId {data($g2/@applicationId )}
+                                                                                                ,element applicationName {data($g2/@applicationName )}
+                                                                                                ,element displayName {data($g2/@displayName )}
+                                                                                                ,element nativeIdentity {data($g2/@nativeIdentity )}
+                                                                                                ,element ent_type {data($g2/AccountItem/@name)}
+                                                                                                ,element ent_value {data($g2/AccountItem/@value )}
+                                                           } ,                                                                
+                                                                                for  $g2 in $g1/RoleTarget
+                                                                                for  $g3 in $g2/AccountItem/value/Set/String
+                                                                                where exists($g2/AccountItem/value/Set) 
+                                                                                
+                                                                                return element r {
+                                                                                                
+                                                                                                $g1/@date
+                                                                                                ,element assignmentId { data($g1/@assignmentIds ) }
+                                                                                                ,element roleId { data($g1/@roleId ) }
+                                                                                                ,element roleName {data($g1/@roleName)}
+                                                                                                
+                                                                                                (:role target details :)
+                                                                                                ,element applicationId {data($g2/@applicationId )}
+                                                                                                ,element applicationName {data($g2/@applicationName )}
+                                                                                                ,element displayName {data($g2/@displayName )}
+                                                                                                ,element nativeIdentity {data($g2/@nativeIdentity )}
+                                                                                                (: account item details:)
+                                                                                                ,element ent_type {data($g2/AccountItem/@name)}
+                                                                                                ,element ent_value {data($g3)}
+                                                           }
+                                                           )
+                                                                
+                                                                                
+                                                              '
+                                                PASSING xmltype(sptIdentity.PREFERENCES)
+                                                columns                                               
+                                                                d_assignment_id                             varchar2(32) path 'assignmentId' 
+                                                                ,d_date                                                number(19) path '@date' 
+                                                                ,d_role_id                                                           varchar2(32) path 'roleId' 
+                                                                ,d_role_name                                                   varchar2(128) path 'roleName' 
+                                                                ,d_application_id             varchar2(32) path 'applicationId' 
+                                                                ,d_application_name     varchar2(128) path 'applicationName' 
+                                                                ,d_display_name             varchar2(128) path 'displayName' 
+                                                                ,d_native_identity           varchar2(128) path 'nativeIdentity' 
+                                                                ,d_ent_type                       varchar2(255) path 'ent_type' 
+                                                                ,ent_value                          varchar2(450) path 'ent_value' 
+                                                                
+                                                                
+                                )x
+                                where dbms_lob.getlength(sptIdentity.preferences)>1
+                                --where name='021517560'
+                
+                )
+                select * from RoleDetections
+
+                select name
+                ,to_date(TO_CHAR(from_tz(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS')+NUMTODSINTERVAL(d_date/1000,'SECOND'),('+0:00')) at time zone 'Asia/Jerusalem','MM-DD-YYYY HH24:MI:SS'),'MM-DD-YYYY HH24:MI:SS') detection_date
+                ,d_assignment_id
+                ,d_role_name
+                ,d_role_id
+                ,d_application_id
+                ,d_application_name
+                ,d_display_name
+                ,d_native_identity
+                ,d_ent_type
+                ,ent_value
+                
+                from detections_report;
