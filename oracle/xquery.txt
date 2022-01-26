@@ -1,16 +1,14 @@
 select x.description,x.sAMAccountName,x.cn from SPT_MANAGED_ATTRIBUTE sptManagedAttribute
+,XMLTABLE(	' 
+	/Attributes/Map
+	(:element description {data(/Attributes/Map/entry[@key="description"]/@value)}:)	
+			'
+	passing XMLTYPE(sptManagedAttribute.ATTRIBUTES)
+	columns
+		description varchar2(32) path 'entry[@key="description"]/@value'
+		,cn varchar2(32) path 'entry[@key="cn"]/@value'
+		,sAMAccountName varchar2(32) path 'entry[@key="sAMAccountName"]/@value'
 
-,XMLTABLE(' 
-                                /Attributes/Map
-                                                (:element description {data(/Attributes/Map/entry[@key="description"]/@value)}:)
-                                
-               '
-                                passing XMLTYPE(sptManagedAttribute.ATTRIBUTES)
-                                columns
-                                                description varchar2(32) path 'entry[@key="description"]/@value'
-                                                ,cn varchar2(32) path 'entry[@key="cn"]/@value'
-                                                ,sAMAccountName varchar2(32) path 'entry[@key="sAMAccountName"]/@value'
+	)x
 
-                                )x
-
-                                where dbms_lob.getlength(sptManagedAttribute.ATTRIBUTES)>1 and x.description is not null
+	where dbms_lob.getlength(sptManagedAttribute.ATTRIBUTES)>1 and x.description is not null
