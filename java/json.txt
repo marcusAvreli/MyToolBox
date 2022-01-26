@@ -1,0 +1,60 @@
+public static void main(String[] args) {
+              initApp();
+              
+              String jsonPathExpression = "$";
+              StringBuilder stringBuilder = new StringBuilder();
+              FileReader fileReader;
+              
+              try {
+                     fileReader = new FileReader("./resources/output.json");
+                     BufferedReader bufferedReader = new BufferedReader(fileReader);
+                     String s;
+                     while((s=bufferedReader.readLine())!=null) {
+                           stringBuilder.append(s);
+                           
+              
+                     }
+                     fileReader.close();
+              } catch (IOException e2) {
+                     // TODO Auto-generated catch block
+                     e2.printStackTrace();
+              }
+              
+              
+              
+              
+              //DocumentContext jsonContext = JsonPath.parse(stringBuilder.toString().trim());
+              
+              JsonPath path = JsonPath.compile(jsonPathExpression);
+              Object object = path.read(stringBuilder.toString().trim());
+              
+              /*JSONParser parser = new JSONParser();
+              Object obj;
+              try {
+                     obj = parser.parse(new FileReader("./resources/outputINTIX.json"));
+                     Object res = JsonPath.read(obj,jsonPathExpression);
+              } catch (FileNotFoundException e) {
+                     // TODO Auto-generated catch block
+                     e.printStackTrace();
+              } catch (IOException e) {
+                     // TODO Auto-generated catch block
+                     e.printStackTrace();
+              } catch (ParseException e) {
+                     // TODO Auto-generated catch block
+                     e.printStackTrace();
+              }
+              */
+              
+              
+              
+       }
+	   
+	   import org.json.JSONTokener;
+FileReader reader = new FileReader("/rawReposnse.json");
+JSONTokener tokener = new JSONTokener(reader);
+JSONObject jsonProvObj = new JSONObject(tokener);
+
+
+
+	   
+	   
