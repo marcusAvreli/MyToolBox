@@ -47,12 +47,42 @@ public static void main(String[] args) {
               
               
               
+
        }
 	   
-	   import org.json.JSONTokener;
+///read json from file	   
+import org.json.JSONTokener;
 FileReader reader = new FileReader("/rawReposnse.json");
 JSONTokener tokener = new JSONTokener(reader);
 JSONObject jsonProvObj = new JSONObject(tokener);
+
+///json path query
+import org.json.JSONTokener;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.jayway.jsonpath.Configuration;
+import com.jayway.jsonpath.JsonPath;
+import com.jayway.jsonpath.spi.json.GsonJsonProvider;
+import com.jayway.jsonpath.spi.mapper.GsonMappingProvider;  
+{"JsonKeyEntryArray":[{"keyName1":"","keyName2":" ","keyName3":""}]}
+//FileReader reader = new FileReader("/opt/nova/tmp/umtbTests/rawResponse.json");
+FileReader reader = new FileReader("/var/tmp/rawResponse.json");
+JSONTokener tokener = new JSONTokener(reader);
+JSONObject rootJsonObject = new JSONObject(tokener);
+String  managedAttributeName = "JsonKeyEntryArray";
+
+Configuration conf = Configuration.builder()
+                           .jsonProvider(new GsonJsonProvider())
+                           .mappingProvider(new GsonMappingProvider())
+                           .build();
+
+String jsonPathQuery="$."+managedAttributeName+".[*]";
+JsonPath jsonPath = JsonPath.compile(jsonPathQuery);
+Object resultObject = JsonPath.using(conf).parse(rootJsonObject.toString()).read(jsonPathQuery);
+logger.info("ResultClass:"+resultObject.getClass());
+logger.info("resultObject: "+resultObject);
+
 
 
 
