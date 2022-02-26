@@ -156,6 +156,15 @@ netstat -an 1 |grep SYN > /var/tmp/netstat.txt
 
 ktpass -out "C:/Prog/Tomcat 8.5_Tomcat8-IdentityIQ/conf/ad.resource.keytab" -mapUser iiqSpnego2@seri.sailpointdemo.com -pass Sailp0!nt -mapOp set +DumpSalt -crypto RC4-HMAC-NT -ptype KRB5_NT_PRINCIPAL -princ HTTP/AD-RESOURCE.seri.sailpointdemo.com@SERI.SAILPOINTDEMO.COM
 
+Kerberos configuration file
+	For cmd/cli usages it done by setting environmental variable
+			name: KRB5_CONFIG
+			value: C:\Prog\Tomcat 8.5_Tomcat8-IdentityIQ\conf\krb5.ini
+	Catalina opts
+		on windows in tomcat confguration exe (running tomcat as service) go to java tab
+		
+		
+	
 List SPNS attached to user account
 	PowerShell
 		Get-AdUser iiqSpnego2 -Properties servicePrincipalName | Select-Object -ExpandProperty servicePrincipalName
@@ -171,3 +180,23 @@ add service principle name to user account
 		setspn -a HTTP/localhost:8080 iiqSpnego2
 		setspn -a HTTP/192.168.134.150:8080 iiqSpnego2
 		setspn -a HTTP/192.168.134.150 iiqSpnego2
+delete service principle name
+	CMD
+		setspn -a HTTP/ad-resource iiqSpnego2
+Validations
+	check that login is possible by spn
+		kinit -J-Dsun.security.krb5.debug=true    HTTP/AD-RESOURCE.seri.sailpointdemo.com
+		
+Enable logging
+	on windows in tomcat confguration exe (running tomcat as service) go to java tab
+	-Dsun.security.krb5.debug=true -Dsun.security.spnego.debug=true
+	
+	Logging.properties of tomcat
+		org.apache.tomcat.websocket.level = FINE
+		org.apache.tomcat.websocket.level = FINE
+		org.apache.catalina.realm.level = FINEST
+		org.apache.catalina.realm.useParentHandlers = true
+		org.apache.catalina.authenticator.level = FINEST
+		org.apache.catalina.authenticator.useParentHandlers = true
+		org.apache.juli.logging.UserDataHelper.CONFIG = INFO_ALL
+		org.apache.coyote.http11.level = DEBUG
