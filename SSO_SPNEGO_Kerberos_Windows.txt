@@ -157,4 +157,17 @@ netstat -an 1 |grep SYN > /var/tmp/netstat.txt
 ktpass -out "C:/Prog/Tomcat 8.5_Tomcat8-IdentityIQ/conf/ad.resource.keytab" -mapUser iiqSpnego2@seri.sailpointdemo.com -pass Sailp0!nt -mapOp set +DumpSalt -crypto RC4-HMAC-NT -ptype KRB5_NT_PRINCIPAL -princ HTTP/AD-RESOURCE.seri.sailpointdemo.com@SERI.SAILPOINTDEMO.COM
 
 List SPNS attached to user account
-Get-AdUser iiqSpnego2 -Properties servicePrincipalName | Select-Object -ExpandProperty servicePrincipalName
+	PowerShell
+		Get-AdUser iiqSpnego2 -Properties servicePrincipalName | Select-Object -ExpandProperty servicePrincipalName
+	CMD
+		setspn -L iiqSpnego2
+	
+add service principle name to user account
+	CMD
+		setspn -a HTTP/ad-resource iiqSpnego2
+		setspn -a HTTP/AD-RESOURCE.seri.sailpointdemo.com iiqSpnego2
+		setspn -a HTTP/AD-RESOURCE.seri.sailpointdemo.com:8080 iiqSpnego2
+		setspn -a HTTP/AD-RESOURCE.seri.sailpointdemo.com@SERI.SAILPOINTDEMO.COM iiqSpnego2
+		setspn -a HTTP/localhost:8080 iiqSpnego2
+		setspn -a HTTP/192.168.134.150:8080 iiqSpnego2
+		setspn -a HTTP/192.168.134.150 iiqSpnego2
