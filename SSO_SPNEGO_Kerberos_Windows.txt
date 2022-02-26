@@ -1,0 +1,160 @@
+The FQDN consists of two parts, the hostname and the domain name
+
+Creating	a	Key-Tab file	and	Service	Principal	Name
+
+The	"keytab"	file	associates	your	web	service	(like	http://identityiq.example.com)	with	a	Service	Principal	in	your	domain.
+
+
+
+The	DNS	name	for	the	IdentityIQ	web	service	in	your	organization.		This	document	uses
+“TESTLABDC.example.com”	for	its	DNS	examples.
+https://serverfault.com/questions/73628/equivalent-of-linux-command-hostname-fqdn-in-windows-xp
+seri.sailpointdemo.com
+https://unix.stackexchange.com/questions/23012/java-could-not-get-the-tgt-from-cache-in-linux-client
+https://community.oracle.com/tech/developers/discussion/1527548/java-security-generalsecurityexception-checksum-failed-for-gssserver
+https://community.sailpoint.com/t5/IdentityIQ-Forum/Active-Directory-single-signon-to-IdentityIQ-SPNEGO/td-p/120709
+https://community.sailpoint.com/t5/IdentityIQ-Forum/Not-able-to-force-user-to-answer-security-question-after-SSO/td-p/30711
+https://community.oracle.com/tech/developers/discussion/1527650/terrible-error-with-kerberos-win2003-checksum-faileds
+des3-cbc-sha1
+https://stackoverflow.com/questions/4265975/authentication-issues-with-www-authenticate-negotiate
+https://stackoverflow.com/questions/51444810/how-to-prevent-browser-from-sending-ntlm-credentials
+https://community.sailpoint.com/t5/IdentityIQ-Forum/Active-Directory-single-signon-to-IdentityIQ-SPNEGO/td-p/120709
+http://seri.sailpointdemo.com:8080/identityiq/define/identity/identities.jsf
+Bombardier90-!
+-Dsun.security.jgss.debug=true
+ksetup /setenctypeattr SERI.SAILPOINTDEMO.COM RC4-HMAC-MD5 AES128-CTS-HMAC-SHA1-96 AES256-CTS-HMAC-SHA1-96
+ksetup /setenctypeattr seri.sailpointdemo.com RC4-HMAC-MD5 AES128-CTS-HMAC-SHA1-96 AES256-CTS-HMAC-SHA1-96
+http://seri.sailpointdemo.com:8080/identityiq/spnego.jsp
+
+# default_tgs_enctypes = aes256-cts arcfour-hmac-md5 des3-hmac-sha1 des-cbc-crc des-cbc-md5
+default_tgs_enctypes = des3-hmac-sha1 des-cbc-crc des-cbc-md5
+
+# default_tkt_enctypes = aes256-cts arcfour-hmac-md5 des3-hmac-sha1 des-cbc-crc des-cbc-md5
+default_tkt_enctypes = des3-hmac-sha1 des-cbc-crc des-cbc-md5
+
+# permitted_enctypes = aes256-cts arcfour-hmac-md5 des3-hmac-sha1 des-cbc-crc des-cbc-md5
+permitted_enctypes = des3-hmac-sha1 des-cbc-crc des-cbc-md5
+		https://dmdaa.wordpress.com/2010/03/13/kerberos-setup-and-jaas-configuration-for-running-sun-jgss-tutorial-against-ad/
+• The	name	to	give	to	your	Service	Principal.		This	is	a	name	that	describes	the	IdentityIQ	web	service	in	your	enterprise.		The	example	show	in	this	document	is	
+“HTTP/TESTLABDC.example.com@EXAMPLE.COM”.		
+
+HTTP/seri.sailpointdemo.com@sailpointdemo.com
+chrome.exe –-auth-server-whitelist="SERI.SAILPOINTDEMO.COM" –-auth-negotiate-delegate-whitelist="SERI.SAILPOINTDEMO.COM" –-auth-schemes="digest,ntlm,negotiate"
+
+"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --new-window –-auth-server-whitelist="SERI.SAILPOINTDEMO.COM" –-auth-negotiate-delegate-whitelist="SERI.SAILPOINTDEMO.COM" –-auth-schemes="digest,ntlm,negotiate"
+ktpass /out "C:/Prog/Tomcat 8.5_Tomcat8-IdentityIQ/conf/ad.resource.keytab" /mapuser iiqSpnego2@seri.sailpointdemo.com /princ HTTP/seri.sailpointdemo.com@sailpointdemo.com /pass Sailp0!nt /ptype krb5_nt_principal /kvno 0
+http://fusionsecurity.blogspot.com/2013/02/part-2-how-to-configure-oam11g-wna-for.html
+supported encryption types by AD
+get-adcomputer -properties msDS-SupportedEncryptionTypes -filter *
+setspn -a HTTP/seri.sailpointdemo.com iiqSpnego2
+setspn -a HTTP/seri.sailpointdemo.com:8080 iiqSpnego2
+https://docs.microsoft.com/en-us/archive/blogs/openspecification/encryption-type-selection-in-kerberos-exchanges
+https://stackoverflow.com/questions/23801169/kdc-has-no-support-for-encryption-type-14
+https://www.oreilly.com/library/view/linux-security-cookbook/0596003919/ch04s13.html
+https://www.ibm.com/mysupport/s/question/0D50z00005q4HNoCAM/how-do-you-add-multiple-spns-to-the-same-keytab-file-for-spnego-or-kerberos-configuration-in-was?language=en_US
+https://kurgus.livejournal.com/342622.html
+This	is	generally	of	the	format: “HTTP/”	as	a	leading	
+string,	followed	by	the	DNS	name	of	the	IdentityIQ	system	with	the	fully	qualified	domain	name,	
+followed	by	“@”	and	the	name	of	the	domain	in	all	capital	letters.			See	“Identifying	your	Service	
+Principal	Name”	in	the	Troubleshooting	section	for	more	details	on	this	topic.
+
+https://shellgeek.com/get-domain-name-using-powershell-and-cmd/#:~:text=Use%20Get%2DWmiObject%20to%20get,get%20domain%20name%20in%20cmd.
+Get-WmiObject -namespace root/cimv2 -class win32_computersystem
+Get-ADDomainController -Identity "ad-resource"
+Get-WmiObject -Namespace root\cimv2 -Class Win32_ComputerSystem | Select Name, Domain
+([System.Net.Dns]::GetHostByName(("ad-resource"))).Hostname
+Resolve-DnsName 192.168.134.150
+for /f "tokens=2 delims=:" %i in ('ipconfig /all ^| findstr Search ') do SET domain=%i & SET newdomain=%domain: =% & echo %COMPUTERNAME%.%newdomain%
+
+https://www.powershellbros.com/powershell-tip-of-the-week-get-fqdn/
+PS C:\> Get-MgmtSvcFqdn -Namespace TenantSite -Password "Sailp0!nt" -Server "ad-resource" -UserName "Administrator"
+
+1. On Active Directory 
+Create user account for spnego auth: iiqSpnego
+iiqSpnego@seri.sailpointdemo.com
+
+ktpass -out centos1-dev-local.keytab -mapUser iiqSpnego@seri.sailpointdemo.com +rndPass -mapOp set +DumpSalt -crypto AES256-SHA1 -ptype KRB5_NT_PRINCIPAL -princ HTTP/centos1.dev.local@seri.sailpointdemo.com
+
+ktpass /out "C:/Prog/Tomcat 8.5_Tomcat8-IdentityIQ/conf/ad.resource.keytab" /mapuser iiqSpnego@seri.sailpointdemo.com /princ HTTP/seri.sailpointdemo.com@seri.sailpointdemo.com /pass Password1 /ptype krb5_nt_principal /kvno 0
+
+ktpass -out ad.resource.keytab -mapUser iiqSpnego@seri.sailpointdemo.com +rndPass -mapOp set +DumpSalt -crypto AES256-SHA1 -ptype KRB5_NT_PRINCIPAL -princ HTTP/ad.resource@seri.sailpointdemo.com
+
+
+setspn -L iiqSpnego2
+
+
+setspn -D HTTP/ad-resource iiqSpnego2
+setspn -D HTTP/ad-resource.seri.sailpointdemo.com iiqSpnego2
+OUTPUT
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+ktpass -out ad.resource.keytab -mapUser iiqSpnego@seri.sailpointdemo.com +rndPass -mapOp set
+ +DumpSalt -crypto AES256-SHA1 -ptype KRB5_NT_PRINCIPAL -princ HTTP/ad.resource@seri.sailpointdemo.com
+Targeting domain controller: ad-resource.seri.sailpointdemo.com
+Using legacy password setting method
+Successfully mapped HTTP/ad.resource to iiqSpnego.
+Building salt with principalname HTTP/ad.resource and domain seri.sailpointdemo.com (encryption type 18)...
+Hashing password with salt "seri.sailpointdemo.comHTTPad.resource".
+Key created.
+Output keytab to ad.resource.keytab:
+Keytab version: 0x502
+keysize 90 HTTP/ad.resource@seri.sailpointdemo.com ptype 1 (KRB5_NT_PRINCIPAL) vno 3 etype 0x12 (AES256-SHA1) keylength
+32 (0xaaa1b46a38d31cb993b7c043577a400080a942285f1e383afac4b3cd4b3d0974)
+
+
+
+
+
+Test JSP Application
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>Hello SPNEGO Example</title>
+</head>
+<body>
+Hello <%= request.getRemoteUser() %> !
+</body>
+</html>
+
+
+
+
+
+kinit -V -k -t "C:/Prog/Tomcat 8.5_Tomcat8-IdentityIQ/conf/ad.resource.keytab" HTTP/ad.resource@SERI.SAILPOINT.COM
+
+ktpass -out ad.resource.keytab -mapUser iiqSpnego@seri.sailpointdemo.com +rndPass -mapOp set +DumpSalt -crypto AES256-SHA1 -ptype KRB5_NT_PRINCIPAL -princ HTTP/ad.resource@seri.sailpointdemo.com
+
+ktpass -out "C:/Prog/Tomcat 8.5_Tomcat8-IdentityIQ/conf/ad.resource.keytab" -mapUser iiqSpnego@seri.sailpointdemo.com +rndPass -mapOp set +DumpSalt -crypto AES128-SHA1 -ptype KRB5_NT_PRINCIPAL -princ HTTP/ad.resource@seri.sailpointdemo.com
+
+kinit -J-Dsun.security.krb5.debug=true -J-Dsun.security.krb5.debug.conf="C:/Prog/Tomcat 8.5_Tomcat8-IdentityIQ/conf/krb5.ini" -k -t "C:/Prog/Tomcat 8.5_Tomcat8-IdentityIQ/conf/ad.resource.keytab" HTTP/ad.resource@SERI.SAILPOINT.COM
+
+kinit -J-Dsun.security.krb5.debug=true -J-Dsun.security.krb5.debug.conf="C:/Prog/Tomcat 8.5_Tomcat8-IdentityIQ/conf/krb5.ini" -k -t C:/Users/Administrator.SERI/ad.resource.keytab HTTP/ad.resource@SERI.SAILPOINT.COM
+
+ktpass /out "C:/Prog/Tomcat 8.5_Tomcat8-IdentityIQ/conf/ad.resource.keytab" /mapuser iiqSpnego@seri.sailpointdemo.com /princ HTTP/seri.sailpointdemo.com@seri.sailpointdemo.com /pass Sailp0!nt /ptype krb5_nt_principal /kvno 0
+
+kinit -J-Dsun.security.krb5.debug=true -k -t "C:/Prog/Tomcat 8.5_Tomcat8-IdentityIQ/conf/ad.resource.keytab" HTTP/ad.resource@seri.sailpointdemo.com
+
+klist -e -f -k -t "C:/Prog/Tomcat 8.5_Tomcat8-IdentityIQ/conf/ad.resource.keytab"
+klist -e -f -k -t "C:\Prog\Tomcat 8.5_Tomcat8-IdentityIQ\conf\ad.resource.keytab"
+klist  -t "C:\Prog\Tomcat 8.5_Tomcat8-IdentityIQ\conf\ad.resource.keytab"
+ktab -l -e -t -k "C:\Prog\Tomcat 8.5_Tomcat8-IdentityIQ\conf\ad.resource.keytab"
+http://www.techpository.com/linux-kinit-cannot-contact-any-kdc-for-realm-while-getting-initial-credentials/#:~:text=February%209-,Linux%3A%20kinit%3A%20Cannot%20contact%20any%20KDC%20for,realm%20while%20getting%20initial%20credentials&text=There%20is%20probably%20one%20of,not%20resolving%20the%20domain%20controller.
+
+https://social.technet.microsoft.com/wiki/contents/articles/36470.active-directory-using-kerberos-keytabs-to-integrate-non-windows-systems.aspx
+https://serverfault.com/questions/682374/client-not-found-in-kerberos-database-while-getting-initial
+https://stackoverflow.com/questions/61640911/krbexception-do-not-have-keys-of-types-listed-in-default-tkt-enctypes-available
+https://stackoverflow.com/questions/40216647/how-to-verify-kerberos-token
+https://www.certforums.com/threads/help-with-kerberos-and-spnego.50755/
+kinit -V -k -t C:/Users/Administrator.SERI/ad.resource.keytab HTTP/ad.resource@SERI.SAILPOINT.COM
+
+ktab -l -e -t -k "C:\Prog\Tomcat 8.5_Tomcat8-IdentityIQ\conf\ad.resource.keytab"
+
+ksetup /setenctypeattr seri.sailpoint.com RC4-HMAC-MD5 AES128-CTS-HMAC-SHA1-96 AES256-CTS-HMAC-SHA1-96
+netstat -an 1 |grep SYN > /var/tmp/netstat.txt
+
+
+ktpass -out "C:/Prog/Tomcat 8.5_Tomcat8-IdentityIQ/conf/ad.resource.keytab" -mapUser iiqSpnego2@seri.sailpointdemo.com -pass Sailp0!nt -mapOp set +DumpSalt -crypto RC4-HMAC-NT -ptype KRB5_NT_PRINCIPAL -princ HTTP/AD-RESOURCE.seri.sailpointdemo.com@SERI.SAILPOINTDEMO.COM
+
+List SPNS attached to user account
+Get-AdUser iiqSpnego2 -Properties servicePrincipalName | Select-Object -ExpandProperty servicePrincipalName
