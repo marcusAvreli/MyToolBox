@@ -10,6 +10,7 @@ The	DNS	name	for	the	IdentityIQ	web	service	in	your	organization.		This	document
 “TESTLABDC.example.com”	for	its	DNS	examples.
 https://serverfault.com/questions/73628/equivalent-of-linux-command-hostname-fqdn-in-windows-xp
 seri.sailpointdemo.com
+https://dzone.com/articles/do-not-publish-configuring-tomcat-single-sign-on-w
 https://unix.stackexchange.com/questions/23012/java-could-not-get-the-tgt-from-cache-in-linux-client
 https://community.oracle.com/tech/developers/discussion/1527548/java-security-generalsecurityexception-checksum-failed-for-gssserver
 https://community.sailpoint.com/t5/IdentityIQ-Forum/Active-Directory-single-signon-to-IdentityIQ-SPNEGO/td-p/120709
@@ -64,6 +65,8 @@ Get-ADDomainController -Identity "ad-resource"
 Get-WmiObject -Namespace root\cimv2 -Class Win32_ComputerSystem | Select Name, Domain
 ([System.Net.Dns]::GetHostByName(("ad-resource"))).Hostname
 Resolve-DnsName 192.168.134.150
+
+GET FQDN
 for /f "tokens=2 delims=:" %i in ('ipconfig /all ^| findstr Search ') do SET domain=%i & SET newdomain=%domain: =% & echo %COMPUTERNAME%.%newdomain%
 
 https://www.powershellbros.com/powershell-tip-of-the-week-get-fqdn/
@@ -200,3 +203,4 @@ Enable logging
 		org.apache.catalina.authenticator.useParentHandlers = true
 		org.apache.juli.logging.UserDataHelper.CONFIG = INFO_ALL
 		org.apache.coyote.http11.level = DEBUG
+
