@@ -1,0 +1,304 @@
+with  multiValueIIQExists as(
+select
+
+x.iiq_disabled
+,x.ent_value
+,x.sAMAccountName
+,x.cn
+,x.department
+,x.displayName
+,x.distinguishedName
+,x.employeeNumber
+,x.employeeType
+,x.facsimileTelephoneNumber
+,x.givenName
+,x.homeMDB
+,x.l
+,x.mail
+,x.mailNickname
+,x.manager
+,x.mobile
+,x.msDS_PrincipalName
+,x.msRTCSIP_UserEnabled
+,x.objectSid
+,x.objectType
+,x.objectguid
+,x.pager
+,x.physicalDeliveryOfficeName
+,x.sn
+,x.streetAddress
+,x.telephoneNumber
+,x.title
+,x.userPrincipalName
+
+,x.account_flags
+,x.object_Class
+,sptApp.Id APP_ID
+,sptLink.id link_id
+
+
+
+from identityiq.spt_link sptLink 
+                  INNER JOIN identityiq.SPT_APPLICATION sptApp ON sptApp.Id = sptLink.application
+                  left join identityiq.spt_identity sptIdentity on  sptIdentity.id = sptLink.identity_id 
+
+   ,XMLTABLE('
+   declare function local:isDisabled($adAccount as node()) as xs:boolean {
+
+(:value of iiqDisabled presented as xml boolean:)
+if($adAccount/entry[@key="IIQDisabled"]/value/Boolean) then
+                let $iiqDisabled := $adAccount/entry[@key="IIQDisabled"]/value/Boolean            
+                return $iiqDisabled
+    
+    else 
+    
+    let $iiqDisabled2 := $adAccount/entry[@key="IIQDisabled"]/@value
+    return
+    (:value of iiqDisabled presented as string:)
+                if(fn:exists($iiqDisabled2)) then
+                                let $converted := xs:boolean($iiqDisabled2)
+                return $converted
+     else(
+               false()
+               )
+     
+                
+  
+};
+
+declare function local:msRTCSIPUserEnabled($adAccount as node()) as xs:boolean {
+
+(:value of iiqDisabled presented as xml boolean:)
+if($adAccount/entry[@key="msRTCSIP-UserEnabled"]/value/Boolean) then
+                let $iiqDisabled := $adAccount/entry[@key="msRTCSIP-UserEnabled"]/value/Boolean     
+                return $iiqDisabled
+    
+    else 
+    
+    let $iiqDisabled2 := $adAccount/entry[@key="msRTCSIP-UserEnabled"]/@value
+    return
+    (:value of iiqDisabled presented as string:)
+                if(fn:exists($iiqDisabled2)) then
+                                let $converted := xs:boolean($iiqDisabled2)
+                return $converted
+     else(
+               false()
+               )
+     
+                
+  
+};
+
+
+
+                declare function local:accountFlags($adAccount as node()) as xs:string {  
+                                let $accountFlags := $adAccount/entry[@key="accountFlags"]/value/List/String
+                                return
+                                                if(fn:exists($accountFlags)) then
+                                                (: for  $accountFlag in  $accountFlags:)
+                                                (:return:)
+                                                (: concat( string-join(($accountFlag)/normalize-space(),","),codepoints-to-string(10)):)
+                                                (:concat( string-join(($accountFlag),","),codepoints-to-string(10)):)
+                                                (:string-join(($accountFlag),","):)
+                                                string-join(data($accountFlags),",")
+                                                (:string-join(($accountFlags),",")):)
+                                                else
+                                                "i dont have list"
+                                
+                };
+
+                declare function local:objectClass($adAccount as node()) as xs:string {     
+                                let $objectClass := $adAccount/entry[@key="objectClass"]/value/List/String
+                                return
+                                                if(fn:exists($objectClass)) then                   
+                                                string-join(data($objectClass),",")                                            
+                                                else
+                                                "i dont have list"
+                                
+                };
+
+                                declare function local:facsimileTelephoneNumber($adAccount as node()) as xs:string {    
+                                let $facsimileTelephoneNumber := $adAccount/entry[@key="facsimileTelephoneNumber"]/value/List/String
+                                return
+                                                if(fn:exists($facsimileTelephoneNumber)) then                  
+                                                string-join(data($facsimileTelephoneNumber),",")                                           
+                                                else
+                                                "i dont have list"
+                                
+                };
+                                
+                                
+                                for  $ad_account in /Attributes/Map
+                                                let $ad_roles := $ad_account/entry[@key="memberOf"]/value/List/String                                            
+                                                let $is_account_disabled := local:isDisabled($ad_account)
+                                                let $account_flags := local:accountFlags($ad_account)
+                                                let $objectClass := local:objectClass($ad_account)
+                                                let $facsimileTelephoneNumber := local:facsimileTelephoneNumber($ad_account)
+                                                let $msRTCSIPUserEnabled := local:msRTCSIPUserEnabled($ad_account)
+                                                return
+                                                                                (: it is multi value :)
+                                                                if ($ad_roles) then
+                                                                                for  $ad_role in  $ad_roles
+                                                                               return element r {                            
+                                                                                               element sAMAccountName {data($ad_account/entry[@key="sAMAccountName"]/@value)}
+                                                                                               ,element cn {data($ad_account/entry[@key="cn"]/@value)}
+                                                                                               ,element department {data($ad_account/entry[@key="department"]/@value)}
+                                                                                               ,element displayName {data($ad_account/entry[@key="displayName"]/@value)}
+                                                                                               ,element distinguishedName {data($ad_account/entry[@key="distinguishedName"]/@value)}
+                                                                                               ,element employeeNumber {data($ad_account/entry[@key="employeeNumber"]/@value)}
+                                                                                               ,element employeeType {data($ad_account/entry[@key="employeeType"]/@value)}
+                                                                                               ,element facsimileTelephoneNumber {data($facsimileTelephoneNumber)}
+                                                                                               ,element givenName {data($ad_account/entry[@key="givenName"]/@value)}
+                                                                                               ,element homeMDB {data($ad_account/entry[@key="homeMDB"]/@value)}
+                                                                                               ,element l {data($ad_account/entry[@key="l"]/@value)}
+                                                                                               ,element mail {data($ad_account/entry[@key="mail"]/@value)}
+                                                                                               ,element mailNickname {data($ad_account/entry[@key="mailNickname"]/@value)}
+                                                                                               ,element manager {data($ad_account/entry[@key="manager"]/@value)}
+                                                                                               ,element mobile {data($ad_account/entry[@key="mobile"]/@value)}
+                                                                                               ,element msDS-PrincipalName {data($ad_account/entry[@key="msDS-PrincipalName"]/@value)}
+                                                                                               ,element msNPAllowDialin {data($ad_account/entry[@key="msNPAllowDialin"]/@value)}
+                                                                                               ,element msRTCSIPUserEnabled {data($msRTCSIPUserEnabled)}
+                                                                                               ,element msRTCSIP-UserEnabled {data($ad_account/entry[@key="msRTCSIP-UserEnabled"]/@value)}
+                                                                                               ,element objectSid {data($ad_account/entry[@key="objectSid"]/@value)}
+                                                                                               ,element objectType {data($ad_account/entry[@key="objectType"]/@value)}
+                                                                                               ,element objectguid {data($ad_account/entry[@key="objectguid"]/@value)}
+                                                                                               ,element pager {data($ad_account/entry[@key="pager"]/@value)}
+                                                                                               ,element physicalDeliveryOfficeName {data($ad_account/entry[@key="physicalDeliveryOfficeName"]/@value)}
+                                                                                               ,element sn {data($ad_account/entry[@key="sn"]/@value)}
+                                                                                               ,element streetAddress {data($ad_account/entry[@key="streetAddress"]/@value)}
+                                                                                               ,element telephoneNumber {data($ad_account/entry[@key="telephoneNumber"]/@value)}
+                                                                                               ,element title {data($ad_account/entry[@key="title"]/@value)}
+                                                                                               ,element userPrincipalName {data($ad_account/entry[@key="userPrincipalName"]/@value)}
+                                                                                               
+                                                                                               
+                                                                                                                
+                                                                                                                ,element is_account_disabled {data($is_account_disabled)}
+                                                                                                                ,element account_flags {data($account_flags)}
+                                                                                                                ,element object_Class {data($objectClass)}
+                                                                                                                ,element ent_value {data($ad_role )}
+                                                                               }
+                                               else
+                                                                                let $ad_roles := $ad_account/entry[@key="memberOf"]/@value
+                                                               (: it is single value :)
+                                                                                return
+                                                               if($ad_roles) then
+                                                               element r {
+                                                                                                element sAMAccountName {data($ad_account/entry[@key="sAMAccountName"]/@value)}
+                                                                                               ,element cn {data($ad_account/entry[@key="cn"]/@value)}
+                                                                                               ,element department {data($ad_account/entry[@key="department"]/@value)}
+                                                                                               ,element displayName {data($ad_account/entry[@key="displayName"]/@value)}
+                                                                                               ,element distinguishedName {data($ad_account/entry[@key="distinguishedName"]/@value)}
+                                                                                               ,element employeeNumber {data($ad_account/entry[@key="employeeNumber"]/@value)}
+                                                                                               ,element employeeType {data($ad_account/entry[@key="employeeType"]/@value)}
+                                                                                               ,element facsimileTelephoneNumber {data($facsimileTelephoneNumber)}
+                                                                                               ,element givenName {data($ad_account/entry[@key="givenName"]/@value)}
+                                                                                               ,element homeMDB {data($ad_account/entry[@key="homeMDB"]/@value)}
+                                                                                               ,element l {data($ad_account/entry[@key="l"]/@value)}
+                                                                                               ,element mail {data($ad_account/entry[@key="mail"]/@value)}
+                                                                                               ,element mailNickname {data($ad_account/entry[@key="mailNickname"]/@value)}
+                                                                                               ,element manager {data($ad_account/entry[@key="manager"]/@value)}
+                                                                                               ,element mobile {data($ad_account/entry[@key="mobile"]/@value)}
+                                                                                               ,element msDS-PrincipalName {data($ad_account/entry[@key="msDS-PrincipalName"]/@value)}
+                                                                                               ,element msNPAllowDialin {data($ad_account/entry[@key="msNPAllowDialin"]/@value)}
+                                                                                               ,element msRTCSIPUserEnabled {data($msRTCSIPUserEnabled)}
+                                                                                               ,element msRTCSIP-UserEnabled {data($ad_account/entry[@key="msRTCSIP-UserEnabled"]/@value)}
+                                                                                               ,element objectSid {data($ad_account/entry[@key="objectSid"]/@value)}
+                                                                                               ,element objectType {data($ad_account/entry[@key="objectType"]/@value)}
+                                                                                               ,element objectguid {data($ad_account/entry[@key="objectguid"]/@value)}
+                                                                                               ,element pager {data($ad_account/entry[@key="pager"]/@value)}
+                                                                                               ,element physicalDeliveryOfficeName {data($ad_account/entry[@key="physicalDeliveryOfficeName"]/@value)}
+                                                                                               ,element sn {data($ad_account/entry[@key="sn"]/@value)}
+                                                                                               ,element streetAddress {data($ad_account/entry[@key="streetAddress"]/@value)}
+                                                                                               ,element telephoneNumber {data($ad_account/entry[@key="telephoneNumber"]/@value)}
+                                                                                               ,element title {data($ad_account/entry[@key="title"]/@value)}
+                                                                                               ,element userPrincipalName {data($ad_account/entry[@key="userPrincipalName"]/@value)}
+                                                                                               
+                                                                                                ,element account_flags {data($account_flags)}
+                                                                                                ,element object_Class {data($objectClass)}
+                                                                                                ,element is_account_disabled {data($is_account_disabled)}
+                                                                               ,element ent_value {data( $ad_roles)}  
+
+
+                                                               }else(
+                                                               (: no roles :)
+                                                               element r {
+                                                                               element sAMAccountName {data($ad_account/entry[@key="sAMAccountName"]/@value)}
+                                                                                               ,element cn {data($ad_account/entry[@key="cn"]/@value)}
+                                                                                               ,element department {data($ad_account/entry[@key="department"]/@value)}
+                                                                                               ,element displayName {data($ad_account/entry[@key="displayName"]/@value)}
+                                                                                               ,element distinguishedName {data($ad_account/entry[@key="distinguishedName"]/@value)}
+                                                                                               ,element employeeNumber {data($ad_account/entry[@key="employeeNumber"]/@value)}
+                                                                                               ,element employeeType {data($ad_account/entry[@key="employeeType"]/@value)}
+                                                                                               ,element facsimileTelephoneNumber {data($facsimileTelephoneNumber)}
+                                                                                               ,element givenName {data($ad_account/entry[@key="givenName"]/@value)}
+                                                                                               ,element homeMDB {data($ad_account/entry[@key="homeMDB"]/@value)}
+                                                                                               ,element l {data($ad_account/entry[@key="l"]/@value)}
+                                                                                               ,element mail {data($ad_account/entry[@key="mail"]/@value)}
+                                                                                               ,element mailNickname {data($ad_account/entry[@key="mailNickname"]/@value)}
+                                                                                               ,element manager {data($ad_account/entry[@key="manager"]/@value)}
+                                                                                               ,element mobile {data($ad_account/entry[@key="mobile"]/@value)}
+                                                                                               ,element msDS-PrincipalName {data($ad_account/entry[@key="msDS-PrincipalName"]/@value)}
+                                                                                               ,element msNPAllowDialin {data($ad_account/entry[@key="msNPAllowDialin"]/@value)}
+                                                                                               ,element msRTCSIP-UserEnabled {data($msRTCSIPUserEnabled)}
+                                                                                               
+                                                                                               ,element objectSid {data($ad_account/entry[@key="objectSid"]/@value)}
+                                                                                               ,element objectType {data($ad_account/entry[@key="objectType"]/@value)}
+                                                                                               ,element objectguid {data($ad_account/entry[@key="objectguid"]/@value)}
+                                                                                               ,element pager {data($ad_account/entry[@key="pager"]/@value)}
+                                                                                               ,element physicalDeliveryOfficeName {data($ad_account/entry[@key="physicalDeliveryOfficeName"]/@value)}
+                                                                                               ,element sn {data($ad_account/entry[@key="sn"]/@value)}
+                                                                                               ,element streetAddress {data($ad_account/entry[@key="streetAddress"]/@value)}
+                                                                                               ,element telephoneNumber {data($ad_account/entry[@key="telephoneNumber"]/@value)}
+                                                                                               ,element title {data($ad_account/entry[@key="title"]/@value)}
+                                                                                               ,element userPrincipalName {data($ad_account/entry[@key="userPrincipalName"]/@value)}
+                                                                                               
+                                                                               ,element account_flags {data($account_flags)}
+                                                                               ,element object_Class {data($objectClass)}
+                                                                                                ,element is_account_disabled {data($is_account_disabled)}
+                                                                               
+                                                               }
+                                                               )
+
+
+
+                               '
+                                passing XMLTYPE(sptLink.ATTRIBUTES)
+                                columns 
+                                sAMAccountName                                          varchar2(32) path 'sAMAccountName' 
+                                ,cn varchar2(100) path 'cn' 
+                                ,department varchar2(100) path 'department' 
+                                ,displayName varchar2(100) path 'displayName' 
+                                ,distinguishedName varchar2(500) path 'distinguishedName' 
+                                ,employeeNumber varchar2(8) path 'employeeNumber' 
+                                ,employeeType varchar2(8) path 'employeeType' 
+                                ,facsimileTelephoneNumber varchar2(100) path 'facsimileTelephoneNumber' 
+                                ,givenName varchar2(100) path 'givenName' 
+                                ,homeMDB varchar2(500) path 'homeMDB' 
+                                ,l varchar2(500) path 'l' 
+                                ,mail varchar2(100) path 'mail' 
+                                ,mailNickname varchar2(100) path 'mailNickname' 
+                                ,manager varchar2(500) path 'manager' 
+                                ,mobile varchar2(500) path 'mobile' 
+                                ,msDS_PrincipalName varchar2(500) path 'msDS-PrincipalName' 
+                                ,msNPAllowDialin varchar2(500) path 'msNPAllowDialin' 
+                                ,msRTCSIP_UserEnabled varchar2(500) path 'msRTCSIP-UserEnabled' 
+                                
+                                ,objectSid varchar2(100) path 'objectSid' 
+                                ,objectType varchar2(100) path 'objectType' 
+                                ,objectguid varchar2(100) path 'objectguid' 
+                                ,pager varchar2(100) path 'pager' 
+                                ,physicalDeliveryOfficeName varchar2(100) path 'physicalDeliveryOfficeName' 
+                                ,sn varchar2(100) path 'sn' 
+                                ,streetAddress varchar2(100) path 'streetAddress' 
+                                ,telephoneNumber varchar2(100) path 'telephoneNumber' 
+                                ,title varchar2(100) path 'title' 
+                                ,userPrincipalName varchar2(100) path 'userPrincipalName' 
+                                                ,iiq_disabled varchar2(32) path 'is_account_disabled' 
+                                                ,ent_value                          varchar2(800) path 'ent_value' 
+                                                ,account_flags varchar2(150) path 'account_flags'
+                                                ,object_Class varchar2(150) path 'object_Class'
+     )x
+      where sptApp.name='Active Directory' 
+      
+)
+select * from multiValueIIQExists 
