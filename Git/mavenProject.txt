@@ -1,15 +1,19 @@
 Back Up Maven project on git
 	git init
-	git remote add origin "full url to your repository"
-		echo "target/" >> .gitignore
-		echo ".classpath" >> .gitignore
-		echo ".project" >> .gitignore
-		echo ".settings/" >> .gitignore
+	git remote add origin "url to repository"
+	
+	echo "target/" >> .gitignore
+	echo "bin/" >> .gitignore
+	echo ".classpath" >> .gitignore
+	echo ".project" >> .gitignore
+	echo ".settings/" >> .gitignore
+	
 	git add .
-		git rm -r --cached target
-		git rm -r --cached ".classpath"
-		git rm -r --cached ".project"
-		git rm -r --cached ".settings/"		
+	git rm -r --cached bin
+	git rm -r --cached target
+	git rm -r --cached ".classpath"
+	git rm -r --cached ".project"
+	git rm -r --cached ".settings/"		
 	git commit -am "initial_commit"
 	git push origin master
 
@@ -19,3 +23,11 @@ Subsequent commits
 	git add "relative path to file"
 	git commit -am "message"
 	git push origin master
+	
+Remove directory from git and local
+	git rm -r one-of-the-directories // This deletes from filesystem
+	git commit . -m "Remove duplicated directory"
+
+Remove directory from git but NOT local
+	git rm -r --cached myFolder
+
