@@ -1,0 +1,77 @@
+with RoleDetections  as (
+                select name
+                ,x.detection_date
+                
+                ,x.assignment_id2
+                ,x.ent_value
+                from spt_identity sptIdentity
+                                ,XMLTABLE ('                                      
+                                                for $g1 in /Map/entry[@key="roleDetections"]/value/List/RoleDetection
+                                                
+                                                return
+                                                                if ($g1/@assignmentIds) then (
+                                                                                (:has assignment id:)
+                                                                                let $assignmentIdList := tokenize($g1/@assignmentIds,",")
+                                                                                
+                                                                                for $i in $assignmentIdList
+                                                                                let $trim := normalize-space($i)
+                                                                                
+                                                                                for  $g2 in $g1/RoleTarget
+                                                                                where exists($g2/AccountItem/@value) 
+                                                                                return element r {
+                                                                                                $g1/@date                                                                                         
+                                                                                                ,element rt_nativeIdentity {data($trim )}
+                                                                                                ,element ent_value {data($g2/AccountItem/@value )}
+                                                           }
+                                                          
+                                                          ,
+                                                          let $assignmentIdList := tokenize($g1/@assignmentIds,",")
+                                                          for $i in $assignmentIdList
+                                                                                let $trim := normalize-space($i)
+                                                                                
+                                                                                for  $g2 in $g1/RoleTarget
+                                                                                for  $g3 in $g2/AccountItem/value/Set/String
+                                                                                where exists($g2/AccountItem/value/Set) 
+                                                                                
+                                                                                return element r {
+                                                                                                $g1/@date
+                                                                                                ,element rt_nativeIdentity {data($trim )}
+                                                                                                ,element ent_value {data($g3)}
+                                                           }
+                                           )
+                                                                else(
+                                                                (:does not have assignment id:)
+                                                                                
+                                                                                for  $g2 in $g1/RoleTarget
+                                                                                where exists($g2/AccountItem/@value) 
+                                                                                return element r {
+                                                                                                $g1/@date                                                                                         
+                                                                                                ,element rt_nativeIdentity { data($g1/@assignmentIds ) }
+                                                                                                ,element ent_value {data($g2/AccountItem/@value )}
+                                                           } ,                                                                
+                                                                                for  $g2 in $g1/RoleTarget
+                                                                                for  $g3 in $g2/AccountItem/value/Set/String
+                                                                                where exists($g2/AccountItem/value/Set) 
+                                                                                
+                                                                                return element r {
+                                                                                                $g1/@date
+                                                                                                ,element rt_nativeIdentity { data($g1/@assignmentIds ) }
+                                                                                                ,element ent_value {data($g3)}
+                                                           }
+                                                           )
+                                                                
+                                                                                
+                                                              '
+                                                PASSING xmltype(sptIdentity.PREFERENCES)
+                                                columns                                               
+                                                                detection_date                varchar2(20) path '@date' 
+                                                                
+                                                                ,assignment_id2                               varchar2(32) path 'rt_nativeIdentity' 
+                                                                ,ent_value                          varchar2(32) path 'ent_value' 
+                                                                
+                                                                
+                                )x
+                                where dbms_lob.getlength(sptIdentity.preferences)>1
+                                
+                )
+

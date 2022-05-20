@@ -1,0 +1,90 @@
+http
+
+APR+APR UTIL
+
+cd /home/admin
+curl -L https://archive.apache.org/dist/apr/apr-1.7.0.tar.bz2 --output apr-1.7.0.tar.bz2
+	tar -xvf apr-1.7.0.tar.bz2
+	mv apr-1.7.0 apr
+	cd apr
+./configure --prefix=/usr    \
+            --disable-static \
+            --with-installbuilddir=/usr/share/apr-1/build &&
+make
+make install
+
+Libraries have been installed in:
+   /usr/lib
+
+If you ever happen to want to link against installed libraries
+in a given directory, LIBDIR, you must either use libtool, and
+specify the full pathname of the library, or use the '-LLIBDIR'
+flag during linking and do at least one of the following:
+   - add LIBDIR to the 'LD_LIBRARY_PATH' environment variable
+     during execution
+   - add LIBDIR to the 'LD_RUN_PATH' environment variable
+     during linking
+   - use the '-Wl,-rpath -Wl,LIBDIR' linker flag
+   - have your system administrator add LIBDIR to '/etc/ld.so.conf'
+
+See any operating system documentation about shared libraries for
+more information, such as the ld(1) and ld.so(8) manual pages.
+
+
+[source: https://www.linuxfromscratch.org/lfs/view/10.1/chapter08/expat.html]
+cd /home/admin
+curl -L https://github.com/libexpat/libexpat/releases/download/R_2_4_1/expat-2.4.1.tar.gz --output expat-2.4.1.tar.gz
+	tar -zxvf expat-2.4.1.tar.gz
+	mv expat-2.4.1 expat
+	cd /home/admin/expat
+	./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/expat-2.4.1
+			make && make install
+	install -v -m644 doc/*.{html,png,css} /usr/share/doc/expat-2.4.1
+
+cd /home/admin
+curl -L https://archive.apache.org/dist/apr/apr-util-1.6.1.tar.bz2 --output apr-util-1.6.1.tar.bz2
+	tar -xvf apr-util-1.6.1.tar.bz2
+	mv apr-util-1.6.1 apr-util
+	cd /home/admin/apr-util
+	./configure --prefix=/usr       \
+            --with-apr=/usr     \
+            --with-gdbm=/usr    \
+            --with-openssl=/usr \
+            --with-crypto &&
+make
+make install
+
+cd /home/admin
+curl -L  https://dlcdn.apache.org//httpd/httpd-2.4.49.tar.gz --output httpd-2.4.49.tar.gz
+	tar -zxvf httpd-2.4.49.tar.gz
+	mv httpd-2.4.49 httpd
+	cd /home/admin/httpd
+	
+	./configure --enable-authnz-fcgi                              \
+            
+            --enable-mods-shared="all cgi"                    \
+            --enable-mpms-shared=all                          \
+            --enable-suexec=shared                            \
+            --with-apr=/usr/bin/apr-1-config                  \
+            --with-apr-util=/usr/bin/apu-1-config             \
+            --with-suexec-bin=/usr/lib/httpd/suexec           \
+            --with-suexec-caller=apache                       \
+            --with-suexec-docroot=/srv/www                    \
+            --with-suexec-logfile=/var/log/httpd/suexec.log   \
+            --with-suexec-uidmin=100                          \
+            --with-suexec-userdir=public_html
+			
+			Server Version: 2.4.49
+    Install prefix: /usr/local/apache2
+    C compiler:     gcc
+    CFLAGS:          -g -O2 -pthread
+    CPPFLAGS:        -DLINUX -D_REENTRANT -D_GNU_SOURCE
+    LDFLAGS:          -L/usr/lib
+    LIBS:
+    C preprocessor: gcc -E
+make;make install
+
+firewall-cmd  --add-port=80/tcp  --permanent
+firewall-cmd --reload

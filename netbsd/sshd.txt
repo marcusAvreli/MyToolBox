@@ -1,0 +1,6 @@
+
+/etc/rc.d/sshd onerestart
+
+or
+service sshd onerestart
+

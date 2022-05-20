@@ -1,0 +1,17 @@
+	[Unit]
+	Description=MySQL Server
+	After=syslog.target
+	After=network.target
+
+	[Service]
+	Type=simple
+	User=root
+	Group=wheel
+	PIDFile=/var/run/mysql5/mysqld.pid
+	ExecStart=/opt/mysql5/bin/mysqld --defaults-file=/etc/my.cnf 
+	ExecReload=/usr/bin/kill -HUP $MAINPID
+	ExecStop=/usr/bin/kill $MAINPID
+	PrivateTmp=true
+
+	[Install]
+	WantedBy=multi-user.target

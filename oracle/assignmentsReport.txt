@@ -1,0 +1,87 @@
+                drop table assignments_report;
+
+
+
+
+                drop table assignments_report;
+create table  umtb_assignments_report (a_application_id varchar2(32)
+                ,a_application_name varchar2(128)
+                ,a_native_identity varchar2(450)
+                ,a_assignment_date number(19)
+                ,a_assignment_id varchar2(32)
+                ,a_source varchar2(32)
+                ,a_role_name varchar2(128)
+                ,a_role_id varchar2(32)
+                ,a_name varchar2(32)
+                ,a_assigner varchar2(32)
+                --,a_umtb_business_source varchar2(450)            
+                );
+--select * from umtb_assignments_report
+--left join umtb_full_entitlements_report entReport on entReport.D_ASSIGNMENT_ID = umtb_assignments_report.A_ASSIGNMENT_ID;
+
+
+insert into assignments_report (a_application_id,a_assigner,a_application_name,a_native_identity,a_assignment_date,a_assignment_id,a_source,a_role_name,a_role_id,a_name)
+                                                                                                                                
+with RoleAssignments as (
+select x.a_application_id
+,x.a_application_name
+,x.a_native_identity
+,x.a_assignment_date
+,x.a_assignment_id
+,x.a_source
+,x.a_role_name
+,x.a_role_id
+,name a_name
+,x.a_assigner
+
+from spt_identity sptIdentity
+    , xmltable(
+                                
+                                '
+                                
+        for $i in /Map/entry[@key="roleAssignments"]/value/List/RoleAssignment
+         let $RoleTargets := $i/RoleTarget
+         return
+           if ($RoleTargets) then
+             for $j in $RoleTargets
+             return element r {
+              $i/@date
+              ,$i/@assignmentId
+               ,$i/@roleId
+               ,$i/@roleName
+               ,$i/@source
+                ,$i/@assigner
+            , element rt_applicationId { data($j/@applicationId ) }
+            , element rt_applicationName { data($j/@applicationName ) }
+            , element rt_nativeIdentity { data($j/@nativeIdentity ) }
+        
+            }
+          else
+            element r {
+              $i/@date
+              ,$i/@assignmentId
+               ,$i/@roleId
+               ,$i/@roleName
+               ,$i/@source
+                ,$i/@assigner
+             
+       
+            }'
+       passing xmltype(sptIdentity.PREFERENCES)
+       columns 
+                               --person_id    varchar2(20)       path 'name'
+            -- , person_name  varchar2(10) path 'name'
+            a_assignment_date number(19) path '@date'
+            ,a_assignment_id varchar2(32) path '@assignmentId'
+            ,a_role_id varchar2(32) path '@roleId'
+            ,a_role_name varchar2(32) path '@roleName'
+            ,a_source varchar2(32) path '@source'
+             , a_application_id   varchar2(32) path 'rt_applicationId'
+              ,a_application_name   varchar2(128) path 'rt_applicationName'
+              ,a_native_identity   varchar2(450) path 'rt_nativeIdentity'
+               ,a_assigner   varchar2(32) path '@assigner'
+            
+     ) x
+where dbms_lob.getlength(sptIdentity.preferences)>1
+)
+select a_application_id,a_assigner,a_application_name,a_native_identity,a_assignment_date,a_assignment_id,a_source,a_role_name,a_role_id,a_name from RoleAssignments

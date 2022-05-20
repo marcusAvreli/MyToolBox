@@ -1,0 +1,69 @@
+============= U N I X =============
+mozilla-rootcerts
+bmake
+bmake install
+mozilla-rootcerts-openssl
+bmake
+bmake install
+
+echo -n | openssl s_client -connect www.github.com:443 | openssl x509 > /etc/openssl/certs/github.com.cert
+
+Let also be sure it has the right owner and rights:
+
+chmod 0644 /etc/openssl/certs/github.com.cert
+chown root:wheel /etc/openssl/certs/github.com.cert
+
+
+3. Calculate the hash of your CA certificate
+openssl x509 -noout -hash -in /etc/openssl/certs/github.com.cert
+
+4. create a link to your certificate using the calculated hash
+
+cd /etc/openssl/certs
+sudo ln -s ca.crt 5d3b9418.0
+
+Verify settings
+
+openssl s_client -connect github.com:443 | grep -i -e verify
+
+RIGHT OUTPUT
+depth=2 C = US, O = DigiCert Inc, OU = www.digicert.com, CN = DigiCert High Assurance EV Root CA
+verify return:1
+depth=1 C = US, O = "DigiCert, Inc.", CN = DigiCert High Assurance TLS Hybrid ECC SHA256 2020 CA1
+verify return:1
+depth=0 C = US, ST = California, L = San Francisco, O = "GitHub, Inc.", CN = github.com
+verify return:1
+Verify return code: 0 (ok)
+    Verify return code: 0 (ok)
+    Verify return code: 0 (ok)
+
+
+
+ERROR OUTPUT
+depth=1 C = US, O = "DigiCert, Inc.", CN = DigiCert High Assurance TLS Hybrid ECC SHA256 2020 CA1
+verify error:num=20:unable to get local issuer certificate
+verify return:1
+depth=0 C = US, ST = California, L = San Francisco, O = "GitHub, Inc.", CN = github.com
+verify return:1
+Verify return code: 20 (unable to get local issuer certificate)
+    Verify return code: 20 (unable to get local issuer certificate)
+    Verify return code: 20 (unable to get local issuer certificate)
+	
+	
+ssl + python
+https://stackoverflow.com/questions/25981703/pip-install-fails-with-connection-error-ssl-certificate-verify-failed-certi
+
+curl -sO http://cacerts.digicert.com/DigiCertHighAssuranceEVRootCA.crt 
+openssl x509 -inform DES -in DigiCertHighAssuranceEVRootCA.crt -out DigiCertHighAssuranceEVRootCA.pem -text
+
+openssl s_client -connect pypi.python.org:443
+CONNECTED(00000003)
+depth=1 /C=US/O=DigiCert Inc/OU=www.digicert.com/CN=DigiCert SHA2 Extended Validation Server CA
+verify error:num=20:unable to get local issuer certificate
+verify return:0
+---
+Certificate chain
+ 0 s:/businessCategory=Private Organization/1.3.6.1.4.1.311.60.2.1.3=US/1.3.6.1.4.1.311.60.2.1.2=Delaware/serialNumber=3359300/street=16 Allen Rd/postalCode=03894-4801/C=US/ST=NH/L=Wolfeboro,/O=Python Software Foundation/CN=www.python.org
+   i:/C=US/O=DigiCert Inc/OU=www.digicert.com/CN=DigiCert SHA2 Extended Validation Server CA
+ 1 s:/C=US/O=DigiCert Inc/OU=www.digicert.com/CN=DigiCert SHA2 Extended Validation Server CA
+   i:/C=US/O=DigiCert Inc/OU=www.digicert.com/CN=DigiCert High Assurance EV Root CA

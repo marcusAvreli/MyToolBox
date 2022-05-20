@@ -1,0 +1,142 @@
+public class SingleInstance2 {
+       static File file;
+    static FileChannel fileChannel;
+    static FileLock lock;
+    static boolean running = false;
+    static String currentPID = null;
+    static String lockFilePID = null;
+    public static final String USER_DIR = System.getProperty("user.dir");
+    public static final String LOCK_FILE = "az-client.lock";
+    private static final Logger logger = LogManager.getLogger(SingleInstance2.class);
+    public static boolean checkInstance() {
+        try {
+            file = new File(USER_DIR + File.separator + LOCK_FILE);
+            currentPID = Integer.toString(11);
+            if (!file.exists()) {
+                file.createNewFile();
+                writePID(currentPID);
+                lockFile();
+                addShudDownHook();
+                running = true;
+                return running;
+            } else {
+                if (isFileLocked()) {
+                    logger.info("App already running");
+                    System.exit(0);
+                } else {
+                    lockFilePID = getPIDFromLockFile();
+                   
+                        file.delete();
+                        file.createNewFile();
+                        writePID(currentPID);
+                        lockFile();
+                        addShudDownHook();
+                        running = true;
+                        return running;
+                    
+                }
+            }
+        } catch (Exception e) {
+            logger.error("App already running",e );
+            System.exit(0);
+        }
+        return running;
+    }
+
+    /**
+     * 
+     * @return
+     * @throws IOException
+     */
+    @SuppressWarnings("resource")
+    private static boolean isFileLocked() throws IOException {
+        fileChannel = new RandomAccessFile(file, "rw").getChannel();
+        lock = fileChannel.tryLock();
+        if (lock == null) {
+            fileChannel.close();
+            fileChannel = null;
+            return true;
+        } else {
+            lock.release();
+            fileChannel.close();
+            fileChannel = null;
+        }
+        return false;
+    }
+
+
+   
+  
+
+    /**
+     * This method write PID to Lock file
+     * 
+     * @param pid
+     * @throws Exception
+     */
+    private static void writePID(String pid) throws Exception {
+        try {
+            // To Do write PID to LockFile
+        } catch (Exception e) {
+            logger.error("writePID",e);
+            throw e;
+        }
+    }
+
+    /**
+     * This method return PID from Lock File
+     * 
+     * @return
+     * @throws Exception
+     */
+    private static String getPIDFromLockFile() throws Exception {
+        try {
+            return "11";//To Do getPID from File
+        } catch (Exception e) {
+            logger.error("getPIDFromLockFile",e);
+            throw e;
+        }
+    }
+
+    private static void addShudDownHook() {
+        try {
+            ShutdownHook shutdownHook = new ShutdownHook();
+            Runtime.getRuntime().addShutdownHook(shutdownHook);
+        } catch (Exception e) {
+            logger.error("addShudDownHook",e);
+        }
+    }
+
+    private static void unlockFile() {
+        try {
+            if (lock != null) {
+                lock.release();
+            }
+            fileChannel.close();
+            file.delete();
+            running = false;
+        } catch (IOException e) {
+            logger.error("unlockFile",e);
+        }
+    }
+
+    private static void lockFile() {
+        try {
+            fileChannel = new RandomAccessFile(file, "rw").getChannel();
+            lock = fileChannel.tryLock();
+            if (lock == null) {
+                fileChannel.close();
+                fileChannel = null;
+            }
+        } catch (IOException e) {
+            logger.error("lockFile",e);
+        }
+    }
+
+    static class ShutdownHook extends Thread {
+        public void run() {
+            unlockFile();
+        }
+   }
+
+}

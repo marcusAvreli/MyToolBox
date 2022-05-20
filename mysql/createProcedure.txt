@@ -1,0 +1,169 @@
+use identityiq;
+DROP PROCEDURE IF EXISTS GetIdentityRequestByRange;
+
+DELIMITER $$
+CREATE PROCEDURE GetIdentityRequestByRange(
+	IN fromDate bigint(20),
+	IN toDate bigint(20)
+     
+)
+BEGIN
+	SELECT sptIdentityRequest.name ir_name,sptIdentityRequest.state ir_state,sptIdentityRequest.type ir_type,sptIdentityRequest.source ir_source
+ 	FROM spt_identity_request sptIdentityRequest
+	WHERE created >= fromDate and created<=toDate;
+END $$
+
+DELIMITER ;
+
+use identityiq;
+DROP PROCEDURE IF EXISTS GetReports;
+DELIMITER $$
+CREATE PROCEDURE GetReports(
+	in reportType int(11)     
+)
+BEGIN
+IF (reportType IS NULL) THEN
+	SELECT *  	FROM tbl_report;    
+end if;
+
+IF (reportType IS not NULL) THEN
+	SELECT * 
+ 	FROM tbl_report
+	where	tbl_report.type_id = reportType;     
+end if;	
+END $$
+DELIMITER ;
+
+use identityiq;
+DROP PROCEDURE IF EXISTS GetReportFields;
+DELIMITER $$
+CREATE PROCEDURE GetReportFields(
+	in reportId int(11)     
+)
+BEGIN
+select tblFields.id,tblFields.name,tblFields.display_name,tblFields.description,tblFields.disabled,tblReportFields.output_ordering,
+tblReportFields.disabled disabled_By_Report, tblReportFields.invisible invisible_By_Report
+from tbl_report_fields tblReportFields
+inner join tbl_Fields tblFields on tblFields.id = tblReportFields.field_Id
+where tblReportFields.report_id=reportId;
+
+END $$
+DELIMITER ;
+
+use identityiq;
+DROP PROCEDURE IF EXISTS GetMyStoredProcedure;
+DELIMITER $$
+CREATE PROCEDURE GetMyStoredProcedure(
+	in reportId int(11)     
+)
+BEGIN
+
+if (reportId is not null) then
+
+	SELECT mySp.id, mySp.name,mySp.description  ,mySpParams.parameter_name	
+	FROM tbl_report_stored_procs mySp
+left join information_schema.parameters mySpParams on mySpParams.specific_name=mySp.Name
+	where id = reportId;    
+    
+end if;
+  
+  
+if (reportId is  null) then
+
+	SELECT mySp.id, mySp.name,mySp.description  ,mySpParams.parameter_name	
+	FROM tbl_report_stored_procs mySp
+left join information_schema.parameters mySpParams on mySpParams.specific_name=mySp.Name;
+	
+    
+end if;
+
+
+
+END $$
+DELIMITER ;
+
+
+GRANT all PRIVILEGES ON identityiq.GetIdentityRequestByRange TO 'root'@'%';
+FLUSH PRIVILEGES;
+
+GRANT all PRIVILEGES ON mysql.proc TO 'root'@'%';
+FLUSH PRIVILEGES;
+
+select * from mysql.proc;
+CALL GetIdentityRequestByRange(1609459200000,1530819855280);
+
+use identityiq;
+DROP PROCEDURE IF EXISTS GetProcedureByReport;
+
+DELIMITER $$
+CREATE PROCEDURE GetProcedureByReport(
+	IN inputid int    
+)
+BEGIN
+	SELECT storedProc.id,storedProc.name,storedProc.description 
+ 	FROM tbl_report_sp reportSp
+	inner join tbl_report_stored_procs  storedProc on storedProc.id=reportSp.sp_id
+	WHERE reportSp.report_id=inputid;
+	
+END $$
+
+DELIMITER ;
+
+
+
+use identityiq;
+DROP PROCEDURE IF EXISTS GetProcedureParams;
+
+DELIMITER $$
+CREATE PROCEDURE GetProcedureParams(
+	IN procId int    
+)
+BEGIN
+	SELECT reportSpParams.id,reportSpParams.name,reportSpParams.param_ordering 
+ 	FROM tbl_report_sp_params reportSpParams
+	
+	WHERE reportSpParams.sp_id=procId;
+	
+END $$
+
+DELIMITER ;
+
+
+
+use identityiq;
+DROP PROCEDURE IF EXISTS GetBundles;
+
+DELIMITER $$
+CREATE PROCEDURE GetBundles(
+	
+)
+BEGIN
+	SELECT sptBundle.name bundle_name,sptBundle.created bundle_created
+ 	FROM spt_bundle sptBundle;
+	
+	
+	
+END $$
+
+DELIMITER $$
+
+use identityiq;
+DROP PROCEDURE IF EXISTS GetStoredProcedureAll;
+CREATE PROCEDURE GetStoredProcedureAll(
+	
+)
+BEGIN
+select routine_schema as database_name,
+       routine_name,
+       routine_type as type,
+       data_type as return_type,
+       routine_definition as definition
+from information_schema.routines
+where routine_schema not in ('sys', 'information_schema',
+                             'mysql', 'performance_schema')
+    -- and r.routine_schema = 'database_name' -- put your database name here
+order by routine_schema,
+         routine_name;
+END $$
+
+DELIMITER ;

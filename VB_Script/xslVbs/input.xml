@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE bookmap PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<bookmap>
+<booktitle>
+<mainbooktitle></mainbooktitle>
+<booktitlealt></booktitlealt>
+</booktitle>
+<frontmatter>
+<keydef keys="copyright">
+<topicmeta>
+<keywords>
+<keyword></keyword>
+</keywords>
+</topicmeta>
+</keydef>
+<keydef keys="trademarks">
+<topicmeta>
+<keywords>
+<keyword></keyword>
+</keywords>
+</topicmeta>
+</keydef>
+<keydef keys="trademarks">
+<topicmeta>
+<keywords>
+<keyword></keyword>
+</keywords>
+</topicmeta>
+</keydef>
+<notices></notices>
+<booklists>
+<toc></toc>
+</booklists>
+</frontmatter>
+<chapter></chapter>
+</bookmap>
+  

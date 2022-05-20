@@ -1,0 +1,102 @@
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+C:\Prog\Tomcat 8.5_Tomcat8-IdentityIQ\conf>java -jar HelloKDC.jar
+Subject=Subject:
+        Principal: iiqSpnego2@SERI.SAILPOINTDEMO.COM
+        Private Credential: Ticket (hex) =
+0000: 61 82 04 74 30 82 04 70   A0 03 02 01 05 A1 18 1B  a..t0..p........
+0010: 16 53 45 52 49 2E 53 41   49 4C 50 4F 49 4E 54 44  .SERI.SAILPOINTD
+0020: 45 4D 4F 2E 43 4F 4D A2   2B 30 29 A0 03 02 01 02  EMO.COM.+0).....
+0030: A1 22 30 20 1B 06 6B 72   62 74 67 74 1B 16 53 45  ."0 ..krbtgt..SE
+0040: 52 49 2E 53 41 49 4C 50   4F 49 4E 54 44 45 4D 4F  RI.SAILPOINTDEMO
+0050: 2E 43 4F 4D A3 82 04 20   30 82 04 1C A0 03 02 01  .COM... 0.......
+0060: 12 A1 03 02 01 02 A2 82   04 0E 04 82 04 0A 93 A5  ................
+0070: 5A CA 4E C6 F2 25 0B 57   37 91 A1 BB 49 66 72 00  Z.N..%.W7...Ifr.
+0080: ED 25 62 90 36 ED A0 B4   B3 B7 EC B8 FA EB 92 42  .%b.6..........B
+0090: 17 CA BB 00 6D B6 6F 4C   05 FF 98 67 58 E5 00 67  ....m.oL...gX..g
+00A0: 9B 12 34 AE C1 CA 54 5E   97 6F 89 0E F6 1E 8D 80  ..4...T^.o......
+00B0: F5 63 73 9D 11 43 20 75   85 AF 81 8A AD A7 F4 B7  .cs..C u........
+00C0: D3 2F F7 45 DC 8F 62 5E   24 42 BB D6 94 07 A7 B4  ./.E..b^$B......
+00D0: 7F 15 D8 DB 39 BC 61 98   74 E0 B9 7B 44 DF 36 70  ....9.a.t...D.6p
+00E0: 98 AB EF 53 CF 51 B1 D5   85 6F E2 76 FB B6 87 86  ...S.Q...o.v....
+00F0: AF 81 10 9E 79 B3 0C 06   BD 8A 4F 00 06 14 66 A4  ....y.....O...f.
+0100: EB B1 7F 1D DB 93 7B 7F   BC ED 8A D7 71 76 19 EC  ............qv..
+0110: 58 C9 D7 14 BC 04 44 40   FB E3 4A 2C 4A D5 DF 0E  X.....D@..J,J...
+0120: 30 56 F6 99 51 4E E2 45   A3 36 EE 14 2C 52 47 D7  0V..QN.E.6..,RG.
+0130: E6 6B 16 68 40 65 85 F2   5F 25 44 9A D4 1C FD 8E  .k.h@e.._%D.....
+0140: 77 23 A3 EF 21 E5 68 08   CE 73 E8 FE A8 96 38 0D  w#..!.h..s....8.
+0150: 16 F9 F5 84 FD 0A A1 95   2D 60 71 2B BB 9F 28 86  ........-`q+..(.
+0160: C7 C2 EA F7 2D AC 71 67   63 1D 1A A4 B1 FE 2C EC  ....-.qgc.....,.
+0170: 33 FA 4A 0C F8 57 0D A0   36 92 23 D2 58 AA 23 54  3.J..W..6.#.X.#T
+0180: CE C9 FC EB 61 1B AF 5C   99 B0 F7 DD 66 BA F9 3B  ....a..\....f..;
+0190: F0 0A 45 7E 60 A7 8E 39   3D 5C A6 B6 93 B5 53 DE  ..E.`..9=\....S.
+01A0: 23 C8 BE A9 7A 59 AF D5   A3 B3 B9 86 FC D6 27 73  #...zY........'s
+01B0: 49 A9 AC F0 0F 38 1F 76   21 FD 5C AF C5 76 5A F2  I....8.v!.\..vZ.
+01C0: 88 B9 9C F4 DD B3 55 87   9C 47 F1 DA 95 0B DA E9  ......U..G......
+01D0: 8B 78 46 78 30 BC 20 57   1A 5F AD C7 E6 92 D2 87  .xFx0. W._......
+01E0: 86 52 A8 EE FB 10 DB 59   BF BE 74 63 EB CA 0C CB  .R.....Y..tc....
+01F0: 1B 58 46 77 41 54 0D 2E   9D 25 72 43 9A 97 E3 A2  .XFwAT...%rC....
+0200: 6E B6 91 76 9F D0 EE 8D   C3 AF 13 AB 0B 34 ED 51  n..v.........4.Q
+0210: B7 28 05 BB 9F 0C ED C1   3F A3 34 18 AE 74 D2 A5  .(......?.4..t..
+0220: 8D 82 92 86 32 EE 80 3E   A4 98 AA 23 90 84 33 7E  ....2..>...#..3.
+0230: F5 3A 0A 82 BF 39 53 6E   06 1C EA CE FA 31 C0 2D  .:...9Sn.....1.-
+0240: A0 CB 27 50 25 0E F5 EB   43 18 3D 6D FA A9 DA 57  ..'P%...C.=m...W
+0250: 24 75 08 20 E5 3F 46 40   87 A9 3C D5 02 A3 51 21  $u. .?F@..<...Q!
+0260: FA 7D 15 49 38 08 12 78   04 F2 D0 A3 A0 2C C2 33  ...I8..x.....,.3
+0270: D5 46 8B D2 87 71 2A CB   1E 88 46 B1 E8 4F 6D 07  .F...q*...F..Om.
+0280: 15 9C 21 80 DB CF 7C 1A   B7 92 53 C7 7F 30 47 E2  ..!.......S..0G.
+0290: 1A 09 4C F6 0E 62 2E 67   B2 0C C3 FD F8 2E DF B3  ..L..b.g........
+02A0: A4 F2 F9 D4 C0 44 E2 FA   6F 37 F5 DD 6C B6 88 AF  .....D..o7..l...
+02B0: E7 D0 BD A5 47 EF A9 02   23 32 BA 33 18 59 0A 98  ....G...#2.3.Y..
+02C0: FD 80 F6 93 EC A6 5A A2   40 36 31 06 10 72 B5 4A  ......Z.@61..r.J
+02D0: 5E 48 AC BF 16 7A 41 86   13 7E E5 71 37 85 87 BD  ^H...zA....q7...
+02E0: 22 95 D8 05 37 4E D0 9C   00 C4 B9 75 AB 23 F2 CC  "...7N.....u.#..
+02F0: 4A 99 3E 44 A5 77 09 65   51 66 C4 F9 CD C0 DF 22  J.>D.w.eQf....."
+0300: C6 73 C6 4B 58 DF D1 C8   5C 6D 7C D6 60 01 01 D8  .s.KX...\m..`...
+0310: F7 9A DE 76 8A B0 BF EF   B7 74 F4 E2 87 2F 76 88  ...v.....t.../v.
+0320: 0F 12 93 D9 72 E3 0F F1   D5 9A 67 51 C1 22 95 AD  ....r.....gQ."..
+0330: 16 A0 1A BD 13 CD 2D 5D   DD E2 64 FC 97 84 45 37  ......-]..d...E7
+0340: 5D 60 79 03 67 22 F6 15   EE C0 81 B4 26 D9 73 5C  ]`y.g"......&.s\
+0350: AF 08 9D B6 2B CF B8 5D   51 5D A2 E6 C7 6C 9D 4E  ....+..]Q]...l.N
+0360: BB 03 E5 2E C2 4B 7E 54   F0 94 90 13 5C CE 59 11  .....K.T....\.Y.
+0370: 74 A4 D2 3C 85 38 0A D4   48 52 42 2F D7 43 F0 A3  t..<.8..HRB/.C..
+0380: 4A BF FF 0B 92 FD A3 92   9C 8D 2B C6 63 F3 63 81  J.........+.c.c.
+0390: 11 C9 29 9A D5 95 C3 04   4A B1 8E D0 E6 85 29 04  ..).....J.....).
+03A0: 13 DA 25 B8 18 C3 5D 11   2B 2D 42 EE A8 68 E5 F7  ..%...].+-B..h..
+03B0: 87 D1 15 4E F7 05 69 9E   F7 11 B5 DD C7 31 75 61  ...N..i......1ua
+03C0: 54 A6 BE DB F5 24 0A 0A   1A 68 1F 8A C9 82 B4 45  T....$...h.....E
+03D0: 91 40 F6 00 B5 92 EF 56   6C 2B 29 42 3D 44 A0 91  .@.....Vl+)B=D..
+03E0: 33 5D 82 F8 C4 E9 F3 A8   EC AB 26 7E A7 8B E7 26  3]........&....&
+03F0: 19 76 D7 69 FA 83 C0 3E   75 8F 0E A2 EE A0 57 B3  .v.i...>u.....W.
+0400: BF EA 79 04 90 45 6E 58   63 08 7B 46 BA CF F8 E3  ..y..EnXc..F....
+0410: 37 D2 E4 4A C4 B8 9F 2B   FA 55 47 5D 7F DD 89 45  7..J...+.UG]...E
+0420: E7 21 29 14 D2 83 34 9B   88 A5 16 38 CB D2 E5 D6  .!)...4....8....
+0430: 2E 74 81 48 91 9D 17 8C   2D D7 63 19 94 0E 94 57  .t.H....-.c....W
+0440: 04 C0 FA 84 60 DE 72 81   5C E2 71 78 D2 54 A9 05  ....`.r.\.qx.T..
+0450: AB 7B 48 49 BC 1F 20 E2   35 73 68 27 30 CC 37 0F  ..HI.. .5sh'0.7.
+0460: 7D 94 39 48 87 89 81 96   2D 2C E0 25 1A 22 1F 9B  ..9H....-,.%."..
+0470: F2 40 D8 BF 72 91 52 9E                            .@..r.R.
+
+Client Principal = iiqSpnego2@SERI.SAILPOINTDEMO.COM
+Server Principal = krbtgt/SERI.SAILPOINTDEMO.COM@SERI.SAILPOINTDEMO.COM
+Session Key = EncryptionKey: keyType=17 keyBytes (hex dump)=
+0000: 1E 79 95 08 CC E0 63 B3   73 66 FC 36 F3 19 D2 2E  .y....c.sf.6....
+
+
+Forwardable Ticket false
+Forwarded Ticket false
+Proxiable Ticket false
+Proxy Ticket false
+Postdated Ticket false
+Renewable Ticket false
+Initial Ticket false
+Auth Time = Wed Feb 16 08:56:26 CST 2022
+Start Time = Wed Feb 16 08:56:26 CST 2022
+End Time = Wed Feb 16 18:56:26 CST 2022
+Renew Till = null
+Client Addresses  Null
+
+Connection test successful.
+
+C:\Prog\Tomcat 8.5_Tomcat8-IdentityIQ\conf>

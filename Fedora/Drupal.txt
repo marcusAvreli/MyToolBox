@@ -1,0 +1,75 @@
+DRUPAL
+
+
+
+cd /home/admin
+curl -k -L https://www.drupal.org/download-latest/tar.gz --output /home/admin/drupal.tar.gz
+tar -zxvf /home/admin/drupal.tar.gz
+
+
+httpd.conf
+	User drupal
+	Group apache
+
+	useradd drupal --shell /sbin/nologin --no-create-home
+	groupadd apache
+	usermod -a -G apache drupal
+
+Which user running apache
+	/var/www/html/whoami.php
+	<?php echo(exec("whoami"))?>
+
+
+chmod 777 /var/www/html/drupal/sites/default
+cp /var/www/html/drupal/sites/default/default.settings.php /var/www/html/drupal/sites/default/settings.php
+chmod 777 /var/www/html/drupal/sites/default/settings.php
+
+ AH01630: client denied by server configuration: /var/www/html/drupal/.htaccess
+ <Directory /var/www/example.com>
+  Order allow,deny
+  Allow from all
+  Require all granted
+</Directory>
+
+create drupal user
+
+	CREATE USER 'drupal'@'localhost' IDENTIFIED BY 'zubur1';
+	ALTER USER 'drupal'@'localhost' IDENTIFIED BY 'zubur1';
+	
+	GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES ON drupal.* TO 'drupal'@'localhost' IDENTIFIED BY 'zubr1';
+	FLUSH PRIVILEGES;
+	SELECT Host,User,password_last_changed FROM mysql.user;
+FLUSH PRIVILEGES;
+
+create database 
+	mysql -u drupal -p
+		create database drupal;
+
+
+
+
+ cp /var/www/html/drupal/sites/default/default.settings.php /var/www/html/drupal/sites/default/settings.php
+ chmod -R 777 /var/www/html/drupal/sites/default
+ 
+ in vi 
+	/opt/httpd/conf/httpd.conf 
+	 enable the rewrite module
+	 root dir of httpd AllowOverride All
+enable opcache 
+	zend_extension=/usr/src/php/modules/opcache.so 
+	opcache.enable=1
+	opcache.memory_consumption=128
+	opcache.max_accelerated_files=10000
+	opcache.revalidate_freq=200
+
+
+
+After drupal database was installed:
+	chmod 0644 /var/www/html/drupal/sites/default/settings.php
+	chmod 0755 /var/www/html/drupal/sites/default/
+	
+Maintenance	
+	/drupal/admin/config/development/maintenance
+	
+Drupal logs
+	/usr/local/apache2/logs/error_log

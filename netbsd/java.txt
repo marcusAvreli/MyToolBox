@@ -1,0 +1,66 @@
+http://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/lang/oracle-jdk8/index.html
+
+export PKG_PATH=http://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/lang/
+
+# pkg_add -v oracle-jdk8
+
+
+echo ftp://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/amd64/9.2/All/> /usr/pkg/etc/pkgin/repositories.conf
+
+ftp://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/lang
+
+https://people.allbsd.org/~hrs/NetBSD/guide/en/chap-pack.html
+
+
+
+export PKG_PATH="http://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/"
+echo $PKG_PATH
+
+##working version
+##source https://superuser.com/questions/975556/netbsd-no-pkg
+export PKG_PATH="http://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/amd64/9.2/All/"   
+https://github.com/joyent/pkgsrc-legacy/issues/434
+source: https://forums.freebsd.org/threads/unable-find-java-jdk-downloadable-binaries-new-to-freebsd.28938/
+pkg_add /path/to/downloaded/package.tbz
+
+pkgin install oracle-jdk8
+
+pkg_add ftp://ftp.NetBSD.org/pub/NetBSD/packages/1.4.2/i386/All/tcsh
+
+pkg_add ftp://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/lang
+
+
+Please remember to add /usr/pkg/bin to your PATH environment variable
+and /usr/pkg/man to your MANPATH environment variable, if necessary.
+
+An example mk.conf file with the settings you provided to "bootstrap"
+has been created for you. It can be found in:
+
+      /usr/pkg/etc/mk.conf
+
+You can find extensive documentation of the NetBSD Packages Collection
+in /usr/pkgsrc/doc/pkgsrc.txt.
+
+Thank you for using pkgsrc!
+must be fetched into:  /usr/pkgsrc/distfiles
+
+/usr/pkgsrc/lang/oracle-jdk8
+
+
+
+
+$NetBSD: MESSAGE.NetBSD,v 1.1 2015/05/30 09:49:43 ryoon Exp $
+
+In order to be able to run the JVM, you need to add the following line
+to your /etc/fstab:
+
+    procfs /emul/linux/proc procfs rw,linux
+
+Furthermore, the maximum data segment size assigned to your user must
+be at least 262144.
+
+You may want to read the following for details about running this JDK:
+
+        /usr/pkg/java/oracle-8/README
+
+===========================================================================

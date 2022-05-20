@@ -1,0 +1,119 @@
+tbl_Report_Stored_Procs - information about stored procedures that are used for running reports
+
+CREATE TABLE IF NOT EXISTS `tbl_Report_Stored_Procs` (
+
+  `id` int(11) NOT NULL auto_increment,   
+  `name` varchar(250) NOT NULL default '0',       
+  `description` varchar(450)  ,     
+  
+   PRIMARY KEY  (`id`)
+
+);
+ALTER TABLE tbl_Report_Stored_Procs ADD CONSTRAINT stored_proc_name UNIQUE (name);
+ALTER TABLE tbl_Report_Stored_Procs add CONSTRAINT FOREIGN KEY (sp_name) references tbl_Report_Stored_Procs(id) on delete cascade on update restrict;
+ALTER TABLE tbl_Report_Stored_Procs ADD disabled int(1) not null default 0;
+
+
+CREATE TABLE IF NOT EXISTS `tbl_Report_SP_Params` (
+ `id` int(11) NOT NULL auto_increment,   
+  `name` varchar(250) NOT NULL default '0',       
+  `param_ordering` int not null default 1 ,     
+  `sp_id` int(11) not null default 1 ,     
+   PRIMARY KEY  (`id`)
+
+);
+ALTER TABLE tbl_report_type DROP  description;
+ALTER TABLE tbl_report_type ADD description varchar(450);
+CREATE TABLE IF NOT EXISTS tbl_report (
+	id int(11) NOT NULL auto_increment,   
+	name varchar(450) NOT NULL ,
+	description varchar(450) NOT NULL ,
+	type_id int(11) not null default 1 ,     
+	display_name varchar(450),
+	disabled int(1) not null default 0,
+	PRIMARY KEY  (id)
+
+);
+insert into tbl_report (name,description,type_id,display_name) values ('Id_Report1','idRep1_description',1, 'id_rep1_display_name');
+insert into tbl_report (name,description,type_id) values ('Id_Report2','idRep2_description',1);
+insert into tbl_report (name,description,type_id,display_name) values ('Id_Report3','idRep3_description',1, 'id_rep1_display_name');
+insert into tbl_report (name,description,type_id,display_name) values ('CertReport_Report3','cRep3_description',2, 'cert_rep1_display_name');
+
+CREATE TABLE IF NOT EXISTS tbl_report_type (
+	id int(11) NOT NULL auto_increment,   
+	name varchar(450) NOT NULL,	  
+	description varchar(450),
+	disabled int(1) not null default 0;
+	PRIMARY KEY  (id)
+
+);
+ALTER TABLE tbl_report_type ADD disabled int(1) not null default 0;
+ALTER TABLE tbl_report_type ADD name varchar(225) not null;
+ALTER TABLE tbl_report_type ADD display_name varchar(450);
+ALTER TABLE tbl_report_type ADD description varchar(450) ;
+INSERT INTO tbl_report_type (name) value ('Identity');
+INSERT INTO tbl_report_type (name) value ('Certification');
+
+tbl_report_type
+
+CREATE TABLE IF NOT EXISTS tbl_report_sp (
+	id int(11) NOT NULL auto_increment,  
+	report_id int(11) NOT NULL,
+	sp_id int(11) NOT NULL,
+	PRIMARY KEY  (id)
+);
+ALTER TABLE TBL_REPORT_sp add CONSTRAINT FOREIGN KEY (sp_id) references tbl_Report_Stored_Procs(id) on delete cascade on update restrict;
+ALTER TABLE TBL_REPORT_sp add CONSTRAINT FOREIGN KEY (report_id) references tbl_report(id) on delete cascade on update restrict;
+insert into tbl_report_sp (report_id,sp_id) values(1,1);
+CREATE TABLE IF NOT EXISTS tbl_report_fields (
+	id int(11) NOT NULL auto_increment,  
+	report_id int(11) NOT NULL,
+	name varchar(450) NOT NULL ,
+	display_name varchar(450) ,	
+	output_ordering int(11) NOT NULL ,
+	description varchar(450) NOT NULL ,
+	input_ordering int(11) not null default -1,
+	disabled int(1) not null default 0,
+	invisible int(1) not null default 0,
+	
+	PRIMARY KEY  (id)
+);
+ALTER TABLE tbl_report_fields ADD disabled int(1) not null default 0;
+ALTER TABLE tbl_report_type DROP  name;
+ALTER TABLE tbl_report_type DROP  display_name;
+ALTER TABLE tbl_report_type DROP  description;
+
+update  tbl_report_fields set field_id=9 where id= 1;
+update  tbl_report_fields set field_id=10 where id= 2;
+update  tbl_report_fields set field_id=11 where id= 3;
+
+ALTER TABLE tbl_report_fields ADD field_id int(11) not null default 0;
+ALTER TABLE tbl_report_fields ADD invisible int(1) not null default 0;
+ALTER TABLE tbl_report_fields ADD input_ordering int(11) not null default -1;
+
+insert into tbl_report_fields (report_id,name,display_name,output_ordering,description) values (1,'name','identityRequestName', 1,'bakasha');
+insert into tbl_report_fields (report_id,name,display_name,output_ordering,description) values (1,'state','myStatus', 2,'bakasha2');
+insert into tbl_report_fields (report_id,name,display_name,output_ordering,description) values (1,'source','mySource', 3,'bakasha2');
+
+
+ALTER TABLE tbl_Report_SP_Params add CONSTRAINT FOREIGN KEY sp_id refrences tbl_Report_Stored_Procs.id on delete cascade on update restrict
+
+
+
+
+CREATE TABLE IF NOT EXISTS tbl_fields (
+	id int(11) NOT NULL auto_increment,  
+	name int(11) NOT NULL,
+	display_name varchar(450) NOT NULL,
+	disabled int(1) not null default 0,
+	
+	PRIMARY KEY  (id)
+);
+ALTER TABLE tbl_fields ADD name varchar(450) NOT NULL;
+ALTER TABLE tbl_report_fields add CONSTRAINT FOREIGN KEY (field_id) references tbl_fields(id) on delete cascade on update restrict;
+insert into tbl_fields (name,display_name,description) values ('ir_name','identityRequestName','ir_name_description');
+insert into tbl_fields (name,display_name,description) values ('ir_state','myStatus','ir_status_description');
+insert into tbl_fields (name,display_name,description) values ('ir_source','mySource','ir_source_description');
+insert into tbl_fields (name,display_name,description) values ('ir_type','irType','ir_type_description');
+
+ALTER TABLE tbl_fields ADD CONSTRAINT tblfieldName UNIQUE (name);

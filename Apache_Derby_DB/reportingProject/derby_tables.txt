@@ -1,0 +1,24 @@
+tbl_Report_Stored_Procs - information about stored procedures that are used for running reports
+
+CREATE TABLE "ADMIN"."tbl_Report_Stored_Procs"
+(	
+	ID BIGINT not null  generated always as identity,
+	name varchar(250) NOT NULL default '0',       
+	description varchar(450)  ,     
+	disabled int not null default 0,
+	primary key (ID)
+);
+
+ALTER TABLE "ADMIN"."tbl_Report_Stored_Procs" ADD CONSTRAINT stored_proc_name UNIQUE (name);
+
+
+CREATE TABLE  tbl_report (
+	ID BIGINT not null  generated always as identity,
+	name varchar(450) NOT NULL ,
+	description varchar(450) NOT NULL ,
+	type_id int(11) not null default 1 ,     
+	display_name varchar(450),
+	disabled int(1) not null default 0,
+	PRIMARY KEY  (id)
+
+);

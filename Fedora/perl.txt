@@ -1,0 +1,18 @@
+1. COMPILER
+	dnf install gcc-c++ gcc
+	
+2. PERL
+	cd /home/admin
+	curl -L https://www.cpan.org/src/5.0/perl-5.34.0.tar.gz --output /home/admin/perl-5.34.0.tar.gz 
+		tar -zxvf perl-5.34.0.tar.gz 
+		mv /home/admin/perl-5.34.0 /home/admin/perl
+		cd /home/admin/perl
+		 			./Configure -des -Dprefix=/usr                 \
+                  -Dvendorprefix=/usr           \
+                  -Dman1dir=/usr/share/man/man1 \
+                  -Dman3dir=/usr/share/man/man3 \
+                  -Dpager="/usr/bin/less -isR"  \
+                  -Duseshrplib                  \
+                  -Dusethreads
+			make && make test && make install
+	cd /home/admin

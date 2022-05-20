@@ -1,0 +1,90 @@
+private  DocumentBuilder createDocumentBuidler() {
+              DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+              DocumentBuilder builder = null;
+              try {
+                     factory.setIgnoringElementContentWhitespace(true);
+                     builder = factory.newDocumentBuilder();
+              } catch (ParserConfigurationException e) {
+                     // TODO Auto-generated catch block
+                     e.printStackTrace();
+              }
+              return builder;
+
+       }
+       public  Document createDocument() {
+
+              // logger.info("sourceFile ==> "+sourceFile);
+              String inputString = getClobString();
+              Document document = null;
+              try {
+
+                     Reader reader = new StringReader(inputString);
+                     InputSource is = new InputSource(reader);
+                     is.setEncoding("UTF-8");
+                     DocumentBuilder buidler = createDocumentBuidler();
+
+                     document = buidler.parse(is);
+                     return document;
+
+              } catch (SAXException | IOException e) {
+                     // TODO Auto-generated catch block
+                     logger.info("Got_Exception:"+inputString+"<<<<<");
+              }
+
+              return null;
+       }
+       public  Document createDocumentByFile() {
+
+              // logger.info("sourceFile ==> "+sourceFile);
+              String sourceFile = getAbsolutePath();
+       
+              Document document = null;
+              try {
+
+                     InputStream inputStream = new FileInputStream(sourceFile);
+                     Reader reader = new InputStreamReader(inputStream, "UTF-8");
+                     InputSource is = new InputSource(reader);
+                     is.setEncoding("UTF-8");
+                     DocumentBuilder buidler = createDocumentBuidler();
+                     document = buidler.parse(is);
+                     return document;
+
+              } catch (SAXException | IOException e) {
+                     // TODO Auto-generated catch block
+                     
+              }
+
+              return null;
+       }
+       
+       public String getQuery(String queryString) {
+              String resultQuery= null;
+              Document document = getSubjectDocument();
+
+              XPath xPath = XPathFactory.newInstance().newXPath();
+              
+              try {
+
+                     NodeList nodes = (NodeList) xPath.evaluate(queryString,
+                                  document, XPathConstants.NODESET);
+                     if (null != nodes && nodes.getLength()>0) {
+                           logger.info("START:" + nodes.getLength());
+                           for (int i = 0; i < nodes.getLength(); i++) {                            
+                                  Element e = (Element) nodes.item(i);
+                                  //String textContent = e.getTextContent();
+                                  resultQuery = e.getAttribute("value");
+                                  
+                           }
+                           logger.info("got something");
+                     }else {
+                           logger.info("NothingFound");
+                     }
+              } catch (XPathExpressionException e) {
+                     // TODO Auto-generated catch block
+                     e.printStackTrace();
+              }
+
+              // setSubjectDocument(document);
+              return resultQuery;
+       }
+

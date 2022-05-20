@@ -1,0 +1,22 @@
+public void writeToXml() {
+	Document documentToWrite = getSubjectDocument();
+	TransformerFactory transformerFactory = TransformerFactory.newInstance();	
+	documentToWrite.setXmlStandalone(true);
+	Source xslDoc = new StreamSource("./resources/stylesheet.xsl");
+	Transformer transformer;
+	try {
+		transformer = transformerFactory.newTransformer(xslDoc);
+		DOMSource source = new DOMSource(documentToWrite);
+		String localAbsoulthPath = getAbosulthFilePath();                                             
+		File directory = new File(localAbsoulthPath);
+		if (!directory.exists()) {
+						directory.mkdirs();
+		}                                              
+		StreamResult result = new StreamResult(new File(localAbsoulthPath+"/"+getName()+".xml"));                                                
+		transformer.transform(source, result);
+	} catch (TransformerException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+}

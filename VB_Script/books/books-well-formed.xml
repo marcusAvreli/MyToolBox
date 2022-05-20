@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE catalog PUBLIC "books.dtd" "books.dtd">
+<catalog>
+   <book id="bk101">
+      <author>Gambardella, Matthew</author>
+      <title>XML Developer's Guide</title>
+      <genre>Computer</genre>
+<!-- The following line is not valid according to books.dtd. -->
+      <!--cost>44.95</cost-->
+	  <price>44.95</price>
+      <publish_date>2000-10-01</publish_date>
+      <description>An in-depth look at creating applications with
+      XML.</description>
+   </book>
+</catalog>

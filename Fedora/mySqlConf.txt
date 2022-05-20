@@ -1,0 +1,132 @@
+firewall-cmd --list-ports
+firewall-cmd --add-port=80/tcp --permanent
+firewall-cmd --reload
+firewall-cmd --list-ports
+
+firewall-cmd --list-ports
+firewall-cmd --add-port=3306/tcp --permanent
+firewall-cmd --reload
+firewall-cmd --list-ports
+ 
+https://noknow.info/it/os/install_mysql_from_source?lang=en
+
+Set the environment path fot MySQL.
+
+
+/etc/profile
+		MYSQL_HOME=/opt/mysql5
+        MYSQL_BIN=$MYSQL_HOME/bin
+        MYSQL_LIB=$MYSQL_HOME/lib
+        MYSQL_PKG_CONFIG=$MYSQL_LIB/pkgconfig
+        PATH=$MYSQL_BIN:$PATH:$HOME/.local/bin:$HOME/bin
+		PATH=MYSQL_BIN:$PATH
+		PATH=/opt/httpd/bin:/opt/php8/bin:/opt/perl/bin:/opt/apr-util/bin:$PATH:$HOME/.local/bin:$HOME/bin
+    export PATH
+	
+		LD_LIBRARY_PATH=$MYSQL_LIB:$LD_LIBRARY_PATH
+		LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:$LD_LIBRARY_PATH
+		LD_LIBRARY_PATH=/opt/apr-util/lib:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH
+	
+		PKG_CONFIG_PATH=$MYSQL_PKG_CONFIG:$PKG_CONFIG_PATH
+		PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/lib64/pkgconfig:/usr/lib/pkgconfig:$PKG_CONFIG_PATH
+	export PKG_CONFIG_PATH
+
+
+
+Import shared libraries to the system
+	ldconfig -v | grep sql
+	echo /opt/mysql5/lib > /etc/ld.so.conf.d/lib.conf
+	vi /etc/ld.so.conf.d/lib.conf
+	/opt/mysql/lib
+	ldconfig 
+	ldconfig -v | grep sql
+	
+Make Socket or Log Directories For MySQL
+	mkdir /var/run/mysql
+	mkdir /var/log/mysql
+	
+Make my.cnf File
+	mysql --help | grep my.cnf
+	*from left to right The last one is given priority.
+vi /etc/my.cnf
+	[client]
+	port = 3306
+	socket = /var/run/mysql/mysql.sock
+	default-character-set = utf8mb4
+	[mysql]
+	default-character-set=utf8mb4
+	[mysqld_safe]
+	log-error=/var/log/mysql/mysqld_safe.log
+	pid-file=/var/run/mysql/mysqld_safe.pid
+	[mysqld]
+	basedir = /opt/mysql5
+	datadir = /opt/mysql5/data
+	tmpdir = /tmp
+	port = 3306
+	socket = /var/run/mysql/mysql.sock
+	character-set-server = utf8mb4
+	default-storage-engine = InnoDB
+	explicit_defaults_for_timestamp = 1
+	default_password_lifetime = 0
+	lower-case-table-names = 2
+	#secure-file-priv = /tmp
+	#sql_mode=NO_ENGINE_SUBSTITUTION
+	user=root
+	log-error=/var/log/mysql/mysqld.log
+	pid-file=/var/run/mysql/mysqld.pid
+	key_buffer_size = 16M
+	[mysqldump]
+	default-character-set=utf8mb4
+	quick
+
+
+Initialize MySQL
+	mysqld --defaults-file=/etc/my.cnf --initialize
+	
+	
+Create mysqld.service File
+	vi /etc/systemd/system/mysqld.service
+
+
+	[Unit]
+	Description=MySQL Server
+	After=syslog.target
+	After=network.target
+
+	[Service]
+	Type=simple
+	User=root
+	Group=wheel
+	PIDFile=/var/run/mysql5/mysqld.pid
+	ExecStart=/opt/mysql5/bin/mysqld --defaults-file=/etc/my.cnf 
+	ExecReload=/usr/bin/kill -HUP $MAINPID
+	ExecStop=/usr/bin/kill $MAINPID
+	PrivateTmp=true
+
+	[Install]
+	WantedBy=multi-user.target
+
+
+Check the status of mysql process.
+
+	systemctl status mysqld
+
+	systemctl start mysqld
+
+	systemctl enable mysqld
+
+
+	grep 'password is generated' /var/log/mysql/mysqld.log
+	2019-04-10T07:18:23.815117Z 1 [Note] A temporary password is generated for root@localhost: ?SyKK*eAk9Pg
+
+	ALTER USER 'root'@'localhost' IDENTIFIED BY 'zubur1';
+	FLUSH PRIVILEGES;
+	SELECT Host,User,password_last_changed FROM mysql.user;
+
+mysql -u root -p
+Enter password: 
+
+5ST=eXyqNmbK
+
+

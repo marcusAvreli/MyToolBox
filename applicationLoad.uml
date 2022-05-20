@@ -1,0 +1,42 @@
+@startuml
+
+
+
+
+
+actor User
+
+
+
+[-> ApplicationLoad: main
+
+activate ApplicationLoad
+ApplicationLoad -> initComponents: initComponentsCall
+
+activate initComponents
+initComponents -> initWelcomeScreen : initWelcomeScreenCall
+activate initWelcomeScreen 
+initComponents -> ApplicationLoad
+ref over initComponents, initWelcomeScreen : init
+initComponents -> initWelcomeScreen: Authentication Request
+alt successful case
+
+    initComponents -> initWelcomeScreen: enable buttons
+else some kind of failure
+    initComponents -> initWelcomeScreen: disable buttons
+else some kind of failure
+end
+
+initWelcomeScreen -> initComponents
+deactivate initWelcomeScreen
+deactivate initComponents
+
+[<- ApplicationLoad: Done
+
+deactivate ApplicationLoad
+
+
+
+
+
+@enduml

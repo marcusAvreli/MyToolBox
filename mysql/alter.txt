@@ -1,0 +1,6 @@
+COLUMNS
+	ALTER TABLE tbl_report_type DROP  description;
+	ALTER TABLE tbl_report_type ADD description varchar(450);
+	
+FOREIGN KEYS
+	ALTER TABLE TBL_REPORT_sp add CONSTRAINT FOREIGN KEY (sp_id) references tbl_Report_Stored_Procs(id) on delete cascade on update restrict;

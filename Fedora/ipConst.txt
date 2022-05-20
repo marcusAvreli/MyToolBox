@@ -1,0 +1,153 @@
+confugre static ip address
+
+hostname
+vi /etc/myname
+netbsd
+
+dns name resolving
+in to /etc/resolv.conf
+nameserver 127.0.0.53
+nameserver 10.0.0.138
+
+default gateway
+/etc/mygate
+192.168.134.2
+
+set ip address
+/etc/ifconfig.wm0
+192.168.134.152 netmask 255.255.255.0 media autoselect
+
+restart the network card
+
+/etc/rc.d/network restart
+
+
+
+
+
+check NAT forwarding
+sysctl -a | grep net.inet.ip.forwarding
+
+
+IP packet forwarding
+or
+1. compile a kernel with options GATEWAY, 
+or
+2. you can sysctl -w net.inet.ip.forwarding=1 each time your machine boots
+or
+3. put net.inet.ip.forwarding=1 into /etc/sysctl.conf
+
+
+
+echo "192.168.134.152 netmask 255.255.255.0 media autoselect" >> /etc/ifconfig.wm0
+
+
+Here are the diagnostic steps I have performed so far:
+----------------------------------------
+
+1. ifconfig -a --> sip0 is up, connected, and has the right IP, broadcast 
+and netmask.
+
+2. netstat -rn --> Internet routing table is fine.
+
+3. ping sup.netbsd.org --> FAILS w/ DNS error.
+
+4. ping 4.2.2.1 (nameserver) --> FAILS.  DNS is busted because I can't talk 
+to the nameservers.  Diagnose this:
+
+5. traceroute to my nameserver (4.2.2.1) --> FAILS.  See below:
+
+This is the output from a Windows machine on the same physical wire and also 
+configured via DHCP.  It works:
+
+Tracing route to 4.2.2.1 over a maximum of 30 hops
+
+  1    60 ms    30 ms    40 ms  4.33.176.1
+  2    20 ms    30 ms    30 ms  4.24.124.9
+  3    20 ms    30 ms    30 ms  4.24.5.101
+  4    20 ms    30 ms    30 ms  4.24.5.98
+  5    30 ms    20 ms    20 ms  4.2.2.1
+
+This is the output from the failing NetBSD machine:
+
+traceroute to 4.2.2.1 (4.2.2.1), 30 hops max, 40 byte packets
+1  4.33.176.1  28.862 ms  33.648 ms  32.797 ms
+2  4.24.124.9  23.488 ms  22.826 ms  22.898 ms
+3  4.24.5.101  22.961 ms  22.817 ms  23.237 ms
+4  4.24.5.98  23.262 ms  23.255 ms  23.521 ms
+5  4.24.22.6  23.808 ms *  25.584 ms
+
+Note that the LAST hop is WRONG.  This is WIERD, but I don't think this 
+explains the "Cannot assign requested address" problem, because traffic is 
+actually generated (see step 10 below).
+
+Note also that my other machines hit the last hop just fine, as does my 
+NetBSD 1.2 machine (also configured by DHCP).
+
+6. Take DNS out of the picture since we know something's wrong with it; 
+comment out all lines in resolv.conf.
+
+7. traceroute to sup.netbsd.org (added to /etc/hosts temporarily):
+
+traceroute to sup.netbsd.org (204.152.184.75), 30 hops max, 40 byte packets
+1  4.33.176.1 (4.33.176.1)  26.621 ms  36.534 ms  30.305 ms
+2  4.24.124.9 (4.24.124.9)  23.054 ms  22.950 ms  22.969 ms
+3  4.24.5.101 (4.24.5.101)  23.232 ms  30.740 ms  23.104 ms
+4  4.24.9.173 (4.24.9.173)  41.824 ms  42.041 ms  42.196 ms
+5  4.24.7.58 (4.24.7.58)  42.124 ms  41.751 ms  43.545 ms
+6  4.0.3.198 (4.0.3.198)  42.202 ms  42.125 ms  42.845 ms
+7  4.0.85.5 (4.0.85.5)  43.337 ms  43.241 ms  43.597 ms
+8  209.133.31.177 (209.133.31.177)  43.793 ms  44.259 ms  43.166 ms
+9  207.126.96.54 (207.126.96.54)  43.522 ms  50.622 ms  42.964 ms
+10  216.200.0.10 (216.200.0.10)  47.183 ms  47.471 ms  47.055 ms
+11  204.152.184.193 (204.152.184.193)  47.145 ms  48.015 ms  52.559 ms
+12  204.152.184.179 (204.152.184.179)  194.383 ms  247.447 ms  249.312 ms
+13  sup.netbsd.org (204.152.184.75)  47.266 ms  47.665 ms  47.546 ms
+
+...SUCCESS!  I now know that I can get off-subnet and that this is not a 
+problem with the DHCP-supplied routing information.
+
+Can I sup to the machine, since I can traceroute to it?
+
+8. sup -s -v
+SUP 8.26 (4.3 BSD) for system software at Jan  4 01:03:20
+SUP: Can't connect to server for supfilesrv: Can't assign requested address
+
+9. Is the problem specific to sup?  Can I connect to other hosts using other 
+programs?
+
+>telnet 129.186.1.201
+Trying 129.186.1.201...
+telnet: Unable to connect to remote host: Can't assign requested address
+
+>ftp 204.152.184.75 (ftp.netbsd.org)
+ftp: connect: Can't assign requested address
+
+...No.  Looks like everyone who calls connect() has this problem.  Could the 
+problem be routing (maybe connect() is returning the wrong error)?  
+Connect() to a machine on the local net:
+
+>telnet <windows machine temporarily running telnet>
+Connected to <windows machine>
+Escape character is '^]'.
+Welcome to Microsoft Telnet Service
+login:
+
+So it works when I do it locally, just not out in internetland.
+
+10.  tcpdump and find out what could be happening on the wire when I try to 
+sup:
+
+>tcpdump -i sip0 not tcp port telnet &
+tcpdump: listening on sip0
+
+>sup -s -v
+SUP 8.26 (4.3 BSD) for system software at Jan  4 01:25:21
+SUP: Can't connect to server for supfilesrv: Can't assign requested address
+
+[wait several minutes to make sure, but NO TRAFFIC IS GENERATED]
+
+...so the problem isn't routing (because traceroute works), isn't my ISP 
+(because no traffic happens when it fails), isn't my netcard (because 
+traceroute works and the problem doesn't repro locally).  What am I missing?
+

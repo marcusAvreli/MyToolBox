@@ -1,0 +1,536 @@
+3.ZLIB 
+	[source: https://www.linuxfromscratch.org/lfs/view/development/chapter07/bison.html ]
+	cd /home/admin
+	curl -L  https://zlib.net/zlib-1.2.11.tar.gz --output /home/admin/zlib-1.2.11.tar.gz
+	tar -zxvf /home/admin/zlib-1.2.11.tar.gz zlib-1.2.11
+	mv /home/admin/zlib-1.2.11 /home/admin/zlib
+	cd /home/admin/zlib
+	./configure --prefix=/usr
+	make
+	make install
+	
+	
+EXPAT
+	[source: https://www.linuxfromscratch.org/lfs/view/10.1/chapter08/expat.html]
+	cd /home/admin
+	curl -L https://github.com/libexpat/libexpat/releases/download/R_2_4_1/expat-2.4.1.tar.gz --output /home/admin/expat-2.4.1.tar.gz
+	tar -zxvf expat-2.4.1.tar.gz
+	mv /home/admin/expat-2.4.1 /home/admin/expat
+	cd /home/admin/expat
+	./configure --prefix=/usr    \
+			--disable-static \
+			--docdir=/usr/share/doc/expat-2.4.1
+			make && make install
+	install -v -m644 doc/*.{html,png,css} /usr/share/doc/expat-2.4.1
+	
+clean
+distclean
+install
+uninstall
+
+
+
+
+5. PYTHON
+//check where pip.conf is expected by python
+	pip3 config -v list
+	
+pip3 list
+
+check ssl is available for python 
+python3
+>>> import ssl
+>>> ssl.OPENSSL_VERSION
+'OpenSSL 1.0.1g 7 Apr 2014'
+
+
+	[source: 
+		https://www.linuxfromscratch.org/blfs/view/cvs/general/python3.html;
+		http://linuxcodemonkey.blogspot.com/2016/12/building-python-36-from-source-on.html
+	]
+	cd /home/admin
+	curl -L https://www.python.org/ftp/python/3.9.2/Python-3.9.2.tar.xz --output /home/admin/python-3.9.2.tar.xz
+		tar -xf /home/admin/python-3.9.2.tar.xz
+		mv  Python-3.9.2 python
+		
+	cd /home/admin/python
+	sed 's|cpython/||' -i Include/cpython/pystate.h
+	
+	CXX="/usr/bin/g++"          
+
+	 ./configure --prefix=/opt/python --enable-shared --with-system-expat --with-system-ffi        --with-ssl-default-suites=openssl       --with-ensurepip=yes | grep "ssl\|SSL\|OpenSSL"
+ ./configure --prefix=/opt/python --enable-shared --with-system-expat         --with-ssl-default-suites=openssl       --with-ensurepip=yes | grep "ssl\|SSL\|OpenSSL"
+
+
+	for m in _struct binascii unicodedata _posixsubprocess math pyexpat _md5 _sha1 _sha256 _sha512 select _random _socket zlib fcntl; do     sed -i "s/^#\(${m}\)/\1/" Modules/Setup; done
+
+
+	make && make install 
+
+clean
+distclean
+install
+
+	to check: python3
+	ModuleNotFoundError: No module named 'libdnf'
+	pip uninstall dnf
+
+dnf install libiconv
+[root@fedora usr]# ldd -r  /usr/lib64/libdnf.so.2
+dnf
+dnf-3
+	 rpm -q dnf python3-dnf python3 python3-rpm
+path_to_module="/usr/lib64"
+
+import importlib
+spam_spec = importlib.util.find_spec("dnf")
+
+
+try:
+    import dnf.sub
+except ModuleNotFoundError as err:
+    # Error handling
+    print(err)
+https://www.py4u.net/discuss/234285
+	echo 'import sys;sys.path += ["/usr/lib64/python3.6/site-packages/", "/usr/lib64/python3.6/"]' | sudo tee /usr/lib/python3.6/site-packages/lib64.pth
+
+import importlib.util
+spec = importlib.util.spec_from_file_location("module.name", "/usr/lib64/python3.9/site-packages/libdnf")
+foo = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(foo)
+foo.MyClass()
+
+
+1. PNG
+	cd /home/admin
+	curl -L https://downloads.sourceforge.net/libpng/libpng-1.6.37.tar.xz --output /home/admin/libpng-1.6.37.tar.xz
+		tar -xf libpng-1.6.37.tar.xz
+		mv /home/admin/libpng-1.6.37 /home/admin/libpng
+		cd /home/admin/libpng
+		./configure --prefix=/usr
+		make
+		make install
+		
+		clean
+distclean
+install
+uninstall
+
+		
+
+[source https://metacpan.org/dist/perl/view/INSTALL 
+env  CPPFLAGS=" -I/usr/include" LDFLAGS="-L/usr/lib64"
+https://www.linuxfromscratch.org/lfs/view/9.1-systemd/chapter06/perl.html#contents-perl ]
+2. PERL
+	cd /home/admin
+	curl -k -L https://www.cpan.org/src/5.0/perl-5.34.0.tar.gz --output /home/admin/perl-5.34.0.tar.gz 
+		tar -zxvf perl-5.34.0.tar.gz 
+		mv /home/admin/perl-5.34.0 /home/admin/perl
+		cd /home/admin/perl
+		 			./Configure -des -Dprefix=/opt/perl                 \
+                  -Dvendorprefix=/opt/perl           \
+                  -Dman1dir=/usr/share/man/man1 \
+                  -Dman3dir=/usr/share/man/man3 \
+                  -Dpager="/usr/bin/less -isR"  \
+                  -Duseshrplib                  \
+                  -Dusethreads 
+
+
+
+				  make && make test && make install
+clean
+distclean
+install
+
+OPENSSL
+	//Requires
+	//1. compiler
+	//2. PERL
+		set environment variable
+		export C_INCLUDE_PATH="$C_INCLUDE_PATH:/opt/zlib/include"
+	otherwise 
+		before ./config concatenate env CPPFLAGS="-I/opt/zlib/include" ./config
+	mv /usr/bin/openssl /usr/bin/openssl_OLD
+	cd /home/admin
+	curl -L https://www.openssl.org/source/old/3.0/openssl-3.0.0-beta2.tar.gz --output /home/admin/openssl-3.0.0-beta2.tar.gz
+	tar -zxvf openssl-3.0.0-beta2.tar.gz
+	mv /home/admin/openssl-3.0.0-beta2 /home/admin/openssl
+
+	
+	
+	cd /home/admin/openssl
+	./config --prefix=/opt/openssl         \
+         --openssldir=/etc/ssl \
+         --libdir=lib          \
+         shared                \
+         zlib-dynamic
+	make 	
+	make  install
+	
+clean
+distclean
+install
+uninstall
+
+	
+vi /etc/ld.so.conf.d/lib.conf
+	/opt/openssl/lib
+ldconfig 
+ldconfig -v
+
+Check contents of the cache 
+	ldconfig -p
+	
+rm /etc/ld.so.cache
+ldconfig
+	
+
+
+2. CMAKE
+	[source: https://cmake.org/install/ ]
+	cd /home/admin
+	curl -L https://github.com/Kitware/CMake/releases/download/v3.21.2/cmake-3.21.2.tar.gz	--output /home/admin/cmake-3.21.2.tar.gz
+	tar -zxvf cmake-3.21.2.tar.gz
+	mv /home/admin/cmake-3.21.2 /home/admin/cmake
+	cd /home/admin/cmake
+	 ./bootstrap
+	  make
+	  make install
+	  
+	options
+	clean
+	install
+	uninstall
+	
+
+3. LIBJPEG-TRURBO
+	cd /home/admin
+	curl -L https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-2.1.1.tar.gz --output /home/admin/libjpeg-turbo-2.1.1.tar.gz
+		tar -zxvf libjpeg-turbo-2.1.1.tar.gz
+		mv /home/admin/libjpeg-turbo-2.1.1 /home/admin/libjpeg-turbo
+		cd /home/admin/libjpeg-turbo
+		mkdir build &&
+	cd    build &&
+
+	cmake -DCMAKE_INSTALL_PREFIX=/usr \
+		  -DCMAKE_BUILD_TYPE=RELEASE  \
+		  -DENABLE_STATIC=FALSE       \
+		  -DCMAKE_INSTALL_DOCDIR=/usr/share/doc/libjpeg-turbo-2.1.1 \
+		  -DCMAKE_INSTALL_DEFAULT_LIBDIR=lib  \
+		  .. &&
+	make
+	make install
+	
+
+4. LIBGD
+	cd /home/admin
+	curl -L  https://github.com/libgd/libgd/releases/download/gd-2.3.2/libgd-2.3.2.tar.gz --output libgd-2.3.2.tar.gz
+	tar -zxvf libgd-2.3.2.tar.gz 
+	mv libgd-2.3.2 libgd
+	cd /home/admin/libgd
+	make disclean; ./configure --prefix=/usr/src --with-png=/usr --with-jpeg=/usr/lib
+	make
+	make install
+
+	
+clean
+distclean
+install
+uninstall
+
+
+
+	
+
+5. LIBXML2
+	cd /home/admin
+	curl -L http://xmlsoft.org/sources/libxml2-2.9.12.tar.gz --output /home/admin/libxml2-2.9.12.tar.gz
+	tar -zxvf libxml2-2.9.12.tar.gz
+	mv /home/admin/libxml2-2.9.12 /home/admin/libxml2
+	cd /home/admin/libxml2
+	./configure --prefix=/usr    \
+            --disable-static \
+            --with-history   \
+            --with-python=/opt/python &&
+	make
+	make install
+
+
+
+
+======================================
+			HTTPD
+======================================
+
+LIBTOOL
+	cd /home/admin
+	curl -L https://ftpmirror.gnu.org/libtool/libtool-2.4.6.tar.gz --output /home/admin/libtool-2.4.6.tar.gz
+	tar -zxvf /home/admin/libtool-2.4.6.tar.gz
+	mv /home/admin/libtool-2.4.6 /home/admin/libtool
+
+	cd /home/admin/libtool
+	./configure --prefix=/usr 
+	make && make install
+
+
+
+APR
+	cd /home/admin
+	curl -L https://archive.apache.org/dist/apr/apr-1.7.0.tar.bz2 --output /home/admin/apr-1.7.0.tar.bz2
+		tar -xvf apr-1.7.0.tar.bz2
+		mv apr-1.7.0 apr
+		cd apr
+	./configure --prefix=/opt/apr    \
+				--disable-static \
+				--with-installbuilddir=/opt/apr/share/apr-1/build
+	make
+	make install
+
+
+APR-UTIL
+	cd /home/admin
+	curl -L https://archive.apache.org/dist/apr/apr-util-1.6.1.tar.bz2 --output /home/admin/apr-util-1.6.1.tar.bz2
+		tar -xvf /home/admin/apr-util-1.6.1.tar.bz2
+		mv /home/admin/apr-util-1.6.1 /home/admin/apr-util
+		cd /home/admin/apr-util
+		./configure --prefix=/opt/apr-util       \
+				--with-apr=/usr     \
+				--with-gdbm=/usr    \
+				--with-openssl=/usr \
+				--with-crypto
+	make
+	make install
+
+
+HTTPD
+//required
+//pcre
+//PERL (if you want to use php)
+	cd /home/admin
+	curl -L  https://archive.apache.org/dist/httpd/httpd-2.4.48.tar.bz2 --output /home/admin/httpd-2.4.48.tar.bz2
+		tar -xvf /home/admin/httpd-2.4.48.tar.bz2
+		mv /home/admin/httpd-2.4.48 /home/admin/httpd
+		cd /home/admin/httpd
+		
+		groupadd -g 25 apache &&
+	useradd -c "Apache Server" -d /srv/www -g apache \
+			-s /bin/false -u 25 apache
+			
+		sed '/dir.*CFG_PREFIX/s@^@#@' -i support/apxs.in              &&
+	
+	make clean; ./configure  --prefix=/opt/httpd --enable-so --enable-ssl=shared --with-ssl=/usr/bin/openssl --with-apr=/opt/apr/bin/apr-1-config         --with-apr-util=/opt/apr-util/bin/apu-1-config ;      make;make install  
+	
+	
+	
+	./configure --enable-authnz-fcgi                              \
+				--enable-so \
+				--enable-mods-shared="all cgi"                    \
+				--enable-mpms-shared=all                          \
+				--enable-suexec=shared                            \
+				--with-apr=/usr/bin/apr-1-config                  \
+				--with-apr-util=/usr/bin/apu-1-config             \
+				--with-suexec-bin=/usr/lib/httpd/suexec           \
+				--with-suexec-caller=apache                       \
+				--with-suexec-docroot=/srv/www                    \
+				--with-suexec-logfile=/var/log/httpd/suexec.log   \
+				--with-suexec-uidmin=100                          \
+				--with-suexec-userdir=public_html                 &&
+	make
+
+	make install  &&
+
+	mv -v /usr/sbin/suexec /usr/lib/httpd/suexec &&
+	chgrp apache           /usr/lib/httpd/suexec &&
+	chmod 4754             /usr/lib/httpd/suexec &&
+
+	chown -v -R apache:apache /srv/www
+
+
+
+======================================
+			MYSQL
+======================================
+
+BOOST
+https://www.linuxfromscratch.org/blfs/view/svn/general/boost.html
+./bootstrap.sh --prefix=/usr --with-python=python3 && ./b2 stage -j5 threading=multi link=shared
+./b2 install threading=multi link=shared   
+
+
+LIBTIRPC
+	[source: https://www.linuxfromscratch.org/blfs/view/svn/basicnet/libtirpc.html ]
+	 cd /home/admin
+	curl -L  https://downloads.sourceforge.net/libtirpc/libtirpc-1.3.2.tar.bz2 --output libtirpc-1.3.2.tar.bz2
+	tar -xf libtirpc-1.3.2.tar.bz2
+	 mv libtirpc-1.3.2 libtirpc
+	 cd /home/admin/libtirpc
+	 ./configure --prefix=/usr                                   \
+				--sysconfdir=/etc                               \
+				--disable-static                                \
+				--disable-gssapi                                &&
+	make
+	make install
+ln -s /usr/lib/pkgconfig/libtirpc.pc /usr/lib64/pkgconfig/libtirpc.pc
+
+RPCSVC-PROTO
+	cd /home/admin
+	curl -L https://github.com/thkukuk/rpcsvc-proto/releases/download/v1.4/rpcsvc-proto-1.4.tar.gz --output rpcsvc-proto-1.4.tar.gz
+	tar -zxvf rpcsvc-proto-1.4.tar.gz
+	mv /home/admin/rpcsvc-proto-1.4 /home/admin/rpcsvc-proto
+	cd rpcsvc-proto
+	./configure && make && make install
+
+
+LIBEDIT 
+	REQUIRES libncurses
+	cd /home/admin
+	curl -L https://thrysoee.dk/editline/libedit-20210910-3.1.tar.gz --output /home/admin/libedit-20210910-3.1.tar.gz
+		tar -zxvf libedit-20210910-3.1.tar.gz
+		mv libedit-20210910-3.1 libedit
+		cd /home/admin/libedit
+		./configure &&  make && make install
+	
+	
+LIBEVENT	
+	cd /home/admin
+	curl -L  https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz --output libevent-2.1.12-stable.tar.gz
+
+	tar -zxvf libevent-2.1.12-stable.tar.gz
+	mv libevent-2.1.12-stable libevent
+	cd libevent
+	sed -i 's/python/&3/' event_rpcgen.py
+	./configure --prefix=/usr --disable-static &&
+	make
+	make install
+	ln -s /usr/lib/pkgconfig/libevent.pc /usr/lib64/pkgconfig/libevent.pc
+
+
+MYSQL
+	cd /home/admin
+	curl -L https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.26.tar.gz --output /home/admin/mysql-5.7.26.tar.gz
+	tar -zxvf /home/admin/mysql-5.7.26.tar.gz
+	mv /home/admin/mysql-5.7.26 /home/admin/mysql
+	cd /home/admin/mysql
+	mkdir /home/admin/mysql/build
+	 cd /home/admin/mysql/build
+	 cmake .. -DCMAKE_INSTALL_PREFIX=/opt/mysql5 -DDOWNLOAD_BOOST=1 -DWITH_BOOST=/usr/local/boost -DWITH_ZLIB=system  -DOPENSSL_ROOT_DIR=/opt/openssl -DOPENSSL_INCLUDE_DIR=/opt/openssl/include -DOPENSSL_LIBRARIES=/opt/openssl/lib -DWITH_EDITLINE=system -DWITH_LIBEVENT=system -DENABLE_DOWNLOADS=1
+	 
+	   cmake .. -DCMAKE_INSTALL_PREFIX=/opt/mysql5 -DDOWNLOAD_BOOST=1 -DWITH_BOOST=/usr/local/boost -DWITH_ZLIB=system  -DWITH_SSL=system -DWITH_EDITLINE=system -DWITH_LIBEVENT=system -DENABLE_DOWNLOADS=1
+	 
+	
+	make
+	make install	
+======================================
+
+SQLITE
+	cd /home/admin
+	curl -L https://sqlite.org/2021/sqlite-autoconf-3350400.tar.gz --output /home/admin/sqlite-autoconf-3350400.tar.gz
+		tar -zxvf /home/admin/sqlite-autoconf-3350400.tar.gz
+		mv /home/admin/sqlite-autoconf-3350400 /home/admin/sqlite
+		cd /home/admin/sqlite
+		./configure --prefix=/usr     \
+				--disable-static  \
+				--enable-fts5     \
+				CPPFLAGS="-DSQLITE_ENABLE_FTS3=1            \
+						  -DSQLITE_ENABLE_FTS4=1            \
+						  -DSQLITE_ENABLE_COLUMN_METADATA=1 \
+						  -DSQLITE_ENABLE_UNLOCK_NOTIFY=1   \
+						  -DSQLITE_ENABLE_DBSTAT_VTAB=1     \
+						  -DSQLITE_SECURE_DELETE=1          \
+						  -DSQLITE_ENABLE_FTS3_TOKENIZER=1" 
+	make
+	make install
+	
+clean
+distclean
+install
+uninstall
+
+ln -s /usr/lib/pkgconfig/sqlite3.pc /usr/lib64/pkgconfig/sqlite3.pc
+
+CURL
+	cd /home/admin
+	curl -L https://curl.se/download/curl-7.79.1.tar.xz --output /home/admin/curl-7.79.1.tar.xz
+	tar -xvf /home/admin/curl-7.79.1.tar.xz
+	mv /home/admin/curl-7.79.1 /home/admin/curl
+	cd /home/admin/curl
+
+	./configure --prefix=/usr                           \
+				--disable-static                        \
+				--with-openssl                          \
+				--enable-threaded-resolver              \
+				--with-ca-path=/etc/ssl/certs 
+				
+	make
+	make install
+	
+	clean
+distclean
+install
+uninstall
+
+
+
+LIBICONV
+	cd /home/admin
+	curl -L  http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.13.1.tar.gz --output /home/admin/libiconv-1.13.1.tar.gz
+	tar -zxvf libiconv-1.13.1.tar.gz
+	mv /home/admin/libiconv-1.13.1 /home/admin/libiconv
+	cd /home/admin/libiconv
+	./configure 
+	make
+	make install
+	sudo ln -s /usr/local/lib/libiconv.so /usr/lib64/libiconv.so
+	sudo ln -s /usr/local/lib/libiconv.so.2 /usr/lib64/libiconv.so.2
+
+
+clean
+distclean
+install
+uninstall
+
+
+ONIGURUMA
+	cd /home/admin
+	curl -k -L https://src.fedoraproject.org/lookaside/extras/oniguruma/onig-5.9.5.tar.gz/970f98a4cd10021b545d84e34c34aae4/onig-5.9.5.tar.gz --output /home/admin/onig-5.9.5.tar.gz
+	tar -zxvf onig-5.9.5.tar.gz 
+	mv onig-5.9.5 oniguruma
+	cd /home/admin/oniguruma
+	./configure;make;make install
+
+
+clean
+distclean
+install
+uninstall
+
+
+6. PHP
+	//required
+	//LIBXML2
+
+
+	env CPPFLAGS="-I/opt/openssl/include"  LDFLAGS="-lcrypto -L/usr/openssl/lib" 
+	
+	cd /home/admin
+	curl -k -L https://www.php.net/distributions/php-8.0.10.tar.gz --output /home/admin/php-8.0.10.tar.gz
+	tar -zxvf /home/admin/php-8.0.10.tar.gz
+	mv /home/admin/php-8.0.10 /home/admin/php
+	cd /home/admin/php
+	
+	./configure --prefix=/opt/php8 --with-apxs2=/opt/httpd/bin/apxs --enable-ftp  -with-pdo-mysql --with-curl=/usr --enable-opcache --with-openssl --with-iconv=/usr/local --with-jpeg  --enable-gd --enable-mbstring| grep "libgd\|png\|jpeg\|SSL\|onig"
+	
+	make
+	make instal
+	
+	curl -L  https://downloads.php.net/~ramsey/php-8.1.0RC3.tar.gz --output /home/admin/php-8.1.0RC3.tar.gz
+	tar -zxvf /home/admin/php-8.1.0RC3.tar.gz
+	
+	mv php-8.1.0RC3 php
+	
+	cd /home/admin/php
+	 ./configure --prefix=/opt/php8.1 --with-apxs2=/opt/httpd/bin/apxs --enable-ftp  -with-pdo-mysql --with-curl=/usr --enable-opcache --with-openssl=/opt/openssl --with-iconv=/usr/local --with-jpeg  --enable-gd| grep "libgd\|png\|jpeg\|SSL"
+
+
+	make
+	make instal

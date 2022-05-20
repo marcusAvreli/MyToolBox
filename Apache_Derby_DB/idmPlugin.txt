@@ -1,0 +1,8 @@
+CREATE TABLE "ADMIN"."REPORT_FIELD" (
+	id  BIGINT not null  generated always as identity,
+	name VARCHAR (25) DEFAULT NULL,
+	ordering bigint  DEFAULT 0 not null,
+	report_id bigint  default 1 not null,
+	primary key (id),
+	CONSTRAINT REPORT_ID_FK FOREIGN KEY (report_id) REFERENCES REPORT (ID) on delete cascade on update restrict
+);

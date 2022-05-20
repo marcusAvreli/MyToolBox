@@ -1,0 +1,16 @@
+MYSQL_HOME=/opt/mysql5
+MYSQL_BIN=$MYSQL_HOME/bin
+MYSQL_LIB=$MYSQL_HOME/lib
+MYSQL_PKG_CONFIG=$MYSQL_LIB/pkgconfig
+PATH=/opt/perl/bin:/opt/php8.1/bin:$MYSQL_BIN:$PATH
+
+export PATH
+
+LD_LIBRARY_PATH=$MYSQL_LIB:$LD_LIBRARY_PATH
+LD_LIBRARY_PATH=/usr/lib/pkgconfig:$LD_LIBRARY_PATH
+
+export LD_LIBRARY_PATH
+
+PKG_CONFIG_PATH=/usr/lib64/pkgconfig:/usr/lib/pkgconfig:$MYSQL_PKG_CONFIG:$PKG_CONFIG_PATH
+
+export PKG_CONFIG_PATH

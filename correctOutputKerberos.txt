@@ -1,0 +1,102 @@
+C:\Users\Administrator.SERI>kinit -J-Dsun.security.krb5.debug=true   -p Aaron.Nichols
+Java config name: null
+LSA: Found Ticket
+LSA: Made NewWeakGlobalRef
+LSA: Found PrincipalName
+LSA: Made NewWeakGlobalRef
+LSA: Found DerValue
+LSA: Made NewWeakGlobalRef
+LSA: Found EncryptionKey
+LSA: Made NewWeakGlobalRef
+LSA: Found TicketFlags
+LSA: Made NewWeakGlobalRef
+LSA: Found KerberosTime
+LSA: Made NewWeakGlobalRef
+LSA: Found String
+LSA: Made NewWeakGlobalRef
+LSA: Found DerValue constructor
+LSA: Found Ticket constructor
+LSA: Found PrincipalName constructor
+LSA: Found EncryptionKey constructor
+LSA: Found TicketFlags constructor
+LSA: Found KerberosTime constructor
+LSA: Finished OnLoad processing
+Native config name: C:\Windows\krb5.ini
+Loaded from native config
+>>>KinitOptions cache name is C:\Users\Administrator.SERI\krb5cc_Administrator
+Principal is Aaron.Nichols@SERI.SAILPOINTDEMO.COM
+Password for Aaron.Nichols@SERI.SAILPOINTDEMO.COM:
+>>> Kinit console input Sailp0!nt
+>>> Kinit realm name is SERI.SAILPOINTDEMO.COM
+>>> Creating KrbAsReq
+>>> KrbKdcReq local addresses for ad-resource are:
+
+        ad-resource/192.168.134.150
+IPv4 address
+
+        ad-resource/fe80:0:0:0:496:801:3578:41e4%12
+IPv6 address
+>>> KdcAccessibility: reset
+default etypes for default_tkt_enctypes: 17 17 23.
+>>> KrbAsReq creating message
+getKDCFromDNS using UDP
+>>> KrbKdcReq send: kdc=ad-resource.seri.sailpointdemo.com. UDP:88, timeout=30000, number of retries =3, #bytes=216
+>>> KDCCommunication: kdc=ad-resource.seri.sailpointdemo.com. UDP:88, timeout=30000,Attempt =1, #bytes=216
+>>> KrbKdcReq send: #bytes read=223
+>>>Pre-Authentication Data:
+         PA-DATA type = 19
+         PA-ETYPE-INFO2 etype = 17, salt = SERI.SAILPOINTDEMO.COMAaron.Nichols, s2kparams = null
+         PA-ETYPE-INFO2 etype = 23, salt = null, s2kparams = null
+
+>>>Pre-Authentication Data:
+         PA-DATA type = 2
+         PA-ENC-TIMESTAMP
+>>>Pre-Authentication Data:
+         PA-DATA type = 16
+
+>>>Pre-Authentication Data:
+         PA-DATA type = 15
+
+>>> KdcAccessibility: remove ad-resource.seri.sailpointdemo.com.:88
+>>> KDCRep: init() encoding tag is 126 req type is 11
+>>>KRBError:
+         sTime is Wed Feb 16 08:35:27 CST 2022 1645022127000
+         suSec is 492559
+         error code is 25
+         error Message is Additional pre-authentication required
+         sname is krbtgt/SERI.SAILPOINTDEMO.COM@SERI.SAILPOINTDEMO.COM
+         eData provided.
+         msgType is 30
+>>>Pre-Authentication Data:
+         PA-DATA type = 19
+         PA-ETYPE-INFO2 etype = 17, salt = SERI.SAILPOINTDEMO.COMAaron.Nichols, s2kparams = null
+         PA-ETYPE-INFO2 etype = 23, salt = null, s2kparams = null
+
+>>>Pre-Authentication Data:
+         PA-DATA type = 2
+         PA-ENC-TIMESTAMP
+>>>Pre-Authentication Data:
+         PA-DATA type = 16
+
+>>>Pre-Authentication Data:
+         PA-DATA type = 15
+
+KrbAsReqBuilder: PREAUTH FAILED/REQ, re-send AS-REQ
+default etypes for default_tkt_enctypes: 17 17 23.
+default etypes for default_tkt_enctypes: 17 17 23.
+>>> EType: sun.security.krb5.internal.crypto.Aes128CtsHmacSha1EType
+>>> KrbAsReq creating message
+getKDCFromDNS using UDP
+>>> KrbKdcReq send: kdc=ad-resource.seri.sailpointdemo.com. UDP:88, timeout=30000, number of retries =3, #bytes=300
+>>> KDCCommunication: kdc=ad-resource.seri.sailpointdemo.com. UDP:88, timeout=30000,Attempt =1, #bytes=300
+>>> KrbKdcReq send: #bytes read=116
+>>> KrbKdcReq send: kdc=ad-resource.seri.sailpointdemo.com. TCP:88, timeout=30000, number of retries =3, #bytes=300
+>>> KDCCommunication: kdc=ad-resource.seri.sailpointdemo.com. TCP:88, timeout=30000,Attempt =1, #bytes=300
+>>>DEBUG: TCPClient reading 1633 bytes
+>>> KrbKdcReq send: #bytes read=1633
+>>> KdcAccessibility: remove ad-resource.seri.sailpointdemo.com.:88
+>>> EType: sun.security.krb5.internal.crypto.Aes128CtsHmacSha1EType
+>>> KrbAsRep cons in KrbAsReq.getReply Aaron.Nichols
+New ticket is stored in cache file C:\Users\Administrator.SERI\krb5cc_Administrator
+
+C:\Users\Administrator.SERI>kinit -J-Dsun.security.krb5.debug=true   -p Aaron.Nichols
