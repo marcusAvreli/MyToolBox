@@ -34,5 +34,17 @@ Configure git to use certificate
 		
 	Verify, that you did it all correctly, without spelling errors:
 		git config --global --list
+		
+Using personal access token
+	first time commit ever
+	git config --global user.email "<your valid email"
+	git config --global user.name "<your name>"
+
+	generate token
+
+	git config --global credential.helper store
+	Username for 'https://github.com': username
+	Password for 'https://username@github.com': <PAT>
+
 	
 curl -L https://github.com/cyrusimap/cyrus-sasl/releases/download/cyrus-sasl-2.1.27/cyrus-sasl-2.1.27.tar.gz --output cyrus-sasl-2.1.27.tar.gz
