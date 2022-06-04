@@ -15,7 +15,8 @@ Apache Derby Guide
 	Run Database Server Instance
 		1. open cmd line(you don't have to be admin).
 		2. Start server by issuing following command
-			java -Djava.security.manager -Djava.security.policy=C:/dbDerby/demo/templates/server.policy  org.apache.derby.drda.NetworkServerControl start -h localhost
+			a. regular version: java -Djava.security.manager -Djava.security.policy=C:/dbDerby/demo/templates/server.policy  org.apache.derby.drda.NetworkServerControl start -h localhost
+			b. debug version: java -Djava.security.manager -Djava.security.debug=access,failure -Djava.security.policy=C:/derby/demo/templates/server.policy  org.apache.derby.drda.NetworkServerControl start -h localhost
 
 	Run Client connection from cmd
 		1. Open another cmd

@@ -51,11 +51,18 @@ permission java.lang.RuntimePermission "createClassLoader";
 		//////APACHE DERBY PERMISSIONS///////////////////////////////////
 		permission org.apache.derby.security.SystemPermission "engine", "usederbyinternals";
 		permission java.util.PropertyPermission "derby.__serverStartedFromCmdLine", "write";
-		permission java.net.SocketPermission "localhost:1527", "accept,listen,resolve";		
+		permission java.net.SocketPermission "127.0.0.1:*", "accept,listen,resolve";		
+		permission java.net.SocketPermission "localhost:*", "accept,listen,resolve";		
 		permission java.util.PropertyPermission "derby.connection.requireAuthentication", "read";
 		permission java.util.PropertyPermission "derby.authentication.provider", "read";
 		permission java.io.FilePermission "derby.log", "read,write";		
-		permission java.io.FilePermission "C:/ApacheDerby/-", "read,write,delete";
+		permission java.io.FilePermission "C:/derby/-", "read,write,delete";
+		permission java.lang.RuntimePermission "createClassLoader";
+		
+		///derby tomcat application permissions		
+		//AccessControlException¶access denied ("java.util.PropertyPermission" "user.dir" "read")
+		//derby server restart required
+		permission java.util.PropertyPermission "user.dir","read";
 
 		
 		

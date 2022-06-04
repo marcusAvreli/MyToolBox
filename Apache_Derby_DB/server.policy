@@ -150,8 +150,7 @@ grant codeBase "${derby.install.url}derbynet.jar"
   // JMX: Uncomment this permission to allow the ping operation of the
   //      NetworkServerMBean to connect to the Network Server.
   //
-  // permission java.net.SocketPermission "*", "connect,resolve";
-
+   
   // Needed by sysinfo. A file permission is needed to check the existence of
   // jars on the classpath. Note that this permission is com;mented out! 
   // You should limit this permission to just the locations which hold
@@ -170,12 +169,12 @@ grant codeBase "${derby.install.url}derbynet.jar"
   //    derbyclient.jar
   //    derbytools.jar
   //
-  // permission java.io.FilePermission "${derby.install.directory}${/}-", "read";
+  
   permission java.io.FilePermission "directory${/}/-", "read,write,delete";
 permission java.util.PropertyPermission "derby.*", "read";
 permission java.lang.RuntimePermission "createClassLoader";
 
-  //permission java.io.FilePermission "<<ALL FILES>>", "read, write, delete, execute";
+  
 permission java.lang.RuntimePermission "createClassLoader";
   permission java.util.PropertyPermission "user.*", "read";
   permission java.util.PropertyPermission "java.home", "read";
@@ -187,4 +186,3 @@ permission java.lang.RuntimePermission "createClassLoader";
   permission java.util.PropertyPermission "derby.__serverStartedFromCmdLine", "read,write";
 		
 };
-
