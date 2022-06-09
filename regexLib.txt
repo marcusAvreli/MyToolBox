@@ -86,3 +86,16 @@ Regular Expression
 find exactly three digits
 	\b\d{3}\b
 
+add pipe at the end of column strings
+	string1
+	string2 
+
+
+	^(.*)$
+
+	\1\\\|
+
+Result is 
+	string1\
+	string2\
+
