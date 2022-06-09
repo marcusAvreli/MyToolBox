@@ -1,6 +1,6 @@
 Back Up Maven project on git
 	git init
-	git remote add origin "url to repository"
+	git remote add origin "https://github.com/marcusAvreli/dumpWebService2.git"
 	
 	echo "target/" >> .gitignore
 	echo "bin/" >> .gitignore
