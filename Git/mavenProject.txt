@@ -1,19 +1,22 @@
 Back Up Maven project on git
 	git init
-	git remote add origin "https://github.com/marcusAvreli/dumpWebService2.git"
+	git remote add origin "<path to git repo>"
 	
 	echo "target/" >> .gitignore
 	echo "bin/" >> .gitignore
 	echo ".classpath" >> .gitignore
 	echo ".project" >> .gitignore
 	echo ".settings/" >> .gitignore
+	echo "logs/" >> .gitignore
 	
 	git add .
 	git rm -r --cached bin
 	git rm -r --cached target
 	git rm -r --cached ".classpath"
 	git rm -r --cached ".project"
-	git rm -r --cached ".settings/"		
+	git rm -r --cached ".settings/"	
+	git rm -r --cached "logs/"
+
 	git commit -am "initial_commit"
 	git push origin master
 

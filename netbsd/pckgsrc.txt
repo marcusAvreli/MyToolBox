@@ -1,7 +1,7 @@
 //https://superuser.com/questions/975556/netbsd-no-pkg
 echo ftp://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/amd64/9.2/All/> /usr/pkg/etc/pkgin/repositories.conf
 Add pckgsrc
-export PKG_PATH="http://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/amd64/8.1/All/
+export PKG_PATH="http://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/amd64/9.2/All"
 
 echo $PKG_PATH
 pkg_add -v pkgin
