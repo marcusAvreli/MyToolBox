@@ -1,6 +1,9 @@
+NET BSD
 
-/etc/rc.d/sshd onerestart
+source: http://www.netbsd.org/docs/guide/en/chap-rc.html
+sshd is not enabled
+vi /etc/rc.conf
+sshd=YES
 
-or
-service sshd onerestart
-
+or oneliner
+echo "sshd=YES" >> rc.conf

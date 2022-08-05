@@ -1,0 +1,84 @@
+check openssl version
+	openssl version
+	
+check openssl home dir
+	openssl version -d
+
+
+
+on fresh installed system run: openssl s_client -connect google.com:443
+you will get following error: SSL certificate problem: unable to get local issuer certificate
+1. 
+	source: https://pavolkutaj.medium.com/fix-openssl-error-unable-to-get-local-issuer-certificate-e0ad5c2b675d
+	quotation: OpenSSL cannot validate the chain OpenSSL itself comes without a list of Trusted Root Certificate Authorities (unlike browsers!)
+
+2. 
+	check openssl  directory where it looks for certificates
+	command: openssl version -d
+	example output:  OPENSSLDIR: "/etc/openssl"
+
+
+3.
+	download: curl -k -L https://curl.se/ca/cacert.pem	--output $HOME/cacert.pem
+	copy: cp $HOME/cacert.pem /etc/openssl/certs
+
+
+4.
+	source: https://stackoverflow.com/questions/25889341/what-is-the-equivalent-of-unix-c-rehash-command-script-on-linux
+	quotation: c_rehash needs "perl" for execution. If you can not run c_rehase, try below. use "openssl" in the Shell file
+	cd /etc/openssl/certs
+	command: for file in *.pem; do ln -s "$file" "$(openssl x509 -hash -noout -in "$file")".0; done
+	
+	
+run again: openssl s_client -connect google.com:443
+if all done properly you will see:
+
+SSL handshake has read 6680 bytes and written 392 bytes
+Verification: OK
+---
+New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
+Server public key is 256 bit
+Secure Renegotiation IS NOT supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+Early data was not sent
+Verify return code: 0 (ok)
+---
+read:errno=0
+
+
+
+
+
+https://unix.stackexchange.com/questions/16226/how-can-i-verify-ssl-certificates-on-the-command-line
+https://unix.stackexchange.com/questions/451207/how-to-trust-self-signed-certificate-in-curl-command-line
+https://www.ibm.com/support/pages/how-extract-ca-certificates
+https://stackoverflow.com/questions/23885449/unable-to-resolve-unable-to-get-local-issuer-certificate-using-git-on-windows
+https://super-unix.com/unixlinux/freebsd-10-root-certificate-store/
+https://www.shellhacks.com/git-bash-unable-to-get-local-issuer-certificate/
+https://gist.github.com/rustymagnet3000/e1bad38d30827e2f9f68bedc7534084d
+https://www.baeldung.com/linux/openssl-extract-certificate-info
+source: https://serverfault.com/questions/590870/how-to-view-all-ssl-certificates-in-a-bundle
+
+	openssl storeutl -noout -text -certs bundle.crt
+
+
+list certificates
+	openssl s_client -showcerts -verify 5 -connect stackexchange.com:443 < /dev/null
+	openssl s_client -showcerts -verify 5 -connect ftp.gnu.org:443 < /dev/null
+
+download certifications and save to file
+	openssl s_client -showcerts -connect stackexchange.com:443 </dev/null 2>/dev/null|openssl x509 -outform PEM >mycertfile.pem
+	openssl s_client -showcerts -connect wikipedia.org:443 </dev/null 2>/dev/null|openssl x509 -outform PEM >mycertfile2.pem
+	openssl s_client -showcerts -connect ftp.gnu.org:443 </dev/null 2>/dev/null|openssl x509 -outform PEM >mycertfile3.pem
+
+
+openssl s_client -showcerts -verify 5 -connect ftp.gnu.org:443 < /dev/null |
+   awk '/BEGIN CERTIFICATE/,/END CERTIFICATE/{ if(/BEGIN CERTIFICATE/){a++}; out="cert"a".pem"; print >out}'
+for cert in *.pem; do 
+        newname=$(openssl x509 -noout -subject -in $cert | sed -nE 's/.*CN ?= ?(.*)/\1/; s/[ ,.*]/_/g; s/__/_/g; s/_-_/-/; s/^_//g;p' | tr '[:upper:]' '[:lower:]').pem
+        echo "${newname}"; mv "${cert}" "${newname}" 
+done
+
+
