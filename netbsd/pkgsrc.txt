@@ -1,0 +1,35 @@
+PACKAGE MANAGER
+https://www.netbsd.org/docs/pkgsrc/platforms.html
+
+3.1. Getting pkgsrc for the first time
+3.1.2. Via anonymous CVS
+	cd /usr && cvs -q -z2 -d anoncvs@anoncvs.NetBSD.org:/cvsroot checkout -P pkgsrc
+	
+	cd /usr/pkgsrc/bootstrap
+	./bootstrap
+
+	Refer to documentation on your command shell how to set CVS_RSH=ssh permanently. For Bourne shells, you can set it in your .profile 
+	or better globally in /etc/profile:
+
+		# set CVS remote shell command
+		CVS_RSH=ssh
+		export CVS_RSH
+
+	By default, CVS doesn't do things like most people would expect it to do. But there is a way to convince CVS, by creating 
+	a file called .cvsrc in your home directory and saving the following lines to it. This file will save you lots of headache and some bug reports, 
+	so we strongly recommend it. You can find an explanation of this file in the CVS documentation.
+
+	# recommended CVS configuration file from the pkgsrc guide
+		cvs -q
+		checkout -P
+		update -dP
+		diff -upN
+		rdiff -u
+		release -d
+
+lets install java
+	get jdk.tar.gz and jre.tar.gz from oracle
+	mv downloaded files into /usr/pkgsrc/distfiles/
+	cd /usr/pkgsrc/lang/oracle-jdk8
+	make
+
