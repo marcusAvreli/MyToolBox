@@ -1,6 +1,9 @@
 PACKAGE MANAGER
 https://www.netbsd.org/docs/pkgsrc/platforms.html
 
+source:
+1. https://www.netbsd.org/docs/pkgsrc/pkgsrc.html
+2. https://kimconnect.com/how-to-compile-package-source/
 3.1. Getting pkgsrc for the first time
 3.1.2. Via anonymous CVS
 	cd /usr && cvs -q -z2 -d anoncvs@anoncvs.NetBSD.org:/cvsroot checkout -P pkgsrc
