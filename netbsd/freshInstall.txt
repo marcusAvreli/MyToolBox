@@ -1,0 +1,17 @@
+FRESH INSTALLED
+
+1. define user that can do su
+	useradd -m -G wheel jsmith
+2. set passwd
+	passwd jsmith
+3. start local dhcp
+	echo "dhcpcd=YES" >> /etc/rc.conf
+	service dhcpcd start
+4. start ssh
+	echo "sshd=YES" >> rc.conf
+	service sshd start
+5. get software sources
+	refer to pkgsrc.txt
+	
+	
+	
