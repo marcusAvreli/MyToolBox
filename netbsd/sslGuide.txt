@@ -72,6 +72,7 @@ download certifications and save to file
 	openssl s_client -showcerts -connect stackexchange.com:443 </dev/null 2>/dev/null|openssl x509 -outform PEM >mycertfile.pem
 	openssl s_client -showcerts -connect wikipedia.org:443 </dev/null 2>/dev/null|openssl x509 -outform PEM >mycertfile2.pem
 	openssl s_client -showcerts -connect ftp.gnu.org:443 </dev/null 2>/dev/null|openssl x509 -outform PEM >mycertfile3.pem
+	openssl s_client -showcerts -connect dlcdn.apache.org:443 </dev/null 2>/dev/null|openssl x509 -outform PEM >/etc/openssl/certs/apacheAnt.pem
 
 
 openssl s_client -showcerts -verify 5 -connect ftp.gnu.org:443 < /dev/null |

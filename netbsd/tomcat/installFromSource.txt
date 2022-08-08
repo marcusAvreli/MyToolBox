@@ -18,6 +18,9 @@
 	mv build /opt/tomcat10
 10. cd /opt/tomcat10/bin
 11. if not exist, create setenv.sh (see setenv.sh)
+	cd /opt/tomcat9/bin
+	vi setenv.sh
+	export JAVA_OPTS="$JAVA_OPTS -Djava.nio.channels.spi.SelectorProvider=sun.nio.ch.PollSelectorProvider -XX:MaxPermSize=128m  -XX:MaxNewSize=1024m"
 12. configure npf (network packet filter) (see npf.conf)
 	npfctl debug
 	//-----if no errors

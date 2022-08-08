@@ -33,6 +33,15 @@ source:
 lets install java
 	get jdk.tar.gz and jre.tar.gz from oracle
 	mv downloaded files into /usr/pkgsrc/distfiles/
+	 ACCEPTABLE_LICENSES+= oracle-binary-code-license
 	cd /usr/pkgsrc/lang/oracle-jdk8
 	make
 
+
+
+How to display or list of OpenBSD installed packages
+Use pkg_info command:
+pkg_info
+https://superuser.com/questions/975556/netbsd-no-pkg
+
+ pkg_add  -v mysql-server
