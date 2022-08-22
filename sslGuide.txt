@@ -164,22 +164,42 @@ Default keystore location
 Linux: $JAVA_HOME/jre/lib/security/cacerts 
 Windows: "%JAVA_HOME%/jre/lib/security/cacerts" 
 
-List certificates
-keytool -keystore $JAVA_HOME/jre/lib/security/cacerts -list
-The default password for the truststore: changeit
+1. List certificates
+	keytool -keystore $JAVA_HOME/jre/lib/security/cacerts -list
+	The default password for the truststore: changeit
 
+2. Generate keystore file
+	keytool -genkeypair -keystore filename.keystore -keypass domainname.com -storepass domainname.com -keyalg RSA -keysize 2048 -alias server -deststoretype pkcs12
 
-Generate keystore file
-keytool -genkeypair -keystore filename.keystore -keypass domainname.com -storepass domainname.com -keyalg RSA -keysize 2048 -alias server -deststoretype pkcs12
-
-Get certificate from server repository.primefaces.org
-keytool -J-Djava.net.useSystemProxies=true -printcert -rfc -sslserver repository.primefaces.org:443 > certPrimeFaces.pem
+3. Get certificate from server repository.primefaces.org
+	keytool -J-Djava.net.useSystemProxies=true -printcert -rfc -sslserver repository.primefaces.org:443 > certPrimeFaces.pem
   
-Save repository.primefaces.org certificate in keystore
-keytool -importcert -file c:\tomcat9014\bin\certOpenLdap.pem -alias certOpenLdap -storepass changeit -keystore "myJavaKeyStrore.jks"
+4. Save repository.primefaces.org certificate in keystore
+	keytool -importcert -file c:\tomcat9014\bin\certOpenLdap.pem -alias certOpenLdap -storepass changeit -keystore "myJavaKeyStrore.jks"
 
-List inserted certificate
-keytool -list -keystore "myJavaKeyStrore.jks" -alias certOpenLdap
+5. List inserted certificate
+	keytool -list -keystore "myJavaKeyStrore.jks" -alias certOpenLdap
+
+
+keytool -J-Djava.net.useSystemProxies=true -printcert -rfc -sslserver 192.168.1.14:636 > certPrimeFaces.pem
+
+cd /etc/ssl/openldap/certs
+keytool  -printcert -rfc -sslserver 192.168.1.14:636 > certPrimeFaces.pem
+openssl verify -CAfile /etc/ssl/openldap/certs/cacert.pem /etc/ssl/openldap/certs/certPrimeFaces.pem
+
+
+##WHICH TRUSSTORE CURRENTLY IN USE
+#! /bin/bash
+
+CACERTS=$(readlink -e $(dirname $(readlink -e $(which keytool)))/../lib/security/cacerts)
+
+if keytool -list -keystore $CACERTS -storepass changeit > /dev/null ; then
+    echo $CACERTS
+else
+    echo 'Can not find cacerts file.' >&2
+    exit 1
+fi
+
 
 
 

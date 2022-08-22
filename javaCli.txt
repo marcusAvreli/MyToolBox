@@ -1,19 +1,3 @@
-Get certificate from server repository.primefaces.org
-keytool -J-Djava.net.useSystemProxies=true -printcert -rfc -sslserver repository.primefaces.org:443 > certPrimeFaces.pem
-  
-Save repository.primefaces.org certificate in keystore
-keytool -importcert -file c:\tomcat9014\bin\certOpenLdap.pem -alias certOpenLdap -storepass changeit -keystore "myJavaKeyStrore.jks"
-
-List inserted certificate
-keytool -list -keystore "myJavaKeyStrore.jks" -alias certOpenLdap
-
-keytool -J-Djava.net.useSystemProxies=true -printcert -rfc -sslserver 192.168.1.14:636 > certPrimeFaces.pem
-
-cd /etc/ssl/openldap/certs
-keytool  -printcert -rfc -sslserver 192.168.1.14:636 > certPrimeFaces.pem
-openssl verify -CAfile /etc/ssl/openldap/certs/cacert.pem /etc/ssl/openldap/certs/certPrimeFaces.pem
-
-
 Find java classes in jars
 for i in *.jar; do jar -tvf "$i" | grep -Hsi ClassName && echo "$i"; done
 
@@ -24,20 +8,3 @@ eclipse.exe -clean -clearPersistedState
 Unable to acquire application service. Ensure that the org.eclipse.core.runtime bundle is resolved and started (see config.ini)
 
 java -XshowSettings:all
-
-
-##WHICH TRUSSTORE CURRENTLY IN USE
-#! /bin/bash
-
-CACERTS=$(readlink -e $(dirname $(readlink -e $(which keytool)))/../lib/security/cacerts)
-
-if keytool -list -keystore $CACERTS -storepass changeit > /dev/null ; then
-    echo $CACERTS
-else
-    echo 'Can not find cacerts file.' >&2
-    exit 1
-fi
-
-
-
-
