@@ -82,4 +82,30 @@ for cert in *.pem; do
         echo "${newname}"; mv "${cert}" "${newname}" 
 done
 
+==================================================================================
+	JAVA VERSION
+	
+	
+Default keystore location
+Linux: $JAVA_HOME/jre/lib/security/cacerts 
+Windows: "%JAVA_HOME%/jre/lib/security/cacerts" 
+
+List certificates
+keytool -keystore $JAVA_HOME/jre/lib/security/cacerts -list
+The default password for the truststore: changeit
+
+
+Generate keystore file
+keytool -genkeypair -keystore filename.keystore -keypass domainname.com -storepass domainname.com -keyalg RSA -keysize 2048 -alias server -deststoretype pkcs12
+
+Get certificate from server repository.primefaces.org
+keytool -J-Djava.net.useSystemProxies=true -printcert -rfc -sslserver repository.primefaces.org:443 > certPrimeFaces.pem
+  
+Save repository.primefaces.org certificate in keystore
+keytool -importcert -file c:\tomcat9014\bin\certOpenLdap.pem -alias certOpenLdap -storepass changeit -keystore "myJavaKeyStrore.jks"
+
+List inserted certificate
+keytool -list -keystore "myJavaKeyStrore.jks" -alias certOpenLdap
+
+
 

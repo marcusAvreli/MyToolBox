@@ -1,0 +1,13 @@
+UI Framework
+https://github.com/mariogarcia/viewa
+
+https://github.com/ramsafin/swing-rest-api-demo
+
+oauth login
+https://github.com/PlanetTeamSpeakk/DevLogin/blob/d75141e57825b5c851edb8cd7c6346f3884ad0de/src/main/java/com/ptsmods/devlogin/mixin/MixinMain.java
+
+https://github.com/scape-cloud/scape-cloud-runelite
+
+https://github.com/mguessan/davmail/search?q=task
+
+https://github.com/rmt2bsc/application_framework_suite
