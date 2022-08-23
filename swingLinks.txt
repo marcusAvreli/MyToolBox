@@ -11,3 +11,54 @@ https://github.com/scape-cloud/scape-cloud-runelite
 https://github.com/mguessan/davmail/search?q=task
 
 https://github.com/rmt2bsc/application_framework_suite
+
+
+https://github.com/Mechtilde/j-lawyer-client
+
+https://github.com/luhonghai/erp-project/tree/c1790e93434f317e8bb628dcb9498609f9795f55/erp-project/src/main/java/org/jallinone/system/permissions/java
+
+
+frameworks
+
+https://github.com/rmt2bsc/application_framework_suite
+https://github.com/maarten-blokker/healthclubnu
+https://github.com/threkk/BePrevious
+https://github.com/langmo/youscope
+
+https://github.com/engtuncay/tunc-utils-java
+https://github.com/jjhartmann/SciMat-Tool
+https://github.com/Kamehameha010/Airline-Managment-System/search?q=sql
+https://www.codeproject.com/Articles/36170/Simple-and-Powerful-TableModel-with-Reflection
+https://stackoverflow.com/questions/7420885/how-do-i-design-a-database-to-store-properties-selecting-attributes-by-synonyms
+https://github.com/julikiller98/Kernbeisser-Gradle/tree/master/src/main/java/kernbeisser/Forms/ObjectForm
+https://github.com/sethjj/Freemind/blob/4b9b59ad16c57b7af0338351211bfdab90109885/freemind/database/DataBaseTransactionException.java
+	swing database
+https://github.com/jihao/generic-table/tree/master/generic-table-springmvc/src/main/java/com/haojii/generic/table/model/cells
+https://stackoverflow.com/questions/70463997/how-to-configure-log4j2-from-properties-object
+https://github.com/rahulyhg/AstrosoftCore/blob/ab901f22a1ef63b6ade4cf80572eda1a33f9744d/src/app/astrosoft/ui/comp/Pagination.java
+	swing xml
+https://github.com/GDSC-Daejin/GDSC-WEB-BackEnd
+	rest springframework database swagger oauth
+https://github.com/kushagra67414/SurveyEngine/tree/4f32918dfb65c6851ce27d444926b833549af736/src
+	swing gui database
+https://github.com/ChristophKaplan/Stocker
+	swing gui
+https://github.com/Club-Rock-ISEN/EntryManager/tree/c0458e3ad04ee59f5e2390230c690fb691853b60/src/main/java/org/clubrockisen
+	swing gui
+https://github.com/Looong01/Airport/tree/51e5de2f4a81e57c6d480f885c027af28f6cd246/src/main/java/gui/staff/page
+https://github.com/trukhinyuri/ClientForJira
+strong gui: https://github.com/goedegep/MyWorld/tree/ae96699ca5c8aa921bead72b53c4823e7a9f7063/tim.prune/src/main/java/tim/prune
+https://github.com/AlanGuerraQuispe/SisAtuxVenta/tree/b36a9e45791dc9c2d1d9fd2b44d4039bfb7ffe1f/atux-jrcp/src/main
+https://github.com/idegtiarenko/Modeler/blob/92fd9ec87f901f7d1ed5ec4131ad5f1369a42405/src/main/java/com/gman/modeler/gui/api/DataCreator.java
+https://github.com/dmc-uilabs/dmcdome/tree/8c6a15222e36ebae50de7d384104d031a5147d12/src/mit/cadlab/dome3/network/client
+https://github.com/nakijun/diy-layout-creator
+	JMS Queue Client
+How to load log4j2 from properties object
+	https://stackoverflow.com/questions/43590612/log4j-2-8-1-using-propertiesconfigurationbuilder-to-load-properties-from-strings
+	How to build table with custom column definition
+	keep  properties in database example
+
+https://github.com/317843020/mybestValue/blob/2f80c469cad21dc232cdbe260597884a3082a86c/src/com/suhb/day01/listenDemo.java
+
+Event bus swing
+	https://github.com/michaelbushe/EventBus/tree/master/test/src/org/bushe/swing/event
