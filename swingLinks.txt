@@ -62,3 +62,11 @@ https://github.com/317843020/mybestValue/blob/2f80c469cad21dc232cdbe260597884a30
 
 Event bus swing
 	https://github.com/michaelbushe/EventBus/tree/master/test/src/org/bushe/swing/event
+
+
+
+
+
+
+https://ux.stackexchange.com/questions/5080/should-checkbox-labels-be-to-the-right-or-the-left
+http://web.archive.org/web/20090409150841/http://java.sun.com/products/jlf/ed2/book/HIG.Controls3.html
