@@ -1,0 +1,110 @@
+https://github.com/MarcusJyl/SecurityProject
+
+https://github.com/liuyajms/Repo/tree/e4bf10b82a2adf9fd7e61c403e5955503ff40eff/base.war
+
+
+https://github.com/yuukaotake/io-test/blob/f6230fc85251da34771af63d0a36d457d17ecb90/core/src/main/java/com/fujitsu/dc/core/DcCoreConfig.java
+
+https://github.com/dswarm/dswarm/tree/339ef9a660ac53ff8f6064e14ce84af5b6477f01/controller/src/main/java/org/dswarm/controller/resources/resource
+
+https://github.com/karutaproject/karuta-backend_legacy/blob/9546e9c9392d4f828be4c2d376bc8c9ebd58dc48/src/com/eportfolium/karuta/rest/RestServicePortfolio.java
+
+https://github.com/comdata/HomeAutomation/tree/de569feb14e74cd492aa862c2934c429b02cc90c/src/main/java/cm/homeautomation
+
+PersoniumEngineSvcCollectionResource
+https://github.com/personium/personium-core/blob/1f48c34778918bc1ecbd02b848c4642346d3cbbc/src/main/java/io/personium/core/rs/box/PersoniumEngineSvcCollectionResource.java
+
+https://github.com/personium/personium-lib-common/tree/develop/src/main/java/io/personium/common/auth/token
+
+https://github.com/karutaproject/karuta-backend_legacy/tree/0726b5ccdb2b28875be8ec389a7f7253006f3aad/src/com/eportfolium/karuta/eventbus
+
+https://github.com/ginccc/lms-data-hub/blob/f5dc99c67cd84f34dc284a917e6db6e816d2c5a7/src/main/java/at/ac/webster/eddi/IRestDifferEndpoint.java
+
+https://openliberty.io/blog/2019/01/24/async-rest-jaxrs-microprofile.html
+
+https://github.com/oceanobservatories/instrument-agent/blob/c18bc06fcf2b0a22aa733ebccf566832650e6f52/src/com/raytheon/uf/ooi/plugin/instrumentagent/InstrumentAgentWebImpl.java
+
+
+
+https://stackoverflow.com/questions/32119962/jersey-custom-context-injection
+
+The set returned from getSingletons() is unmodifiable. Instead we need to override the method
+
+@Override
+public Set<Object> getSingletons() {
+    Set<Object> singletons = new HashSet<>();
+    singletons.add(new new DaoContextProvider());
+    return singletons;
+}
+Note though that a direct Application subclass is limited in functionality compared to the Jersey specific way. In Jersey, 
+the preferred approach is to use a ResourceConfig subclass (which is actually a subclass of Application). 
+For example (you can use PackagesResourceConfig to scan packages).
+
+@ApplicationPath("/webresources")
+public class AppConfig extends PackagesResourceConfig {
+    
+    public AppConfig() {
+        // scans the package and sub-packages.
+        super("package.where.all.your.resource.and.providers.are");
+        getProperties().put("some properites", "to set");
+        getContainerRequestFilters().add(new SomeFiltersToRegister());
+        getProviderSingletons().add(new SomeProvidersToAdd());
+        // see the ResourceConfig API for more methods.
+    }
+}
+This will scan for @Path and @Provider annotated classes, so we don't need to explicitly register everything. 
+Though some providers will need to be explicitly registered. Your particular provider doesn't need to be registered though. 
+It i picked up in the package scan.
+
+UPDATE
+Ok since you say you are using Glassfish 4.1, the first thing you should understand is that Glassfish 4 uses Jersey 2.x. 
+So any Jersey 1.x dependencies/jars you have, you should get rid of them. Use only Jersey 2.x dependencies, and make sure that they are 
+only compile-time dependencies, as you do not want conflicting versions making it's way to Glassfish, that already has a version of them.
+
+What this means is that your current implementation of the DaoContextProvider will not work. 
+The SingletonTypeInjectableProvider is Jersey 1.x class, and the Jersey 2.x runtime will just ignore it.
+
+In Jersey 2.x there are a few ways to configure injectable objects. One way is to create a Factory for the object. For example.
+
+public class DaoContextProvider implements Factory<Bar> {
+
+    @Override
+    public Bar provide() {
+        return new Bar("boo hoo!");
+    }
+
+    @Override
+    public void dispose(Bar bar) {}
+}
+In Jersey 2.x, the API for ResourceConfig has change, and we can extend it directly. For example
+
+@ApplicationPath("/webresources")
+public class AppConfig extends ResourceConfig {
+
+    public AppConfig() {
+        
+        packages("com.stackoverflow.jersey");
+        
+        register(new AbstractBinder(){
+            @Override
+            protected void configure() {
+                bindFactory(DaoContextProvider.class)
+                        .to(Bar.class)
+                        .in(RequestScoped.class);
+            }
+        });
+    }
+}
+You can see the AbstractBinder. That is how we register the DaoContextProvider with the Bar class. So now Bar can be injected 
+to your resource classes.
+
+The only Maven dependency you need to pull everything else in, is
+
+<dependency>
+    <groupId>org.glassfish.jersey.containers</groupId>
+    <artifactId>jersey-container-servlet</artifactId>
+    <version>2.19</version>
+    <scope>provided</scope>
+</dependency> 
+Notice the provided scope, so that it does not get built to the war. If you are not using Maven, then grab all the jars in the Jersey JAX-RS 2.0 
+RI bundle. Remember that you should make them only compile time dependencies. They should no get built into the war.
