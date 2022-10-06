@@ -1,0 +1,9 @@
+git push origin master
+remote: Invalid username or password.
+fatal: Authentication failed for 'https://github.com/{username}/{repoName}/'
+
+to resolve
+
+generate new personall access token
+run: git push origin master
+this will popup login windows. copy and paste new token (without  spaces in token string)
