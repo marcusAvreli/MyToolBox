@@ -47,6 +47,32 @@ Verify return code: 0 (ok)
 ---
 read:errno=0
 
+Source: https://stackoverflow.com/questions/7587851/openssl-unable-to-verify-the-first-certificate-for-experian-url
+	The first error message is telling you more about the problem:
+
+	verify error:num=20:unable to get local issuer certificate
+
+	The issuing certificate authority of the end entity server certificate is
+
+	VeriSign Class 3 Secure Server CA - G3
+
+	Look closely in your CA file - you will not find this certificate since it is an intermediary CA - what you found 
+
+	was a similar-named G3 Public Primary CA of VeriSign.
+
+	But why does the other connection succeed, but this one doesn't? The problem is a misconfiguration of the servers 
+	(see for yourself using the -debug option). The "good" server sends the entire certificate chain during the handshake, 
+	therefore providing you with the necessary intermediate certificates.
+
+	But the server that is failing sends you only the end entity certificate, and OpenSSL is not capable of downloading 
+	the missing intermediate certificate "on the fly" (which would be possible by interpreting the Authority Information Access extension). 
+	Therefore your attempt fails using s_client but it would succeed nevertheless if you browse to the same URL using e.g. FireFox (which does 
+	support the "certificate discovery" feature).
+
+	Your options to solve the problem are either fixing this on the server side by making the server send the entire chain, too, 
+	or by passing the missing intermediate certificate to OpenSSL as a client-side parameter.
+
+
 
 source: https://stackoverflow.com/questions/31673587/error-unable-to-verify-the-first-certificate-in-nodejs
 error: Verify Return code: 21 (unable to verify the first certificate)
