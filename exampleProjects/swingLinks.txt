@@ -17,14 +17,61 @@ https://github.com/Mechtilde/j-lawyer-client
 
 https://github.com/luhonghai/erp-project/tree/c1790e93434f317e8bb628dcb9498609f9795f55/erp-project/src/main/java/org/jallinone/system/permissions/java
 
+//lazy table
+//https://rubenlaguna.com/post/2010-01-13-jtable-bound-to-a-database-with-lazy-loading/
+//https://stackoverflow.com/questions/11330268/how-to-smoothen-scrolling-of-jframe-in-java/11330436#11330436
+//https://stackoverflow.com/questions/17414109/populate-jtable-with-large-number-of-rows
 
+
+//pagination
+https://github.com/singer568/crawler/search?q=PaginationBean
+https://github.com/erajasekar/Astrosoft/blob/7e9b467ea1e4ef78a3fb3d561978920d04b0f67a/src/app/astrosoft/ui/table/AstrosoftTable.java
+https://github.com/hoangdh2001/travel_manager_v3/tree/5b9877d2638105509c90403279a538bf84900565/com.huyhoang/src/com/huyhoang/swing
+https://github.com/rzarref/pentaho-reporting/tree/0e41a7a657c0f1319bfcccfee3148bb68f89b1b5/engine/core/src/main/java/org/pentaho/reporting/engine/classic/core/layout/model/table
+https://github.com/vashishthask/theotherpages/tree/master/src/main/java/net/sf/theotherpages/business
+https://github.com/skuarch/sam4-client/blob/dcab88de57d0be42507dbaff186233bce2e5bc4d/src/java/views/tables/TablePagination.java
+https://github.com/eljavatar/SwingUtils/blob/dd39f74c7921b85136f053457896db9384697d91/src/main/java/com/eljavatar/swingutils/core/components/PaginatedTable.java
+https://github.com/tools20022/tools20022-api-payments (Lazy)
+https://github.com/rfsandiego/openhospital/blob/fbd3cef5064a7efb6e6c41769548b1f4b7359308/src/main/java/org/isf/opd/gui/OpdBrowser.java
+	PaginatedTableDecorator
+	PaginationDataProvider
+	PageableTableModel
+https://github.com/ArtemZaikovsky/Front/blob/46147b3f03cd0335bf7e59f7649c5fc97c732f3b/src/main/java/com/trade_accounting/components/util/LazyPaginator.java
+https://github.com/scap2000/DDesktop/blob/5a6bd3d7760307429bc2168ae053ba03dd394459/.deleted/Reporter/src/org/jfree/report/modules/output/pageable/base/PageableRenderer.java
+https://github.com/DanyCandra/e-arsip/blob/e42dc3c7569fb98ca2aaeb21e155ac1a2211b9d9/ArsipPLO/src/com/dany/plo/view/PanelPejabat.java
+https://github.com/erajasekar/Astrosoft/blob/7e9b467ea1e4ef78a3fb3d561978920d04b0f67a/src/app/astrosoft/ui/comp/PagingPanel.java
+https://github.com/pentaho/pentaho-reporting/blob/150c05e394f370a931e78dcd084f79bf0e8e4a14/engine/core/src/main/java/org/pentaho/reporting/engine/classic/core/modules/gui/base/PreviewPane.java
+https://github.com/qyouti/qyoutidesktop/search?q=PaginationRecord
+https://github.com/rsprat/outfit-recommendation-system/blob/460056145c45703f8da4c8c26a18dbb393cd38af/code/outfitRecommendationSystem/graphicalTools/rob/ors/graphicalTools/AbstractOutfitsPanel.java
+https://github.com/alemanym/Save-My-Wiki/blob/d6d05ea3cb9d39745213fa6823c4df1335d2a5e6/SaveMyWiki/src/main/java/com/savemywiki/tools/export/ui/AppView.java
+https://github.com/magsilva/ossim/blob/5d1b236fba8e51f0b3944352f09d2c125c16a7c0/src/edu/upc/fib/ossim/memory/model/MemStrategyPAG.java (PageSize)
+
+https://github.com/oneperfectsunrise/dbviewer/blob/11f7f715aa658c9d0d1749bb999900f2a214ca26/src/main/java/com/mcd/dub/views/panels/DatabaseViewPanel.java
+https://github.com/donatellosantoro/Llunatic/blob/aea6ad3d9fb3a5999fbf374efeed6b40983b3ba9/LunaticGUI/gui/src/it/unibas/lunatic/gui/window/db/DbPagedTableTopComponent.java#L35
+	(public interface PagedTableView )
+
+https://github.com/yinzwii/gfes/blob/c98ca78b27e65920c0429f6830379f9d3ce48468/src/main/java/com/gfes/view/UserManagementJPanel.java
+interface Pageable
+https://github.com/NCIP/cab2b
+	interface Pager
+	abstract class AbstractPager
+	class NumericPager
+
+https://github.com/hongluu/krank/blob/fdaa1db39b28cd7371150bf5c565cfeb483eb1d7/crank-crud/src/main/java/org/crank/crud/controller/FilterablePageable.java
+https://github.com/hongluu/krank/blob/fdaa1db39b28cd7371150bf5c565cfeb483eb1d7/crank-crud/src/main/java/org/crank/crud/controller/FilterablePageable.java
+
+https://github.com/svn2github/JdownloaderUtils/tree/41e2dedd169c41478f8f6057c49637af685a3efd/src/org/appwork/swing/exttable
+https://github.com/edwerner/react-app-server/tree/b55143b5635368be8d2f90820351804f9e9a6691/jdk8_src/javax/swing
+//visible columns
+https://github.com/julianpistorius/mirth-connect/blob/f6ef29cb254de1b0fa3c2eba8cfda7bf1c465456/client/src/com/mirth/connect/client/ui/components/MirthTable.java
 frameworks
-
+//https://github.com/l2fprod/l2fprod-common
+//https://github.com/jidesoft/jide-oss
 https://github.com/rmt2bsc/application_framework_suite
 https://github.com/maarten-blokker/healthclubnu
 https://github.com/threkk/BePrevious
 https://github.com/langmo/youscope
-
+https://github.com/jidesoft/jide-oss/tree/429b7080111df363a5decec2c2f71041379844af/src-jdk8/com
 https://github.com/engtuncay/tunc-utils-java
 https://github.com/jjhartmann/SciMat-Tool
 https://github.com/Kamehameha010/Airline-Managment-System/search?q=sql
@@ -71,10 +118,39 @@ export to excel
 https://github.com/ornrocha/tslabeler/tree/6a8820366e18cd6a2522972c0c4f1bf90021eb3c
 panels tables
 https://github.com/ornrocha/rencoder
+https://github.com/nhamnhuliem/DRGV2
+	PaginatedTableDecorator
 https://ux.stackexchange.com/questions/5080/should-checkbox-labels-be-to-the-right-or-the-left
 http://web.archive.org/web/20090409150841/http://java.sun.com/products/jlf/ed2/book/HIG.Controls3.html
-https://github.com/nhamnhuliem/DRGV2
+https://github.com/coderazzi/tablefilter-swing
 
 AbstractViewer
 swing viewers
 https://github.com/sepinf-inc/IPED
+
+Presentation Model
+https://github.com/informatici/openhospital-gui/tree/develop/src
+
+openTCS-4.12.0/openTCS-PlantOverview/src/main/java/org/opentcs/guing/components/properties/panel/PropertiesTableContent.java 
+
+
+https://github.com/ztl8702/ELAN
+https://github.com/garybentley/quollwriter
+https://github.com/ornrocha/rencoder
+https://github.com/nhamnhuliem/DRGV2
+https://github.com/leMaik/swing-material/tree/master/src/main
+https://github.com/skuarch/sam4-client
+https://github.com/DmytroRybka/nepxion
+	SwingLocale
+https://github.com/wasabiwithbun/KB
+https://github.com/glycoinfo/GlycanBuilder2
+https://github.com/donatellosantoro/Llunatic
+https://github.com/oneperfectsunrise/dbviewer
+https://github.com/julianpistorius/mirth-connect
+https://github.com/eitansuez/jmatter-complet
+https://github.com/mgg-dev-it/mgg-legacy-lib
+https://github.com/d3xsystems/d3x-morpheus
+https://github.com/semantic-web-software/dynagent/tree/master/Elecom
+	GTable
+	GTableRow
+	GTableColumn

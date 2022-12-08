@@ -24,9 +24,14 @@ https://openliberty.io/blog/2019/01/24/async-rest-jaxrs-microprofile.html
 
 https://github.com/oceanobservatories/instrument-agent/blob/c18bc06fcf2b0a22aa733ebccf566832650e6f52/src/com/raytheon/uf/ooi/plugin/instrumentagent/InstrumentAgentWebImpl.java
 
+https://github.com/GIPL-Internship/Online-Exam-API
 
+//async web services. guava event bus
+https://github.com/enviroCar/enviroCar-server
 
 https://stackoverflow.com/questions/32119962/jersey-custom-context-injection
+
+https://github.com/trendev/kiam-backend/search?p=2&q=Filter
 
 The set returned from getSingletons() is unmodifiable. Instead we need to override the method
 
@@ -108,3 +113,12 @@ The only Maven dependency you need to pull everything else in, is
 </dependency> 
 Notice the provided scope, so that it does not get built to the war. If you are not using Maven, then grab all the jars in the Jersey JAX-RS 2.0 
 RI bundle. Remember that you should make them only compile time dependencies. They should no get built into the war.
+
+
+ curl -H 'Content-Type: application/json'    -H 'Accept: application/json' http://localhost:8080/sampleIdmWebRest/tstreams/-1
+ 
+ https://github.com/CodingPang/crm-backend/tree/d7e9ccc0bb93d26a38d46137de5c7c99496152ee/src/main/java/com/greatgump/crm
+ 
+ https://github.com/karutaproject/karuta-backend_legacy
+ https://github.com/personium/personium-core
+ http://people.apache.org/~sgoeschl/blog/posts/javamelody/using-java-melody/

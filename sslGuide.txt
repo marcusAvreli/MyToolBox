@@ -48,7 +48,43 @@ Verify return code: 0 (ok)
 read:errno=0
 
 
+source: https://stackoverflow.com/questions/31673587/error-unable-to-verify-the-first-certificate-in-nodejs
+error: Verify Return code: 21 (unable to verify the first certificate)
+How do I get intermediate certificate
 
+	Save the remote server's certificate details:
+
+		openssl s_client -connect incomplete-chain.badssl.com:443 -servername incomplete-chain.badssl.com | tee logcertfile
+
+	We're looking for the issuer (the intermediate certificate is the issuer / signer of the server certificate):
+
+		openssl x509 -in logcertfile -noout -text | grep -i "issuer"
+
+	It should give you URI of the signing certificate. Download it:
+
+		curl --output intermediate.crt http://cacerts.digicert.com/DigiCertSHA2SecureServerCA.crt
+
+	Finally, convert it to .pem:
+
+		openssl x509 -inform DER -in intermediate.crt -out intermediate.pem -text
+
+	or
+		x509 -inform der -in intermediate.crt -out intermediate.pem
+		
+
+
+source: https://stackoverflow.com/questions/50923455/converting-cer-to-pem-returns-error-unable-to-load-certificate
+
+	converting .cer to .pem returns error 'unable to load certificate'
+
+	-----BEGIN CERTIFICATE-----
+
+	MIIHE...
+
+	-----END CERTIFICATE-----
+
+
+	Your certificate is already in PEM format. Just rename it from certificate.cer to certificate.pem
 
 
 https://unix.stackexchange.com/questions/16226/how-can-i-verify-ssl-certificates-on-the-command-line
