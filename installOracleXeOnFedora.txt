@@ -1,17 +1,20 @@
+source: https://ostechnix.com/add-delete-and-grant-sudo-privileges-to-users-in-fedora/
+		https://ask.fedoraproject.org/t/installing-oracle-xe-fedora-35/18897
+		https://community.oracle.com/tech/apps-infra/discussion/4335851/unable-to-install-compat-libcap1-1-10-in-ol8-2
+		https://serverfault.com/questions/100596/linux-quota-per-directory
+		https://landoflinux.com/linux_lvm_command_examples.html
+
 sudo mkdir -p /usr/local/java
 sudo cp -r jdk-8u341-linux-x64.tar.gz /usr/local/java
 cd /usr/local/java
 sudo tar -zxvf  jdk-8u341-linux-x64.tar.gz
-https://ostechnix.com/add-delete-and-grant-sudo-privileges-to-users-in-fedora/
-https://ask.fedoraproject.org/t/installing-oracle-xe-fedora-35/18897
-https://community.oracle.com/tech/apps-infra/discussion/4335851/unable-to-install-compat-libcap1-1-10-in-ol8-2
-vi /etc/profile
 
-	export JAVA_HOME=/usr/local/java/jdk1.8.0_341
-	export PATH=$PATH:$JAVA_HOME/bin
+echo 'export JAVA_HOME=/usr/local/java/jdk1.8.0_341' >> /etc/profile
+echo 'export PATH=$PATH:$JAVA_HOME/bin' >> /etc/profile
 source /etc/profile
 
 curl -o oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm https://yum.oracle.com/repo/OracleLinux/OL7/latest/x86_64/getPackage/oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm
+dnf localinstall -y oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm
 
 import thrid party repository
 	sudo rpm --import https://raw.githubusercontent.com/UnitedRPMs/unitedrpms/master/URPMS-GPG-PUBLICKEY-Fedora
@@ -21,29 +24,57 @@ import thrid party repository
 sudo dnf install xorg-x11-utils 
 
 dnf install -y  https://rpmfind.net/linux/centos/7.9.2009/os/x86_64/Packages/compat-libcap1-1.10-7.el7.x86_64.rpm
-		dnf install -y http://mirror.centos.org/centos/7/os/x86_64/Packages/compat-libcap1-1.10-7.el7.x86_64.rpm
-sudo dnf install -y https://rpmfind.net/linux/centos/7.9.2009/os/x86_64/Packages/compat-libstdc++-33-3.2.3-72.el7.x86_64.rpm
-		dnf install -y http://mirror.centos.org/centos/7/os/x86_64/Packages/compat-libstdc++-33-3.2.3-72.el7.x86_64.rpm
-		
-you will receive following error
-	java.lang.UnsatisfiedLinkError: /opt/oracle/product/18c/dbhomeXE/oui/lib/linux64/liboraInstaller.so: libnsl.so.1: cannot open shared object file: No such file or directory
-		
-dnf install -y http://mirror.centos.org/centos/7/os/x86_64/Packages/glibc-2.17-317.el7.x86_64.rpm
-sudo dnf install -y https://rpmfind.net/linux/fedora/linux/updates/36/Everything/x86_64/Packages/g/glibc-2.35-20.fc36.x86_64.rpm
-ln -s /lib64/libnsl.so.2 /lib64/libnsl.so.1		
- dnf update
+dnf install -y https://rpmfind.net/linux/centos/7.9.2009/os/x86_64/Packages/compat-libstdc++-33-3.2.3-72.el7.x86_64.rpm
+dnf install -y libnsl.so.1*64*	
 dnf -y groupinstall "Development Tools" 
+dnf localinstall -y  oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm
+dnf localinstall -y oracle-database-xe-18c-1.0-1.x86_64.rpm
 
-dnf -y install xorg-x11-server-Xorg xorg-x11-drv-{evdev,intel,synaptics} xorg-x11-xinit liberation-fonts
 
+Total size: 2.3 G
+Installed size: 5.2 G
+Downloading Packages:
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1
+  Running scriptlet: oracle-database-xe-18c-1.0-1.x86_64                    1/1
+  Installing       : oracle-database-xe-18c-1.0-1.x86_64                    1/1
+  Running scriptlet: oracle-database-xe-18c-1.0-1.x86_64                    1/1
+[INFO] Executing post installation scripts...
+[INFO] Oracle home installed successfully and ready to be configured.
+To configure Oracle Database XE, optionally modify the parameters in '/etc/sysconfig/oracle-xe-18c.conf'
+ and then execute '/etc/init.d/oracle-xe-18c configure' as root.
+                                                                           
+
+  Verifying        : oracle-database-xe-18c-1.0-1.x86_64                    1/1
+
+Installed:
+  oracle-database-xe-18c-1.0-1.x86_64
+
+Complete!
+echo '' >> $HOME/.bashrc; echo '#Oracle Environment Variables' >> $HOME/.bashrc
 
 echo 'export PATH="/opt/oracle/product/18c/dbhomeXE/bin:$PATH"' >> $HOME/.bashrc
 
+echo 'export ORACLE_SID=XE' >> $HOME/.bashrc
+
+echo 'export ORAENV_ASK=NO' >> $HOME/.bashrc
+
 echo 'export ORACLE_HOME="/opt/oracle/product/18c/dbhomeXE"' >> $HOME/.bashrc
+
 
 /etc/init.d/oracledb_ORCLCDB-18c configure
 
 Specify a password to be used for database accounts. Oracle recommends that the password entered should be at least 8 characters in length, contain at least 1 uppercase character, 1 lower case character and 1 digit [0-9]. Note that the same password will be used for SYS, SYSTEM and PDBADMIN accounts:
-ln -s /usr/lib64/libnsl.so.1 /lib64/libnsl.so.2 
-/usr/lib64/libnsl.so.1
+
+
 ldd /opt/oracle/product/18c/dbhomeXE/bin/orabase
+
+mount -t tmpfs -o size=8G tmpfs /var/mountpoint
+	lvcreate -L 15g -n project1 fedora_fedora
+	mke2fs -j /dev/fedora_fedora/project1
+	mkdir -r /projects/project1
+	mount /dev/fedora_fedora/project1 /projects/project1
