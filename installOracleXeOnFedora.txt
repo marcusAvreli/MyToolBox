@@ -42,6 +42,8 @@ dnf -y groupinstall "Development Tools"
 dnf localinstall -y  oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm
 dnf localinstall -y oracle-database-xe-18c-1.0-1.x86_64.rpm
 
+ldd /opt/oracle/product/18c/dbhomeXE/bin/orabase
+ldd /opt/oracle/product/18c/dbhomeXE/perl/bin/perl
 
 Total size: 2.3 G
 Installed size: 5.2 G
@@ -68,13 +70,9 @@ Installed:
 
 Complete!
 echo '' >> $HOME/.bashrc; echo '#Oracle Environment Variables' >> $HOME/.bashrc
-
 echo 'export PATH="/opt/oracle/product/18c/dbhomeXE/bin:$PATH"' >> $HOME/.bashrc
-
 echo 'export ORACLE_SID=XE' >> $HOME/.bashrc
-
 echo 'export ORAENV_ASK=NO' >> $HOME/.bashrc
-
 echo 'export ORACLE_HOME="/opt/oracle/product/18c/dbhomeXE"' >> $HOME/.bashrc
 
 
@@ -83,8 +81,7 @@ echo 'export ORACLE_HOME="/opt/oracle/product/18c/dbhomeXE"' >> $HOME/.bashrc
 Specify a password to be used for database accounts. Oracle recommends that the password entered should be at least 8 characters in length, contain at least 1 uppercase character, 1 lower case character and 1 digit [0-9]. Note that the same password will be used for SYS, SYSTEM and PDBADMIN accounts:
 
 
-ldd /opt/oracle/product/18c/dbhomeXE/bin/orabase
-ldd /opt/oracle/product/18c/dbhomeXE/perl/bin/perl
+
 
 [root@fedora admin]# /etc/init.d/oracle-xe-18c configure
 Specify a password to be used for database accounts. Oracle recommends that the password entered should be at least 8 characters in length, contain at least 1 uppercase character, 1 lower case character and 1 digit [0-9]. Note that the same password will be used for SYS, SYSTEM and PDBADMIN accounts:
@@ -130,36 +127,37 @@ Connect to Oracle Database using one of the connect strings:
      Pluggable database: fedora/XEPDB1
      Multitenant container database: fedora
 Use https://localhost:5500/em to access Oracle Enterprise Manager for Oracle Database XE
-
+to open portal for the world:
+	EXEC DBMS_XDB.SETLISTENERLOCALACCESS(FALSE);
 	
 	
 	
 
 
+During installation i saw following in trace log:
 
-[progressPage.flowWorker] [ 2022-12-20 11:09:17.616 IST ] [PerlEngine.execute:224]  SHLVL=3
-[progressPage.flowWorker] [ 2022-12-20 11:09:17.616 IST ] [PerlEngine.execute:224]  HOME=/home/oracle
-[progressPage.flowWorker] [ 2022-12-20 11:09:17.616 IST ] [PerlEngine.execute:224]  PERL5LIB=/opt/oracle/product/18c/dbhomeXE/rdbms/admin
-[progressPage.flowWorker] [ 2022-12-20 11:09:17.616 IST ] [PerlEngine.execute:229]  Execing PERL process...
-[progressPage.flowWorker] [ 2022-12-20 11:09:17.618 IST ] [PerlEngine.execute:267]  m_bReaderStarted: false
-[progressPage.flowWorker] [ 2022-12-20 11:09:17.618 IST ] [PerlEngine.execute:271]  Starting Reader Thread...
-[progressPage.flowWorker] [ 2022-12-20 11:09:17.631 IST ] [PerlEngine.execute:325]  Inputing secret arg: 0
-[progressPage.flowWorker] [ 2022-12-20 11:09:17.631 IST ] [PerlEngine.execute:325]  Inputing secret arg: 1
-[progressPage.flowWorker] [ 2022-12-20 11:09:17.632 IST ] [PerlEngine.execute:368]  Exit value = 127
-[progressPage.flowWorker] [ 2022-12-20 11:09:17.632 IST ] [PerlEngine.execute:369]   status is  = 127
-dnf install perl-core
-echo $PERL5LIB
-https://stackoverflow.com/questions/7113320/where-to-find-the-perl-shared-objects-directory
-ls -ltr  /usr/share/perl5/vendor_perl
-echo 'export PERL5LIB=/usr/local/lib64/perl5/5.34:/usr/local/share/perl5/5.34:/usr/lib64/perl5/vendor_perl:/usr/share/perl5/vendor_perl:/usr/lib64/perl5:/usr/share/perl5' >> /etc/profile
- ls -ltr /opt/oracle/cfgtoollogs/dbca
+	[progressPage.flowWorker] [ 2022-12-20 11:09:17.616 IST ] [PerlEngine.execute:224]  SHLVL=3
+	[progressPage.flowWorker] [ 2022-12-20 11:09:17.616 IST ] [PerlEngine.execute:224]  HOME=/home/oracle
+	[progressPage.flowWorker] [ 2022-12-20 11:09:17.616 IST ] [PerlEngine.execute:224]  PERL5LIB=/opt/oracle/product/18c/dbhomeXE/rdbms/admin
+	[progressPage.flowWorker] [ 2022-12-20 11:09:17.616 IST ] [PerlEngine.execute:229]  Execing PERL process...
+	[progressPage.flowWorker] [ 2022-12-20 11:09:17.618 IST ] [PerlEngine.execute:267]  m_bReaderStarted: false
+	[progressPage.flowWorker] [ 2022-12-20 11:09:17.618 IST ] [PerlEngine.execute:271]  Starting Reader Thread...
+	[progressPage.flowWorker] [ 2022-12-20 11:09:17.631 IST ] [PerlEngine.execute:325]  Inputing secret arg: 0
+	[progressPage.flowWorker] [ 2022-12-20 11:09:17.631 IST ] [PerlEngine.execute:325]  Inputing secret arg: 1
+	[progressPage.flowWorker] [ 2022-12-20 11:09:17.632 IST ] [PerlEngine.execute:368]  Exit value = 127
+	[progressPage.flowWorker] [ 2022-12-20 11:09:17.632 IST ] [PerlEngine.execute:369]   status is  = 127
+
+To verify the reason, I run
+	ldd /opt/oracle/product/18c/dbhomeXE/perl/bin/perl
+
+ls -ltr /opt/oracle/cfgtoollogs/dbca
 rm -f /opt/oracle/cfgtoollogs/dbca/XE/*
 vi /etc/sysconfig/oracle-xe-18c.conf
 
 firewall-cmd --add-port=22/tcp
 firewall-cmd --add-port=5500/tcp
 
-https://github.com/marcusAvreli/MyToolBox/blob/master/Fedora/httpd.txt#:~:text=firewall%2Dcmd%20%20%2D%2Dadd%2Dport%3D80/tcp%20%20%2D%2Dpermanent
+
 firewall-cmd  --add-port=1521/tcp
 firewall-cmd --runtime-to-permanent
 firewall-cmd --reload
@@ -170,4 +168,3 @@ firewall-cmd --zone=FedoraServer --add-port=5500/tcp
 firewall-cmd --remove-port=1521/tcp
 firewall-cmd --runtime-to-permanent
 firewall-cmd --reload
-EXEC DBMS_XDB.SETLISTENERLOCALACCESS(FALSE);
