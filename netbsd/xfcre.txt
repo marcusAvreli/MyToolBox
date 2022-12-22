@@ -1,0 +1,55 @@
+source: https://slice2.com/2019/09/21/howto-install-the-xfce-4-desktop-on-netbsd-8-1/
+
+pkgin install font-adobe-75*
+pkgin install font-adobe-100*
+pkgin install font-adobe-utopia* / Y
+pkgin install fam
+cp /usr/pkg/share/examples/rc.d/famd /etc/rc.d/
+cp /usr/pkg/share/examples/rc.d/dbus /etc/rc.d/
+echo rpcbind=YES >> /etc/rc.conf
+echo famd=YES >> /etc/rc.conf
+echo dbus=YES >> /etc/rc.conf
+/etc/rc.d/rpcbind start
+/etc/rc.d/famd start
+/etc/rc.d/dbus start
+
+
+/etc/rc.d/rpcbind restart
+/etc/rc.d/famd restart
+/etc/rc.d/dbus restart
+
+echo xfce4-session >> /home/admin/.xinitrc
+ln /home/admin/.xinitrc /home/admin/.xsession
+chown admin:wheel /home/admin/.xinitrc
+chown admin:wheel /home/admin/.xsession
+
+
+pkgin -y install firefox
+pkgin -y install opera
+pkgin -y install flashplayer
+pkgin -y install mozilla-fonts*
+
+pkgin -y install openquicktime
+pkgin -y install xpdf
+
+
+pkgin -y install audacious
+pkgin -y install audacity
+pkgin -y install brasero
+pkgin -y install bunzip
+pkgin -y install bzip2
+pkgin -y install filezilla
+pkgin -y install libreoffice*
+
+pkgin -y install thunderbird
+pkgin -y install tree
+pkgin -y install vlc*
+pkgin -y install xmms
+pkgin -y install xfce4-xmms-plugin
+pkgin -y install xcdroast
+pkgin -y install xcalc
+pkgin -y install xpad
+pkgin -y install xpaint
+
+pkgin -y install xorg
+
