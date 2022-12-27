@@ -7,16 +7,29 @@ hostname
 dns name resolving
 	vi /etc/resolv.conf
 	nameserver 127.0.0.53
-	nameserver 10.0.0.138
+	nameserver 192.168.243.2
 
 default gateway
 	/etc/mygate
-	192.168.134.2
+	192.168.243.2
 
 set ip address
-	/etc/ifconfig.wm0
-	192.168.134.152 netmask 255.255.255.0 media autoselect
+	/etc/pcn0
+	192.168.243.136 netmask 255.255.255.0 media autoselect
 
 restart the network card
 	/etc/rc.d/network restart
 
+https://www.cyberciti.biz/faq/howto-setup-static-routes-on-openbsd-unix-networking/
+View Current Routing Table
+Type the following command
+# route show
+# route -n show
+
+To display ipv4 routes only, enter:
+# route -n show -inet
+
+To display ipv6 routes only, enter:
+# route -n show -inet6
+
+Sample outputs (ipv4 routes only):
