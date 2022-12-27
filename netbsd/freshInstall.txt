@@ -8,7 +8,7 @@ FRESH INSTALLED
 	echo "dhcpcd=YES" >> /etc/rc.conf
 	service dhcpcd start
 4. start ssh
-	echo "sshd=YES" >> rc.conf
+	echo "sshd=YES" >> /etc/rc.conf
 	service sshd start
 5. get software sources
 	refer to pkgsrc.txt
