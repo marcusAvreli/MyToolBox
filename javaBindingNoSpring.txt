@@ -1,0 +1,3 @@
+https://github.com/TechPrimers/rule-engine-example-1
+https://tenmilesquare.com/resources/software-development/basic-rules-engine-design-pattern/
+https://github.com/EricTrainingRev/Community-Library/blob/ddf30d8b4f41ae4f37521609d2edb0f1fd21f4e6/community-library/src/main/java/com/revature/Main.java
