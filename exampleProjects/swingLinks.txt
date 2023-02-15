@@ -1,5 +1,6 @@
 UI Framework
 https://github.com/mariogarcia/viewa
+https://github.com/SURESH04BALAN/ofbiz_max/tree/aa0ce29a4a59870a385aad43ffc3707247d1fecb/framework
 
 https://github.com/ramsafin/swing-rest-api-demo
 
@@ -63,12 +64,15 @@ https://github.com/hongluu/krank/blob/fdaa1db39b28cd7371150bf5c565cfeb483eb1d7/c
 https://github.com/svn2github/JdownloaderUtils/tree/41e2dedd169c41478f8f6057c49637af685a3efd/src/org/appwork/swing/exttable
 https://github.com/edwerner/react-app-server/tree/b55143b5635368be8d2f90820351804f9e9a6691/jdk8_src/javax/swing
 //visible columns
+//interesting database connection
 https://github.com/julianpistorius/mirth-connect/blob/f6ef29cb254de1b0fa3c2eba8cfda7bf1c465456/client/src/com/mirth/connect/client/ui/components/MirthTable.java
 frameworks
 //https://github.com/l2fprod/l2fprod-common
 //https://github.com/jidesoft/jide-oss
 https://github.com/rmt2bsc/application_framework_suite
-https://github.com/maarten-blokker/healthclubnu
+
+
+//table column factory
 https://github.com/threkk/BePrevious
 https://github.com/langmo/youscope
 https://github.com/jidesoft/jide-oss/tree/429b7080111df363a5decec2c2f71041379844af/src-jdk8/com

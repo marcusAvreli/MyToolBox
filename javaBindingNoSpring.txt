@@ -8,3 +8,4 @@ https://github.com/kislayverma/Rulette/blob/master/rulette-core/src/main/java/co
 
 https://github.com/aromajason/BusinessrulesEngine/tree/master/src/main/java/com/example/businessrulesEngine/pipeline/handler
 https://github.com/ceddyville/BusinessRulesEngine/blob/master/src/main/java/EngineRule.java
+1971*
