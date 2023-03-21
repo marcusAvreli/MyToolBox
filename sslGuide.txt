@@ -4,7 +4,7 @@ check openssl version
 check openssl home dir
 	openssl version -d
 
-
+https://unix.stackexchange.com/questions/368123/how-to-extract-the-root-ca-and-subordinate-ca-from-a-certificate-chain-in-linux
 
 on fresh installed system run: openssl s_client -connect google.com:443
 you will get following error: SSL certificate problem: unable to get local issuer certificate

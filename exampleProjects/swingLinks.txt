@@ -158,3 +158,33 @@ https://github.com/semantic-web-software/dynagent/tree/master/Elecom
 	GTable
 	GTableRow
 	GTableColumn
+	
+	https://github.com/OlexDragon/irt_gui/search?q=ControllerAbstract
+https://github.com/tuckerd/conference_system/blob/9cefa256d4c477dd0be69b377e9c24e49d9a9204/src/controller/RevisedAuthorViewController.java
+
+CUSTOM COMPONENTS
+	https://objectcomputing.com/resources/publications/sett/january-2005-developing-custom-swing-components-with-test-driven-development
+	https://github.com/omarSuarezRodriguez/jcombobox-suggestions-autocomplete/blob/main/src/main/ModernScrollBarUI.java
+
+https://github.com/comdata/HomeAutomation/blob/de569feb14e74cd492aa862c2934c429b02cc90c/src/main/java/cm/homeautomation/eventbus/EventBusEndpointConfigurator.java
+https://github.com/Polus-Software/VUCoeus/blob/d66c987c6387b458a0e5a7ff1dedeab89225b787/Source/Client/src/edu/mit/coeus/gui/CoeusAppletMDIForm.java
+https://github.com/abenhamo/XtendTradingIB/blob/f3a8147603f771e58e24cc43d9baca2f0795dcb0/src/com/xtendtrading/ibbot/controller/HomepageController.java
+https://github.com/mgijax/mtb-utils/tree/970adf883ecf4b88a2a85c64d084bc40697753b3/dao/src/org/jax/mgi/mtb/dao/gen
+https://github.com/omkar-ramtekkar/AYF-Fund-Manager/blob/fa57fbe2a382da0d7ba16b9d41c2d3bca30e9176/AYFFundManager/src/org/ayf/util/Toast.java
+https://github.com/harihara12345/ParasBank/blob/dc801c36e6c2c0df7644af30288f614e46f87af8/src/test/java/com/internetapp/pages/a_ElementsPage.java
+https://github.com/joshiejack/Progression/blob/1ab4a7f3c4b9a2a9b28fb9f85710562f5820114d/src/main/java/joshie/progression/handlers/RuleHandler.java
+https://github.com/GIPL-Internship/Online-Exam-API/blob/47a8900dff231b1b8cfc9e4d0b5aa59f16270a58/src/main/java/com/example/theexamapi/repositories/TClassRepository.java
+https://github.com/marcusAvreli/dynamicFeature/tree/master/src/main/java/dynamicFeature/rest
+https://github.com/jcabaiova/RDFDataAnalyser/blob/42f60d5c9fe84cddd7286e5549d83156e971df0e/src/main/java/cz/cvut/fit/cabaijan/resources/RestMethods.java
+
+
+https://github.com/SURESH04BALAN/ofbiz_max/tree/aa0ce29a4a59870a385aad43ffc3707247d1fecb/framework
+https://github.com/chesarin/FloreantPOS/tree/14ddbe09ea2b6c53d7c514fe53fa4fa5594bd7eb/src
+https://github.com/mgarin/weblaf
+https://github.com/michaelbull/ModBot/tree/f727eca551597a796c3cb4b9a5267e64d0d7a3f8/src/main/java/org/modbot
+MH17. Years of lies | PREMIERE of documentary project on ICTV
+https://web.archive.org/web/20180722012752/http://usna86-techbits.blogspot.com/2012/11/uml-class-diagram-relationships.html
+https://web.archive.org/web/20180722012752/http://usna86-techbits.blogspot.com/2012/11/uml-class-diagram-relationships.html
+https://www.tutorialspoint.com/design_pattern/front_controller_pattern.htm
+https://www.tutorialspoint.com/design_pattern/business_delegate_pattern.htm
+https://github.com/Minor2020/AndroidTraining/blob/eb5277ab5b65db193789fb60cd82da8508aba2ab/lib-eventbus/src/main/java/org/greenrobot/eventbus/util/AsyncExecutor.java

@@ -122,3 +122,8 @@ RI bundle. Remember that you should make them only compile time dependencies. Th
  https://github.com/karutaproject/karuta-backend_legacy
  https://github.com/personium/personium-core
  http://people.apache.org/~sgoeschl/blog/posts/javamelody/using-java-melody/
+ https://github.com/dotCMS/core/blob/adccf337fc00cb9b4d744ce53cff6ada9bf202bd/dotCMS/src/main/webapp/WEB-INF/web.xml
+ https://github.com/tanmoy069/ResearchAndDevelopment-Repo/tree/057698b573a6d1cf1c7aeb5c072c9c64036be414/JerseyWebApiRnd/src/main/java/com/tanmoy/JerseyWebApiRnd
+ 
+ https://github.com/DescartesResearch/TeaStore/blob/e2875721dac172d07bd708cea524aed650b3e786/utilities/tools.descartes.teastore.registryclient/src/main/java/tools/descartes/teastore/registryclient/rest/NonBalancedCRUDOperations.java
+ https://github.com/tengia/oauth-2/blob/master/oauth2-client/src/main/java/net/oauth2/client/OAuthTokenServiceDelegate.java
