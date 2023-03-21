@@ -48,3 +48,14 @@ Using personal access token
 
 	
 curl -L https://github.com/cyrusimap/cyrus-sasl/releases/download/cyrus-sasl-2.1.27/cyrus-sasl-2.1.27.tar.gz --output cyrus-sasl-2.1.27.tar.gz
+
+
+git push origin master
+remote: Invalid username or password.
+fatal: Authentication failed for '<repository name>'
+
+How to fix it
+
+https://github.com/settings/tokens generated token
+Copy the Personal Access Token
+Make authentication through browser
