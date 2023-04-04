@@ -11,6 +11,28 @@ source:
 	cd /usr/pkgsrc/bootstrap
 	./bootstrap
 
+
+===========================================================================
+
+Please remember to add /usr/pkg/bin to your PATH environment variable
+and /usr/pkg/man to your MANPATH environment variable, if necessary.
+
+An example mk.conf file with the settings you provided to "bootstrap"
+has been created for you. It can be found in:
+
+      /usr/pkg/etc/mk.conf
+
+You can find extensive documentation of the NetBSD Packages Collection
+in /usr/pkgsrc/doc/pkgsrc.txt.
+
+Thank you for using pkgsrc!
+
+===========================================================================
+
+
+
+
+
 	Refer to documentation on your command shell how to set CVS_RSH=ssh permanently. For Bourne shells, you can set it in your .profile 
 	or better globally in /etc/profile:
 
