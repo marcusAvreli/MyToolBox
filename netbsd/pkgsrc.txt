@@ -28,8 +28,10 @@ in /usr/pkgsrc/doc/pkgsrc.txt.
 Thank you for using pkgsrc!
 
 ===========================================================================
+vi $HOME/.profile
+PATH=/usr/pkg/bin:$PATH
 
-
+export PATH
 
 
 
