@@ -1,3 +1,11 @@
+[admin@fedora ~]$ openssl version
+OpenSSL 3.0.8 7 Feb 2023 (Library: OpenSSL 3.0.8 7 Feb 2023)
+
+dnf install "Developer tools"
+#tomcat bin
+#java rpm
+#https://tomcat.apache.org/native-doc/
+
 [root@fedora lib]# pwd
 /opt/tomcat9/lib
 [root@fedora lib]# ls -ltr
