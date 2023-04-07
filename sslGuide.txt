@@ -7,7 +7,25 @@ check openssl home dir
 https://unix.stackexchange.com/questions/368123/how-to-extract-the-root-ca-and-subordinate-ca-from-a-certificate-chain-in-linux
 
 on fresh installed system run: openssl s_client -connect google.com:443
-you will get following error: SSL certificate problem: unable to get local issuer certificate
+you will get following message:
+
+	No client certificate CA names sent
+	Peer signing digest: SHA256
+	Peer signature type: ECDSA
+	Server Temp Key: X25519, 253 bits
+	---
+	SSL handshake has read 6778 bytes and written 392 bytes
+	Verification error: unable to get local issuer certificate
+	---
+	New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
+	Server public key is 256 bit
+	Secure Renegotiation IS NOT supported
+	Compression: NONE
+	Expansion: NONE
+	No ALPN negotiated
+	Early data was not sent
+	Verify return code: 20 (unable to get local issuer certificate)
+
 1. 
 	source: https://pavolkutaj.medium.com/fix-openssl-error-unable-to-get-local-issuer-certificate-e0ad5c2b675d
 	quotation: OpenSSL cannot validate the chain OpenSSL itself comes without a list of Trusted Root Certificate Authorities (unlike browsers!)
