@@ -1,6 +1,7 @@
 Environmental variables
 M2_HOME is used for both Maven 2 and 3
-
+//ant_install_from_source
+//https://ant.apache.org/manual/index.html
 export M2_HOME=/Users/xxx/sdk/apache-maven-3.0.5
 export M2=$M2_HOME/bin
 export MAVEN_OPTS="-Xmx1048m -Xms256"
