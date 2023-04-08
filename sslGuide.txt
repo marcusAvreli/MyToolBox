@@ -3,6 +3,9 @@ check openssl version
 	
 check openssl home dir
 	openssl version -d
+	
+OpenSSL Certificate Authority
+https://jamielinux.com/docs/openssl-certificate-authority/index.html
 https://jamielinux.com/docs/openssl-certificate-authority/sign-server-and-client-certificates.html
 https://unix.stackexchange.com/questions/368123/how-to-extract-the-root-ca-and-subordinate-ca-from-a-certificate-chain-in-linux
 
