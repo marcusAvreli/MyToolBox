@@ -6,7 +6,7 @@ check openssl home dir
 	
 OpenSSL Certificate Authority
 https://jamielinux.com/docs/openssl-certificate-authority/index.html
-https://jamielinux.com/docs/openssl-certificate-authority/sign-server-and-client-certificates.html
+https://deliciousbrains.com/ssl-certificate-authority-for-local-https-development/
 https://unix.stackexchange.com/questions/368123/how-to-extract-the-root-ca-and-subordinate-ca-from-a-certificate-chain-in-linux
 
 on fresh installed system run: openssl s_client -connect google.com:443
