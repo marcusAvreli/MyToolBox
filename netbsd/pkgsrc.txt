@@ -95,12 +95,12 @@ export JAVA_HOME CATALINA_HOME CATALINA_OPTS
 CATALINA_OPTS="-Djava.awt.headless=true -Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true -Djava.nio.channels.spi.SelectorProvider=sun.nio.ch.PollSelectorProvider"
 export CATALINA_OPTS
 
-sh buildconf --with-apr=/usr/pkgsrc/devel/apr/work/apr-1.7.2
+sh buildconf --with-apr=/usr/pkgsrc/devel/apr/work/apr-1.7.2 
 
 configure --with-apr=apr_install_location --with-ssl=openssl_install_location
 
 sh buildconf --with-apr=/usr/pkgsrc/devel/apr/work/apr-1.7.2
-./configure --with-apr=/usr/pkg --with-ssl=/usr
+./configure --with-apr=/usr/pkg/bin/apr-1-config --with-ssl=yes --with-java-home=$JAVA_HOME --prefix=$CATALINA_HOME
 make
 ln -s /usr/pkg/bin/python2.7 /usr/pkg/bin/python
 
@@ -116,3 +116,13 @@ ln -s /usr/pkg/bin/python2.7 /usr/pkg/bin/python
 java.library.path: [/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib:/usr/local/apr/lib]
 -Djava.library.path=/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib:/usr/local/apr/lib
 https://stackoverflow.com/questions/19216979/ssl-configuration-in-tomcat-and-apr
+
+-Djava.library.path=/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib:/usr/local/apr/lib
+-Djava.library.path=$CATALINA_HOME/lib
+export LD_LIBRARY_PATH=/opt/tomcat9/lib:$LD_LIBRARY_PATH
+
+export PATH=$JAVA_HOME/bin:$PATH
+
+sudo dnf search libapr1.0-dev
+
+./configure --with-apr=/usr/bin/apr-1-config --with-java-home=/usr --with-ssl=yes --prefix=/opt/tomcat9
