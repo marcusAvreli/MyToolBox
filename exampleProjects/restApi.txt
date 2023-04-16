@@ -1,7 +1,8 @@
 https://github.com/MarcusJyl/SecurityProject
 
 https://github.com/liuyajms/Repo/tree/e4bf10b82a2adf9fd7e61c403e5955503ff40eff/base.war
-
+framework
+https://github.com/devallever/SocialServer/blob/007072f98110844b9776181f03020e220d89f845/src/com/easemob/server/example/comm/EasemobRestAPIFactory.java
 
 https://github.com/yuukaotake/io-test/blob/f6230fc85251da34771af63d0a36d457d17ecb90/core/src/main/java/com/fujitsu/dc/core/DcCoreConfig.java
 
@@ -127,3 +128,17 @@ RI bundle. Remember that you should make them only compile time dependencies. Th
  
  https://github.com/DescartesResearch/TeaStore/blob/e2875721dac172d07bd708cea524aed650b3e786/utilities/tools.descartes.teastore.registryclient/src/main/java/tools/descartes/teastore/registryclient/rest/NonBalancedCRUDOperations.java
  https://github.com/tengia/oauth-2/blob/master/oauth2-client/src/main/java/net/oauth2/client/OAuthTokenServiceDelegate.java
+ https://github.com/santanu12saha/JWT-Authentication-Authorization-with-jersey/tree/939c57a85ffdcf2c50b08e56a522609c921f2e50/src/main/java/org/santanubrains
+ 
+ 
+ https://github.com/CoprHD/coprhd-controller/tree/a575ec96928b1e9258313efe92c930bfe9d6753a
+ https://github.com/SuppenNudel/scryfall-java-api/blob/c4aa0f5e1e472a695d13fdac829b16e70ef871cf/scryfall-rest-api-java/src/main/java/de/rohmio/mtg/scryfall/api/endpoints/NamedEndpoint.java
+ https://github.com/opus-research/couchbase-jvm-core/blob/5f2ee87406cc488168ab2d878552df8d7797edbd/src/main/java/com/couchbase/client/core/security/sasl/ShaSaslClientFactory.java
+ https://github.com/AllTheDucks/bb-rest-jersey-client-filter/blob/b186ffa55ba275b6c4f4c87e4052bda338a6f214/src/main/java/com/alltheducks/bbrest/jersey/OAuth2ClientCredentialsFeature.java
+ https://github.com/BBhatia-29/EmailAdministrationApp/search?l=Java&q=Authorization
+ https://github.com/aoju/bus/blob/2d6fc37ce5c293dd54caf028db5a7c54eec8a03d/bus-gitlab/src/main/java/org/aoju/bus/gitlab/support/AccessToken.java
+ 
+ getClient()
+ https://github.com/sahlone/DataProcessorAPI/blob/b9d47a42a50ce3cabce7b50851561920a3f547bd/EuroTravel/src/com/goeuro/api/service/impl/CityInfoServiceImpl.java
+ 
+ https://github.com/SheekhaJ/HPALMJava/blob/b7bc76287578059a84fb444182d7454432eaada9/HPALMJava/src/main/java/com/authentication/Authentication.java
