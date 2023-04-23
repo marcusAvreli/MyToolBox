@@ -9,7 +9,7 @@ https://jamielinux.com/docs/openssl-certificate-authority/index.html
 https://deliciousbrains.com/ssl-certificate-authority-for-local-https-development/
 https://stackoverflow.com/questions/16062072/how-to-add-certificate-chain-to-keystore
 https://unix.stackexchange.com/questions/368123/how-to-extract-the-root-ca-and-subordinate-ca-from-a-certificate-chain-in-linux
-
+https://stackoverflow.com/questions/7580508/getting-chrome-to-accept-self-signed-localhost-certificate
 on fresh installed system run: openssl s_client -connect google.com:443
 you will get following message:
 
