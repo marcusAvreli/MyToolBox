@@ -1,0 +1,2 @@
+https://community.sailpoint.com/t5/IdentityIQ-Articles/Building-IdentityIQ-Plugin-Projects-with-Gradle-and-Angular-4/ta-p/78820
+https://community.sailpoint.com/t5/Technical-White-Papers/IdentityIQ-REST-API-Integration/ta-p/76814

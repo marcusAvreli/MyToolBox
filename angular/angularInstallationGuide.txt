@@ -1,0 +1,24 @@
+//install node js of latest version
+https://nodejs.org/dist/v18.16.0/node-v18.16.0-x64.msi
+
+//install python 2.7.10
+
+//local installation of angular with specific version
+npm install @angular/cli@1.4.10 --ignore-script
+
+//path to global installation of angular
+//Set up the correct NPM PATH on Windows
+npm config get prefix
+
+
+//link your project to the globally installed Angular package
+npm link @angular/cli
+
+//ng command should work now
+
+
+
+references:
+	
+	https://bobbyhadz.com/blog/not-recognized-as-internal-or-external-command-ng#:~:text=To%20solve%20the%20error%20%22ng,variable%20is%20set%20up%20correctly.
+	https://ferie.medium.com/how-to-install-a-specific-angular-version-16d4766341f3
