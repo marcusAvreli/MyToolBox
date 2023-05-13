@@ -1,0 +1,1 @@
+https://docs.gradle.org/current/userguide/build_environment.html#:~:text=Gradle%20can%20also%20set%20project,with%20the%20value%20of%20somevalue%20.

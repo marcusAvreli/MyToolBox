@@ -1,0 +1,7 @@
+https://stackoverflow.com/questions/50812026/is-there-some-kind-of-load-event-for-web-workers
+https://stackoverflow.com/questions/246801/how-can-you-encode-a-string-to-base64-in-javascript
+https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_webworker
+https://www.w3schools.com/js/tryit.asp?filename=tryjs_promise2
+https://www.w3schools.com/js/js_promise.asp
+https://stackoverflow.com/questions/246801/how-can-you-encode-a-string-to-base64-in-javascript
+https://stackabuse.com/making-http-requests-in-node-js-with-node-fetch/

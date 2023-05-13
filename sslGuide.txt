@@ -7,7 +7,9 @@ check openssl home dir
 OpenSSL Certificate Authority
 https://jamielinux.com/docs/openssl-certificate-authority/index.html
 https://deliciousbrains.com/ssl-certificate-authority-for-local-https-development/
+building pfx file
 https://stackoverflow.com/questions/16062072/how-to-add-certificate-chain-to-keystore
+
 https://unix.stackexchange.com/questions/368123/how-to-extract-the-root-ca-and-subordinate-ca-from-a-certificate-chain-in-linux
 https://stackoverflow.com/questions/7580508/getting-chrome-to-accept-self-signed-localhost-certificate
 on fresh installed system run: openssl s_client -connect google.com:443
@@ -287,3 +289,6 @@ fi
 
 
 
+openssl ocsp -issuer .\crates-io-chain.pem -cert .\crates-io.pem -text -url <ocsp_server_url> -no_nonce
+
+certutil -f -urlfetch -verify "C:\Users\User\Desktop\Alice Ltd Root CA.crt"

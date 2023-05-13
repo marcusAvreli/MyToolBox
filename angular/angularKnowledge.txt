@@ -1,0 +1,16 @@
+Errors
+Uncaught reflect-metadata shim is required when using class decorators
+In root/src
+Update file polyfills.ts
+
+import 'zone.js';
+import 'reflect-metadata';
+
+Cannot find name 'require'
+Update file tsconfig.app.json
+
+"types": [
+      "node"
+    ]
+https://yeshasmp.github.io/posts/angular-services/
+https://indepth.dev/posts/1151/a-deep-dive-into-injectable-and-providedin-in-ivy

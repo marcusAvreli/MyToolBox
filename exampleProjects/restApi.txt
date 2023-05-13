@@ -142,3 +142,4 @@ RI bundle. Remember that you should make them only compile time dependencies. Th
  https://github.com/sahlone/DataProcessorAPI/blob/b9d47a42a50ce3cabce7b50851561920a3f547bd/EuroTravel/src/com/goeuro/api/service/impl/CityInfoServiceImpl.java
  
  https://github.com/SheekhaJ/HPALMJava/blob/b7bc76287578059a84fb444182d7454432eaada9/HPALMJava/src/main/java/com/authentication/Authentication.java
+ https://gist.github.com/BrainBacon/667e09373ae1992fcd59

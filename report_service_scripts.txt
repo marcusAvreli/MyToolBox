@@ -1,0 +1,10 @@
+CREATE TABLE "ADMIN"."RPRT_REPORT"
+(
+	
+	ID BIGINT not null  generated always as identity	
+	,NAME varchar(100) not null default 'NOT_SET'
+	,DESCRIPTION varchar(100)
+	,STRD_PRCDR BIGINT NOT null
+	
+	,primary key (ID)
+)

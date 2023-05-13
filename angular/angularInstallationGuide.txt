@@ -2,9 +2,13 @@
 https://nodejs.org/dist/v18.16.0/node-v18.16.0-x64.msi
 
 //install python 2.7.10
+//install Microsoft Visual C++ Redistributable latest supported downloads
 
 //local installation of angular with specific version
-npm install @angular/cli@1.4.10 --ignore-script
+npm install -g @angular/cli@1.4.10 --ignore-script
+
+//uninstall angular
+npm uninstall -g @angular/cli
 
 //path to global installation of angular
 //Set up the correct NPM PATH on Windows
@@ -16,9 +20,23 @@ npm link @angular/cli
 
 //ng command should work now
 
+//new project
+ng new exmapleWorker3 --skipt-git
+
+add dependencies
+	npm install moment
+	npm install @angular/http
+
 
 
 references:
 	
 	https://bobbyhadz.com/blog/not-recognized-as-internal-or-external-command-ng#:~:text=To%20solve%20the%20error%20%22ng,variable%20is%20set%20up%20correctly.
 	https://ferie.medium.com/how-to-install-a-specific-angular-version-16d4766341f3
+	https://www.mend.io/free-developer-tools/blog/npm-how-to-install-a-specific-version-of-node-js-package/
+	https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170
+	https://stackoverflow.com/questions/60248452/is-there-a-compatibility-list-for-angular-angular-cli-and-node-js
+	https://nodejs.org/download/release/v8.17.0/
+	https://nodejs.org/en/download/releases
+	https://stackoverflow.com/questions/43344600/how-to-install-a-specific-version-of-angular-with-angular-cli
+	https://blog.webiks.com/working-offline-with-angular-cli/
