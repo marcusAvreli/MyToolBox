@@ -101,6 +101,12 @@ BUILDING MULTI MODULE PROJECT tutorial2
 		mvn archetype:generate -DgroupId=tutorial2 -DartifactId=tutorial2-web -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
 
 		Change packaging of tutorial2-server to <packaging>war</packaging>
+	
+	parent module:	
+		mvn archetype:generate -DgroupId=gtableIntegration  -DartifactId=gtableIntegration -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.1 -DinteractiveMode=false
+		
+		child module:
+			mvn archetype:generate -DgroupId=gtableIntegration  -DartifactId=gtableAttemp1 -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.1 -DinteractiveMode=false
 		
 		
 ================================================================================================================================		
