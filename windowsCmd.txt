@@ -1,2 +1,15 @@
-findstr /sin /c:"AnnotationResolver" "C:\Users\User\eclipse-workspace\*.java"
-findstr /sin /c:"ColumnDefinition" "C:\Users\User\eclipse-workspace\*.java" > "C:\Users\User\output.txt"
+search string in file recurcively
+	
+	findstr /sin /c:"AnnotationResolver" "C:\Users\User\eclipse-workspace\*.java"
+	findstr /sin /c:"ColumnDefinition" "C:\Users\User\eclipse-workspace\*.java" > "C:\Users\User\output.txt"
+
+Number Of Files in directory recurcively
+	dir /a:-d /s /b "<path-to-directory>" | find /c ":"
+
+Number Of Sub-Directories in directory recurcively
+	dir /a:d /s /b "<path-to-directory>" | find /c ":"
+
+kill all java on windows
+	taskkill /f /im jqs.exe 
+	taskkill /f /im javaw.exe 
+	taskkill /f /im java.exe

@@ -24,3 +24,12 @@ https://github.com/MTHRSHiP/skf-flask/blob/346906d7983be00a53ab1616484fe41f33469
 https://github.com/drewdru/ponyTown/blob/6efbc4d15db68b6982d18628bbc7b5ad60e2b0d4/src/ts/components/tools/tools-perf/tools-perf.ts#L1
 https://github.com/goossaert/ethereum-payment-system/blob/84018f02ed2eb3fcbb7107c55a3c22e0eaa264d8/frontend/src/app/auth/auth.service.ts
 https://github.com/auth0-blog/mean-rsvp-auth0/blob/0ef1fd599ff4bf77244823b5e476373aca7fae7f/src/app/core/env.config.ts
+https://github.com/Lumeer/web-ui/blob/b8eaf4ac135f47ffcedb046f278141ab6421912c/src/app/auth/auth.service.ts#L20
+https://github.com/Code4SocialGood/c4sg-web/blob/f3ce8b0205b1d3450c75879a511d1e4a76704232/src/app/auth.service.ts#L486
+https://github.com/GSA/srt-ui/blob/4f89b3e9beed3a0ac714fc293f02fd109fc0b9df/src/app/user/masq/masq.service.ts
+https://github.com/chris-amaya/fh-chat/blob/9f75ceb3bc6f4667664ba1ea4fb4926e17d5b4af/packages/backend/src/helpers/jwt.ts
+https://github.com/mxtommy/Kip/blob/44d073c62b92562cbbfd7a62b29e86aa764bb2c6/src/app/auththetication.service.ts#L212
+https://github.com/acgnhiki/blrec/blob/1ac194ef4dcc73f3271df3fce8d5b71a7f6aa4a4/webapp/src/app/tasks/shared/services/task.service.ts
+
+resolveComponentFactory
+	https://github.com/SUSE/stratos/blob/d32e3f2eaca14e055689da7e658e8545481ce930/src/frontend/packages/core/src/features/about/about-page/about-page.component.ts#L32
