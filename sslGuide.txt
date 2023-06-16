@@ -292,3 +292,13 @@ fi
 openssl ocsp -issuer .\crates-io-chain.pem -cert .\crates-io.pem -text -url <ocsp_server_url> -no_nonce
 
 certutil -f -urlfetch -verify "C:\Users\User\Desktop\Alice Ltd Root CA.crt"
+
+
+echo -e 'Concat certs'
+cat "${DIR_PATH}/tls/server/public/server.cert.pem" "${DIR_PATH}/tls/intermediate/certs/ca-chain-bundle.cert.pem" > "${DIR_PATH}/tls/server/tomcat/all.cert.pem"
+echo -e "Creating new tomcat keystore"
+openssl pkcs12 -inkey "${DIR_PATH}/tls/server/private/server.key.pem" -in "${DIR_PATH}/tls/server/tomcat/all.cert.pem" -export -out "${DIR_PATH}/tls/server/tomcat/tomcat.pfx" -password pass:changeit
+
+
+openssl pkcs12 -in tomcat.pfx -info
+openssl s_client -connect 192.168.243.133:8443 -showcerts

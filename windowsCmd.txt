@@ -3,6 +3,11 @@ search string in file recurcively
 	findstr /sin /c:"AnnotationResolver" "C:\Users\User\eclipse-workspace\*.java"
 	findstr /sin /c:"ColumnDefinition" "C:\Users\User\eclipse-workspace\*.java" > "C:\Users\User\output.txt"
 
+find string skipping directories
+	findstr /sin /c:"addTable" "C:\Users\User\gtable\dynagent\*.java" | findstr /liv "\\server\\ \\Nucleo"
+	
+	skip: server and Nucleo directories
+
 Number Of Files in directory recurcively
 	dir /a:-d /s /b "<path-to-directory>" | find /c ":"
 

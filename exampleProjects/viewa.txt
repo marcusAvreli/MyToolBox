@@ -1,0 +1,78 @@
+	
+	CORE
+	AbstractViewContainerFrame
+	DefaultViewContainerFrame
+	DefaultViewManager extends AbstractViewManager
+	AbstractViewContainer
+		UTIL
+		https://github.com/mariogarcia/viewa/blob/c39f7f46dc39908bd23cd4ded0b60c5f555617b8/core/src/main/java/org/viewaframework/util/StatusBar.java
+	API
+	ViewManager 
+	Delegator
+	ViewContainerFrame extends ViewContainer
+	ViewContainer
+	
+VIEW 
+	CORE
+	https://github.com/mariogarcia/viewa/blob/c39f7f46dc39908bd23cd4ded0b60c5f555617b8/core/src/main/java/org/viewaframework/view/AbstractViewContainerFrame.java
+	https://github.com/mariogarcia/viewa/blob/c39f7f46dc39908bd23cd4ded0b60c5f555617b8/core/src/main/java/org/viewaframework/view/AbstractViewContainer.java
+	https://github.com/mariogarcia/viewa/blob/c39f7f46dc39908bd23cd4ded0b60c5f555617b8/core/src/main/java/org/viewaframework/view/DefaultViewContainerFrame.java
+	https://github.com/mariogarcia/viewa/blob/c39f7f46dc39908bd23cd4ded0b60c5f555617b8/core/src/main/java/org/viewaframework/view/DefaultViewManager.java
+	https://github.com/mariogarcia/viewa/blob/c39f7f46dc39908bd23cd4ded0b60c5f555617b8/core/src/main/java/org/viewaframework/view/AbstractViewManager.java
+	
+		https://github.com/mariogarcia/viewa/blob/c39f7f46dc39908bd23cd4ded0b60c5f555617b8/core/src/main/java/org/viewaframework/view/perspective/DefaultPerspective.java
+	API
+	https://github.com/mariogarcia/viewa/blob/c39f7f46dc39908bd23cd4ded0b60c5f555617b8/api/src/main/java/org/viewaframework/view/ViewManager.java
+	https://github.com/mariogarcia/viewa/blob/c39f7f46dc39908bd23cd4ded0b60c5f555617b8/api/src/main/java/org/viewaframework/view/delegator/Delegator.java
+	https://github.com/mariogarcia/viewa/blob/c39f7f46dc39908bd23cd4ded0b60c5f555617b8/api/src/main/java/org/viewaframework/view/ViewContainer.java
+	https://github.com/mariogarcia/viewa/blob/c39f7f46dc39908bd23cd4ded0b60c5f555617b8/api/src/main/java/org/viewaframework/view/ViewContainerFrame.java
+
+		https://github.com/mariogarcia/viewa/blob/c39f7f46dc39908bd23cd4ded0b60c5f555617b8/api/src/main/java/org/viewaframework/view/ViewAware.java
+	https://github.com/mariogarcia/viewa/blob/c39f7f46dc39908bd23cd4ded0b60c5f555617b8/api/src/main/java/org/viewaframework/view/perspective/PerspectiveConstraint.java
+	
+ViewContainerFrame
+https://github.com/wuchiachong/java-annotation-reflection-validation/blob/master/src/UserRepositoryTest.java
+https://github.com/BabSarg/ValidationByReflection
+https://github.com/secondsun/notification_manager_for_github_frontend/blob/c4b7e0f72d8fd1464d7bd9232abc756c6718e26a/src/main/java/net/saga/github/notifications/manager/service/auth/AuthModule.java
+https://github.com/mariogarcia/viewa/blob/c39f7f46dc39908bd23cd4ded0b60c5f555617b8/api/src/main/java/org/viewaframework/view/ComponentsAware.java
+	ComponentsAware
+		getComponentsByName
+		getComponentByName
+		getNamedComponents
+		setNamedComponents
+
+https://github.com/mariogarcia/viewa/blob/c39f7f46dc39908bd23cd4ded0b60c5f555617b8/api/src/main/java/org/viewaframework/controller/ViewControllerAware.java
+	ViewControllerAware
+		setViewControllerMap
+		getViewControllerMap
+		
+		
+ViewContainerEventAware	https://github.com/mariogarcia/viewa/blob/c39f7f46dc39908bd23cd4ded0b60c5f555617b8/api/src/main/java/org/viewaframework/view/event/ViewContainerEventAware.java
+	public void fireViewClose(ViewContainerEvent event);	
+	public void fireViewInit(ViewContainerEvent event);	
+	public void fireViewInitUIState(ViewContainerEvent event);	
+	public void fireViewInitBackActions(ViewContainerEvent event);	
+	public void fireViewFinalUIState(ViewContainerEvent event);
+
+ViewContainerEventControllerAware	https://github.com/mariogarcia/viewa/blob/c39f7f46dc39908bd23cd4ded0b60c5f555617b8/api/src/main/java/org/viewaframework/view/event/ViewContainerEventControllerAware.java
+	public abstract void addViewContainerListener(ViewContainerEventController listener);
+	public abstract void removeViewContainerListener(ViewContainerEventController listener);
+	public abstract void setViewContainerListeners(List<ViewContainerEventController> listeners);
+	public abstract List<ViewContainerEventController> getViewContainerListeners();
+ApplicationAware	https://github.com/mariogarcia/viewa/blob/c39f7f46dc39908bd23cd4ded0b60c5f555617b8/api/src/main/java/org/viewaframework/core/ApplicationAware.java
+	public abstract void setApplication(Application application);
+	public abstract Application getApplication();
+ComponentsAware
+ViewControllerAware	https://github.com/mariogarcia/viewa/blob/c39f7f46dc39908bd23cd4ded0b60c5f555617b8/api/src/main/java/org/viewaframework/controller/ViewControllerAware.java
+ViewModelAware	https://github.com/mariogarcia/viewa/blob/c39f7f46dc39908bd23cd4ded0b60c5f555617b8/api/src/main/java/org/viewaframework/model/ViewModelAware.java
+	public void addModelValue(String alias,Object object);	
+	public Object getModelValue(String alias);
+	public Map<String,ViewModel> getViewModelMap();	
+	public void setViewModelMap(Map<String,ViewModel> viewModelMap);
+DelegatorAware
+	public void setDelegators(List<Delegator> delegators);
+	public void addDelegator(Delegator delegator);
+	public List<Delegator> getDelegators();
+	public void removeDelegator(Delegator delegator);
+RootPaneContainer
+MessageAware
