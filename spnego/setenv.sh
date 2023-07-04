@@ -1,0 +1,20 @@
+CATALINA_OPTS="
+	-Xms1024m -Xmx2048m
+	-XX:MaxPermSize=256m  
+	-XX:+UseParNewGC
+	-XX:+UseConcMarkSweepGC
+	-Dcom.sun.jndi.ldap.connect.pool.timeout=10000 
+	-Djco.trace_path=${CATALINA_HOME}
+	-Djco.trace_level=0
+	-Doracle.jdbc.javaNetNio=false
+	-Dlog4j2.formatMsgNoLookups=true                                      
+	-Dorg.apache.velocity.runtime.log=${CATALINA_HOME}/logs/velocity.log
+	-Djava.net.preferIPv4Stack=true
+	-Djava.net.preferIPv4Addresses=true
+	-Djava.security.krb5.conf=${CATALINA_HOME}/conf/krb5.ini
+	-Djava.security.auth.login.config=${CATALINA_HOME}/conf/jaas.conf 
+	-Djavax.security.auth.useSubjectCredsOnly=false
+	-Dsun.security.krb5.debug=true
+	-Dsun.security.spnego.debug=true
+	-Dsun.security.jgss.debug=true
+	"

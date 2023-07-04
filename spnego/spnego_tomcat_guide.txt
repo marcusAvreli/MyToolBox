@@ -1,0 +1,147 @@
+ktpass /out "<path_to_key_tab>/file_name.keytab" /mapuser <ad_user_name>@domainNameCaseSensitive /princ HTTP/fqdnofTargetServer@domainNameCaseSensitive /pass <password> /ptype krb5_nt_principal /kvno 0 /crypto ALL
+
+contents of key tab
+klist  -kte iiqSpnegoTomcat.keytab
+
+  0 01/01/1970 02:00:00 HTTP/fqdnofTargetServer@domainNameCaseSensitive (des-cbc-crc)
+   0 01/01/1970 02:00:00 HTTP/fqdnofTargetServer@domainNameCaseSensitive (des-cbc-md5)
+   0 01/01/1970 02:00:00 HTTP/fqdnofTargetServer@domainNameCaseSensitive (arcfour-hmac)
+   0 01/01/1970 02:00:00 HTTP/fqdnofTargetServer@domainNameCaseSensitive (aes256-cts-hmac-sha1-96)
+   0 01/01/1970 02:00:00 HTTP/fqdnofTargetServer@domainNameCaseSensitive (aes128-cts-hmac-sha1-96)
+
+if keyTab and krb5.conf are configured properly then following commands should work well
+	1. kinit -V samaccountname
+		Correct output
+			Using existing cache: <text_whatever>
+			Using principal: samaccountname@domainNameCaseSensitive
+			Password for samaccountname@domainNameCaseSensitive:
+			Authenticated to Kerberos v5
+	2.  kinit -p samaccountname
+			Prints no output
+	
+	3. kinit -V -XDsun.security.krb5.debug=true -p samaccountname
+		Correct output
+			Using existing cache: <text_whatever>
+			Using principal: samaccountname@domainNameCaseSensitive
+			PA Option Dsun.security.krb5.debug = true
+			Password for samaccountname@domainNameCaseSensitive:
+			Authenticated to Kerberos v5
+					
+	4. kinit -V HTTP/fqdnofTargetServer
+			Using existing cache: <text_whatever>
+			Using principal: HTTP/fqdnofTargetServer@domainNameCaseSensitive
+			Password for HTTP/fqdnofTargetServer@domainNameCaseSensitive:
+			Authenticated to Kerberos v5
+
++-------------------------------------------------------------------------------------------+ 
+|                                                                                           |              
+|	5. jaas.conf /<tomcat_root>/conf                                                		|
+|                                                                                           |
++-------------------------------------------------------------------------------------------+
+Tomcat {
+  com.sun.security.auth.module.Krb5LoginModule required;
+};
+
+
+com.sun.security.jgss.krb5.initiate {
+    com.sun.security.auth.module.Krb5LoginModule required
+    doNotPrompt=true
+    principal="HTTP/fqdnofTargetServer"
+    useKeyTab=true
+    keyTab="<path_to_key_tab>/file_name.keytab"
+    debug=true
+    storeKey=true;
+};
+
+com.sun.security.jgss.krb5.accept {
+    com.sun.security.auth.module.Krb5LoginModule required
+    doNotPrompt=true
+    principal="HTTP/fqdnofTargetServer"
+    useKeyTab=true
+    keyTab="<path_to_key_tab>/file_name.keytab"
+    debug=true
+    storeKey=true;
+};
+
++-------------------------------------------------------------------------------------------+ 
+|																							|
+|		6. server.xml /<tomcat_root>/conf													|
+|																							|
++-------------------------------------------------------------------------------------------+
+
+
+
+inside of engine tag
+
+<Realm className="org.apache.catalina.realm.JNDIRealm"
+	connectionURL="ldap://ad_host:3268" userSubtree="true"
+	userBase="dc=<dc1>,dc=<dc2>"
+	userSearch="(sAMAccountName={0})"
+	userRoleName="memberOf"
+	roleBase="dc=<dc1>,dc=<dc2>" roleName="cn"
+	roleSearch="(member={0})"
+	roleSubtree="true"
+	roleNested="true"
+/>
+<Host name="novaiquit01.mehmail.loc" appBase="webapps">
+	<Context docBase="base_path_to_app" path="/base_path_to_app">
+			<Valve className="org.apache.catalina.authenticator.SpnegoAuthenticator" storeDelegatedCredential="true"/>
+	</Context>
+	<Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+									prefix="localhost_access_log" suffix=".txt"
+									pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+</Host>
+
+
+vi logging.properties
+org.apache.catalina.realm.level = ALL
+org.apache.catalina.realm.useParentHandlers = true
+org.apache.catalina.authenticator.level = ALL
+org.apache.catalina.authenticator.useParentHandlers = true
+org.apache.juli.logging.UserDataHelper.CONFIG = INFO_ALL
+org.apache.coyote.http11.level = DEBUG
+
+web.xml of app
+
+<security-constraint>
+
+        <web-resource-collection>
+
+             <web-resource-name>All JSF Files</web-resource-name>
+
+             <url-pattern>*.jsf</url-pattern>
+
+
+        </web-resource-collection>
+
+        <auth-constraint>
+
+             <role-name>*</role-name>
+
+        </auth-constraint>
+
+    </security-constraint>
+
+
+    <security-constraint>
+      <display-name>Restrict access to XHTML pages</display-name>
+      <web-resource-collection>
+        <web-resource-name>Restrict access to XHTML pages</web-resource-name>
+        <url-pattern>*.xhtml</url-pattern>
+      </web-resource-collection>
+<auth-constraint>
+
+             <role-name>*</role-name>
+
+        </auth-constraint>
+    </security-constraint>
+
+   <security-role>
+
+        <role-name>*</role-name>
+
+    </security-role>
+
+    <login-config>
+      <auth-method>SPNEGO</auth-method>
+    </login-config>

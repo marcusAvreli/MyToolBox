@@ -7,6 +7,36 @@ find string skipping directories
 	findstr /sin /c:"addTable" "C:\Users\User\gtable\dynagent\*.java" | findstr /liv "\\server\\ \\Nucleo"
 	
 	skip: server and Nucleo directories
+	El nombre de la columna
+	findstr /sin /c:"filter" "C:\Users\User\gtable\dynagent\*.java" | findstr /liv "\\server\\ \\Nucleo\\ \\test\\ \\ruleengine\\ \\updaters\\ \\importers\\ \\xml\\"
+https://stackoverflow.com/questions/20076262/findstr-and-skipping-folders
+
+	The following script will not bother scanning the "%basedir%\Projects" or "%basedir%\Archive" folders.
+
+		@echo off
+		setlocal EnableDelayedExpansion
+		set basedir=C:\folder
+
+		>"%basedir%\Projects\list.txt" (
+		  findstr /mil request "%basedir%\*"
+		  for /f "eol=: delims=" %%F in (
+			'dir /a:d-h /b %basedir% ^| findstr /vixl "projects archive"'
+		  ) do findstr /smil request "%basedir%\%%F\*"
+		)
+	If you want to skip all folders named "Projects" or "Archive", regardless where they appear in the tree, then:
+
+		@echo off
+		setlocal EnableDelayedExpansion
+		set basedir=C:\folder
+
+		>"%basedir%\Projects\list.txt" (
+		  findstr /mil request "%basedir%\*"
+		  for /f "eol=: delims=" %%F in (
+			'dir /s /a:d-h /b %basedir% ^| findstr /vir "[\\]projects[\\] [\\]archive[\\] [\\]projects$ [\\]archive$"'
+		  ) do findstr /mil request "%%F\*"
+		)
+
+
 
 Number Of Files in directory recurcively
 	dir /a:-d /s /b "<path-to-directory>" | find /c ":"

@@ -1,3 +1,9 @@
+keep single space between string
+
+find what: ^ +| +$|( )+
+replace with: $1
+
+ 
 To add "); at the end of row
 	FindWhat: ^(.*)$
 	ReplaceWith: \1"\);
