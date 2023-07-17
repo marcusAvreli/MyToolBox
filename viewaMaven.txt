@@ -1,0 +1,23 @@
+https://github.com/mariogarcia/viewa/tree/master
+mvn install:install-file -Dfile=viewapi.jar -DgroupId=viewapi -DartifactId=viewapi -Dversion=1 -Dpackaging=jar
+mvn install:install-file -Dfile=viewcore.jar -DgroupId=viewcore -DartifactId=viewcore -Dversion=1 -Dpackaging=jar
+mvn install:install-file -Dfile=viewswing2.jar -DgroupId=viewswing2 -DartifactId=viewswing2 -Dversion=1 -Dpackaging=jar
+mvn install:install-file -Dfile=viewswing.jar -DgroupId=viewswing -DartifactId=viewswing -Dversion=1 -Dpackaging=jar
+
+<dependency>
+	<groupId>viewapi</groupId>
+	<artifactId>viewapi</artifactId>
+	<version>1</version>
+</dependency>
+
+<dependency>
+	<groupId>viewcore</groupId>
+	<artifactId>viewcore</artifactId>
+	<version>1</version>
+</dependency>
+
+<dependency>
+	<groupId>viewswing2</groupId>
+	<artifactId>viewswing2</artifactId>
+	<version>1</version>
+</dependency>
