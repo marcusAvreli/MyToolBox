@@ -199,3 +199,5 @@ https://github.com/kislayverma/Rulette/blob/master/rulette-core/src/main/java/co
 
 https://github.com/aromajason/BusinessrulesEngine/tree/master/src/main/java/com/example/businessrulesEngine/pipeline/handler
 https://github.com/ceddyville/BusinessRulesEngine/blob/master/src/main/java/EngineRule.java
+
+https://github.com/ppp-kohe/autogui/blob/master/src/main/java/org/autogui/base/type/GuiTypeMemberAction.java
