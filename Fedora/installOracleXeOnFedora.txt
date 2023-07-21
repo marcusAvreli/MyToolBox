@@ -1,12 +1,3 @@
-source: https://ostechnix.com/add-delete-and-grant-sudo-privileges-to-users-in-fedora/
-		https://ask.fedoraproject.org/t/installing-oracle-xe-fedora-35/18897
-		https://community.oracle.com/tech/apps-infra/discussion/4335851/unable-to-install-compat-libcap1-1-10-in-ol8-2
-		https://serverfault.com/questions/100596/linux-quota-per-directory
-		https://landoflinux.com/linux_lvm_command_examples.html
-		https://oracle-base.com/articles/18c/oracle-db-18c-installation-on-fedora-30
-		https://xcoolwinds.wordpress.com/2013/06/06/oracle-nh/
-		https://docs.oracle.com/en/database/oracle/oracle-database/21/xeinl/using-enterprise-manager-express.html#GUID-35C7E577-5FCF-4C5E-B7E7-91FA6DFB59C5
-dnf repoquery -l xorg-x11-apps
 #install java
 	sudo mkdir -p /usr/local/java
 	sudo cp -r jdk-8u341-linux-x64.tar.gz /usr/local/java
@@ -19,10 +10,10 @@ dnf repoquery -l xorg-x11-apps
 #create logical volume
 	//https://serverfault.com/questions/100596/linux-quota-per-directory
 	lvcreate -L 15g -n project1 fedora_fedora
-	mke2fs -j /dev/fedora_fedora/project1
-	
+	mke2fs -j /dev/fedora_fedora/project1	
 	mkdir -p /projects/{project1}
 	mount /dev/fedora_fedora/project1 /projects/project1
+	
 #Verify that the storage device is mounted successfully
 	ls -lah /projects/project1
 	
@@ -190,3 +181,12 @@ vi /etc/sysconfig/oracle-xe-18c.conf
 
 
 
+source: https://ostechnix.com/add-delete-and-grant-sudo-privileges-to-users-in-fedora/
+		https://ask.fedoraproject.org/t/installing-oracle-xe-fedora-35/18897
+		https://community.oracle.com/tech/apps-infra/discussion/4335851/unable-to-install-compat-libcap1-1-10-in-ol8-2
+		https://serverfault.com/questions/100596/linux-quota-per-directory
+		https://landoflinux.com/linux_lvm_command_examples.html
+		https://oracle-base.com/articles/18c/oracle-db-18c-installation-on-fedora-30
+		https://xcoolwinds.wordpress.com/2013/06/06/oracle-nh/
+		https://docs.oracle.com/en/database/oracle/oracle-database/21/xeinl/using-enterprise-manager-express.html#GUID-35C7E577-5FCF-4C5E-B7E7-91FA6DFB59C5
+dnf repoquery -l xorg-x11-apps
