@@ -6,7 +6,7 @@ source: https://ostechnix.com/add-delete-and-grant-sudo-privileges-to-users-in-f
 		https://oracle-base.com/articles/18c/oracle-db-18c-installation-on-fedora-30
 		https://xcoolwinds.wordpress.com/2013/06/06/oracle-nh/
 		https://docs.oracle.com/en/database/oracle/oracle-database/21/xeinl/using-enterprise-manager-express.html#GUID-35C7E577-5FCF-4C5E-B7E7-91FA6DFB59C5
-
+dnf repoquery -l xorg-x11-apps
 #install java
 	sudo mkdir -p /usr/local/java
 	sudo cp -r jdk-8u341-linux-x64.tar.gz /usr/local/java
@@ -17,6 +17,7 @@ source: https://ostechnix.com/add-delete-and-grant-sudo-privileges-to-users-in-f
 	source /etc/profile
 
 #create logical volume
+	//https://serverfault.com/questions/100596/linux-quota-per-directory
 	lvcreate -L 15g -n project1 fedora_fedora
 	mke2fs -j /dev/fedora_fedora/project1
 	
@@ -26,25 +27,31 @@ source: https://ostechnix.com/add-delete-and-grant-sudo-privileges-to-users-in-f
 	ls -lah /projects/project1
 
 #Install Prerequisites
-	sudo dnf install xorg-x11-utils 
-
 	dnf install -y  https://rpmfind.net/linux/centos/7.9.2009/os/x86_64/Packages/compat-libcap1-1.10-7.el7.x86_64.rpm
-	dnf install -y https://rpmfind.net/linux/centos/7.9.2009/os/x86_64/Packages/compat-libstdc++-33-3.2.3-72.el7.x86_64.rpm
+	dnf install -y https://rpmfind.net/linux/centos/7.9.2009/os/x86_64/Packages/compat-libstdc++-33-3.2.3-72.el7.x86_64.rpm	
 	dnf install -y libnsl.so.1*64*	
 	dnf install -y libcrypt.so.1*64*
 	dnf -y groupinstall "Development Tools" 
-
-curl -o oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm https://yum.oracle.com/repo/OracleLinux/OL7/latest/x86_64/getPackage/oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm
-dnf localinstall -y oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm
-
-import thrid party repository
+	
+#import thrid party repository
 	sudo rpm --import https://raw.githubusercontent.com/UnitedRPMs/unitedrpms/master/URPMS-GPG-PUBLICKEY-Fedora
-
 	sudo dnf -y install https://github.com/UnitedRPMs/unitedrpms/releases/download/20/unitedrpms-$(rpm -E %fedora)-20.fc$(rpm -E %fedora).noarch.rpm
+	sudo dnf install xorg-x11-utils 
+
+#install oracle
+	curl -o oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm https://yum.oracle.com/repo/OracleLinux/OL7/latest/x86_64/getPackage/oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm
+	dnf localinstall -y oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm
+
+	vi /etc/sysconfig/oracle-xe-18c.conf
+
+		# Database file directory
+		# If not specified, database files are stored under Oracle base/oradata
+		DBFILE_DEST=/projects/project1
+
+	mkdir /projects/project1/XE
+	chmod 7777 -R  /projects/project1/XE
 
 
-dnf localinstall -y  oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm
-dnf localinstall -y oracle-database-xe-18c-1.0-1.x86_64.rpm
 
 ldd /opt/oracle/product/18c/dbhomeXE/bin/orabase
 ldd /opt/oracle/product/18c/dbhomeXE/perl/bin/perl
@@ -78,63 +85,77 @@ echo 'export PATH="/opt/oracle/product/18c/dbhomeXE/bin:$PATH"' >> $HOME/.bashrc
 echo 'export ORACLE_SID=XE' >> $HOME/.bashrc
 echo 'export ORAENV_ASK=NO' >> $HOME/.bashrc
 echo 'export ORACLE_HOME="/opt/oracle/product/18c/dbhomeXE"' >> $HOME/.bashrc
+source $HOME/.bashrc
 
-
-/etc/init.d/oracledb_ORCLCDB-18c configure
-
-Specify a password to be used for database accounts. Oracle recommends that the password entered should be at least 8 characters in length, contain at least 1 uppercase character, 1 lower case character and 1 digit [0-9]. Note that the same password will be used for SYS, SYSTEM and PDBADMIN accounts:
 
 
 
 
 [root@fedora admin]# /etc/init.d/oracle-xe-18c configure
-Specify a password to be used for database accounts. Oracle recommends that the password entered should be at least 8 characters in length, contain at least 1 uppercase character, 1 lower case character and 1 digit [0-9]. Note that the same password will be used for SYS, SYSTEM and PDBADMIN accounts:
+Specify a password to be used for database accounts. Oracle recommends that the password entered should be at least 8 characters in length, contain at least 
+1 uppercase character, 1 lower case character and 1 digit [0-9]. Note that the same password will be used for SYS, SYSTEM and PDBADMIN accounts:
 Confirm the password:
-Configuring Oracle Listener.
-Listener configuration succeeded.
-Configuring Oracle Database XE.
-Enter SYS user password:
-*****
-Enter SYSTEM user password:
-*****
-Enter PDBADMIN User Password:
-*****
-Prepare for db operation
-7% complete
-Copying database files
-29% complete
-Creating and starting Oracle instance
-30% complete
-31% complete
-34% complete
-38% complete
-41% complete
-43% complete
-Completing Database Creation
-47% complete
-50% complete
-Creating Pluggable Databases
-54% complete
-71% complete
-Executing Post Configuration Actions
-93% complete
-Running Custom Scripts
-100% complete
-Database creation complete. For details check the logfiles at:
- /opt/oracle/cfgtoollogs/dbca/XE.
-Database Information:
-Global Database Name:XE
-System Identifier(SID):XE
-Look at the log file "/opt/oracle/cfgtoollogs/dbca/XE/XE0.log" for further details.
+	Configuring Oracle Listener.
+	Listener configuration succeeded.
+	Configuring Oracle Database XE.
+	Enter SYS user password:
+	*****
+	Enter SYSTEM user password:
+	*****
+	Enter PDBADMIN User Password:
+	*****
+	Prepare for db operation
+	7% complete
+	Copying database files
+	29% complete
+	Creating and starting Oracle instance
+	30% complete
+	31% complete
+	34% complete
+	38% complete
+	41% complete
+	43% complete
+	Completing Database Creation
+	47% complete
+	50% complete
+	Creating Pluggable Databases
+	54% complete
+	71% complete
+	Executing Post Configuration Actions
+	93% complete
+	Running Custom Scripts
+	100% complete
+	Database creation complete. For details check the logfiles at:
+	 /opt/oracle/cfgtoollogs/dbca/XE.
+	Database Information:
+	Global Database Name:XE
+	System Identifier(SID):XE
+	Look at the log file "/opt/oracle/cfgtoollogs/dbca/XE/XE0.log" for further details.
 
-Connect to Oracle Database using one of the connect strings:
-     Pluggable database: fedora/XEPDB1
-     Multitenant container database: fedora
-Use https://localhost:5500/em to access Oracle Enterprise Manager for Oracle Database XE
-to open portal for the world:
-	EXEC DBMS_XDB.SETLISTENERLOCALACCESS(FALSE);
+	Connect to Oracle Database using one of the connect strings:
+		 Pluggable database: fedora/XEPDB1
+		 Multitenant container database: fedora
+	Use https://localhost:5500/em to access Oracle Enterprise Manager for Oracle Database XE
+	to open portal for the world:
+		EXEC DBMS_XDB.SETLISTENERLOCALACCESS(FALSE);
 	
-	
+#open firewall
+	firewall-cmd  --add-port=1521/tcp
+	firewall-cmd --runtime-to-permanent
+	firewall-cmd --reload
+	firewall-cmd  --add-port=5500/tcp
+	firewall-cmd --runtime-to-permanent
+	firewall-cmd --reload
+	firewall-cmd --zone=FedoraServer --add-port=5500/tcp
+	firewall-cmd --remove-port=1521/tcp
+	firewall-cmd --runtime-to-permanent
+	firewall-cmd --reload
+
+
+#start server
+	/etc/init.d/oracle-xe-18c start
+
+
 	
 
 
@@ -158,17 +179,6 @@ ls -ltr /opt/oracle/cfgtoollogs/dbca
 rm -f /opt/oracle/cfgtoollogs/dbca/XE/*
 vi /etc/sysconfig/oracle-xe-18c.conf
 
-firewall-cmd --add-port=22/tcp
-firewall-cmd --add-port=5500/tcp
 
 
-firewall-cmd  --add-port=1521/tcp
-firewall-cmd --runtime-to-permanent
-firewall-cmd --reload
-firewall-cmd  --add-port=5500/tcp
-firewall-cmd --runtime-to-permanent
-firewall-cmd --reload
-firewall-cmd --zone=FedoraServer --add-port=5500/tcp
-firewall-cmd --remove-port=1521/tcp
-firewall-cmd --runtime-to-permanent
-firewall-cmd --reload
+
