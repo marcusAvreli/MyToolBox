@@ -86,12 +86,14 @@ Installed:
   oracle-database-xe-18c-1.0-1.x86_64
 
 Complete!
-echo '' >> $HOME/.bashrc; echo '#Oracle Environment Variables' >> $HOME/.bashrc
-echo 'export PATH="/opt/oracle/product/18c/dbhomeXE/bin:$PATH"' >> $HOME/.bashrc
-echo 'export ORACLE_SID=XE' >> $HOME/.bashrc
-echo 'export ORAENV_ASK=NO' >> $HOME/.bashrc
-echo 'export ORACLE_HOME="/opt/oracle/product/18c/dbhomeXE"' >> $HOME/.bashrc
-source $HOME/.bashrc
+
+#set environment variables
+	echo '' >> $HOME/.bashrc; echo '#Oracle Environment Variables' >> $HOME/.bashrc
+	echo 'export PATH="/opt/oracle/product/18c/dbhomeXE/bin:$PATH"' >> $HOME/.bashrc
+	echo 'export ORACLE_SID=XE' >> $HOME/.bashrc
+	echo 'export ORAENV_ASK=NO' >> $HOME/.bashrc
+	echo 'export ORACLE_HOME="/opt/oracle/product/18c/dbhomeXE"' >> $HOME/.bashrc
+	source $HOME/.bashrc
 
 
 
