@@ -7,22 +7,32 @@ source: https://ostechnix.com/add-delete-and-grant-sudo-privileges-to-users-in-f
 		https://xcoolwinds.wordpress.com/2013/06/06/oracle-nh/
 		https://docs.oracle.com/en/database/oracle/oracle-database/21/xeinl/using-enterprise-manager-express.html#GUID-35C7E577-5FCF-4C5E-B7E7-91FA6DFB59C5
 
-sudo mkdir -p /usr/local/java
-sudo cp -r jdk-8u341-linux-x64.tar.gz /usr/local/java
-cd /usr/local/java
-sudo tar -zxvf  jdk-8u341-linux-x64.tar.gz
+#install java
+	sudo mkdir -p /usr/local/java
+	sudo cp -r jdk-8u341-linux-x64.tar.gz /usr/local/java
+	cd /usr/local/java
+	sudo tar -zxvf  jdk-8u341-linux-x64.tar.gz
+	echo 'export JAVA_HOME=/usr/local/java/jdk1.8.0_341' >> /etc/profile
+	echo 'export PATH=$PATH:$JAVA_HOME/bin' >> /etc/profile
+	source /etc/profile
 
-echo 'export JAVA_HOME=/usr/local/java/jdk1.8.0_341' >> /etc/profile
-echo 'export PATH=$PATH:$JAVA_HOME/bin' >> /etc/profile
-source /etc/profile
-
-create logical volume
+#create logical volume
 	lvcreate -L 15g -n project1 fedora_fedora
-		mke2fs -j /dev/fedora_fedora/project1
-		mkdir  /projects/project1
-		mount /dev/fedora_fedora/project1 /projects/project1
-	Verify that the storage device is mounted successfully
-		ls -lah /projects/project1
+	mke2fs -j /dev/fedora_fedora/project1
+	
+	mkdir -p /projects/{project1}
+	mount /dev/fedora_fedora/project1 /projects/project1
+#Verify that the storage device is mounted successfully
+	ls -lah /projects/project1
+
+#Install Prerequisites
+	sudo dnf install xorg-x11-utils 
+
+	dnf install -y  https://rpmfind.net/linux/centos/7.9.2009/os/x86_64/Packages/compat-libcap1-1.10-7.el7.x86_64.rpm
+	dnf install -y https://rpmfind.net/linux/centos/7.9.2009/os/x86_64/Packages/compat-libstdc++-33-3.2.3-72.el7.x86_64.rpm
+	dnf install -y libnsl.so.1*64*	
+	dnf install -y libcrypt.so.1*64*
+	dnf -y groupinstall "Development Tools" 
 
 curl -o oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm https://yum.oracle.com/repo/OracleLinux/OL7/latest/x86_64/getPackage/oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm
 dnf localinstall -y oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm
@@ -32,13 +42,7 @@ import thrid party repository
 
 	sudo dnf -y install https://github.com/UnitedRPMs/unitedrpms/releases/download/20/unitedrpms-$(rpm -E %fedora)-20.fc$(rpm -E %fedora).noarch.rpm
 
-sudo dnf install xorg-x11-utils 
 
-dnf install -y  https://rpmfind.net/linux/centos/7.9.2009/os/x86_64/Packages/compat-libcap1-1.10-7.el7.x86_64.rpm
-dnf install -y https://rpmfind.net/linux/centos/7.9.2009/os/x86_64/Packages/compat-libstdc++-33-3.2.3-72.el7.x86_64.rpm
-dnf install -y libnsl.so.1*64*	
-dnf install -y libcrypt.so.1*64*
-dnf -y groupinstall "Development Tools" 
 dnf localinstall -y  oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm
 dnf localinstall -y oracle-database-xe-18c-1.0-1.x86_64.rpm
 

@@ -1,0 +1,4 @@
+1. define user that can do su
+	useradd -m -G wheel jsmith
+2. set passwd
+	passwd jsmith
