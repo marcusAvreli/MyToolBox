@@ -25,6 +25,12 @@ dnf repoquery -l xorg-x11-apps
 	mount /dev/fedora_fedora/project1 /projects/project1
 #Verify that the storage device is mounted successfully
 	ls -lah /projects/project1
+	
+	#correct output
+		drwxr-xr-x. 4 root root 4.0K Jul 21 16:16 .
+		drwxr-xr-x. 3 root root   22 Jul 21 15:28 ..
+		drwx------. 2 root root  16K Jul 21 15:13 lost+found
+
 
 #Install Prerequisites
 	dnf install -y  https://rpmfind.net/linux/centos/7.9.2009/os/x86_64/Packages/compat-libcap1-1.10-7.el7.x86_64.rpm
@@ -52,9 +58,9 @@ dnf repoquery -l xorg-x11-apps
 	chmod 7777 -R  /projects/project1/XE
 
 
-
-ldd /opt/oracle/product/18c/dbhomeXE/bin/orabase
-ldd /opt/oracle/product/18c/dbhomeXE/perl/bin/perl
+#verify that all libraries are in place
+	ldd /opt/oracle/product/18c/dbhomeXE/bin/orabase
+	ldd /opt/oracle/product/18c/dbhomeXE/perl/bin/perl
 
 Total size: 2.3 G
 Installed size: 5.2 G
