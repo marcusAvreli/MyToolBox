@@ -1,0 +1,36 @@
+#ant from source
+	tar -zxvf apache-ant-1.10.13-src.tar.gz;
+	mv apache-ant-1.10.13 ant;
+	mv ant /opt/
+	cd /opt/ant; 
+
+	./build.sh -Ddist.dir=/opt/ant dist	
+
+	echo 'export ANT_HOME="/opt/ant"' >> /etc/profile
+	echo 'export PATH=$PATH:$ANT_HOME/bin' >> /etc/profile
+	source /etc/profile
+	
+
+tar -zxvf apache-tomcat-9.0.73-src.tar.gz
+mv apache-tomcat-9.0.73-src tomcat90Source
+cd tomcat90Source
+ant
+#result server is in output/build
+mkdir /opt/tomcat90
+cp -r output/build	/opt/tomcat90
+
+#tomcat
+useradd -r tomcat;
+chown -R tomcat:tomcat /opt/tomcat90;
+
+echo $JAVA_HOME
+/usr/local/java/jdk1.8.0_341
+
+vi /etc/init.d/tomcat90
+
+firewall-cmd  --add-port=8080/tcp
+firewall-cmd --runtime-to-permanent
+firewall-cmd --reload
+
+
+vi /etc/logrotate.d/tomcat

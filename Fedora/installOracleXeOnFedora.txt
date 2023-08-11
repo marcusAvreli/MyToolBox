@@ -11,9 +11,11 @@
 	//https://serverfault.com/questions/100596/linux-quota-per-directory
 	lvcreate -L 15g -n project1 fedora_fedora
 	mke2fs -j /dev/fedora_fedora/project1	
-	mkdir -p /projects/{project1}
+	mkdir  /projects/{project1}
+	mkdir  /projects
+	mkdir  /projects/project1
 	mount /dev/fedora_fedora/project1 /projects/project1
-	
+	ls -ltr /dev/mapper/fedora_fedora-root
 #Verify that the storage device is mounted successfully
 	ls -lah /projects/project1
 	
@@ -38,13 +40,18 @@
 #install oracle
 	curl -o oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm https://yum.oracle.com/repo/OracleLinux/OL7/latest/x86_64/getPackage/oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm
 	dnf localinstall -y oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm
-
+	dnf localinstall -y oracle-database-xe-18c-1.0-1.x86_64.rpm
+	
+	
+	
+	
+	
 	vi /etc/sysconfig/oracle-xe-18c.conf
 
 		# Database file directory
 		# If not specified, database files are stored under Oracle base/oradata
 		DBFILE_DEST=/projects/project1
-
+	rm -rf  /projects/project1/XE
 	mkdir /projects/project1/XE
 	chmod 7777 -R  /projects/project1/XE
 
@@ -79,6 +86,15 @@ Installed:
 Complete!
 
 #set environment variables
+	echo '' >> /etc/profile;
+	echo '#Oracle Environment Variables' >> /etc/profile;
+	echo 'export PATH="/opt/oracle/product/18c/dbhomeXE/bin:$PATH"' >> /etc/profile;
+	echo 'export ORACLE_SID=XE' >> /etc/profile;
+	echo 'export ORAENV_ASK=NO' >> /etc/profile;
+	echo 'export ORACLE_HOME="/opt/oracle/product/18c/dbhomeXE"' >> /etc/profile;
+	source /etc/profile;
+
+
 	echo '' >> $HOME/.bashrc; echo '#Oracle Environment Variables' >> $HOME/.bashrc
 	echo 'export PATH="/opt/oracle/product/18c/dbhomeXE/bin:$PATH"' >> $HOME/.bashrc
 	echo 'export ORACLE_SID=XE' >> $HOME/.bashrc
@@ -146,13 +162,126 @@ Confirm the password:
 	firewall-cmd --runtime-to-permanent
 	firewall-cmd --reload
 	firewall-cmd --zone=FedoraServer --add-port=5500/tcp
-	firewall-cmd --remove-port=1521/tcp
-	firewall-cmd --runtime-to-permanent
-	firewall-cmd --reload
+	#firewall-cmd --remove-port=1521/tcp
+	#firewall-cmd --runtime-to-permanent
+	#firewall-cmd --reload
 
 
 #start server
 	/etc/init.d/oracle-xe-18c start
+
+
+
+
+//https://docs.oracle.com/en/database/oracle/oracle-database/21/xeinw/starting-and-stopping-oracle-database-xe.html#GUID-831D014C-E163-45F6-9B44-611EE772E2E2
+
+#DELETE ORACLE
+	/etc/init.d/oracle-xe-18c stop
+	/etc/init.d/oracle-xe-18c delete
+	dnf remove oracle-database-xe-18c.x86_64 
+	dnf remove oracle-database-preinstall-18c.x86_64
+	rm -rf  /projects/project1/XE
+
+
+
+
+mount /dev/fedora_fedora/project1 /projects/project1
+
+df -h
+Filesystem                      Size  Used Avail Use% Mounted on
+devtmpfs                        4.0M     0  4.0M   0% /dev
+tmpfs                           3.9G     0  3.9G   0% /dev/shm
+tmpfs                           1.6G  1.3M  1.6G   1% /run
+/dev/mapper/fedora_fedora-root   15G  6.1G  9.0G  41% /
+tmpfs                           3.9G   44K  3.9G   1% /tmp
+/dev/sda1                      1014M  196M  819M  20% /boot
+tmpfs                           792M     0  792M   0% /run/user/1000
+
+
+[root@fedora java]# df -h
+Filesystem                          Size  Used Avail Use% Mounted on
+devtmpfs                            4.0M     0  4.0M   0% /dev
+tmpfs                               4.2G     0  4.2G   0% /dev/shm
+tmpfs                               1.7G  1.5M  1.7G   1% /run
+/dev/mapper/fedora_fedora-root       15G  4.6G   11G  31% /
+tmpfs                               4.2G     0  4.2G   0% /tmp
+/dev/nvme0n1p1                     1014M  196M  819M  20% /boot
+tmpfs                               848M     0  848M   0% /run/user/1000
+/dev/mapper/fedora_fedora-project1   15G   92K   14G   1% /projects/project1
+
+
+#after install oracle
+	[root@fedora admin]# df -h
+	Filesystem                          Size  Used Avail Use% Mounted on
+	devtmpfs                            4.0M     0  4.0M   0% /dev
+	tmpfs                               4.2G     0  4.2G   0% /dev/shm
+	tmpfs                               1.7G  1.5M  1.7G   1% /run
+	/dev/mapper/fedora_fedora-root       15G   11G  4.5G  71% /
+	tmpfs                               4.2G     0  4.2G   0% /tmp
+	/dev/nvme0n1p1                     1014M  196M  819M  20% /boot
+	tmpfs                               848M     0  848M   0% /run/user/1000
+	/dev/mapper/fedora_fedora-project1   15G   92K   14G   1% /projects/project1
+
+#after /etc/init.d/oracle-xe-18c configure
+	[root@fedora admin]# df -h
+	Filesystem                          Size  Used Avail Use% Mounted on
+	devtmpfs                            4.0M     0  4.0M   0% /dev
+	tmpfs                               4.2G     0  4.2G   0% /dev/shm
+	tmpfs                               1.7G  1.5M  1.7G   1% /run
+	/dev/mapper/fedora_fedora-root       15G   11G  4.5G  71% /
+	tmpfs                               4.2G   13M  4.2G   1% /tmp
+	/dev/nvme0n1p1                     1014M  196M  819M  20% /boot
+	tmpfs                               848M     0  848M   0% /run/user/1000
+	/dev/mapper/fedora_fedora-project1   15G  3.4G   11G  25% /projects/project1
+
+https://docs.oracle.com/en/database/oracle/oracle-database/21/xeinw/starting-and-stopping-oracle-database-xe.html#GUID-831D014C-E163-45F6-9B44-611EE772E2E2
+sqlplus sys as  sysdba
+SQL> shutdown immediate;
+Database closed.
+Database dismounted.
+;
+ORACLE instance shut down.
+SQL> SP2-0223: No lines in SQL buffer.
+
+
+SQL> startup;
+ORACLE instance started.
+
+Total System Global Area 1610612704 bytes
+Fixed Size                  8896480 bytes
+Variable Size             520093696 bytes
+Database Buffers         1073741824 bytes
+Redo Buffers                7880704 bytes
+Database mounted.
+Database opened.
+SQL> alter pluggable database all open;
+
+Pluggable database altered.
+
+
+SQL> shutdown immediate;
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+SQL> shutdown immediate;
+ERROR:
+ORA-01034: ORACLE not available
+ORA-27101: shared memory realm does not exist
+Linux-x86_64 Error: 2: No such file or directory
+Additional information: 4150
+Additional information: 280682727
+Process ID: 0
+Session ID: 0 Serial number: 0
+
+
+SQL> quit
+Disconnected from Oracle Database 18c Express Edition Release 18.0.0.0.0 - Production
+Version 18.4.0.0.0
+[root@fedora admin]# /etc/init.d/oracle-xe-18c stop
+Oracle Database instance XE is already stopped.
+
+
+
 
 
 	
@@ -181,6 +310,16 @@ vi /etc/sysconfig/oracle-xe-18c.conf
 
 
 
+RMAN & CONTROL FILES
+https://geodatamaster.com/tag/oracle-control-file-deleted/
+http://www.orafaq.com/forum/t/26885/
+https://docs.oracle.com/cd/A97630_01/server.920/a96566/rcmcnctg.htm
+https://smarttechways.com/tag/create-control-file-for-existing-datafiles/
+https://dba.stackexchange.com/questions/31875/oracle-express-edition-on-ubuntu-control-file-missing
+https://gist.github.com/liuanyou/c179bcc8b009e7a9d0c372bb112a64ae
+
+
+
 source: https://ostechnix.com/add-delete-and-grant-sudo-privileges-to-users-in-fedora/
 		https://ask.fedoraproject.org/t/installing-oracle-xe-fedora-35/18897
 		https://community.oracle.com/tech/apps-infra/discussion/4335851/unable-to-install-compat-libcap1-1-10-in-ol8-2
@@ -188,5 +327,18 @@ source: https://ostechnix.com/add-delete-and-grant-sudo-privileges-to-users-in-f
 		https://landoflinux.com/linux_lvm_command_examples.html
 		https://oracle-base.com/articles/18c/oracle-db-18c-installation-on-fedora-30
 		https://xcoolwinds.wordpress.com/2013/06/06/oracle-nh/
+		https://docs.oracle.com/en/database/oracle/oracle-database/18/ladbi/server-configuration-checklist-for-oracle-database-installation.html#GUID-CD4657FB-2DDC-4B30-AAB4-2C927045A86D
+		https://docs.oracle.com/cd/E17781_01/server.112/e18804/startup.htm#ADMQS123
 		https://docs.oracle.com/en/database/oracle/oracle-database/21/xeinl/using-enterprise-manager-express.html#GUID-35C7E577-5FCF-4C5E-B7E7-91FA6DFB59C5
+		https://docs.oracle.com/en/database/oracle/oracle-database/21/xeinl/using-enterprise-manager-express.html#GUID-35C7E577-5FCF-4C5E-B7E7-91FA6DFB59C5
+		https://stackoverflow.com/questions/23968230/oracle-11g-xe-installation-not-working-create-controlfile-failed
 dnf repoquery -l xorg-x11-apps
+
+STARTUP XE PFILE=/opt/oracle/product/18c/dbhomeXE/dbs/init.ora
+STARTUP XE PFILE=init.ora
+/opt/oracle/product/18c/dbhomeXE/dbs/init.ora
+
+//https://forums.oracle.com/ords/apexds/post/verify-steps-is-correct-about-spfile-pfile-7145
+
+STARTUP  PFILE='/opt/oracle/product/18c/dbhomeXE/dbs/init.ora'
+STARTUP  PFILE='/opt/oracle/product/18c/dbhomeXE/srvm/admin/init.ora'

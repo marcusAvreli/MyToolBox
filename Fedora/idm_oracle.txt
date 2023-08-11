@@ -1,0 +1,140 @@
+https://logic.edchen.org/how-to-resolve-ora-65096-invalid-common-user-or-role-name/#:~:text=ORA%2D65096%20mean%20that%20the,container%20we%20are%20currently%20in.&text=It's%20the%20root%20container.
+https://stackoverflow.com/questions/18403125/how-to-create-a-new-schema-new-user-in-oracle-database-11g
+http://mostoraclereviews.blogspot.com/2012/12/solving-ora-00210-cannot-open-specified.html
+https://techsupportwhale.com/ora-01033-oracle-initialization-or-shutdown-in-progress/
+https://techsupportwhale.com/ora-01033-oracle-initialization-or-shutdown-in-progress/
+https://ittutorial.org/ora-00205-error-in-identifying-control-file-check-alert-log-for-more-info-ora-205/
+https://oracleagent.wordpress.com/2021/02/01/restore-a-loss-of-controlfile-using-autobackup-in-oracle19c/
+https://dba.stackexchange.com/questions/106934/in-oracle-xe-what-is-the-difference-between-the-autobackup-and-backupset-direco
+https://www.experts-exchange.com/questions/21741358/Control-files-are-corrupted.html
+https://ittutorial.org/alert-log-file-location-in-oracle/
+https://ittutorial.org/alert-log-file-location-in-oracle/
+https://logic.edchen.org/how-to-resolve-sp2-0382-the-show-pdbs-command-is-not-available/
+
+
+sqlplus sys as sysdba;
+ show parameter control_files;
+  ls -ltr /projects/project1/XE/control01.ctl
+  ls -ltr /projects/project1/XE/control02.ctl
+
+ select status from v$instance;
+ /projects/project1/XE/control01.ctl
+ 
+ select value from GV$DIAG_INFO;
+SQL> show con_name
+
+CON_NAME
+------------------------------
+CDB$ROOT
+SQL> show pdbs;
+grant sysdba to XEPDB1;
+grant sysdba to XE;
+alter pluggable database XEPDB1 open;
+STARTUP identityiq;
+STARTUP XEPDB1;
+
+    CON_ID CON_NAME                       OPEN MODE  RESTRICTED
+---------- ------------------------------ ---------- ----------
+         2 PDB$SEED                       READ ONLY  NO
+         3 XEPDB1                         READ WRITE NO
+
+	
+	alter session set container=XEPDB1;
+	alter session set container=CDB$ROOT;
+	#alter session set container=identityiq;
+	
+	create user identityiq identified by identityiq;
+	grant create session to identityiq;
+	grant create table to identityiq;
+	
+	GRANT RESOURCE TO identityiq;
+	GRANT CONNECT TO identityiq;
+	GRANT CREATE VIEW TO identityiq;	
+	ALTER USER identityiq quota unlimited on users;
+	
+#iiq.properties oracle xe connection string	
+	dataSource.url=jdbc:oracle:thin:@localhost:1521/XEPDB1
+	dataSource.driverClassName=oracle.jdbc.driver.OracleDriver
+	sessionFactory.hibernateProperties.hibernate.dialect=org.hibernate.dialect.Oracle12cDialect
+	
+SQL>@/opt/tomcat90/webapps/iiq/WEB-INF/database/create_identityiq_tables-8.1.oracle
+
+
+ less /projects/project1/XE/control01.ctl
+ less /projects/project1/XE/control02.ctl
+ 
+ 
+ 
+#rman
+rman target sys/zubur1
+
+
+[root@fedora admin]# rman target sys/zubur1
+
+Recovery Manager: Release 18.0.0.0.0 - Production on Sat Jul 22 18:56:24 2023
+Version 18.4.0.0.0
+
+Copyright (c) 1982, 2018, Oracle and/or its affiliates.  All rights reserved.
+
+connected to target database: XE (DBID=3024000082)
+
+RMAN> show all;
+
+using target database control file instead of recovery catalog
+RMAN configuration parameters for database with db_unique_name XE are:
+CONFIGURE RETENTION POLICY TO REDUNDANCY 1; # default
+CONFIGURE BACKUP OPTIMIZATION OFF; # default
+CONFIGURE DEFAULT DEVICE TYPE TO DISK; # default
+CONFIGURE CONTROLFILE AUTOBACKUP ON; # default
+CONFIGURE CONTROLFILE AUTOBACKUP FORMAT FOR DEVICE TYPE DISK TO '%F'; # default
+CONFIGURE DEVICE TYPE DISK PARALLELISM 1 BACKUP TYPE TO BACKUPSET; # default
+CONFIGURE DATAFILE BACKUP COPIES FOR DEVICE TYPE DISK TO 1; # default
+CONFIGURE ARCHIVELOG BACKUP COPIES FOR DEVICE TYPE DISK TO 1; # default
+CONFIGURE MAXSETSIZE TO UNLIMITED; # default
+CONFIGURE ENCRYPTION FOR DATABASE OFF; # default
+CONFIGURE ENCRYPTION ALGORITHM 'AES128'; # default
+CONFIGURE COMPRESSION ALGORITHM 'BASIC' AS OF RELEASE 'DEFAULT' OPTIMIZE FOR LOAD TRUE ; # default
+CONFIGURE RMAN OUTPUT TO KEEP FOR 7 DAYS; # default
+CONFIGURE ARCHIVELOG DELETION POLICY TO NONE; # default
+CONFIGURE SNAPSHOT CONTROLFILE NAME TO '/opt/oracle/product/18c/dbhomeXE/dbs/snapcf_XE.f'; # default
+
+
+
+SQL> select value from GV$DIAG_INFO
+  2  ;
+
+VALUE
+--------------------------------------------------------------------------------
+TRUE
+/opt/oracle
+/opt/oracle/diag/rdbms/xe/XE
+/opt/oracle/diag/rdbms/xe/XE/trace
+/opt/oracle/diag/rdbms/xe/XE/alert
+/opt/oracle/diag/rdbms/xe/XE/incident
+/opt/oracle/diag/rdbms/xe/XE/cdump
+/opt/oracle/diag/rdbms/xe/XE/hm
+/opt/oracle/diag/rdbms/xe/XE/trace/XE_ora_23342.trc
+0
+0
+
+
+create pfile from spfile='/u08/parameter_files/spfile.20180912';
+
+https://logic.edchen.org/how-to-resolve-ora-01565-error-in-identifying-file-dbs-spfile-ora/#:~:text=ORA%2D01565%20means%20that%20the,it%20startup%20with%20a%20PFILE.
+https://dba.stackexchange.com/questions/31875/oracle-express-edition-on-ubuntu-control-file-missing
+
+
+CREATE CONTROLFILE REUSE SET DATABASE XE RESETLOGS;
+CREATE CONTROLFILE REUSE DATABASE XE NORESETLOGS NOARCHIVELOG
+SELECT VALUE FROM V$PARAMETER WHERE NAME = 'control_files';
+
+
+Create controlfile reuse set database "XE"
+RESETLOGS;
+
+CONNECT TARGET sysdba/zubur1@CDB$ROOT
+
+ CONNECT TARGET sysdba/zubur1@XEPDB1;
+ CONNECT TARGET identityiq/zubur1@XE;
+ CONNECT TARGET SYS/zubur1@XE
+rman target SYS/zubur1@XE
