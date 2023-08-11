@@ -44,46 +44,22 @@
 	
 	
 	
-	
-	
+	mount /dev/fedora_fedora/project1 /projects/project1
+	rm -rf  /projects/project1/XE
+	mkdir /projects/project1/XE
+	chmod 7777 -R  /projects/project1/XE
 	vi /etc/sysconfig/oracle-xe-18c.conf
 
 		# Database file directory
 		# If not specified, database files are stored under Oracle base/oradata
 		DBFILE_DEST=/projects/project1
-	rm -rf  /projects/project1/XE
-	mkdir /projects/project1/XE
-	chmod 7777 -R  /projects/project1/XE
+
 
 
 #verify that all libraries are in place
 	ldd /opt/oracle/product/18c/dbhomeXE/bin/orabase
 	ldd /opt/oracle/product/18c/dbhomeXE/perl/bin/perl
 
-Total size: 2.3 G
-Installed size: 5.2 G
-Downloading Packages:
-Running transaction check
-Transaction check succeeded.
-Running transaction test
-Transaction test succeeded.
-Running transaction
-  Preparing        :                                                        1/1
-  Running scriptlet: oracle-database-xe-18c-1.0-1.x86_64                    1/1
-  Installing       : oracle-database-xe-18c-1.0-1.x86_64                    1/1
-  Running scriptlet: oracle-database-xe-18c-1.0-1.x86_64                    1/1
-[INFO] Executing post installation scripts...
-[INFO] Oracle home installed successfully and ready to be configured.
-To configure Oracle Database XE, optionally modify the parameters in '/etc/sysconfig/oracle-xe-18c.conf'
- and then execute '/etc/init.d/oracle-xe-18c configure' as root.
-                                                                           
-
-  Verifying        : oracle-database-xe-18c-1.0-1.x86_64                    1/1
-
-Installed:
-  oracle-database-xe-18c-1.0-1.x86_64
-
-Complete!
 
 #set environment variables
 	echo '' >> /etc/profile;
@@ -102,78 +78,43 @@ Complete!
 	echo 'export ORACLE_HOME="/opt/oracle/product/18c/dbhomeXE"' >> $HOME/.bashrc
 	source $HOME/.bashrc
 
+#CONFIGURE DATABASE
+	/etc/init.d/oracle-xe-18c configure
 
 
 
 
-[root@fedora admin]# /etc/init.d/oracle-xe-18c configure
-Specify a password to be used for database accounts. Oracle recommends that the password entered should be at least 8 characters in length, contain at least 
-1 uppercase character, 1 lower case character and 1 digit [0-9]. Note that the same password will be used for SYS, SYSTEM and PDBADMIN accounts:
-Confirm the password:
-	Configuring Oracle Listener.
-	Listener configuration succeeded.
-	Configuring Oracle Database XE.
-	Enter SYS user password:
-	*****
-	Enter SYSTEM user password:
-	*****
-	Enter PDBADMIN User Password:
-	*****
-	Prepare for db operation
-	7% complete
-	Copying database files
-	29% complete
-	Creating and starting Oracle instance
-	30% complete
-	31% complete
-	34% complete
-	38% complete
-	41% complete
-	43% complete
-	Completing Database Creation
-	47% complete
-	50% complete
-	Creating Pluggable Databases
-	54% complete
-	71% complete
-	Executing Post Configuration Actions
-	93% complete
-	Running Custom Scripts
-	100% complete
-	Database creation complete. For details check the logfiles at:
-	 /opt/oracle/cfgtoollogs/dbca/XE.
-	Database Information:
-	Global Database Name:XE
-	System Identifier(SID):XE
-	Look at the log file "/opt/oracle/cfgtoollogs/dbca/XE/XE0.log" for further details.
-
-	Connect to Oracle Database using one of the connect strings:
-		 Pluggable database: fedora/XEPDB1
-		 Multitenant container database: fedora
-	Use https://localhost:5500/em to access Oracle Enterprise Manager for Oracle Database XE
-	to open portal for the world:
-		EXEC DBMS_XDB.SETLISTENERLOCALACCESS(FALSE);
 	
-#open firewall
-	firewall-cmd  --add-port=1521/tcp
-	firewall-cmd --runtime-to-permanent
-	firewall-cmd --reload
-	firewall-cmd  --add-port=5500/tcp
-	firewall-cmd --runtime-to-permanent
-	firewall-cmd --reload
-	firewall-cmd --zone=FedoraServer --add-port=5500/tcp
-	#firewall-cmd --remove-port=1521/tcp
-	#firewall-cmd --runtime-to-permanent
-	#firewall-cmd --reload
+#FIREWALL
+	#open database port on firewall
+		firewall-cmd  --add-port=1521/tcp
+		firewall-cmd --runtime-to-permanent
+		firewall-cmd --reload
+
+	#open webconsole port on firewall
+		firewall-cmd  --add-port=5500/tcp
+		firewall-cmd --runtime-to-permanent
+		firewall-cmd --reload
+		firewall-cmd --zone=FedoraServer --add-port=5500/tcp
 
 
-#start server
+#START ORACLE
 	/etc/init.d/oracle-xe-18c start
 
 
 
 
 //https://docs.oracle.com/en/database/oracle/oracle-database/21/xeinw/starting-and-stopping-oracle-database-xe.html#GUID-831D014C-E163-45F6-9B44-611EE772E2E2
+
+
+#WEB CONSOLE
+	Connect to Oracle Database using one of the connect strings:
+		 Pluggable database: fedora/XEPDB1
+		 Multitenant container database: fedora
+	Use https://localhost:5500/em to access Oracle Enterprise Manager for Oracle Database XE
+	to open portal for the world:
+		EXEC DBMS_XDB.SETLISTENERLOCALACCESS(FALSE);
+
 
 #DELETE ORACLE
 	/etc/init.d/oracle-xe-18c stop
@@ -233,6 +174,51 @@ tmpfs                               848M     0  848M   0% /run/user/1000
 	/dev/nvme0n1p1                     1014M  196M  819M  20% /boot
 	tmpfs                               848M     0  848M   0% /run/user/1000
 	/dev/mapper/fedora_fedora-project1   15G  3.4G   11G  25% /projects/project1
+	
+	
+	
+#correct output: /etc/init.d/oracle-xe-18c configure
+Specify a password to be used for database accounts. Oracle recommends that the password entered should be at least 8 characters in length, contain at least 
+1 uppercase character, 1 lower case character and 1 digit [0-9]. Note that the same password will be used for SYS, SYSTEM and PDBADMIN accounts:
+Confirm the password:
+	Configuring Oracle Listener.
+	Listener configuration succeeded.
+	Configuring Oracle Database XE.
+	Enter SYS user password:
+	*****
+	Enter SYSTEM user password:
+	*****
+	Enter PDBADMIN User Password:
+	*****
+	Prepare for db operation
+	7% complete
+	Copying database files
+	29% complete
+	Creating and starting Oracle instance
+	30% complete
+	31% complete
+	34% complete
+	38% complete
+	41% complete
+	43% complete
+	Completing Database Creation
+	47% complete
+	50% complete
+	Creating Pluggable Databases
+	54% complete
+	71% complete
+	Executing Post Configuration Actions
+	93% complete
+	Running Custom Scripts
+	100% complete
+	Database creation complete. For details check the logfiles at:
+	 /opt/oracle/cfgtoollogs/dbca/XE.
+	Database Information:
+	Global Database Name:XE
+	System Identifier(SID):XE
+	Look at the log file "/opt/oracle/cfgtoollogs/dbca/XE/XE0.log" for further details.
+
+	
 
 https://docs.oracle.com/en/database/oracle/oracle-database/21/xeinw/starting-and-stopping-oracle-database-xe.html#GUID-831D014C-E163-45F6-9B44-611EE772E2E2
 sqlplus sys as  sysdba
@@ -284,61 +270,25 @@ Oracle Database instance XE is already stopped.
 
 
 
-	
+#INSTALL ORACLE: 
+	https://ostechnix.com/add-delete-and-grant-sudo-privileges-to-users-in-fedora/
+	https://ask.fedoraproject.org/t/installing-oracle-xe-fedora-35/18897
+	https://community.oracle.com/tech/apps-infra/discussion/4335851/unable-to-install-compat-libcap1-1-10-in-ol8-2
+	https://serverfault.com/questions/100596/linux-quota-per-directory
+	https://landoflinux.com/linux_lvm_command_examples.html
+	https://oracle-base.com/articles/18c/oracle-db-18c-installation-on-fedora-30
+	https://xcoolwinds.wordpress.com/2013/06/06/oracle-nh/
+	https://docs.oracle.com/en/database/oracle/oracle-database/18/ladbi/server-configuration-checklist-for-oracle-database-installation.html#GUID-CD4657FB-2DDC-4B30-AAB4-2C927045A86D
+	https://docs.oracle.com/cd/E17781_01/server.112/e18804/startup.htm#ADMQS123
+	https://docs.oracle.com/en/database/oracle/oracle-database/21/xeinl/using-enterprise-manager-express.html#GUID-35C7E577-5FCF-4C5E-B7E7-91FA6DFB59C5
+	https://docs.oracle.com/en/database/oracle/oracle-database/21/xeinl/using-enterprise-manager-express.html#GUID-35C7E577-5FCF-4C5E-B7E7-91FA6DFB59C5
+	https://stackoverflow.com/questions/23968230/oracle-11g-xe-installation-not-working-create-controlfile-failed
+	https://forums.oracle.com/ords/apexds/post/verify-steps-is-correct-about-spfile-pfile-7145
 
-
-During installation i saw following in trace log:
-
-	[progressPage.flowWorker] [ 2022-12-20 11:09:17.616 IST ] [PerlEngine.execute:224]  SHLVL=3
-	[progressPage.flowWorker] [ 2022-12-20 11:09:17.616 IST ] [PerlEngine.execute:224]  HOME=/home/oracle
-	[progressPage.flowWorker] [ 2022-12-20 11:09:17.616 IST ] [PerlEngine.execute:224]  PERL5LIB=/opt/oracle/product/18c/dbhomeXE/rdbms/admin
-	[progressPage.flowWorker] [ 2022-12-20 11:09:17.616 IST ] [PerlEngine.execute:229]  Execing PERL process...
-	[progressPage.flowWorker] [ 2022-12-20 11:09:17.618 IST ] [PerlEngine.execute:267]  m_bReaderStarted: false
-	[progressPage.flowWorker] [ 2022-12-20 11:09:17.618 IST ] [PerlEngine.execute:271]  Starting Reader Thread...
-	[progressPage.flowWorker] [ 2022-12-20 11:09:17.631 IST ] [PerlEngine.execute:325]  Inputing secret arg: 0
-	[progressPage.flowWorker] [ 2022-12-20 11:09:17.631 IST ] [PerlEngine.execute:325]  Inputing secret arg: 1
-	[progressPage.flowWorker] [ 2022-12-20 11:09:17.632 IST ] [PerlEngine.execute:368]  Exit value = 127
-	[progressPage.flowWorker] [ 2022-12-20 11:09:17.632 IST ] [PerlEngine.execute:369]   status is  = 127
-
-To verify the reason, I run
-	ldd /opt/oracle/product/18c/dbhomeXE/perl/bin/perl
-
-ls -ltr /opt/oracle/cfgtoollogs/dbca
-rm -f /opt/oracle/cfgtoollogs/dbca/XE/*
-vi /etc/sysconfig/oracle-xe-18c.conf
-
-
-
-
-RMAN & CONTROL FILES
-https://geodatamaster.com/tag/oracle-control-file-deleted/
-http://www.orafaq.com/forum/t/26885/
-https://docs.oracle.com/cd/A97630_01/server.920/a96566/rcmcnctg.htm
-https://smarttechways.com/tag/create-control-file-for-existing-datafiles/
-https://dba.stackexchange.com/questions/31875/oracle-express-edition-on-ubuntu-control-file-missing
-https://gist.github.com/liuanyou/c179bcc8b009e7a9d0c372bb112a64ae
-
-
-
-source: https://ostechnix.com/add-delete-and-grant-sudo-privileges-to-users-in-fedora/
-		https://ask.fedoraproject.org/t/installing-oracle-xe-fedora-35/18897
-		https://community.oracle.com/tech/apps-infra/discussion/4335851/unable-to-install-compat-libcap1-1-10-in-ol8-2
-		https://serverfault.com/questions/100596/linux-quota-per-directory
-		https://landoflinux.com/linux_lvm_command_examples.html
-		https://oracle-base.com/articles/18c/oracle-db-18c-installation-on-fedora-30
-		https://xcoolwinds.wordpress.com/2013/06/06/oracle-nh/
-		https://docs.oracle.com/en/database/oracle/oracle-database/18/ladbi/server-configuration-checklist-for-oracle-database-installation.html#GUID-CD4657FB-2DDC-4B30-AAB4-2C927045A86D
-		https://docs.oracle.com/cd/E17781_01/server.112/e18804/startup.htm#ADMQS123
-		https://docs.oracle.com/en/database/oracle/oracle-database/21/xeinl/using-enterprise-manager-express.html#GUID-35C7E577-5FCF-4C5E-B7E7-91FA6DFB59C5
-		https://docs.oracle.com/en/database/oracle/oracle-database/21/xeinl/using-enterprise-manager-express.html#GUID-35C7E577-5FCF-4C5E-B7E7-91FA6DFB59C5
-		https://stackoverflow.com/questions/23968230/oracle-11g-xe-installation-not-working-create-controlfile-failed
-dnf repoquery -l xorg-x11-apps
-
-STARTUP XE PFILE=/opt/oracle/product/18c/dbhomeXE/dbs/init.ora
-STARTUP XE PFILE=init.ora
-/opt/oracle/product/18c/dbhomeXE/dbs/init.ora
-
-//https://forums.oracle.com/ords/apexds/post/verify-steps-is-correct-about-spfile-pfile-7145
-
-STARTUP  PFILE='/opt/oracle/product/18c/dbhomeXE/dbs/init.ora'
-STARTUP  PFILE='/opt/oracle/product/18c/dbhomeXE/srvm/admin/init.ora'
+#RMAN & CONTROL FILES
+	https://geodatamaster.com/tag/oracle-control-file-deleted/
+	http://www.orafaq.com/forum/t/26885/
+	https://docs.oracle.com/cd/A97630_01/server.920/a96566/rcmcnctg.htm
+	https://smarttechways.com/tag/create-control-file-for-existing-datafiles/
+	https://dba.stackexchange.com/questions/31875/oracle-express-edition-on-ubuntu-control-file-missing
+	https://gist.github.com/liuanyou/c179bcc8b009e7a9d0c372bb112a64ae
