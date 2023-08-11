@@ -10,12 +10,37 @@ https://www.experts-exchange.com/questions/21741358/Control-files-are-corrupted.
 https://ittutorial.org/alert-log-file-location-in-oracle/
 https://ittutorial.org/alert-log-file-location-in-oracle/
 https://logic.edchen.org/how-to-resolve-sp2-0382-the-show-pdbs-command-is-not-available/
+https://docs.oracle.com/cd/A97385_01/server.920/a96521/control.htm#5538
 
+cp /projects/project1/XE/control01.ctl /home/admin
+cp /projects/project1/XE/control02.ctl /home/admin
+
+#INIT IDM DATABASE
+	sqlplus sys as sysdba;
+	alter session set container=XEPDB1;
+	
+	create user identityiq identified by identityiq;
+	grant create session to identityiq;
+	grant create table to identityiq;	
+	GRANT RESOURCE TO identityiq;
+	GRANT CONNECT TO identityiq;
+	GRANT CREATE VIEW TO identityiq;	
+	ALTER USER identityiq quota unlimited on users;
 
 sqlplus sys as sysdba;
  show parameter control_files;
   ls -ltr /projects/project1/XE/control01.ctl
   ls -ltr /projects/project1/XE/control02.ctl
+
+cp /projects/project1/XE/control01.ctl /home/admin
+cp /projects/project1/XE/control02.ctl /home/admin
+
+#SOURCE https://docs.oracle.com/cd/A97385_01/server.920/a96521/control.htm#5538
+
+#Backing Up Control Files
+
+	ALTER DATABASE BACKUP CONTROLFILE TO '/projects/project1/XE/control.bkp';
+	ALTER DATABASE BACKUP CONTROLFILE TO TRACE;
 
  select status from v$instance;
  /projects/project1/XE/control01.ctl
