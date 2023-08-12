@@ -34,3 +34,45 @@ Remove directory from git and local
 Remove directory from git but NOT local
 	git rm -r --cached myFolder
 
++-----------------------------------------------------------+
+|															|
+|		MULTI-MODULE PROJECT								|
+|															|
++-----------------------------------------------------------+
+
+git init
+git remote add origin "https://github.com/marcusAvreli/oauthClient.git"
+
+echo "target/" >> .gitignore
+echo "bin/" >> .gitignore
+echo ".classpath" >> .gitignore
+echo ".project" >> .gitignore
+echo ".settings/" >> .gitignore
+echo "logs/" >> .gitignore
+
+echo "oauth2Client1/target/" >> .gitignore
+echo "oauth2Client1/bin/" >> .gitignore
+echo "oauth2Client1/.classpath" >> .gitignore
+echo "oauth2Client1/.project" >> .gitignore
+echo "oauth2Client1/.settings/" >> .gitignore
+echo "oauth2Client1/logs/" >> .gitignore
+
+
+
+git add .
+git rm -r --cached bin
+git rm -r --cached target
+git rm -r --cached ".classpath"
+git rm -r --cached ".project"
+git rm -r --cached ".settings/"	
+git rm -r --cached "logs/"
+
+git rm -r --cached oauth2Client1/bin
+git rm -r --cached oauth2Client1/target
+git rm -r --cached "oauth2Client1/.classpath"
+git rm -r --cached "oauth2Client1/.project"
+git rm -r --cached "oauth2Client1/.settings/"	
+git rm -r --cached "oauth2Client1/logs/"
+
+git commit -am "initial_commit"
+git push origin master
