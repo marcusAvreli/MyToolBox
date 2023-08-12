@@ -15,6 +15,7 @@ Environment=CATALINA_PID=/opt/tomcat90/temp/tomcat.pid
 Environment=CATALINA_HOME=/opt/tomcat90/
 Environment=CATALINA_BASE=/opt/tomcat90/
 Environment='CATALINA_OPTS=-Xms512M -Xmx4096M -server -XX:+UseParallelGC'
+Environment='JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom'
 Type=forking
 WorkingDirectory=/opt/tomcat90/bin
 
