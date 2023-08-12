@@ -1,0 +1,144 @@
++-----------------------------------------------------------+
+|															|
+|					FEDORA 36								|
+|															|
++-----------------------------------------------------------+
+cat /etc/os-release
+
+	NAME="Fedora Linux"
+	VERSION="36 (Server Edition)"
+	ID=fedora
+	VERSION_ID=36
+	VERSION_CODENAME=""
+	PLATFORM_ID="platform:f36"
+	PRETTY_NAME="Fedora Linux 36 (Server Edition)"
+	ANSI_COLOR="0;38;2;60;110;180"
+	LOGO=fedora-logo-icon
+	CPE_NAME="cpe:/o:fedoraproject:fedora:36"
+	HOME_URL="https://fedoraproject.org/"
+	DOCUMENTATION_URL="https://docs.fedoraproject.org/en-US/fedora/f36/system-administrators-guide/"
+	SUPPORT_URL="https://ask.fedoraproject.org/"
+	BUG_REPORT_URL="https://bugzilla.redhat.com/"
+	REDHAT_BUGZILLA_PRODUCT="Fedora"
+	REDHAT_BUGZILLA_PRODUCT_VERSION=36
+	REDHAT_SUPPORT_PRODUCT="Fedora"
+	REDHAT_SUPPORT_PRODUCT_VERSION=36
+	PRIVACY_POLICY_URL="https://fedoraproject.org/wiki/Legal:PrivacyPolicy"
+	SUPPORT_END=2023-05-16
+	VARIANT="Server Edition"
+	VARIANT_ID=server
+
+hostnamectl
+
+	 Static hostname: n/a
+	Transient hostname: fedora
+			 Icon name: computer-vm
+			   Chassis: vm 🖴
+			Machine ID: 14f91d34d72c4104931c2770b9ae87a1
+			   Boot ID: 4999042bc00e46098d2152289330e816
+		Virtualization: vmware
+	  Operating System: Fedora Linux 36 (Server Edition)
+		   CPE OS Name: cpe:/o:fedoraproject:fedora:36
+				Kernel: Linux 5.17.5-300.fc36.x86_64
+		  Architecture: x86-64
+	   Hardware Vendor: VMware, Inc.
+		Hardware Model: VMware Virtual Platform
+
+
+https://www.tecmint.com/install-mysql-fedora-linux/
+repositories: https://computingforgeeks.com/how-to-install-mysql-8-on-fedora/?expand_article=1
+	sudo dnf update
+	sudo dnf install community-mysql-server -y
+	mysqld  --initialize
+
+#get temporary root password
+	#get log location:
+		find / -name mysqld.log
+	#find password
+		grep 'password' /var/log/mysql/mysqld.log
+
+#check user was created
+	less /etc/passwd | grep mysql
+
+#FIREWALL
+	#open database port on firewall
+		firewall-cmd  --add-port=3306/tcp
+		firewall-cmd --runtime-to-permanent
+		firewall-cmd --reload	
+
+
+
+
+
+chown -R mysql:mysql /var/lib/mysql/	
+
+
+#SYSTEMCTL
+	#start server 
+	systemctl start mysqld.service
+
+	#start on boot	
+	systemctl enable mysqld.service
+
+
+● mysqld.service - MySQL 8.0 database server
+     Loaded: loaded (/usr/lib/systemd/system/mysqld.service; enabled; vendor preset: disabled)
+     Active: active (running) since Sat 2023-08-12 10:03:31 IDT; 7s ago
+    Process: 12986 ExecStartPre=/usr/libexec/mysql-check-socket (code=exited, status=0/SUCCESS)
+    Process: 13008 ExecStartPre=/usr/libexec/mysql-prepare-db-dir mysqld.service (code=exited, status=0/SUCCESS)
+   Main PID: 13042 (mysqld)
+     Status: "Server is operational"
+      Tasks: 39 (limit: 9458)
+     Memory: 367.0M
+        CPU: 1.208s
+     CGroup: /system.slice/mysqld.service
+             └─ 13042 /usr/libexec/mysqld --basedir=/usr
+
+
+	firewall-cmd  --add-port=3306/tcp
+	firewall-cmd --runtime-to-permanent
+	firewall-cmd --reload
+
+#check telnet
+	telnet <my_sql_ip_address> 3306
+	
+	#error output	
+		FHost '192.168.243.1' is not allowed to connect to this MySQL server
+		Connection to host lost.
+#RESET ROOT PASSWORD
+	ALTER USER 'root'@'localhost' IDENTIFIED BY 'zubur1';
+#CREATE USER
+	CREATE USER 'identityiq'@'192.168.243.%' IDENTIFIED WITH mysql_native_password BY 'identityiq';
+	GRANT CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT, REFERENCES, RELOAD on *.* TO 'identityiq'@'192.168.243.%' WITH GRANT OPTION;
+	FLUSH PRIVILEGES;
+	
+	
+	
+	
+
+#ERROR	
+	systemctl status mysqld
+	× mysqld.service - MySQL 8.0 database server
+		 Loaded: loaded (/usr/lib/systemd/system/mysqld.service; enabled; vendor preset: disabled)
+		 Active: failed (Result: exit-code) since Sat 2023-08-12 09:57:30 IDT; 7s ago
+		Process: 12874 ExecStartPre=/usr/libexec/mysql-check-socket (code=exited, status=0/SUCCESS)
+		Process: 12896 ExecStartPre=/usr/libexec/mysql-prepare-db-dir mysqld.service (code=exited, status=0/SUCCESS)
+		Process: 12930 ExecStart=/usr/libexec/mysqld --basedir=/usr (code=exited, status=1/FAILURE)
+		Process: 12931 ExecStopPost=/usr/libexec/mysql-wait-stop (code=exited, status=0/SUCCESS)
+	   Main PID: 12930 (code=exited, status=1/FAILURE)
+		 Status: "Server shutdown complete"
+		  Error: 13 (Permission denied)
+			CPU: 486ms
+			
+	#mysqld.log
+	 No existing UUID has been found, so we assume that this is the first time that this server has been started. Generating a new UUID: 7605385c-38dd-11ee-b021-000c294989a9.
+	mysqld: File '/var/lib/mysql/auto.cnf' not found (OS errno 13 - Permission denied)
+
+#JAVA CONNECTION STRING
+	jdbc:mysql://192.168.243.143:3306/identityiq
+
+#RUN SCRIPT
+	source /home/admin/create_identityiq_tables-8.1.mysql
+	
+#SQL DATA DIR
+ select @@datadir;
