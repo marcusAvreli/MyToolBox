@@ -1,0 +1,26 @@
+# Systemd unit file for tomcat
+#place in /etc/systemd/system/tomcat.service
+#source:
+#https://stackoverflow.com/questions/53994521/tomcat-8-on-centos-7-does-not-start-as-service-but-it-starts-manually
+#https://www.shubhamdipt.com/blog/how-to-create-a-systemd-service-in-linux/
+[Unit]
+Description=Apache Tomcat Web Application Container for ShopWorx
+After=syslog.target network.target
+
+[Service]
+Environment=JAVA_HOME=/usr/local/java/jdk1.8.0_341
+Environment=CATALINA_PID=/opt/tomcat90/temp/tomcat.pid
+Environment=CATALINA_HOME=/opt/tomcat90/
+Environment=CATALINA_BASE=/opt/tomcat90/
+Environment='CATALINA_OPTS=-Xms512M -Xmx4096M -server -XX:+UseParallelGC'
+Type=forking
+WorkingDirectory=/opt/tomcat90/bin
+
+ExecStart=/usr/bin/bash /opt/tomcat90/bin/catalina.sh start
+ExecStop=/usr/bin/bash /opt/tomcat90/bin/catalina.sh stop
+
+User=root
+Group=tomcat
+
+[Install]
+WantedBy=multi-user.target

@@ -1,3 +1,6 @@
+#CHECK JAVA_HOME
+	echo $JAVA_HOME
+		/usr/local/java/jdk1.8.0_341
 #ant from source
 	tar -zxvf apache-ant-1.10.13-src.tar.gz;
 	mv apache-ant-1.10.13 ant;
@@ -10,27 +13,69 @@
 	echo 'export PATH=$PATH:$ANT_HOME/bin' >> /etc/profile
 	source /etc/profile
 	
+#tomcat form source
+	tar -zxvf apache-tomcat-9.0.73-src.tar.gz
+	mv apache-tomcat-9.0.73-src tomcat90Source
+	cd tomcat90Source
+	ant
+	#result server is in output/build
+	mkdir /opt/tomcat
+	cp -r output/build/*	/opt/tomcat
 
-tar -zxvf apache-tomcat-9.0.73-src.tar.gz
-mv apache-tomcat-9.0.73-src tomcat90Source
-cd tomcat90Source
-ant
-#result server is in output/build
-mkdir /opt/tomcat90
-cp -r output/build	/opt/tomcat90
+#USERS AND PERMISSIONS
+	
+	
+	useradd -r -s /bin/false tomcat
+	groupadd --system tomcat
+	
+	#We put the tomcat user as the owner of the folder of tomcat:
+	chown -R tomcat:tomcat /opt/tomcat
+	
+	#Users can not modify the configuration of tomcat:
+	chmod -R g+r /opt/tomcat/conf
+	
+	#Users can modify the other folders:
 
-#tomcat
-useradd -r tomcat;
-chown -R tomcat:tomcat /opt/tomcat90;
+		chmod -R g+w /opt/tomcat/logs;
+		chmod -R g+w /opt/tomcat/temp;
+		chmod -R g+w /opt/tomcat/webapps;
+		#chmod -R g+w /opt/tomcat/work;
+	#Activate the sticky-bit for new files keep permissions defined:
+		chmod -R g+s /opt/tomcat/conf
+		chmod -R g+s /opt/tomcat/logs
+		chmod -R g+s /opt/tomcat/temp
+		chmod -R g+s /opt/tomcat/webapps
+		chmod -R g+s /opt/tomcat/work
+	#Finally, we add the tomcat group we want users who can use the tomcat:
+		usermod -a -G tomcat root
 
-echo $JAVA_HOME
-/usr/local/java/jdk1.8.0_341
 
-vi /etc/init.d/tomcat90
-
-firewall-cmd  --add-port=8080/tcp
-firewall-cmd --runtime-to-permanent
-firewall-cmd --reload
+#FIREWALL
+	firewall-cmd  --add-port=8080/tcp
+	firewall-cmd --runtime-to-permanent
+	firewall-cmd --reload
 
 
-vi /etc/logrotate.d/tomcat
+#LOGROTATE 
+	#conf
+		vi /etc/logrotate.conf
+	
+	
+	#define logrotate
+		vi /etc/logrotate.d/tomcat
+		/opt/tomcat90/logs/catalina.out {
+			su root tomcat
+			copytruncate
+			daily
+			rotate 8
+			compress
+			missingok
+			maxsize 1G
+			create 0644 tomcat tomcat
+		} 
+
+	#verify tomcat rotate works
+		logrotate /etc/logrotate.d/tomcat
+		
+#source:
+	https://superuser.com/questions/632618/best-practice-for-access-permission-to-users-for-apache-tomcat

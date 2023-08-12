@@ -11,6 +11,7 @@ https://ittutorial.org/alert-log-file-location-in-oracle/
 https://ittutorial.org/alert-log-file-location-in-oracle/
 https://logic.edchen.org/how-to-resolve-sp2-0382-the-show-pdbs-command-is-not-available/
 https://docs.oracle.com/cd/A97385_01/server.920/a96521/control.htm#5538
+https://stackoverflow.com/questions/45342829/restore-standby-database-failed-in-oracle-11g-express
 
 cp /projects/project1/XE/control01.ctl /home/admin
 cp /projects/project1/XE/control02.ctl /home/admin
@@ -39,7 +40,7 @@ cp /projects/project1/XE/control02.ctl /home/admin
 
 #Backing Up Control Files
 
-	ALTER DATABASE BACKUP CONTROLFILE TO '/projects/project1/XE/control.bkp';
+	ALTER DATABASE BACKUP CONTROLFILE TO '/home/admin/XE/control.bkp';
 	ALTER DATABASE BACKUP CONTROLFILE TO TRACE;
 
  select status from v$instance;
@@ -77,11 +78,30 @@ STARTUP XEPDB1;
 	GRANT CREATE VIEW TO identityiq;	
 	ALTER USER identityiq quota unlimited on users;
 	
+	
+	create user identityiqplugin identified by identityiq;
+	grant create session to identityiqplugin;
+	grant create table to identityiqplugin;
+
+	GRANT RESOURCE TO identityiqplugin;
+	GRANT CONNECT TO identityiqplugin;
+	GRANT CREATE VIEW TO identityiqplugin;	
+	ALTER USER identityiqplugin quota unlimited on users;
+	
 #iiq.properties oracle xe connection string	
+	##### Oracle #####
+	## URL Format: dataSource.url=jdbc:oracle:<drivertype>:<username/password>@<database>:<port>:<sid>
+
 	dataSource.url=jdbc:oracle:thin:@localhost:1521/XEPDB1
 	dataSource.driverClassName=oracle.jdbc.driver.OracleDriver
 	sessionFactory.hibernateProperties.hibernate.dialect=org.hibernate.dialect.Oracle12cDialect
 	
+	
+	
+#PLUGIN
+	pluginsDataSource.url=jdbc:oracle:thin:@localhost:1521/XEPDB1
+	pluginsDataSource.driverClassName=oracle.jdbc.driver.OracleDriver
+
 SQL>@/opt/tomcat90/webapps/iiq/WEB-INF/database/create_identityiq_tables-8.1.oracle
 
 
