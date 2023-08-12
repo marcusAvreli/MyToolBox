@@ -1,7 +1,8 @@
 #CHECK JAVA_HOME
 	echo $JAVA_HOME
 		/usr/local/java/jdk1.8.0_341
-#ant from source
+		
+#ANT FROM SOURCE
 	tar -zxvf apache-ant-1.10.13-src.tar.gz;
 	mv apache-ant-1.10.13 ant;
 	mv ant /opt/
@@ -13,7 +14,7 @@
 	echo 'export PATH=$PATH:$ANT_HOME/bin' >> /etc/profile
 	source /etc/profile
 	
-#tomcat form source
+#TOMCAT FORM SOURCE
 	tar -zxvf apache-tomcat-9.0.73-src.tar.gz
 	mv apache-tomcat-9.0.73-src tomcat90Source
 	cd tomcat90Source
@@ -76,6 +77,9 @@
 
 	#verify tomcat rotate works
 		logrotate /etc/logrotate.d/tomcat
+		
+#ADD TOMCAT AS SERVICE
+	refer tomcat.service file
 		
 #source:
 	https://superuser.com/questions/632618/best-practice-for-access-permission-to-users-for-apache-tomcat
