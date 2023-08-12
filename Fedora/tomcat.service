@@ -3,6 +3,8 @@
 #source:
 #https://stackoverflow.com/questions/53994521/tomcat-8-on-centos-7-does-not-start-as-service-but-it-starts-manually
 #https://www.shubhamdipt.com/blog/how-to-create-a-systemd-service-in-linux/
+#systemctl daemon-reload
+#systemctl restart tomcat.service
 [Unit]
 Description=Apache Tomcat Web Application Container for ShopWorx
 After=syslog.target network.target
