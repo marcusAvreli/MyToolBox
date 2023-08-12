@@ -1,0 +1,38 @@
+CREATE TABLE rprt_ad (
+    id int NOT NULL AUTO_INCREMENT,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Age int,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE rprt_atlas (
+    id int NOT NULL AUTO_INCREMENT,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Age int,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE rprt_crm_mis (
+    id int NOT NULL AUTO_INCREMENT,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Age int,
+    PRIMARY KEY (id)
+);
+
++-----------------------------------------------------------+
+|															|
+|					PLUGIN									|
+|															|
++-----------------------------------------------------------+
+
+
+CREATE TABLE rprt (
+    ID int NOT NULL AUTO_INCREMENT,
+    NAME varchar(255),
+    DISPLAY_NAME varchar(255),
+    DESCRIPTION int,
+    PRIMARY KEY (ID)
+);
