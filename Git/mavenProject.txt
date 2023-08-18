@@ -67,8 +67,8 @@ git rm -r --cached ".project"
 git rm -r --cached ".settings/"	
 git rm -r --cached "logs/"
 
-git rm -r --cached oauth2Client1/bin
-git rm -r --cached oauth2Client1/target
+git rm -r --cached "oauth2Client1/bin'
+git rm -r --cached "oauth2Client1/target"
 git rm -r --cached "oauth2Client1/.classpath"
 git rm -r --cached "oauth2Client1/.project"
 git rm -r --cached "oauth2Client1/.settings/"	
