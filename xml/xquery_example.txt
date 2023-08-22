@@ -1,0 +1,30 @@
+<Bundle name=”testName”>
+<Attributes>
+<Map>
+<entry key="testKey" value="testValue"/>
+<entry key="testKey1" value="testValue1"/>
+</Map>
+</Attributes>
+</Bundle>
+
+Xpath Query:
+/Bundle/Attributes/Map/entry[@key='testKey']
+/Bundle/@name
+
+
+<Bundle name=”testName”>
+<Attributes>
+<Map>
+<entry key="testKey" value="testValue"/>
+<entry key="testKey1" value="testValue1"/>
+<entry key="sysDescriptions">
+<value>
+<Map>
+<entry key=”en_US” value="testDescription"/>
+</Map>
+</value>
+</entry>
+</Map>
+</Attributes>
+</Bundle>
+/Bundle/Attributes/Map/entry[@key='sysDescriptions']//value/Map/entry
