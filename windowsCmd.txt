@@ -64,3 +64,7 @@ kill all java on windows
 	taskkill /f /im jqs.exe 
 	taskkill /f /im javaw.exe 
 	taskkill /f /im java.exe
+
+POWERSHELL
+Get Version of powershell
+Get-Host | Select-Object Version
