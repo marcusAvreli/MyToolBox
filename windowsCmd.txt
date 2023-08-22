@@ -16,6 +16,13 @@
 	(source: https://stackoverflow.com/questions/54978756/exclude-windows-folder-in-cmd-search)
 	dir /S /B /A:-D *.mp3 *.mp4 *.jpg | findstr /V /I /C:"\\Microsoft\\" /C:"\\Windows\\" > "C:\output.txt"
 
++-----------------------------------------------------------+
+|															|
+|					READ CSV								|
+|															|
++-----------------------------------------------------------+
+	
+https://stackoverflow.com/questions/24927944/read-csv-file-through-windows-batch-file-and-create-txt-file
 	
 	
 https://stackoverflow.com/questions/20076262/findstr-and-skipping-folders
