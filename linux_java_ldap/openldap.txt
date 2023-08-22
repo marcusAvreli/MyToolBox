@@ -1,0 +1,362 @@
+OpenLdap Old1
+To check that the server cert is installed and working correctly, 
+openssl s_client -connect localhost:389 -showcerts
+openssl s_client -CApath /etc/pki/tls/certs/ -connect oLdap.testDomain:389
+openssl s_client -connect 127.0.0.1:389 -prexit
+To check that TLS is working.
+ldapsearch -ZZ -x -D 'cn=manager,dc=oLdap,dc=testDomain' -W 'objectclass=*' -v
+https://serverfault.com/questions/63794/openldap-ssl-error
+http://qaru.site/questions/182333/openssl-command-to-check-if-a-server-is-presenting-a-certificate
+
+the directory used: openssl version -d
+Output:OPENSSLDIR: "/usr/ssl"
+
+Linux default installation:
+openssl version -d
+OPENSSLDIR: "/etc/pki/tls"
+https://support.f5.com/csp/article/K15292
+https://lists.gnupg.org/pipermail/gnutls-help/2013-July/003200.html
+add new Root CA into ca-bundle.crt
+openssl x509 -in /home/admin/ca.crt -text >> /etc/pki/tls/certs/ca-bundle.crt
+https://www.sbarjatiya.com/notes_wiki/index.php/Configuring_TLS_or_SSL_security_for_openLDAP_server
+http://wiki.zarafa.com/index.php?title=Configure_OpenLDAP_with_SSL/TLS&oldid=717
+Whether the SSL connection works can be tested with:
+openssl s_client -connect 127.0.0.1:636 -CApath /usr/ssl/demoCA/certs
+openssl s_client -connect 127.0.0.1:636 -CApath /home/admin/openldap
+To test whether the SSL connection is working correctly with LDAP, use the following command:
+ldapsearch -x -H ldaps://openldap.domain.com -b <BASEDN> -D <binddn> -w
+/usr/local/bin/ldapsearch -LLL -x -W -D 'cn=Manager,dc=oLdap,dc=testDomain' -H  ldap://oLdap.testDomain -ZZ '(uid=manny)'
+
+
+
+
+slappasswd {SSHA}QNf5QwoyN1XIaOsRNl3rGRJGOYQ2ocf2
+cd /etc/openldap
+vi slapd.conf
+Verify Installation
+/usr/local/libexec/slapd -VVV
+strings /usr/local/bin/ldapmodify | grep "\.so"
+ldapsearch -H ldap://oLdap.testDomain -D "cn=Manager,dc=oLdap,dc=testDomain" -w zubur1 -ZZ -d7
+openssl s_client -connect oLdap.testDomain:389 -CApath /etc/pki/CA/certs/
+
+cd /home/admin/openldap; make distclean
+
+cd /etc/openldap/slapd.d/cn\=config
+https://www.vincentliefooghe.net/content/modifier-les-acl-dun-annuaire-openldap
+http://oracleiam.com/add-view-and-delete-aci/
+
+
+
+OpenSSL - 1.0.2
+http://linux-sxs.org/security/openssl.html
+https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=828139
+cd /home/admin
+tar -zxvf openssl-1.0.2.tar.gz
+mv openssl-1.0.2 openssl
+cd openssl
+./config --prefix=/usr --openssldir=/usr/ssl shared
+make
+make install
+cd /home/admin
+https://henning.kropponline.de/2014/09/14/openldap-setup-w-ca-signed-certificate-centos/
+/etc/pki/tls/openssl.cnf
+https://www.openldap.org/lists/openldap-software/200009/msg00504.html
+env CPPFLAGS="-I/usr/local/ssl/include" LDFLAGS="-L/usr/local/ssl/lib"
+
+To view the certificate:
+openssl x509 -noout -text -in /etc/openldap/oLdap.testDomain.cert.pem
+openssl x509 -noout -text -in ia.crt
+
+To view the key:
+openssl rsa -noout -text -in /etc/openldap/oLdap.testDomain.key.pem
+openssl rsa -noout -text -in ia.key
+/usr/local/var/openldap-data
+
+
+Cyrus-SASL-2.1.26 
+cd /home/admin
+tar -zxvf cyrus-sasl-2.1.26.tar.gz
+mv cyrus-sasl-2.1.26 cyrus-sasl
+cd /home/admin/cyrus-sasl
+
+env CPPFLAGS="-I/usr/local/BerkeleyDB.5.3/include -I/usr/include/openssl" LDFLAGS="-L/usr/local/BerkeleyDB.5.3/lib" ./configure --sysconfdir=/etc;make;make install
+
+./configure --prefix=/usr/local       \
+            --sysconfdir=/etc    \
+ --with-openssl=/usr \
+            --enable-auth-sasldb \
+--with-des=/usr \
+            --with-dbpath=/var/lib/sasl/sasldb2 \
+            --with-saslauthd=/var/run/saslauthd
+make;make install
+
+vi /etc/sasl2/slapd.conf
+/usr/local/sbin/pluginviewer
+/usr/local/sbin/saslauthd -v
+saslpasswd2 -c -u oLdap.testDomain manager
+saslpasswd2 -c -u oLdap.testDomain matt
+
+
+Commands
+
+vi /etc/openldap/slapd.d/cn\=config.ldif
+
+https://www.ibm.com/support/knowledgecenter/en/SSVJJU_6.4.0/com.ibm.IBMDS.doc_6.4/r_cr_ldapsearch.html
+https://www.linux.com/blog/openldap-ppolicy-overlay-user-authentication
+
+
+
+
+Error: ''OpenSSL:error:0B080074:x509 certificate routines:x509_check_private_key:key values mismatch''
+
+The "modulus" and "public exponent" portions in the key and the certificate must match exactly.
+
+If the modulus in the two files do not match, the installation will fail.
+
+
+https://tobru.ch/openldap-password-policy-overlay/
+https://www.openldap.org/lists/openldap-software/200508/msg00192.html
+
+
+ /usr/local/libexec/slapd -d127 -h "ldap:/// ldaps:///"
+
+/usr/local/libexec/slapd
+/usr/local/libexec/slapd -d 1
+Verify
+https://help.ubuntu.com/community/SecuringOpenLDAPConnections
+https://help.ubuntu.com/community/OpenLDAP-SambaPDC-OrgInfo-Posix
+
+
+https://www.ibm.com/support/knowledgecenter/en/SSB23S_1.1.0.12/gtpl3/l3openldapwithssl.html
+https://www.vivaolinux.com.br/conf/
+https://serverfault.com/questions/437546/centos-openldap-cert-trust-issues
+
+https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=828139
+
+
+
+
+Creating an SSL/TLS CA
+/usr/ssl/misc/CA.pl -newca
+New private key
+/usr/ssl/demoCA/private/cakey.pem
+http://www.reppep.com/~pepper/ssl/
+
+https://blog.didierstevens.com/2008/12/30/howto-make-your-own-cert-with-openssl/
+
+http://bacedifo.blogspot.com/2009/01/saslexternal-with-openldap.html
+
+difference between TLS over port 389 and SSL over port 636
+/usr/local/bin/ldapsearch -x -ZZ  -H ldap://127.0.0.1/
+
+/usr/local/bin/ldapsearch -x -ZZ -d1 -H ldap://127.0.0.1/
+outputs:
+TLS: could not load verify locations (file:`/usr/share/ca-certificates/extra/ca.key',dir:`/home/admin/openldap/'
+
+/home/admin/openldap/usr/share/ca-certificates/extra/ca.key
+
+cd /etc/pki/CA
+openssl req -config /etc/pki/tls/openssl.cnf -new -x509 -extensions v3_ca -keyout private/ca.key -out certs/ca.crt -days 3650
+
+openssl req -config /etc/pki/tls/openssl.cnf -newkey rsa:2048 -sha256 -nodes -out oLdap_cert.csr -outform PEM -keyout oLdap_key.pem
+
+openssl ca -config /etc/pki/tls/openssl.cnf -policy signing_policy -extensions signing_req -out oLdap_cert.pem -infiles oLdap_cert.csr
+
+openssl x509 -in certs/ca.crt -text >> /etc/pki/tls/certs/ca-bundle.crt
+
+cp  oLdap_key.pem /etc/openldap/
+cp  oLdap_cert.pem /etc/openldap/
+
+TLSCACertificatePath /etc/pki/tls/certs
+TLSCertificateFile /etc/openldap/oLdap_cert.pem
+TLSCertificateKeyFile /etc/openldap/oLdap_key.pem 
+https://stackoverflow.com/questions/30377935/openldap-logs-not-getting-generated
+
+https://www.openldap.org/lists/openldap-software/200305/msg00331.html
+https://unix.stackexchange.com/questions/353350/centos-7-ldap-add-insufficient-access-50
+RE: SASL(-4): no mechanism available
+
+To: "'Robin SP Zhang'" <RobinZhang@pek.destiny.com.cn>, "'OpenLdap-Software \(E-mail\)'" <OpenLdap-Software@OpenLDAP.org>
+Subject: RE: SASL(-4): no mechanism available
+From: "Howard Chu" <hyc@highlandsun.com>
+Date: Wed, 14 May 2003 05:02:19 -0700
+Importance: Normal
+In-reply-to: <BD61F856F5FED3119813000629397B0901B0AFDE@MIS_EXCHANGE>
+
+> -----Original Message-----
+> From: owner-openldap-software@OpenLDAP.org
+> [mailto:owner-openldap-software@OpenLDAP.org]On Behalf Of Robin SP Zhang
+
+> Hi,
+>       I want to use TLS to connect to LDAP server, but it failed.
+> the debug info is
+>
+> ...
+> TLS trace: SSL_connect:SSLv3 read finished A
+> ldap_interactive_sasl_bind_s: user selected: EXTERNAL
+> ldap_int_sasl_bind: EXTERNAL
+> SASL/EXTERNAL authentication started
+> ldap_perror
+> ldap_sasl_interactive_bind_s: Unknown authentication method (86)
+>         additional info: SASL(-4): no mechanism available:
+>
+> I traced the routine, and found that it is failed because  auth_id of
+> external
+> is NULL, auth_id seems come from certificate, then I found that
+> SSL_get_certificate return NULL in tls.c, so I doubted that
+> my configuration about TLS client has some error.
+> I configure it in ldap.conf as
+>
+> TLS_CACERT 		E:\\OpenLDAP\\SYSCONF\\server.pem
+> SASL_SECPROPS none
+>
+> Is it right ? or I created a wrong certificate?
+
+The SASL/EXTERNAL mechanism is only for use when you want to authenticate
+with a client certificate. If all you want is to use TLS with a
+password-based login, then you should not be using SASL/EXTERNAL. If you want
+to login with SASL/EXTERNAL, you need to create a client certificate and add
+its location to your .ldaprc file.
+
+Read the Admin Guide, it's already explained there.
+http://www.openldap.org/doc/admin21/
+
+
+  -- Howard Chu
+  Chief Architect, Symas Corp.       Director, Highland Sun
+  http://www.symas.com               http://highlandsun.com/hyc
+  Symas: Premier OpenSource Development and Support
+
+
+http://manpages.ubuntu.com/manpages/bionic/man8/saslpluginviewer.8.html
+
+https://forums.fedoraforum.org/showthread.php?293605-Openldap-SASL-Issues-can-t-configure-LDAP
+https://ltb-project.org/documentation/general/sasl_delegation
+http://www-01.ibm.com/support/docview.wss?uid=swg21962541
+Convert configuration file into dynamic configuration under /etc/openldap/slapd.d/ directory:
+https://www.openldap.org/lists/openldap-technical/201003/msg00056.html
+slaptest -f /etc/openldap/slapd.conf -F /etc/openldap/slapd.d
+Find the Configuration DIT: /usr/local/bin/ldapsearch -H ldap:// -x -s base -b "" -LLL "configContext"
+
+Accessing the Configuration DIT: sudo /usr/local/bin/ldapsearch -H ldapi:// -Y EXTERNAL -b "cn=config" -LLL -Q
+
+https://www.netiq.com/documentation/edir88/edir88/data/agtxhz5.html
+https://wiki.gentoo.org/wiki/Centralized_authentication_using_OpenLDAP
+
+http://www.yolinux.com/TUTORIALS/LinuxTutorialLDAP.html
+http://www.lichteblau.com/ldapvi/cyrus-sasl/options.html
+https://www.digitalocean.com/community/tutorials/how-to-configure-openldap-and-perform-administrative-ldap-tasks
+
+http://www-lor.int-evry.fr/~michel/LDAP/SASL/ActivationSASL.html#external
+SASL/EXTERNAL only works with ldapi:/// connection
+https://www.openldap.org/lists/openldap-technical/201110/msg00021.html
+https://www.lisenet.com/2014/install-and-configure-an-openldap-server-with-ssl-on-debian-wheezy/
+https://answers.launchpad.net/ubuntu/+source/openldap/+question/129615
+https://www.server-world.info/en/note?os=CentOS_6&p=ldap
+http://www.zytrax.com/books/ldap/ch6/slapd-config.html
+https://docs.couchbase.com/server/5.5/security/security-saslauthd-new.html
+
+
+The SASL EXTERNAL mechanism is only availible to ldap or ldaps connections 
+if
+1) the server requests a certificate (TLSVerifyClient option is set to 
+   something other than "never"),
+2) the client provides a certificate (TLS_CERT and TLS_KEY settings are
+   used), AND
+3) the server can verify the client's cert (the cert is under a CA 
+   available to slapd via TLSCACertificateFile or TLSCACertificatePath
+   and passes the various validity checks, etc)
+
+
+
+
+Resolution
+ldapsearch should not be initiated with ldaps and start_tls both, Use either -ZZ or use ldaps://fqdn.of.server
+
+STARTTLS is an extension to plain text communication protocols, which offers a way to upgrade a plain text connection to an encrypted (TLS or SSL) connection instead of using a separate port for encrypted communication. It is defined in http://tools.ietf.org/html/rfc2830
+
+Try SSL
+
+Raw
+# ldapsearch -x -H ldaps://fqdn -b "dc=example,dc=com"
+or TLS
+
+Raw
+# ldapsearch -x -ZZ -h ldap://fqdn -b "dc=example,dc=com"
+
+
+add the certificate for the CA to the list of trusted CA's used by the client
+openssl version -d: OPENSSLDIR: "/usr/ssl"
+https://www.madboa.com/geek/openssl/#what-certificate-authorities-does-openssl-recognize
+https://stackoverflow.com/questions/25156180/how-to-list-certificates-trusted-by-openssl
+
+openssl x509 -noout -fingerprint -in /etc/openldap/oLdap.testDomain.cert.pem
+
+https://stackoverflow.com/questions/4138139/how-to-find-out-the-path-for-openssl-trusted-certificate
+https://www.openldap.org/lists/openldap-technical/201003/msg00056.html
+
+Append your trusted certificate to file /etc/pki/tls/certs/ca-bundle.crt
+cat foo.crt >>/etc/pki/tls/certs/ca-bundle.crt
+
+https://www.linuxquestions.org/questions/linux-newbie-8/how-to-add-new-root-ca-into-ca-bundle-crt-909982/
+https://opensource.apple.com/source/OpenLDAP/OpenLDAP-68/OpenLDAP/contrib/ldapsasl/README
+https://www.cyberciti.biz/faq/verify-ssl-certificate-openssl/
+http://www.surekhatech.com/blog/openldap-pass-through-authentication-with-sasl-to-active-directory
+https://forums.suse.com/archive/index.php/t-5488.html
+https://ltb-project.org/documentation/general/sasl_delegation
+https://ltb-project.org/documentation/general/openldap_ssl_tls_mutual_authentication
+https://jpmens.net/pages/ldap-external/
+
+
+https://serverfault.com/questions/617678/cant-use-external-authentication-after-enabling-tls-in-ldap-2-4
+
+Looking into the code: on the server side, in servers/slapd/daemon.c, the authid for EXTERNAL is set up using the uid and gid shortly after the incoming connection is accept()ed. Later on, in servers/slapd/connection.c, if TLS is active, it overwrites that with the name from the client's certificate. Since you aren't providing a client certificate, at this point the authid gets overwritten with NULL, making EXTERNAL not available.
+
+In short, if TLS is active then the uid+gid authid is not used. Depending on your perspective, this could be considered a bug; ideally it would fall back to the peercred ID.
+
+That said, TLS on ldapi is really not necessary as the local socket already provides total privacy; so you could set olcSecurity just on your own database, leaving it not set for the frontend and cn=config (see e.g. this post), or you could use ssf= instead of tls= and set olcLocalSSF appropriately. Or you could use a different DN as the manager for cn=config, in order to not depend on the peercred feature.
+
+https://www.itzgeek.com/how-tos/linux/centos-how-tos/configure-openldap-with-ssl-on-centos-7-rhel-7.html
+
+
+https://www.openldap.org/lists/openldap-technical/200804/msg00092.html
+su - ldap -s /bin/bash -c 'ls /usr/local/var/openldap-data'
+
+
+If you bind as the rootdn, ACL restrictions do not apply. To view your
+existing olcRootDN/olcRootPW configuration, do:
+
+slapcat -n0
+You can use:
+https://blogs.mindspew-age.com/2012/06/11/overlays-mdb-openldap-fun/
+https://wiki.univention.de/index.php/Cool_Solution_-_LDAP_Policy_use_cases#Policy_.22NFS_mounts.22
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+https://www.openldap.org/lists/openldap-software/200208/msg00085.html
+https://debian-handbook.info/browse/stable/sect.ldap-directory.html
+1) i had to change the owner of "/usr/local/var/openldap-ldbm" and the files inside to be "ldap" instead of "root" since slapd was running as "ldap". IMHO this should have been done by the "make install" command, but maybe there are other factors i don't understand. since an older version of OpenLDAP was already installed i think certain things had been done that normally aren't done when installing from source.
+
+2) i had to use ldapadd instead of slapadd. now that i've done it the instructions make much more sense, but essentially i took these lines out of the LDIF file and loaded them with slapadd (while slapd wasn't running):
+-----
+dn: dc=aes,dc=org
+objectClass: dcObject
+objectClass: organization
+o: AES
+dc: aes
+
+dn: cn=Manager,dc=aes,dc=org
+objectclass: organizationalRole
+cn: Manager
+-----
+
+
+and then i was able to start slapd and use this command to load the rest of the file:
+ldapadd -f bottom.ldif -x -D "cn=Manager,dc=aes,dc=org" -w secret
+after fixing one mistake in my "perfect" ldif file it loaded in without a hitch and i could then do:
+ldapsearch -x
+to print out the whole thing.
+
+i know this is really basic stuff to most of you, but hopefully this post will help a newbie in the future that is searching the archives.
+

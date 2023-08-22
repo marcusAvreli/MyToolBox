@@ -1,0 +1,407 @@
+https://serverfault.com/questions/757784/cannot-run-samba-dc-and-openldap-the-port-is-being-used?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+
+https://wiki.samba.org/index.php/Samba4/LDAP_Backend/OpenLDAP
+http://albertolarripa.com/2012/09/16/samba-3-trust-relationship-with-active-directory/
+https://sportmail.ru/football2018/news/33969025/?frommail=1
+CurrentStatus: 
+http://linux-sxs.org/security/openssl.html
+http://linux-sxs.org/internet_serving/bind9.html
+Python
+wget http://python.org/ftp/python/2.7.14/Python-2.7.14.tar.xz
+tar xf Python-2.7.14.tar.xz
+cd Python-2.7.14
+./configure --prefix=/usr/local --enable-unicode=ucs4 --enable-shared LDFLAGS="-Wl,-rpath /usr/local/lib"
+Remove all existing Python software
+make  
+rpm -q -a | grep python | while read line
+do
+rpm -e --nodeps $line
+done
+make install
+Update your library resolutions:
+ldconfig -v
+http://edoceo.com/howto/samba3-windows7
+https://community.sailpoint.com/message/90394#90394
+https://community.sailpoint.com/message/87873#87873
+
+https://www.digitalocean.com/community/tutorials/how-to-install-java-on-centos-and-fedora
+If you want JAVA_HOME to be set for every user on the system by default, add the previous line to the /etc/environment file. An easy way to append it to the file is to run this command:
+sudo sh -c "echo export JAVA_HOME=/usr/java/jdk1.8.0_161/jre >> /etc/environment"
+
+
+Cyrus-SASL
+autoreconf
+
+Db versioning.
+https://www.openldap.org/lists/openldap-technical/201606/msg00006.html
+There are several versions available from Oracle Corporation. Berkeley DB version 6.0.20 and later uses a software license that is incompatible with LDAP technology and should not be used with OpenLDAP
+./configure --sysconfdir=/etc --enable-bdb --enable-crypt --with-tls --enable-ldap --enable-slapd  --with-nettle=/usr/local/lib64/pkgconfig/;make depend;make;make install;
+http://zee.linxsol.com/system-administration/centos-62-installing-ldap-directory-services-using-cli.html
+
+LDFLAGS="-L/usr/local/lib -L/usr/local/BerkeleyDB.5.3/lib -L/usr/local/lib64/ -L/usr/local/ssl/lib" CPPFLAGS="-I/usr/local/include -L/usr/local/lib64/ -I/usr/local/BerkeleyDB.5.3/include -I/usr/local/ssl/include" ./configure --sysconfdir=/etc --enable-bdb --enable-crypt --with-tls --enable-ldap --enable-slapd  --with-nettle=/usr/local/lib64/pkgconfig/;make depend;make;make install;sudo ldconfig
+
+Installing LDAP Directory Services using CLI
+
+vi /etc/openldap/ldap.conf
+URI ldap://192.168.1.222
+BASE dc=shan,dc=com
+ 
+Copy the sample files from /usr/share/openldap to /etc/openldap and var/lib/ldap:
+ 
+cp /usr/share/openldap-servers/slapd.conf.obsolete /etc/openldap/slapd.conf
+cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG
+###zGX/jOA8OrQ08RGfjTVxrbcSpS1uwuBI
+Setup a new root password:
+slappasswd
+New password:
+Re-enter new password:
+{SSHA}xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+ 
+Copy the password as you need to enter the password in slapd.conf:
+ 
+vi /etc/openldap/slapd.conf
+:%s/dc=my-domain/dc=shan/g  #This regex will replace all the instances of my-domain with your domain name.
+:%s/dc=my-domain/dc=testDomain/g
+ 
+ 
+Create an SSL certificate
+ 
+cd /etc/pki/tls/certs
+rm slapd.pem
+make slapd.pem
+chmod 640 slapd.pem
+chown :ldap slapd.pem
+ln -s /etc/pki/tls/certs/slapd.pem /etc/openldap/cacerts/slapd.pem
+vi /etc/sysconfig/ldap
+SLAPD_LDAPS=yes
+ 
+vi /etc/openldap/slapd.conf
+TLSCACertificateFile /etc/pki/tls/certs/ca-bundle.crt
+TLSCertificateFile /etc/pki/tls/certs/slapd.pem
+TLSCertificateKeyFile /etc/pki/tls/certs/slapd.pem
+ 
+vi /etc/openldap/ldap.conf
+TLS_CACERTDIR /etc/openldap/cacerts
+TLS_REQCERT never
+ 
+ 
+Test if everything is up and working fine
+ 
+rm -rf /etc/openldap/slapd.d/*
+slaptest -f /etc/openldap/slapd.conf -F /etc/openldap/slapd.d
+chown -R ldap:ldap /etc/openldap/slapd.d
+Service slapd restart
+ 
+ldapsearch -x -ZZ -h localhost (TLS)
+ldapsearch -x -H ldaps://localhost (SSL)
+ 
+Some additional steps
+Open /etc/nsswitch.conf and edit the entry 'hosts' and add the ldap first so clients can authenticate from ldap:
+vi /etc/nsswitch.conf
+hosts: ldap files
+Add the rule in firewall for port 636
+
+
+Samba 4.8.2
+
+chmod -R 755 /home/admin/samba; cd /home/admin/samba;./configure --with-piddir=/run/samba                   --with-pammodulesdir=/lib/security         --without-systemd                          --enable-fhs   ;make;make install
+
+
+/home/admin/samba/source4/lib/tls/wscript:51: error: Building the AD DC requires GnuTLS (eg libgnutls-dev, gnutls-devel) for ldaps:// support and for the BackupKey protocol
+https://serverfault.com/questions/720332/cannot-connect-to-linux-samba-share-from-windows-10?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+https://www.linuxquestions.org/questions/linux-networking-3/wbinfo-u-error-looking-up-domain-users-407796/
+yum install perl gcc attr libacl-devel libblkid-devel \
+    gnutls-devel readline-devel python-devel gdb pkgconfig \
+    krb5-workstation zlib-devel setroubleshoot-server libaio-devel \
+    setroubleshoot-plugins policycoreutils-python \
+    libsemanage-python perl-ExtUtils-MakeMaker perl-Parse-Yapp \
+    perl-Test-Base popt-devel libxml2-devel libattr-devel \
+    keyutils-libs-devel cups-devel bind-utils libxslt \
+    docbook-style-xsl openldap-devel autoconf python-crypto pam-devel
+
+
+http://howtododifficult.blogspot.co.il/2016/12/samba-active-directory-domain.html
+/usr/local/samba/sbin/smbd -D
+/usr/local/samba/sbin/nmbd -D
+/usr/local/samba/sbin/winbindd -D
+cp /usr/local/samba/etc/samba/smb.conf /etc/samba/smb.conf
+ samba-tool dns add 192.168.1.16 testdomain.com zone2 A 192.168.1.12 -U administrator
+ samba-tool dns add 192.168.1.16 1.168.192.in-addr.arpa 55 PTR zone2.testDomain.com -U administrator
+samba-tool dns add 192.168.1.16 testDomain.com _zone2._tcp SRV 'zone2.testDomain.com 8080 0 100' -U administrator
+
+Verifications
+
+ find / -executable -name samba
+
+action:/usr/local/libexec/slapd -d -1
+result:olcPidFile: /var/run/slapd/slapd.pid
+
+action: /usr/local/libexec/slapd -d -1 -u ldap -g ldap
+Result: diagnostic mode (5)
+
+Current Status:
+Action: /usr/local/samba/bin/smbclient -UAdministrator -Llocalhost
+Result: Connection to localhost failed (Error NT_STATUS_BAD_NETWORK_NAME)
+
+Research:
+homeDir:  /usr/local/samba/bin
+export  LD_LIBRARY_PATH=/usr/local/lib/;ldconfig
+
+/usr/local/samba/bin/smbclient -UAdministrator -Llocalhost
+error while loading shared libraries: libldap-2-devel.so.0 echo $LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/usr/local/lib;ldconfig 
+/usr/local/samba/sbin/smbd
+/usr/local/samba/var/cores/smbd
+
+pgrep -l mbd
+/usr/local/samba/bin/testparm
+/usr/local/samba/bin/smbclient -L localhost -U%
+/usr/local/samba/bin/samba-tool user list
+/usr/local/samba/bin/ldbsearch -H /usr/local/samba/var/lib/samba/private/sam.ldb CN=Administrator
+/usr/local/samba/bin/ldbsearch -H /usr/local/samba/var/lib/samba/private/sam.ldb cn=Barbara Jensen
+
+/usr/local/samba/bin/samba-tool user create user1
+
+/usr/local/samba/sbin/samba
+
+/usr/local/samba/bin/smbclient //localhost/netlogon -UAdministrator -c 'ls'
+/usr/local/samba/bin/smbtree -d 4 -U administrator 
+/usr/local/samba/bin/samba-tool drs showrepl -d 4
+/usr/local/samba/bin/samba-tool dbcheck --cross-ncs --fix --yes
+/usr/local/samba/bin/smbcontrol all reload-config
+/usr/local/samba/bin/samba-tool user list
+/usr/local/samba/bin/wbinfo -u
+/usr/local/samba/bin/samba-tool testparm -v --suppress-prompt | grep "server services"
+/usr/local/samba/bin/smbclient -L host
+/fusr/local/samba/bin/smbclient \\\\192.168.1.16\\shared --user administrator
+/usr/local/samba/bin/pdbedit -L
+https://kb.iu.edu/d/atcb
+/usr/local/samba/bin/smbtree -d 4 -U administrator
+/usr/local/samba/bin/pdbedit -L -w | grep '\[[WI]'
+
+https://www.tecmint.com/manage-samba4-active-directory-linux-command-line/
+
+
+action:ldapsearch -x -b 'dc=testDomain,dc=com' '(objectclass=*)'
+result:ldap_sasl_bind(SIMPLE): Can't contact LDAP server (-1)
+
+ldapsearch -x -ZZ
+netstat -ant | grep 135
+$ cat /var/log/messages | grep 135
+
+sudo samba-tool drs replicate
+sudo samba-tool user add test
+sudo samba-tool user list
+
+sudo samba-tool user setexpiry test --noexpiry
+
+sudo ldbsearch -H /var/lib/samba/private/sam.ldb '(invocationid=*)' --cross-ncs objectguid
+
+wbinfo -u
+*************************************************************************************************************
+*************************************************************************************************************
+************Result2*****************
+# extended LDIF
+#
+# LDAPv3
+# base <dc=testDomain,dc=com> with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+
+# search result
+search: 2
+result: 32 No such object
+
+# numResponses: 1
+
+*************result2******************
+*************************************************************************************************************
+*************************************************************************************************************
+samba
+pidof slapd
+/usr/local/libexec/slapd -d -1
+ldapadd -x -D 'cn=Manager,dc=testDomain,dc=com' -W
+https://superuser.com/questions/115337/windows-7-connecting-to-samba-shares?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+https://www.linuxquestions.org/questions/slackware-14/can%27t-connect-from-windows-to-samba-4-6-7-on-current-same-config-works-fine-on-sw14-1-samba-4-2-1-x86_64-1-a-4175612921/
+/usr/local/samba/bin/smbcontrol all reload-config
+https://ubuntuforums.org/archive/index.php/t-1646052.html
+
+Smbtree
+pstree
+samba-tool drs showrepl -d 4
+ //here omes error
+sudo smbpasswd -a guest
+ldapsearch -H ldap://192.168.1.16 -b dc=webon -x -d-1
+ps -ef | grep slap
+slapd -d -1
+https://serverfault.com/questions/586694/samba-4-openldap-authentication-issue
+vi /etc/openldap/slapd.conf
+Start openLdap
+Action:/usr/local/libexec/slapd -d -1
+Result:pidof slapd [returns number of process]
+https://kb.iu.edu/d/atcb
+find / -executable -name samba
+samba --version
+ldap_connect_system: Failed to retrieve password from secrets.tdb
+smbpasswd -w admin
+
+https://wiki.samba.org/index.php/1.0:_Configuring_Samba
+https://edoceo.com/howto/samba-ldap-migration
+Checking if the Samba Daemons are Running
+You can check to see if the Samba daemon (smbd) is running using the ps command
+ps -ef | grep smbd
+
+You can also check to see if the NetBIOS name server daemon (nmbd) is running using the ps command:
+ps -ef | grep nmbd
+Links
+1 https://linuxadministrations.wordpress.com/category/linux/ldap/troubleshooting-ldap/
+
+2 https://www.linuxquestions.org/questions/linux-software-2/new-samba-ad-dc-as-member-port-135-nt_status_connection_refused-4175547418/
+
+3 https://www.linuxquestions.org/questions/linux-networking-3/samba-issue-with-share-level-security-and-client-lanman-auth-4175419138/
+
+4 https://forums.mageia.org/en/viewtopic.php?f=25&t=4556
+
+5 http://www.zytrax.com/books/ldap/ch11/running.html
+http://david-latham.blogspot.com/2012/12/extending-ad-schema-on-samba4.html
+https://www.howtoforge.com/community/threads/ldap-doesn-t-start.50556/
+https://www.ibm.com/developerworks/linux/tutorials/l-ldapsamba/index.html
+ldap server require strong auth = no
+ldap server require strong auth = yes
+
+When set to 'yes', we only allow simple binds over TLS.  
+
+When using SASL, it is more secure to use the sign/seal protection
+provided by SASL rather than just wrapping it in TLS, as so few clients
+actually check SSL certificates.
+ldapsearch -LLL -x -H ldap://testdomain.com -s "base" -b "" supportedSASLMechanisms
+
+https://www.cyrusimap.org/sasl/sasl/faqs/openldap-sasl-gssapi.html
+
+https://ubuntuforums.org/showthread.php?t=1767283
+is not set up to establish a connection on port "File and printer sharing (SMB)" with this computer.
+
+10.20.0.77" is not set up to establish a connection on port "File and printer sharing (SMB)" with this computer.
+Python
+Environment variable
+
+
+Looking up IPv4 addresses
+Looking up IPv6 addresses
+No IPv6 address will be assigned
+Setting up secrets.ldb
+Setting up the registry
+Setting up the privileges database
+Setting up idmap db
+Setting up SAM db
+Setting up sam.ldb partitions and settings
+Setting up sam.ldb rootDSE
+Pre-loading the Samba 4 and AD schema
+Unable to determine the DomainSID, can not enforce uniqueness constraint on local domainSIDs
+
+Adding DomainDN: DC=testserver,DC=testdomain,DC=com
+Adding configuration container
+Setting up sam.ldb schema
+Setting up sam.ldb configuration data
+Setting up display specifiers
+Modifying display specifiers and extended rights
+Adding users container
+Modifying users container
+Adding computers container
+Modifying computers container
+Setting up sam.ldb data
+Setting up well known security principals
+Setting up sam.ldb users and groups
+Setting up self join
+Adding DNS accounts
+Creating CN=MicrosoftDNS,CN=System,DC=testserver,DC=testdomain,DC=com
+Creating DomainDnsZones and ForestDnsZones partitions
+Populating DomainDnsZones and ForestDnsZones partitions
+Setting up sam.ldb rootDSE marking as synchronized
+Fixing provision GUIDs
+A Kerberos configuration suitable for Samba AD has been generated at /usr/local/samba/private/krb5.conf
+Merge the contents of this file with your system krb5.conf or replace it with this one. Do not create a symlink!
+Once the above files are installed, your Samba AD server will be ready to use
+Server Role:           active directory domain controller
+Hostname:              testServer
+NetBIOS Domain:        TESTDOMAIN
+DNS Domain:            testserver.testdomain.com
+DOMAIN SID:            S-1-5-21-3348650813-2576436171-2981601168
+
+Alberto Martinez answer describes why the mapped network drive is not accessible.
+
+Here is registry fix to solve the problem:
+
+Open regedit and go to HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+Add a new DWORD (32-bit) Value named EnableLinkedConnections.
+Adjust the value to 1 (or 00000001).
+Exit regedit and restart the computer.
+
+OpenLDAP's slapd(8) MDB primary database backend uses the LMDB software included with the OpenLDAP source. There is no need to download any additional software to have MDB support.
+
+OpenLDAP's slapd(8) BDB and HDB deprecated database backends require Oracle Corporation's Berkeley DB. If not available at configure time, you will not be able to build slapd(8) with these deprecated database backends.
+
+Your operating system may provide a supported version of Berkeley DB in the base system or as an optional software component. If not, you'll have to obtain and install it yourself. Berkeley DB is available from Oracle Corporation's Berkeley DB download page if required.
+
+There are several versions available from Oracle Corporation. Berkeley DB version 6.0.20 and later uses a software license that is incompatible with LDAP technology and should not be used with OpenLDAP.
+https://github.com/Evolveum/midpoint/blob/master/samples/resources/openldap/example.ldif
+
+/usr/local/samba/bin/ldbadd -H /usr/local/samba/var/lib/samba/private/secrets.ldb /home/admin/barbara.ldif
+/usr/local/samba/bin/ldbadd -H /usr/local/samba/var/lib/samba/private/sam.ldb /home/admin/barbara.ldif
+/usr/local/samba/bin/ldbadd -H /usr/local/samba/var/lib/samba/private/sam.ldb /home/admin/group1.ldif
+/usr/local/samba/bin/ldbmodify -H /usr/local/samba/var/lib/samba/private/sam.ldb /home/admin/aci.ldif
+/usr/local/samba/bin/ldbmodify -H /usr/local/samba/var/lib/samba/private/sam.ldb /home/admin/posixGroup.ldif
+
+/usr/local/samba/bin/ldbmodify -H /usr/local/samba/var/lib/samba/private/sam.ldb /home/admin/CustomAddSchema.def
+/usr/local/samba/bin/ldbsearch -b "cn=schema,cn=configuration,dc=testdomain" -H /usr/local/samba/var/lib/samba/private/idmap.ldb "objectclass=inetOrgPerson"
+
+/usr/local/samba/bin/ldbsearch -b "cn=schema,cn=configuration,dc=testdomain" -H /usr/local/samba/var/lib/samba/private/sam.ldb "objectclass=inetOrgPerson"
+
+/usr/local/samba/bin/ldbsearch -b "cn=schema,cn=configuration,dc=testdomain" -H /usr/local/samba/var/lib/samba/private/sam.ldb 
+"(&(objectclass=attributeSchema)(searchFlags:1.2.840.113556.1.4.803:=1))"
+
+ /usr/local/samba/bin/ldbsearch -b "cn=schema,cn=configuration,dc=testdomain" -H /usr/local/samba/var/lib/samba/private/sam.ldb | grep 'inetOrg*'
+
+/usr/local/samba/bin/ldbsearch  -H /usr/local/samba/var/lib/samba/private/sam.ldb   -s base -b @INDEXLIST
+
+/usr/local/samba/bin/ldbsearch -H  /usr/local/samba/var/lib/samba/private/sam.ldb -k yes
+
+/usr/local/samba/bin/ldbsearch -H /usr/local/samba/var/lib/samba/private/sam.ldb -s base  $(/usr/local/samba/bin/ldbsearch -H /usr/local/samba/var/lib/samba/private/sam.ldb -s base'' subschemaSubentry | sed '/dn:/d;/^$/d;s/subschemaSubentry: //' ) objectClasses
+
+https://wiki.samba.org/index.php/LDB
+/usr/local/samba/bin/ldbsearch -b "dc=testdomain" -H /usr/local/samba/var/lib/samba/private/sam.ldb -s base -b ""
+rootDSE
+
+/usr/local/samba/bin/ldbsearch -H  /usr/local/samba/var/lib/samba/private/sam.ldb -s base -b \
+CN=ypservers,CN=ypServ30,CN=RpcServices,CN=System,DC=testdomain cn
+
+/usr/local/samba/bin/samba-tool forest directory_service dsheuristics 0000002 -H ldap://localhost --simple-bind-dn='administrator@testdomain'
+/usr/local/samba/bin/samba-tool fsmo show -H ldap://localhost --simple-bind-dn='administrator@testdomain' 
+
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/identity_management_guide/managing-unique_uid_and_gid_attributes
+
+/usr/local/samba/bin/ldbedit -H  /usr/local/samba/var/lib/samba/private/sam.ldb -s base -b CN=ypservers,CN=ypServ30,CN=RpcServices,CN=System,DC=testdomain
+
+http://www.zytrax.com/books/ldap/ch3/
+
+
+https://access.redhat.com/documentation/en-US/Red_Hat_Directory_Server/8.2/html/Administration_Guide/schema-ldapmodify.html
+
+/usr/local/samba/bin/ldbsearch -H /usr/local/samba/var/lib/samba/private/sam.ldb -s base
+
+https://docs.oracle.com/cd/E22289_01/html/821-1273/extending-the-schema.html
+http://pig.made-it.com/uidgid.html
+
+http://etutorials.org/Server+Administration/ldap+system+administration/Part+II+Application+Integration/Chapter+8.+Standard+Unix+Services+and+LDAP/8.3+User+Authentication+with+Samba/
+https://fy.blackhats.net.au/blog/html/2018/04/18/making_samba_4_the_default_ldap_server.html re
+
+Midpoint1!
+
+/usr/local/samba/bin/samba-tool dsacl set --objectdn=CN=Users,DC=testdomain --sddl='(A;CI;RPLCLORC;;;AN)' --simple-bind-dn="administrator@testdomain"
+
+/usr/local/samba/bin/samba-tool dsacl set --objectdn=DC=testdomain --sddl='(A;;RPLCLORC;;;AN)' --simple-bind-dn=”administrator@testdomain”
+
+/usr/local/samba/bin/samba-tool dsacl set --objectdn=CN=Builtin,DC=testdomain --sddl='(A;CI;RPLCLORC;;;AN)' --simple-bind-dn="administrator@testdomain"
+
+ https://itconnect.uw.edu/wares/msinf/other-help/understanding-sddl-syntax/

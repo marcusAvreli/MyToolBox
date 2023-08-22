@@ -1,0 +1,207 @@
+GSSAPI
+Development tools
+yum groupinstall "Development Tools"
+
+yum install perl gcc attr libacl-devel libblkid-devel \
+    gnutls-devel readline-devel python-devel gdb pkgconfig \
+    krb5-workstation zlib-devel setroubleshoot-server libaio-devel \
+    setroubleshoot-plugins policycoreutils-python \
+    libsemanage-python perl-ExtUtils-MakeMaker perl-Parse-Yapp \
+    perl-Test-Base popt-devel libxml2-devel libattr-devel \
+    keyutils-libs-devel cups-devel bind-utils libxslt \
+    docbook-style-xsl openldap-devel autoconf python-crypto pam-devel
+SAMBA 4.8.2
+./configure --with-piddir=/run/samba                   --with-pammodulesdir=/lib/security         --without-systemd      --with-gnutls                    --enable-fhs
+make
+make install
+
+Check Version
+/usr/local/samba/sbin/samba -V
+
+/usr/local/samba/bin/samba-tool domain provision
+Realm: myTest
+Domain: TESTDOMAIN
+Server Role: <default>
+Server Role:           active directory domain controller
+Hostname:              mySamba
+NetBIOS Domain:        TESTDOMAIN
+DNS Domain:            mytest
+DOMAIN SID:            S-1-5-21-960490690-4184573983-2008108530
+
+start samba daemon manually
+Action: /usr/local/samba/sbin/samba
+Result: <empty>
+
+list the shares on your Samba4 server
+Action: /usr/local/samba/bin/smbclient -L localhost -U% 
+Result:
+  Sharename       Type      Comment
+        ---------       ----      -------
+        netlogon        Disk
+        sysvol          Disk
+        IPC$            IPC       IPC Service (Samba 4.8.2)
+Reconnecting with SMB1 for workgroup listing.
+
+        Server               Comment
+        ---------            -------
+
+        Workgroup            Master
+        ---------            -------
+Config File
+/sbin/iptables -I INPUT -m state --state NEW -m udp -p udp  --dport 88 -j ACCEPT
+/sbin/iptables -I INPUT -m state --state NEW -m tcp -p tcp  --dport 88 -j ACCEPT
+/sbin/iptables -I INPUT -m state --state NEW -m udp -p udp  --dport 123 -j ACCEPT
+/sbin/iptables -I INPUT -m state --state NEW -m tcp -p tcp  --dport 135 -j ACCEPT
+/sbin/iptables -I INPUT -m state --state NEW -m tcp -p tcp  --dport 389 -j ACCEPT
+/sbin/iptables -I INPUT -m state --state NEW -m udp -p udp  --dport 389 -j ACCEPT
+/sbin/iptables -I INPUT -m state --state NEW -m tcp -p tcp  --dport 689 -j ACCEPT
+/sbin/iptables -I INPUT -m state --state NEW -m udp -p udp  --dport 689 -j ACCEPT
+/sbin/iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 445 -j ACCEPT
+/sbin/iptables -I INPUT -m state --state NEW -m tcp -p tcp  --dport 464 -j ACCEPT
+/sbin/iptables -I INPUT -m state --state NEW -m udp -p udp  --dport 464 -j ACCEPT
+
+service iptables save
+service iptables restart
+
+/usr/local/samba/etc/samba/smb.conf
+
+
+/usr/local/samba/bin/smbcontrol all reload-config
+/usr/local/samba/bin/testparm
+/usr/local/samba/bin/smbclient -L localhost -U%
+https://negativo17.org/samba-4-active-directory-with-bind-dlz-zones-dynamic-dns-updates-windows-static-rpc-2/
+https://2stech.ca/index.php/linux/linuxtutotials/tutorials/234-samba-active-directory-with-bind-dns-backend-on-ubuntu-1404
+
+[root@samba4 samba]# /usr/local/samba/bin/samba-tool domain provision --host-name=samba4 --realm=testDomain --domain=myRealm --server-role='dc'  --adminpass=markgavS30! --dns-backend=BIND9_DLZ   --use-rfc2307
+
+Looking up IPv4 addresses
+Looking up IPv6 addresses
+No IPv6 address will be assigned
+Setting up secrets.ldb
+Setting up the registry
+Setting up the privileges database
+Setting up idmap db
+Setting up SAM db
+Setting up sam.ldb partitions and settings
+Setting up sam.ldb rootDSE
+Pre-loading the Samba 4 and AD schema
+Unable to determine the DomainSID, can not enforce uniqueness constraint on local domainSIDs
+
+Adding DomainDN: DC=testdomain
+Adding configuration container
+Setting up sam.ldb schema
+Setting up sam.ldb configuration data
+Setting up display specifiers
+Modifying display specifiers and extended rights
+Adding users container
+Modifying users container
+Adding computers container
+Modifying computers container
+Setting up sam.ldb data
+Setting up well known security principals
+Setting up sam.ldb users and groups
+Setting up self join
+Adding DNS accounts
+Creating CN=MicrosoftDNS,CN=System,DC=testdomain
+Creating DomainDnsZones and ForestDnsZones partitions
+Populating DomainDnsZones and ForestDnsZones partitions
+BIND version unknown, please modify /usr/local/samba/var/lib/samba/bind-dns/named.conf manually.
+See /usr/local/samba/var/lib/samba/bind-dns/named.conf for an example configuration include file for BIND
+and /usr/local/samba/var/lib/samba/bind-dns/named.txt for further documentation required for secure DNS updates
+Setting up sam.ldb rootDSE marking as synchronized
+Fixing provision GUIDs
+A Kerberos configuration suitable for Samba AD has been generated at /usr/local/samba/var/lib/samba/private/krb5.conf
+Merge the contents of this file with your system krb5.conf or replace it with this one. Do not create a symlink!
+Setting up fake yp server settings
+Once the above files are installed, your Samba AD server will be ready to use
+Server Role:           active directory domain controller
+Hostname:              samba4
+NetBIOS Domain:        MYREALM
+DNS Domain:            testdomain
+DOMAIN SID:            S-1-5-21-2800902944-4043976844-1135124508
+
+External DNS
+ --prefix=/usr' '--mandir=/usr/share/man' '--infodir=/usr/share/info'
+'--sysconfdir=/etc/bind' '--localstatedir=/var' '--enable-threads'
+'--enable-largefile' '--with-libtool' '--enable-shared' '--enable-static'
+'--with-openssl=/usr' '--with-gssapi=/usr' '--with-gnu-ld' '--with-geoip=/usr'
+'--with-atf=no' '--enable-ipv6' '--enable-rrl' '--enable-filter-aaaa'
+'CFLAGS=-fno-strict-aliasing -DDIG_SIGCHASE -O2'
+
+https://2stech.ca/index.php/linux/linuxtutotials/tutorials/234-samba-active-directory-with-bind-dns-backend-on-ubuntu-1404
+
+Looking up IPv4 addresses
+Looking up IPv6 addresses
+No IPv6 address will be assigned
+Setting up share.ldb
+Setting up secrets.ldb
+Setting up the registry
+Setting up the privileges database
+Setting up idmap db
+Setting up SAM db
+Setting up sam.ldb partitions and settings
+Setting up sam.ldb rootDSE
+Pre-loading the Samba 4 and AD schema
+Unable to determine the DomainSID, can not enforce uniqueness constraint on local domainSIDs
+
+Adding DomainDN: DC=testdomain
+Adding configuration container
+Setting up sam.ldb schema
+Setting up sam.ldb configuration data
+Setting up display specifiers
+Modifying display specifiers and extended rights
+Adding users container
+Modifying users container
+Adding computers container
+Modifying computers container
+Setting up sam.ldb data
+Setting up well known security principals
+Setting up sam.ldb users and groups
+Setting up self join
+Adding DNS accounts
+Creating CN=MicrosoftDNS,CN=System,DC=testdomain
+Creating DomainDnsZones and ForestDnsZones partitions
+Populating DomainDnsZones and ForestDnsZones partitions
+See /usr/local/samba/var/lib/samba/bind-dns/named.conf for an example configuration include file for BIND
+and /usr/local/samba/var/lib/samba/bind-dns/named.txt for further documentation required for secure DNS updates
+Setting up sam.ldb rootDSE marking as synchronized
+Fixing provision GUIDs
+A Kerberos configuration suitable for Samba AD has been generated at /usr/local/samba/var/lib/samba/private/krb5.conf
+Merge the contents of this file with your system krb5.conf or replace it with this one. Do not create a symlink!
+Setting up fake yp server settings
+Once the above files are installed, your Samba AD server will be ready to use
+Server Role:           active directory domain controller
+Hostname:              samba4
+NetBIOS Domain:        MYREALM
+DNS Domain:            testdomain
+DOMAIN SID:            S-1-5-21-1345464879-2939938059-4017668117
+/usr/local/samba/var/lib/samba/private/dns.keytab
+vi  /usr/local/samba/var/lib/samba/bind-dns/named.conf
+BIND9 DLZ DNS Back End - SambaWiki
+https://wiki.samba.org/index.php/Dns_tkey_negotiategss:_TKEY_is_unacceptable#Verifying_That_the_BIND_AD_Account_Exists_for_the_DC
+https://wiki.samba.org/index.php/Dns_tkey_negotiategss:_TKEY_is_unacceptable
+https://ldapcon.org/2015/wp-content/uploads/2015/09/ivanova-samba_backend.pdf
+TESTING
+/usr/local/samba/sbin/samba_dnsupdate --verbose --all-names
+https://wiki.samba.org/index.php/Testing_Dynamic_DNS_Updates
+
+/usr/local/samba/sbin/samba_upgradedns --dns-backend=BIND9_DLZ
+https://wiki.samba.org/index.php/BIND9_DLZ_DNS_Back_End#Troubleshooting
+https://github.com/Evolveum/midpoint/blob/master/samples/evolveum/resource-openldap.xml
+/usr/sbin/named -u named -f -g 2>&1 | tee /home/admin/debug_named.log
+/usr/sbin/named-checkconf
+
+/usr/local/samba/bin/samba-tool dns add DC1 samdom.example.com DC2 A 10.99.0.2 -Uadministrator
+/usr/local/samba/bin/samba-tool dns query 192.168.1.14 testDomain
+start samba daemon manually
+Action: /usr/local/samba/sbin/samba
+Result: <empty>
+
+ps -ef | grep named
+START NAMED
+/usr/sbin/named -u named
+
+mv /etc/krb5.conf {,.dist}
+
+https://community.atlassian.com/t5/Confluence-questions/Unable-to-connect-Confluence-to-Samba-4-Active-Directory-PDC/qaq-p/680166
+

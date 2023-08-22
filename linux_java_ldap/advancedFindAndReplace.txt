@@ -1,0 +1,144 @@
+#!/usr/bin/perl
+
+ 
+
+# purpose: generate a list of href hyperlinks from a pipe-delimited database.
+
+#          this program reads from an input file, and writes to standard out (stdout).
+
+#
+
+# usage:   perl this_program input_file_name > output_file_name
+
+ 
+
+# the first argument is the filename we read from
+
+@logFiles = qw();
+
+ 
+
+@strings = [];
+
+ 
+
+$roleTranslationsFile = $ARGV[0];
+
+open(my $csvData,'<',$roleTranslationsFile) or die "Could not read from $roleTranslationsFile, program halting. $!";
+
+while (my $line= <$csvData>)
+
+{
+
+    # work with the current record
+
+    chomp $line;
+
+#    ($roleName,$roleNameReplaceBy)
+
+     my @fields= split ",",$line;
+
+push(@strings,@fields[0].".*\$");
+
+$roleNameReplaceBy=@fields[1];
+
+  #print "$roleName,$roleNameReplaceBy";
+
+#print "Processing line $line\n";
+
+}
+
+print "Size of strings is ",scalar @strings,"\n";
+
+#my $reg_exp = join '|', @strings;
+
+#my $reg_exp = "(?:(?<cn>CN=(?<name>[^,]*)),)?(?:(?<path>(?:(?:CN|OU)=[^,]+,?)+),)?(?<domain>(?:DC=[^,]+,?)+)";
+
+my $reg_exp = "[0-9]{9}";
+
+ 
+
+ 
+
+ 
+
+ 
+
+foreach $logFile (@logFiles) {
+
+print  "Processing $logFile\n";
+
+ 
+
+open(my $in,  '<', "$logFile") || die "cannot open $logFile for read $!";
+
+open(my $out, '>', "$logFile.tmp") || die "cannot open $logFile.tmp for write $!";
+
+ 
+
+ 
+
+  while(my $lineIn= <$in>)
+
+{
+
+chomp $lineIn;
+
+#print "Processing line 2  $line\n";
+
+ 
+
+my $reg_exp = qr($reg_exp);            # This is now a regular expression
+
+    #s/\b$roleName\b/$roleNameReplaceBy/g;
+
+    if($lineIn=~ $reg_exp){
+
+#             print "Found\n";
+
+                $lineIn =~ s/$reg_exp/roleNameReplaceBy/g;
+
+                print $out "$lineIn\n";
+
+}
+
+else{
+
+print $out "$lineIn\n";
+
+}
+
+  
+
+}
+
+ 
+
+ 
+
+ 
+
+close(FILE);
+
+close ($in);
+
+close ($out);
+
+ 
+
+# save copy of original file
+
+rename ("$logFile","$logFile.bak")  || die "problem with rename $!";
+
+# replace original with the modified version
+
+ 
+
+rename ("$logFile.tmp", "$logFile") || die "problem with rename $!";
+
+ 
+
+
+}#loop through log files	
+
+
