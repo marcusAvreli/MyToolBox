@@ -12,7 +12,8 @@ link to download node 14.16.0: https://nodejs.org/en/blog/release/v14.16.0
 INSTALL ANGULAR
 	npm install -g @angular/cli@1.4.10 --ignore-script
 
-
+CURRENT ANGULAR CLI VERSION
+	ng -v
 
 
 
