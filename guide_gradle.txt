@@ -1,0 +1,20 @@
+https://docs.gradle.org/current/userguide/plugins.html
+
+pluginManagement {
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.namespace == 'com.example') {
+                useModule('com.example:sample-plugins:1.0.0')
+            }
+        }
+    }
+    repositories {
+        maven {
+            url './maven-repo'
+        }
+        gradlePluginPortal()
+        ivy {
+            url './ivy-repo'
+        }
+    }
+}
