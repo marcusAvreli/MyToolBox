@@ -74,9 +74,15 @@ https://github.com/noptran/cms1/blob/e69838c380ea7c010a2ea208ef84ae3d4b8f8b35/cl
 REPORT
 https://github.com/shamimahmad786/Report/tree/8c110a082914eb68659c922c06fbfc73cfd5b6dd/src/app
 
-
+https://github.com/IgorMinar/batarangle/blob/142d1fb8e009da0123b58f88665c53f290d2f06b/example-apps/todo-mvc-example/source/components/todo-list.ts
 
 https://odieweblog.wordpress.com/2016/05/20/how-to-using-outer-join-with-xmltable-or-xquery/
+
+https://github.com/Donnerstagnacht/polity/blob/1424b8b56139dfb1553dd8efbbe7b7b07f4de8ac/supabase/functions/notify-user/index.ts
+
+https://github.com/carbon-design-system/carbon-components-angular/tree/master/src
+
+https://github.com/wahello/wigfrid/blob/eac443e1ee1f8849a3a547d9bc7c1a89e27b2b97/src/clarity-angular/checkboxes/checkbox.spec.ts#L17
 Task 1. Choose layout
 Zero layout - app.module does not have any components. Application main component located in core module
 
