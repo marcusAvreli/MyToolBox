@@ -84,3 +84,31 @@ select count(*) from table_name where rowid not in (select min(rowid)   from tab
 --delete doubled rows
 delete from table_name where rowid not in (select min(rowid) from table_name group by list_of_fields)
 
+
+
++-----------------------------------------------------------+
+|															|
+|		IF FIRST QUERY RETURN EMPTY USE ANOTHER				|
+|															|
++-----------------------------------------------------------+
+source (https://stackoverflow.com/questions/12980854/oracle-db-return-second-query-if-first-query-is-empty)
+WITH query1 as (
+    select 1, 2
+    from dual
+    where 1=0
+    connect by level <= 10
+),
+query2 as (
+    select 3, 4
+    from dual
+    connect by level <= 10
+)
+select *
+from query1
+union all
+select *
+from query2
+where not exists (
+    select null
+    from query1
+);
