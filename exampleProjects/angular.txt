@@ -41,3 +41,21 @@ metareducer
 ag-grid
 	https://github.com/giniedp/nw-buddy/blob/11019fe6674c853c06910ab29138602902992d29/apps/web/app/ui/ag-grid/ag-grid.component.ts
 	https://github.com/eskeinet/grid-list/tree/600958d085cea98fb26a43d322bd8a34419114ef
+	
+CMS
+	
+	https://github.com/alexabbott/firebase-cms/tree/master/src/app/storefront-components
+	https://github.com/search?q=repo%3Ascriptclump%2Fmean-stack-cms%20drag&type=code
+	https://github.com/breadhead/cms/tree/master/src/front/components
+	https://github.com/aducin/Angular4-CMS/tree/master
+	https://github.com/dev-tom-0108/Build_App_CMS-Angular4/blob/72967af56ba2c164cbe8e6959979b05f5651763f/src/app/structure/push-notification/push-notification.component.ts
+	
+	
+Data bus(Common Service)
+	https://github.com/yduartep/angular-full-sample
+	https://github.com/dancancro/great-big-example-application
+	https://github.com/Teradata/kylo
+	https://indepth.dev/posts/1167/lazy-loading-angular-modules-with-ivy
+	https://morioh.com/p/7873ece1c94d
+	https://medium.com/@ct7/angular2-module-architecture-and-example-seed-project-35b7410264f5
+	https://medium.com/@nikolasleblanc/building-an-angular-4-component-library-with-the-angular-cli-and-ng-packagr-53b2ade0701e
