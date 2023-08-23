@@ -69,10 +69,10 @@ https://www.dotnetcurry.com/angularjs/1445/angular-services-component-communicat
 MESSAGE BUS
 https://stackblitz.com/edit/angular-message-bus?file=app%2Fcommunication%2Fmessage-bus-demo.component.html
 
+https://github.com/noptran/cms1/blob/e69838c380ea7c010a2ea208ef84ae3d4b8f8b35/client-app/src/app/components/provider-info-module/provider-info.component.ts
 
-
-
-
+REPORT
+https://github.com/shamimahmad786/Report/tree/8c110a082914eb68659c922c06fbfc73cfd5b6dd/src/app
 
 
 
