@@ -1,4 +1,4 @@
-ktpass /out "<path_to_key_tab>/file_name.keytab" /mapuser <ad_user_name>@domainNameCaseSensitive /princ HTTP/fqdnofTargetServer@domainNameCaseSensitive /pass <password> /ptype krb5_nt_principal /kvno 0 /crypto ALL
+﻿ktpass /out "<path_to_key_tab>/file_name.keytab" /mapuser <ad_user_name>@domainNameCaseSensitive /princ HTTP/fqdnofTargetServer@domainNameCaseSensitive /pass <password> /ptype krb5_nt_principal /kvno 0 /crypto ALL
 
 contents of key tab
 klist  -kte iiqSpnegoTomcat.keytab
