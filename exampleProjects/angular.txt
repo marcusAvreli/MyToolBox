@@ -90,6 +90,8 @@ CUSTOM COMPONENTS
 	https://github.com/mostafa-raafat/ng-simple-slideshow/blob/master/src/app/modules/slideshow/slideshow.module.ts
 	https://github.com/webcat12345/ngx-ui-switch/tree/master/src/app/demo-cdr
 	https://github.com/wahello/wigfrid/blob/eac443e1ee1f8849a3a547d9bc7c1a89e27b2b97/src/clarity-angular/checkboxes/checkbox.spec.ts#L17
+	https://github.com/carbon-design-system/carbon-components-angular/blob/master/src/combobox/combobox.stories.ts
+	https://github.com/SAP/fundamental-ngx/tree/5d31ea152cbd0eebaaec92939b92934c2d43c08a/libs/core/src/lib/combobox
 	ag-grid
 		https://github.com/giniedp/nw-buddy/blob/11019fe6674c853c06910ab29138602902992d29/apps/web/app/ui/ag-grid/ag-grid.component.ts
 		https://github.com/eskeinet/grid-list/tree/600958d085cea98fb26a43d322bd8a34419114ef

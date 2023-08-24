@@ -145,3 +145,8 @@ web.xml of app
     <login-config>
       <auth-method>SPNEGO</auth-method>
     </login-config>
+
+
+https://www.ibm.com/docs/en/engineering-lifecycle-management-suite/lifecycle-management/6.0.6.1?topic=ldapsdbm-manually-configuring-tomcat-web-container-use-ldap
+https://www.ibm.com/docs/sk/mpf/8.0.0?topic=tomcat-configuration-ldap-authentication-apache
+http://incepttechnologies.blogspot.com/p/weblogic.html
