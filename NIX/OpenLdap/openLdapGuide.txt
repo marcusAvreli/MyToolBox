@@ -125,3 +125,16 @@ http://xionghuilin.com/rhel6-ldap-server-configuration-issue-and-solve/comment-p
 
 https://wiki.gentoo.org/wiki/Centralized_authentication_using_OpenLDAP
 https://books.google.co.il/books?id=HmydDwAAQBAJ&pg=PA57&lpg=PA57&dq=%22ldapsearch+-x+-b%22+%22No+Such+object%22&source=bl&ots=BGfK6WcUWM&sig=ACfU3U3DXLWdID9_3l2WPWnFtYjDJIjUgQ&hl=en&sa=X&ved=2ahUKEwjyiefk2obpAhXSzaQKHfeKDrgQ6AEwAnoECAkQAQ#v=onepage&q=%22ldapsearch%20-x%20-b%22%20%22No%20Such%20object%22&f=false
+
+
+CHECKED ON KALI
+sudo apt-get install libssl-dev
+sudo apt-get install libsasl2-dev
+
+
+curl -L https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.5.7.tgz --output openldap-2.5.7.tgz
+	tar -zxvf openldap-2.5.7.tgz
+	mv openldap-2.5.7 openldap
+	cd openldap
+	env CPPFLAGS=" -I/opt/openssl" LDFLAGS="-L/usr/lib64 -L/opt/openssl/lib" ./configure --sysconfdir=/etc  --enable-ldap    --enable-slapd --with-cyrus-sasl  --with-tls=openssl   --enable-rewrite --enable-rlookups    --enable-dynamic --enable-ppolicy  --enable-memberof  --enable-refint ;
+	make depend; make;make install
