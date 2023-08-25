@@ -1,0 +1,60 @@
+SSL Tuts
+
+SSL_DATABASE
+https://pki-tutorial.readthedocs.io/en/latest/advanced/#create-database
+
+
+https://smallstep.com/blog/everything-pki/
+https://manuals.gfi.com/en/kerio/connect/content/server-configuration/ssl-certificates/adding-trusted-root-certificates-to-the-server-1605.html
+https://forums.centos.org/viewtopic.php?t=67042
+https://stackoverflow.com/questions/37043442/how-to-add-certificate-authority-file-in-centos-7
+https://www.happyassassin.net/posts/2015/01/14/trusting-additional-cas-in-fedora-rhel-centos-dont-append-to-etcpkitlscertsca-bundle-crt-or-etcpkitlscert-pem/
+
+https://stackoverflow.com/questions/12066430/javax-naming-communicationexception-simple-bind-failed
+openssl crl2pkcs7 -nocrl -certfile /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem | openssl pkcs7 -print_certs -text -noout
+openssl crl2pkcs7 -nocrl -certfile /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem | openssl pkcs7 -print_certs -noout
+https://kifarunix.com/setup-openldap-server-with-ssl-tls-on-debian-10/
+This is not the proper way to create a certificate chain.
+1. create a certificate authority
+2. create a server certificate
+3. sign the server certificate with the CA
+4. extract the password from server certificate into a key
+
+
+/etc/pki/ca-trust/source/anchors/
+
+Create Root CA (Done once)
+openssl genrsa -des3 -out rootCA.key 4096
+
+openssl genrsa -out company.com.key 2048
+
+openssl req -new -sha256 -key company.com.key -subj "/C=US/ST=CA/O=MyOrg, Inc./CN=192.168.1.14" -out company.com.csr
+
+openssl x509 -req -in company.com.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out company.com.crt -days 500 -sha256
+
+Append your trusted certificate to file /etc/pki/tls/certs/ca-bundle.crt
+cat company.com.crt >>/etc/pki/tls/certs/ca-bundle.crt
+
+openssl rsa < company.com.key > clearkey.company.com.pem
+mv company.com.crt /etc/openldap/company.com.crt
+mv clearkey.company.com.pem /etc/openldap/company.com.key.pem
+
+###########
+# SSL/TLS # 
+########### 
+TLSCACertificateFile /etc/ssl/openldap/certs/cacert.pem
+TLSCertificateFile /etc/ssl/openldap/certs/ldapserver-cert.crt
+TLSCertificateKeyFile /etc/ssl/openldap/private/ldapserver-key.key
+
+
+Ldap.conf
+TLS_CACERTDIR /etc/pki/tls/certs/
+https://kifarunix.com/setup-openldap-server-with-ssl-tls-on-debian-10/
+openssl s_client -showcerts -connect 192.168.1.14:636
+
+creates certificate with begin and end only
+openssl s_client -showcerts -connect server.edu:443 </dev/null 2>/dev/null|openssl x509 -outform PEM >mycertfile.pem
+
+
+
+

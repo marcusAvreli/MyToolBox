@@ -20,6 +20,32 @@ And to push changes to remote repo
 	git push origin branch_name
 
 
++-----------------------------------------------------------+
+|															|
+|					Windows`								|
+|															|
++-----------------------------------------------------------+
+
+INIT GIT CONNECTION
+
+	install openssl
+
+	set OPENSSL_HOME=C:\Users\user\openssl\x64
+	set OPENSSL_CONF=%OPENSSL_HOME%\ssl\openssl.cnf
+	set PATH=%OPENSSL_HOME%\bin;%PATH%
+	cd /d %OPENSSL_HOME%
+	openssl version -a
+
+	echo -n | openssl s_client -connect www.github.com:443 | openssl x509 > C:\Users\user\github.com.cert
+	git config --global http.sslCAInfo C:\Users\user\github.com.cert
+
+
+	git config --global user.email "<MAIL@exmaple.com>"
+	git config --global user.name "username"
+
+git clone <path.to.repo>
+
+
 
 Configure git to use certificate
 

@@ -1,0 +1,59 @@
+public static void main(String[] args) throws IllegalStateException, GitAPIException {
+                                String remote = "origin";
+                                String branch = "refs/heads/master";
+                                String trackingBranch = "refs/remotes/" + remote + "/master";
+
+                                Repository repo;
+                                try {
+
+                                                // repo = new FileRepositoryBuilder().setGitDir(new
+                                                // File("C:\\pathToRepo")).readEnvironment().findGitDir().setup().build();
+                                                repo = new FileRepository("C:\\pathToRepo\\.git");
+                                                Git gitRepo = new Git(repo);
+                                                AddCommand add = gitRepo.add();
+
+                                                // add.setUpdate(true);
+                                                List<String> pathsToPush = new ArrayList<String>();
+                                                BufferedReader br;
+
+                                                br = new BufferedReader(new FileReader("source.csv"));
+
+                                                StringBuffer sb = new StringBuffer();
+                                                while (true) {
+                                                                String line = br.readLine();
+                                                                if (line == null) {
+                                                                                break;
+                                                                }
+
+                                                                pathsToPush.add(line);
+                                                }
+                                                br.close();
+
+                                                for (String pathToPush : pathsToPush) {
+                                                                add.addFilepattern(pathToPush);
+                                                }
+
+                                                add.call();
+                                                RevCommit commit1 = gitRepo.commit().setMessage("message").call();
+                                                RefSpec spec = new RefSpec(branch + ":" + branch);
+                                                Iterable<PushResult> resultIterable = gitRepo.push().setRemote(remote).setRefSpecs(spec).call();
+                                                PushResult result = resultIterable.iterator().next();
+
+                                                TrackingRefUpdate trackingRefUpdate = result.getTrackingRefUpdate(trackingBranch);
+
+                                                RevWalk walk = new RevWalk(repo);
+                                                ObjectId head = repo.resolve("HEAD");
+                                                if (null != head) {
+                                                                RevCommit lastCommit = walk.parseCommit(head);
+                                                                logger.info("Full Commit Id:" + lastCommit.getId().getName());
+                                                                logger.info("Abbreviated Name:" + lastCommit.getId().abbreviate(8).name());
+                                                }
+
+                                                gitRepo.close();
+                                                logger.info("finished");
+                                } catch (IOException e) {
+                                                // TODO Auto-generated catch block
+                                                e.printStackTrace();
+                                }
+
+                }

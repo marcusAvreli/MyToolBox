@@ -1,0 +1,957 @@
+
+Pure jersey 1.19
+https://github.com/enviroCar/enviroCar-server/tree/09999321c567ceb313ce180e6144ab15d1d97fd1
+https://github.com/metterytt/Restaurant/blob/master/Restaurant/pom.xml
+https://github.com/Morijo/persysosteste/tree/master/PersysOs
+https://github.com/helmedeiros/sherlock
+https://dzone.com/articles/layered-architecture-is-good
+Big Projects
+https://github.com/metterytt/Restaurant
+Rundeck
+https://github.com/rundeck/rundeck
+Jaas
+BackGround Management Systems
+https://github.com/qomosoloto/spring-boot-jsf-primefaces
+
+Showcase
+https://github.com/primefaces-extensions/showcase
+
+RIHA-Browser RIHA Beta version
+https://github.com/e-gov/RIHA-Browser
+
+REST-like backend API for Penstro, a social platform for user submitted content
+https://github.com/tomjbarry/penstro
+
+Example to use CAS auth with jhipster app
+https://github.com/jgribonvald/demo-spring-cas-angular
+
+Token spring boot
+https://github.com/Ryan-Miao/spring-security-token-login-server
+
+Spring Security Demo
+https://github.com/maurofokker/spring-security-demo
+
+JWT
+https://github.com/bbarbs/spring-boot-jwt
+https://www.benchresources.net/jersey-2-x-web-service-integrating-with-spring-security/
+https://github.com/palominolabs/jersey-cors-filter/tree/master/src/main/java
+
+login/logout example jersey 1.19
+https://github.com/HuygensING/elaborate4-backend
+
+login/logout custom security context
+https://github.com/Morijo/persysosteste
+PAC4j
+https://github.com/pac4j/spring-security-pac4j-boot-demo
+JPA
+https://github.com/kelechi-chima/jpa-tutorials/tree/master/client-invoicing-dao
+
+E-commerse 
+https://www.youtube.com/watch?v=qACqz8bMqSM&list=PLAXbOMavY3k1VJGqqhfqAn0tUSC14Qsvq&index=13&ab_channel=KhozemaNullwala
+
+https://github.com/spring-guides/top-spring-security-architecture#authorization-or-access-control
+https://github.com/jaxio/jpa-query-by-example/blob/master/src/main/java/com/jaxio/jpa/querybyexample/GenericRepository.java
+https://github.com/springframeworkguru/springbootwebapp/tree/part6/src/main/java/guru/springframework/bootstrap
+https://github.com/xionggit/boot-login-service
+Client-server
+https://github.com/ralscha/blog2019/tree/master/stateless
+https://github.com/devdojobr/springboot-essentials/tree/master/src/main/java/br/com/devdojo/adpater
+https://github.com/springframeworkguru/springbootwebapp/blob/part6/src/main/java/guru/springframework/controllers/IndexController.java
+
+PDF: 
+https://dzone.com/articles/spring-security-5-form-login-with-database-provide
+https://github.com/BHRother/spring-boot-security-jwt/tree/ed76ba0cbf86f77d198a8962579a49e9fc33520c/src/main/java/nl/palmapps/myawesomeproject
+
+Domain
+https://hussainpithawala.wordpress.com/2012/01/11/extending-spring-security/
+https://leaks.wanari.com/2017/11/28/how-to-make-custom-usernamepasswordauthenticationfilter-with-spring-security
+Styling
+https://www.javaguides.net/2018/11/spring-boot-spring-mvc-spring-security-hibernate-mysql-tutorial.html
+https://insource.io/blog/articles/custom-authentication-with-spring-boot.html
+Multi module
+https://github.com/trlogic-developer/feelincs/blob/828c220e2ee21024178a3022a765c82ce034fe97/feelincs-web/pom.xml
+https://github.com/mkaczmarek93/kapj-24-25
+https://github.com/webshopboys/exc-crm
+https://programming.vip/docs/spring-security-custom-logon-authentication.html
+https://www.callicoder.com/spring-boot-spring-security-jwt-mysql-react-app-part-2/
+https://github.com/ralscha/blog2019/tree/master/stateless/server/src/main/java/ch/rasc/stateless
+https://blog.davincisoftware.sk/technologie/blog-angular-and-spring-security-integration-part1/
+https://codenotfound.com/jsf-login-servlet-filter-example.html
+VelvetSweatshop
+https://github.com/jenkinsci/url-auth-sso-plugin
+
+LDAP
+https://github.com/NCIP/edct-formbuilder/tree/master/src/main/java
+https://dzone.com/articles/spring-security-authentication
+https://github.com/intranda/goobi/blob/master/Goobi/src/de/sub/goobi/helper/ldap/LdapAuthentication.java
+https://github.com/amit-gshe/spring-demos/blob/master/spring-ldap-demo/src/main/java/boot/config/SpringSecurityConfig.java
+https://github.com/Erudika/para/blob/master/para-server/src/main/java/com/erudika/para/security/LDAPAuthenticationProvider.java
+https://github.com/web4thejob/home/tree/master/org.web4thejob.security.ss3/src/main/java/org/web4thejob/security
+
+https://github.com/CatalystITLabs/CatalystDrive/blob/master/src/main/java/com/catalyst/drive/security/ActiveDirectoryLdapAuthenticationProvider.java
+
+https://github.com/faizalh/jtrac7/tree/master/src/main/java/info/jtrac/acegi
+
+https://stackoverflow.com/questions/17126201/spring-security-authentication-via-token
+https://tech.ebayinc.com/engineering/customizing-spring-security-with-multiple-authentications/
+https://programmingspot.blogspot.com/2011/10/how-to-configure-spring-security-with.html
+https://memorynotfound.com/spring-security-spring-ldap-authentication-example/
+https://stackoverflow.com/questions/45533063/spring-security-custom-ldapauthenticationprovider-custom-ldapauthoritiespopula
+https://github.com/gravitee-io/gravitee-management-rest-api
+https://github.com/ctripcorp/apollo
+https://github.com/pingidentity/ssam/blob/master/src/main/java/com/unboundid/webapp/ssam/LDAPAuthenticationProvider.java
+https://github.com/aditi-rajawat/Craft-Demo/blob/master/src/main/java/com/intuit/craftdemo/security/LdapAuthenticationProvider.java
+https://stackoverflow.com/questions/84680/how-do-you-authenticate-against-an-active-directory-server-using-spring-security
+https://github.com/SerNet/verinice/tree/768fb52cf8f052f1329090f6ed20286e20defb50/sernet.gs.server/src/sernet/gs/server/security
+https://stackoverflow.com/questions/15470758/db-and-ldap-authentication-by-using-spring-security
+https://github.com/szerhusenBC/jwt-spring-security-demo/tree/master/src/main
+
+SPNEGO
+https://tech.ebayinc.com/engineering/customizing-spring-security-with-multiple-authentications/
+https://github.com/pinguet62/JSFring/wiki/Spring-Security-Login
+https://github.com/omarbenhamid/JSF-4-Mobile
+https://dzone.com/articles/hibernate-5-java-configuration-example
+https://javadeveloperzone.com/spring-boot/spring-boot-jpa-mysql-example/
+https://github.com/eugenp/tutorials/blob/master/persistence-modules/spring-boot-persistence/src/main/java/com/baeldung/boot/config/H2JpaConfig.java
+SCALA
+https://github.com/dnvriend/spring-boot-study/blob/master/25-simple-scala/src/main/scala/com/github/dnvriend/Application.scala
+
+http://joshlong.com/jl/blogPost/simplified_web_configuration_with_spring.html
+Simplified Web Configuration with Spring
+https://www.boraji.com/spring-boot-using-servlet-filter-and-listener-example-1
+
+https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html
+https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-servlet-context-hierarchy
+
+https://www.baeldung.com/spring-mvc-view-resolver-tutorial
+A Guide to the ViewResolver in Spring MVC
+
+https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/jsf/el/SpringBeanFacesELResolver.html
+https://ilya-murzinov.github.io/articles/spring-boot-jboss/
+org.springframework.boot.web.servlet.support.SpringBootServletInitializer which is a WebApplicationInitializer to run a SpringApplication from a traditional WAR deployment
+https://rieckpil.de/howto-simple-form-based-authentication-for-jsf-2-3-with-java-ee-8-security-api/
+https://github.com/dlitz/resin/blob/master/modules/resin/src/com/caucho/jsf/application/ApplicationImpl.java
+https://stackoverflow.com/questions/9439314/how-to-register-elresolver-in-jsf-2-0-programmatically
+http://www.gregbugaj.com/?p=126
+https://git.fortiss.org/civitas-digitalis/jsf-modules/ideaBoard/-/tree/c01d7aff857c1005763f770986f061a30c7682a4/src/main/java/servicetrackers
+https://github.com/wsh17/spring-boot
+https://github.com/nklkarthi/java-tutorials/tree/master/spring-mvc-java/src
+https://mkyong.com/jsf2/access-a-managed-bean-from-event-listener-jsf/
+https://github.com/Apress/beg-spring-boot-2/blob/master/chapter-01/springmvc-jpa-demo/src/main/java/com/apress/demo/config/WebMvcConfig.java
+https://github.com/fred4jupiter/spring-boot-jsf
+https://stackoverflow.com/questions/46905852/jsf-keeps-the-same-values-for-all-sessions?rq=1
+https://dzone.com/articles/spring-boot-with-external-tomcat
+https://stackoverflow.com/questions/27552227/primefaces-fileupload-not-working-in-spring-boot
+Spirng - boot JSF JPA
+https://github.com/saichandu/BoxMonitor
+Scheduler,FacesContext
+
+https://github.com/tsobis/example
+example for picketlink with ocpsoft rewrite, jsf and a custom Authentication Controller
+https://github.com/tronprotocol/java-http-client
+https://github.com/cBioPortal/oncotree
+https://github.com/lynchnf/crud-jsf
+Example of a simple CRUD Web application using JavaServer Faces.
+https://github.com/Karina-Denisevich/Animal-shelter-web
+https://github.com/hernxntk/spring-jsf-demo
+spring-jsf-demo
+https://github.com/dylants/spring-data-web-app
+https://github.com/igormukhin/jsf-spring-example
+https://github.com/vaquarkhan/VaquarKhan-Workspace/tree/master/spring-boot-master/spring-boot/src/main/java/org/springframework/boot/context/web
+
+https://dzone.com/articles/creating-custom-jsf-12
+
+https://github.com/hpneo/clickandbuy-web
+
+https://github.com/adilsonv77/loman/tree/master/web/WEB-INF
+https://github.com/lokeshgupta1981/spring-webmvc
+https://github.com/igormukhin/spring-boot-sample-jsf/tree/master/src/main/webapp
+https://github.com/stephanrauh/JSF-on-Spring-Boot/tree/master/UnderstandingScopes
+https://github.com/bilak/spring-boot-security-jsf
+https://github.com/igormukhin/spring-jsf-jpa-template
+https://github.com/vasscisse/springboot-jsf
+https://github.com/wuyungen1996/prison-appointment
+https://github.com/s3ymd/spring_jsf_jpa
+https://github.com/braully/prototyping-udm
+https://github.com/danielwieth/spring-boot-jsf
+https://github.com/swagataroy/springbootforwardedheader
+https://github.com/everythingisdata/jsf-spring-boot-integration
+https://github.com/bilak/spring-boot-security-jsf
+https://github.com/qomosoloto/spring-boot-jsf-primefaces
+https://github.com/ramazankaragozBilgeadam/spring-boot-jsf-hibernate
+https://github.com/gbouknecht/my-web-app
+https://github.com/TerryChang/egovconfigboard
+https://github.com/allegro/handlebars-spring-boot-starter
+Spring JSF JPA
+https://github.com/michelrisucci/spring-jsf-jpa-quickstart
+Hibernate sessionFactory
+https://stackoverflow.com/questions/46132696/how-to-configure-a-physical-naming-strategy-in-hibernate-cfg-xml
+
+Interesting thoughts
+My backing bean for login page initially had been managed by JSF. JSF had been initializing UIcomponent property. When I added a new managed property and configured its injection in spring security config I actually made my bean managed by Spring. Thus properties previously had been initialized by JSF became null.
+
+As a w\a I decided to split functionality in the bean into two separate beans. One of them will be managed by Spring and another one by JSF
+https://stackoverflow.com/questions/12243873/managedproperty-in-a-spring-managed-bean-is-null/12244697#12244697
+https://stackoverflow.com/questions/18426778/is-it-wrong-to-have-annotations-entity-and-component-on-the-same-class
+https://stackoverflow.com/questions/8925170/jsf-2-inject-spring-bean-service-with-managedproperty-and-no-xml
+https://stackoverflow.com/questions/28421777/autowired-service-inside-a-managedbean-component-class-is-null-during-jsf-req
+
+Hibernate
+https://stackoverflow.com/questions/26610015/hibernate-add-custom-prefix-to-the-catalogs
+Rest
+https://github.com/skhatri/spring-resteasy-example
+LAYOUTS
+Zanata
+https://github.com/zanata/zanata-platform
+
+java-web-hero-exam
+https://github.com/kostanikolov/java-web-hero-exam
+
+Login register in same tree 
+https://git.uibk.ac.at/WebServices/XoFlat/blob/54ee4cb346e10baf69c3c54fdac7580de024f9c0/src/main/webapp/WEB-INF/includes/header.xhtml
+
+https://github.com/seam/examples/tree/master/booking/src/main/webapp
+https://github.com/TheCoder4eu/BootsFaces-examples/tree/master/src/main/webapp/applayout
+https://www.theserverside.com/tutorial/Creating-pages-based-on-a-JSF-template-Using-the-Facelets-uidefine-tag
+https://github.com/eqalmeida/jsf-template/tree/master/web/templates
+
+https://stackoverflow.com/questions/30025035/spring-mvc-primefaces-resources-not-found?rq=1
+Why does everyone keep trying to mix Spring MVC with JSF? What makes Spring MVC so special that it seemingly must be used together with its full competitor JSF? Or is every Spring starter confusing/mixing "Spring DI/IoC" with "Spring MVC"? Still can't get my head around it. – BalusC May 4 '15 at 7:59
+https://crunchify.com/simplest-spring-mvc-hello-world-example-tutorial-spring-model-view-controller-tips/
+https://www.consultarcep.com.br/rs/
+https://docs.jboss.org/hibernate/orm/5.1/userguide/html_single/chapters/domain/collections.html
+https://stackoverflow.com/questions/8769308/what-is-the-need-for-an-unsaved-value-attribute-in-hibernate
+Spring Method Security with @PreAuthorize and @Secured
+Spring Security Example UserDetailsService
+How to inherit properties from a base class entity using @MappedSuperclass with JPA and Hibernate
+https://vladmihalcea.com/the-best-way-to-use-entity-inheritance-with-jpa-and-hibernate/
+Login by MySQL-LDAP-Thymeleaf with spring security
+https://developer.ibm.com/technologies/java/tutorials/mq-jms-application-development-with-spring-boot
+https://vladmihalcea.com/hibernate-multiplebagfetchexception/
+https://docs.spring.io/spring-security/site/docs/current/reference/html5/#filter-stack
+
+
+https://www.intelliware.com/unidirectional-one-to-many-using-a-join-column-hibernate/
+
+
+CasAuthenticationProvider
+
+https://programmer.group/spring-mvc-integrates-cas-and-resolves-front-end-and-back-end-separation.html
+
+
+
+https://github.com/collectionspace/services
+SECURITY
+https://gist.github.com/tomasmano/4690699
+https://stackoverflow.com/questions/30176575/spring-security-4-x-dynamic-invalidsessionurl
+https://stackoverflow.com/questions/24145253/how-get-current-logged-in-username-in-spring-security-with-jsf
+https://stackoverflow.com/questions/30176575/spring-security-4-x-dynamic-invalidsessionurl
+Migration from spring 3 to spring 4
+https://github.com/terasolunaorg/terasoluna-gfw/wiki/Migration-Guide-5.0.0
+https://docs.spring.io/spring-security/site/migrate/current/3-to-4/html5/migrate-3-to-4-xml.html
+UsernamePasswordAuthenticationFilter
+https://twinnation.org/articles/21/spring-security-prevent-authenticated-users-from-accessing-login-page
+http://www.codesenior.com/en/tutorial/Spring-Security-Concurrent-Session-Implementation-With-Custom-Form-Login-Filter
+Extra Login Fields with Spring Security
+Spring Security Authentication
+Add Spring Security Custom Filter
+/////////////////////////////////////////////////////////////////////////////////////
+https://www.javainuse.com/spring/boot_security_jdbc_authentication_bcrypt
+https://snyk.io/blog/spring-boot-security-best-practices/
+https://docs.spring.io/spring-security/site/docs/current/reference/html5/
+https://www.omnijava.com/wp-content/uploads/2018/04/JSFResponse.jpg
+http://websystique.com/spring-security/spring-security-4-password-encoder-bcrypt-example-with-hibernate/
+https://stackoverflow.com/questions/19942217/generate-a-database-update-scripts-with-hibernate-spring
+https://www.toptal.com/spring/top-10-most-common-spring-framework-mistakes
+https://dzone.com/articles/spring-di-patterns-the-good-the-bad-and-the-ugly
+https://www.devglan.com/hibernate/hibernate-inheritance-example
+https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/single-table-inheritance.html
+http://www.thinkcode.se/blog/2009/04/09/hibernate-spring-and-maven
+The Persistence Layer with Spring 3 and Hibernate 4
+https://www.bytestree.com/hibernate/generic-dao-hibernate-example/
+https://spring.io/guides/gs/maven/
+https://medium.com/@dassum/securing-spring-boot-rest-api-with-json-web-token-and-jdbc-token-store-67558a7d6c29
+https://www.javaguides.net/2018/09/spring-boot-spring-mvc-role-based-spring-security-jpa-thymeleaf-mysql-tutorial.html
+https://www.tobiasroessler.com/create-jsf-web-application-part-44-integrate-spring-security/
+https://www.javaguides.net/2018/09/spring-boot-spring-mvc-role-based-spring-security-jpa-thymeleaf-mysql-tutorial.html
+https://www.concretepage.com/spring-4/spring-mvc-4-security-hibernate-5-mysql-using-annotation-xml-example
+http://fmanea.blogspot.com/2015/04/jsf-login-through-spring-security-400.html
+https://www.concretepage.com/spring-4/spring-mvc-4-security-hibernate-5-mysql-using-annotation-xml-example
+http://fruzenshtein.com/spring-mvc-security-mysql-hibernate/
+https://www.concretepage.com/spring-4/spring-4-security-jsf-2-primefaces-5-integration-annotation-example
+https://www.javaguides.net/2019/02/spring-mvc-5-spring-security-5-hibernate-5-mysql.html
+https://hellokoding.com/registration-and-login-example-with-spring-xml-configuration-maven-jsp-and-mysql/
+https://stackoverflow.com/questions/21128058/invalid-csrf-token-null-was-found-on-the-request-parameter-csrf-or-header
+Spring Batch CSV Processing
+ום
+
+
+
+Sm20
+Analysis of security audit log 03
+S_tabu_rfc 
+https://www.thesslstore.com/knowledgebase/ssl-install/tomcat-ssl-installation/
+https://opensource.com/article/20/3/kubernetes-traefik
+SPNEGO
+Chapter 17 Binding between XML Schema and Java Classes
+10 Skills Java Programmer can Learn to Accelerate their Career
+
+                    <Valve className="org.apache.catalina.authenticator.SpnegoAuthenticator"
+                       
+https://dzone.com/articles/do-not-publish-configuring-tomcat-single-sign-on-w
+Configuring Tomcat Single Sign-on with SPNEGO (Kerberos & LDAP)
+https://www.google.com/amp/s/gusto77.wordpress.com/2015/09/02/apache-tomcat-spnego-authentication-configuration/amp/
+https://stackoverflow.com/questions/53998077/read-large-files-and-send-to-jms-queue-using-spring-batch
+
+
+https://dzone.com/articles/how-spring-boot-initialize-the-spring-mvc-applicat
+https://www.baeldung.com/spring-web-contexts
+https://www.javacodegeeks.com/2017/11/spring-framework-application-context-three-ways-get-application-context.html
+
+
+https://stackoverflow.com/questions/30915718/understand-spring-ws-integration-with-spring-mvc-and-automatic-generation-of-ws
+https://stackoverflow.com/questions/18087308/spring-autowired-dao-with-hibernate-cfg-xml
+Complete Project Step By Step Using Spring Hibernate Angular JS and Bootstrap
+
+https://stackoverflow.com/questions/36985189/spring-application-context-is-null
+https://stackoverflow.com/questions/32090921/deploying-maven-project-throws-java-util-zip-zipexception-invalid-loc-header-b/46153355#46153355
+find /home/me/.m2/repository/ -name "*jar" | xargs -L 1 zip -T | grep error | grep invalid
+https://github.com/code-not-found/spring-ws/blob/master/spring-ws-digital-signature/pom.xml
+
+https://medium.com/@phanhoangminhluan/how-does-spring-initialize-under-the-hood-part-2-74475a2f0185
+https://stackoverflow.com/questions/2154622/why-does-jpa-have-a-transient-annotation
+
+
+Tomcat settings
+https://stackoverflow.com/questions/8701307/the-absolute-uri-http-java-sun-com-jsp-jstl-core-ca
+nnot-be-resolved-in-either/13562088
+https://www.briansdevblog.com/2013/01/spring-web-services-tutorial/
+
+https://www.uml-diagrams.org/bank-atm-uml-state-machine-diagram-example.html
+GITHUB
+Spring Security
+Spitter
+https://github.com/karolgornicki/spitter
+Remarks: 3 layered architecture, role based access,JSP
+
+https://github.com/vdenotaris/spring-boot-security-saml-sample
+Spring Boot Sample SAML 2.0 Service Provider
+https://github.com/gothinkster/spring-boot-realworld-example-app
+https://github.com/bilak/spring-boot-security-jsf
+spring-security-user-registration
+https://github.com/lizard-buzzard/spring-security-user-registration
+Login with ldap
+LDAPAuthenticator
+https://github.com/hirenpandit/spring-boot-spring-security-thymeleaf/tree/master/src/main
+If you what to authentificate agains LDAP and Autorize (get user roles from JDBC) you should implement LdapAuthoritiesPopulator.
+
+
+https://github.com/RameshMF/spring-boot-tutorial
+https://github.com/mpatapenka/PersonalAccess-Project
+https://github.com/asouza/exemplo-spring-security
+
+Different ways to authenticate against ldap
+https://www.stevenschwenke.de/LDAPWithSpringSecurity
+LOGIN PI
+https://github.com/PanagiotisDrakatos/SpringBoot-Registration-Login-ThePerfectExample
+Remarks: login page, nice look, role based access,JSP,spring-boot-starter-parent
+MyProject: customLoginPi
+Start Date: 13-04-2020
+Mile Stone 1: 25-04-2020. I got registration and login functionality. Login and Registration occurs against datbase derby
+Target: 1. Migrate from jsp to jsf
+	2. Use Hibernate Transaction Manager
+3. Connect to ldap
+4. Apply spnego
+5. Apply tgs
+6. Apply OAUTH2
+7. Use derby
+8. Try to use berkley
+
+
+Wormhole - Intelligent File Router
+https://github.com/theturbomonkey/wormhole
+Remarks:LdapAuthenticationProvider
+
+Role-based-oauth2
+Link: https://github.com/only2dhir/role-based-oauth2
+Remarks: Rest, role based access
+
+https://github.com/hellokoding/registration-login-spring-xml-maven-jsp-mysql
+Remarks: Registration and Login Example with Spring MVC, Spring Security, Spring Data JPA, XML Configuration, Maven, JSP, and MySQL.
+
+Easy Business Rules
+https://github.com/openl-tablets/openl-tablets
+
+
+Spring Security Demo
+maurofokker/spring-security-demo
+Remarks: Layered Architecture,Events,Security
+
+moviesstore-swf-jsf
+https://github.com/ippontech/moviesstore-swf-jsf
+
+JSF Shopping System
+https://github.com/HaydnG/JSF-ShoppingSystem
+
+Spring Data Web Application
+https://github.com/dylants/spring-data-web-app
+
+https://github.com/gsitgithub/java-spring-code
+
+SSL Client
+https://github.com/dianrong/UniAuth/search?q=ConcurrentSessionControlAuthenticationStrategy&unscoped_q=ConcurrentSessionControlAuthenticationStrategy
+
+https://github.com/spencerdcarlson/spring-template
+https://github.com/Baeldung/spring-security-registration
+
+Mybatis,crawler
+immssyou/codedraw: codedraw
+
+Spring Scopes
+https://github.com/jyore/spring-scopes
+https://github.com/jneat/spring-jsf
+
+https://github.com/naturalprogrammer/np-spring-tutorial
+BlackBox
+Link: https://github.com/gaurovojha/blackbox
+Tags: Security, Modular, Login Several Methods, JSP,JpaTransactionManager
+
+
+
+
+
+https://github.com/TechPrimers/spring-security-db-example/search?q=password&unscoped_q=password
+https://github.com/JavaNeed/spring-security-mkyong/blob/master/spring-security-limit-login-annotation/src/main/java/com/mkyong/users/dao/UserDetailsDaoImpl.java
+https://github.com/mozilla/caseconductor-platform
+https://github.com/openmrs/openmrs-core
+https://github.com/openpreserve/plato
+https://github.com/collectionspace
+https://github.com/lehaSVV2009/hibernate-training
+https://github.com/alessandrostein/hibernate-persistence
+https://github.com/medalibettaieb/sigmarket-repo
+Remarks: EJB
+Spring PetClinic Sample Application https://github.com/spring-projects/spring-petclinic
+Spring PetClinic: https://dzone.com/articles/layered-architecture-is-good
+
+https://github.com/jakubnabrdalik/spring-security-starter
+
+
+
+
+https://github.com/bilak/spring-boot-security-jsf
+
+
+
+https://github.com/allegro/cassandra-modeling-kata/tree/master/src/main/java/pl/allegro/techblog/cassandra/domain/model
+https://github.com/yahoo/athenz/tree/master/core/zms/src/main/java/com/yahoo/athenz/zms
+https://github.com/MichalGoly/MusicStore/tree/master/nbproject
+https://github.com/martinmine/jsp-mvc/tree/master/src
+https://github.com/MarquezProject/marquez 
+
+https://github.com/raissi/jsf2-spring-springsecurity-hibernate
+Remarks: Scope Usage
+
+
+
+
+https://github.com/emmanuelneri/athat
+https://github.com/poderosoans/ecommerce-jsf-spring
+
+https://github.com/jakubnabrdalik/spring-security-starter/tree/master/main-sample/src/main
+
+Spring-Boot-JPA-Auth
+
+
+
+
+
+
+חניוני לילה ללא תשל
+Architecture and Design Tutorials:
+https://vaadin.com/tutorials/ddd/ddd_and_hexagonal
+Domain Driven Design and Development In Practice
+ddd-by-examples/library: A comprehensive Domain-Driven Design example with problem space strategic analysis and various tactical patterns.
+ChristophKnabe/spring-ddd-bank: A sample project following Domain Driven Design with Spring Data JPA
+ddd-example/order_ddd_example at master · ketan-gote/ddd-example
+https://github.com/vaquarkhan/Domain-driven-design--code-sample
+https://github.com/mploed/ddd-aggregate-example
+https://github.com/sandokandias/spring-boot-ddd
+Sample jsf crud
+https://github.com/lynchnf/crud-jsf
+Custom schema generation with Hibernate annotations
+Implementing a Custom Naming Strategy With Hibernate
+
+kgrzybek/modular-monolith-with-ddd: Full Modular Monolith application with Domain-Driven Design approach.
+m-kann0/ddd-example: My Training of DDD (Domain Driven Design)
+coi-gov-pl/spring-clean-architecture: An example web app structured using Clean Architecture, implemented using Spring Framework.
+A Domain Driven Design Implementation With Spring JDBC templates
+
+
+https://github.com/hantsy/javaee8-jsf-sample/blob/master/pom.xml
+https://github.com/iluwatar/java-design-patterns/tree/master/master-worker-pattern/src/main/java/com/iluwatar/masterworker/system
+https://github.com/hdiv/hdiv-jsf-example/blob/master/src/main/java/org/hdiv/example/backingbean/AccountListBean.java
+
+
+https://github.com/marcosgsilva/crud-jsf/tree/master/src/main
+https://github.com/algaworks/curso-jpa-hibernate/blob/master/Aulas/Multi-Tenancy%20com%20Banco%20de%20dados%20separados/gerenciador-acesso/pom.xml
+https://github.com/rmnresende/exemplo-jsf23-cdi-20-tomcat/blob/master/pom.xml
+
+
+Baskaran Test Project
+i71186/basktest: Baskaran Test Project
+
+CodelyTV/java-ddd-example: ☕🎯 Hexagonal Architecture + DDD + CQRS in a Java project using SpringBoot
+
+
+https://github.com/hantsy/ee8-sandbox
+https://github.com/javaee-samples/javaee8-samples/tree/master/cdi
+https://github.com/iluwatar/java-design-patterns
+https://github.com/javaee-samples/javaee8-samples/tree/master/cdi
+https://github.com/jirkapinkas/java-blog-aggregator/tree/master/src/main/java/cz/jiripinkas/jba
+SOAP web service for curd application.
+
+https://github.com/jmhmjayamaha/spring-boot-soap-webservice
+Spring WS - Overview
+
+https://www.tutorialspoint.com/springws/springws_quick_guide.htm
+spring-ws-mtom-example
+https://github.com/vanioinformatika/spring-ws-mtom-example
+Spring-ws coffeeshop
+https://github.com/CinJug/spring-ws/tree/2c6e894d55c57c017cc79837378856b95c85ecbe
+Spring WS SOAP Service from existing WSDL
+https://github.com/making/spring-ws-customerservice
+Spring Web Services WS-Security Example
+https://github.com/Bernardo-MG/spring-ws-security-soap-example
+
+Spring WS With Spring Boot And Spring Data JPA / Basic CRUD Operation Using SOAP
+https://github.com/sumit-samaddar/Spring-ws
+Apache CXF vs. Apache AXIS vs. Spring WS
+https://dzone.com/articles/apache-cxf-vs-apache-axis-vs
+https://dzone.com/articles/write-about-integration-prompts
+soap-web-services
+https://github.com/n7Sense/soap-web-services
+Loan Approval Portal
+
+https://github.com/htr3n/loan-approval-portal
+Fuse 7.x CXF Soap Service with Spring Boot example
+A simple example of how to implement a JAX-WS (Soap) CXF service with Camel and Spring Boot.
+https://github.com/youhusky/Search_Ads_Web_Service/blob/master/AdServer/src/io/kafka/KafkaProducer1.java
+
+https://github.com/ricardozanini/fuse-soap-spring-boot-example
+AdServer
+Source Code: https://github.com/geniot/adserverbeans
+Source Code: https://github.com/Elloink/AdSapient-Adserver-Java/tree/684103b7bb9be220710fbfb44e420ea1bdf27385
+Java Blog Aggregator
+Source Code: https://github.com/jirkapinkas/java-blog-aggregator
+Video: https://www.youtube.com/playlist?list=PLmcxdcWPhFqMq2BctGktOcIJKUw23wJeh
+
+HMS
+Source Code: https://github.com/srinivas1918/spring-java-config-example
+spring5-mvc-hibernate-example
+Article: https://github.com/dev-cheats/spring5-mvc-hibernate-example
+Rem: 
+Spring Security Authentication
+Article:https://dzone.com/articles/spring-security-authentication
+Rem: UML,spring-security
+
+Tutorial 1 : Spring Security Authentication Using Token
+Article: https://intellitech.pro/tutorial-1-spring-security-authentication-using-token/
+JWT Spring Security Demo
+Article: https://dev.to/keysh/spring-security-with-jwt-3j76
+Source Code: https://github.com/szerhusenBC/jwt-spring-security-demo
+Rem: spring rest api example,spring-security
+securing-rest-api-spring-security
+Source Code: https://github.com/jloisel/securing-rest-api-spring-security
+Tutorial Article: https://octoperf.com/blog/2018/03/08/securing-rest-api-spring-security/
+secure-rest-spring-tut
+Source Code: https://github.com/codesandnotes/secure-rest-spring-tut
+Introduction to PlexRBAC
+Source Code: bhatti/PlexRBAC: Role based Access Control Service: REST based service to store authorization service
+
+Rem : sleepycat. Berkley
+Spring Security 5 Form Login with Database Provider
+Programming Discussion Forum
+
+Source Code: https://github.com/YogenRaii/pdf
+Tutorial Article: https://dzone.com/articles/spring-security-5-form-login-with-database-provide
+
+Spring Method Security with @PreAuthorize and @Secured
+
+
+
+Modular like application
+https://github.com/SouthGreenPlatform/gigwa/blob/master/src/fr/cirad/tools/data/GigwaModuleManager.java
+Demo Application TERASOLUNA Server Framework for Java (5.x).
+Source Code: https://github.com/kazuki43zoo/demo-application
+Rem: session
+Sales Order System
+Source Code: colinbut/sales-order-system: Spring Web MVC + JPA + Hibernate + JSP + JSTL application
+Remarks: JSP,security
+
+Spring MVC Demo Application
+Source Code: https://github.com/anton-goncharov/spring-mvc-demo
+
+Jwt-Spring-Security-JPA
+Source Code: isopropylcyanide/Jwt-Spring-Security-JPA: Backend MVP showcasing JWT (Json Web Token) authentication with multiple login, timeout / refresh / logout using Spring Security & MySQL JPA.
+
+NixMash Spring
+
+Source Code: https://github.com/diop-malick/Spring-NixMash/
+
+
+How to load multiple Spring bean configuration file
+https://www.mkyong.com/spring/load-multiple-spring-bean-configuration-file/
+Spring MVC - Project Work - Technology Stack (Contact App) - Java Training By eZeon
+https://www.youtube.com/watch?v=JDvvQftwyr8&list=PLAXbOMavY3k1VJGqqhfqAn0tUSC14Qsvq&index=2&t=0s
+https://www.youtube.com/watch?v=KFlDdb65w3U&list=PLqq-6Pq4lTTZTYpk_1DOowOGWJMIH5T39&index=4
+https://stackoverflow.com/questions/26873563/how-to-use-second-dispatcherservlet-for-resources
+<mvc:annotation-driven />
+    <mvc:resources mapping="/resources/" location="/resources/jbr/config/user-beans.xml" />
+SPRING SECURITY
+https://github.com/xdamsorg/xDams-core/blob/master/src/main/webapp/WEB-INF/spring/security/securityCustom.xml
+CAMEL TUTORIALS
+https://www.javainuse.com/camel/camel-routing-slip-example
+
+
+
+
+http://sunilkumarpblog.blogspot.com/2016/01/spring-security-entry-point-and-role.html
+https://www.youtube.com/watch?v=gN_V6nLJIHo
+
+https://github.com/xdamsorg/xDams-core/
+https://www.ivankrizsan.se/2018/09/28/spring-security-5-overcomplicated/
+
+
+https://www.mkyong.com/spring-security/spring-security-hello-world-example/
+https://www.tutorialspoint.com/design_pattern/transfer_object_pattern.htm
+https://softwareengineering.stackexchange.com/questions/171457/what-is-the-point-of-using-dto-data-transfer-objects
+
+Web-Project From Scratch
+Create an Eclipse Project from scratch in a Tomcat web container:
+http://www.michael-thomas.com/tech/apache/tomcat/tutorial_tomcat_eclipse/index.htm
+http://java.boot.by/wcd-guide/ch03.html
+http://obscuredclarity.blogspot.com/2009/11/hello-world-java-web-application-in_3043.html
+http://www.ubiqx.org/cifs/NetBIOS.html
+
+Good comparison of regular vs IOC
+http://www.artechra.com/media/speaking/2006/SPA2006-IoC-Containers.pdf
+
+https://github.com/heroku/template-java-spring-hibernate
+
+
+https://jamielinux.com/docs/openssl-certificate-authority/appendix/index.html
+
+Java Brains
+java brains koushik hibernate
+
+DESIGN APPLICATION
+https://www.javaworld.com/article/2072844/java-web-development/put-jsf-to-work.html?page=3
+https://www.ibm.com/developerworks/data/library/techarticle/dm-0509cline/index.html
+
+DESIGN WORKFLOW
+https://www.javaworld.com/article/2071865/web-app-frameworks/use-spring-to-create-a-simple-workflow-engine.amp.html
+
+
+
+
+https://www.javaskool.com/jdbc/
+https://docs.bvstools.com/home/ssl-documentation/openssl
+https://dzone.com/articles/ioc-vs-di
+https://dzone.com/articles/cdi-di-p1
+https://dzone.com/articleshipo/cdi-di-p2
+https://www.journaldolev.com/2394/java-dependency-injection-design-pattern-example-tutorial
+P
+https://www.google.com/amp/s/mobiarch.wordpress.com/2013/01/11/spring-di-and-cdi-comparative-study/amp/
+
+
+https://www.infoq.com/articles/ddd-in-practice
+http://static.olivergierke.de/lectures/ddd-and-spring/
+https://dzone.com/refcardz/getting-started-domain-driven?chapter=4 ok
+
+https://cybersecurity.ieee.org/blog/2016/06/02/design-best-practices-for-an-authentication-system/
+https://www.ibm.com/developerworks/java/tutorials/j-javalibrary/j-javalibrary.html
+https://www.google.com/amp/s/www.javaworld.com/article/2072971/enterprise-java/design-a-simple-service-oriented-j2ee-application-framework.amp.html
+https://www.google.com/amp/s/www.javaworld.com/article/2073918/core-java/i-want-my-aop---part-1.amp.html
+https://mobile.codeguru.com/csharp/.net/net_asp/mvc/understanding-dependency-injection.htm
+
+https://docs.oracle.com/cd/E19316-01/819-3669/bncby/index.html
+http://www.icodeguru.com/design/J2EE-Design-Patterns/index.html
+
+
+
+
+
+
+
+
+
+
+https://www.guru99.com/jsp-mvc.html
+https://db.apache.org/derby/docs/10.5/devguide/rdevdvlp22102.html
+Web http server presents ads
+Downloader 
+takes files from different locations 
+Puts the files on disk
+File manager will manage files in the root of server
+Heritrix will look for info?
+
+Heritrix 
+looks for tech articles
+Saves into db
+Web server
+Presents search results
+
+
+J2EE design patterns
+https://www.uml-diagrams.org/composition.html
+http://www.icodeguru.com/design/j2ee-design-patterns/0596004273_j2eedp-chp-3-sect-3.html
+https://dzone.com/articles/java-the-factory-pattern
+https://dzone.com/articles/factory-design-pattern
+https://www.journaldev.com/1418/abstract-factory-design-pattern-in-java
+https://www.tutorialspoint.com/design_pattern/front_controller_pattern.htm
+
+
+
+
+
+CQRS SPECIFIC
+https://github.com/citerus/bookstore-cqrs-example/blob/master/pom.xml
+From Internet
+Dao
+http://onlyxscript.blogspot.com/2018/02/java-mvc-addeditdelete-using-jsp-and.html
+https://javarevisited.blogspot.com/2013/01/data-access-object-dao-design-pattern-java-tutorial-example.html
+Dependency injection without Sprint, Guice etc
+	https://memorynotfound.com/context-dependency-injection-inject/
+https://github.com/paul-hammant/servlet-dependency-injection-crude-example/blob/master/src/main/java/servletdi/secret/MyFilter.java
+
+Design
+https://softwareengineering.stackexchange.com/questions/173050/relationship-dao-servlet-jsp-and-pojo
+Projects that i have
+
+Java Servlet Filter Example Tutorial
+https://github.com/paul-hammant/servlet-dependency-injection-crude-example/blob/master/src/main/java/servletdi/secret/MyFilter.java
+https://javarevisited.blogspot.com/2013/01/data-access-object-dao-design-pattern-java-tutorial-example.html
+https://memorynotfound.com/context-dependency-injection-inject/
+A bridge between the ServletContext life cycle events and CDI observers (with example observer ApplicationInitializer)
+Raw
+http://onlyxscript.blogspot.com/2018/02/java-mvc-addeditdelete-using-jsp-and.html
+https://www.javatpoint.com/abstract-factory-pattern
+
+https://www.javaworld.com/article/2076909/building-a-java-servlet-framework-using-reflection--part-2.html?page=3
+Take control of the servlet environment, Part 3
+https://github.com/Rezve/kodvel
+https://www.roseindia.net/jsp/crud-application.shtml
+Domain Driven Design
+https://www.mirkosertic.de/blog/2013/04/domain-driven-design-example
+https://pehapkari.cz/blog/2018/02/21/domain-driven-design-implementation/
+https://github.com/javaee/cargotracker/tree/master/src/main/java/net/java/cargotracker/domain/model
+The Books:
+
+“Domain-driven Design” by Eric Evans 
+“Implementing Domain-driven Design” by Vaughn Vernon
+
+
+WEB-SERVICES
+REST, Web services, REST-full services
+
+https://www.journaldev.com/9170/restful-web-services-tutorial-java
+https://www.ibm.com/developerworks/library/mw-1612-gunderson-trs/index.html
+https://www.ibm.com/developerworks/library/ws-RESTservices/index.html
+https://www.ibm.com/developerworks/library/ws-devws-jsme/index.html
+SOA, SOAP
+http://webreference.com/programming/basic_soa/index.html
+https://www.ibm.com/developerworks/library/ws-apacheaxis/index.html
+https://www.ibm.com/developerworks/library/ws-log4j/index.html
+http://server2client.com/servlets25adv/conlisteners.html
+
+
+
+https://community.sailpoint.com/groups/development-partnership-program/blog/2017/10/10/managing-entitlements-creating-business-role-it-role-quicklink-rule-to-manage-quicklink-and-workgroup
+https://community.sailpoint.com/message/104676#104676
+Top 5 design patterns
+https://medium.com/@ivorobioff/the-5-most-common-design-patterns-in-php-applications-7f33b6b7d8d6
+Factory
+Strategy
+Adapter
+Observer
+Decorator
+Adding Generic Request capabilities to IdentityIQ	https://community.sailpoint.com/docs/DOC-5822
+https://krazytech.com/programs/session-role-based-java-login-example
+https://www.nakov.com/inetjava/lectures/part-3-webapps/InetJava-3.4-Servlet-lyfecycle-Sessions-Cookies.html
+https://www.nakov.com/inetjava/
+Java Web Application
+Java Servlet Tutorial
+Session Management in Java
+Servlet Filter
+Servlet Listeners
+Cookies in Servlets
+Servlet File Upload and Download Example
+https://examples.javacodegeeks.com/enterprise-java/jws/jax-ws-dynamic-proxy-client-example/
+גיבוריםגיבורים
+גיבורים במצולות טריילר רשמי - Kursk
+38,963 views
+
+
+
+
+Spring tutorials
+https://howtodoinjava.com/spring5/core/applicationcontext-xml-config-example/
+https://howtodoinjava.com/spring5/security5/login-form-example/
+https://dzone.com/articles/spring-security-5-form-login-with-database-provide
+https://www.javaguides.net/2018/09/spring-boot-spring-mvc-role-based-spring-security-jpa-thymeleaf-mysql-tutorial.html
+
+https://github.com/spring-projects/spring-social-samples/tree/master/attic/spring-social-showcase-xml/src/main/webapp/resources
+https://www.boraji.com/spring-security-4-hello-world-example
+http://websystique.com/spring-security/spring-security-4-hello-world-annotation-xml-example/
+https://www.journaldev.com/8718/spring-4-security-mvc-login-logout-example
+https://intellitech.pro/tutorial-0-authentication-with-spring-security/
+
+https://codesjava.com/spring-security-hello-world-xml-example
+Note: If you try to login with right credentials you will get the following error. 
+java.lang.IllegalArgumentException: There is no PasswordEncoder mapped for the id “null”.
+
+It is because, in spring-security-core:5.0.0.RC1, the default PasswordEncoder is built as a DelegatingPasswordEncoder. When we store the users in memory, we are providing the passwords in plain text and when trying to retrieve the encoder from the DelegatingPasswordEncoder to validate the password it can’t find one that matches the way in which these passwords were stored.
+https://www.elasticfeed.com/f3414fd5f797f11cba979ceeda8fc127/
+http://www.programmersought.com/article/2213631656/;jsessionid=E123752CB748A7D5884B66F36197FA3A
+
+https://www.javaguides.net/2019/01/springboot-postgresql-jpa-hibernate-crud-restful-api-tutorial.html#at_pco=smlwn-1.0&at_si=5d20384701de7f42&at_ab=per-2&at_pos=0&at_tot=1
+https://www.javaguides.net/2019/01/standard-project-structure-for-spring-boot-projects.html#at_pco=smlwn-1.0&at_si=5d20381a5ad01190&at_ab=per-2&at_pos=0&at_tot=1
+https://www.javaguides.net/2018/08/application-controller-design-pattern-in-java.html#at_pco=smlwn-1.0&at_si=5d1e1d9bb6e0fac9&at_ab=per-2&at_pos=0&at_tot=1
+
+https://www.javaguides.net/2018/12/what-is-difference-between-jpa-and-hibernate.html#at_pco=smlwn-1.0&at_si=5d2042142f743955&at_ab=per-2&at_pos=0&at_tot=1
+https://github.com/iluwatar/java-design-patterns
+Understanding Spring AOP Concepts and Terminology with Example
+Hibernate Transaction Management Tutorial
+
+MySQL
+GRANT ALL PRIVILEGES ON cardb.* TO 'root'@'192.168.6.1';
+FLUSH PRIVILEGES;
+
+murygin/spring-jsf: Project template for a Spring JSF integration, read more in this blog post:
+
+
+https://codesjava.com/spring-mvc-execution-flow
+pivotalsoftware/spring-travel-app: Spring Travel App using GemfireXD.
+https://stackoverflow.com/questions/3541077/design-patterns-web-based-applications
+
+JSF
+https://www.javatpoint.com/jsf-datatable
+https://codesjava.com/edit-row-in-datatable-jsf
+https://www.mkyong.com/jsf2/jsf-2-valuechangelistener-example/
+http://www.java2s.com/Tutorials/Java/JSF/1940__JSF_DataTable_Update.htm
+https://github.com/AnghelLeonard/JSF-2.x
+https://github.com/primefaces/showcase/tree/master/src/main/java/org/primefaces/showcase/domain
+https://www.logicbig.com/tutorials/misc/primefaces/dialog-return-event.html
+
+
+
+
+
+
+Good design inspired by primefaces org
+https://stackoverflow.com/questions/48348637/jsf-datatable-how-to-select-row-on-button-push-in-row
+https://stackoverflow.com/questions/19868898/houtputtext-to-conditionally-render-groups-of-jsf-elements-no-longer-working-in
+Indeed, since JSF 2.0, children of UIInput and UIOutput are by default not anymore rendered. This is the consequence of fixes for issue 1154. In Mojarra 2.x, you can still turn it back on via a web.xml context parameter:
+
+<context-param>
+    <param-name>com.sun.faces.allowTextChildren</param-name>
+    <param-name>true</param-name>
+</context-param>
+See also the Mojarra 2.0.0 release notes.
+https://github.com/marioosh-net/JSF2.0-Hello-World/tree/master/src/main
+It's however more recommended to instead use <h:panelGroup> or <ui:fragment> for conditional rendering of blocks as the <h:outputText> is just the Wrong Tool™ for the job.
+See
+
+
+
+
+http://balusc.omnifaces.org/2011/09/communication-in-jsf-20.html#ManagedBeanScopes
+
+https://www.developer.com/java/using-managed-beans-in-a-facelet-page.html
+
+https://www.javacodegeeks.com/2016/02/creating-jsfcdi-maven-project-eclipse.html
+
+https://hackernoon.com/creating-a-j2ee-crud-app-in-10-steps-with-jsf-primefaces-jpa-mysql-39a1421b8845
+
+https://docs.jboss.org/weld/reference/latest/en-US/html_single/#_what_is_a_bean
+http://balusc.omnifaces.org/2013/10/how-to-install-cdi-in-tomcat.html
+
+
+http://balusc.omnifaces.org/2013/10/how-to-install-cdi-in-tomcat.html
+SoundCloud elad malca malca
+http://www.javawebtutor.com/articles/jsf/jsf_maven_example.php
+JSF CDI weld
+https://github.com/Treeptik/Template-JSF-CDI-JPA
+https://github.com/lytves/hotel-jsf/tree/master/src/es/uv/etse/bdweb/hotel
+https://github.com/Apress/Practical-JSF-Java-EE-8/blob/master/Alumni/AlumniAccount/src/main/java/de/muellerbruehl/alumniaccount/rest/AccountService.java
+https://github.com/qos-ch/slf4j/tree/master/slf4j-log4j12/src/main/java/org
+
+https://github.com/hantsy/javaee8-jsf-sample/tree/master/src/main/webapp
+https://github.com/citerus/bookstore-cqrs-example/blob/master/pom.xml
+
+
+Project #1: JSF-Basic-CRUD
+Description: 
+https://github.com/hugoarthur/jsf-basic-crud/tree/master/src/main
+
+Project #2: JSF CDI and JPA template application
+Description: JSF Crud Weld
+https://github.com/Treeptik/Template-JSF-CDI-JPA
+
+Project #3:
+Description: EclipseLink Example
+
+https://github.com/eclipse/examples/tree/master/jpa/employee/employee.web
+https://github.com/JuanBalceda/jpa-spring-jsf
+Project #4:Map usage
+https://github.com/michelrisucci/spring-jsf-jpa-quickstart/blob/9fb6e1e45506ffc08edbbb6f927a2d45fd323d1f/src/main/webapp/protected/manage/country-list.xhtml
+https://github.com/danilobatistaqueiroz/jsf_jpa_crud
+Crud example
+https://github.com/lynchnf/crud-jsf/tree/master/src/main/java/com/psclistens/example
+https://liveoncode.com/building-enterprise-application-with-ejb-jpa-jsf-and-crud/
+https://stackoverflow.com/questions/7031885/how-to-choose-the-right-bean-scope
+
+
+Tomcat connection pool
+https://docs.geoserver.org/stable/en/user/tutorials/tomcat-jndi/tomcat-jndi.html
+https://medium.com/byteagenten/simple-application-configuration-with-tomcat-5cad0a551ba6
+https://antoniogoncalves.org/2011/02/07/adding-cdi-to-an-existing-java-ee-6-application/
+https://docs.oracle.com/cd/E19226-01/820-7627/gipxl/index.html
+https://github.com/adelzaid4/ShareIT-EJB-JPA-and-JSF-Client/tree/master/ShareitClient/src/main/webapp
+https://github.com/medalibettaieb/lms-repo/tree/master/lms/lms-web/src/main/webapp/WEB-INF
+http://www.thejavageek.com/2015/01/09/creating-jsf-ejb-jpa-application-using-eclipse-wildfly/
+
+https://javabeat.net/event-driven-programming-with-jsf/
+
+
+
+
+
+
+
+
+
+FACES REFERENCES
+https://dzone.com/articles/javaserver-faces-23-1
+
+https://caucho.com/articles/CDI_Landscape.pdf
+
+https://www.sitepoint.com/cdi-weld-inject-jpa-hibernate-entity-managers/
+
+https://github.com/inspectIT/marketplace/tree/master/src/main/java/rocks/inspectit/marketplace/dao
+
+https://github.com/eugenp/tutorials/blob/master/persistence-modules/hibernate5/src/main/java/com/baeldungf/hibernate/transaction/PostService.java
+
+THEORY:
+Java persistence with JPA and Hibernate, Part 1
+https://www.javaworld.com/article/3373652/java-persistence-with-jpa-and-hibernate-part-1-entities-and-relationships.html
+Java persistence with JPA and Hibernate, Part 2
+https://www.javaworld.com/article/3387643/java-persistence-with-jpa-and-hibernate-part-2-many-to-many-relationships.html?page=3
+
+
+
+
+
+
+
+

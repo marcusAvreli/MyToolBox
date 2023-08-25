@@ -1,14 +1,373 @@
-select x.description,x.sAMAccountName,x.cn from SPT_MANAGED_ATTRIBUTE sptManagedAttribute
-,XMLTABLE(	' 
-	/Attributes/Map
-	(:element description {data(/Attributes/Map/entry[@key="description"]/@value)}:)	
-			'
-	passing XMLTYPE(sptManagedAttribute.ATTRIBUTES)
-	columns
-		description varchar2(32) path 'entry[@key="description"]/@value'
-		,cn varchar2(32) path 'entry[@key="cn"]/@value'
-		,sAMAccountName varchar2(32) path 'entry[@key="sAMAccountName"]/@value'
+select
 
-	)x
+                sptLink.id             lnk_id
 
-	where dbms_lob.getlength(sptManagedAttribute.ATTRIBUTES)>1 and x.description is not null
+                ,sptLink.created lnk_created_date
+
+                ,sptLink.modified             lnk_modified_date
+
+                ,sptLink.last_Refresh      lnk_lst_rfrshd_date       
+
+                ,sptLink.display_Name  lnk_display_Name
+
+                ,sptLink.key1     lnk_key1
+
+                ,sptLink.key2     lnk_key2
+
+                ,sptLink.key3     lnk_key3
+
+                ,sptLink.key4     lnk_key4
+
+                ,sptLink.entitlements     lnk_entitlements
+
+                ,sptLink.identity_id         lnk_identity_id
+
+                ,sptApp.id           app_id
+
+                ,account_details.num_of_rows sch_num_of_rows
+
+                ,account_details.ordering            sch_ordering
+
+                ,account_details.iiq_disabled     sch_iiq_disabled
+
+ 
+
+               
+
+ 
+
+from identityiq.spt_link sptLink
+
+                INNER JOIN identityiq.SPT_APPLICATION sptApp ON sptApp.Id = sptLink.application
+
+                ,XMLTABLE(                        '
+
+               
+
+                                declare function local:testParseDate($adAccount as node(),$stringName as xs:string?) as xs:integer {
+
+ 
+
+                if(fn:exists($adAccount/entry[@key=$stringName])) then
+
+                               let $iiqDisabledBoolean := $adAccount/entry[@key=$stringName]/value/Date
+
+                                               return
+
+                                                if($iiqDisabledBoolean) then
+
+                                                (: this is boolean :)
+
+                                                let $iiqDisabledBooleanV := $iiqDisabledBoolean/text()
+
+                                                return
+
+                                                if($iiqDisabledBooleanV) then
+
+                                                               $iiqDisabledBooleanV
+
+                                                              
+
+                                                 else(
+
+                                                               (: value is empty :)
+
+                                                               0
+
+                                                )
+
+                                               else(
+
+                                                               (: this is not boolean :)
+
+                                                              
+
+                                                                $adAccount/entry[@key=$stringName]/@value
+
+                                               )
+
+                                              
+
+                                   
+
+                else(
+
+                                0
+
+                )
+
+               
+
+ 
+
+};
+
+                declare function local:testParseInt($adAccount as node(),$stringName as xs:string?) as xs:integer {
+
+ 
+
+                if(fn:exists($adAccount/entry[@key=$stringName])) then
+
+                               let $iiqDisabledBoolean := $adAccount/entry[@key=$stringName]/value/Integer
+
+                                               return
+
+                                                if($iiqDisabledBoolean) then
+
+                                                (: this is boolean :)
+
+                                                let $iiqDisabledBooleanV := $iiqDisabledBoolean/text()
+
+                                                return
+
+                                                if($iiqDisabledBooleanV) then
+
+                                                               $iiqDisabledBooleanV
+
+                                                              
+
+                                                 else(
+
+                                                               (: value is empty :)
+
+                                                               0
+
+                                                )
+
+                                               else(
+
+                                                               (: this is not integer :)
+
+                                                                if($adAccount/entry[@key=$stringName]/@value) then
+
+                                                                                $adAccount/entry[@key=$stringName]/@value
+
+                                                                else(
+
+                                                                                (: this is not integer and entry does not have value :)
+
+                                                                                0
+
+                                                                )
+
+                                               )
+
+                                              
+
+                                   
+
+                else(
+
+                                0
+
+                )
+
+               
+
+ 
+
+};
+
+                declare function local:testParseDate($adAccount as node(),$stringName as xs:string?) as xs:integer {
+
+ 
+
+                                if(fn:exists($adAccount/entry[@key=$stringName])) then
+
+                                                let $iiqDisabledBoolean := $adAccount/entry[@key=$stringName]/value/Date
+
+                                                return
+
+                                                if($iiqDisabledBoolean) then
+
+                                                                (: this is boolean :)
+
+                                                                let $iiqDisabledBooleanV := $iiqDisabledBoolean/text()
+
+                                                                return
+
+                                                                if($iiqDisabledBooleanV) then
+
+                                                                                $iiqDisabledBooleanV
+
+                                                                else(
+
+                                                                                (: value is empty :)
+
+                                                                                0
+
+                                                                )
+
+                                                else(
+
+                                                                (: this is not date :)
+
+                                                                if($adAccount/entry[@key=$stringName]/@value) then
+
+                                                                                $adAccount/entry[@key=$stringName]/@value
+
+                                                                else(
+
+                                                                                (: this is not date and entry does not have value :)
+
+                                                                                0
+
+                                                                )
+
+                                                )
+
+                                else(
+
+                                                0
+
+                                )
+
+                };
+
+                                declare function local:testParseBoolean($adAccount as node(),$stringName as xs:string?) as xs:string {
+
+ 
+
+                if(fn:exists($adAccount/entry[@key=$stringName])) then
+
+                               let $iiqDisabledBoolean := $adAccount/entry[@key=$stringName]/value/Boolean
+
+                                               return
+
+                                                if($iiqDisabledBoolean) then
+
+                                                (: this is boolean :)
+
+                                                let $iiqDisabledBooleanV := $iiqDisabledBoolean/text()
+
+                                                return
+
+                                                if($iiqDisabledBooleanV) then
+
+                                                               (:$iiqDisabledBooleanV:)
+
+                                                               $iiqDisabledBooleanV
+
+                                                else(
+
+                                                               (: value is empty :)
+
+                                                               "false"
+
+                                                )
+
+                                               else(
+
+                                                              
+
+                                                                (: this is not date :)
+
+                                                                if($adAccount/entry[@key=$stringName]/@value) then
+
+                                                                                $adAccount/entry[@key=$stringName]/@value
+
+                                                                else(
+
+                                                                                (: this is not date and entry does not have value :)
+
+                                                                                "false"
+
+                                                                )
+
+                                               )
+
+                                              
+
+                                   
+
+                else(
+
+                                "false"
+
+                )
+
+               
+
+ 
+
+};
+
+                declare function local:testParseSingleValueNode($singleValueNode as node(),$stringName as xs:string?) as element()* {
+
+            if(fn:exists($singleValueNode/entry[@key=$stringName])) then
+
+                            let $tempValue := $singleValueNode/entry[@key=$stringName]/@value
+
+                            return
+
+                                if($tempValue) then
+
+                                    element r{
+
+                                       element message_key {data($tempValue)}
+
+                                    }
+
+                                else (
+
+                                              if($singleValueNode/entry[@key=$stringName]/value/List/String) then
+
+                             $singleValueNode/entry[@key=$stringName]/value/List/String
+
+                        else(
+
+                             element r{
+
+                                                                                                                                element message_key {"test_empty"}
+
+                                                                                                                }
+
+                                                                                                )
+
+                                                                                )
+
+ 
+
+            else (
+
+                 element r{
+
+                              element message_key {"test_empty"}
+
+                 }
+
+            )
+
+        };
+
+       let $map := /Attributes/Map
+
+                                let $iiqDisabled := local:testParseBoolean($map,"IIQDisabled")
+
+                                return element r{
+
+                                                element               iiq_disabled        {data($iiqDisabled)}
+
+                                               
+
+                                }
+
+                               '
+
+                                passing case when sptLink.ATTRIBUTES is null then null else XMLTYPE(sptLink.ATTRIBUTES) end
+
+                columns
+
+                num_of_rows   number(10)        path       'num_of_rows'
+
+                ,ordering             number(10)        path       'ordering'
+
+                ,iiq_disabled      varchar2(5)         path       'iiq_disabled'
+
+ 
+
+
+ )account_details
+
+
+where sptApp.name='<app_name>'  and dbms_lob.getlength(sptLink.ATTRIBUTES)>1;

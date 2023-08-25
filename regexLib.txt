@@ -3,6 +3,9 @@ keep single space between string
 find what: ^ +| +$|( )+
 replace with: $1
 
+converT all characters to upper case
+	find what: ([a-zA-Z]*)
+	replace with: \U\1
  
 To add "); at the end of row
 	FindWhat: ^(.*)$

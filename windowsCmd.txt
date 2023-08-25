@@ -1,14 +1,30 @@
-search string in file recurcively
-	
++-----------------------------------------------------------+
+|															|
+|					SEARCH									|
+|															|
++-----------------------------------------------------------+
+
+1. SEARCH STRING IN FILE RECURCIVELY	
 	findstr /sin /c:"AnnotationResolver" "C:\Users\User\eclipse-workspace\*.java"
 	findstr /sin /c:"ColumnDefinition" "C:\Users\User\eclipse-workspace\*.java" > "C:\Users\User\output.txt"
 
-find string skipping directories
-	findstr /sin /c:"addTable" "C:\Users\User\gtable\dynagent\*.java" | findstr /liv "\\server\\ \\Nucleo"
+2. FIND STRING SKIPPING DIRECTORIES
+	findstr /sin /c:"addTable" "C:\Users\User\gtable\dynagent\*.java" | findstr /liv "\\server\\ \\Nucleo"	
+	findstr /sin /c:"filter" "C:\Users\User\gtable\dynagent\*.java" | findstr /liv "\\server\\ \\Nucleo\\ \\test\\ \\ruleengine\\ \\updaters\\ \\importers\\ \\xml"
+
+3. FIND FILE SKIPPING DIRECTORIES
+	(source: https://stackoverflow.com/questions/54978756/exclude-windows-folder-in-cmd-search)
+	dir /S /B /A:-D *.mp3 *.mp4 *.jpg | findstr /V /I /C:"\\Microsoft\\" /C:"\\Windows\\" > "C:\output.txt"
+
++-----------------------------------------------------------+
+|															|
+|					READ CSV								|
+|															|
++-----------------------------------------------------------+
 	
-	skip: server and Nucleo directories
-	El nombre de la columna
-	findstr /sin /c:"filter" "C:\Users\User\gtable\dynagent\*.java" | findstr /liv "\\server\\ \\Nucleo\\ \\test\\ \\ruleengine\\ \\updaters\\ \\importers\\ \\xml\\"
+https://stackoverflow.com/questions/24927944/read-csv-file-through-windows-batch-file-and-create-txt-file
+	
+	
 https://stackoverflow.com/questions/20076262/findstr-and-skipping-folders
 
 	The following script will not bother scanning the "%basedir%\Projects" or "%basedir%\Archive" folders.
@@ -48,3 +64,62 @@ kill all java on windows
 	taskkill /f /im jqs.exe 
 	taskkill /f /im javaw.exe 
 	taskkill /f /im java.exe
+
+POWERSHELL
+Get Version of powershell
+Get-Host | Select-Object Version
+
+
+Find string in directory files recursively
+Batch
+
+@ECHO OFF
+for /F %%i in (pattern.txt) do (
+echo Files containing %%i
+findstr /M /C:%%i /I /S *.java > output.txt
+)
+ECHO Finished execution.
+PAUSE
+
+Find classes in jars (did not work in the past)
+for /R %G in (*.jar) do @jar -tvf "%G" | find "ClassName" > NUL && echo %G
+
+Windows list of directories including files
+dir /s /w/ /p /b c:\build1.0 > output.txt
+
+Stop all java on windows
+taskkill /f /im jqs.exe 
+taskkill /f /im javaw.exe 
+taskkill /f /im java.exe
+
+Remove Directory recursively
+With Prompt:
+rmdir c:\test /s
+
+Without prompts:
+rmdir c:\test /s /q
+Run cmd as admin
+runas /user:Administrator cmd
+
+
+Rename windows service 
+
+Verified and approved
+ on (Windows Server 2012 R2 Elbit)
+
+Stop tomcat service
+
+The Windows command line program to change services is "sc".
+
+Here's the Microsoft reference page: https://technet.microsoft.com/en-us/library/bb490995.aspx
+
+To change the display name of a service you can run:
+
+sc config "Old service name" displayname= "New service name"
+
+To change the executable you can run:
+
+sc config "Service name" binpath= "C:\path\to\executable\here"
+
+For both of those commands, make sure you have a space between the = and the new name (ie. displayname= "New Name", NOT displayname="New Name")
+
