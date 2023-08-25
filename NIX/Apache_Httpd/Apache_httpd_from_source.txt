@@ -1,72 +1,73 @@
-Static IP
-https://www.putorius.net/2012/10/how-to-configure-static-ip-address-in.html
-https://ie.technion.ac.il/~bravo/secret/Other/apache_compile.phtml
-OpenSSH
+STATIC IP
+	https://www.putorius.net/2012/10/how-to-configure-static-ip-address-in.html
+	https://ie.technion.ac.il/~bravo/secret/Other/apache_compile.phtml
+	
+OPENSSH
+	Start on boot: chkconfig sshd on
 
-Start on boot: chkconfig sshd on
+DEVELOPMENT TOOLS
+	yum groupinstall "Development Tools"
+	yum install expat-devel
+	yum install libxml2-devel
+	yum install libXpm-devel
 
-Development tools
-yum groupinstall "Development Tools"
-yum install expat-devel
-yum install libxml2-devel
-yum install libXpm-devel
+AUTOCONF
+	tar -zxvf autoconf-2.69.tar.gz
+	mv autoconf-2.69 autoconf
+	mv /home/admin/autoconf /usr/src/
+	chmod -R 700 /usr/src/autoconf
+	cd /usr/src/autoconf
+	./configure;make;make install
+	cd /home/admin
 
-Autoconf
-tar -zxvf autoconf-2.69.tar.gz
-mv autoconf-2.69 autoconf
-mv /home/admin/autoconf /usr/src/
-chmod -R 700 /usr/src/autoconf
-cd /usr/src/autoconf
-./configure;make;make install
-cd /home/admin
-
-Automake
-tar -zxvf automake-1.15.tar.gz
-mv automake-1.15 automake
-mv /home/admin/automake /usr/src/
-chmod -R 700 /usr/src/automake
-cd /usr/src/automake
-./configure;make;make install
-cd /home/admin
+AUTOMAKE
+	tar -zxvf automake-1.15.tar.gz
+	mv automake-1.15 automake
+	mv /home/admin/automake /usr/src/
+	chmod -R 700 /usr/src/automake
+	cd /usr/src/automake
+	./configure;make;make install
+	cd /home/admin
 
 PCRE
-tar -zxvf pcre-8.42.tar.gz
-mv pcre-8.42 pcre
-mv /home/admin/pcre /usr/src/
-chmod -R 700 /usr/src/pcre
-cd /usr/src/pcre
-./configure;make;make install
+	tar -zxvf pcre-8.42.tar.gz
+	mv pcre-8.42 pcre
+	mv /home/admin/pcre /usr/src/
+	chmod -R 700 /usr/src/pcre
+	cd /usr/src/pcre
+	./configure;make;make install
 
 HTTPD
-cd /home/admin
-tar -zxvf httpd-2.4.33.tar.gz
-mv httpd-2.4.33 httpd
-mv /home/admin/httpd /usr/src
-chmod -R 700 /usr/src/httpd
-cd /home/admin
+	cd /home/admin
+	tar -zxvf httpd-2.4.33.tar.gz
+	mv httpd-2.4.33 httpd
+	mv /home/admin/httpd /usr/src
+	chmod -R 700 /usr/src/httpd
+	cd /home/admin
 
 APR+APR UTIL
-tar -zxvf apr-1.6.3.tar.gz
-tar -zxvf apr-util-1.6.1.tar.gz
-mv apr-1.6.3 apr
-mv apr-util-1.6.1 apr-util
-cp -r /home/admin/apr /usr/src/httpd/srclib
-cp -r /home/admin/apr-util /usr/src/httpd/srclib
-chmod -R 700 /usr/src/httpd/srclib/apr
-chmod -R 700 /usr/src/httpd/srclib/apr-util
+	tar -zxvf apr-1.6.3.tar.gz
+	tar -zxvf apr-util-1.6.1.tar.gz
+	mv apr-1.6.3 apr
+	mv apr-util-1.6.1 apr-util
+	cp -r /home/admin/apr /usr/src/httpd/srclib
+	cp -r /home/admin/apr-util /usr/src/httpd/srclib
+	chmod -R 700 /usr/src/httpd/srclib/apr
+	chmod -R 700 /usr/src/httpd/srclib/apr-util
 
-yum install openssl-devel
+OPENSSL
+	yum install openssl-devel
 
-cd /usr/src/httpd/srclib/apr
-./configure;make;make install
-cd /usr/src/httpd/srclib/apr-util
-./configure --with-apr=/usr/src/httpd/srclib/apr/apr-1-config;make;make install
-cd /usr/src/httpd/; make clean; ./configure --enable-so --enable-ssl=shared --with-ssl=/usr/bin/openssl ;make;make install  
-##Run the below-mentioned command to ensure that there are no errors in the above step. (if it returns 0, so there were no errors)
-echo $?
+	cd /usr/src/httpd/srclib/apr
+	./configure;make;make install
+	cd /usr/src/httpd/srclib/apr-util
+	./configure --with-apr=/usr/src/httpd/srclib/apr/apr-1-config;make;make install
+	cd /usr/src/httpd/; make clean; ./configure --enable-so --enable-ssl=shared --with-ssl=/usr/bin/openssl ;make;make install  
+	##Run the below-mentioned command to ensure that there are no errors in the above step. (if it returns 0, so there were no errors)
+	echo $?
 
-List Modules
-/usr/local/apache2/bin/apachectl -M
+LIST MODULES
+	/usr/local/apache2/bin/apachectl -M
 
 
 
@@ -83,14 +84,14 @@ cd /usr/local/apache2/bin/
 ./apachectl restart
 
 
-PHP
-GD
-mv libpng /usr/src/
-mv libgd /usr/src/
 
-cd /usr/src/libpng;make distclean;./configure --prefix=/usr/src/;make;make install
-cd /usr/src/libjpeg;make distclean;./configure --prefix=/usr/src;make;make install
-cd /usr/src/libgd;make disclean; ./configure --prefix=/usr/src --with-png=/usr/src/lib --with-jpeg=/usr/src/lib;make;make install
+GD PNG
+	mv libpng /usr/src/
+	mv libgd /usr/src/
+
+	cd /usr/src/libpng;make distclean;./configure --prefix=/usr/src/;make;make install
+	cd /usr/src/libjpeg;make distclean;./configure --prefix=/usr/src;make;make install
+	cd /usr/src/libgd;make disclean; ./configure --prefix=/usr/src --with-png=/usr/src/lib --with-jpeg=/usr/src/lib;make;make install
 
 php -r 'print_r(gd_info());'
 
@@ -127,28 +128,28 @@ https://board.phpbuilder.com/d/10395817-php70-not-playing-nice-with-openssl/3
 Which php configuration file is currently loaded
 php -i | grep "Loaded Configuration File"
 
-Check php openSSL
-php -i |grep -A 5 openssl
-php -r 'phpinfo();' | grep openssl
-Enable opcache.so
-zend_extension=/usr/src/php/modules/opcache.so
-List php modules
-php -m
-Ext/openssl directory in the PHP installation directory
-find / -name "openssl" | grep php
+CHECK PHP OPENSSL
+	php -i |grep -A 5 openssl
+	php -r 'phpinfo();' | grep openssl
+	Enable opcache.so
+	zend_extension=/usr/src/php/modules/opcache.so
+
+LIST PHP MODULES
+	php -m
+	Ext/openssl directory in the PHP installation directory
+	find / -name "openssl" | grep php
 
 
 IPTABLES
-For Apache
-/sbin/iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
-service iptables save
-service iptables restart
+	APACHE HTTPD
+		/sbin/iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+		service iptables save
+		service iptables restart
 
-For mySQL
-
-/sbin/iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT
-service iptables save
-service iptables restart
+	MYSQL
+		/sbin/iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT
+		service iptables save
+		service iptables restart
 
 /var/lib/mysql/mysql.sock
 7b9;4/>+ldS
@@ -167,13 +168,13 @@ SET GLOBAL log_bin_trust_function_creators = 1;
 wget http://www-us.apache.org/dist//httpd/httpd-2.4.25.tar.gz .
 
 
-Apache Config File
-vim /usr/local/apache2/conf/httpd.conf 
-navigate to LINE 115:LoadModule proxy_module modules/mod_proxy.so
-navigate to LINE 118:LoadModule proxy_http_module modules/mod_proxy_http.so
-navigate to LINE 150::LoadModule rewrite_module modules/mod_rewrite.so
-navigate to LINE 215: change DocumentRoot to be /var/www/html/
-navigate to LINE 216: change <Directory> to be <Directory /var/www/html>
+APACHE CONFIG FILE
+	vim /usr/local/apache2/conf/httpd.conf 
+	navigate to LINE 115:LoadModule proxy_module modules/mod_proxy.so
+	navigate to LINE 118:LoadModule proxy_http_module modules/mod_proxy_http.so
+	navigate to LINE 150::LoadModule rewrite_module modules/mod_rewrite.so
+	navigate to LINE 215: change DocumentRoot to be /var/www/html/
+	navigate to LINE 216: change <Directory> to be <Directory /var/www/html>
 
 AddType text/html .php
 AddHandler php5-script .php
@@ -186,9 +187,9 @@ cd /usr/local/apache2/bin/
 /usr/local/apache2/bin/apachectl stop
 /usr/local/apache2/bin/apachectl start
 
-Server Version
-/usr/local/apache2/bin/apachectl -v
-/usr/local/apache2/bin/apachectl -V
+SERVER VERSION
+	/usr/local/apache2/bin/apachectl -v
+	/usr/local/apache2/bin/apachectl -V
 
 cd /usr/local/apache2/bin/
 ./apachectl stop
