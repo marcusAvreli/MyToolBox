@@ -209,14 +209,3 @@ CREATE USER 'identityiq'@'localhost' IDENTIFIED BY 'identityiq';
 mySql check version
 mysql -V
 SHOW VARIABLES LIKE "%version%";
-
-
-Check distro version
-/etc/*-release
-Remove mysql rpms
-rpm -qa | grep mysql
-Yum remove mysql*
-
-drupal
-sudo chmod 644 settings.php
-chmod 755 default/

@@ -1,3 +1,10 @@
+Check distro version
+/etc/*-release
+
+Remove mysql rpms
+rpm -qa | grep mysql
+Yum remove mysql*
+
 SSH 
 Start on boot: chkconfig sshd on
 service sshd start
