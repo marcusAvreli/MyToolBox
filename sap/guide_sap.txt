@@ -1,0 +1,74 @@
+Create a symbolic link to the sapjco3.jar file in ITDI_HOME/jars/3rdparty/others:
+ln -s <sapjco_install_dir>/sapjco3.jar  
+   ITDI_HOME/jars/3rdparty/others/sapjco3.jarCopy code
+
+Add the SAP JCo installation directory to the dynamic library path:
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:<sapjco_install_dir>
+export LIBPATH=$LIBPATH:<sapjco_install_dir>
+
+tar zxvf sapjco3-linux*3.0.11.tgz [return]
+
+Then add {sapjco3-install-path} to the LD_LIBRARY_PATH environment variable.
+Finally, add {sapjco3-install-path}/sapjco3.jar to your CLASSPATH environment variable.
+
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/some/pathOfContainingDirectory"
+
+
+
+LD_LIBRARY_PATH
+java.library.path
+LINUX
+PATH
+java.library.path
+WINDOWS
+
+
+
+
+
+https://community.rsa.com/community/products/governance-and-lifecycle/blog/2016/06/15/new-sap-afx-connector-javacodebased-tutorial
+
+Secured sap
+Download and extract the following from SAP Marketplace:
+the SAP Cryptographic Library installation package (SAPCRYPTOLIB) using SAPCAR 
+and
+the Configuration Tool (SAPGENPSE)
+
+UNIX	
+libsapcrypto.so
+Sapgenpse.sh
+
+Windows
+sapcrypto.dll
+Sapgenpse.exe
+
+Environment variables
+SECUDIR c:\snc
+SNC_LIB c:\snc\sapcrypto.dll
+
+
+
+
+Role - transaction object
+Transaction - specific content
+Permission object - which data to see, what to do with that data
+
+Structural Permissions - הרשאות מבניות
+
+O - יחידה ארגונית
+S - משרה
+P - person/בן אדם/user
+
+PA0001 main table for employee details
+se16 access to specific table
+se16n
+
+GLM - Global Liquidity Manager
+RTGS - Real Time Gross Settlement
+AMH - Alliance Messaging Hub
+SMF
+
+STAD - logging rfc calls -  not effective for performance test
+
+On Line System Log Analysis sm21
+Display Changed Document

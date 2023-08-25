@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:output method="html" omit-xml-declaration="yes"   indent="yes" encoding="UTF-8"/>
+<!-- 
+<xsl:template match="node() | @*">
+        <xsl:copy>
+            <xsl:apply-templates select="node() | @*"/>
+        </xsl:copy>
+    </xsl:template>
+-->
+
+<xsl:template match="/">
+<html>
+      <head>
+       <title>Example</title>
+       <link href="style.css" rel="stylesheet" type="text/css"/>
+     </head>
+      
+         <body>
+            <h1>Bundle Details</h1>
+            <table>
+               <tr>
+                                              
+                              <th>RefNo</th>
+                  <th>Name</th>
+                  <th>Display Name</th>
+                  <th>Type</th>      
+                  
+                                  
+               </tr>
+               <xsl:apply-templates select="sailpoint/Bundle" />
+               </table>
+               </body>
+               </html>
+               </xsl:template>
+               
+   
+   
+                <xsl:template match="*">      
+                                <xsl:for-each select="current()">             
+                                                <xsl:choose>
+                                                                <xsl:when test="@type='business'">
+                                                                                <tr>
+                                                                                                <td>            
+                                                                                                                <xsl:value-of select = "@name"/>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                                <xsl:value-of select = "@displayName"/>
+                                                                                                </td>                  
+                                                                                </tr>                  
+                                                                </xsl:when>                     
+                                                </xsl:choose>              
+                                </xsl:for-each>    
+                </xsl:template>
+                
+                
+                <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sailpoint PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<sailpoint>
+<Bundle displayName="testName" name="testDisplayName" type="it">
+  <Attributes>
+    <Map>
+      <entry key="allowDuplicateAccounts" value="false"/>
+      <entry key="allowMultipleAssignments" value="false"/>
+      <entry key="mergeTemplates" value="true"/>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+    
+          </Map>
+        </value>
+      </entry>
+    
+    </Map>
+  </Attributes>
+  <Inheritance>
+    <Reference class="sailpoint.object.Bundle" />
+  </Inheritance>
+  <Owner>
+    
+  </Owner>
+  <Profiles>
+    <Profile>
+      <ApplicationRef>
+        <Reference class="sailpoint.object.Application" name="Active Directory"/>
+      </ApplicationRef>
+      <Constraints>
+        <Filter operation="CONTAINS_ALL" property="memberOf">
+          <Value>
+            <List>
+              
+            </List>
+          </Value>
+        </Filter>
+      </Constraints>
+    </Profile>
+  </Profiles>
+</Bundle>
+</sailpoint>
+
+
+public class Application {
+                public static String Log4JPath = null;
+                private static final Logger logger = LogManager.getLogger(Application.class);
+
+                public static void main(String[] args) throws IOException {
+                                initApp();
+                                try {
+                                                String xmlPathName = "./resources/importer.xml";
+                                                String xslPathName = "./resources/stylesheet.xsl";
+                                                String htmlPathName = "./resources/result.html";
+                                                Source xslDoc = new StreamSource(xslPathName);
+                                                //Source xmlDoc = new StreamSource(xmlPathName);
+                                                //String outputFileName = "./resources/result.html";
+                                                //OutputStream htmlFile = new FileOutputStream(outputFileName);
+                                                
+                                                // Create an XML Stream Reader
+                                                XMLStreamReader xmlSR;
+                                                BufferedWriter bw =null;
+                                                try {
+                                                                xmlSR = XMLInputFactory.newInstance().createXMLStreamReader(new InputStreamReader(new FileInputStream(xmlPathName), Charset.forName("UTF-8")));                                                   
+                                                                // Wrap the XML Stream Reader in a StAXSource
+                                                                StAXSource source = new StAXSource(xmlSR);
+                                                                // Create a String Writer
+                                                                StringWriter stringWriter = new StringWriter();
+                                                                // Create a Stream Result
+                                                                StreamResult streamResult = new StreamResult(stringWriter);
+                                                                // Create a transformer
+                                                                Transformer transformer = TransformerFactory.newInstance().newTransformer(xslDoc);                                      
+                                                                transformer.transform(source, streamResult);
+                                                                bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(htmlPathName), StandardCharsets.UTF_8));
+                                                                bw.write(stringWriter.getBuffer().toString());
+                                                                //logger.info(stringWriter.getBuffer().toString());
+                                                } catch (XMLStreamException e) {
+                                                                // TODO Auto-generated catch block
+                                                                e.printStackTrace();
+                                                } catch (FactoryConfigurationError e) {
+                                                                // TODO Auto-generated catch block
+                                                                e.printStackTrace();
+                                                }
+                                                finally {
+                                                                bw.close();                                                         
+                                                }
+
+                                } catch (FileNotFoundException e) {
+                                                e.printStackTrace();
+                                } catch (TransformerConfigurationException e) {
+                                                e.printStackTrace();
+                                } catch (TransformerFactoryConfigurationError e) {
+                                                e.printStackTrace();
+                                } catch (TransformerException e) {
+                                                e.printStackTrace();
+                                }
+
+                }
+
+                public static String getLog4JPath() {
+                                return Log4JPath;
+                }
+
+                public static void setLog4JPath(String log4jPath) {
+                                Log4JPath = log4jPath;
+                }
+
+                public static Properties getApplicationProperties() {
+                                Application application = new Application();
+
+                                InputStream inputStream = null;
+                                Properties applicationProp = null;
+                                try {
+                                                inputStream = new FileInputStream(new File("./resources/application.properties"));
+                                                applicationProp = new Properties();
+                                                applicationProp.load(inputStream);
+                                                inputStream.close();
+                                } catch (IOException e1) {
+                                                // TODO Auto-generated catch block
+                                                e1.printStackTrace();
+                                }
+
+                                return applicationProp;
+                }
+
+                public static void initApp() {
+                                Properties applicationProperties = getApplicationProperties();
+
+                                setLog4JPath(applicationProperties.getProperty("LOG4J_PATH"));
+
+                                loadLog4j();
+
+                }
+
+                private static void loadLog4j() {
+
+                                PropertyConfigurator.configure(getLog4JPath());
+                }
+}

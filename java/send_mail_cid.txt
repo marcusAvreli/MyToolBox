@@ -1,0 +1,322 @@
+import sailpoint.object.EmailTemplate;
+                import sailpoint.object.EmailOptions;
+                import javax.mail.util.ByteArrayDataSource;
+                import sailpoint.tools.EmailException;
+                import sailpoint.object.Configuration;
+                import javax.mail.Address;
+                import javax.mail.internet.MimeUtility;
+                import javax.mail.Authenticator;
+                import javax.mail.Message.RecipientType;
+                import javax.mail.MessagingException;
+                import javax.mail.NoSuchProviderException;
+                import javax.mail.PasswordAuthentication;
+                import javax.mail.SendFailedException;
+                import javax.mail.Message;
+                import javax.mail.Session;
+                import sailpoint.api.SailPointContext;
+                import javax.activation.DataSource;
+                import javax.activation.FileDataSource;
+                import javax.activation.DataHandler;
+                import sailpoint.object.EmailFileAttachment;
+                import javax.mail.internet.AddressException;
+                import javax.mail.internet.InternetAddress;
+                import javax.mail.internet.MimeBodyPart;
+                import javax.mail.internet.MimeMessage;
+                import javax.mail.internet.MimeMultipart;
+                import javax.mail.internet.MimeUtility;
+                import sailpoint.tools.GeneralException;
+                import sailpoint.api.Emailer;
+                import sailpoint.object.Link;
+                import sailpoint.object.Attributes;
+                import java.io.FileOutputStream;
+                import sailpoint.object.Application;
+                import javax.mail.Session;
+                import java.util.Properties;
+                import sailpoint.object.EmailFileAttachment;
+                import java.lang.NullPointerException;
+                import sailpoint.server.RedirectingEmailNotifier;
+                import sailpoint.server.SMTPEmailNotifier;
+                import sailpoint.api.EmailNotifier;
+                import sailpoint.server.SMTPEmailNotifier.SailPointMessage;
+                import sailpoint.server.SMTPEmailNotifier.SmtpSessionHelper;
+                import sailpoint.server.SMTPEmailNotifier.SmtpOptions;
+                import sailpoint.server.SMTPEmailNotifier.SmtpOptions.SmtpEncryptionOptions;  
+                import javax.mail.internet.MimeMultipart;
+                import sailpoint.tools.Util;
+                import sailpoint.tools.VelocityUtil;
+                                
+                private void testSendMessage(SailPointContext context,EmailTemplate emailTemplate,HashMap testEmailOptionsMap,List<String> mailAddresses){
+                                EmailNotifier notifier=null;
+                                RedirectingEmailNotifier redirecting=null;
+                                String redirectionFileName=null;
+                                String artName="testSendMessage";
+                                Configuration currentConfig=context.getConfiguration();
+                                String host = currentConfig.getString("defaultEmailHost");
+                                String port = currentConfig.getString("defaultEmailPort");
+                                String type = currentConfig.getString("emailNotifierType");
+                                String defaultEmailFromAddress=currentConfig.getString("defaultEmailFromAddress");  
+                                testDebug(getLogStartMessage(artName));
+                                
+                                
+                                testDebug("building smtpOptions");
+                                SmtpOptions smtpOptions = new SMTPEmailNotifier.SmtpOptions();
+                                smtpOptions.setSessionProperties(emailTemplate.getSessionProperties());
+                                smtpOptions.setPort(Integer.valueOf(port));
+                                smtpOptions.setHost(host);
+                                
+                                SmtpEncryptionOptions encryptionOptions = new SMTPEmailNotifier.SmtpOptions.SmtpEncryptionOptions();
+        
+                                SMTPEmailNotifier.SmtpEncryptionType encryptionType = (SMTPEmailNotifier.SmtpEncryptionType)currentConfig.get(Configuration.SmtpConfiguration.EncryptionType);
+                                if (encryptionType == null) {
+                                  encryptionType = SMTPEmailNotifier.SmtpEncryptionType.NONE;
+                                }
+                                encryptionOptions.setEncryptionType(encryptionType);
+                encryptionOptions.setSslSocketFactoryClass(currentConfig.getString(Configuration.SmtpConfiguration.SslSocketFactoryClass));
+                                encryptionOptions.setUsername(currentConfig.getString(Configuration.SmtpConfiguration.Username));
+                encryptionOptions.setPassword(context.decrypt(currentConfig.getString(Configuration.SmtpConfiguration.Password)));
+                                smtpOptions.setEncryptionOptions(encryptionOptions);
+                
+                                SmtpSessionHelper myHelper=new SmtpSessionHelper(smtpOptions);
+                                
+                                
+                                
+                                if("smtp".equals(type)){
+                                                notifier = new SMTPEmailNotifier();
+                                                notifier.setSendImmediate(Boolean.TRUE);
+                                }
+                                
+                                else if (isRedirectingType(type)){
+                                                redirecting = new RedirectingEmailNotifier();
+                                                redirecting.setDelegate(new SMTPEmailNotifier());
+                                                redirecting.setEmailAddress(currentConfig.getString("redirectingEmailNotifierAddress"));
+                                                if ("redirectToFile".equals(type)) {  
+                                                                redirecting.setFileName(currentConfig.getString("redirectingEmailNotifierFilename"));    
+                                                } else {
+                                                                redirecting.setFileName(null);
+                                                }
+                                                notifier = redirecting;
+                                                notifier.setSendImmediate(Boolean.FALSE);
+                                }
+                
+                                
+                                testDebug("notifier.sendImmediate() ==> "+notifier.sendImmediate()); 
+                                
+                                emailOptions = new EmailOptions();
+                                String testAttachementFile=testEmailOptionsMap.get("testAttachementFile");
+                                testDebug("hello_testAttachementFile == "+testAttachementFile);
+                                for(Map.Entry testEmailOptionsMap : testEmailOptionsMap.entrySet()){
+                                                String optionsKey=testEmailOptionsMap.getKey();
+                                                if(!optionsKey.equals("testAttachementFile")){
+                                                                Object optionsValue=testEmailOptionsMap.getValue();
+                                                                emailOptions.setVariable(optionsKey,optionsValue);
+                                                }
+                                }
+                                if(mailAddresses.size()==1){                        
+                                                emailOptions.setTo(mailAddresses.get(0));
+                                }
+                                if(mailAddresses.size()>1){
+                                                emailOptions.setTo(mailAddresses.get(0));
+                                                mailAddresses.remove(0);
+                                                emailOptions.setCc(Util.listToCsv(mailAddresses));
+                                }
+                                
+                                Session session =myHelper.createSession();
+                                emailTemplate.setFrom(defaultEmailFromAddress);                        
+                                
+                                
+                                emailTemplate=emailTemplate.compile(context,currentConfig,emailOptions);
+                                
+                                javax.mail.Message myMsg= createMessage(emailTemplate,emailOptions,currentConfig,session,testAttachementFile);
+                                                                
+                                try{
+                                                if ((notifier != null) && (notifier.sendImmediate())){       
+                                                                testDebug("sending immediate");                                                                                                                            
+                                                                notifier.sendMessage(smtpOptions,myMsg);      
+                                                }else{     
+                                                                testDebug("redirecting message");          
+                                                                myMsg.writeTo(new FileOutputStream(new File(redirecting.getFileName())));
+                                                }              
+                                }catch(NullPointerException ex){
+                                                ex.printStackTrace();
+                                }
+                }
+  
+                private javax.mail.Message createMessage(EmailTemplate src, EmailOptions options, Configuration config, Session session,String testAttachementFile){
+                                String artName="createMessage";
+                                testDebug(getLogStartMessage(artName));
+                                EmailTemplate localEmailTemplate = src;
+                                EmailOptions localEmailOptions = options;
+                                Configuration localConfiguration = config;
+                                Session localSession = session;     
+                                String domain = getDomain(config);           
+                                javax.mail.Message msg = createMessageWithHeader(src, session, domain);        
+                                MimeBodyPart msgBodyPart = createMessageBodyPart(src);      
+                                MimeMultipart multipart = new MimeMultipart();
+                                
+                                multipart.addBodyPart(msgBodyPart);
+                                                                
+                                msgBodyPart=createImagePart("MailNovaLogo");
+                                multipart.addBodyPart(msgBodyPart);
+                                msgBodyPart=createImagePart("Mizrahi");
+                                multipart.addBodyPart(msgBodyPart);
+                                testDebug("[createMessage]: 1");
+                                if(Util.isNotNullOrEmpty(testAttachementFile)){
+                                                testDebug("[createMessage]: 2");
+                                                msgBodyPart=createAttachementPart(testAttachementFile);
+                                                multipart.addBodyPart(msgBodyPart);
+                                }
+                                
+                                msg.setContent(multipart);
+                                msg.saveChanges();
+                                testDebug(getLogFinishMessage(artName));
+                                return msg;    
+                }
+  
+  
+                private javax.mail.Message createMessageWithHeader(EmailTemplate src, Session session, String domain){
+                                String artName="createMessageWithHeader";
+                                testDebug(getLogStartMessage(artName));
+                    EmailTemplate localEmailTemplate = src;
+                    Session localSession = session;
+                    String str1 = domain;
+                testDebug("[createMessageWithHeader] ==> 1 "+session);
+                                javax.mail.Message msg = new MimeMessage(session);    
+                                testDebug("[createMessageWithHeader] ==> 2 "+session);
+                                try{
+                                                testDebug("[createMessageWithHeader] ==> 3");
+                                                String from = src.getFrom();
+                                                if ((from == null) || (from.length() == 0)) {
+                                                                throw new EmailException("Unable to send email notification, a from address was not specified");
+                                                }
+                                                String to = src.getTo();
+                                                testDebug("[createMessageWithHeader] ==> 4");
+                                                if ((to == null) || (to.length() == 0)) {
+                                                                throw new EmailException("Unable to send email notification, a to address was not specified");
+                                                }
+                                                msg.setFrom(new InternetAddress(from));
+                                                
+                                                msg.setRecipients(javax.mail.Message.RecipientType.TO, InternetAddress.parse(to, false));
+                                                if (null != src.getCc()) {
+                                                                msg.setRecipients(javax.mail.Message.RecipientType.CC, InternetAddress.parse(src.getCc(), false));
+                                                }
+                                                if (null != src.getBcc()) {
+                                                                msg.setRecipients(javax.mail.Message.RecipientType.BCC, InternetAddress.parse(src.getBcc(), false));
+                                                }
+                                                String subject = src.getSubject();
+                                                if (!Util.isNullOrEmpty(subject)) {
+                                                                msg.setSubject(MimeUtility.encodeText(subject, "UTF-8", "Q"));
+                                                }
+                                                testDebug("[createMessageWithHeader] ==> 5");
+                                                msg.setHeader("X-Mailer", "smptsend");
+                  
+                
+                                                msg.setSentDate(new Date());
+                                }catch(EmailException ex){
+                                                ex.printStackTrace();
+                                }
+                                testDebug(getLogFinishMessage(artName));
+                                return msg; 
+                }
+  
+                private MimeBodyPart createMessageBodyPart(EmailTemplate src) {
+                                EmailTemplate localEmailTemplate = src;   
+                                 
+                                MimeBodyPart msgBodyPart = new MimeBodyPart();                     
+                                String body = src.getBody();
+                                    
+                                if (isHtml(body)) {                                            
+                                                testDebug("buidling message");                
+                                                msgBodyPart.setContent(body, "text/html; charset=UTF-8");        
+                                } else {
+                                                
+                                }                  
+                                return msgBodyPart;
+                    
+                }
+  private MimeBodyPart createImagePart(String contentId) {    
+                MimeBodyPart imagePart = new MimeBodyPart();
+                String fileName="/opt/nova/tomcat85/webapps/iiq/ui/images/"+contentId+".png";
+                DataSource fds = new FileDataSource(fileName);              
+                //imagePart.setDataHandler(new DataHandler(fds));
+                imagePart.attachFile(fileName);
+                imagePart.setHeader("Content-ID", "<"+contentId+">");  
+                return imagePart;
+  }
+  
+  private MimeBodyPart createAttachementPart(String testAttachementFile) {
+    
+                    
+                MimeBodyPart textPart = new MimeBodyPart();
+                String fileName=testAttachementFile;
+                DataSource fds = new FileDataSource(fileName);              
+                textPart.setDataHandler(new DataHandler(fds));
+                textPart.setHeader("Content-Type","text/plain; charset=UTF-8");
+                testDebug("going to attch file");
+                textPart.setHeader("Content-Transfer-Encoding","8bit");
+                String[] directories=testAttachementFile.split("/");
+                String attachedFileName=directories[directories.length-1];
+                textPart.setFileName(attachedFileName);
+                testDebug("file attched successfully");
+                return textPart;
+  }
+  
+  private void addAttachmentsToMultipart(EmailOptions options, MimeMultipart multipart){
+                String artName="addAttachmentsToMultipart";
+                testDebug(getLogStartMessage(artName));
+    EmailOptions localEmailOptions = options;
+    MimeMultipart localMimeMultipart = multipart;
+    
+      List attachmentList = options.getAttachments();
+      if (attachmentList != null) {
+        for (EmailFileAttachment attachment : attachmentList)
+        {
+          MimeBodyPart fileAttachment = new MimeBodyPart();
+          fileAttachment.setFileName(attachment.getFileName());
+          DataHandler dh = new DataHandler(new AttachmentDataSource(attachment));
+          
+          fileAttachment.setDataHandler(dh);
+          multipart.addBodyPart(fileAttachment);
+        }
+      } 
+      testDebug(getLogFinishMessage(artName));       
+  }
+  
+  private String getDomain(Configuration config){
+    Configuration localConfiguration = config;
+   
+      String domain = "unknown";
+      if (config != null)
+      {
+        String from = config.getString("defaultEmailFromAddress");
+        if (from != null)
+        {
+          int at = from.indexOf("@");
+          if ((at >= 0) && (at + 1 < from.length())) {
+            domain = from.substring(at + 1);
+          }
+        }
+      }
+
+      return domain;
+   
+    
+  }
+                private boolean isHtml(String body){
+                                String str = body;    
+                                boolean html = false;
+                                if (body != null){
+                                                body = body.trim();
+                                                html = (body.startsWith("<!DOCTYPE")) || (body.startsWith("<HTML")) || (body.startsWith("<html"));
+                                }    
+                                return html;
+                }
+  
+  private boolean isRedirectingType(String type){
+    String str = type;
+    boolean redirectToFile=true;
+         
+      if("redirectToEmail".equals(type)){
+               redirectToFile=false;
+      }
+      return redirectToFile;
+   }

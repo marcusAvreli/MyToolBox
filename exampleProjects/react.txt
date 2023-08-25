@@ -1,0 +1,120 @@
+Windows
+Step 1 - Create the Root Folder
+
+mkdir reactApp
+cd reactApp
+npm init -y
+
+Step 2 - install React and react dom
+npm install react --save
+npm install react-dom --save
+
+Step 3 - Install webpack
+
+npm install webpack --save
+npm install webpack-dev-server --save
+npm install webpack-cli --save
+
+Step 4 - Install babel
+
+npm install babel-core --save-dev
+npm install babel-loader --save-dev
+npm install babel-preset-env --save-dev
+npm install babel-preset-react --save-dev
+npm install html-webpack-plugin --save-dev
+npm install @babel/preset-react --save
+npm install @babel/core --save
+
+Step 5 - Create the Files
+
+type nul > index.html
+type nul > App.js
+type nul > main.js
+type nul > webpack.config.js
+type nul > .babelrc
+
+Step 6 - Set Compiler, Server and Loaders
+Edit file:webpack.config.js
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+
+module.exports = {
+   entry: './main.js',
+   output: {
+      path: path.join(__dirname, '/bundle'),
+      filename: 'index_bundle.js'
+   },
+   devServer: {
+      inline: true,
+      port: 8001
+   },
+   module: {
+      rules: [
+         {
+            test: /\.jsx?$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader',
+           
+         }
+      ]
+   },
+   plugins:[
+      new HtmlWebpackPlugin({
+         template: './index.html'
+      })
+   ]
+}
+
+Edit File:package.json
+"scripts": {
+    "start": "webpack-cli serve --mode development",
+    "build": "webpack --mode production"
+  },
+  
+  
+Step 7 - index.html
+<!DOCTYPE html>
+<html lang = "en">
+   <head>
+      <meta charset = "UTF-8">
+      <title>React App</title>
+   </head>
+   <body>
+      <div id = "app"></div>
+      <script src = 'index_bundle.js'></script>
+   </body>
+</html>
+
+Step 8 − App.jsx and main.js
+Edit File: App.jsx
+import React, { Component } from 'react';
+class App extends Component{
+   render(){
+      return(
+         <div>
+            <h1>Hello World</h1>
+         </div>
+      );
+   }
+}
+export default App;
+
+Edit File:main.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App.js';
+
+ReactDOM.render(<App />, document.getElementById('app'));
+
+Edit File:.bashrc
+
+{ 
+    "presets": ["@babel/preset-react"]
+}
+
+Step 9 - Running the Server
+npm start
+
+
+

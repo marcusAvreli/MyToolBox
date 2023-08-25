@@ -1,0 +1,3 @@
+http://wp.study3.biz/2017/02/freebsd-12-0-current%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%8B%E3%82%89%E3%83%93%E3%83%AB%E3%83%89%E3%81%97%E3%81%9Fsamba4-5-5%E3%82%92install%E3%81%97%E3%81%A6active-directory-domain%E3%81%AE%E6%A7%8B/
+http://howtododifficult.blogspot.co.il/2016/12/samba-active-directory-domain.html
+https://serverfault.com/questions/724574/samba4-active-directory-kerberos-cannot-contact-any-kdc-for-realm-internal-c

@@ -1,0 +1,171 @@
+SSH 
+Start on boot: chkconfig sshd on
+service sshd start
+Static IP
+https://www.putorius.net/2012/10/how-to-configure-static-ip-address-in.html
+Disable Network Manager
+Stop NetworkManager:
+service NetworkManager stop
+or
+/etc/init.d/NetworkManager stop
+or
+systemctl stop NetworkManager
+
+
+GCC
+wget http://people.centos.org/tru/devtools-2/devtools-2.repo -O /etc/yum.repos.d/devtools-2.repo
+yum install devtoolset-2-gcc devtoolset-2-binutils
+yum install devtoolset-2-gcc-c++ devtoolset-2-gcc-gfortran
+scl enable devtoolset-2 bash
+source /opt/rh/devtoolset-2/enable
+DEVELOPER TOOLS
+yum install yum-plugin-remove-with-leaves
+yum groupinstall "Development Tools"
+
+rpm -qa | grep "git"
+rpm -qa | grep "java"
+yum remove mysql --remove-leaves
+
+yum remove java --remove-leaves
+yum remove git --remove-leaves
+yum remove glibc --remove-leaves
+
+JAVA
+cd /opt/
+wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/8u201-b09/42970487e3af4f5aa5bca3f542482c60/jdk-8u201-linux-x64.tar.gz"
+tar xzf jdk-8u211-linux-x64.tar.gz
+cd jdk1.8.0_211/
+alternatives --install /usr/bin/java java /opt/jdk1.8.0_211/bin/java 2
+alternatives --config java
+
+alternatives --install /usr/bin/jar jar /opt/jdk1.8.0_211/bin/jar 2
+alternatives --install /usr/bin/javac javac /opt/jdk1.8.0_211/bin/javac 2
+alternatives --set jar /opt/jdk1.8.0_211/bin/jar
+alternatives --set javac /opt/jdk1.8.0_211/bin/javac
+
+export JAVA_HOME=/opt/jdk1.8.0_211
+export JRE_HOME=/opt/jdk1.8.0_211/jre
+export PATH=$PATH:/opt/jdk1.8.0_211/bin:/opt/jdk1.8.0_211/jre/bin
+
+/etc/bashrc or /etc/environment
+
+yum install curl-devel
+GIT
+yum install zlib-devel
+wget --no-check-certificate https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.21.0.tar.gz
+tar -zxvf git-2.21.0.tar.gz
+mv git-2.21.0 /usr/src
+https://unix.stackexchange.com/questions/370879/java-command-not-found-for-centos-linux-release-7-3-1611
+cd /usr/src/git-2.21.0/
+./configure
+make
+make install
+make clean
+
+git clone git://github.com/javaee/cargotracker.git cargotracker
+http://apache.mivzakim.net/maven/maven-3/3.6.1/source/apache-maven-3.6.1-src.tar.gz
+
+
+GLASSFISH
+/sbin/iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8080 -j ACCEPT
+
+service iptables save
+service iptables restart
+
+/sbin/iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 4848 -j ACCEPT
+
+service iptables save
+service iptables restart
+
+/sbin/iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 9009 -j ACCEPT
+
+service iptables save
+service iptables restart
+
+/sbin/iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 443 -j ACCEPT
+
+service iptables save
+service iptables restart
+
+/sbin/iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT
+
+service iptables save
+service iptables restart
+
+
+
+rpm -ivh MySQL-shared-5.6.15-1.el6.i686.rpm
+https://www.devdungeon.com/content/creating-self-signed-ssl-certificates-openssl
+https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/certificate?view=azure-devops-2019
+https://docs.microsoft.com/en-us/dotnet/core/linux-prerequisites?tabs=netcore2x
+https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/v2-linux?view=azure-devops
+https://docs.microsoft.com/en-us/azure/devops/server/admin/setup-secure-sockets-layer?view=azure-devops#obtaining-certificate
+https://dotnet.microsoft.com/download/dotnet-core/2.2https://unix.stackexchange.com/questions/90450/adding-a-self-signed-certificate-to-the-trusted-list
+krh7tnn33sxoqync6ea5qgr3i5gm4xadcqxswbijrbqc7saqexua
+zfd5jnopd5fkg6zz7sq7j7mrwveumb2fqh3t4wwnrdbiglvmmkpq
+https://www.devdungeon.com/content/creating-self-signed-ssl-certificates-openssl
+https://medium.com/@MRiezebosch/vsts-agent-tfs-on-premise-with-an-unofficial-certificate-for-testing-purposes-only-465541913760
+https://unix.stackexchange.com/questions/90450/adding-a-self-signed-certificate-to-the-trusted-list
+
+APACHE TOMCAT
+cd /home/admin
+wget --no-check-certificate https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.4/src/apache-tomcat-8.5.4-src.tar.gz
+tar -xzvf apache-tomcat-8.5.4-src.tar.gz
+Execute : ant
+Contents of ../output/build is actually tomcat server
+sudo useradd -r -m -U -d /opt/tomcat85 -s /bin/false tomcat
+https://linuxize.com/post/how-to-install-tomcat-9-on-ubuntu-18-04/#step-4-create-a-systemd-unit-file
+Firewall centos 7
+firewall-cmd --permanent --add-port=8080/tcp
+firewall-cmd --reload
+Apache ANT
+https://github.com/hamcrest/JavaHamcrest/commit/2df96c1357e996e3b522aae13e3cd67c4194ef93
+Disable doclint in javadoc build, so that it works on JDK 1.8. See is…
+destdir="build/temp/@{modulename}-${version}-javadoc.jar.contents" author="true" version="true"
+                     use="true" windowtitle="Hamcrest" source="${javaversion}" failonerror="yes" defaultexcludes="yes">
+                <classpath refid="cp-@{modulename}-main"/>
+                <arg value="-Xdoclint:none"/>
+            </javadoc>
+            <jar-module-component modulename="@{modulename}" suffix="-javadoc"/>
+        </sequential>
+
+Linne 1482<arg value="-Xdoclint:none"/>
+
+http://fr.linuxfromscratch.org/view/blfs-8.2-fr/general/apache-ant.html
+cp -v ../jai-core-1.1.3.jar  \
+      ../jai-codec-1.1.3.jar \
+      ../xz-1.0.jar  lib     &&
+unzip -p ../NetRexx-3.06-GA.zip lib/NetRexxC.jar > lib/NetRexxC.jar
+Construct a limited bootstrap version of Apache Ant with the following command:
+
+./bootstrap.sh
+Download the rest of the runtime dependencies with the build script ant fetch.xml :
+
+bootstrap/bin/ant -f fetch.xml -Ddest=system || true &&
+cp -v lib/*.jar lib/optional/
+Build Apache Ant by running the following commands:
+
+./build.sh -Ddist.dir=$PWD/ant-1.10.2 dist
+Install, as a user root.
+
+cp -rv ant-1.10.2 /opt/            &&
+chown -R root:root /opt/ant-1.10.2 &&
+ln -sfv ant-1.10.2 /opt/ant
+
+Configuration information
+Some packages will require that ant be in the search path and that the variable ANT_HOME be set. Satisfy these requirements by typing as a user root :
+
+cat > /etc/profile.d/ant.sh << EOF
+# Begin /etc/profile.d/ant.sh
+
+pathappend /opt/ant/bin
+export ANT_HOME=/opt/ant
+
+# End /etc/profile.d/ant.sh
+EOF
+export PATH=$PATH:$ANT_HOME/bin
+export ANT_HOME=$ANT_HOME:/opt/ant-1.10.2
+
+http://employees.oneonta.edu/higgindm/internet%20programming/Deploying_WebApps_With_Ant.htm
+https://dzone.com/tutorials/java/ant/ant-sample-build-file-war-1.html
+Foundations of CentOS Linux: Enterprise Linux On the Cheap

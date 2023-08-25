@@ -1,0 +1,636 @@
+public class ProjectSAP1 {
+	static SapConnector sapConnector;
+	static Properties prop = null;
+	final static Logger logger = Logger.getLogger(ProjectSAP1.class);
+	private static CountDownLatch latch = new CountDownLatch(1);
+	String fileName = "resultReport.xlsx";
+	public static void main(String[] args) {
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+		Date today = new Date();
+		BEGDA = fmt.format(today);
+		getConfigProperties();
+		String fileName = prop.getProperty("accountSourceFileName");	
+		sapConnector = new SapConnector();
+		sapConnector.init(initParams);
+
+		try {
+			InputStream ips = new FileInputStream(fileName);
+			InputStreamReader ipsr = new InputStreamReader(ips);
+			BufferedReader br = new BufferedReader(ipsr);
+			int availableProcessors = Runtime.getRuntime().availableProcessors();
+			ExecutorService exec = Executors.newFixedThreadPool(availableProcessors);			
+			List<Future<HashMap>> results = new ArrayList<Future<HashMap>>();
+			String line;
+			while ((line = br.readLine()) != null) {
+				String[] s = line.split(",");
+				String identityName = s[0];
+				int numberRuns = 1; // per thread
+				int numberThread = 1;			
+				for (int i = 0; i < 1; i++) {
+					Future<HashMap> fut = exec.submit(new TaskWithResult(latch, i, sapConnector,identityName));
+					results.add(fut);
+				}
+			}
+			br.close();
+			latch.await();
+			exec.shutdown();
+			for (Future<HashMap> fs : results) {
+
+				if (fs.isDone()) {
+					HashMap<String,HashMap<String,String>> resultsMap=fs.get();
+					
+					for(Map.Entry<String, HashMap<String,String>> entryMap : resultsMap.entrySet()) {
+						MyExcel.writeCountryListToFile("resultSappEccTestReport.xlsx", entryMap.getValue(), entryMap.getKey());
+					}
+					//MyExcel.writeMergedRow("resultReport.xlsx");
+				}
+
+			}
+		}
+		catch (Exception e) {
+
+			logger.error("exception", e);
+		}
+
+				
+					
+				
+				
+				
+			
+			
+	} 
+
+
+	
+	public static void getConfigProperties() {
+
+		try (InputStream input = new FileInputStream("resources/app.properties")) {
+
+			prop = new Properties();
+
+			// load a properties file
+			prop.load(input);
+
+		} catch (IOException ex) {
+			logger.debug("configuration file not found", ex);
+
+		}
+
+	}
+
+}
+
+public class SapConfiguration {    
+	
+	    private String host=null;	    
+	
+	    private String user=null;
+	
+	    private String password=null;    	    
+	
+	    private String systemNumber =null;
+	
+	    private String client=null;    
+	
+	    private String lang =null;
+	    
+	    private String poolCapacity =null;
+	    
+	    public SapConfiguration(HashMap <String,String> initParams) {
+	    	this.host=initParams.get("host");
+	    	this.user=initParams.get("user");
+	    	this.password=initParams.get("password");
+	    	this.systemNumber=initParams.get("systemNumber");
+	    	this.client=initParams.get("client");
+	    	this.lang=initParams.get("lang");
+	    	this.poolCapacity=initParams.get("poolCapacity");
+	    }
+	
+	    public Properties getDestinationProperties() {
+	        //adapt parameters in order to configure a valid destination
+	        Properties connectProperties = new Properties();        	
+        	
+            connectProperties.setProperty(DestinationDataProvider.JCO_ASHOST, host);	      
+	        
+	        connectProperties.setProperty(DestinationDataProvider.JCO_SYSNR, systemNumber);	       
+	        connectProperties.setProperty(DestinationDataProvider.JCO_CLIENT, client);
+	        connectProperties.setProperty(DestinationDataProvider.JCO_LANG, lang);        	        
+            connectProperties.setProperty(DestinationDataProvider.JCO_USER, user);        
+            connectProperties.setProperty(DestinationDataProvider.JCO_PASSWD, password);           
+            connectProperties.setProperty(DestinationDataProvider.JCO_POOL_CAPACITY, poolCapacity);
+            
+	        return connectProperties;
+	    }
+	
+	  
+}
+
+
+
+public class SapConnector {
+
+	final static Logger logger = Logger.getLogger(SapConnector.class);
+	private static final String SEPARATOR = "."; // between structure and his attributes, for example ADDRESS.FIRSTNAME
+	// used BAPI functions in connector
+	private static final String[] BAPI_FUNCTION_LIST = { "BAPI_USER_GETLIST", "BAPI_USER_GET_DETAIL",
+			"BAPI_USER_CREATE1", "BAPI_TRANSACTION_COMMIT", "BAPI_TRANSACTION_ROLLBACK", "BAPI_USER_DELETE",
+			"BAPI_USER_CHANGE", "BAPI_USER_LOCK", "BAPI_USER_UNLOCK", "BAPI_USER_ACTGROUPS_ASSIGN",
+			"RFC_GET_TABLE_ENTRIES", "SUSR_USER_CHANGE_PASSWORD_RFC", "SUSR_GENERATE_PASSWORD",
+			"BAPI_USER_PROFILES_ASSIGN", "BAPI_HELPVALUES_GET", "SUSR_LOGIN_CHECK_RFC", "PASSWORD_FORMAL_CHECK",
+			"SUSR_GET_ADMIN_USER_LOGIN_INFO"
+			// , "SUSR_BAPI_USER_UNLOCK"
+
+			/* "BAPI_ADDRESSORG_GETDETAIL", "BAPI_ORGUNITEXT_DATA_GET", */ /*
+																			 * BAPI to Read Organization Addresses, Get
+																			 * data on organizational unit
+																			 */
+
+			/* "BAPI_OUTEMPLOYEE_GETLIST", "BAPI_EMPLOYEE_GETDATA", */ /*
+																		 * List of employees in a payroll area, Find
+																		 * Personnel Numbers for Specified Search
+																		 * Criteria - not found in SAP :(((
+																		 */
+
+			/*
+			 * "BAPI_USER_LOCPROFILES_ASSIGN", "BAPI_USER_LOCPROFILES_READ",
+			 * "BAPI_USER_LOCPROFILES_DELETE"
+			 */ /* CUA landscape */
+			/*
+			 * "BAPI_USER_LOCACTGROUPS_READ", "BAPI_USER_LOCACTGROUPS_DELETE",
+			 * "BAPI_USER_LOCACTGROUPS_ASSIGN"
+			 */ /* CUA landscape */
+
+			/* "BAPI_USER_EXISTENCE_CHECK", */ /* handled over Exception and parameter RETURN */
+			/* "BAPI_USER_ACTGROUPS_DELETE", */ /* replaced with BAPI_USER_ACTGROUPS_ASSIGN */
+			/* "BAPI_USER_PROFILES_DELETE" */ /* replaced with BAPI_USER_PROFILES_ASSIGN, NON CUA landscape */
+			/* "BAPI_USER_DISPLAY", */ /* Don't need, using BAPI_USER_GET_DETAIL */
+			/* "SUSR_BAPI_USER_LOCK", "BAPI_USER_CREATE" */ /* DO NOT USE ! */
+	};
+
+	// SAP roles, groups, profiles
+	private static final String AGR_NAME = "AGR_NAME";
+	public static final String ACTIVITYGROUPS = "ACTIVITYGROUPS";
+	public static final String ACTIVITYGROUPS__ARG_NAME = ACTIVITYGROUPS + SEPARATOR + AGR_NAME;
+
+	private static final String BAPIPROF = "BAPIPROF";
+	public static final String PROFILES = "PROFILES";
+	public static final String PROFILES_BAPIPROF = PROFILES + SEPARATOR + BAPIPROF;
+	public static final String PROFILE_NAME = "PROFILE"; // also as objectClass name
+
+	private static final String USERGROUP = "USERGROUP";
+	public static final String GROUPS = "GROUPS";
+	public static final String GROUPS_USERGROUP = GROUPS + SEPARATOR + USERGROUP;
+
+	// see for example
+	// http://www.sapdatasheet.org/abap/func/BAPI_USER_GET_DETAIL.html
+	// these "Paremeter name"-s we can read and write in Type "Exporting"
+	private static final String[] READ_WRITE_PARAMETERS = { "ADDRESS", "DEFAULTS", "UCLASS", "LOGONDATA", "ALIAS",
+			"COMPANY", "REF_USER" };
+	// these "Paremeter name"-s we can only read (don't have appropirade parameters
+	// in BAPI_USER_CHANGE)
+	static final String[] READ_ONLY_PARAMETERS = { "ISLOCKED", "LASTMODIFIED", "SNC", "ADMINDATA", "IDENTITY" };
+	// variable version of READ_ONLY_PARAMETERS that could be set through connector
+	// configuration
+	private String[] readOnlyParams;
+	// these attributes in "ADDRESS" parameter name we can't update, only set,
+	// because "ADDRESSX" in BAPI_USER_CHANGE don't contains these fields
+	private static final String[] CREATE_ONLY_ATTRIBUTES = { "ADDRESS" + SEPARATOR + "COUNTY_CODE",
+			"ADDRESS" + SEPARATOR + "COUNTY", "ADDRESS" + SEPARATOR + "TOWNSHIP_CODE",
+			"ADDRESS" + SEPARATOR + "TOWNSHIP", "DEFAULTS" + SEPARATOR + "CATTKENNZ" };
+
+	// supported tables reading & writing in tables parameter type
+	// "UCLASSSYS", "EXTIDHEAD", "EXTIDPART", "SYSTEMS" not supported yet
+	public static final String[] TABLETYPE_PARAMETER_LIST = { "PARAMETER", PROFILES, ACTIVITYGROUPS, "RETURN", "ADDTEL",
+			"ADDFAX", "ADDTTX", "ADDTLX", "ADDSMTP", "ADDRML", "ADDX400", "ADDRFC", "ADDPRT", "ADDSSF", "ADDURI",
+			"ADDPAG", "ADDCOMREM", "PARAMETER1", GROUPS/* , "UCLASSSYS", "EXTIDHEAD", "EXTIDPART", "SYSTEMS" */ };
+
+	// these tables on update use "change flag" explicitly as is
+	private static final List<String> TABLES_WITH_CHANGE_FLAG = Arrays.asList(GROUPS, "PARAMETER", "PARAMETER1");
+	// these communication data tables on update use "change flag" in "ADDCOMX"
+	private static final List<String> COMMUNICATION_DATA_TABLES_WITH_CHANGE_FLAG = Arrays.asList("ADDTEL", "ADDFAX",
+			"ADDTTX", "ADDTLX", "ADDSMTP", "ADDRML", "ADDX400", "ADDRFC", "ADDPRT", "ADDSSF", "ADDURI", "ADDPAG",
+			"ADDCOMREM");
+
+	// with these tables we can manipulate as XML line with all his attributes (for
+	// example ACTIVITYGROUPS)
+	// and also as only string keys (for example ACTIVITYGROUPS.AGR_NAME) - used in
+	// midPoint associations
+	public static final Map<String, String> TABLETYPE_PARAMETER_KEYS = new HashMap<>();
+
+	static {
+		TABLETYPE_PARAMETER_KEYS.put(ACTIVITYGROUPS, AGR_NAME);
+		TABLETYPE_PARAMETER_KEYS.put(PROFILES, BAPIPROF);
+		TABLETYPE_PARAMETER_KEYS.put(GROUPS, USERGROUP);
+	}
+
+	// LOGONDATA
+	private static final String GLTGV = "GLTGV"; // User valid from, AttributeInfo ENABLE_DATE, "LOGONDATA.GLTGV"
+	private static final String GLTGB = "GLTGB"; // User valid to, AttributeInfo DISABLE_DATE; "LOGONDATA.GLTGB"
+
+	// ISLOCKED
+	private static final String LOCAL_LOCK = "LOCAL_LOCK"; // Local_Lock - Logon generally locked for the local system
+	private static final String WRNG_LOGON = "WRNG_LOGON"; // WRNG_LOGON - Password logon locked by incorrect logon
+															// attempts
+
+	public static final String USERNAME = "USERNAME";
+
+	// PASSWORD
+	private static final String BAPIPWD = "BAPIPWD";
+
+	// USER_LOGIN_INFO prefix
+	private static final String USER_LOGIN_INFO = "USER_LOGIN_INFO";
+
+	public static final SimpleDateFormat SAP_DF = new SimpleDateFormat("yyyy-MM-dd");
+	public static final SimpleDateFormat DATE_TIME = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+	private static final String SELECT = "X";
+
+	private SapConfiguration configuration;
+	private JCoDestination destination;
+	private Map<String, Integer> sapAttributesLength = new HashMap<String, Integer>();
+	private Map<String, String> sapAttributesType = new HashMap<String, String>();
+
+	public void init(HashMap<String, String> initParams) {
+		this.configuration = new SapConfiguration(initParams);
+		logger.debug("Initialization start, configuration:");
+
+		CustomDestinationDataProvider myProvider = CustomDestinationDataProvider.getInstance();
+
+		// register the provider with the JCo environment;
+		// catch IllegalStateException if an instance is already registered
+		try {
+			if (!com.sap.conn.jco.ext.Environment.isDestinationDataProviderRegistered()) {
+				com.sap.conn.jco.ext.Environment.registerDestinationDataProvider(myProvider);
+			}
+		} catch (IllegalStateException providerAlreadyRegisteredException) {
+			// somebody else registered its implementation,
+			// stop the execution
+			logger.error("init", providerAlreadyRegisteredException);
+		}
+
+		// properties for destination from config
+		Properties props = this.configuration.getDestinationProperties();
+		String destinationName = "SAP GW";
+
+		Properties destProps = myProvider.getDestinationProperties(destinationName);
+		if (destProps == null || !destProps.equals(props)) {
+			myProvider.setDestinationProperties(destinationName, props);
+		}
+
+		// create destination & ping it
+		try {
+			// checkAlive();
+			this.destination = JCoDestinationManager.getDestination(destinationName);
+			this.destination.ping();
+		} catch (JCoException e) {
+			logger.debug("SapConnector init Exception", e);
+		}
+
+		// validate & initialize tables
+
+		// read schema
+
+		logger.debug("Initialization finished");
+	}
+
+	public void checkAlive() {
+		if (this.destination == null || !this.destination.isValid()) {
+			logger.debug("check alive: FAILED");
+
+		}
+		try {
+			this.destination.ping();
+		} catch (JCoException e) {
+
+			logger.debug("Connection ping failed");
+		}
+		logger.debug("check alive: OK");
+	}
+
+	public void dispose() {
+		this.configuration = null;
+		if ((this.destination != null) && (JCoContext.isStateful(this.destination))) {
+			logger.debug("disposing");
+		}
+	}
+
+	
+
+	// public JCoParameterList callBapiUpgraded(String bapiName, HashMap
+	// inputParams)
+	public HashMap callBapiUpgraded(String bapiName, HashMap inputParams) {
+		
+		HashMap<String, String> resultMap = new HashMap<String, String>();
+		String pattern = "yyyy-MM-dd HH:mm:ss.SSS";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		Date dateRepositoryAccessStart = new Date();
+		String strFormattedDate =null;
+		
+		JCoFunction jcoFunction = getJcoFunction(bapiName);
+		Date dateRepositoryAccessFinish = new Date();
+		long getRepositoryTime =dateRepositoryAccessFinish.getTime()-dateRepositoryAccessStart.getTime();
+		resultMap.put("Access Repository", String.valueOf(getRepositoryTime));
+		JCoFunction commitfunction;
+		JCoParameterList outTables = null;
+
+		JCoFieldIterator iter = jcoFunction.getImportParameterList().getFieldIterator();
+
+		while (iter.hasNextField()) {
+
+			JCoField f = iter.nextField();
+			String fieldName = f.getName();
+
+			if (fieldName.equals("USERNAME")) {
+				String identityName = (String) inputParams.get("USERNAME");
+				f.setValue(identityName);
+				resultMap.put("Identity Name", identityName);
+			}
+
+		}
+
+		JCoParameterList jcoParameterList = jcoFunction.getImportParameterList();
+		JCoStructure inputStructureGroupsX = jcoParameterList.getStructure("GROUPSX");
+		inputStructureGroupsX.setValue("USERGROUP", "X");
+		
+		JCoStructure jcoLogonDataStructureX = jcoParameterList.getStructure("LOGONDATAX");
+		jcoLogonDataStructureX.setValue("CODVC", "X");
+		JCoStructure jcoAddressStructureX = jcoParameterList.getStructure("ADDRESSX");
+		jcoAddressStructureX.setValue("FIRSTNAME","X");
+		jcoAddressStructureX.setValue("LASTNAME","X");
+		jcoAddressStructureX.setValue("E_MAIL","X");
+		JCoStructure jcoSncStructureX = jcoParameterList.getStructure("SNCX");
+		jcoSncStructureX.setValue("PNAME", "X");
+		
+		
+		
+		//logger.info("jcoLogonDataStructureX" + jcoLogonDataStructureX.toXML());
+		//logger.info("jcoAddressStructureX" + jcoAddressStructureX.toXML());
+		//logger.info("jcoSncStructureX" + jcoSncStructureX.toXML());
+		JCoParameterList tableParameters = jcoFunction.getTableParameterList();
+		JCoTable groupsTable = tableParameters.getTable("GROUPS");
+		groupsTable.appendRow();
+		groupsTable.setValue("USERGROUP", "MEHISH");
+		
+		
+		
+		
+		JCoStructure logonDataStructure= jcoParameterList.getStructure("LOGONDATA");
+		
+		
+		
+		logonDataStructure.setValue("CODVC",inputParams.get("codvc"));
+		
+		
+		JCoStructure addressTable = jcoParameterList.getStructure("ADDRESS");
+	
+		addressTable.setValue("FIRSTNAME",inputParams.get("firstName"));
+		addressTable.setValue("LASTNAME",inputParams.get("lastName"));
+		addressTable.setValue("E_MAIL",inputParams.get("email"));
+		
+		
+		JCoStructure sncTable = jcoParameterList.getStructure("SNC");
+		
+		sncTable.setValue("PNAME",inputParams.get("sncName"));
+		
+		
+
+		Date dateBeginNow = new Date();
+		
+		strFormattedDate = simpleDateFormat.format(dateBeginNow);
+		resultMap.put("Start Execution", strFormattedDate);
+
+		try {
+			jcoFunction.execute(destination);
+		} catch (JCoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Date dateEndNow = new Date();
+		strFormattedDate = simpleDateFormat.format(dateEndNow);
+		resultMap.put("Finish Execution", strFormattedDate);
+		long umtbRunTime = dateEndNow.getTime() - dateBeginNow.getTime();
+		resultMap.put("Execution Time", String.valueOf(umtbRunTime));
+
+		// logger.debug("Calling BAPI " + bapiName + " - AFTER: " + strFormattedDate);
+
+		AbapException[] exception = jcoFunction.getExceptionList();
+		JCoParameterList exportParameterList = jcoFunction.getExportParameterList();
+		JCoParameterList tableParameterList = jcoFunction.getTableParameterList();
+		JCoParameterFieldIterator iterator = tableParameterList.getParameterFieldIterator();
+		while (iterator.hasNextField()) {
+			JCoField object = iterator.nextField();
+			String stringType = object.getTypeAsString();
+			if (stringType.equals("TABLE")) {
+				JCoTable jcoTable = object.getTable();
+				String tableName = object.getName();
+
+			} else {
+
+			}
+
+		}
+		if (null != exportParameterList) {
+			logger.info("Export Paramter List: " + exportParameterList.toXML());
+		}
+		
+		String sapReturnMessage = getReturnMessage(jcoFunction);
+		
+		resultMap.put("Sap Return Message", sapReturnMessage);
+		
+		
+		return resultMap;
+	}
+
+	public JCoFunction getJcoFunction(String bapiName) {
+		
+		JCoDestination destination = this.destination;
+		JCoRepository sapRepository;
+		JCoFunction jcoFunction = null;
+		JCoFunctionTemplate template2 = null;
+		try {
+			sapRepository = destination.getRepository();
+			String tid = destination.createTID();
+			template2 = sapRepository.getFunctionTemplate(bapiName);
+			jcoFunction = template2.getFunction();
+		} catch (JCoException e) {
+			e.printStackTrace();
+			logger.error("Could not get repository or execute bapi", e);
+		}
+		
+		return jcoFunction;
+	}
+
+	
+	public String getReturnMessage(JCoFunction jcoFunction) {
+		JCoTable returnTable = jcoFunction.getTableParameterList().getTable("RETURN");
+		String sapReturnMessage = null;
+		JCoFieldIterator fieldIterator = returnTable.getFieldIterator();
+		while (fieldIterator.hasNextField()) {
+
+			JCoField tableField = fieldIterator.nextField();
+			String fieldName = tableField.getName();
+			if (fieldName.equals("MESSAGE")) {
+				sapReturnMessage = (String) tableField.getValue();
+				// logger.info(fieldName+ ": "+tableField.getValue());
+				
+			}
+		}
+		return sapReturnMessage;
+	}
+	public HashMap callBapiGetDetail(String bapiName, HashMap inputParams) {
+		
+		HashMap<String, String> resultMap = new HashMap<String, String>();
+		String pattern = "yyyy-MM-dd HH:mm:ss.SSS";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		
+		Date dateRepositoryAccessStart = new Date();
+		
+		
+		JCoFunction jcoFunction = getJcoFunction(bapiName);
+		Date dateRepositoryAccessFinish = new Date();
+		long getRepositoryTime =dateRepositoryAccessFinish.getTime()-dateRepositoryAccessStart.getTime();
+		resultMap.put("Access Repository", String.valueOf(getRepositoryTime));
+		// JCoFunction commitfunction;
+		// JCoParameterList outTables = null;
+
+		// logger.info(jcoFunction.toXML());
+		JCoFieldIterator iter = jcoFunction.getImportParameterList().getFieldIterator();
+		jcoFunction.getImportParameterList().setValue("USERNAME", inputParams.get("USERNAME"));
+		while (iter.hasNextField()) {
+
+			JCoField f = iter.nextField();
+			String fieldName = f.getName();
+
+			
+		}
+		try {
+			Date dateBeginNow = new Date();
+			
+			String strFormattedDate = simpleDateFormat.format(dateBeginNow);
+			resultMap.put("Start Execution", strFormattedDate);
+			jcoFunction.execute(this.destination);
+		
+			Date dateEndNow = new Date();
+			strFormattedDate = simpleDateFormat.format(dateEndNow);
+			resultMap.put("Finish Execution", strFormattedDate);
+			long umtbRunTime = dateEndNow.getTime() - dateBeginNow.getTime();
+			resultMap.put("Execution Time", String.valueOf(umtbRunTime));
+		} catch (JCoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		JCoParameterList jcoParameterList = jcoFunction.getExportParameterList();
+		JCoFieldIterator outputIterator = jcoParameterList.getFieldIterator();
+		JCoStructure jcoLogonDataStructure = jcoParameterList.getStructure("LOGONDATA");
+		JCoStructure jcoAddressStructure = jcoParameterList.getStructure("ADDRESS");
+		JCoStructure jcoSncStructure = jcoParameterList.getStructure("SNC");
+		// JCoStructure jcoIsLockedStructure= jcoParameterList.getStructure("ISLOCKED");
+
+		String codvc = jcoLogonDataStructure.getString("CODVC");
+
+		String sncName = jcoSncStructure.getString("PNAME");
+
+		String firstName = jcoAddressStructure.getString("FIRSTNAME");
+		String lastName = jcoAddressStructure.getString("LASTNAME");
+		String email = jcoAddressStructure.getString("E_MAIL");
+		String persNo = jcoAddressStructure.getString("PERS_NO");
+
+		
+		
+		resultMap.put("codvc", codvc);
+		resultMap.put("sncName", sncName);
+		resultMap.put("firstName", firstName);
+		resultMap.put("lastName", lastName);
+		resultMap.put("email", email);
+		resultMap.put("persNo", persNo);
+		
+
+		
+		return resultMap;
+	}
+
+}
+
+
+class TaskWithResult implements Callable<HashMap> {
+
+	int id;
+	CountDownLatch latch;
+	SapConnector sapConnector = null;
+	String identityName;
+	public TaskWithResult(CountDownLatch latch, int id, SapConnector sapConnector,String identityName) {
+		this.sapConnector = sapConnector;
+		this.id = id;
+		this.latch = latch;
+		this.identityName=identityName;
+	}
+
+	@Override
+	public HashMap call() throws Exception {
+		
+		HashMap<String,String> localExecutionMap = new HashMap<String,String>();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS");		
+		Date startExection = new Date();
+		
+		Date dateBeginNow = new Date();
+		String pattern = "yyyy-MM-dd HH:mm:ss.SSS";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		String strFormattedDate = simpleDateFormat.format(dateBeginNow);
+		localExecutionMap.put("Start Execution", strFormattedDate);
+		
+		
+		
+		HashMap<String, String> resultMap = new HashMap<String, String>();
+		
+		HashMap<String,HashMap<String,String>> masterMap = new HashMap<>();
+		
+		//resultMap = bapiUserChange(identityName);
+		HashMap<String,String> originalDetailsMap = bapiUsergGetDetail(identityName);
+		masterMap.put("Read", originalDetailsMap);
+		HashMap<String,String> paramsToUpdate = new HashMap<String,String>();
+		paramsToUpdate.put("codvc", "1");
+		paramsToUpdate.put("sncName", <updated snc string >);
+		paramsToUpdate.put("firstName", "Test First Name");
+		paramsToUpdate.put("lastName", "Test Last Name");
+		paramsToUpdate.put("email", <updated email string>);
+		resultMap = bapiUserChange(identityName,paramsToUpdate);
+		masterMap.put("Write1", resultMap);
+		resultMap = bapiUserChange(identityName,originalDetailsMap);
+		
+	//	Date finishExection = new Date();
+	//	long executionTime = finishExection.getTime() - startExection.getTime();	
+		latch.countDown();
+		
+		//String strStartExection = formatter.format(startExection);
+		//String strFinishExecution = formatter.format(finishExection);
+		
+		masterMap.put("Write2", resultMap);
+		
+		Date dateEndNow = new Date();
+		strFormattedDate = simpleDateFormat.format(dateEndNow);
+		localExecutionMap.put("Finish Execution", strFormattedDate);
+		long umtbRunTime = dateEndNow.getTime() - dateBeginNow.getTime();
+		localExecutionMap.put("Execution Time", String.valueOf(umtbRunTime));
+		masterMap.put("Total", localExecutionMap);
+		return masterMap;
+	}
+	
+	 public HashMap bapiUserChange(String identityName,HashMap <String,String> inputParams) {			
+			String bapiName="BAPI_USER_CHANGE";			
+			inputParams.put("USERNAME",identityName);					
+			HashMap<String,String> resultMap = sapConnector.callBapiUpgraded(bapiName, inputParams);
+			return resultMap;
+		
+		}
+	 public HashMap bapiUsergGetDetail(String identityName) {			
+			
+			String bapiName="BAPI_USER_GET_DETAIL";
+			HashMap<String,String> inputParams=new HashMap<String,String>();
+			inputParams.put("USERNAME",identityName);		
+			HashMap<String,String> resultMap = sapConnector.callBapiGetDetail(bapiName, inputParams);
+			return resultMap;
+		
+		}
+
+}

@@ -1,0 +1,210 @@
+#!/usr/bin/perl
+
+ 
+
+# purpose: generate a list of href hyperlinks from a pipe-delimited database.
+
+#          this program reads from an input file, and writes to standard out (stdout).
+
+#
+
+# usage:   perl this_program input_file_name > output_file_name
+
+ 
+
+# the first argument is the filename we read from
+
+@logFiles = qw(sailpoint.log sailpoint.log.1 sailpoint.log.11 sailpoint.log.12 sailpoint.log.13 sailpoint.log.14 sailpoint.log.15 sailpoint.log.16 sailpoint.log.17 sailpoint.log.18 sailpoint.log.19 sailpoint.log.2 sailpoint.log.20 sailpoint.log.3 sailpoint.log.5 sailpoint.log.6 sailpoint.log.7 sailpoint.log.8 sailpoint.log.9);
+
+@strings = [];
+
+ 
+
+$roleTranslationsFile = $ARGV[0];
+
+open(my $csvData,'<',$roleTranslationsFile) or die "Could not read from $roleTranslationsFile, program halting. $!";
+
+while (my $line= <$csvData>)
+
+{
+
+    # work with the current record
+
+    chomp $line;
+
+#    ($roleName,$roleNameReplaceBy)
+
+     my @fields= split ",",$line;
+
+push(@strings,@fields[0].".*\$");
+
+$roleNameReplaceBy=@fields[1];
+
+  #print "$roleName,$roleNameReplaceBy";
+
+#print "Processing line $line\n";
+
+}
+
+print "Size of strings is ",scalar @strings,"\n";
+
+#my $reg_exp = join '|', @strings;
+
+my $reg_exp = "(?:(?<cn>CN=(?<name>[^,]*)),)?(?:(?<path>(?:(?:CN|OU)=[^,]+,?)+),)?(?<domain>(?:DC=[^,]+,?)+)";
+
+ 
+
+ 
+
+ 
+
+foreach $logFile (@logFiles) {
+
+print  "Processing $logFile\n";
+
+ 
+
+#$roleTranslationsFile = $ARGV[0];
+
+#open(my $csvData,'<',$roleTranslationsFile) or die "Could not read from $roleTranslationsFile, program halting. $!";
+
+#while (my $line= <$csvData>)
+
+#{
+
+    # work with the current record
+
+  #  chomp $line;
+
+#    ($roleName,$roleNameReplaceBy)
+
+ #    my @fields= split ",",$line;
+
+#push(@strings,@fields[0].".*\$");
+
+#$roleNameReplaceBy=@fields[1];
+
+  #print "$roleName,$roleNameReplaceBy";
+
+#print "Processing line $line\n";
+
+#}
+
+#print "Size of strings is ",scalar @strings,"\n";
+
+#my $reg_exp = join '|', @strings;
+
+ 
+
+#my $logFile = "logFile";
+
+open(my $in,  '<', "sailpointCase/$logFile") || die "cannot open $logFile for read $!";
+
+open(my $out, '>', "sailpointCase/$logFile.tmp") || die "cannot open $logFile.tmp for write $!";
+
+ 
+
+ 
+
+#my $reg_exp = join '|', @strings;
+
+# loop through the input file
+
+#while (my $line= <$csvData>)
+
+#{
+
+    # work with the current record
+
+  #  chomp $line;
+
+#    ($roleName,$roleNameReplaceBy)
+
+ #    my @fields= split ",",$line;
+
+#push(@strings,@fields[0].".*\$");
+
+#$roleNameReplaceBy=@fields[1];
+
+  #print "$roleName,$roleNameReplaceBy";
+
+#print "Processing line $line\n";
+
+#}
+
+#print "Size of strings is ",scalar @strings,"\n";
+
+#my $reg_exp = join '|', @strings;
+
+ 
+
+#open(my $in,  '<', $logFile) || die "cannot open $logFile for read $!";
+
+#open(my $out, '>', "$logFile.tmp") || die "cannot open $logFile.tmp for write $!";
+
+ 
+
+  while(my $lineIn= <$in>)
+
+{
+
+chomp $lineIn;
+
+#print "Processing line 2  $line\n";
+
+ 
+
+my $reg_exp = qr($reg_exp);            # This is now a regular expression
+
+    #s/\b$roleName\b/$roleNameReplaceBy/g;
+
+    if($lineIn=~ $reg_exp){
+
+                print "Found\n";
+
+                $lineIn =~ s/$reg_exp/roleNameReplaceBy/g;
+
+                print $out "$lineIn\n";
+
+}
+
+else{
+
+print $out "$lineIn\n";
+
+}
+
+  
+
+}
+
+ 
+
+ 
+
+ 
+
+close(FILE);
+
+close ($in);
+
+close ($out);
+
+ 
+
+# save copy of original file
+
+rename ("sailpointCase/$logFile","originalFiles/$logFile")  || die "problem with rename $!";
+
+# replace original with the modified version
+
+ 
+
+rename ("sailpointCase/$logFile.tmp", "sailpointResult/$logFile") || die "problem with rename $!";
+
+ 
+
+
+}#loop through log files
+
+ 

@@ -1,0 +1,272 @@
+public class customXmlparser {
+
+     private Document input;
+     private DocumentBuilderFactory factory;
+     private DocumentBuilder builder;
+     private Document parentInput;
+     private NodeList parentNodeList;
+     final Logger logger = Logger.getLogger(customXPathQuery.class);
+
+     public customXmlparser() {
+           // 1- Build the doc from the XML file
+
+     }
+
+     public void getParentNode(String resourcePath) throws ParserConfigurationException, IOException, SAXException {
+           // setting xml part to insert into destination xml
+           factory = DocumentBuilderFactory.newInstance();
+
+           factory.setNamespaceAware(true);
+
+           builder = factory.newDocumentBuilder();
+
+           parentInput = builder.parse(resourcePath);
+
+           XPath xpath = XPathFactory.newInstance().newXPath();
+           try {
+                parentNodeList = (NodeList) xpath.evaluate("/*", parentInput, XPathConstants.NODESET);
+
+           } catch (XPathExpressionException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+           }
+
+     }
+
+     public void init(String resourcePath) throws ParserConfigurationException, IOException, SAXException {
+
+           factory = DocumentBuilderFactory.newInstance();
+           factory.setNamespaceAware(true);
+           builder = factory.newDocumentBuilder();
+           input = builder.parse(resourcePath);
+     }
+
+     public void updateValues(String destinationFileAbsPath) {
+
+           // input - source xml
+
+           XPath xpath = XPathFactory.newInstance().newXPath();
+           NodeList sourceNodes;
+           try {
+                sourceNodes = (NodeList) xpath.evaluate("/Bundle/ProvisioningForms", input, XPathConstants.NODESET);
+
+                int sourceNodesLength = sourceNodes.getLength();
+
+                
+
+                if (sourceNodesLength == 0) {
+
+                     Element element = (Element) parentNodeList.item(0);
+                     Node copiedNode = input.importNode(element, true);
+                     input.getDocumentElement().appendChild(copiedNode);
+
+                } else {
+
+                }
+
+                // 4- Save the result to a new XML doc
+                Transformer xformer = TransformerFactory.newInstance().newTransformer();
+                try {
+                     xformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                     DocumentType doctype = input.getDoctype();
+                     if (doctype != null) {
+
+                           xformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, doctype.getPublicId());
+                           xformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, doctype.getSystemId());
+                     } else {
+
+                     }
+                     xformer.transform(new DOMSource(input), new StreamResult(new File(destinationFileAbsPath)));
+                } catch (TransformerException e) {
+                     // TODO Auto-generated catch block
+                     e.printStackTrace();
+                }
+
+           } catch (XPathExpressionException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+           } catch (TransformerConfigurationException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+           } catch (TransformerFactoryConfigurationError e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+           }
+
+     }
+     
+     public void getMissingRequirements(String destinationFileAbsPath) {
+
+           // input - source xml
+
+           XPath xpath = XPathFactory.newInstance().newXPath();
+           NodeList requirementsNodes;
+           try {
+                requirementsNodes = (NodeList) xpath.evaluate("/Bundle/Requirements", input, XPathConstants.NODESET);
+
+                int sourceNodesLength = requirementsNodes.getLength();
+
+                
+
+                if (sourceNodesLength == 0) {
+
+                     NodeList nodesBundle = (NodeList)xpath.evaluate("/*",input, XPathConstants.NODESET);
+                
+         for (int idx = 0; idx < nodesBundle.getLength(); idx++) {
+             Node valueName = nodesBundle.item(idx).getAttributes().getNamedItem("name");
+             Node valueDisName = nodesBundle.item(idx).getAttributes().getNamedItem("displayName");
+             String name = valueName.getNodeValue();
+             String disaplyName = valueDisName.getNodeValue();
+             logger.info("Name: "+name);
+             logger.info("Display Name: "+disaplyName);
+             logger.info("****************");
+                
+
+                }
+                }
+           } catch (XPathExpressionException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+           }  catch (TransformerFactoryConfigurationError e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+           }
+
+     }
+
+
+    public void saveNameAndDisplayName(String destinationFileAbsPath) {
+    new ArrayList<String>();
+    
+     XPath xpath = XPathFactory.newInstance().newXPath();
+    NodeList nodesBundle;
+     
+         try {
+                     nodesBundle = (NodeList)xpath.evaluate("/*",
+                             input, XPathConstants.NODESET);
+                
+         for (int idx = 0; idx < nodesBundle.getLength(); idx++) {
+             Node valueName = nodesBundle.item(idx).getAttributes().getNamedItem("name");
+             Node valueDisName = nodesBundle.item(idx).getAttributes().getNamedItem("displayName");
+             String valName = valueName.getNodeValue();
+             try {
+              BufferedWriter myWriter=new BufferedWriter(new FileWriter("./myCsv.txt",true));
+                           
+                     myWriter.append(valName+","+valueDisName.getNodeValue()+"\n");
+                        
+                      myWriter.close();
+                     } catch (IOException e) {
+                           // TODO Auto-generated catch block
+                           e.printStackTrace();
+                     }
+           
+             
+          }
+         } catch (XPathExpressionException e1) {
+                     // TODO Auto-generated catch block
+                     e1.printStackTrace();
+                }
+         
+           
+     
+
+    }
+     
+}
+public class XmlDocGenerator {
+     Document resultDocument;
+     public void generateXml( String destinationDir, String destinationFileName) {
+           
+           
+           Element inheritanceElement = null;
+           Element ownerElement = null;
+           Element requirementsElement = null;
+           Element selectorElement = null;
+
+           // instance of a DocumentBuilderFactory
+           DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+           try {
+                // use factory to get an instance of document builder
+                DocumentBuilder db = dbf.newDocumentBuilder();
+                // create instance of DOM
+                resultDocument = db.newDocument();
+                resultDocument.setXmlStandalone(true);
+                // create the root element
+                Element rootElement = resultDocument.createElement("Bundle");
+
+                // create data elements and place them under root
+                
+                inheritanceElement = resultDocument.createElement("Inheritance");
+                ownerElement = resultDocument.createElement("Owner");
+                requirementsElement = resultDocument.createElement("Requirements");
+                selectorElement = resultDocument.createElement("Selector");
+
+                // ownerElement.appendChild(document.createTextNode("BundleValue"));
+                rootElement.appendChild(createAttributesChild());
+                rootElement.appendChild(inheritanceElement);
+                rootElement.appendChild(ownerElement);
+                rootElement.appendChild(requirementsElement);
+                rootElement.appendChild(selectorElement);
+
+                resultDocument.appendChild(rootElement);
+
+                try {
+                     DOMImplementation domImpl = resultDocument.getImplementation();
+                     DocumentType docType = domImpl.createDocumentType("doctype", "PUBLIC", "sailpoint.dtd");
+                     Transformer tr = TransformerFactory.newInstance().newTransformer();
+                     tr.setOutputProperty(OutputKeys.INDENT, "yes");
+                     tr.setOutputProperty(OutputKeys.METHOD, "xml");
+                     tr.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+                     tr.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+                     tr.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, "sailpoint.dtd");
+                     tr.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, docType.getSystemId());
+
+                     // send DOM to file
+                     tr.transform(new DOMSource(resultDocument), new StreamResult(new FileOutputStream(destinationDir+"/"+destinationFileName)));
+
+                } catch (TransformerException te) {
+                     System.out.println(te.getMessage());
+                } catch (IOException ioe) {
+                     System.out.println(ioe.getMessage());
+                }
+           } catch (ParserConfigurationException pce) {
+                System.out.println("UsersXML: Error trying to instantiate DocumentBuilder " + pce);
+           }
+     }
+     
+     
+     private Element createAttributesChild() {
+           Element attributesElement = null;
+           attributesElement = resultDocument.createElement("Attributes");
+           Element mapAttributes = resultDocument.createElement("Map");
+           attributesElement.appendChild(mapAttributes);
+           
+           Element mapEntry = resultDocument.createElement("entry");
+           mapEntry.setAttribute("key", "accountSelectorRules");
+           mapAttributes.appendChild(mapEntry);
+           
+           mapEntry = resultDocument.createElement("entry");
+           mapEntry.setAttribute("key", "allowDuplicateAccounts");
+           mapEntry.setAttribute("value", "false");
+           mapAttributes.appendChild(mapEntry);
+           
+           mapEntry = resultDocument.createElement("entry");
+           mapEntry.setAttribute("key", "allowMultipleAssignments");
+           mapEntry.setAttribute("value", "false");
+           mapAttributes.appendChild(mapEntry);
+           
+           mapEntry = resultDocument.createElement("entry");
+           mapEntry.setAttribute("key", "mergeTemplates");
+           mapEntry.setAttribute("value", "false");
+           mapAttributes.appendChild(mapEntry);
+           
+           mapEntry = resultDocument.createElement("entry");
+           mapEntry.setAttribute("key", "sysDescriptions");
+           HashMap testMap = new HashMap<String,String>();
+           testMap.put("test", "testValue");
+           mapEntry.setNodeValue(testMap.toString());
+           mapAttributes.appendChild(mapEntry);
+           
+           return attributesElement;
+     }
+}

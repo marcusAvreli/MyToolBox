@@ -1,1 +1,106 @@
 https://github.com/Laniax/EventDispatcher/blob/master/src/scripts/laniax/framework/event_dispatcher/EventListener.java
+
+
+
+https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/JAAS_Cheat_Sheet.md
+Enterprise Java™ Security: Building Secure J2EE™ Applications
+JaasAuthenticationProvider
+https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/authentication/jaas/JaasAuthenticationProvider.html
+Guide To The Java Authentication And Authorization Service (JAAS)
+https://www.baeldung.com/java-authentication-authorization-service
+
+https://docs.oracle.com/javase/7/docs/technotes/guides/security/jaas/JAASRefGuide.html
+
+A lot of references
+http://www.mooreds.com/jaas.html
+
+Java Config example
+https://stackoverflow.com/questions/22189366/access-denied-in-jaas-authorisation
+
+Configuration c = new ConfigurationBuilder()
+            .addServer()
+                .host(HOT_ROD_ENDPOINT_SERVICE)
+                .port(11222)
+               .security()
+                .authentication().enable()
+                  .username(USERNAME)
+                  .password(PASSWORD)
+                  .realm("ApplicationRealm")
+                  .saslMechanism("DIGEST-MD5")
+                  .saslQop(SaslQop.AUTH)
+                .ssl().enable()
+                  .trustStoreFileName(TRUSTSTORE_PATH)
+                  .trustStorePassword(TRUSTSTORE_PASSWORD)
+            .build();
+
+An Introduction to Java SASL
+https://www.baeldung.com/java-sasl
+
+Java JAAS form based authentication
+
+https://www.javacodegeeks.com/2012/06/java-jaas-form-based-authentication.html
+
+BaseWebSecurityConfigurer
+
+
+
+
+Ensuring the Security of Your APIs
+https://dzone.com/articles/how-do-you-ensure-security
+https://nl.devoteam.com/en/blog-post/authentication-authorization-secure-apis/
+
+How to provide multiple ways of authentication with Spring Security
+Link : https://stackoverflow.com/questions/49225035/how-to-provide-multiple-ways-of-authentication-with-spring-security
+
+Solution overview
+Broadly speaking, the requirement to have multiple AuthenticationProviders fall into two categories:
+
+Authenticate requests for different types of URLs with different authentication modes, for example:
+Authenticate all requests for /web/** using form-based username-password authentication;
+Authenticate all requests for /api/** using token-based authentication.
+Authenticate all requests with one of multiple supported authentication modes.
+The solutions are slightly different for each, but they are based on a common foundation.
+
+Spring Security has out-of-the-box support for form-based username-password authentication, so regardless of the two categories above, this can be implemented quite easily.
+
+Token-based authentication however, is not supported out-of-the-box, so custom code is required to add the necessary support. The following components are required to add this support:
+
+A POJO extending AbstractAuthenticationToken that will hold the token to use for authentication.
+A filter extending AbstractAuthenticationProcessingFilter that will extract the token value from the request and populate the POJO created on step 1 above.
+An AuthenticationProvider implementation that will authenticate requests using the token.
+Spring Security configuration for option 1 or 2 above, depending on the requirement.
+
+
+https://stackoverflow.com/questions/3205469/custom-authentication-in-spring
+You can write your own validation mechanism for Spring Security. It have to consists of following parts:
+
+Auth Filter - reads data from request, then call Auth Provider with credentials token (instance of class Authentication)
+
+https://stackoverflow.com/questions/5252940/newbie-at-jaas-authentication-sign-in-using-a-token-in-the-url-bar
+Auth Provider - accepts this auth token (filter can create different tokents, and there can be different auth providers, for each token type), and try to authenticate (calling your service, at your case). After auth you may (or may not) call User Details Service or fill all user data right there
+User Details Service - load signed in user details from somewhere (from jdbc, other service, etc)
+
+JAAS isn't really suitable for web application. It is more for desktop applications which support interactive inputs and accessing local resources managed by the JVM such as files, network sockets.
+
+But if you really want to go down the JAAS road, prepare to write your custom LoginModule and probably a CallbackHandler and Principal. Most important class is the LoginModule. You might be able to reuse some existing Principal class.
+
+The CallbackHandler would pull the token out of the URL. The LoginModule would look that token up against some database, and populate the passed-in Subject with some Principal.
+
+It may sound confusing because the terms are quite close (Subject vs Principal, LoginModule vs CallbackHandler) so the docs should be at a close distance.
+
+After you've done all of this, you will also need to configure the web container's policy to load a new login context (yet another very related term). This is like configuring PAM in Linux. Ask your administrator to do this for you.
+
+But you haven't finished yet. The last task is to write a (I assume you are developing something based on Java Servlet) filter. This filter should be hooked at the very first level. If it sees a special parameter value (such as user_token), it obtains the configured LoginContext object, and calls its login method.
+
+Now, if you scrap JAAS altogether, you could make do with just the servlet filter. In this filter, if authentication is successful, you could populate the session object with your own custom objects (such as a User object) to signify a success. Much more simple.
+
+https://www.logicbig.com/tutorials/spring-framework/spring-security/user-details-service.html
+AuthenticationProvider vs UserDetailsService
+UserDetailsService is not an alternative to AuthenticationProvider but it is used for a different purpose i.e. to load user details. Typically, an AuthenticationProvider implementation can use UserDetailsService instance to retrieve user details during its authentication process. For example, DaoAuthenticationProvider, in case of JDBC-authentication, uses JdbcUserDetailsManager as an implementation of UserDetailsService. In case of in-memory authentication, DaoAuthenticationProvider uses InMemoryUserDetailsManager implementation.
+
+kerberos
+https://medium.com/@robert.broeckelmann/kerberos-and-windows-security-delegation-7b5a3f31d779
+Security Assertion Markup Language (SAML) 2.0 Profile for OAuth 2.0 Client Authentication and Authorization Grants
+https://tools.ietf.org/html/rfc7522
+https://geekflare.com/apache-tomcat-hardening-and-security-guide/
+https://geekflare.com/tomcat-http-security-header/amp/
