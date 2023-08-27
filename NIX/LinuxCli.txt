@@ -86,7 +86,6 @@ cat fileName.json | jq -c '.groups[] | select(.name=="valueToFind")'
 |															|
 +-----------------------------------------------------------+
 
-
 	cat fileName.json | tr ‘\r\n’ ‘ ’ | jq .
 
 +-----------------------------------------------------------+
@@ -94,7 +93,6 @@ cat fileName.json | jq -c '.groups[] | select(.name=="valueToFind")'
 |							RECODE							|
 |															|
 +-----------------------------------------------------------+
-
 
 	echo 'טסט מחרוזת' |recode ..html
 
