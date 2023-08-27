@@ -67,7 +67,11 @@ ls -lSh
 ##find files larger than 4G
 find . -type f -size +4G
 
-TAR
++-----------------------------------------------------------+
+|															|
+|						TAR									|
+|															|
++-----------------------------------------------------------+
 	CREATE
 		tar cvf name_of_archive.tar dirname/
 	UNTAR
