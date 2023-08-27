@@ -133,6 +133,7 @@ cat fileName.json | jq -c '.groups[] | select(.name=="valueToFind")'
 |				SORT FILES BY SIZE IN DIRECTORY				|
 |															|
 +-----------------------------------------------------------+
+
 	#native
 		ls -lSh
 	#reverse
