@@ -1,79 +1,162 @@
-Strace -o mylog.txt -f -e trace=file ./startup.sh
++-----------------------------------------------------------+
+|															|
+|			LOG OUTPUT OF SH SCRIPT							|
+|															|
++-----------------------------------------------------------+
 
-check kerberos connectivity
+	strace -o mylog.txt -f -e trace=file ./startup.sh
+	
 
-env KRB5_TRACE=/pathToLog/krb5.log 
-kinit -V
-kinit -p <username>@domain.name
++-----------------------------------------------------------+
+|															|
+|			CHECK KERBEROS CONNECTIVITY						|
+|															|
++-----------------------------------------------------------+
 
-Delete files by extension
+	env KRB5_TRACE=/pathToLog/krb5.log 
+	kinit -V
+	kinit -p <username>@domain.name
+	
 
-List file to be deleted
-find . -name "*.bak" -type f
++-----------------------------------------------------------+
+|															|
+|			DELETE FILES BY EXTENSION						|
+|															|
++-----------------------------------------------------------+
 
-Delete files
-find . -name "*.bak" -type f -delete
--------------------------------------------------------------------------------------------------------------------------------
-Delete files by date of change range
+	#List file to be deleted
+		find . -name "*.bak" -type f
 
-List files that were modified between dates
-find . -type f -newermt '01 jan 2009 00:00:00' -not -newermt '01 jan 2012 00:00:00' -ls
+	#Delete files
+		find . -name "*.bak" -type f -delete
 
-Delete files that were modified between dates
-find . -type f -newermt '01 jan 2009 00:00:00' -not -newermt '01 jan 2012 00:00:00' -delete
---------------------------------------------------------------------------------------------------------------------------------------------
-Find locks on files
+
++-----------------------------------------------------------+
+|															|
+|			DELETE FILES BY DATE OF CHANGE RANGE			|
+|															|
++-----------------------------------------------------------+
+
+	#List files that were modified between dates
+		find . -type f -newermt '01 jan 2009 00:00:00' -not -newermt '01 jan 2012 00:00:00' -ls
+
+	#Delete files that were modified between dates
+		find . -type f -newermt '01 jan 2009 00:00:00' -not -newermt '01 jan 2012 00:00:00' -delete
+
+
++-----------------------------------------------------------+
+|															|
+|				FIND LOCKS ON FILES							|
+|															|
++-----------------------------------------------------------+
  
-lsof +g | grep sailpoint.log | sed "s/[a-z]\+\s\+\([0-9]\+\)\s.*/\\1/" | xargs ps
+	lsof +g | grep sailpoint.log | sed "s/[a-z]\+\s\+\([0-9]\+\)\s.*/\\1/" | xargs ps
 
-Text editor
-vim file
-:set bomb
-:set fileencoding=utf-8
-:wq
 
-:set encoding=latin1
--------------------------------------------------------------------------------------------------------------------------------
-Jq
++-----------------------------------------------------------+
+|															|
+|				FILE ENCODING								|
+|															|
++-----------------------------------------------------------+
+
+	#Text editor
+		vim file
+		:set bomb
+		:set fileencoding=utf-8
+		:wq
+
+		:set encoding=latin1
+
+
++-----------------------------------------------------------+
+|															|
+|							JQ								|
+|															|
++-----------------------------------------------------------+
 
 cat fileName.json | jq -c '. | select(.)' #if this works then json file is correct
 cat fileName.json | jq -c '.groups.name[] | select(.)'
 cat fileName.json | jq -c '.groups.name[] | select(.=="valueToFind")'
 cat fileName.json | jq -c '.groups[] | select(.name=="valueToFind")'
--------------------------------------------------------------------------------------------------------------------------------
-Tr
-cat fileName.json | tr ‘\r\n’ ‘ ’ | jq .
-192.168.134.128
-echo 'טסט מחרוזת' |recode ..html
-
-Permissions octal presentation
-$ stat -c '%A %a %n' /etc/passwd
 
 
++-----------------------------------------------------------+
+|															|
+|							TR								|
+|															|
++-----------------------------------------------------------+
 
-ls -ltr --block-size=M
 
-##disk space usage in linux
-df -H 
+	cat fileName.json | tr ‘\r\n’ ‘ ’ | jq .
 
-##size of directory
-du -sh /opt/testDir 
-##sort files by size in directory in reverse
-ls -lShr
++-----------------------------------------------------------+
+|															|
+|							RECODE							|
+|															|
++-----------------------------------------------------------+
 
-##sort files by size in directory in native
-ls -lSh
 
-##find files larger than 4G
-find . -type f -size +4G
+	echo 'טסט מחרוזת' |recode ..html
+
+
++-----------------------------------------------------------+
+|															|
+|			PERMISSIONS OCTAL PRESENTATION					|
+|															|
++-----------------------------------------------------------+
+	
+	stat -c '%A %a %n' /etc/passwd
+
+
++-----------------------------------------------------------+
+|															|
+|			LS												|
+|															|
++-----------------------------------------------------------+
+	
+	ls -ltr --block-size=M
+	
+
++-----------------------------------------------------------+
+|															|
+|			SIZE											|
+|															|
++-----------------------------------------------------------+
+
+	#disk space usage in linux
+		df -H 
+
+	#size of directory
+		du -sh /opt/testDir 
+	
+
++-----------------------------------------------------------+
+|															|
+|				SORT FILES BY SIZE IN DIRECTORY				|
+|															|
++-----------------------------------------------------------+
+	#native
+		ls -lSh
+	#reverse
+		ls -lShr
+	
+	
++-----------------------------------------------------------+
+|															|
+|				FIND FILES LARGER THAN 4G					|
+|															|
++-----------------------------------------------------------+
+
+	find . -type f -size +4G
+
 
 +-----------------------------------------------------------+
 |															|
 |						TAR									|
 |															|
 +-----------------------------------------------------------+
-	CREATE
+
+	#CREATE
 		tar cvf name_of_archive.tar dirname/
-	UNTAR
+	#UNTAR
 		tar cvf name_of_archive.tar
-		
