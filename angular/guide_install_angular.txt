@@ -12,6 +12,9 @@ link to download node 14.16.0: https://nodejs.org/en/blog/release/v14.16.0
 INSTALL ANGULAR
 	npm install -g @angular/cli@1.4.10 --ignore-script
 
+UNINSTALL ANGULAR
+	npm uninstall -g @angular/cli
+
 CURRENT ANGULAR CLI VERSION
 	ng -v
 
@@ -29,11 +32,9 @@ https://nodejs.org/dist/v18.16.0/node-v18.16.0-x64.msi
 //install python 2.7.10
 //install Microsoft Visual C++ Redistributable latest supported downloads
 
-//local installation of angular with specific version
-npm install -g @angular/cli@1.4.10 --ignore-script
 
-//uninstall angular
-npm uninstall -g @angular/cli
+
+
 
 //path to global installation of angular
 //Set up the correct NPM PATH on Windows

@@ -23,9 +23,13 @@ npm i @angular/http@4.4.7
 
 https://medium.com/@nikolasleblanc/building-an-angular-4-component-library-with-the-angular-cli-and-ng-packagr-53b2ade0701e
 https://tomastrajan.medium.com/the-best-way-to-architect-your-angular-libraries-87959301d3d3
+https://medium.com/@khan0549/publish-your-first-angular-library-e9ffd7a2c4b2
 https://github.com/ng-packagr/ng-packagr/blob/v1.3.0/package.json
 npm i ng-packagr@1.3.0
 
 
 
-
+ng generate module clarity-angular
+A Computer Science portal for geeks.
+https://github.com/archfirst/angular2-seed-sass/blob/master/package.json
+https://www.geeksforgeeks.org/how-to-use-bootstrap-4-in-angular-2/
