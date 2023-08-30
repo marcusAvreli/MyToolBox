@@ -19,13 +19,15 @@ https://indepth.dev/posts/1151/a-deep-dive-into-injectable-and-providedin-in-ivy
 npm i @ngrx/core@1.2.0 @ngrx/effects@2.0.3 @ngrx/router-store@1.2.6 @ngrx/store@2.2.3 @ngrx/store-devtools@4.1.1
 npm i ag-grid@17.0.0 ag-grid-angular@17.0.0 moment@2.29.4 ngrx-store-freeze@0.1.9 reselect@3.0.0
 npm i @angular/http@4.4.7
-
+npm i ng-packagr@1.3.0
 
 https://medium.com/@nikolasleblanc/building-an-angular-4-component-library-with-the-angular-cli-and-ng-packagr-53b2ade0701e
 https://tomastrajan.medium.com/the-best-way-to-architect-your-angular-libraries-87959301d3d3
 https://medium.com/@khan0549/publish-your-first-angular-library-e9ffd7a2c4b2
+https://www.tsmean.com/articles/how-to-write-a-typescript-library/angular/
+https://github.com/bersling/angular-library-example/blob/master/demo-library/src/app/app.component.ts
 https://github.com/ng-packagr/ng-packagr/blob/v1.3.0/package.json
-npm i ng-packagr@1.3.0
+
 
 
 
@@ -33,3 +35,10 @@ ng generate module clarity-angular
 A Computer Science portal for geeks.
 https://github.com/archfirst/angular2-seed-sass/blob/master/package.json
 https://www.geeksforgeeks.org/how-to-use-bootstrap-4-in-angular-2/
+
+ng new use-dropdown2
+
+npm install ../my-component-library6/dist/my-component-library6-0.0.0.tgz
+
+
+	npm i gulp     gulp-autoprefixer     gulp-clang-format	gulp-concat     gulp-env     gulp-gzip    gulp-inline-ng2-template     gulp-preprocess gulp-rename     gulp-replace     gulp-sass     gulp-sourcemaps     gulp-stylestats     gulp-tslint     gulp-typescript gulp-util gulp-zip
