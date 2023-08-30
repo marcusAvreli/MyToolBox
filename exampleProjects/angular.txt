@@ -100,7 +100,8 @@ CUSTOM COMPONENTS
 
 	https://rangle.io/blog/angular-2-ngmodel-and-custom-form-components
 	https://github.com/clbond/form-example/blob/master/src/app/components/index.ts
-
+	https://medium.com/@tarik.nzl/angular-2-custom-form-control-with-validation-json-input-2b4cf9bc2d73
+	https://stackoverflow.com/questions/45390312/can-one-render-angular-2-components-inside-dom-elements-from-third-party-librari
 
 Tech Stuck
 ngrxIIQReporting2
