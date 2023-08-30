@@ -7,3 +7,16 @@ to resolve
 generate new personall access token
 run: git push origin master
 this will popup login windows. copy and paste new token (without  spaces in token string)
+
+
+
+
+//source:https://stackoverflow.com/questions/72978485/git-submodule-update-failed-with-fatal-detected-dubious-ownership-in-repositor
+
+fatal: detected dubious ownership in repository at '/media/data/users/jhu3szh/serialize'
+To add an exception for this directory, call:
+
+git config --global --add safe.directory /media/data/users/jhu3szh/serialize
+
+
+git config --global --add safe.directory "*"
