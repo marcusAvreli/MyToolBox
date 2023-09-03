@@ -56,7 +56,7 @@ Data bus(Common Service)
 	https://indepth.dev/posts/1167/lazy-loading-angular-modules-with-ivy
 	https://morioh.com/p/7873ece1c94d
 	https://medium.com/@ct7/angular2-module-architecture-and-example-seed-project-35b7410264f5
-	https://medium.com/@nikolasleblanc/building-an-angular-4-component-library-with-the-angular-cli-and-ng-packagr-53b2ade0701e
+	
 	
 EVENT BUS
 https://www.mihira.dev/2020/02/angular-component-communication-with.html
@@ -102,6 +102,8 @@ CUSTOM COMPONENTS
 	https://github.com/clbond/form-example/blob/master/src/app/components/index.ts
 	https://medium.com/@tarik.nzl/angular-2-custom-form-control-with-validation-json-input-2b4cf9bc2d73
 	https://stackoverflow.com/questions/45390312/can-one-render-angular-2-components-inside-dom-elements-from-third-party-librari
+	https://medium.com/@nikolasleblanc/building-an-angular-4-component-library-with-the-angular-cli-and-ng-packagr-53b2ade0701e
+	https://github.com/bersling/angular-library-example/tree/master/demo-library/src/app/libex
 
 Tech Stuck
 ngrxIIQReporting2
