@@ -29,6 +29,8 @@
 (source: //https://stackoverflow.com/questions/18466830/how-to-compare-two-lists-using-cli)
 for /f "delims=" %A in (list1.txt) do @find "%A" "list2.txt" >nul2>nul || echo.%A>>list3.txt
 
+https://stackoverflow.com/questions/6257948/copy-a-list-txt-of-files
+
 +-----------------------------------------------------------+
 |															|
 |					READ CSV								|
