@@ -15,6 +15,19 @@
 3. FIND FILE SKIPPING DIRECTORIES
 	(source: https://stackoverflow.com/questions/54978756/exclude-windows-folder-in-cmd-search)
 	dir /S /B /A:-D *.mp3 *.mp4 *.jpg | findstr /V /I /C:"\\Microsoft\\" /C:"\\Windows\\" > "C:\output.txt"
+	
+4. LIST ALL DIRECTORY NAMES IN CURRENT LEVEL
+	(source: https://superuser.com/questions/1104377/windows-command-prompt-dir-what-option-shows-only-directories-and-not-files )
+	dir /B /AD
+
++-----------------------------------------------------------+
+|															|
+|					COMPARE TWO LISTS						|
+|															|
++-----------------------------------------------------------+
+
+(source: //https://stackoverflow.com/questions/18466830/how-to-compare-two-lists-using-cli)
+for /f "delims=" %A in (list1.txt) do @find "%A" "list2.txt" >nul2>nul || echo.%A>>list3.txt
 
 +-----------------------------------------------------------+
 |															|
@@ -104,14 +117,6 @@ runas /user:Administrator cmd
 
 
 
-+-----------------------------------------------------------+
-|															|
-|					COMPARE TWO LISTS						|
-|															|
-+-----------------------------------------------------------+
-
-//https://stackoverflow.com/questions/18466830/how-to-compare-two-lists-using-cli
-for /f "delims=" %A in (list1.txt) do @find "%A" "list2.txt" >nul2>nul || echo.%A>>list3.txt
 
 
 Rename windows service 
