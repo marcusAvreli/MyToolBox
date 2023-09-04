@@ -102,6 +102,18 @@ Run cmd as admin
 runas /user:Administrator cmd
 
 
+
+
++-----------------------------------------------------------+
+|															|
+|					COMPARE TWO LISTS						|
+|															|
++-----------------------------------------------------------+
+
+//https://stackoverflow.com/questions/18466830/how-to-compare-two-lists-using-cli
+for /f "delims=" %A in (list1.txt) do @find "%A" "list2.txt" >nul2>nul || echo.%A>>list3.txt
+
+
 Rename windows service 
 
 Verified and approved
