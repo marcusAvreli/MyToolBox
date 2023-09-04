@@ -45,3 +45,6 @@ npm install ../my-component-library6/dist/my-component-library6-0.0.0.tgz
 
 
 	npm i gulp     gulp-autoprefixer     gulp-clang-format	gulp-concat     gulp-env     gulp-gzip    gulp-inline-ng2-template     gulp-preprocess gulp-rename     gulp-replace     gulp-sass     gulp-sourcemaps     gulp-stylestats     gulp-tslint     gulp-typescript gulp-util gulp-zip
+	
+	
+	https://serverfault.com/questions/951315/npm-install-globally-a-package-offline-with-tarball

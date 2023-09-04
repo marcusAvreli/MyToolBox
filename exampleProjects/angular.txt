@@ -104,6 +104,12 @@ CUSTOM COMPONENTS
 	https://stackoverflow.com/questions/45390312/can-one-render-angular-2-components-inside-dom-elements-from-third-party-librari
 	https://medium.com/@nikolasleblanc/building-an-angular-4-component-library-with-the-angular-cli-and-ng-packagr-53b2ade0701e
 	https://github.com/bersling/angular-library-example/tree/master/demo-library/src/app/libex
+	https://rangle.io/blog/angular-2-ngmodel-and-custom-form-components
+	https://medium.com/@getflourish/getting-the-most-out-of-angular-hot-module-replacement-two-way-data-binding-for-custom-8ecfe702e8db
+	https://rangle.io/blog/dynamically-creating-components-with-angular-2
+	
+	example with current angular version
+	https://stackoverflow.com/questions/45390312/can-one-render-angular-2-components-inside-dom-elements-from-third-party-librari
 
 Tech Stuck
 ngrxIIQReporting2

@@ -2,7 +2,7 @@ Back Up Angular project on git
 	git init
 	git remote add origin https://github.com/marcusAvreli/lazyApp.git
 	echo "node_modules/" >> .gitignore
-	git add .
+	git add -- . :!"node_modules"
 	git rm -r --cached node_modules
 	git commit -am "initial_commit"
 	git push origin master
@@ -10,5 +10,6 @@ Back Up Angular project on git
 Subsequent commits
 	git status
 	git add tomcat.txt
+	[ git add -- . :!"node_modules" ]
 	git commit -am "new regex added"
 	git push origin master
