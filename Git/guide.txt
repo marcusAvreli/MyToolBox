@@ -85,3 +85,7 @@ How to fix it
 https://github.com/settings/tokens generated token
 Copy the Personal Access Token
 Make authentication through browser
+
+https://stackoverflow.com/questions/50316434/add-all-files-using-git-add-except-one-directory
+git add -- . :!"node_modules"
+git add . -- ':!somefolder' ':!**/some_deep_nested_folder/*'
