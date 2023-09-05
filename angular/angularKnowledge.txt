@@ -48,3 +48,41 @@ npm install ../my-component-library6/dist/my-component-library6-0.0.0.tgz
 	
 	
 	https://serverfault.com/questions/951315/npm-install-globally-a-package-offline-with-tarball
+	
+	
+
+//https://www.educba.com/typescript-cast-object/
+
+var example = {
+siva: { first:6245, second:1725},
+raman: { first:6245, second:1725,five:'qjwkgje jweg wqegj wjeg kwjeg wejkg wejkg kwhe kwhej'},
+sivaraman: { first:6245, second:1725,four:'jges jwge wjge  wjeg kwjegr jkwegr jkewgr'},
+kweg: { first:6245, second:1725},
+ksdhjg: { first:6245, second:1725,four:'jgsd jags jsd g wjeg qwkjeg wekjg kqweg kqwge'},
+kjlsldj: { first:6245, third:827,four:'jsgd34 asjkdgf jgds wjhg jweg kwjge kweg kwejg'},
+}
+let vars = [];
+Object.keys(example).map(function(key){
+vars.push({[key]:example[key]})
+return vars;
+});
+console.log('Welcome To My Domian Object of the people are=',example)
+console.log('After converting the people object to array is=',vars)
+
+
+
+//source: https://stackoverflow.com/questions/47492595/why-foreach-does-not-exist-on-nodelistof
+
+
+There is no guarantee forEach will exist on this type - it can, but not necessarily (e.g. in PhantomJS and IE), so TypeScript disallows it by default. In order to iterate over it you can use:
+
+1) Array.from():
+
+Array.from(checkboxes).forEach((el) => { /* do something */});
+2) for-in:
+
+for (let i in checkboxes) {
+  if (checkboxes.hasOwnProperty(i)) {
+    console.log(checkboxes[i]);
+  }
+}
