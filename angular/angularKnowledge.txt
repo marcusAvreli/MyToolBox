@@ -49,7 +49,7 @@ npm install ../my-component-library6/dist/my-component-library6-0.0.0.tgz
 	
 	https://serverfault.com/questions/951315/npm-install-globally-a-package-offline-with-tarball
 	
-	
+https://itnext.io/8-daily-problems-solved-by-interceptors-in-angular-59c8ce1e1074	
 
 //https://www.educba.com/typescript-cast-object/
 
