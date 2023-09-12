@@ -108,3 +108,25 @@ Result is
 	string1\
 	string2\
 
+SPLIT A STRING BY COMMAS BUT IGNORE COMMAS WITHIN DOUBLE-QUOTES (CSV WITH EMBEDDED COMMAS)
+	https://stackoverflow.com/questions/11456850/split-a-string-by-commas-but-ignore-commas-within-double-quotes-using-javascript
+	(".*?"|[^",\s]+)(?=\s*,|\s*$)
+	
+	
+find everything after := sign
+
+(([\\:])=(.*?))$
+
+
+ 
+
+ VI
+
+
+ %s/FIND_WHAT/REPLACE_WITH/g
+
+ 
+
+ 
+DISTINGUISHED NAME
+^((CN=([^,]*)),)?((((?:CN|OU)=[^,]+,?)+),)?((DC=[^,]+,?)+)
