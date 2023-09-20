@@ -145,3 +145,11 @@ regexp_count(t.orders, ',')+1
 )lines
 order by customer,
 lines.column_value;
+
++-----------------------------------------------------------+
+|															|
+|	check only digits										|
+|															|
++-----------------------------------------------------------+
+https://stackoverflow.com/questions/3932230/oracle-sql-query-that-returns-rows-with-only-numeric-values
+SELECT X  FROM SO WHERE REGEXP_LIKE(X, '^[[:digit:]]+$');
