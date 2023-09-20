@@ -112,3 +112,25 @@ where not exists (
     select null
     from query1
 );
+
+
+
++-----------------------------------------------------------+
+|															|
+|		child column is csv									|
+|															|
++-----------------------------------------------------------+
+https://medium.com/swlh/three-routes-convert-comma-separated-column-to-rows-c17c85079ecf
+select t.customer,
+trim(regexp_substr(t.orders, '[^,]+', 1, lines.column_value))
+as "Order"
+from checkout t,
+table(cast(multiset(
+select level from dual
+connect by level <=
+regexp_count(t.orders, ',')+1
+) as sys.odciNumberList
+)
+)lines
+order by customer,
+lines.column_value;

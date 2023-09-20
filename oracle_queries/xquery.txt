@@ -371,3 +371,12 @@ from identityiq.spt_link sptLink
 
 
 where sptApp.name='<app_name>'  and dbms_lob.getlength(sptLink.ATTRIBUTES)>1;
+
+
+
+
+https://www.sqlservercentral.com/blogs/xquery-accessing-the-attributes-axis
+SELECT t.c.query('.') AS 'SomeElement'
+
+   , t.c.value('count(attribute::*)', 'int') AS 'CountOfAttributes'
+FROM @xml.nodes('/Data/SomeElement') t(c)

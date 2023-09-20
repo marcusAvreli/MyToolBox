@@ -5,3 +5,6 @@
 difference between two dates
 
 =IF(INT(F21-E21)>0, INT(F21-E21) & " days, ","") & IF(HOUR(F21-E21)>0, HOUR(F21-E21) & " hours, ","") & IF(MINUTE(F21-E21)>0, MINUTE(F21-E21) & " minutes and ","") & IF(SECOND(F21-E21)>0, SECOND(F21-E21) & " seconds","")
+
+
+=IF(COUNTIF($A$2:$A$7,A2)>1,”Duplicate”,”Unique”)
