@@ -113,6 +113,7 @@ where not exists (
     from query1
 );
 
+<<<<<<< HEAD
 
 
 +-----------------------------------------------------------+
@@ -121,6 +122,16 @@ where not exists (
 |															|
 +-----------------------------------------------------------+
 https://medium.com/swlh/three-routes-convert-comma-separated-column-to-rows-c17c85079ecf
+=======
++-----------------------------------------------------------+
+|															|
+|	Three Routes: Convert Comma-Separated Column to Rows	|
+|															|
++-----------------------------------------------------------+
+//https://medium.com/swlh/three-routes-convert-comma-separated-column-to-rows-c17c85079ecf
+column a is parent column b is csv of children (parent_and_csv_of_children)
+
+>>>>>>> eb6c2559bcad0fd16c7606d67b9db8117543d3cf
 select t.customer,
 trim(regexp_substr(t.orders, '[^,]+', 1, lines.column_value))
 as "Order"

@@ -1,0 +1,172 @@
+https://chromatichq.com/blog/drupal-8-deployments-jenkins-github-slack
+https://medium.freecodecamp.org/the-best-way-to-manage-your-drupal-workflow-ade9525a84c0
+https://www.liquidweb.com/kb/delete-a-mysql-database-on-linux-via-command-line/
+mkdir davinci
+mkdir davinci/config
+mkdir davinci/config/install
+mkdir davinci/config/schema
+mkdir davinci/css
+mkdir davinci/images
+mkdir davinci/js
+mkdir davinci/templates
+
+To remove all the contents of the folder(including all interior folders) but not the folder itself: 
+cd /var/www/html/drupal/
+rm -f  .[a-z]*
+rm -rf /var/www/html/drupal/*
+
+cp *.* .[a-z]* /var/www/html/drupal/
+cp -R * /var/www/html/drupal/
+
+
+
+
+Install drupal
+cd /var/www/html/drupal
+chmod 777 /var/www/html/drupal/sites/default
+cp /var/www/html/drupal/sites/default/default.settings.php /var/www/html/drupal/sites/default/settings.php
+chmod 777 /var/www/html/drupal/sites/default/settings.php
+
+
+
+
+
+
+
+
+
+Remove drush
+composer remove drush/drush
+
+Drupal update
+rm -rf autoload.php
+rm -rf composer.*
+rm -rf example.gitignore
+rm -rf index.php
+rm -rf INSTALL.txt
+rm -rf README.txt
+rm -rf vendor
+rm -rf core
+rm -rf web.config
+rm -rf update.php
+
+rm -rf robots.txt
+
+rm -rf LICENSE.txt
+
+cp -rf core/  /var/www/html/drupal/
+cp -rf vendor/  /var/www/html/drupal/
+
+cp web.config /var/www/html/drupal
+cp update.php /var/www/html/drupal/
+cp robots.txt  /var/www/html/drupal/
+cp README.txt  /var/www/html/drupal/
+cp LICENSE.txt  /var/www/html/drupal/
+cp INSTALL.txt  /var/www/html/drupal/
+cp index.php  /var/www/html/drupal/
+cp .*  /var/www/html/drupal/
+
+cp example.gitignore  /var/www/html/drupal/
+cp composer.*  /var/www/html/drupal/
+cp autoload.php  /var/www/html/drupal/
+
+
+
+
+
+
+
+
+
+
+Instal/uninstal composer
+curl -sS https://getcomposer.org/installer | sudo php
+sudo mv composer.phar /usr/local/bin/composer
+export PATH="$HOME/.composer/vendor/bin:$PATH"
+If you have installed by this way simply
+
+Delete composer.phar from where you've putted it.
+
+In this case path will be /usr/local/bin/composer
+
+Note: There is no need to delete the exported path.	
+
+Twig
+https://www.lullabot.com/articles/drupal-8-theming-fundamentals-part-1
+https://www.lullabot.com/articles/drupal-8-theming-fundamentals-part-2
+
+Gulp Workflow
+https://www.chenhuijing.com/blog/drupal-101-d8-theming/
+https://www.chenhuijing.com/blog/drupal-101-theming-with-gulp-again/
+https://www.chapterthree.com/blog/twig-concepts-drupal-8-themes-part-i
+https://www.chapterthree.com/blog/twig-concepts-drupal-8-themes-part-ii
+http://www.invezzatechnologies.com/step-step-process-create-custom-theme-drupal-8/
+http://westweb-solutions.com/blog/drupal-8-how-add-region-theme
+https://www.mediacurrent.com/blog/rethinking-theme-structure-drupal-8/
+https://www.anubavam.com/blogs/drupal-8-theming-guide
+https://x-team.com/blog/deep-dive-anatomy-drupal-8-theming/
+https://www.davehall.com.au/blog/dave/2010/08/08/kicking-javascript-footer-drupal-8
+https://agile.coop/blog/building-theme-drupal-8
+https://github.com/phase2/drupal-lab/blob/master/web/themes/dashing/templates/layout/region--footer.html.twig
+https://github.com/docksal/drupal8/tree/master/.docksal
+https://github.com/chapter-three/drupal-8-theming/blob/master/exercise_19-theme-settings2.md
+https://github.com/x-team/Drupal-8-Examples
+https://github.com/ericski/Drupal-8-Module-Theming-Example/tree/master/src
+https://github.com/zetagraph/monoset/blob/master/templates/page.html.twig
+http://sqndr.github.io/d8-theming-guide/
+https://www.youtube.com/watch?v=UN9DYNfGRQ4
+https://www.youtube.com/watch?v=fEVjORKs4v8&list=PLI_x5XaZMJqhlItnF1TJU4I6TWFKFhPZQ&index=7
+https://dzone.com/articles/maximizing-drupal-8-performance-with-nginx-part-ii?sa=X&ved=2ahUKEwiRsezy7ffeAhXPp4sKHVyaBZYQ9QEwCHoECAEQBQ
+https://github.com/daggerhart/drupal8_examples
+https://circleci.com/blog/continuous-drupal-p1-maintaining-with-docker-git-composer/
+https://m.youtube.com/watch?v=ESLzVNEF9t8
+https://github.com/italia/monitoraggio-italia-it/blob/6c6d40fed206edb0b5fec6b45f4ca74ee5a4e724/web/themes/custom/italiagov/italiagov.theme
+Possible layouts
+https://www.thirdandgrove.com/theme-drupal-panels-right-way
+
+Ways to work with styles
+https://ffwagency.com/digital-strategies-blog/managing-css-and-javascript-files-drupal-8-libraries
+
+Good example for content design
+https://opensenselabs.com/blog/tech/creating-custom-themes-drupal-8-part-2
+http://www.techthings.org/compile-apache-latest-version-2-4-33-on-centos-7-from-source-code/
+https://hugogiraudel.com/2013/11/12/themes-layouts-twig/
+
+git push 'https://marcusAvreli:markgavS30!@github.com/marcusAvreli/drupal.git'
+git remote add origin https://github.com/marcusAvreli/drupal.git
+Git push https://github.com/marcusAvreli/drupal.git
+git push https://marcusAvreli:markgavS30!@drupal/drupal.git --all
+
+https://evolvingweb.ca/blog/using-configuration-management-and-git-drupal-8
+https://help.github.com/articles/error-permission-denied-publickey/
+https://stackoverflow.com/questions/12940626/github-error-message-permission-denied-publickey
+composer update --with-dependencies
+Downloading...
+
+Composer (version 1.7.3) successfully installed to: /tmp/composer.phar
+Use it: php composer.phar
+
+Some settings on your machine may cause stability issues with Composer.
+If you encounter issues, try to change the following:
+
+The zlib extension is not loaded, this can slow down Composer a lot.
+If possible, install it or recompile php with --with-zlib
+
+The php.ini used by your command-line PHP is: /usr/local/lib/php.ini
+If you can not modify the ini file, you can also run `php -d option=value` to modify ini values on the fly. You can use -d multiple times.
+
+
+
+https://stackoverflow.com/questions/48142019/create-blogger-template-using
+
+https://github.com/karawangsaz/Backbone-XML/tree/master/widgets
+
+https://www.drupalcenter.de/node/56409
+
+
+https://github.com/Lullabot/windup/tree/8.x-1.x/scss
+SASS global variables
+_global.scss	Used to import other files in this directory
+_fonts.scss	Sets up fonts and icon fonts
+_variables.scss	Contains variables used across the project
+_mixins.scss	Contains Sass mixins for the project
