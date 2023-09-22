@@ -1,5 +1,0 @@
-=INT(B2-A2) & " days, " & HOUR(B2-A2) & " hours, " & MINUTE(B2-A2) & " minutes and " & SECOND(B2-A2) & " seconds"
-
-To instruct your Excel time difference formula to hide zero values, embed four IF functions into it:
-
-=IF(INT(B2-A2)>0, INT(B2-A2) & " days, ","") & IF(HOUR(B2-A2)>0, HOUR(B2-A2) & " hours, ","") & IF(MINUTE(B2-A2)>0, MINUTE(B2-A2) & " minutes and ","") & IF(SECOND(B2-A2)>0, SECOND(B2-A2) & " seconds","")
