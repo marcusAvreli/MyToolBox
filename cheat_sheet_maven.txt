@@ -7,20 +7,24 @@ export M2=$M2_HOME/bin
 export MAVEN_OPTS="-Xmx1048m -Xms256"
 export PATH=$M2:$PATH
 
-Windows environment variables
 
++-----------------------------------------------------------+
+|															|
+|	Windows environment variables							|
+|															|
++-----------------------------------------------------------+
 Variable Name	Variable Value
 MAVEN_HOME	c:\maven
 PATH		%MAVEN_HOME%\bin
 
 
-Ant
+---Ant
 
 ANT_HOME	c:\ant
 PATH		%ANT_HOME%\bin
 
 
-Gradle
+---Gradle
 
 GRADLE_HOME	c:\gradle
 PATH		%GRADLE_HOME%\bin
@@ -48,6 +52,28 @@ mvn archetype:generate -DgroupId=reportRest  -DartifactId=reportRest -Darchetype
 
 ---desktop/console
 mvn archetype:generate -DgroupId=idmx3RestFrontEnd  -DartifactId=idmManager3 -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.1 -DinteractiveMode=false
+
+
++-----------------------------------------------------------+
+|															|
+|	source compiler properties								|
+|															|
++-----------------------------------------------------------+
+
+<properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+  
+  
++-----------------------------------------------------------+
+|															|
+|	INSTALL CUSTOM JAR LIBRARY IN LOCAL MAVEN				|
+|															|
++-----------------------------------------------------------+
+  
+  mvn install:install-file -Dfile=identityiq.jar -DgroupId=identityiq81 -DartifactId=identityiq -Dversion=8 -Dpackaging=jar
 
 ================================================================================================================================
 
@@ -95,24 +121,13 @@ BUILDING SINGLE MODULE PROJECT tutorial2
 MAKE PROJECT WEB
 
 	Change packaging of tutorial2 to <packaging>war</packaging>
-	
 
++-----------------------------------------------------------+
+|															|
+|	BUILDING MULTI MODULE PROJECT tutorial2					|
+|															|
++-----------------------------------------------------------+
 
- <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-  </properties>
-================================================================================================================================
-
-INSTALL CUSTOM JAR LIBRARY IN LOCAL MAVEN
-
-	mvn install:install-file -Dfile=identityiq.jar -DgroupId=identityiq81 -DartifactId=identityiq -Dversion=8 -Dpackaging=jar
-	
-	
-================================================================================================================================	
-
-BUILDING MULTI MODULE PROJECT tutorial2
 
 	mvn archetype:generate -DgroupId=tutorial2  -DartifactId=tutorial2 -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
 
