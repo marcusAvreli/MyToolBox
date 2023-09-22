@@ -25,10 +25,29 @@ Gradle
 GRADLE_HOME	c:\gradle
 PATH		%GRADLE_HOME%\bin
 
-DOWNLOAD ONLY DEPENDENCIES OF PROJECT INTO SEPARATE DIRECTORY
 
++-----------------------------------------------------------+
+|															|
+|	download only dependencies								|
+|															|
++-----------------------------------------------------------+
+1. create directory
+	mkdir project
+	cd project
+2. create pom.xml like showed in maven/downloadOnly
 	mvn dependency:copy-dependencies -DoutputDirectory=yourfoldername -Dhttps.protocols=TLSv1.2
-	
+
++-----------------------------------------------------------+
+|															|
+|	create maven project									|
+|															|
++-----------------------------------------------------------+
+
+---web
+mvn archetype:generate -DgroupId=reportRest  -DartifactId=reportRest -DarchetypeArtifactId=maven-archetype-webapp -DarchetypeVersion=1.0 -DinteractiveMode=false
+
+---desktop/console
+mvn archetype:generate -DgroupId=idmx3RestFrontEnd  -DartifactId=idmManager3 -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.1 -DinteractiveMode=false
 
 ================================================================================================================================
 
