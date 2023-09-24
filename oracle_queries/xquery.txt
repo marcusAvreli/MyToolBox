@@ -154,13 +154,15 @@ from identityiq.spt_link sptLink
 						$singleValueNode/entry[@key=$stringName]/value/List/String
 					else(
 						element r{
-							element message_key {"test_empty"}
+							(: return null :)
+							element message_key {}
 						}
 					)
 				)
 		else (
 			element r{
-				element message_key {"test_empty"}
+				(: return null :)
+				element message_key {}
 			}
 		)
 	};
