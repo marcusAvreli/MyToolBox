@@ -108,8 +108,21 @@ CUSTOM COMPONENTS
 	https://medium.com/@getflourish/getting-the-most-out-of-angular-hot-module-replacement-two-way-data-binding-for-custom-8ecfe702e8db
 	https://rangle.io/blog/dynamically-creating-components-with-angular-2
 	
-	example with current angular version
+example with current angular version
 	https://stackoverflow.com/questions/45390312/can-one-render-angular-2-components-inside-dom-elements-from-third-party-librari
+	https://stackoverflow.com/questions/38944725/how-to-get-dom-element-in-angular-2
+	https://github.com/juice-shop/juice-shop/tree/97fbca01d4b8516eddd8ee376e2db1bf22b3b678/frontend/src/app/oauth
+	https://github.com/angular-threejs/angular-three/blob/789eab4db588a359761e859a5bfbce2a60ddf291/libs/angular-three/src/lib/di/before-render.ts	
+	
+wijmo innerHtml javascript wahello wigfrid
+		https://github.com/wahello/wigfrid/tree/master/public/styles
+		https://www.grapecity.com/wijmo/demos/Grid/Overview/angular
+		https://www.grapecity.com/blogs/using-web-components-in-angular
+		https://www.grapecity.com/wijmo/demos/Grid/Overview/angular
+		https://www.grapecity.com/blogs/using-web-components-in-angular
+
+
+
 
 Tech Stuck
 ngrxIIQReporting2
