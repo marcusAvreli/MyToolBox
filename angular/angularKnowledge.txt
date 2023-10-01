@@ -31,8 +31,11 @@ https://www.tsmean.com/articles/how-to-write-a-typescript-library/angular/
 https://github.com/bersling/angular-library-example/blob/master/demo-library/src/app/app.component.ts
 https://github.com/ng-packagr/ng-packagr/blob/v1.3.0/package.json
 
+directory structure
+https://itnext.io/choosing-a-highly-scalable-folder-structure-in-angular-d987de65ec7
 
-
+webpack
+https://medium.com/hackernoon/webpack-for-angular-developers-c8584a60e627
 
 ng generate module clarity-angular
 A Computer Science portal for geeks.
