@@ -1,4 +1,7 @@
 
+detect log4j2
+https://github.com/dimajix/flowman/blob/b68be70436c9aee2e6269b8841cb185fe63a00c2/flowman-common-java/src/main/java/com/dimajix/flowman/common/Logging.java#L209
+
 Pure jersey 1.19
 https://github.com/enviroCar/enviroCar-server/tree/09999321c567ceb313ce180e6144ab15d1d97fd1
 https://github.com/metterytt/Restaurant/blob/master/Restaurant/pom.xml

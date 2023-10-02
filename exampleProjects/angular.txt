@@ -59,26 +59,22 @@ Data bus(Common Service)
 	
 	
 EVENT BUS
-https://www.mihira.dev/2020/02/angular-component-communication-with.html
-https://dev.to/ivandotv/event-bus-pattern-via-native-eventemmiter-class-72a
-https://www.mbejda.com/angular-4-propagating-events-from-directives-to-parent-components/
-https://www.tektutorialshub.com/angular/angular-pass-data-to-parent-component/#how-to-pass-data-to-parent-component-using-output
-https://www.dotnetcurry.com/angularjs/1445/angular-services-component-communication
+	https://www.mihira.dev/2020/02/angular-component-communication-with.html
+	https://dev.to/ivandotv/event-bus-pattern-via-native-eventemmiter-class-72a
+	https://www.mbejda.com/angular-4-propagating-events-from-directives-to-parent-components/
+	https://www.tektutorialshub.com/angular/angular-pass-data-to-parent-component/#how-to-pass-data-to-parent-component-using-output
+	https://www.dotnetcurry.com/angularjs/1445/angular-services-component-communication
+	
 MESSAGE BUS
-https://stackblitz.com/edit/angular-message-bus?file=app%2Fcommunication%2Fmessage-bus-demo.component.html
-
-https://github.com/noptran/cms1/blob/e69838c380ea7c010a2ea208ef84ae3d4b8f8b35/client-app/src/app/components/provider-info-module/provider-info.component.ts
+	https://stackblitz.com/edit/angular-message-bus?file=app%2Fcommunication%2Fmessage-bus-demo.component.html
+	https://github.com/noptran/cms1/blob/e69838c380ea7c010a2ea208ef84ae3d4b8f8b35/client-app/src/app/components/provider-info-module/provider-info.component.ts
 
 REPORT
-https://github.com/shamimahmad786/Report/tree/8c110a082914eb68659c922c06fbfc73cfd5b6dd/src/app
-
-https://github.com/IgorMinar/batarangle/blob/142d1fb8e009da0123b58f88665c53f290d2f06b/example-apps/todo-mvc-example/source/components/todo-list.ts
-
-https://odieweblog.wordpress.com/2016/05/20/how-to-using-outer-join-with-xmltable-or-xquery/
-
-https://github.com/Donnerstagnacht/polity/blob/1424b8b56139dfb1553dd8efbbe7b7b07f4de8ac/supabase/functions/notify-user/index.ts
-
-https://github.com/carbon-design-system/carbon-components-angular/tree/master/src
+	https://github.com/shamimahmad786/Report/tree/8c110a082914eb68659c922c06fbfc73cfd5b6dd/src/app
+	https://github.com/IgorMinar/batarangle/blob/142d1fb8e009da0123b58f88665c53f290d2f06b/example-apps/todo-mvc-example/source/components/todo-list.ts
+	https://odieweblog.wordpress.com/2016/05/20/how-to-using-outer-join-with-xmltable-or-xquery/
+	https://github.com/Donnerstagnacht/polity/blob/1424b8b56139dfb1553dd8efbbe7b7b07f4de8ac/supabase/functions/notify-user/index.ts
+	https://github.com/carbon-design-system/carbon-components-angular/tree/master/src
 
 
 
@@ -121,8 +117,11 @@ wijmo innerHtml javascript wahello wigfrid
 		https://www.grapecity.com/wijmo/demos/Grid/Overview/angular
 		https://www.grapecity.com/blogs/using-web-components-in-angular
 
-
-
+appendChild
+	https://github.com/sbb-design-systems/sbb-angular/tree/b76b371ac718b57b58044948f0b30f445edfe697/src/components-examples/angular/autocomplete
+	
+angular course. advanced components appendChild
+	https://github.com/lnielsen/ngCourse2/tree/43f92f5e91124c18c46ad0b5ef7e633195b3b816
 
 Tech Stuck
 ngrxIIQReporting2
