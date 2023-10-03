@@ -44,7 +44,7 @@ https://github.com/archfirst/angular2-seed-sass/blob/master/package.json
 https://www.geeksforgeeks.org/how-to-use-bootstrap-4-in-angular-2/
 
 ng new use-dropdown2
-
+https://coco-boudard.medium.com/adding-css-assets-to-angular-library-c22fd3a47c5d
 npm install ../my-component-library6/dist/my-component-library6-0.0.0.tgz
 
 
@@ -111,6 +111,15 @@ https://coderonfleek.medium.com/understanding-the-angular-boot-process-9a338b062
 https://www.dsebastien.net/2021-03-28-angular-application-bootstrap/
 //ANGULAR 4 SYSTEMJS
 https://stackoverflow.com/questions/46377115/uncaught-referenceerror-system-is-not-defined-angular-4
+https://jinalshah999.medium.com/creating-reusable-web-component-and-using-it-with-angular-3ee0505098ea
 
 CLARITY
 https://github.com/wahello/wigfrid/blob/eac443e1ee1f8849a3a547d9bc7c1a89e27b2b97/build/npm/clarity-icons.json
+
+
+https://www.linkedin.com/pulse/angular-4-from-scratchno-seedcli-suwigya-rathore/
+https://indepth.dev/posts/1204/a-deep-deep-deep-deep-deep-dive-into-the-angular-compiler
+https://blog.cloudboost.io/building-a-dynamic-website-with-angular-universal-f8dd7bffb667
+https://feloy.medium.com/building-a-static-website-with-angular-universal-a1acc49e26e5
+https://feloy.medium.com/angular-v4-universal-demystified-f06a576d6ca2
+https://stackoverflow.com/questions/46122313/how-should-i-generate-the-app-module-ngfactory-ts-file
