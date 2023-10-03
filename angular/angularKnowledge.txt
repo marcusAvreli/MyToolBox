@@ -14,10 +14,10 @@ Update file tsconfig.app.json
     ]
 https://yeshasmp.github.io/posts/angular-services/
 https://indepth.dev/posts/1151/a-deep-dive-into-injectable-and-providedin-in-ivy
+https://www.dsebastien.net/2021-03-28-angular-application-bootstrap/
 
-
-npm i @ngrx/core@1.2.0 @ngrx/effects@2.0.3 @ngrx/router-store@1.2.6 @ngrx/store@2.2.3 @ngrx/store-devtools@4.1.1
-npm i ag-grid@17.0.0 ag-grid-angular@17.0.0 moment@2.29.4 ngrx-store-freeze@0.1.9 reselect@3.0.0
+npm i @ngrx/core@1.2.0 @ngrx/effects@2.0.3 @ngrx/router-store@1.2.6 @ngrx/store@2.2.3 @ngrx/store-devtools@4.1.1 @angular/http@4.4.7 --global
+npm i ag-grid@17.0.0 ag-grid-angular@17.0.0 moment@2.29.4 ngrx-store-freeze@0.1.9 reselect@3.0.0 --global
 npm i @angular/http@4.4.7
 npm i ng-packagr@1.3.0
 
@@ -106,3 +106,11 @@ Running the equivalent CLI commands will result in an error.
 
 ==========================================================================================
 Some packages were added. Please run "npm install".
+
+https://coderonfleek.medium.com/understanding-the-angular-boot-process-9a338b06248c
+https://www.dsebastien.net/2021-03-28-angular-application-bootstrap/
+//ANGULAR 4 SYSTEMJS
+https://stackoverflow.com/questions/46377115/uncaught-referenceerror-system-is-not-defined-angular-4
+
+CLARITY
+https://github.com/wahello/wigfrid/blob/eac443e1ee1f8849a3a547d9bc7c1a89e27b2b97/build/npm/clarity-icons.json
