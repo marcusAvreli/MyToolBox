@@ -129,3 +129,6 @@ https://feloy.medium.com/angular-v4-universal-demystified-f06a576d6ca2
 https://stackoverflow.com/questions/46122313/how-should-i-generate-the-app-module-ngfactory-ts-file
 
 https://www.usefuldev.com/post/Angular:%20create%20a%20library%20that%20supports%20Angular%20Material%20theming
+
+
+https://github.com/dancancro/great-big-example-application/blob/fc757ea6e862194deabb1fbb039fd4c6ca230010/src/main/webapp/app/features/contacts/contacts.page.ts
