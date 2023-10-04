@@ -45,6 +45,10 @@ https://www.geeksforgeeks.org/how-to-use-bootstrap-4-in-angular-2/
 
 ng new use-dropdown2
 https://coco-boudard.medium.com/adding-css-assets-to-angular-library-c22fd3a47c5d
+https://stackoverflow.com/questions/46442949/include-assets-when-building-library-using-ng-packagr
+
+ng build my-boot-strap2 --prod
+https://sandroroth.com/blog/angular-library
 npm install ../my-component-library6/dist/my-component-library6-0.0.0.tgz
 
 
@@ -123,3 +127,5 @@ https://blog.cloudboost.io/building-a-dynamic-website-with-angular-universal-f8d
 https://feloy.medium.com/building-a-static-website-with-angular-universal-a1acc49e26e5
 https://feloy.medium.com/angular-v4-universal-demystified-f06a576d6ca2
 https://stackoverflow.com/questions/46122313/how-should-i-generate-the-app-module-ngfactory-ts-file
+
+https://www.usefuldev.com/post/Angular:%20create%20a%20library%20that%20supports%20Angular%20Material%20theming

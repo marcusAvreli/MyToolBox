@@ -12,7 +12,8 @@ https://github.com/maxime1992/demo-webworker-library/blob/6c4ca2d833981bd0f5570b
 
 https://github.com/matthprost/scaleway-manager/blob/68e2531f1524327ab46886fc623ade962a2c9f03/src/app/services/api/object-api.service.ts#L1
 
-https://github.com/goossaert/ethereum-payment-system/blob/84018f02ed2eb3fcbb7107c55a3c22e0eaa264d8/frontend/src/app/auth/auth.service.ts#L2
+json token renew JWT_RENEWAL_INTERVAL 
+	https://github.com/goossaert/ethereum-payment-system/blob/84018f02ed2eb3fcbb7107c55a3c22e0eaa264d8/frontend/src/app/auth/auth.service.ts#L2
 
 https://github.com/jecihjoy/ng2-amrs/blob/ed4a6aff9c0529f045be1fd1766ecafacf4e064f/src/app/clinic-dashboard/hiv/patient-status-change-visualization/patient-status-change-visualization.component.ts
 https://github.com/opfab/operatorfabric-core/blob/929dd8d0485e4e3f2cf68f7f07477cbe76f8acfc/ui/main/src/app/business/services/application-events.service.ts
@@ -22,9 +23,11 @@ https://github.com/jchewitt/angular-auth-service/blob/dev/src/app/core/core.modu
 https://www.itsolutionstuff.com/post/how-to-install-specific-version-of-angular-materialexample.html
 https://github.com/MTHRSHiP/skf-flask/blob/346906d7983be00a53ab1616484fe41f3346946d/Angular2/src/app/core/core.module.ts
 https://github.com/drewdru/ponyTown/blob/6efbc4d15db68b6982d18628bbc7b5ad60e2b0d4/src/ts/components/tools/tools-perf/tools-perf.ts#L1
-https://github.com/goossaert/ethereum-payment-system/blob/84018f02ed2eb3fcbb7107c55a3c22e0eaa264d8/frontend/src/app/auth/auth.service.ts
+
 https://github.com/auth0-blog/mean-rsvp-auth0/blob/0ef1fd599ff4bf77244823b5e476373aca7fae7f/src/app/core/env.config.ts
-https://github.com/Lumeer/web-ui/blob/b8eaf4ac135f47ffcedb046f278141ab6421912c/src/app/auth/auth.service.ts#L20
+
+STRONG UI shared core
+	https://github.com/Lumeer/web-ui/blob/b8eaf4ac135f47ffcedb046f278141ab6421912c/src/app/auth/auth.service.ts#L20
 https://github.com/Code4SocialGood/c4sg-web/blob/f3ce8b0205b1d3450c75879a511d1e4a76704232/src/app/auth.service.ts#L486
 https://github.com/GSA/srt-ui/blob/4f89b3e9beed3a0ac714fc293f02fd109fc0b9df/src/app/user/masq/masq.service.ts
 https://github.com/chris-amaya/fh-chat/blob/9f75ceb3bc6f4667664ba1ea4fb4926e17d5b4af/packages/backend/src/helpers/jwt.ts
@@ -33,7 +36,11 @@ https://github.com/acgnhiki/blrec/blob/1ac194ef4dcc73f3271df3fce8d5b71a7f6aa4a4/
 
 resolveComponentFactory
 	https://github.com/SUSE/stratos/blob/d32e3f2eaca14e055689da7e658e8545481ce930/src/frontend/packages/core/src/features/about/about-page/about-page.component.ts#L32
+	
+BaseEntityService api base sevice generic http client with ngrx store
 	https://github.com/wthapps/portal-frontend/blob/afc96afa941c33e7d32e40d055de85fe22326f01/src/note/app.component.ts#L182
+
+
 	https://github.com/litebulb/ProjectEdison/blob/95704e7e01ac888a7948a873731891d5136c929e/Edison.Web/Edison.AdminPortal/ClientApp/src/app/modules/shared/components/action-list-item/action-list-item.component.ts#L57
 metareducer	
 	https://stackoverflow.com/questions/66695786/angular-createcomponent-throws-error-typeerror-cannot-add-property
