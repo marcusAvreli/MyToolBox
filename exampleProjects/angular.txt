@@ -170,7 +170,16 @@ npm install ../my-component-library6/dist/my-component-library6-0.0.0.tgz
 	
 https://itnext.io/8-daily-problems-solved-by-interceptors-in-angular-59c8ce1e1074	
 
-//https://www.educba.com/typescript-cast-object/
+
+
++-----------------------------------------------------------+
+|															|
+|	TYPESCRIPT CAST OBJECT									|
+|															|
++-----------------------------------------------------------+
+//convert object to map 
+//build map of options
+//source: https://www.educba.com/typescript-cast-object/
 
 var example = {
 siva: { first:6245, second:1725},
