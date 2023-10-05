@@ -14,6 +14,8 @@ https://github.com/matthprost/scaleway-manager/blob/68e2531f1524327ab46886fc623a
 
 json token renew JWT_RENEWAL_INTERVAL 
 	https://github.com/goossaert/ethereum-payment-system/blob/84018f02ed2eb3fcbb7107c55a3c22e0eaa264d8/frontend/src/app/auth/auth.service.ts#L2
+	
+	
 
 https://github.com/jecihjoy/ng2-amrs/blob/ed4a6aff9c0529f045be1fd1766ecafacf4e064f/src/app/clinic-dashboard/hiv/patient-status-change-visualization/patient-status-change-visualization.component.ts
 https://github.com/opfab/operatorfabric-core/blob/929dd8d0485e4e3f2cf68f7f07477cbe76f8acfc/ui/main/src/app/business/services/application-events.service.ts
@@ -130,6 +132,119 @@ appendChild
 angular course. advanced components appendChild
 	https://github.com/lnielsen/ngCourse2/tree/43f92f5e91124c18c46ad0b5ef7e633195b3b816
 
+
+
+
+https://medium.com/@nikolasleblanc/building-an-angular-4-component-library-with-the-angular-cli-and-ng-packagr-53b2ade0701e
+https://itecnote.com/tecnote/angular-how-to-export-models-from-libraries-in-angular/
+https://tomastrajan.medium.com/the-best-way-to-architect-your-angular-libraries-87959301d3d3
+https://medium.com/@khan0549/publish-your-first-angular-library-e9ffd7a2c4b2
+https://www.tsmean.com/articles/how-to-write-a-typescript-library/angular/
+https://github.com/bersling/angular-library-example/blob/master/demo-library/src/app/app.component.ts
+https://github.com/ng-packagr/ng-packagr/blob/v1.3.0/package.json
+
+directory structure
+https://itnext.io/choosing-a-highly-scalable-folder-structure-in-angular-d987de65ec7
+
+webpack eject
+https://medium.com/hackernoon/webpack-for-angular-developers-c8584a60e627
+
+ng generate module clarity-angular
+A Computer Science portal for geeks.
+https://github.com/archfirst/angular2-seed-sass/blob/master/package.json
+https://www.geeksforgeeks.org/how-to-use-bootstrap-4-in-angular-2/
+
+ng new use-dropdown2
+https://coco-boudard.medium.com/adding-css-assets-to-angular-library-c22fd3a47c5d
+https://stackoverflow.com/questions/46442949/include-assets-when-building-library-using-ng-packagr
+
+ng build my-boot-strap2 --prod
+https://sandroroth.com/blog/angular-library
+npm install ../my-component-library6/dist/my-component-library6-0.0.0.tgz
+
+
+	npm i gulp     gulp-autoprefixer     gulp-clang-format	gulp-concat     gulp-env     gulp-gzip    gulp-inline-ng2-template     gulp-preprocess gulp-rename     gulp-replace     gulp-sass     gulp-sourcemaps     gulp-stylestats     gulp-tslint     gulp-typescript gulp-util gulp-zip
+	
+	
+	https://serverfault.com/questions/951315/npm-install-globally-a-package-offline-with-tarball
+	
+https://itnext.io/8-daily-problems-solved-by-interceptors-in-angular-59c8ce1e1074	
+
+//https://www.educba.com/typescript-cast-object/
+
+var example = {
+siva: { first:6245, second:1725},
+raman: { first:6245, second:1725,five:'qjwkgje jweg wqegj wjeg kwjeg wejkg wejkg kwhe kwhej'},
+sivaraman: { first:6245, second:1725,four:'jges jwge wjge  wjeg kwjegr jkwegr jkewgr'},
+kweg: { first:6245, second:1725},
+ksdhjg: { first:6245, second:1725,four:'jgsd jags jsd g wjeg qwkjeg wekjg kqweg kqwge'},
+kjlsldj: { first:6245, third:827,four:'jsgd34 asjkdgf jgds wjhg jweg kwjge kweg kwejg'},
+}
+let vars = [];
+Object.keys(example).map(function(key){
+vars.push({[key]:example[key]})
+return vars;
+});
+console.log('Welcome To My Domian Object of the people are=',example)
+console.log('After converting the people object to array is=',vars)
+
+
+
+//source: https://stackoverflow.com/questions/47492595/why-foreach-does-not-exist-on-nodelistof
+
+
+There is no guarantee forEach will exist on this type - it can, but not necessarily (e.g. in PhantomJS and IE), so TypeScript disallows it by default. In order to iterate over it you can use:
+
+1) Array.from():
+
+Array.from(checkboxes).forEach((el) => { /* do something */});
+2) for-in:
+
+for (let i in checkboxes) {
+  if (checkboxes.hasOwnProperty(i)) {
+    console.log(checkboxes[i]);
+  }
+}
+
+
+C:\Users\user\angularDemoProjects\myBootStrap>ng eject
+==========================================================================================
+Ejection was successful.
+
+To run your builds, you now need to do the following commands:
+   - "npm run build" to build.
+   - "npm test" to run unit tests.
+   - "npm start" to serve the app using webpack-dev-server.
+   - "npm run e2e" to run protractor.
+
+Running the equivalent CLI commands will result in an error.
+
+==========================================================================================
+Some packages were added. Please run "npm install".
+
+https://coderonfleek.medium.com/understanding-the-angular-boot-process-9a338b06248c
+https://www.dsebastien.net/2021-03-28-angular-application-bootstrap/
+//ANGULAR 4 SYSTEMJS
+https://stackoverflow.com/questions/46377115/uncaught-referenceerror-system-is-not-defined-angular-4
+https://jinalshah999.medium.com/creating-reusable-web-component-and-using-it-with-angular-3ee0505098ea
+
+CLARITY
+https://github.com/wahello/wigfrid/blob/eac443e1ee1f8849a3a547d9bc7c1a89e27b2b97/build/npm/clarity-icons.json
+
+
+https://www.linkedin.com/pulse/angular-4-from-scratchno-seedcli-suwigya-rathore/
+https://indepth.dev/posts/1204/a-deep-deep-deep-deep-deep-dive-into-the-angular-compiler
+https://blog.cloudboost.io/building-a-dynamic-website-with-angular-universal-f8dd7bffb667
+https://feloy.medium.com/building-a-static-website-with-angular-universal-a1acc49e26e5
+https://feloy.medium.com/angular-v4-universal-demystified-f06a576d6ca2
+https://stackoverflow.com/questions/46122313/how-should-i-generate-the-app-module-ngfactory-ts-file
+
+https://www.usefuldev.com/post/Angular:%20create%20a%20library%20that%20supports%20Angular%20Material%20theming
+
+START FROM good example of application
+https://github.com/dancancro/great-big-example-application/blob/fc757ea6e862194deabb1fbb039fd4c6ca230010/src/main/webapp/app/features/contacts/contacts.page.ts
+
+
 Tech Stuck
 ngrxIIQReporting2
 "@ngrx/core": "^1.2.0",
@@ -211,6 +326,8 @@ https://github.com/iharriott/angular-shared-components
 https://github.com/jyoti0291/emp-reusable-elements
 https://github.com/venkateshwarans/sunbird-forms-with-angular-app
 https://github.com/bahurudeen/dynamicform
+
+VALIDATORS
 https://github.com/yarvanya/angular-validators-sandbox
 https://github.com/tiennh-dev/accMaster/blob/master/src/app/shared/formdef/models.ts
 https://github.com/Robinyo/serendipity-2.0/blob/3555019f55caed8afb86597874d997443eafa696/frontend/projects/dynamic-forms-lib/src/lib/angular-material/models/dynamic-form-control.model.ts
