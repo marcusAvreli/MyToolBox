@@ -30,3 +30,19 @@ npm i ng-packagr@1.3.0
 
 npm i sass@1.1.1
 npm i gulp-sass@2.2.0
+
+
+https://medium.com/@damianczapiewski/custom-rxjs-operators-637c7d3d8f86
+function OPERATOR() {
+  return function (source: Observable<number>) {
+    return new Observable(subscriber => {
+      const subscription = source.subscribe(
+        /*
+          all the magic happens here
+        */
+      );
+      return  ()  =>  subscription.unsubscribe();
+    });
+  };
+}
+https://github.com/vparomskiy/thingsboard/blob/3ac59a95946248d504391bc30541b94c47c878bd/ui-ngx/src/app/modules/home/models/datasource/entity-datasource.ts#L92
