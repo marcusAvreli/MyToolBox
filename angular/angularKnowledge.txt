@@ -49,3 +49,4 @@ https://github.com/vparomskiy/thingsboard/blob/3ac59a95946248d504391bc30541b94c4
 https://github.com/jacklam718/cqrs/blob/96c7ab8ca894d2d34aa8e0de33460da08f7789ec/src/utils/observable-bus.ts#L8
 https://stackoverflow.com/questions/52414920/emitting-a-hot-boolean-observable-using-switchmap
 https://www.grapecity.com/wijmo/api/interfaces/wijmo.icollectionview.html
+https://www.grapecity.com/wijmo/demos/Core/CollectionView/Overview/purejs
