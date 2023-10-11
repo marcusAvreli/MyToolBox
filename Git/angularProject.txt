@@ -12,6 +12,9 @@ Back Up Angular project on git
 Subsequent commits
 	git status
 	git add tomcat.txt
-	[ git add -- . :!"node_modules" ]
+	[ git add -- . :!"node_modules" ]//add all
 	git commit -am "new regex added"
 	git push origin master
+	
+//https://stackoverflow.com/questions/50316434/add-all-files-using-git-add-except-one-directory
+git add . -- ':!somefolder' ':!**/some_deep_nested_folder/*'
