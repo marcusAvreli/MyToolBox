@@ -1,15 +1,22 @@
 Back Up Angular project on git
 	git init
-	git remote add origin https://github.com/marcusAvreli/lazyApp.git
+	git remote add origin <repo_address>
 	echo "node_modules/" >> .gitignore
-	git add -- . :!"node_modules"
+	echo "dist/" >> .gitignore
+	git add -- . :!"node_modules" :!"dist"	
 	git rm -r --cached node_modules
+	git rm -r --cached dist
 	git commit -am "initial_commit"
 	git push origin master
 
 Subsequent commits
 	git status
 	git add tomcat.txt
-	[ git add -- . :!"node_modules" ]
+	[ git add -- . :!"node_modules" ]//add all
 	git commit -am "new regex added"
 	git push origin master
+	
+//https://stackoverflow.com/questions/50316434/add-all-files-using-git-add-except-one-directory
+git add . -- ':!somefolder' ':!**/some_deep_nested_folder/*'
+
+

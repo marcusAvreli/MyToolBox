@@ -15,7 +15,13 @@ https://github.com/matthprost/scaleway-manager/blob/68e2531f1524327ab46886fc623a
 json token renew JWT_RENEWAL_INTERVAL 
 	https://github.com/goossaert/ethereum-payment-system/blob/84018f02ed2eb3fcbb7107c55a3c22e0eaa264d8/frontend/src/app/auth/auth.service.ts#L2
 	
-	
+https://ultimatecourses.com/blog/ngrx-store-understanding-state-selectors
+https://stackoverflow.com/questions/58385399/what-is-the-best-way-to-get-ngrx-data-from-multiple-slices-of-the-store	
+
+
+multiple reducers
+https://github.com/richinator38/ngrx-selectors/blob/master/src/app/store/effects/effects.ts#L52
+https://github.com/thingsboard/thingsboard/blob/2f988467140c881fb70dbcacb222a73381d1a330/ui-ngx/package.json
 
 https://github.com/jecihjoy/ng2-amrs/blob/ed4a6aff9c0529f045be1fd1766ecafacf4e064f/src/app/clinic-dashboard/hiv/patient-status-change-visualization/patient-status-change-visualization.component.ts
 https://github.com/opfab/operatorfabric-core/blob/929dd8d0485e4e3f2cf68f7f07477cbe76f8acfc/ui/main/src/app/business/services/application-events.service.ts
