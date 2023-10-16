@@ -1,0 +1,12 @@
++-----------------------------------------------------------+
+|															|
+|					GRADLE									|
+|															|
++-----------------------------------------------------------+
+	Initializing the Project
+		mkdir pluginRtl
+		cd pluginRtl
+		gradle init
+			Select type of project to generate : Basic
+			Select build script DSL : Groovy
+			Generate build using new APIs and behavior : no

@@ -69,51 +69,91 @@ https://stackoverflow.com/questions/20076262/findstr-and-skipping-folders
 
 
 
-Number Of Files in directory recurcively
++-----------------------------------------------------------+
+|															|
+|		NUMBER OF FILES IN DIRECTORY RECURCIVELY			|
+|															|
++-----------------------------------------------------------+
+
 	dir /a:-d /s /b "<path-to-directory>" | find /c ":"
 
-Number Of Sub-Directories in directory recurcively
++-----------------------------------------------------------+
+|															|
+|		NUMBER OF SUB-DIRECTORIES IN DIRECTORY RECURCIVELY	|
+|															|
++-----------------------------------------------------------+
 	dir /a:d /s /b "<path-to-directory>" | find /c ":"
 
-kill all java on windows
++-----------------------------------------------------------+
+|															|
+|		KILL ALL JAVA ON WINDOWS							|
+|															|
++-----------------------------------------------------------+
 	taskkill /f /im jqs.exe 
 	taskkill /f /im javaw.exe 
 	taskkill /f /im java.exe
 
-POWERSHELL
++-----------------------------------------------------------+
+|															|
+|		POWERSHELL											|
+|															|
++-----------------------------------------------------------+
 Get Version of powershell
-Get-Host | Select-Object Version
+	Get-Host | Select-Object Version
 
 
-Find string in directory files recursively
++-----------------------------------------------------------+
+|															|
+|		FIND STRING IN DIRECTORY FILES RECURSIVELY			|
+|															|
++-----------------------------------------------------------+
 Batch
 
-@ECHO OFF
-for /F %%i in (pattern.txt) do (
-echo Files containing %%i
-findstr /M /C:%%i /I /S *.java > output.txt
-)
-ECHO Finished execution.
-PAUSE
+	@ECHO OFF
+	for /F %%i in (pattern.txt) do (
+	echo Files containing %%i
+	findstr /M /C:%%i /I /S *.java > output.txt
+	)
+	ECHO Finished execution.
+	PAUSE
 
 Find classes in jars (did not work in the past)
 for /R %G in (*.jar) do @jar -tvf "%G" | find "ClassName" > NUL && echo %G
 
-Windows list of directories including files
-dir /s /w/ /p /b c:\build1.0 > output.txt
++-----------------------------------------------------------+
+|															|
+|			WINDOWS LIST OF DIRECTORIES INCLUDING FILES		|
+|															|
++-----------------------------------------------------------+
+	dir /s /w/ /p /b c:\build1.0 > output.txt
 
-Stop all java on windows
-taskkill /f /im jqs.exe 
-taskkill /f /im javaw.exe 
-taskkill /f /im java.exe
 
-Remove Directory recursively
-With Prompt:
-rmdir c:\test /s
 
-Without prompts:
-rmdir c:\test /s /q
-Run cmd as admin
++-----------------------------------------------------------+
+|															|
+|			REMOVE DIRECTORY RECURSIVELY					|
+|															|
++-----------------------------------------------------------+
+
+rmdir c:\test /s/d
+rd /s/q test
+
+
++-----------------------------------------------------------+
+|															|
+|			REMOVE FILES ONLY RECURSIVELY					|
+|															|
++-----------------------------------------------------------+
+/s - recurcively
+/q - without prompt
+del c:\test /s/q
+
+
++-----------------------------------------------------------+
+|															|
+|		RUN CMD AS ADMIN									|
+|															|
++-----------------------------------------------------------+
 runas /user:Administrator cmd
 
 

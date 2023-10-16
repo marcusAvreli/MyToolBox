@@ -1,0 +1,4 @@
+curl -X GET -H "Content-type: application/json" -H "Accept: application/json" -d {"name":"name1"} http://localhost:8080/reportRest1/report
+
+
+https://stackoverflow.com/questions/978061/http-get-with-request-body

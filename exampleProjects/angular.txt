@@ -81,14 +81,14 @@ MESSAGE BUS
 REPORT
 	https://github.com/shamimahmad786/Report/tree/8c110a082914eb68659c922c06fbfc73cfd5b6dd/src/app
 	https://github.com/IgorMinar/batarangle/blob/142d1fb8e009da0123b58f88665c53f290d2f06b/example-apps/todo-mvc-example/source/components/todo-list.ts
-	https://odieweblog.wordpress.com/2016/05/20/how-to-using-outer-join-with-xmltable-or-xquery/
-	https://github.com/Donnerstagnacht/polity/blob/1424b8b56139dfb1553dd8efbbe7b7b07f4de8ac/supabase/functions/notify-user/index.ts
+	https://odieweblog.wordpress.com/2016/05/20/how-to-using-outer-join-with-xmltable-or-xquery/	
 	https://github.com/carbon-design-system/carbon-components-angular/tree/master/src
 
 
 
 
 SIMPLE DEPENDENT COMBOBOXES
+	LoadingSpinner error message and retry ui-elements
 	https://github.com/Donnerstagnacht/polity/blob/1424b8b56139dfb1553dd8efbbe7b7b07f4de8ac/src/app/UI-elements/chips-picker/chips-picker.component.html
 
 CUSTOM COMPONENTS
@@ -254,36 +254,7 @@ START FROM good example of application
 https://github.com/dancancro/great-big-example-application/blob/fc757ea6e862194deabb1fbb039fd4c6ca230010/src/main/webapp/app/features/contacts/contacts.page.ts
 
 
-Tech Stuck
-ngrxIIQReporting2
-"@ngrx/core": "^1.2.0",
-"@ngrx/effects": "^2.0.3",
-"@ngrx/store": "^2.2.3",
-"@ngrx/router-store": "^1.2.6",
-"reselect": "^3.0.0",
-"moment": "^2.21.0",
-"ngx-bootstrap": "^2.0.3",
 
-ngrxIIQReporting3
-"@ngrx/core": "^1.2.0",
-"@ngrx/effects": "^2.0.3",
-"@ngrx/store": "^2.2.3",
-"@ngrx/router-store": "^1.2.6",
-"ngrx-store-freeze": "^0.1.9",
-"reselect": "^3.0.0",
-"moment": "^2.21.0",
-"ngx-bootstrap": "^2.0.3",
-"ag-grid": "^17.0.0",
-"ag-grid-angular": "^17.0.0",
-"@ngrx/store-devtools": "^4.1.0",
-
-
-angularRedux
-"@ngrx/core": "^1.2.0",
-"@ngrx/effects": "^2.0.3",
-"@ngrx/store": "^2.2.3",
-"reselect": "^3.0.0",
-"ngrx-store-freeze": "^0.1.9",
 
 res.subscribe(val => this.myReportsArray = val);
 this.isLoading$.subscribe(console.log);
@@ -348,22 +319,8 @@ integration of
 directiveReportSelection8
 angularSimpleLogin2
 
-Libraries
-"moment": "^2.21.0",
-"@ngrx/core": "^1.2.0",
-    "@ngrx/effects": "^2.0.3",
-    "@ngrx/store": "^2.2.3",
-    "@ngrx/router-store": "^1.2.6",
-    "ngrx-store-freeze": "^0.1.9",
-    "reselect": "^3.0.0",
-    "ngx-cookie": "^1.0.0",
-    "@ngrx/store-devtools": "^3.2.4",
-    "@ngrx/store-log-monitor": "^3.0.2",
 
-npx @angular/cli@1.4.10 new manualLazyLoad --skip-git
-npx @angular/cli@1.4.10 new manualLazyLoad2 --skip-git
-npx @angular/cli@1.4.10 new manualLazyLoad3 --skip-git
-npx @angular/cli@1.4.10 new directiveReportSelectionLazy --skip-git
+
 Drag and drop
 https://github.com/Jalalx/drag/tree/master/src/app
 https://github.com/alichherawalla/ng2-drag-n-drop/tree/master/bundles
@@ -373,27 +330,7 @@ https://github.com/reppners/ngx-drag-drop/tree/2.0.0-rc.0
 
 https://github.com/kirjs/angular-dynamic-module-loading
 https://stackoverflow.com/questions/50149016/load-new-modules-dynamically-in-run-time-with-angular-cli-angular-5
-npx @angular/cli@1.4.10 new umtbReporting3 --skip-git
 
-In order to install node_modules
-Edit package.json
-Save package.json
-Run npm i
-
-Errors
-Uncaught reflect-metadata shim is required when using class decorators
-In root/src
-Update file polyfills.ts
-
-import 'zone.js';
-import 'reflect-metadata';
-
-Cannot find name 'require'
-Update file tsconfig.app.json
-
-"types": [
-      "node"
-    ]
 
 
 Eager,preload,lazy load
@@ -427,11 +364,7 @@ ng-package.json
 }
 public_api.ts
 
-npm i @angular/compiler@^11.0.0-next.0
-npm i @angular/compiler-cli@^11.0.0-next.0
-npm i tslib@2.0.0
-npm i typescript@4.0.3
-npm install ng-packagr --save-dev
+
 
 https://medium.com/@ahsan.ayaz/creating-progressive-web-apps-with-angular-part-1-8f752b866f29
 npm install --save @angular/service-worker @angular/platform-server ng-pwa-tools
@@ -439,15 +372,7 @@ Now we’ll enable service workers inside our application. By default, they’re
 ng set apps.0.serviceWorker=true
 ng add @angular/pwa --project *project-name*
 
-npm install ngx-bootstrap@^2.0.3
-npm install moment@^2.21.0
 
-npm install @types/node@^6.0.60
-npm i bootstrap@^3.3.7
-npm i ngx-bootstrap@^2.0.3
-npm i moment@^2.21.0
-npm install @ngrx/core
-npm install @ngrx/store@^5.2.0
 
 SUBJECT
 https://medium.com/@enriqueoriol/angular-service-component-communication-4933782af52c
@@ -524,24 +449,24 @@ https://m.habr.com/ru/company/nspk/blog/560026/
 https://medium.com/swlh/a-better-way-to-pass-data-to-your-angular-components-e8b5ef6a642a
 
 Clone existing public git repository
-git clone https://github.com/doctral/Medium-Module-Loading-Strategies.git
-git clone https://github.com/libgit2/libgit2 mylibgit
-git clone https://github.com/yduartep/angular-full-sample.git
+https://github.com/doctral/Medium-Module-Loading-Strategies.git
+https://github.com/libgit2/libgit2 mylibgit
+https://github.com/yduartep/angular-full-sample.git
 
-git clone https://github.com/MihiraBandara/AngularEventBusServiceApp.git
-git clone https://github.com/mbrdar/angular-shared-and-core-module.git
-git clone https://github.com/designcourse/ngrx-tutorial.git
-git clone https://github.com/bodiddlie/rxheroes.git
-git clone https://github.com/eagleeyethinker/SimpleAgGridApp.git
-git clone https://github.com/toddmotto/angular-dynamic-forms.git
-git clone https://github.com/jcdevcode/jersey-security.git
-git clone https://github.com/loiane/angular-redux-ngrx-examples.git
-git clone https://github.com/roselew/bohater2.git
-git clone https://github.com/HuygensING/elaborate4-backend.git
-git clone https://github.com/vikigstar/travel_service.git
-git clone https://github.com/yduartep/angular-full-sample.git
+https://github.com/MihiraBandara/AngularEventBusServiceApp.git
+https://github.com/mbrdar/angular-shared-and-core-module.git
+https://github.com/designcourse/ngrx-tutorial.git
+https://github.com/bodiddlie/rxheroes.git
+https://github.com/eagleeyethinker/SimpleAgGridApp.git
+https://github.com/toddmotto/angular-dynamic-forms.git
+https://github.com/jcdevcode/jersey-security.git
+https://github.com/loiane/angular-redux-ngrx-examples.git
+https://github.com/roselew/bohater2.git
+https://github.com/HuygensING/elaborate4-backend.git
+https://github.com/vikigstar/travel_service.git
+https://github.com/yduartep/angular-full-sample.git
 
-git clone https://github.com/druny/agGridAngularTest.git
+https://github.com/druny/agGridAngularTest.git
 https://github.com/Simle-Infotech/gandaki_portal.git
 
 git clone https://github.com/jorgetrigueros/ngComponentOutlet-ejemplo.git
