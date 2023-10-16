@@ -18,3 +18,5 @@ Subsequent commits
 	
 //https://stackoverflow.com/questions/50316434/add-all-files-using-git-add-except-one-directory
 git add . -- ':!somefolder' ':!**/some_deep_nested_folder/*'
+
+

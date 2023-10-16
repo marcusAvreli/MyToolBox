@@ -32,6 +32,24 @@ npm i sass@1.1.1
 npm i gulp-sass@2.2.0
 
 
+
+npm i @ngrx/core@^1.2.0 --global
+npm i @ngrx/effects@^2.0.3 --global
+npm i @ngrx/router@^1.0.0-beta.2 --global
+npm i @ngrx/router-store@^1.2.5 --global
+npm i @ngrx/store@^2.2.3" --global
+npm i @ngrx/store-devtools@^3.2.4 --global
+npm i @ngrx/store-log-monitor@^3.0.2 --global
+npm i @ngx-translate/core@8.0.0 --global
+npm i @ngx-translate/http-loader@2.0.0 --global
+npm i ngrx-store-freeze@0.2.0 --global
+npm i ngrx-store-localstorage@0.2.2 --global
+
+
+
+
+
+
 https://medium.com/@damianczapiewski/custom-rxjs-operators-637c7d3d8f86
 function OPERATOR() {
   return function (source: Observable<number>) {

@@ -18,6 +18,11 @@ json token renew JWT_RENEWAL_INTERVAL
 https://ultimatecourses.com/blog/ngrx-store-understanding-state-selectors
 https://stackoverflow.com/questions/58385399/what-is-the-best-way-to-get-ngrx-data-from-multiple-slices-of-the-store	
 
+
+multiple reducers
+https://github.com/richinator38/ngrx-selectors/blob/master/src/app/store/effects/effects.ts#L52
+https://github.com/thingsboard/thingsboard/blob/2f988467140c881fb70dbcacb222a73381d1a330/ui-ngx/package.json
+
 https://github.com/jecihjoy/ng2-amrs/blob/ed4a6aff9c0529f045be1fd1766ecafacf4e064f/src/app/clinic-dashboard/hiv/patient-status-change-visualization/patient-status-change-visualization.component.ts
 https://github.com/opfab/operatorfabric-core/blob/929dd8d0485e4e3f2cf68f7f07477cbe76f8acfc/ui/main/src/app/business/services/application-events.service.ts
 https://github.com/ngx-formly/ngx-formly/blob/f9c3926e9c0b3821ed62c51c28a4eb8d303c1023/demo/src/app/examples/examples.module.ts#L34
