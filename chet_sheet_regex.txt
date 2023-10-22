@@ -6,7 +6,17 @@ replace with: $1
 converT all characters to upper case
 	find what: ([a-zA-Z]*)
 	replace with: \U\1
- 
+	
+Add Leading Zeros
+	Search for: ^
+	Replace with: 00000000
+	If you have leading spaces then use search for: ^ *
+
+	That’ll put eight zeroes at the front of all lines
+
+	The second search/replace is:
+	Search for: ^[0]+([0-9]{8})$
+	Replace with: \1
 To add "); at the end of row
 	FindWhat: ^(.*)$
 	ReplaceWith: \1"\);
