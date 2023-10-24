@@ -1,1 +1,4 @@
 https://github.com/odopod/code-library/blob/ceb47654545ec0b734c8650b3128a6c07504845a/packages/odo-draggable/src/settings.js#L17
+https://github.com/Pamblam/ez-drag-n-drop/blob/main/src/EZDnD_Draggable.js
+https://codepen.io/franzcisco/pen/zQwXQy
+
