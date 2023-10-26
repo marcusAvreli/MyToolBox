@@ -90,9 +90,13 @@ REPORT
 	https://odieweblog.wordpress.com/2016/05/20/how-to-using-outer-join-with-xmltable-or-xquery/	
 	https://github.com/carbon-design-system/carbon-components-angular/tree/master/src
 
+localization, components
+https://github.com/homebridge/homebridge-config-ui-x/blob/c4128688aa7f5425652e4feae7c2cd966887d0c7/ui/src/app/app.module.ts#L7
+	rtl.directive.ts
+  const browserLang = languages.find(x => x === translate.getBrowserLang() || x === translate.getBrowserCultureLang());
+https://github.com/idvoretskyi/harbor/blob/fc0654f02801de4bc86ac0f731b1bab63b3b045d/src/portal/lib/src/harbor-library.module.ts
 
-
-
+https://github.com/homebridge/homebridge-config-ui-x/blob/c4128688aa7f5425652e4feae7c2cd966887d0c7/src/core/config/config.startup.ts
 SIMPLE DEPENDENT COMBOBOXES
 	LoadingSpinner error message and retry ui-elements
 	https://github.com/Donnerstagnacht/polity/blob/1424b8b56139dfb1553dd8efbbe7b7b07f4de8ac/src/app/UI-elements/chips-picker/chips-picker.component.html
