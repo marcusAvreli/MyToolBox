@@ -3,3 +3,12 @@ https://github.com/Pamblam/ez-drag-n-drop/blob/main/src/EZDnD_Draggable.js
 https://codepen.io/franzcisco/pen/zQwXQy
 
 https://github.com/caplin/boxxer/tree/master
+
+text editor
+https://github.com/JiHong88/suneditor/blob/master/sample/index.html
+select combo
+https://github.com/orchidjs/tom-select/blob/master/src/tom-select.ts
+https://github.com/kbrgl/gatsby/tree/1f5e6fc68a6e54b7fbaacca768cc0233fa0c56ee/www/src/components/layout
+
+https://github.com/audi/audi-ui/blob/03b8cd1ca4d44ea63081bbf61791965ff0a2df6c/src/textfield/_textfield.scss
+https://github.com/CoherentLabs/GameUIComponents/blob/master/components/text-field/script.js
