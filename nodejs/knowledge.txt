@@ -1,0 +1,31 @@
+https://www.freecodecamp.org/news/setup-babel-in-nodejs/
+
+https://copyprogramming.com/howto/node-js-syntaxerror-unexpected-token-import
+npm i babel-cli babel-plugin-transform-runtime babel-preset-es2015 --save-dev
+"build:js": "babel src --out-dir dist --presets=es2015 --plugins=transform-runtime,transform-es2015-modules-commonjs",
+
+https://www.section.io/engineering-education/webpack/
+https://stackoverflow.com/questions/28782656/how-to-run-node-js-app-with-es6-features-enabled
+https://medium.com/@ahsan.ayaz/beginners-guide-to-webpack-how-to-start-a-basic-application-with-webpack-2-ebed3172fa8c
+https://stackoverflow.com/questions/68879208/how-to-compile-a-js-file-as-library-using-webpack-and-babel
+https://itecnote.com/tecnote/javascript-karma-webpack-babel-loader-es6-unexpected-token-import/
+npm init -y
+
+ "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "babel-loader": "^8.2.2",
+    "webpack": "^5.51.1",
+    "webpack-cli": "^4.8.0"
+	
+	  "@babel/cli": "^7.23.0",
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2"
+	
+	@babel/preset-env
+	
+	npm install --save-dev babel-loader webpack webpack-cli
+	
+	 npm install  babel-preset-es2015 webpack-dev-server babel-polyfill --save-dev
+	 
+	 https://medium.com/hackernoon/a-complete-workshop-build-your-es6-code-into-a-library-using-webpack-80295faeb833
+	 https://www.learnwithjason.dev/blog/learn-rollup-js

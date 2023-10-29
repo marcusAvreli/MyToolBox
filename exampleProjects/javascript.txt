@@ -1,14 +1,35 @@
 https://github.com/odopod/code-library/blob/ceb47654545ec0b734c8650b3128a6c07504845a/packages/odo-draggable/src/settings.js#L17
 https://github.com/Pamblam/ez-drag-n-drop/blob/main/src/EZDnD_Draggable.js
 https://codepen.io/franzcisco/pen/zQwXQy
-
+https://github.com/aigan/mv-sorter/blob/master/mv-sorter.js
+https://github.com/bradtraversy/vanillawebprojects/blob/master/sortable-list/script.js#L102
+https://github.com/TECHOUS/treasurejs.github.io/blob/5264f6b45419f6fc223a001554063e3914718093/scripts/V.js
+https://github.com/ComiR/neos-development-collection/blob/e6c7bb9c528c46a2e55c4631e3c725ca2571824e/Neos.Neos/Resources/Public/Library/toastr/toastr.js
+BrowserInfo
+https://github.com/CyberFlameGO/Hubzilla/blob/0140f9fe560b7cc0f65cbfc7988f6808b4dc1236/library/Sortable/src/EventDispatcher.js
 https://github.com/caplin/boxxer/tree/master
-
+https://github.com/jillix/svg.draggy.js/
 text editor
 https://github.com/JiHong88/suneditor/blob/master/sample/index.html
 select combo
 https://github.com/orchidjs/tom-select/blob/master/src/tom-select.ts
 https://github.com/kbrgl/gatsby/tree/1f5e6fc68a6e54b7fbaacca768cc0233fa0c56ee/www/src/components/layout
+clarity grape city
+https://github.com/noreason/grapesjs/blob/885d5bbdc01256b39841741b799c261640a0f436/src/dom_components/model/ComponentLink.js
 
+https://github.com/lukasoppermann/html5sortable/tree/master/src
 https://github.com/audi/audi-ui/blob/03b8cd1ca4d44ea63081bbf61791965ff0a2df6c/src/textfield/_textfield.scss
 https://github.com/CoherentLabs/GameUIComponents/blob/master/components/text-field/script.js
+
+https://github.com/ec-europa/europa-component-library/tree/v3-dev/src/implementations/vanilla/components
+https://github.com/Formstone/Formstone/tree/master/src/js
+https://github.com/10up/component-library/tree/develop/packages
+https://github.com/mzusin/toolcool-range-slider/tree/main/src/core/domain
+https://github.com/AiviksIQ/JS-library/tree/master/src/js
+https://github.com/whoisjuan/Reusable-Component-JS-Challenge/tree/master/datagrid/js
+https://github.com/Mevrael/bunny
+https://github.com/y3un9/yui-component/tree/main/components
+https://github.com/localtoast3000/VjsComponents/tree/master/default_componants
+https://github.com/koolKai/Table_Component/tree/main/Table%20Component
+https://github.com/thetribeio/plotly.js/tree/c73e84b16585368bde1f910955b7ab6a2d6b6193/src/components
+https://github.com/ScandinavianSection-UCLA/Nexus2/blob/4b98aad676a899c269051ce0e0f658e6a3707bc9/src/components/MapView/leaflet/src/dom/Draggable.js#L146

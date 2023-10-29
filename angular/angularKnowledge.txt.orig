@@ -1,0 +1,163 @@
+Errors
+Uncaught reflect-metadata shim is required when using class decorators
+In root/src
+Update file polyfills.ts
+
+import 'zone.js';
+import 'reflect-metadata';
+
+Cannot find name 'require'
+Update file tsconfig.app.json
+
+"types": [
+      "node"
+    ]
+https://yeshasmp.github.io/posts/angular-services/
+https://indepth.dev/posts/1151/a-deep-dive-into-injectable-and-providedin-in-ivy
+https://www.dsebastien.net/2021-03-28-angular-application-bootstrap/
+https://www.intertech.com/top-5-ways-to-misuse-ngrx-selectors/
+
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
+this.clock.subscribe(console.log.bind(console));
+FILTER OBSERVABLES INTERFACES
+https://www.javatpoint.com/rxjs-filter-filtering-operator
+https://github.com/ReactiveX/rxjs/issues/2163
+https://stackoverflow.com/questions/37991713/simple-filter-on-array-of-rxjs-observable
+
+
++-----------------------------------------------------------+
+|															|
+|	ANGULAR 4												|
+|															|
++-----------------------------------------------------------+
+@angular/cli : 1.4.10
+node : 8.17.0
+
+
+npm i @ngrx/core@1.2.0 @ngrx/effects@2.0.3 @ngrx/router-store@1.2.6 @ngrx/store@2.2.3 @ngrx/store-devtools@4.1.1 @angular/http@4.4.7 --global
+npm i ag-grid@17.0.0 ag-grid-angular@17.0.0 moment@2.29.4 ngrx-store-freeze@0.1.9 reselect@3.0.0 --global
+npm i @angular/http@4.4.7
+npm i ng-packagr@1.3.0
+
+
+####sass
+npm i sass@1.1.1
+npm install  node-sass@4.8.1
+download required package win32-x64-64_binding.node, put in the local:
+c:\users\{username}\appdata\roaming\npm-cache\node-sass\4.8.1\
+"build:sass": "sass ./src/clarity-angular/main.scss ./src/assets/styles.scss"
+
+
+
+npm i gulp-sass@2.2.0
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
+npm install ngx-bootstrap@^2.0.3
+npm install moment@^2.21.0
+
+npm install @types/node@^6.0.60
+npm i bootstrap@^3.3.7
+npm i ngx-bootstrap@^2.0.3
+npm i moment@^2.21.0
+npm install @ngrx/core
+npm install @ngrx/store@^5.2.0
+
+npm i @angular/compiler@^11.0.0-next.0
+npm i @angular/compiler-cli@^11.0.0-next.0
+npm i tslib@2.0.0
+npm i typescript@4.0.3
+npm install ng-packagr --save-dev
+Libraries
+"moment": "^2.21.0",
+"@ngrx/core": "^1.2.0",
+    "@ngrx/effects": "^2.0.3",
+    "@ngrx/store": "^2.2.3",
+    "@ngrx/router-store": "^1.2.6",
+    "ngrx-store-freeze": "^0.1.9",
+    "reselect": "^3.0.0",
+    "ngx-cookie": "^1.0.0",
+    "@ngrx/store-devtools": "^3.2.4",
+    "@ngrx/store-log-monitor": "^3.0.2",
+Tech Stuck
+ngrxIIQReporting2
+"@ngrx/core": "^1.2.0",
+"@ngrx/effects": "^2.0.3",
+"@ngrx/store": "^2.2.3",
+"@ngrx/router-store": "^1.2.6",
+"reselect": "^3.0.0",
+"moment": "^2.21.0",
+"ngx-bootstrap": "^2.0.3",
+
+ngrxIIQReporting3
+"@ngrx/core": "^1.2.0",
+"@ngrx/effects": "^2.0.3",
+"@ngrx/store": "^2.2.3",
+"@ngrx/router-store": "^1.2.6",
+"ngrx-store-freeze": "^0.1.9",
+"reselect": "^3.0.0",
+"moment": "^2.21.0",
+"ngx-bootstrap": "^2.0.3",
+"ag-grid": "^17.0.0",
+"ag-grid-angular": "^17.0.0",
+"@ngrx/store-devtools": "^4.1.0",
+
+
+angularRedux
+"@ngrx/core": "^1.2.0",
+"@ngrx/effects": "^2.0.3",
+"@ngrx/store": "^2.2.3",
+"reselect": "^3.0.0",
+"ngrx-store-freeze": "^0.1.9",
+npx @angular/cli@1.4.10 new manualLazyLoad --skip-git
+npx @angular/cli@1.4.10 new manualLazyLoad2 --skip-git
+npx @angular/cli@1.4.10 new manualLazyLoad3 --skip-git
+npx @angular/cli@1.4.10 new directiveReportSelectionLazy --skip-git
+
+<<<<<<< Updated upstream
+=======
+
+
+
+npm i @ngrx/core@^1.2.0 --global
+npm i @ngrx/effects@^2.0.3 --global
+npm i @ngrx/router@^1.0.0-beta.2 --global
+npm i @ngrx/router-store@^1.2.5 --global
+npm i @ngrx/store@^2.2.3" --global
+npm i @ngrx/store-devtools@^3.2.4 --global
+npm i @ngrx/store-log-monitor@^3.0.2 --global
+npm i @ngx-translate/core@8.0.0 --global
+npm i @ngx-translate/http-loader@2.0.0 --global
+npm i ngrx-store-freeze@0.2.0 --global
+npm i ngrx-store-localstorage@0.2.2 --global
+
+
+
+
+
+
+https://medium.com/@damianczapiewski/custom-rxjs-operators-637c7d3d8f86
+function OPERATOR() {
+  return function (source: Observable<number>) {
+    return new Observable(subscriber => {
+      const subscription = source.subscribe(
+        /*
+          all the magic happens here
+        */
+      );
+      return  ()  =>  subscription.unsubscribe();
+    });
+  };
+}
+https://github.com/vparomskiy/thingsboard/blob/3ac59a95946248d504391bc30541b94c47c878bd/ui-ngx/src/app/modules/home/models/datasource/entity-datasource.ts#L92
+https://github.com/jacklam718/cqrs/blob/96c7ab8ca894d2d34aa8e0de33460da08f7789ec/src/utils/observable-bus.ts#L8
+https://stackoverflow.com/questions/52414920/emitting-a-hot-boolean-observable-using-switchmap
+https://www.grapecity.com/wijmo/api/interfaces/wijmo.icollectionview.html
+https://www.grapecity.com/wijmo/demos/Core/CollectionView/Overview/purejs
+>>>>>>> 741dcd80d7f09202e30245c090cfaaca75974b22
+=======
+>>>>>>> Stashed changes

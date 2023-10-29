@@ -325,6 +325,7 @@ function OPERATOR() {
     });
   };
 }
+https://stackoverflow.com/questions/56764331/how-to-get-data-from-a-generic-http-get-method-which-returns-observablet-in
 https://github.com/vparomskiy/thingsboard/blob/3ac59a95946248d504391bc30541b94c47c878bd/ui-ngx/src/app/modules/home/models/datasource/entity-datasource.ts#L92
 https://github.com/jacklam718/cqrs/blob/96c7ab8ca894d2d34aa8e0de33460da08f7789ec/src/utils/observable-bus.ts#L8
 https://stackoverflow.com/questions/52414920/emitting-a-hot-boolean-observable-using-switchmap
