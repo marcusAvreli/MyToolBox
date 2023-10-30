@@ -104,6 +104,7 @@ CUSTOM COMPONENTS
 	https://github.com/wahello/wigfrid/blob/eac443e1ee1f8849a3a547d9bc7c1a89e27b2b97/src/clarity-angular/checkboxes/checkbox.spec.ts#L17
 	https://github.com/carbon-design-system/carbon-components-angular/blob/master/src/combobox/combobox.stories.ts
 	https://github.com/SAP/fundamental-ngx/tree/5d31ea152cbd0eebaaec92939b92934c2d43c08a/libs/core/src/lib/combobox
+	ui-grid
 	https://github.com/UiPath/angular-components/blob/8be4d01a53e624861f972e73eba9afc801a27530/projects/angular/components/ui-suggest/src/ui-suggest.component.ts
 	ag-grid
 		https://github.com/giniedp/nw-buddy/blob/11019fe6674c853c06910ab29138602902992d29/apps/web/app/ui/ag-grid/ag-grid.component.ts

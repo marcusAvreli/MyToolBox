@@ -153,3 +153,22 @@ lines.column_value;
 +-----------------------------------------------------------+
 https://stackoverflow.com/questions/3932230/oracle-sql-query-that-returns-rows-with-only-numeric-values
 SELECT X  FROM SO WHERE REGEXP_LIKE(X, '^[[:digit:]]+$');
+
+
+Oracle Hierarchical query: how to follow max on each level
+https://dba.stackexchange.com/questions/81313/oracle-hierarchical-query-how-to-follow-max-on-each-level
+select lpad(' ',2*(level-1))|| max(child)
+from test_connect_by  
+start with parent is null
+connect by prior child = parent
+group by level
+
+select lpad(' ',2*(level-1)) || child as result
+from 
+  ( select parent, max(child) as child 
+    from test_connect_by 
+    group by parent
+  ) t 
+start with parent is null 
+connect by prior child = parent
+order by level ;
