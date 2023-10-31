@@ -41,3 +41,13 @@ https://github.com/localtoast3000/VjsComponents/tree/master/default_componants
 https://github.com/koolKai/Table_Component/tree/main/Table%20Component
 https://github.com/thetribeio/plotly.js/tree/c73e84b16585368bde1f910955b7ab6a2d6b6193/src/components
 https://github.com/ScandinavianSection-UCLA/Nexus2/blob/4b98aad676a899c269051ce0e0f658e6a3707bc9/src/components/MapView/leaflet/src/dom/Draggable.js#L146
+
+cms
+https://github.com/dadi/api/blob/develop/dadi/lib/monitor/index.js
+https://github.com/dadi/publish
+
+https://github.com/klaudsol/klaudsol-cms/tree/main
+https://github.com/niklauscms/niklaus/tree/master/api/src/models
+
+i18n culture pure java script
+https://github.com/zzllrr/mather/blob/c8358cd1e376e2fadafe03b927bc968a399950a6/ar.html#L29
