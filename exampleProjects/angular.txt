@@ -126,6 +126,10 @@ CUSTOM COMPONENTS
 		https://github.com/eskeinet/grid-list/tree/600958d085cea98fb26a43d322bd8a34419114ef
 	ag-grid-buttons
 		https://stackblitz.com/edit/ag-grid-angular-hello-world-bq5yev?file=src%2Fapp%2Fapp.component.ts
+		https://github.com/mr-guard/dayz-server-manager/blob/684961f042203a0df23de81a889e654c3aa83a66/ui/src/modules/files/containers/types/renderers.ts#L25
+		
+		column factory before save after save
+		https://github.com/search?q=repo%3Ajlsalmon%2Fmodesti+save&type=code&p=2
 	https://www.codeproject.com/Articles/1195569/Angular-Data-Grid-with-Sorting-Filtering-Export-to
 	https://github.com/ita-social-projects/GreenCityClient/blob/3999e26a448d49df1196c38b4ad5983c53bedd5f/src/app/ubs/ubs/components/ubs-main-page/ubs-main-page.component.ts
 	https://rangle.io/blog/angular-2-ngmodel-and-custom-form-components

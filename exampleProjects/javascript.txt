@@ -51,3 +51,6 @@ https://github.com/niklauscms/niklaus/tree/master/api/src/models
 
 i18n culture pure java script
 https://github.com/zzllrr/mather/blob/c8358cd1e376e2fadafe03b927bc968a399950a6/ar.html#L29
+
+pure javascript detect node server. localization without external libs
+https://github.com/search?q=repo%3AShoobx%2Fpdf.js%20viewer.properties&type=code
