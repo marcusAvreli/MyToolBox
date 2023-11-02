@@ -128,8 +128,15 @@ CUSTOM COMPONENTS
 		https://stackblitz.com/edit/ag-grid-angular-hello-world-bq5yev?file=src%2Fapp%2Fapp.component.ts
 		https://github.com/mr-guard/dayz-server-manager/blob/684961f042203a0df23de81a889e654c3aa83a66/ui/src/modules/files/containers/types/renderers.ts#L25
 		
-		column factory before save after save
+		column factory before save after save ag-grid-column-factory checkboxCellRenderer column-factory.ts AgGridColumnFactory
 		https://github.com/search?q=repo%3Ajlsalmon%2Fmodesti+save&type=code&p=2
+		
+		search and drag androp list
+		https://github.com/sipcapture/homer-ui/blob/53a420b7c2e5a485bf747ed2fb1f1a38f8128bd3/src/app/components/controls/custom-ag-grid/custom-ag-grid.component.ts
+		filter
+		https://github.com/apache/trafficcontrol/blob/eec1b0017cfd82a65d797a6af261b23005cfe7ff/experimental/traffic-portal/src/app/shared/generic-table/generic-table.component.ts#L315
+		https://github.com/nageshbb/hospital-management-emr/blob/da7388a98ff67dbd2982f2f0bf08191f5b99df0d/Code/Websites/DanpheEMR/wwwroot/DanpheApp/src/app/shared/danphe-grid/danphe-grid.component.ts#L13
+		https://github.com/ArkTaskMakers/MakerTracker/blob/7bdb382c1dff4202a7dedbc4b7a27f26db3882f3/MakerTracker/ClientApp/src/app/lookup-manager/models/supplier.model.ts#L2
 	https://www.codeproject.com/Articles/1195569/Angular-Data-Grid-with-Sorting-Filtering-Export-to
 	https://github.com/ita-social-projects/GreenCityClient/blob/3999e26a448d49df1196c38b4ad5983c53bedd5f/src/app/ubs/ubs/components/ubs-main-page/ubs-main-page.component.ts
 	https://rangle.io/blog/angular-2-ngmodel-and-custom-form-components
