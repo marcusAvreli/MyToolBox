@@ -131,7 +131,7 @@ CUSTOM COMPONENTS
 		column factory before save after save ag-grid-column-factory checkboxCellRenderer column-factory.ts AgGridColumnFactory
 		https://github.com/search?q=repo%3Ajlsalmon%2Fmodesti+save&type=code&p=2
 		
-		search and drag androp list
+		search and drag and drop list
 		https://github.com/sipcapture/homer-ui/blob/53a420b7c2e5a485bf747ed2fb1f1a38f8128bd3/src/app/components/controls/custom-ag-grid/custom-ag-grid.component.ts
 		filter
 		https://github.com/apache/trafficcontrol/blob/eec1b0017cfd82a65d797a6af261b23005cfe7ff/experimental/traffic-portal/src/app/shared/generic-table/generic-table.component.ts#L315
