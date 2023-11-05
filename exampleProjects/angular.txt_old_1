@@ -131,21 +131,12 @@ CUSTOM COMPONENTS
 		column factory before save after save ag-grid-column-factory checkboxCellRenderer column-factory.ts AgGridColumnFactory
 		https://github.com/search?q=repo%3Ajlsalmon%2Fmodesti+save&type=code&p=2
 		
-		search and drag androp list
+		search and drag and drop list
 		https://github.com/sipcapture/homer-ui/blob/53a420b7c2e5a485bf747ed2fb1f1a38f8128bd3/src/app/components/controls/custom-ag-grid/custom-ag-grid.component.ts
-		https://github.com/sipcapture/homer-ui/tree/53a420b7c2e5a485bf747ed2fb1f1a38f8128bd3/src/app/components/search-grid-call
-		edit row by row
-		https://stackblitz.com/edit/ag-grid-angular-hello-world-btu1py?file=src%2Fapp%2Fapp.component.html,src%2Fapp%2Fapp.component.ts
 		filter
 		https://github.com/apache/trafficcontrol/blob/eec1b0017cfd82a65d797a6af261b23005cfe7ff/experimental/traffic-portal/src/app/shared/generic-table/generic-table.component.ts#L315
 		https://github.com/nageshbb/hospital-management-emr/blob/da7388a98ff67dbd2982f2f0bf08191f5b99df0d/Code/Websites/DanpheEMR/wwwroot/DanpheApp/src/app/shared/danphe-grid/danphe-grid.component.ts#L13
 		https://github.com/ArkTaskMakers/MakerTracker/blob/7bdb382c1dff4202a7dedbc4b7a27f26db3882f3/MakerTracker/ClientApp/src/app/lookup-manager/models/supplier.model.ts#L2
-		https://github.com/yulongbb/admin-starter/blob/08c9158267d338bdef1546ec5cc90730a1e23fec/src/app/pages/auth/user/user.component.ts#L39
-		ag-grid 18
-		https://github.com/qiniu/tracing-agent/blob/b9551e6de772f74525e7b06efc1c2b1fe8c0d831/web/src/main/webapp/v2/src/app/core/components/agent-list/agent-list.component.ts#L27
-		styling
-		https://github.com/Javier3131/ProyectoDAW/blob/1278cfc577b1db53adfa2c9fe6555c9a24f8bfde/public/lib/ag-grid/docs/angular-grid-cell-styling/example1.js
-		https://github.com/quarano/quarano-application/blob/1aeb1f331c70c652596f5a12f05f6866a76d5082/frontend/libs/administration/feature-account-list/src/lib/account-list/account-list.component.ts#L38
 	https://www.codeproject.com/Articles/1195569/Angular-Data-Grid-with-Sorting-Filtering-Export-to
 	https://github.com/ita-social-projects/GreenCityClient/blob/3999e26a448d49df1196c38b4ad5983c53bedd5f/src/app/ubs/ubs/components/ubs-main-page/ubs-main-page.component.ts
 	https://rangle.io/blog/angular-2-ngmodel-and-custom-form-components
@@ -217,16 +208,6 @@ https://itnext.io/8-daily-problems-solved-by-interceptors-in-angular-59c8ce1e107
 
 
 
-dnd drag and drop
-https://github.com/datainsider-co/rocket-bi/blob/970c6f51c3dd7e338e2c6d4042d525d8a0f4a469/rocket-bi-web/src/screens/chart-builder/config-builder/config-panel/ConfigDraggable.ts#L96
-
-timer
-https://github.com/epam/TimebaseWS/blob/290b1ac0830cd471775cf8de3ab2b5969434f77e/web/frontend/src/app/pages/streams/modules/schema-editor/components/diff/grid/grid.component.ts#L4
-https://github.com/epam/TimebaseWS/blob/290b1ac0830cd471775cf8de3ab2b5969434f77e/web/frontend/src/app/shared/services/grid.service.ts#L291
-https://github.com/AMPATH/ng2-amrs/blob/a917d6a7ea8a115d20e31b58e29cc8fde8e88979/src/app/clinic-dashboard/dashboard-filters/dashboard-filters.component.ts
-snack bar on save
-https://github.com/medboutakat/angularv4/blob/5e1bce9b246e2e5f3ba32d243e64ea95dfa33069/src/app/sales/clients/clients.component.ts#L237
-https://github.com/jrwhip/scratch/blob/main/tryagain.ts#L71
 +-----------------------------------------------------------+
 |															|
 |	TYPESCRIPT CAST OBJECT									|
@@ -526,5 +507,3 @@ https://github.com/Simle-Infotech/gandaki_portal.git
 
 git clone https://github.com/jorgetrigueros/ngComponentOutlet-ejemplo.git
 git clone https://github.com/andy23512/try-angular-templateref.git
-
-
