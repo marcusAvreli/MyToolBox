@@ -1,7 +1,8 @@
 https://github.com/Vishal1419/auth2-client/blob/master/src/serviceWorker.js
 https://vitalflux.com/angular-create-progressive-web-app-angular/
 https://github.com/dineshg13/AngularjsLogin/blob/6ef7eeeef6ebeb036791dd6f68917d5ebe1e7d95/AngularjsLogin/main/srvAuth.ts
-
+https://github.com/vmware-archive/clarity/tree/next
+https://github.com/vmware-clarity/ng-clarity
 reflection
 	https://github.com/fred1218/JS_plugins/blob/e769a7750c988cb459d95ad802e4ada32bb9685c/MVVM%26MVC/angularJS/angular-master/modules/examples/src/web_workers/message_broker/index_common.ts
 	https://github.com/gleosmith/angular-web-worker/blob/master/worker/src/lib/worker-controller.ts
@@ -220,7 +221,7 @@ https://itnext.io/8-daily-problems-solved-by-interceptors-in-angular-59c8ce1e107
 dnd drag and drop
 https://github.com/datainsider-co/rocket-bi/blob/970c6f51c3dd7e338e2c6d4042d525d8a0f4a469/rocket-bi-web/src/screens/chart-builder/config-builder/config-panel/ConfigDraggable.ts#L96
 
-timer
+timer grid ag-grid 20
 https://github.com/epam/TimebaseWS/blob/290b1ac0830cd471775cf8de3ab2b5969434f77e/web/frontend/src/app/pages/streams/modules/schema-editor/components/diff/grid/grid.component.ts#L4
 https://github.com/epam/TimebaseWS/blob/290b1ac0830cd471775cf8de3ab2b5969434f77e/web/frontend/src/app/shared/services/grid.service.ts#L291
 https://github.com/AMPATH/ng2-amrs/blob/a917d6a7ea8a115d20e31b58e29cc8fde8e88979/src/app/clinic-dashboard/dashboard-filters/dashboard-filters.component.ts

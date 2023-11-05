@@ -3,7 +3,7 @@ https://github.com/Pamblam/ez-drag-n-drop/blob/main/src/EZDnD_Draggable.js
 https://codepen.io/franzcisco/pen/zQwXQy
 https://github.com/aigan/mv-sorter/blob/master/mv-sorter.js
 https://github.com/bradtraversy/vanillawebprojects/blob/master/sortable-list/script.js#L102
-
+https://github.com/uuidjs/uuid/tree/main
 
 https://github.com/TECHOUS/treasurejs.github.io/blob/5264f6b45419f6fc223a001554063e3914718093/scripts/S.js
 	SMOOTH DND
