@@ -1,0 +1,4 @@
+https://stackoverflow.com/questions/38421638/how-to-set-bootstrap-form-with-multi-controls-aligned-at-same-row-and-responsiv
+https://codepen.io/seyedi/pen/bGoZjzX
+https://css-tricks.com/almanac/properties/g/grid-template-areas/
+https://www.w3docs.com/tools/code-editor/10428
