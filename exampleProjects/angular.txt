@@ -3,6 +3,9 @@ https://vitalflux.com/angular-create-progressive-web-app-angular/
 https://github.com/dineshg13/AngularjsLogin/blob/6ef7eeeef6ebeb036791dd6f68917d5ebe1e7d95/AngularjsLogin/main/srvAuth.ts
 https://github.com/vmware-archive/clarity/tree/next
 https://github.com/vmware-clarity/ng-clarity
+https://github.com/lowkey-who/mean_crm/tree/24c96022f95105efe87f92eaef3388471c624c57
+https://github.com/radiumrasheed/ng-zorro-antd/blob/71016ea4e453b6e96304e6ac8aa5ffd5ae70c739/components/i18n/nz-i18n.service.ts
+https://github.com/rangle/angular-ngrx-example/blob/master/src/app/video-games/store/video-game-listing/video-game-listing.store.ts#L43
 reflection
 	https://github.com/fred1218/JS_plugins/blob/e769a7750c988cb459d95ad802e4ada32bb9685c/MVVM%26MVC/angularJS/angular-master/modules/examples/src/web_workers/message_broker/index_common.ts
 	https://github.com/gleosmith/angular-web-worker/blob/master/worker/src/lib/worker-controller.ts

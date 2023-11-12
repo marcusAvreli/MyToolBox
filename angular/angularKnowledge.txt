@@ -14,16 +14,10 @@ Update file tsconfig.app.json
     ]
 https://yeshasmp.github.io/posts/angular-services/
 https://indepth.dev/posts/1151/a-deep-dive-into-injectable-and-providedin-in-ivy
-https://www.dsebastien.net/2021-03-28-angular-application-bootstrap/
+--How Angular applications start
+	https://www.dsebastien.net/2021-03-28-angular-application-bootstrap/
 https://www.intertech.com/top-5-ways-to-misuse-ngrx-selectors/
 
-<<<<<<< Updated upstream
-=======
-
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 this.clock.subscribe(console.log.bind(console));
 FILTER OBSERVABLES INTERFACES
 https://www.javatpoint.com/rxjs-filter-filtering-operator
