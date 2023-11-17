@@ -8,7 +8,7 @@ import 'reflect-metadata';
 
 Cannot find name 'require'
 Update file tsconfig.app.json
-
+https://stackoverflow.com/questions/44224085/how-to-get-index-of-selected-option-in-angular
 "types": [
       "node"
     ]
