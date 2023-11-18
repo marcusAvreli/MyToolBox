@@ -3,7 +3,11 @@ https://vitalflux.com/angular-create-progressive-web-app-angular/
 https://github.com/dineshg13/AngularjsLogin/blob/6ef7eeeef6ebeb036791dd6f68917d5ebe1e7d95/AngularjsLogin/main/srvAuth.ts
 https://github.com/vmware-archive/clarity/tree/next
 https://github.com/vmware-clarity/ng-clarity
+
 https://github.com/lowkey-who/mean_crm/tree/24c96022f95105efe87f92eaef3388471c624c57
+APP_INITIALIZER
+
+
 https://github.com/radiumrasheed/ng-zorro-antd/blob/71016ea4e453b6e96304e6ac8aa5ffd5ae70c739/components/i18n/nz-i18n.service.ts
 https://github.com/rangle/angular-ngrx-example/blob/master/src/app/video-games/store/video-game-listing/video-game-listing.store.ts#L43
 reflection
@@ -92,13 +96,15 @@ REPORT
 	https://github.com/carbon-design-system/carbon-components-angular/tree/master/src
 
 localization, components
+	registerLocaleData
 	https://github.com/homebridge/homebridge-config-ui-x/blob/c4128688aa7f5425652e4feae7c2cd966887d0c7/ui/src/app/app.module.ts#L7
 	rtl.directive.ts
-  const browserLang = languages.find(x => x === translate.getBrowserLang() || x === translate.getBrowserCultureLang());
+	APP_INITIALIZER
+	const browserLang = languages.find(x => x === translate.getBrowserLang() || x === translate.getBrowserCultureLang());
 	https://github.com/idvoretskyi/harbor/blob/fc0654f02801de4bc86ac0f731b1bab63b3b045d/src/portal/lib/src/harbor-library.module.ts
-localization, components
+localization, components,HTTP_INTERCEPTORS,
 	https://github.com/msg-systems/joolia/tree/6acc2f020c15e445ccfbdf67f97676c6b4b5ff29/joolia-client/src/app/core
-	https://github.com/homebridge/homebridge-config-ui-x/blob/c4128688aa7f5425652e4feae7c2cd966887d0c7/src/core/config/config.startup.ts
+	
 
 clarity ssl core as separate library
 	https://github.com/idvoretskyi/harbor/tree/fc0654f02801de4bc86ac0f731b1bab63b3b045d/src/portal/src
@@ -121,9 +127,7 @@ CUSTOM COMPONENTS
 	https://github.com/SAP/fundamental-ngx/tree/5d31ea152cbd0eebaaec92939b92934c2d43c08a/libs/core/src/lib/combobox
 	//components guards effects reducers actions
 		https://github.com/ultimatejetvacations/booking-engine/tree/master/angular-hotels/app/components
-	https://github.com/UiPath/angular-components/blob/8be4d01a53e6
-	
-	24861f972e73eba9afc801a27530/projects/angular/components/ui-suggest/src/ui-suggest.component.ts
+	https://github.com/UiPath/angular-components/blob/8be4d01a53e624861f972e73eba9afc801a27530/projects/angular/components/ui-suggest/src/ui-suggest.component.ts
 	https://github.com/drewdru/ponyTown/blob/6efbc4d15db68b6982d18628bbc7b5ad60e2b0d4/src/ts/components/tools/tools-perf/tools-perf.ts#L1
 	ag-grid
 		https://github.com/giniedp/nw-buddy/blob/11019fe6674c853c06910ab29138602902992d29/apps/web/app/ui/ag-grid/ag-grid.component.ts

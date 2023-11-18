@@ -43,6 +43,7 @@ npm i ng-packagr@1.3.0
 ####sass
 npm i sass@1.1.1
 npm install  node-sass@4.8.1
+npm install sass-loader@6.0.7
 download required package win32-x64-64_binding.node, put in the local:
 c:\users\{username}\appdata\roaming\npm-cache\node-sass\4.8.1\
 "build:sass": "sass ./src/clarity-angular/main.scss ./src/assets/styles.scss"
