@@ -8,15 +8,21 @@ https://github.com/uuidjs/uuid/tree/main
 https://github.com/TECHOUS/treasurejs.github.io/blob/5264f6b45419f6fc223a001554063e3914718093/scripts/S.js
 	SMOOTH DND
 	https://github.com/kutlugsahin/smooth-dnd
-
-
+drop down by div
+https://www.w3schools.com/howto/howto_js_dropdown.asp#:~:text=Use%20any%20element%20to%20open,dropdown%20menu%20correctly%20with%20CSS.
 https://github.com/ComiR/neos-development-collection/blob/e6c7bb9c528c46a2e55c4631e3c725ca2571824e/Neos.Neos/Resources/Public/Library/toastr/toastr.js
 validation localization
 https://github.com/sha256/Pristine/tree/master
+https://github.com/CyberFlameGO/Hubzilla/tree/0140f9fe560b7cc0f65cbfc7988f6808b4dc1236/library/ace
 BrowserInfo
 https://github.com/CyberFlameGO/Hubzilla/blob/0140f9fe560b7cc0f65cbfc7988f6808b4dc1236/library/Sortable/src/EventDispatcher.js
-https://github.com/caplin/boxxer/tree/master
-https://github.com/jillix/svg.draggy.js/
+Boxxer - Layout manager
+	https://github.com/caplin/boxxer/tree/master
+	https://github.com/jillix/svg.draggy.js/
+https://github.com/Choices-js/Choices/tree/master/src/scripts/components
+https://github.com/ec-europa/europa-component-library/blob/v3-dev/src/implementations/vanilla/components/breadcrumb-core/breadcrumb-core.js
+https://github.com/10up/component-library/tree/develop/packages
+https://github.com/AiviksIQ/JS-library/tree/master/src/js
 text editor
 https://github.com/JiHong88/suneditor/blob/master/sample/index.html
 select combo
@@ -24,7 +30,10 @@ https://github.com/orchidjs/tom-select/blob/master/src/tom-select.ts
 https://github.com/kbrgl/gatsby/tree/1f5e6fc68a6e54b7fbaacca768cc0233fa0c56ee/www/src/components/layout
 clarity grape city
 https://github.com/noreason/grapesjs/blob/885d5bbdc01256b39841741b799c261640a0f436/src/dom_components/model/ComponentLink.js
-
+core start server listent to events
+	https://github.com/hapijs/hapi/blob/master/lib/core.js
+validator
+	https://github.com/geraintluff/tv4/tree/master
 https://github.com/lukasoppermann/html5sortable/tree/master/src
 https://github.com/audi/audi-ui/blob/03b8cd1ca4d44ea63081bbf61791965ff0a2df6c/src/textfield/_textfield.scss
 https://github.com/CoherentLabs/GameUIComponents/blob/master/components/text-field/script.js
