@@ -1,16 +1,16 @@
+window.navigator.userAgent app-initializer.ts
+https://github.com/ncc-erp/metasign/tree/main/angular/src
+https://github.com/bitwarden/directory-connector/blob/master/jslib/common/src/services/i18n.service.ts#L3
+
+left right side bar
+https://github.com/lapig-ufg/atlas-pastagens/tree/359707dd7a5c2c22080141b2929d87c55a163452/src/client/src/app/components
+https://github.com/device-health-monitoring/openremote/blob/0fe2f7eae34fc54e6b6a1c6c5190d8de6a682eef/ui/component/core/src/console.ts
 https://github.com/Vishal1419/auth2-client/blob/master/src/serviceWorker.js
 https://vitalflux.com/angular-create-progressive-web-app-angular/
 https://github.com/dineshg13/AngularjsLogin/blob/6ef7eeeef6ebeb036791dd6f68917d5ebe1e7d95/AngularjsLogin/main/srvAuth.ts
 https://github.com/vmware-archive/clarity/tree/next
 https://github.com/vmware-clarity/ng-clarity
-
-https://github.com/lowkey-who/mean_crm/tree/24c96022f95105efe87f92eaef3388471c624c57
-APP_INITIALIZER
-
-
-https://github.com/radiumrasheed/ng-zorro-antd/blob/71016ea4e453b6e96304e6ac8aa5ffd5ae70c739/components/i18n/nz-i18n.service.ts
-https://github.com/rangle/angular-ngrx-example/blob/master/src/app/video-games/store/video-game-listing/video-game-listing.store.ts#L43
-
+https://github.com/lixianfa/tabby/blob/b0c300be432fceef79fe7b8326567fb5d5847ee2/app/lib/app.ts
 reflection
 	https://github.com/fred1218/JS_plugins/blob/e769a7750c988cb459d95ad802e4ada32bb9685c/MVVM%26MVC/angularJS/angular-master/modules/examples/src/web_workers/message_broker/index_common.ts
 	https://github.com/gleosmith/angular-web-worker/blob/master/worker/src/lib/worker-controller.ts
@@ -33,7 +33,14 @@ https://github.com/jecihjoy/ng2-amrs/blob/ed4a6aff9c0529f045be1fd1766ecafacf4e06
 https://github.com/opfab/operatorfabric-core/blob/929dd8d0485e4e3f2cf68f7f07477cbe76f8acfc/ui/main/src/app/business/services/application-events.service.ts
 https://github.com/ngx-formly/ngx-formly/blob/f9c3926e9c0b3821ed62c51c28a4eb8d303c1023/demo/src/app/examples/examples.module.ts#L34
 https://developercommunity.visualstudio.com/t/npm-cant-install-from-cache/1467998
-https://github.com/jchewitt/angular-auth-service/blob/dev/src/app/core/core.module.ts
+
+
+
+APP_INITIALIZER CoreModule  app-config.ts
+	https://github.com/jchewitt/angular-auth-service/blob/dev/src/app/core/core.module.ts
+
+
+
 https://www.itsolutionstuff.com/post/how-to-install-specific-version-of-angular-materialexample.html
 https://github.com/MTHRSHiP/skf-flask/blob/346906d7983be00a53ab1616484fe41f3346946d/Angular2/src/app/core/core.module.ts
 
@@ -97,16 +104,17 @@ REPORT
 	https://github.com/carbon-design-system/carbon-components-angular/tree/master/src
 
 localization, components
-	registerLocaleData
-	https://github.com/homebridge/homebridge-config-ui-x/blob/c4128688aa7f5425652e4feae7c2cd966887d0c7/ui/src/app/app.module.ts#L7
-	rtl.directive.ts
-	APP_INITIALIZER
-	const browserLang = languages.find(x => x === translate.getBrowserLang() || x === translate.getBrowserCultureLang());
+	
+	
+  
 	https://github.com/idvoretskyi/harbor/blob/fc0654f02801de4bc86ac0f731b1bab63b3b045d/src/portal/lib/src/harbor-library.module.ts
-localization, components,HTTP_INTERCEPTORS,
+localization, components
 	https://github.com/msg-systems/joolia/tree/6acc2f020c15e445ccfbdf67f97676c6b4b5ff29/joolia-client/src/app/core
 	
-
+	rtl.directive.ts
+	const browserLang = languages.find(x => x === translate.getBrowserLang() || x === translate.getBrowserCultureLang());
+		https://github.com/homebridge/homebridge-config-ui-x/blob/c4128688aa7f5425652e4feae7c2cd966887d0c7/src/core/config/config.startup.ts
+https://github.com/xieziyu/angular2-draggable/tree/6143a2b1b589cc934d8663dd15ac001b6f3c0e44
 clarity ssl core as separate library
 	https://github.com/idvoretskyi/harbor/tree/fc0654f02801de4bc86ac0f731b1bab63b3b045d/src/portal/src
 user slide menu
@@ -128,15 +136,13 @@ CUSTOM COMPONENTS
 	https://github.com/SAP/fundamental-ngx/tree/5d31ea152cbd0eebaaec92939b92934c2d43c08a/libs/core/src/lib/combobox
 	//components guards effects reducers actions
 		https://github.com/ultimatejetvacations/booking-engine/tree/master/angular-hotels/app/components
-	https://github.com/UiPath/angular-components/blob/8be4d01a53e624861f972e73eba9afc801a27530/projects/angular/components/ui-suggest/src/ui-suggest.component.ts
+	https://github.com/UiPath/angular-components/blob/8be4d01a53e6
+	
+	24861f972e73eba9afc801a27530/projects/angular/components/ui-suggest/src/ui-suggest.component.ts
 	https://github.com/drewdru/ponyTown/blob/6efbc4d15db68b6982d18628bbc7b5ad60e2b0d4/src/ts/components/tools/tools-perf/tools-perf.ts#L1
 	ag-grid
 		https://github.com/giniedp/nw-buddy/blob/11019fe6674c853c06910ab29138602902992d29/apps/web/app/ui/ag-grid/ag-grid.component.ts
 		https://github.com/eskeinet/grid-list/tree/600958d085cea98fb26a43d322bd8a34419114ef
-		
-		https://github.com/TAK-Product-Center/Server/blob/8cb3c65aa40d3fe6b02af78eab5d2fc4094d7d20/src/federation-hub-ui/src/main/webapp/bowerDependencies/ag-grid/src/ts/grid.ts#L573
-		https://github.com/iReflect/reflect-web/blob/d2b4fecac2a272917c222a792d76bd298db9bb26/src/app/retrospective/sprint-task-summary/sprint-task-summary.component.ts#L339
-		https://github.com/neuvector/manager/blob/main/admin/webapp/package.json
 	ag-grid-buttons
 		https://stackblitz.com/edit/ag-grid-angular-hello-world-bq5yev?file=src%2Fapp%2Fapp.component.ts
 		https://github.com/mr-guard/dayz-server-manager/blob/684961f042203a0df23de81a889e654c3aa83a66/ui/src/modules/files/containers/types/renderers.ts#L25
