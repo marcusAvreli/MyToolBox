@@ -26,6 +26,7 @@ https://stackoverflow.com/questions/58385399/what-is-the-best-way-to-get-ngrx-da
 
 
 multiple reducers
+https://github.com/tensorflow/tensorboard/blob/master/tensorboard/webapp/header/plugin_selector_component.ts
 https://github.com/richinator38/ngrx-selectors/blob/master/src/app/store/effects/effects.ts#L52
 https://github.com/thingsboard/thingsboard/blob/2f988467140c881fb70dbcacb222a73381d1a330/ui-ngx/package.json
 
@@ -133,8 +134,23 @@ CUSTOM COMPONENTS
 	ag-grid
 		https://github.com/giniedp/nw-buddy/blob/11019fe6674c853c06910ab29138602902992d29/apps/web/app/ui/ag-grid/ag-grid.component.ts
 		https://github.com/eskeinet/grid-list/tree/600958d085cea98fb26a43d322bd8a34419114ef
+		https://github.com/zah33r/ng9Boilerplate/blob/3506e8dd0aeeed01e68b05502a37730584e0bc06/src/components/base/ag-grid-base/ag-grid-base.component.ts#L12
+		https://github.com/swfz/ng2-sample/blob/46f9104b5b34e0e0e370ba20ef6ac7726961fe88/src/app/components/tabs/tabs.component.html
+		https://github.com/tikerzxc/ag-grid-ng2-examples/blob/d4ed2b45941be032785ec165b693d7584d2dbd9c/examples/example2/app/app.component.html#L13
 		
+		https://github.com/giniedp/nw-buddy/blob/1d87283ca2aa72c95385c87219e93304c3d8e0dd/apps/web/app/widgets/data/item-table/item-table-adapter.ts#L68
+		https://github.com/corneliouzbett/ng2-amrs/blob/0fafd4f1294e624f4b6ca1e7ad773a8b05cebbbd/src/app/shared/data-lists/generic-list/generic-list.component.ts#L13
+		
+		exportData texteditor
+		https://github.com/globisnv/aggridcomponents/blob/06166802366001c6d2c4e2fe79e1ecba67ef194e/aggrid/projects/nggrids/src/powergrid/powergrid.ts
+		ag-grid 19
+		https://github.com/vinhlece/AngularCore/blob/0e974e78523995d94495c002a6fa19df327eb28b/src/app/charts/components/table/table.component.ts#L33
+		
+		https://github.com/mohamdi/htt-generators/blob/5fa6981c3c80976850351e189f7cd97389113a7a/generator-htt-angular/generators/app/templates/src/app/modules/dummy/dummy-list/dummy-list.component.ts#L19
+		
+		https://github.com/TheILPlace/Angular2Demos/blob/3384d50fa4bd0bf4c7360b76c7f2e77651eaf101/Demos/ag-grid-demo/src/app/app.module.ts
 		https://github.com/TAK-Product-Center/Server/blob/8cb3c65aa40d3fe6b02af78eab5d2fc4094d7d20/src/federation-hub-ui/src/main/webapp/bowerDependencies/ag-grid/src/ts/grid.ts#L573
+		ag grid 18 agGroupCellRenderer
 		https://github.com/iReflect/reflect-web/blob/d2b4fecac2a272917c222a792d76bd298db9bb26/src/app/retrospective/sprint-task-summary/sprint-task-summary.component.ts#L339
 		https://github.com/neuvector/manager/blob/main/admin/webapp/package.json
 	ag-grid-buttons
@@ -144,7 +160,7 @@ CUSTOM COMPONENTS
 		column factory before save after save ag-grid-column-factory checkboxCellRenderer column-factory.ts AgGridColumnFactory
 		https://github.com/search?q=repo%3Ajlsalmon%2Fmodesti+save&type=code&p=2
 		
-		search and drag androp list
+		search and drag androp list 25 v
 		https://github.com/sipcapture/homer-ui/blob/53a420b7c2e5a485bf747ed2fb1f1a38f8128bd3/src/app/components/controls/custom-ag-grid/custom-ag-grid.component.ts
 		https://github.com/sipcapture/homer-ui/tree/53a420b7c2e5a485bf747ed2fb1f1a38f8128bd3/src/app/components/search-grid-call
 		edit row by row
