@@ -1,3 +1,27 @@
+https://github.com/PureMVC/puremvc-js-multicore-framework/blob/c045fb4ab27c7439a22f6d7e8ed263a65e57fd1c/src/org/puremvc/js/multicore/patterns/observer/Notifier.js
+https://github.com/SAP/openui5/blob/45da40f3b01ab7fea1f524eb84bca6c0bf907a5d/src/sap.ui.commons/src/sap/ui/commons/layout/MatrixLayoutRenderer.js
+https://github.com/petermichaux/maria/blob/a13f0367247bb850da38f11bbc7906302e939954/eg/checkit/src/js/models/TodosModel.js
+https://github.com/loiane/desktop-app-servlets3/blob/f5aa9f5abd9e13ea561d02d2508c9b780e6c0b55/extjs-code/ExtMVC/ext/src/Component.js
+https://github.com/sbworth/getnoc/blob/a9a5647df31822062db3db7afe7ae1c005d166f7/ui/web/sa/managedobjectprofile/Application.js#L119
+https://github.com/scottohara/loot/tree/c8d2ac02cb0d508519bf83b38d87b108b5206518
+https://github.com/molior-dbs/molior-web/tree/edafab24883c30c40f1b310377c7bd9ae67c01fd
+https://github.com/Calvinshi/blog/blob/75b50da000c8b10d65a19a19e43678b83bd1a625/frontEnd/libs/angular-ui-router/src/path/pathFactory.ts
+https://github.com/grafana/grafana/blob/73776f37eb595d8345a34d5e1f0f0c1f9dead986/public/app/core/services/ResponseQueue.test.ts
+https://github.com/taiga-family/taiga-ui/tree/6ad27708d773bffe95d414947dde80563758ebf4/projects/core/observables/test
+https://github.com/NativeScript/NativeScript/blob/82e9c67d3398c376be1641c5f23bf82a492a48c3/apps/ui/src/bindings/main-page.ts
+https://github.com/dotCMS/core/tree/13c23373dcb7772a48258764cc7e80247fcefc87
+awareDecorator
+https://github.com/spira/spira/tree/806f60fddbf52b11c91c5caeecf00117363662a9/app/src/common/models/image
+
+javascript in angular app
+https://github.com/Minds/front/blob/master/src/app/services/api/cookie-http-interceptor.service.ts
+component controller
+https://github.com/WISE-Community/WISE-DEPRECATED/tree/25f6dd52399fa050b5223f2fd0951db317518a19/src/main/webapp/wise5/lib
+https://github.com/matrix-org/thirdroom/tree/01bc731b057bd2a0e01d2152ad4828c05f1f6302
+https://github.com/OnsenUI/OnsenUI/tree/90c0aeb2b2acadfefb66a3da038b6b09cfb5b9c8
+https://github.com/moodlehq/moodleapp/blob/ba50fb8d6e7ca3c5bf1247cebff842861d4d9388/src/core/components/sites-list/sites-list.ts
+//change view
+https://github.com/AjuntamentdeBarcelona/PICS-WEBAPP/tree/ef6b0028020a85d145bfdb38c365d8ca1ee5f69d/src/pages
 https://github.com/odopod/code-library/blob/ceb47654545ec0b734c8650b3128a6c07504845a/packages/odo-draggable/src/settings.js#L17
 https://github.com/Pamblam/ez-drag-n-drop/blob/main/src/EZDnD_Draggable.js
 https://codepen.io/franzcisco/pen/zQwXQy
