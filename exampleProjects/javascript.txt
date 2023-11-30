@@ -9,10 +9,13 @@ https://github.com/Calvinshi/blog/blob/75b50da000c8b10d65a19a19e43678b83bd1a625/
 https://github.com/grafana/grafana/blob/73776f37eb595d8345a34d5e1f0f0c1f9dead986/public/app/core/services/ResponseQueue.test.ts
 https://github.com/taiga-family/taiga-ui/tree/6ad27708d773bffe95d414947dde80563758ebf4/projects/core/observables/test
 https://github.com/NativeScript/NativeScript/blob/82e9c67d3398c376be1641c5f23bf82a492a48c3/apps/ui/src/bindings/main-page.ts
-https://github.com/dotCMS/core/tree/13c23373dcb7772a48258764cc7e80247fcefc87
+https://github.com/dotCMS/core/tree/a7af331b7361bffd039413a22bea7dbad7b3d03c/core-web
+https://github.com/AntonLapshin/popup-validation/blob/master/src/rules.js
+https://github.com/Kallenju/simpower-validation/blob/main/src/core/modules/commonFunctions/isEmpty.js
 awareDecorator
 https://github.com/spira/spira/tree/806f60fddbf52b11c91c5caeecf00117363662a9/app/src/common/models/image
-
+https://github.com/Compro-Single-Step/SIMS-Builder/blob/7d4ba7f0b21b201917458b085ed84bb48735914d/client/app/shared/base.component.ts#L9
+https://github.com/OHDSI/Perseus/blob/4267d0bbf27b607646efb9f6eb0fddcb07258b2b/UI/src/app/models/perseus/concept.ts
 javascript in angular app
 https://github.com/Minds/front/blob/master/src/app/services/api/cookie-http-interceptor.service.ts
 component controller
@@ -43,9 +46,14 @@ https://github.com/CyberFlameGO/Hubzilla/blob/0140f9fe560b7cc0f65cbfc7988f6808b4
 Boxxer - Layout manager
 	https://github.com/caplin/boxxer/tree/master
 	https://github.com/jillix/svg.draggy.js/
+	//reducers
 https://github.com/Choices-js/Choices/tree/master/src/scripts/components
+
+components
 https://github.com/ec-europa/europa-component-library/blob/v3-dev/src/implementations/vanilla/components/breadcrumb-core/breadcrumb-core.js
 https://github.com/10up/component-library/tree/develop/packages
+
+dropdown.js	snackbar.js	tabs.js	tooltip.js
 https://github.com/AiviksIQ/JS-library/tree/master/src/js
 text editor
 https://github.com/JiHong88/suneditor/blob/master/sample/index.html
@@ -63,6 +71,8 @@ https://github.com/audi/audi-ui/blob/03b8cd1ca4d44ea63081bbf61791965ff0a2df6c/sr
 https://github.com/CoherentLabs/GameUIComponents/blob/master/components/text-field/script.js
 
 https://github.com/ec-europa/europa-component-library/tree/v3-dev/src/implementations/vanilla/components
+
+ data.vertical = this.attr("orient") === "vertical" || data.vertical;
 https://github.com/Formstone/Formstone/tree/master/src/js
 https://github.com/10up/component-library/tree/develop/packages
 https://github.com/mzusin/toolcool-range-slider/tree/main/src/core/domain
@@ -72,7 +82,11 @@ https://github.com/Mevrael/bunny
 https://github.com/y3un9/yui-component/tree/main/components
 https://github.com/localtoast3000/VjsComponents/tree/master/default_componants
 https://github.com/koolKai/Table_Component/tree/main/Table%20Component
+
+//plotly.js/src/plot_api/validate.js valid components
 https://github.com/thetribeio/plotly.js/tree/c73e84b16585368bde1f910955b7ab6a2d6b6193/src/components
+
+//REACT
 https://github.com/ScandinavianSection-UCLA/Nexus2/blob/4b98aad676a899c269051ce0e0f658e6a3707bc9/src/components/MapView/leaflet/src/dom/Draggable.js#L146
 
 cms
