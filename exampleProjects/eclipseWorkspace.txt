@@ -1,0 +1,7 @@
+https://stackoverflow.com/questions/18463067/eclipse-updating-the-compiler-compliance-to-1-7
+ .metadata\.plugins\org.eclipse.core.runtime\.settings\org.eclipse.jdt.core.prefs
+
+Here are changed lines: 
+    org.eclipse.jdt.core.compiler.compliance=1.7
+    org.eclipse.jdt.core.compiler.source=1.7
+    org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.7
