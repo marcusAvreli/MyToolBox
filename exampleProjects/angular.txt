@@ -7,10 +7,36 @@ https://github.com/vmware-clarity/ng-clarity
 https://github.com/lowkey-who/mean_crm/tree/24c96022f95105efe87f92eaef3388471c624c57
 APP_INITIALIZER
 
+workers
+https://github.com/dailydotdev/daily-api/blob/main/src/commands/personalizedDigest.ts
 
+custom grid
+https://github.com/rapid7/marionette.carpenter/blob/327356b6085eff04614741458191da6d85683f5a/src/_start.js
+https://github.com/almas77abolfazl/Quiz/blob/eff4c02cc372d10f6ddf6ea75d81d296c26c3c76/client/src/modules/shared/components/grid-select-editor/grid-select-editor.component.ts#L9
+https://github.com/AMPATH/ngx-openmrs-poc/blob/889097087982e05a22be71b52c33f7908649360f/src/app/authentication/login.component.ts
+https://github.com/CommunityAlly/CommunityAllyWebApp/blob/121f16a7aa43c80265b98f5aff78e71fbc99aa0c/website/ngApp/chtn/manager/manage-residents-ctrl.ts#L435
 https://github.com/radiumrasheed/ng-zorro-antd/blob/71016ea4e453b6e96304e6ac8aa5ffd5ae70c739/components/i18n/nz-i18n.service.ts
 https://github.com/rangle/angular-ngrx-example/blob/master/src/app/video-games/store/video-game-listing/video-game-listing.store.ts#L43
+https://github.com/vinhlece/AngularCore/blob/0e974e78523995d94495c002a6fa19df327eb28b/src/app/charts/components/table/table.component.ts#L101
 
+https://github.com/giniedp/nw-buddy/blob/11019fe6674c853c06910ab29138602902992d29/apps/web/app/ui/ag-grid/renderer/async-cell-renderer.ts
+CustomAgGridComponent
+https://github.com/sipcapture/homer-ui/blob/53a420b7c2e5a485bf747ed2fb1f1a38f8128bd3/src/app/components/controls/custom-ag-grid/custom-ag-grid.component.ts
+https://github.com/qiniu/tracing-agent/blob/master/web/src/main/webapp/v2/src/app/core/components/thread-dump-list/thread-dump-list.component.ts#L140
+https://github.com/quarano/quarano-application/blob/1aeb1f331c70c652596f5a12f05f6866a76d5082/frontend/libs/administration/feature-account-list/src/lib/account-list/account-list.component.html
+
+
+https://github.com/jaimeyu-suse/manager/blob/df9d9584406d7cdea433522fc91fae154e70069a/admin/webapp/websrc/app/routes/components/response-rules/partial/action-buttons/action-buttons.component.ts#L2
+https://github.com/StephenCooper/ag-grid-doc-comparison/blob/0b7715dfc02dbcd4e450da73146252fab8528789/doc-pages/cell-editing-start-stop/examples/cell-editing/main.ts
+REPORTING DASHBOARD
+https://github.com/vinhlece/AngularCore/blob/0e974e78523995d94495c002a6fa19df327eb28b/src/app/charts/components/table/table.component.ts#L33
+
+CHART
+https://github.com/mpdroid/d3-in-angular/blob/master/src/app/donut-chart/donut-chart.component.ts
+https://github.com/rmahique/nv_manager/blob/7a10162711bb8ca12ebe0b0e8b3f52014290ce76/admin/webapp/websrc/app/routes/registries/registries-table/registries-table.component.ts#L112
+https://github.com/corneliouzbett/ng2-amrs/blob/0fafd4f1294e624f4b6ca1e7ad773a8b05cebbbd/src/app/shared/data-lists/generic-list/generic-list.component.ts#L13
+ private globalEventListener(eventType: string, event: any): void {
+https://github.com/TAK-Product-Center/Server/blob/8cb3c65aa40d3fe6b02af78eab5d2fc4094d7d20/src/federation-hub-ui/src/main/webapp/bowerDependencies/ag-grid/src/ts/components/agGridNg2.ts#L138
 reflection
 	https://github.com/fred1218/JS_plugins/blob/e769a7750c988cb459d95ad802e4ada32bb9685c/MVVM%26MVC/angularJS/angular-master/modules/examples/src/web_workers/message_broker/index_common.ts
 	https://github.com/gleosmith/angular-web-worker/blob/master/worker/src/lib/worker-controller.ts
