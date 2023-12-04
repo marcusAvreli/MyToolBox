@@ -1,1 +1,2 @@
 https://stackoverflow.com/questions/43024308/return-multiple-rows-from-procedure-select-statement-pl-sql
+https://oracle-base.com/articles/12c/index-usage-tracking-12cr2
