@@ -11,6 +11,7 @@ https://github.com/taiga-family/taiga-ui/tree/6ad27708d773bffe95d414947dde805637
 https://github.com/NativeScript/NativeScript/blob/82e9c67d3398c376be1641c5f23bf82a492a48c3/apps/ui/src/bindings/main-page.ts
 https://github.com/dotCMS/core/tree/a7af331b7361bffd039413a22bea7dbad7b3d03c/core-web
 https://github.com/AntonLapshin/popup-validation/blob/master/src/rules.js
+https://github.com/lifechurch/validstate
 https://github.com/Kallenju/simpower-validation/blob/main/src/core/modules/commonFunctions/isEmpty.js
 awareDecorator
 https://github.com/spira/spira/tree/806f60fddbf52b11c91c5caeecf00117363662a9/app/src/common/models/image
@@ -31,7 +32,11 @@ https://codepen.io/franzcisco/pen/zQwXQy
 https://github.com/aigan/mv-sorter/blob/master/mv-sorter.js
 https://github.com/bradtraversy/vanillawebprojects/blob/master/sortable-list/script.js#L102
 https://github.com/uuidjs/uuid/tree/main
-
+https://github.com/nvie/decoders
+https://github.com/validatorjs/validator.js
+https://github.com/Yousef-Hatem/validation-all/blob/main/validation.js
+https://github.com/KrAG2000/javascript-form-validator
+https://github.com/EzyWebwerkstaden/Parsley.js/blob/d1e39e11c678d62481cb27dff5f4f0056ba912b1/doc/examples/customvalidator.html
 https://github.com/TECHOUS/treasurejs.github.io/blob/5264f6b45419f6fc223a001554063e3914718093/scripts/S.js
 	SMOOTH DND
 	https://github.com/kutlugsahin/smooth-dnd
@@ -101,3 +106,7 @@ https://github.com/zzllrr/mather/blob/c8358cd1e376e2fadafe03b927bc968a399950a6/a
 
 pure javascript detect node server. localization without external libs
 https://github.com/search?q=repo%3AShoobx%2Fpdf.js%20viewer.properties&type=code
+https://github.com/Sergey-Nag/cms-data-api/blob/5b7e3e21300f6be134c1f03ae75c2207971a734d/utils/ApiValidationFactory.js#L7
+
+https://css-tricks.com/build-a-state-management-system-with-vanilla-javascript/
+	https://github.com/Andy-set-studio/vanilla-js-state-management/blob/master/src/js/store/mutations.js
