@@ -23,8 +23,11 @@ FILTER OBSERVABLES INTERFACES
 https://www.javatpoint.com/rxjs-filter-filtering-operator
 https://github.com/ReactiveX/rxjs/issues/2163
 https://stackoverflow.com/questions/37991713/simple-filter-on-array-of-rxjs-observable
+https://github.com/karthikbalajikb/Treeshaking-with-rollup.js/tree/master/src
+https://www.linkedin.com/pulse/how-create-aotjit-compatible-angular-4-library-external-oleksii/
+https://medium.com/@UpgradingAJS/the-ultimate-guide-to-setting-up-aot-for-ngupgrade-without-jumping-out-a-window-998df2fdd196
 
-
+node_modules\.bin\eslint --init
 +-----------------------------------------------------------+
 |															|
 |	ANGULAR 4												|
@@ -44,6 +47,7 @@ npm i ng-packagr@1.3.0
 npm i sass@1.1.1
 npm install  node-sass@4.8.1
 npm install sass-loader@6.0.7
+npm install sass-loader@6.0.7 node-sass@4.8.1
 download required package win32-x64-64_binding.node, put in the local:
 c:\users\{username}\appdata\roaming\npm-cache\node-sass\4.8.1\
 "build:sass": "sass ./src/clarity-angular/main.scss ./src/assets/styles.scss"
@@ -115,7 +119,7 @@ npx @angular/cli@1.4.10 new directiveReportSelectionLazy --skip-git
 <<<<<<< Updated upstream
 =======
 
-
+https://www.geeksforgeeks.org/how-to-add-image-into-dropdown-list-for-each-items/
 
 npm i @ngrx/core@^1.2.0 --global
 npm i @ngrx/effects@^2.0.3 --global
@@ -128,7 +132,9 @@ npm i @ngx-translate/core@8.0.0 --global
 npm i @ngx-translate/http-loader@2.0.0 --global
 npm i ngrx-store-freeze@0.2.0 --global
 npm i ngrx-store-localstorage@0.2.2 --global
-
+npm i rollup@^0.36.3
+npm i rollup-plugin-node-resolve@^2.0.0
+https://github.com/ali-kamalizade/text-select/tree/master
 
 
 
