@@ -3,7 +3,7 @@ https://vitalflux.com/angular-create-progressive-web-app-angular/
 https://github.com/dineshg13/AngularjsLogin/blob/6ef7eeeef6ebeb036791dd6f68917d5ebe1e7d95/AngularjsLogin/main/srvAuth.ts
 https://github.com/vmware-archive/clarity/tree/next
 https://github.com/vmware-clarity/ng-clarity
-
+https://github.com/uNmAnNeR/imaskjs/blob/master/packages/angular-imask/example/app/app.component.ts
 https://github.com/lowkey-who/mean_crm/tree/24c96022f95105efe87f92eaef3388471c624c57
 APP_INITIALIZER
 
@@ -35,7 +35,9 @@ CHART
 https://github.com/mpdroid/d3-in-angular/blob/master/src/app/donut-chart/donut-chart.component.ts
 https://github.com/rmahique/nv_manager/blob/7a10162711bb8ca12ebe0b0e8b3f52014290ce76/admin/webapp/websrc/app/routes/registries/registries-table/registries-table.component.ts#L112
 https://github.com/corneliouzbett/ng2-amrs/blob/0fafd4f1294e624f4b6ca1e7ad773a8b05cebbbd/src/app/shared/data-lists/generic-list/generic-list.component.ts#L13
- private globalEventListener(eventType: string, event: any): void {
+
+
+globalEventListener global event listener
 https://github.com/TAK-Product-Center/Server/blob/8cb3c65aa40d3fe6b02af78eab5d2fc4094d7d20/src/federation-hub-ui/src/main/webapp/bowerDependencies/ag-grid/src/ts/components/agGridNg2.ts#L138
 reflection
 	https://github.com/fred1218/JS_plugins/blob/e769a7750c988cb459d95ad802e4ada32bb9685c/MVVM%26MVC/angularJS/angular-master/modules/examples/src/web_workers/message_broker/index_common.ts

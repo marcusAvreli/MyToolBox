@@ -1,3 +1,5 @@
+https://dev.to/steffanboodhoo/practical-webpack-basics-pure-javascript-frontend-356
+
 https://github.com/PureMVC/puremvc-js-multicore-framework/blob/c045fb4ab27c7439a22f6d7e8ed263a65e57fd1c/src/org/puremvc/js/multicore/patterns/observer/Notifier.js
 https://github.com/SAP/openui5/blob/45da40f3b01ab7fea1f524eb84bca6c0bf907a5d/src/sap.ui.commons/src/sap/ui/commons/layout/MatrixLayoutRenderer.js
 https://github.com/petermichaux/maria/blob/a13f0367247bb850da38f11bbc7906302e939954/eg/checkit/src/js/models/TodosModel.js
@@ -31,8 +33,9 @@ https://codepen.io/franzcisco/pen/zQwXQy
 https://github.com/aigan/mv-sorter/blob/master/mv-sorter.js
 https://github.com/bradtraversy/vanillawebprojects/blob/master/sortable-list/script.js#L102
 https://github.com/uuidjs/uuid/tree/main
-
 https://github.com/TECHOUS/treasurejs.github.io/blob/5264f6b45419f6fc223a001554063e3914718093/scripts/S.js
+https://github.com/jagermesh/draggable/tree/master
+https://github.com/nosir/cleave.js/blob/master/src/shortcuts/NumeralFormatter.js
 	SMOOTH DND
 	https://github.com/kutlugsahin/smooth-dnd
 drop down by div
