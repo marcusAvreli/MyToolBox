@@ -26,6 +26,7 @@ https://stackoverflow.com/questions/37991713/simple-filter-on-array-of-rxjs-obse
 https://github.com/karthikbalajikb/Treeshaking-with-rollup.js/tree/master/src
 https://www.linkedin.com/pulse/how-create-aotjit-compatible-angular-4-library-external-oleksii/
 https://medium.com/@UpgradingAJS/the-ultimate-guide-to-setting-up-aot-for-ngupgrade-without-jumping-out-a-window-998df2fdd196
+https://rahuulmiishra.medium.com/journey-to-adding-typescript-in-existing-react-project-bba6e88a9234
 
 node_modules\.bin\eslint --init
 +-----------------------------------------------------------+
