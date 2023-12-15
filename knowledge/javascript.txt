@@ -1,2 +1,5 @@
 rollup
 https://rakish-labs.medium.com/the-ultimate-introductory-guide-for-bundling-typescript-packages-817e3527c1e
+mkdir my-lib
+cd my-lib
+mkdir src

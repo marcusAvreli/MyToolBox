@@ -51,7 +51,7 @@ npm install sass-loader@6.0.7 node-sass@4.8.1
 download required package win32-x64-64_binding.node, put in the local:
 c:\users\{username}\appdata\roaming\npm-cache\node-sass\4.8.1\
 "build:sass": "sass ./src/clarity-angular/main.scss ./src/assets/styles.scss"
-
+npm add -D typescript@2.3.3 babel-core@6.26.3 babel-preset-env@1.7.0
 
 
 npm i gulp-sass@2.2.0
