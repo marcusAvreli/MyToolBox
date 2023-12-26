@@ -1,1 +1,3 @@
 https://superuser.com/questions/1247295/was-able-to-insert-a-ltr-word-in-rtl-sentence-in-word-but-when-sentence-length-e
+https://github.com/Innlandet-Fylkesarkiv/ArkivMester
+https://github.com/pentaho/pentaho-reporting/blob/master/engine/core/src/it/java/org/pentaho/reporting/engine/classic/core/layout/complextext/RichTextRenderingIT.java#L110
