@@ -1,3 +1,7 @@
+database sql parser 
+https://github.com/jdbi/jdbi/tree/master
+https://medium.com/codex/antlr-magic-developing-mainframe-language-applications-using-language-recognizer-5262726e1e93
+
 NAMED PARAMETERS
 https://stackoverflow.com/questions/26459164/is-it-possible-to-call-pl-sql-function-from-jdbc-and-register-the-return-value-b
 https://seanstuber.com/2019/03/21/java-table-functions-returning-a-sql-collection-from-a-java-function/

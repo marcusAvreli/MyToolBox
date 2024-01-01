@@ -5,6 +5,12 @@ https://github.com/vmware-archive/clarity/tree/next
 https://github.com/vmware-clarity/ng-clarity
 https://github.com/uNmAnNeR/imaskjs/blob/master/packages/angular-imask/example/app/app.component.ts
 https://github.com/lowkey-who/mean_crm/tree/24c96022f95105efe87f92eaef3388471c624c57
+customElements
+https://github.com/geonetwork/geonetwork-ui/blob/9ce2ff9f259cb123d2a6e1cd2557c6a0b36aec52/apps/webcomponents/src/app/components/base.component.ts
+
+customElements CUSTOM_ELEMENTS_SCHEMA
+https://github.com/dnys1/amplify-ui/blob/main/packages/angular/projects/ui-angular/src/lib/components/confirm-reset-password/amplify-confirm-reset-password.component.ts
+
 APP_INITIALIZER
 
 workers

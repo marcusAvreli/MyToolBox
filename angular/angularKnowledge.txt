@@ -325,3 +325,7 @@ https://www.grapecity.com/wijmo/demos/Core/CollectionView/Overview/purejs
 >>>>>>> 741dcd80d7f09202e30245c090cfaaca75974b22
 =======
 >>>>>>> Stashed changes
+
+https://github.com/sass/node-sass/issues/2251
+https://github.com/sass/libsass/issues/2244
+Sass 3.5 will support var() as an argument to plain-CSS color functions, similarly to how calc() is treated in 3.4. See sass/sass#2175 for details and sass/sass-spec#1002 for specs.
