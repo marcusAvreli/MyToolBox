@@ -227,3 +227,131 @@ https://onebitahead.medium.com/dont-reinvent-the-wheel-use-white-label-web-compo
 https://github.com/search?q=repo%3Avideojs%2Fvideo.js%20customElements&type=code
 https://github.com/mozilla/blurts-server/blob/ea176dc1b070db735e886da2ce886b8cbb5e1396/src/client/js/components/circleChart.js
 https://github.com/carbon-design-system/ibm-security/tree/8c57c28a6d37c928b0ce4472f876cc5d7afe1652/src/components
+
+https://github.com/derikb/character-sheet-app/blob/69c3f58f7d6de38aa4b708d67223567432ed611d/src/components/Modal.js#L104
+https://github.com/esiur/iui/blob/1bcc7e0a64a256fe6beaaafed84982f639f079fc/src/Core/IUI.js#L24
+https://github.com/megazear7/ziro-components/tree/885fbae4f8009b0ddad1e81ec722ef5c6d9555b8/src
+https://github.com/knowler/knowler.dev/tree/bff674795fb6eb2c2cea0817a4ef315eaf596f68/middleware
+https://github.com/search?q=repo%3Abobbyadamski%2FUmbraco.UI%20custom-elements.json&type=code
+https://github.com/YufJi/tiny/blob/fe35eef306aa4cd53f85e1649bc1ce58935c8023/packages/base/src/webview/web-components/form.js
+https://github.com/JackovAlltrades/io/tree/master/src/elements/core
+https://github.com/HTMLElements/smart-webcomponents/blob/dcbb7cf5436af30f9e9de52b61296b303aa9620e/framework/smart.element.js
+https://github.com/pavlism/karaoke/blob/fe791fa336a87efdeb35d4875a1f7d420bb46bf4/public/components/mrp-form.js#L28
+https://github.com/pavlism/karaoke/tree/fe791fa336a87efdeb35d4875a1f7d420bb46bf4/public/components (xlsx)
+https://github.com/Dabolus/vanilla-pwa/tree/bd03984a2abbcd179cfd9ecd392477bc240fd966/components/dynamic-data
+HTMLCollection
+customElements
+middleware
+generate custom-elements.json
+assignedElements 
+service_worker
+formAssociated
+https://github.com/orneryd/web-components/tree/f9257097f9c92a108ba2f94759acf6d329f303ae/src
+bindEvents
+https://coryrylan.com/blog/using-web-components-in-angular-forms-with-element-internals
+ngDefaultControl
+
+
+https://github.com/BenjaminZekavica/easy-toggle-state/blob/master/rollup.config.js
+https://github.com/popcorn-official/pop-api-scraper/blob/659701a4299a4563c9f0d8b3d199f3aaf086a848/rollup.config.js
+rollup
+
+https://github.com/cunzaizhuyi/qwik/blob/98f9bfefb4e276ccaefcbba9fcae89cbd4ee2d67/scripts/util.ts#L193
+WatchMode 
+
+ https://github.com/rhanb/nativescript-fancy-calendar
+  "babel-traverse": "6.24.1",
+    "babel-types": "6.24.1",
+    "babylon": "6.16.1",
+    "lazy": "1.0.11",
+    "nativescript-dev-android-snapshot": "^0.*.*",
+    "nativescript-dev-typescript": "~0.4.5",
+    "typescript": "~2.3.3"
+	
+	
+	
+	
+	https://github.com/fictional-tribble-2/atom--atom/tree/master/src
+	 "babel-code-frame": "^6.26.0",
+            "babel-generator": "^6.26.0",
+            "babel-helpers": "^6.24.1",
+            "babel-messages": "^6.23.0",
+            "babel-register": "^6.26.0",
+            "babel-runtime": "^6.26.0",
+            "babel-template": "^6.26.0",
+            "babel-traverse": "^6.26.0",
+            "babel-types": "^6.26.0",
+			
+			https://github.com/jestintab/Hybrid-Restaurant-App/blob/fe367c716e85d20c7609f60956ca57bcb79582f7/hooks/package.json#L80
+			 "babel-plugin-transform-es2015-modules-systemjs": "6.14.0",
+    "babel-preset-es2015": "6.16.0",
+	
+	
+https://github.com/topcoder-platform/topcoder-x-ui/blob/075ddbd346a85e25f0cf6ec7e66adb39599d0b16/package.json#L90	
+	 "babel-core": "^6.26.3",
+        "babel-preset-env": "^1.7.0",
+        "babel-preset-es2016": "^6.24.1",
+		
+npm add -D typescript@2.3.3 babel-core@6.26.3 babel-cli@6.26.0  babel-preset-env@1.7.0 cross-env@5.1.6 rimraf@2.7.1	
+npm add -D typescript@2.3.3 babel-core@6.26.3 											babel-preset-env@1.7.0
+npm add -D babel-preset-typescript
+npm add -D rollup-plugin-typescript@^1
+
+https://github.com/ampproject/amphtml/tree/e3ef925d3e83419e76895ec20f8874b862de6ba2
+pnpm add -D rollup@0.42.0 rollup-plugin-terser@0.42.0 @rollup/plugin-babel @rollup/plugin-node-resolve
+
+  "rollup": "0.42.0" "rollup-plugin-terser" "typescript":"2.3.3"
+  
+  https://github.com/busypeoples/spected/blob/master/package.json
+  
+  https://github.com/eCollect/vue-plugin-template/blob/b998550c5303dbde1d3a4ee611509796e5549550/template/.babelrc
+  https://github.com/Javey/misstime/blob/e3ad1d0a3f42f9edc6636c8dc7d529c0845fc622/package.json
+  https://github.com/njakob/parcel/tree/master
+ npm add -D  babel-eslint@7.1.1
+ npm add -D babel-plugin-external-helpers@6.22.0
+ npm add -D babel-plugin-transform-flow-strip-types@6.22.0
+ npm add -D babel-preset-es2015@6.14.0
+ npm add -D babel-preset-stage-0@6.5.0
+ 
+ autoreload live reload
+ https://github.com/Chimeejs/chimee/blob/0f04e52355e9ba2316705a0982b134377f3b3729/build/rollup.config.base.js#L11
+ 
+ object assign
+ https://github.com/devilwjp/veaury/blob/60e3631802f12c3dd7262d9e95dd91fa0070bf01/rollup.config.js#L2
+ 
+    "rollup": "^0.66.6", rollup-plugin-typescript2
+ https://github.com/Festify/app/blob/6029a3964a15cd3f55b89aa5a5e45e108cd3b72a/package.json
+ 
+ https://github.com/melodyWxy/melody-core-utils/blob/8be6575c10bbb7c823ae8d14ccbb17337447dd64/config/rollup.config.dev.js#L3
+ 
+ 
+    npm add -D rollup-plugin-eslint@3.0.0
+    npm add -D rollup-plugin-node-resolve@2.0.0
+    npm add -D rollup-plugin-postcss@0.2.0
+    npm add -D rollup-plugin-replace@1.1.1
+    npm add -D rollup-plugin-uglify@1.0.1
+    npm add -D rollup-watch@3.0.0
+	
+npm add -D cssnano@3.9.1
+npm add -D livereload@0.6.0
+npm add -D npm-run-all@3.1.2
+npm add -D postcss-cssnext@2.9.0
+npm add -D postcss-nested@1.0.0
+npm add -D postcss-simple-vars@3.0.0
+npm add -D rollup-plugin-angular@^0.5.*
+npm add -D rollup-plugin-typescript@^0.5.*
+
+npm add -D cssnano@3.9.1 livereload@0.6.0 npm-run-all@3.1.2 postcss-cssnext@2.9.0 postcss-nested@1.0.0 postcss-simple-vars@3.0.0 
+
+https://www.sensedeep.com/blog/posts/2021/how-to-create-single-source-npm-module.html
+https://github.com/sensedeep/dynamodb-onetable/blob/main/src/index.js
+npm i -S choices-module@file:../../nodeJSDev/my-choices
+npm i -S mycomponents@file:../../nodeJSDev/myComponents
+npm i -S webcomponents@file:../../nodeJSDev/webcomponents
+npm i -S webcomponents2@file:../../nodeJSDev/webcomponents2
+npm i -S webcomponents3@file:../../nodeJSDev/webcomponents3
+npm i clean-css@^4
+npm i html-minifier@^3
+npm i cross-env@^5
+
+npm i -S myzoo@file:../../nodeJSDev/myzoo
