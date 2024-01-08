@@ -1,0 +1,19 @@
+<project name="Create Mirror" default="create-mirror" basedir=".">
+
+  <target name="create-mirror">
+    <p2.mirror>
+     <repository location="${target.dir}"/>
+    <source>
+      <repository location="https://raw.githubusercontent.com/antlr4ide/antlr4ide-eclipse-release/master/"/>
+      <!--repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/composite/marketplace/"/--><!-- checkstyle & findbugs -->
+      <repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.32.0/"/>
+      
+    </source>
+    <slicingOptions followStrict="true" />
+	</p2.mirror>
+  </target>
+
+</project>
+
+
+

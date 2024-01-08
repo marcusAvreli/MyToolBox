@@ -1,4 +1,7 @@
+https://medium.com/@fwouts/a-quick-intro-to-antlr4-5f4f35719823
+
 https://github.com/Vishal1419/auth2-client/blob/master/src/serviceWorker.js
+
 https://vitalflux.com/angular-create-progressive-web-app-angular/
 https://github.com/dineshg13/AngularjsLogin/blob/6ef7eeeef6ebeb036791dd6f68917d5ebe1e7d95/AngularjsLogin/main/srvAuth.ts
 https://github.com/vmware-archive/clarity/tree/next
