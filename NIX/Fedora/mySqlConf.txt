@@ -1,18 +1,16 @@
-firewall-cmd --list-ports
-firewall-cmd --add-port=80/tcp --permanent
-firewall-cmd --reload
-firewall-cmd --list-ports
-
-firewall-cmd --list-ports
-firewall-cmd --add-port=3306/tcp --permanent
-firewall-cmd --reload
-firewall-cmd --list-ports
- 
-https://noknow.info/it/os/install_mysql_from_source?lang=en
-
-Set the environment path fot MySQL.
++-----------------------------------------------------------++-----------------------------------------------------------++-------------------------------------------------------------+
+|																																														|
+|																				FROM SOURCE																								|
+|																																														|
++-----------------------------------------------------------++-----------------------------------------------------------++-------------------------------------------------------------+
+COPYRIGHT:https://noknow.info/it/os/install_mysql_from_source?lang=en
 
 
++-----------------------------------------------------------+
+|															|
+|			MYSQL ENVIRONMENTAL VARIABLES					|
+|															|
++-----------------------------------------------------------+
 /etc/profile
 		MYSQL_HOME=/opt/mysql5
         MYSQL_BIN=$MYSQL_HOME/bin
@@ -83,12 +81,24 @@ vi /etc/my.cnf
 
 Initialize MySQL
 	mysqld --defaults-file=/etc/my.cnf --initialize
+
++-----------------------------------------------------------+
+|															|
+|			MYSQLD FIREWALL									|
+|															|
++-----------------------------------------------------------+
+	firewall-cmd --list-ports
+	firewall-cmd --add-port=3306/tcp --permanent
+	firewall-cmd --reload
+	firewall-cmd --list-ports
 	
-	
-Create mysqld.service File
+
++-----------------------------------------------------------+
+|															|
+|			MYSQLD SYSTEMD SERVICE							|
+|															|
++-----------------------------------------------------------+
 	vi /etc/systemd/system/mysqld.service
-
-
 	[Unit]
 	Description=MySQL Server
 	After=syslog.target
@@ -106,14 +116,15 @@ Create mysqld.service File
 
 	[Install]
 	WantedBy=multi-user.target
-
-
-Check the status of mysql process.
+	
++-----------------------------------------------------------+
+|															|
+|			STATUS MYSQLD SERVICE							|
+|															|
++-----------------------------------------------------------+
 
 	systemctl status mysqld
-
 	systemctl start mysqld
-
 	systemctl enable mysqld
 
 
@@ -127,6 +138,39 @@ Check the status of mysql process.
 mysql -u root -p
 Enter password: 
 
-5ST=eXyqNmbK
++-----------------------------------------------------------+
+|															|
+|			CREATE USER 									|
+|															|
++-----------------------------------------------------------+
+
+CREATE USER identityiq IDENTIFIED BY 'zubur1';
+GRANT ALL PRIVILEGES ON identityiq.* TO identityiq;
+FLUSH PRIVILEGES;
+
++-----------------------------------------------------------+
+|															|
+|			RUN SCRIPT	 									|
+|															|
++-----------------------------------------------------------+
+	mysql > source /root/create_identityiq_tables-8.4.mysql
 
 
+
+
++-----------------------------------------------------------++-----------------------------------------------------------++-------------------------------------------------------------+
+|																																														|
+|																				INSTALL FROM RPM																						|
+|																																														|
++-----------------------------------------------------------++-----------------------------------------------------------++-------------------------------------------------------------+
+COPYRIGHT: https://www.linuxcapable.com/how-to-install-mysql-8-0-on-almalinux/
+
+
+
++-----------------------------------------------------------++-----------------------------------------------------------++-------------------------------------------------------------+
+|																																														|
+|																				PROGRAMMING LANGUAGES																					|
+|																																														|
++-----------------------------------------------------------++-----------------------------------------------------------++-------------------------------------------------------------+
+JAVA connection stirng
+	jdbc:mysql://host_ip_or_name:3306/database_name

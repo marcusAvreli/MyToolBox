@@ -1,3 +1,12 @@
++-----------------------------------------------------------+
+|															|
+|			JAVA ENVIRONMENTAL VARIABLES					|
+|															|
++-----------------------------------------------------------+
+	echo 'export JAVA_HOME=/opt/jdk' >> /etc/profile;		
+	echo 'export PATH=${PATH}:${JAVA_HOME}/bin' >> /etc/profile;
+	source /etc/profile
+
 #CHECK JAVA_HOME
 	echo $JAVA_HOME
 		/usr/local/java/jdk1.8.0_341
@@ -9,7 +18,11 @@
 	cd /opt/ant; 
 
 	./build.sh -Ddist.dir=/opt/ant dist	
-
++-----------------------------------------------------------+
+|															|
+|			ANT ENVIRONMENTAL VARIABLES						|
+|															|
++-----------------------------------------------------------+
 	echo 'export ANT_HOME="/opt/ant"' >> /etc/profile
 	echo 'export PATH=$PATH:$ANT_HOME/bin' >> /etc/profile
 	source /etc/profile
@@ -81,5 +94,42 @@
 #ADD TOMCAT AS SERVICE
 	refer tomcat.service file
 		
-#source:
+#COPYRIGHT:
 	https://superuser.com/questions/632618/best-practice-for-access-permission-to-users-for-apache-tomcat
+
++-----------------------------------------------------------+
+|															|
+|			TOMCAT SYSTEMD SERVICE							|
+|															|
++-----------------------------------------------------------+
+
+
+# Systemd unit file for tomcat
+#place in /etc/systemd/system/tomcat.service
+#source:
+#https://stackoverflow.com/questions/53994521/tomcat-8-on-centos-7-does-not-start-as-service-but-it-starts-manually
+#https://www.shubhamdipt.com/blog/how-to-create-a-systemd-service-in-linux/
+#systemctl daemon-reload
+#systemctl restart tomcat.service
+[Unit]
+Description=Apache Tomcat Web Application Container for ShopWorx
+After=syslog.target network.target
+
+[Service]
+Environment=JAVA_HOME=/usr/local/java/jdk1.8.0_341
+Environment=CATALINA_PID=/opt/tomcat90/temp/tomcat.pid
+Environment=CATALINA_HOME=/opt/tomcat90/
+Environment=CATALINA_BASE=/opt/tomcat90/
+Environment='CATALINA_OPTS=-Xms512M -Xmx4096M -server -XX:+UseParallelGC'
+Environment='JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom'
+Type=forking
+WorkingDirectory=/opt/tomcat90/bin
+
+ExecStart=/usr/bin/bash /opt/tomcat90/bin/catalina.sh start
+ExecStop=/usr/bin/bash /opt/tomcat90/bin/catalina.sh stop
+
+User=root
+Group=tomcat
+
+[Install]
+WantedBy=multi-user.target

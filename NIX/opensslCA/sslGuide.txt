@@ -1,3 +1,5 @@
+//https://serverfault.com/questions/305503/installing-2-versions-openssl-simultaneously
+
 check openssl version
 	openssl version
 	
