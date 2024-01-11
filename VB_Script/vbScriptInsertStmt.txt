@@ -7,9 +7,9 @@ on error resume next
 
 
 
-Dim resultFileName: resultFileName="Export.csv"
-Dim targetSchema : targetSchema = "testSchema"
-Dim targetTable : targetTable = "test_test_test_CONVERSION"
+Dim resultFileName: resultFileName="output.csv"
+Dim targetSchema : targetSchema = "identityiq"
+Dim targetTable : targetTable = "test_hr_source"
 
 'Dim regex 
 'Set regex = CreateObject("VBScript.Regexp")
@@ -17,153 +17,146 @@ Dim targetTable : targetTable = "test_test_test_CONVERSION"
 'regex.Global = True
 'regex.Pattern = """[^""]*""|[^,]*"
 
-
+msgbox "STARTED"
 Dim strCurDir : strCurDir=getCurrentDirectory()
 Dim strTargetExcelName : strTargetExcelName = getExcelFileName()
 Dim targetFilePathName : targetFilePathName = strCurDir & "\" & strTargetExcelName
 
 
 generateSqlCommands strCurDir,resultFileName,targetFilePathName,targetSchema,targetTable
-
+msgbox "FINISHED"
 
 
 sub generateSqlCommands (ByVal strCurDir,ByVal resultFileName,ByVal targetFilePathName,ByRef targetSchema,ByREf targetTable)
-                'option explicit
+	'option explicit
+	
+	on error resume next
+	Dim VRstatmt
+	
+	Dim i,j
+	Dim currentFieldName,csvValue
+	Dim objRecordSet
+	Const ForWriting = 2
+	Dim objFields,csvColumns
+	Dim csvFilePath : csvFilePath =strCurDir & "\" & resultFileName
+	Dim objFSO : Set objFSO = CreateObject("Scripting.FileSystemObject")
+	dim  objCSVFile : Set objCSVFile = objFSO.CreateTextFile(csvFilePath,ForWriting, True)
+	Dim targetQueryRange :               targetQueryRange=getUsedRange(targetFilePathName)
+	Dim targetSpreadSheetName : targetSpreadSheetName=getSpreadSheetName(targetFilePathName)               
                 
-                on error resume next
-                Dim VRstatmt
-                
-                Dim i,j
-                Dim currentFieldName,csvValue
-                Dim objRecordSet
-                Const ForWriting = 2
-                Dim objFields,csvColumns
-                Dim csvFilePath : csvFilePath =strCurDir & "\" & resultFileName
-                Dim objFSO : Set objFSO = CreateObject("Scripting.FileSystemObject")
-                dim  objCSVFile : Set objCSVFile = objFSO.CreateTextFile(csvFilePath,ForWriting, True)
-                Dim targetQueryRange :               targetQueryRange=getUsedRange(targetFilePathName)
-                Dim targetSpreadSheetName : targetSpreadSheetName=getSpreadSheetName(targetFilePathName)
-                
-                
-                
-                Dim sql_text :    sql_text="Select * FROM [" & targetSpreadSheetName & "$]" & VRstatmt
-                msgbox "SQL_Name: " & sql_text
-                Dim objConnection: Set objConnection = CreateObject("ADODB.Connection")
-                objConnection.open "Provider=Microsoft.ACE.OLEDB.16.0;data source =" & targetFilePathName &";extended properties=excel 12.0;"
-                Dim objCommand: Set objCommand = CreateObject("ADODB.Command")
-                'msgbox "checkpost2"
-                objCommand.ActiveConnection = objConnection
-                objCommand.commandText = sql_text
-                objCommand.prepared=true
-                Set objRecordset = objCommand.execute
-                Set objFields = objRecordset.fields
+	Dim sql_text :    sql_text="Select * FROM [" & targetSpreadSheetName & "$]" & VRstatmt
+	
+	Dim objConnection: Set objConnection = CreateObject("ADODB.Connection")
+	objConnection.open "Provider=Microsoft.ACE.OLEDB.16.0;data source =" & targetFilePathName &";extended properties=excel 12.0;"
+	Dim objCommand: Set objCommand = CreateObject("ADODB.Command")
+	
+	objCommand.ActiveConnection = objConnection
+	objCommand.commandText = sql_text
+	objCommand.prepared=true
+	Set objRecordset = objCommand.execute
+	Set objFields = objRecordset.fields
 
-'               msgbox "checkpost3"
-                ReDim csvFields ((objFields.count)) 
-                ReDim csvValues((objFields.count))
+'              
+	ReDim csvFields ((objFields.count)) 
+	ReDim csvValues((objFields.count))
 
-                'msgbox "checkpost4"
-                for i=0 to objFields.count-1                         
-                                if len(objFields.Item(i).name) > 0 Then
-                                                csvFields(i)=objFields.Item(i).name
-                                end if
-                next
+   
+	for i=0 to objFields.count-1                         
+	if len(objFields.Item(i).name) > 0 Then
+		csvFields(i)=objFields.Item(i).name
+	end if
+	next
 
-                Dim tempCsvFields : tempCsvFields = Join(csvFields,",")
-                'msgbox "checkpost5"
-                if right(tempCsvFields,1)="," then 
-                                tempCsvFields = cstr(Left(tempCsvFields,Len(tempCsvFields)-1))
-                end if
+	Dim tempCsvFields : tempCsvFields = Join(csvFields,",")
+   
+	if right(tempCsvFields,1)="," then 
+		tempCsvFields = cstr(Left(tempCsvFields,Len(tempCsvFields)-1))
+	end if
 
-                Dim sqlString
-                sqlString = "insert into """& targetSchema &"""."  &""""& targetTable &""""& " ("  & tempCsvFields & ") values "
-                msgbox "checkpost6"
-                Dim counter : counter=0
-                with objRecordset
-                                if not .bof and not .eof then
-                                                '.movelast
-                                                .movefirst                           
-                                                while( not .eof) 
-                                                for j=0 to  objFields.count
-                                                                                                currentFieldName = csvFields(j)                                                                
-                                                                                                if currentFieldName = "" then 
-                                                                                                                'msgbox "current field name is null" 
-                                                                                                end if
-                                                                                                if currentFieldName <> "" Then 
-                                                                                                                select case currentFieldName
-                                                                                                                                case  "test_1"                                                                                                    
-                                                                                                                                                csvValue = Cstr(objRecordset.fields.item(currentFieldName))                                                                                                                                            
-                                                                                                                                                csvValues(j) = "'" & Cstr(LPad(csvValue,3,"0")) & "'"                                                                                                                                       
-                                                                                                                                case  "test_test_2"                                                                                                          
-                                                                                                                                                csvValue = Cstr(objRecordset.fields.item(currentFieldName))                                                                                            
-                                                                                                                                                csvValues(j) = "'" & Cstr(LPad(csvValue,3,"0")) & "'"                                                                                                                                       
-                                                                                                                                'case else                                                                                             
-                                                                                                                                '               csvValue = Cstr(objRecordset.fields(currentFieldName))                                                                                       
-                                                                                                                                '               csvValues(j)= "'" & csvValue & "'"                                                                                                                                              
-                                                                                                                end select           
-                                                                                                                
-                                                                                                end if
-                                                                                next       
-                                                                counter=counter+1
-                                                                csvColumns = Join(csvValues,",")                                              
+	Dim sqlString
+	sqlString = "insert into """& targetSchema &"""."  &""""& targetTable &""""& " ("  & tempCsvFields & ") values "
+	
+	Dim counter : counter=0
+	with objRecordset
+		if not .bof and not .eof then
+			'.movelast
+			.movefirst
+			while( not .eof)
+			for j=0 to  objFields.count
+				currentFieldName = csvFields(j)                                                                
+				if currentFieldName = "" then
+				end if
+				if currentFieldName <> "" Then 
+					select case currentFieldName
+						case  "FIELD_1"                                                                                                    
+							csvValue = Cstr(objRecordset.fields.item(currentFieldName))                                                                                                                                            
+							csvValues(j) = "'" & Cstr(LPad(csvValue,3,"0")) & "'"                                                                                                                                       
+						case  "FIELD_2"                                                                                                          
+							csvValue = Cstr(objRecordset.fields.item(currentFieldName))                                                                                            
+							csvValues(j) = "'" & csvValue & "'"
+					end select
+								
+				end if
+			next       
+			counter=counter+1
+			csvColumns = Join(csvValues,",")                                              
 
-                                                                if right(csvColumns,1)="," then 
-                                                                                csvColumns = Left(csvColumns,Len(csvColumns)-1)
-                                                                end if
-                                                                'msgbox "tempCsvFields 1" & csvColumns
-                                                                sqlString = sqlString & "(" & csvColumns & ");"
-                                                                objCSVFile.Write sqlString
-                                                                objCSVFile.Writeline
-                                                                'sqlString = "insert into  ("  & tempCsvFields & ") values "
-                                                                sqlString = "insert into """ & targetSchema & """."  &"""" & targetTable & """"& " ("  & tempCsvFields & ") values "
-                                                                counter=counter+1
-                                                                .movenext
-                                                wend
-                                end if
-                end with
-                'msgbox "Number of records " & counter
+			if right(csvColumns,1)="," then 
+							csvColumns = Left(csvColumns,Len(csvColumns)-1)
+			end if
+			
+			sqlString = sqlString & "(" & csvColumns & ");"
+			objCSVFile.Write sqlString
+			objCSVFile.Writeline
+			
+			sqlString = "insert into """ & targetSchema & """."  &"""" & targetTable & """"& " ("  & tempCsvFields & ") values "
+			counter=counter+1
+			.movenext
+			wend
+		end if
+	end with
+               
 
-                objCSVFile.close
-                set objCSVFile=nothing
-                objRecordset.Close
-                objConnection.close
-                
-                set objCommand=nothing
-                
-                set objConnection=nothing
-                
-                msgbox "generateSqlCommands exit"
-                if err.number <>0 then 
-                                msgbox "Error_Number: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
-                                err.clear
-                end if 
+	objCSVFile.close
+	set objCSVFile=nothing
+	objRecordset.Close
+	objConnection.close
+	
+	set objCommand=nothing	
+	set objConnection=nothing
+	
+	
+	if err.number <>0 then 
+		msgbox "Error_Number: " & Err.Number & ", Source: " & Err.Source & ", Description: " & Err.Description
+		err.clear
+	end if 
 end sub
 
 function getCurrentDirectory()
-                Dim WshShell, strCurDir
-                Set WshShell = CreateObject("WScript.Shell")     
-                getCurrentDirectory    = WshShell.CurrentDirectory         
+	Dim WshShell, strCurDir
+	Set WshShell = CreateObject("WScript.Shell")
+	getCurrentDirectory    = WshShell.CurrentDirectory
 end function
 
 function getExcelFileName()
 
-                Dim strCurDir,WshShell
-                Set WshShell = CreateObject("WScript.Shell")
-                strCurDir    = WshShell.CurrentDirectory
-                
-                Set WshShell = Nothing                 
-                Dim oFile
-                Dim goFS    : Set goFS    = CreateObject("Scripting.FileSystemObject")        
-                For Each oFile In goFS.GetFolder(strCurDir).Files
-                  If "xlsx" = LCase(goFS.GetExtensionName(oFile.Name)) Then                                     
-                                getExcelFileName = oFile.Name
-                                exit function
-                                end if 
-                Next
-  
-                If oLstPng Is Nothing Then
-                                WScript.Echo "no excel found"
-                End If
+	Dim strCurDir,WshShell
+	Set WshShell = CreateObject("WScript.Shell")
+	strCurDir    = WshShell.CurrentDirectory
+	
+	Set WshShell = Nothing
+	Dim oFile
+	Dim goFS    : Set goFS    = CreateObject("Scripting.FileSystemObject")
+	For Each oFile In goFS.GetFolder(strCurDir).Files
+		If "xlsx" = LCase(goFS.GetExtensionName(oFile.Name)) Then
+			getExcelFileName = oFile.Name
+			exit function
+		end if 
+	Next
+
+	If oLstPng Is Nothing Then
+					WScript.Echo "no excel found"
+	End If
    
 end function
 
@@ -179,56 +172,56 @@ Public Function ExcelColHead(ByVal ColNum)
 End Function
 
 function getUsedRange(ByVal originFileName)
-                Dim originSheetName
-                Dim objExcel1,originObjSpread,objWorksheet1
-                Set objExcel1 = CreateObject("Excel.Application")
-                
-                objExcel1.displayalerts = false
-                Set originObjSpread = objExcel1.Workbooks.Open(originFileName)
-                originObjSpread.sheets(1).activate
-                Set objWorksheet1 = originObjSpread.Worksheets(1)
-                originSheetName=objWorksheet1.name
-                
-                Dim startingColumn : startingColumn = objWorksheet1.usedrange.column
-                Dim numberOfColumns : numberOfColumns = objWorksheet1.usedrange.columns.count
-                Dim startingRow : startingRow = objWorksheet1.usedRange.row
-                Dim numberOfRows: numberOfRows = objWorksheet1.usedRange.rows.count
-                'msgbox "number of used rows: " & numberOfRows
-                Dim rangeName : rangeName = ExcelColHead(numberOfColumns)
-                
-                
-                Dim queryRange : queryRange = "A1:" & rangeName & cstr(numberOfRows)
-                'msgbox "Used Range:" & queryRange & " Number Of Rows:" & numberOfRows & " Name of Spread Sheet:" & originSheetName
+	Dim originSheetName
+	Dim objExcel1,originObjSpread,objWorksheet1
+	Set objExcel1 = CreateObject("Excel.Application")
+	
+	objExcel1.displayalerts = false
+	Set originObjSpread = objExcel1.Workbooks.Open(originFileName)
+	originObjSpread.sheets(1).activate
+	Set objWorksheet1 = originObjSpread.Worksheets(1)
+	originSheetName=objWorksheet1.name
+	
+	Dim startingColumn : startingColumn = objWorksheet1.usedrange.column
+	Dim numberOfColumns : numberOfColumns = objWorksheet1.usedrange.columns.count
+	Dim startingRow : startingRow = objWorksheet1.usedRange.row
+	Dim numberOfRows: numberOfRows = objWorksheet1.usedRange.rows.count
+	'msgbox "number of used rows: " & numberOfRows
+	Dim rangeName : rangeName = ExcelColHead(numberOfColumns)
+	
+	
+	Dim queryRange : queryRange = "A1:" & rangeName & cstr(numberOfRows)
+	'msgbox "Used Range:" & queryRange & " Number Of Rows:" & numberOfRows & " Name of Spread Sheet:" & originSheetName
 
 
-                originObjSpread.Close
-                objExcel1.displayalerts = True
-                objExcel1.quit
-                Set originObjSpread = Nothing
-                Set objExcel1 = Nothing
-                
-                getUsedRange = queryRange
+	originObjSpread.Close
+	objExcel1.displayalerts = True
+	objExcel1.quit
+	Set originObjSpread = Nothing
+	Set objExcel1 = Nothing
+	
+	getUsedRange = queryRange
 end function
 
 function getSpreadSheetName(ByVal originFileName)    
-                Dim objExcel1
-                Set objExcel1 = CreateObject("Excel.Application")             
-                objExcel1.displayalerts = false    
-                Dim objSpread :  Set objSpread = objExcel1.Workbooks.Open(originFileName)    
-                Dim objWorksheet1  : Set objWorksheet1 = objSpread.Worksheets(1)     
-                Dim sheetName : sheetName=objWorksheet1.name
-                'msgbox "fileNAme:" & originFileName & " Sheet_Name:" &         sheetName
-                objSpread.Close               
-                objExcel1.displayalerts = True     
-                objExcel1.quit   
-                Set objSpread = Nothing
-                Set objExcel1 = Nothing 
-                getSpreadSheetName = sheetName
+	Dim objExcel1
+	Set objExcel1 = CreateObject("Excel.Application")             
+	objExcel1.displayalerts = false    
+	Dim objSpread :  Set objSpread = objExcel1.Workbooks.Open(originFileName)    
+	Dim objWorksheet1  : Set objWorksheet1 = objSpread.Worksheets(1)     
+	Dim sheetName : sheetName=objWorksheet1.name
+	'msgbox "fileNAme:" & originFileName & " Sheet_Name:" &         sheetName
+	objSpread.Close               
+	objExcel1.displayalerts = True     
+	objExcel1.quit   
+	Set objSpread = Nothing
+	Set objExcel1 = Nothing 
+	getSpreadSheetName = sheetName
 end function
 
 function LPad(s,l,c)
-                Dim n: n =0
-                if l>len(s) then n= l-len(s)
-                'msgbox "Result:" &  String(n,c) & s
-                LPad = String(n,c) & s
+	Dim n: n =0
+	if l>len(s) then n= l-len(s)
+	'msgbox "Result:" &  String(n,c) & s
+	LPad = String(n,c) & s
 end function
