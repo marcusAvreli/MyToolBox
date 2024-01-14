@@ -1,0 +1,34 @@
+//https://kb.wisc.edu/iam/page.php?id=13881
+//https://www.manageengine.com/products/active-directory-audit/kb/how-to/how-to-change-group-policy-settings.html
+//https://theitbros.com/logon-as-a-service/#penci-Managing-Log-on-as-a-service-Rights-Assignments-via-Group-Policy
+//https://github.com/junecastillote/PS-Manage-Log-On-As-A-Service/blob/main/Remove-ServiceLogonRight.ps1
+//https://krestfield.github.io/docs/certdog/configure_logon_as_a_service.html
+Best Practices for use of Service Accounts
+
++-----------------------------------------------------------+
+|															|
+|	NON INTERACTIVE LOGON,LOG-ON-AS-SERVICE					|
+|															|
++-----------------------------------------------------------+
+
+
+Add the "Logon as a service" rights to a user account
+	Open Local Security Policy > secpol.msc
+	
+	In the console tree, double-click Local Policies, and then click User Rights Assignments
+	
+	In the details pane, double-click Logon as a service
+	
+	if "Add User or Group" is enabled
+		Click Add User or Group, and then add the appropriate account to the list of accounts that possess the Logon as a service right
+	if "Add User or Group" is disabled
+	
+		Add the "Logon as a service" rights to an account for a Group Policy Object (GPO)
+		
+			Make sure your workstation or server is joined to the domain in which your users and GPO's reside
+			Click Start, point to Run, type mmc, and then click OK
+			
+	Creating a new GPO
+	
+	Step 2 - Launch the Group Policy Management Tool
+	Choose Start → All Programs →Administrative Tools → Group Policy Management
