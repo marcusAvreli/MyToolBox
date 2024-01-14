@@ -1,0 +1,3 @@
+https://theitbros.com/logon-as-a-service/#penci-Managing-Log-on-as-a-service-Rights-Assignments-via-Group-Policy
+https://github.com/junecastillote/PS-Manage-Log-On-As-A-Service/blob/main/Remove-ServiceLogonRight.ps1
+https://blakedrumm.com/blog/set-and-check-user-rights-assignment/
