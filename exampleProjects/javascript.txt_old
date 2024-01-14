@@ -355,3 +355,26 @@ npm i html-minifier@^3
 npm i cross-env@^5
 
 npm i -S myzoo@file:../../nodeJSDev/myzoo
+
+//data grid
+https://github.com/jmptrader/wc-data-grid/blob/c9f83ebfc2f6c5ad1d1a5262dd8d27203a6ef529/src/data-grid.js
+
+https://github.com/webzhou/mip2/blob/85fc126df3ff84b5dbb113d065ad56e80a6dcec1/packages/mip/src/runtime.js
+ installServices () {
+    installExtensionsService()
+    installTimerService()
+    installVueCompatService()
+  }https://github.com/damien-hl/travia/tree/main/assets/scss/abstracts
+  https://github.com/knownasilya/rss-reader-example-app/tree/0d6929e74de4e6802586e6d7655046ac89dc87b7/static
+ https://github.com/EduardoRFS/flow/blob/30f3641e546cb1b9d1daf574990ba5197bae777e/lib/serviceworkers.js
+ https://github.com/tangleMesh/base-class/blob/74f87881bd279c3bd230830b951320ae9eeaddf3/scripts/server/component-renderer.js
+ https://github.com/tsung-ju/parallax-background-image/blob/cc5f1e9138256ee41c088ce79993e730687e93a5/src/parallax-element.js#L2
+ https://github.com/googlefonts/fontra/blob/main/src/fontra/client/core/html-utils.js#L6
+ https://github.com/SVG-Edit/svgedit/blob/19403a275550dd7ebc2f62359de5094728ec4511/src/editor/components/seZoom.js
+ https://github.com/RichProsper/RichProsper.github.io/blob/28fd9967eee4c855183d5d18e14ae8124988c286/projects/rwc/form-elements/input/rwc-input.js
+ https://github.com/Tangerine-Community/tangy-form-editor/blob/0c841b74dba2c6825a69468fcc0b3a351b10b9a7/demo/index.html
+ https://github.com/Tangerine-Community/tangy-form-editor/blob/0c841b74dba2c6825a69468fcc0b3a351b10b9a7/widget/tangy-checkboxes-widget.js#L4
+ https://github.com/search?q=repo%3AAbdurraziq%2FRestolog%20detail-page&type=code
+ https://github.com/mellambias/tienOn/blob/035b8657b9138c50c4d767a91785b0fd0181560e/public/dashboard/js/webComponents/Form.js
+ https://github.com/dataformsjs/dataformsjs/tree/9b7772c50b39df9068079bc7ba7049903ff57eea
+ https://github.com/search?q=repo%3Anamphongpt%2Ftator%20type-form&type=code
