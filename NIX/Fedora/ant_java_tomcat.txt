@@ -1,5 +1,16 @@
 +-----------------------------------------------------------+
 |															|
+|			JAVA COMPILE FROM CMD							|
+|															|
++-----------------------------------------------------------+
+	COMPILE JAVA CLASSES CMD CLI
+	# *nix
+	javac -cp .:/usr/local/lib/antlr-4.8-complete.jar ./com/sevan/pond/*.java
+
+	# Windows
+	javac -cp .;path\to\antlr-4.8-complete.jar .\com\sevan\pond\*.java
++-----------------------------------------------------------+
+|															|
 |			JAVA ENVIRONMENTAL VARIABLES					|
 |															|
 +-----------------------------------------------------------+
