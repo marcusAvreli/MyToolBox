@@ -1,0 +1,4 @@
+https://www.atera.com/blog/how-do-i-check-which-powershell-version-im-using/?cq_src=google_ads&cq_cmp=20881532348&cq_term=&cq_plac=&cq_net=g&cq_plt=gp&utm_adgroup=dsa_blog&utm_adname=&utm_audience=&utm_source=adwords&utm_campaign=search-usa-dsa-tcpa-may22&utm_medium=cpc&utm_term=NoKeyword&hsa_cam=17125495084&hsa_grp=153829931941&hsa_ad=685286483940&hsa_kw=&hsa_tgt=dsa-2269832072621&hsa_mt=&hsa_acc=6675104902&hsa_src=g&hsa_net=adwords&hsa_ver=3&gad_source=1&gclid=CjwKCAiAqY6tBhAtEiwAHeRopX4jiZJxwfKYkstRQl6oOwj8MCD8yerdMW96zdbEDTrQXsOwOQz5wRoCAc4QAvD_BwE
+get-Host|Select-Object
+$PSVersionTable
+https://blakedrumm.com/blog/set-and-check-user-rights-assignment/
