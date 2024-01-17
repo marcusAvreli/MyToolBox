@@ -1,0 +1,2 @@
+https://github.com/mirabilos/shellsnippets/blob/abade56acb9562dad18b04c01abb52c43d94a58f/mksh/teckids/advent/parsecsv.sh
+https://github.com/acidprime/CODFish/blob/93e091c6b3a9ff04f79885565982a11d19dccc14/codfish.sh
