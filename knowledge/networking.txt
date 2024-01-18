@@ -15,3 +15,7 @@ https://datatag.web.cern.ch/howto/tcp.html
 https://blog.cloudflare.com/when-the-window-is-not-fully-open-your-tcp-stack-is-doing-more-than-you-think
 
 
+
+https://stackoverflow.com/questions/51614838/what-could-cause-software-to-run-slower-on-better-hardware
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/power_management_guide/cpufreq_governors
+https://unix.stackexchange.com/questions/182696/how-to-get-current-cpupower-governor
