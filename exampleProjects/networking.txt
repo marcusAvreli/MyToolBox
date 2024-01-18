@@ -1,3 +1,0 @@
-https://blog.packagecloud.io/illustrated-guide-monitoring-tuning-linux-networking-stack-receiving-data/
-https://blog.packagecloud.io/monitoring-tuning-linux-networking-stack-receiving-data/
-https://stackoverflow.com/questions/9153566/difference-between-push-and-urgent-flags-in-tcp

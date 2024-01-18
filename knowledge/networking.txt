@@ -1,0 +1,17 @@
+https://blog.packagecloud.io/illustrated-guide-monitoring-tuning-linux-networking-stack-receiving-data/
+https://blog.packagecloud.io/monitoring-tuning-linux-networking-stack-receiving-data/
+https://stackoverflow.com/questions/9153566/difference-between-push-and-urgent-flags-in-tcp
+
+
+https://asktom.oracle.com/ords/asktom.search?tag=speed-of-clob-vs-long
+https://access.redhat.com/discussions/3945781
+https://adil.medium.com/why-do-you-need-the-tcp-window-size-ec11036e5e51
+https://www.bartleby.com/subject/engineering/computer-science/concepts/transmission-delay
+
+https://stackoverflow.com/questions/51614838/what-could-cause-software-to-run-slower-on-better-hardware
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/power_management_guide/cpufreq_governors
+https://datatag.web.cern.ch/howto/tcp.html
+
+https://blog.cloudflare.com/when-the-window-is-not-fully-open-your-tcp-stack-is-doing-more-than-you-think
+
+
