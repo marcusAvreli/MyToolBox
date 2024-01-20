@@ -351,7 +351,7 @@ Running the equivalent CLI commands will result in an error.
 
 ==========================================================================================
 Some packages were added. Please run "npm install".
-
+https://github.com/balajikirnakumar/angular4-bootstrap4-firebase-ecommerce-application/blob/master/.angular-cli.json
 https://coderonfleek.medium.com/understanding-the-angular-boot-process-9a338b06248c
 https://www.dsebastien.net/2021-03-28-angular-application-bootstrap/
 //ANGULAR 4 SYSTEMJS
