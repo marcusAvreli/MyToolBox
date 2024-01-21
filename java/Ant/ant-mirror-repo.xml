@@ -17,3 +17,11 @@
 
 
 
+<!--
+https://www.lorenzobettini.it/2012/11/mirror-eclipse-repositories-with-p2-mirror-ant-task/
+
+/path/to/eclipse -noSplash \
+   -application org.eclipse.ant.core.antRunner \
+   -buildfile mirror-orbit.xml \
+   -Dtarget.dir=$HOME/eclipsemirror
+-->
