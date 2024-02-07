@@ -218,6 +218,13 @@ https://github.com/zazaulola/xel-extra/blob/master/elements/x-input.js
 https://github.com/easylogic/gradientpicker/blob/main/config/rollup.config.prod.js
 https://trailheadtechnology.com/create-and-compile-web-components-in-angular-projects/
 .bootstrapModule(ClientFormElementModule)
+constructor(injector: Injector) {
+    const ngElement = createCustomElement(ClientFormComponent, {
+      injector,
+    });
+
+    customElements.define('custom-client-form', ngElement);
+  }
 https://github.com/CaptainCodeman/hn-webcomponents/tree/c3b14afa5db2cb5d3eb62f36252c973858a285fc?tab=readme-ov-file
 https://github.com/CaptainCodeman/gif-player/tree/54234731e58c579eda454bd5fb52eb453bd5abe5
 https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements
@@ -436,6 +443,8 @@ https://github.com/HTMLElements/smart-webcomponents/blob/dcbb7cf5436af30f9e9de52
 https://github.com/pavlism/karaoke/blob/fe791fa336a87efdeb35d4875a1f7d420bb46bf4/public/components/mrp-form.js#L28
 https://github.com/pavlism/karaoke/tree/fe791fa336a87efdeb35d4875a1f7d420bb46bf4/public/components (xlsx)
 https://github.com/Dabolus/vanilla-pwa/tree/bd03984a2abbcd179cfd9ecd392477bc240fd966/components/dynamic-data
+
+
 HTMLCollection
 customElements
 middleware
@@ -464,4 +473,191 @@ Just some text here
 https://github.com/vaadin-learning-center/learning-content/blob/73539a768ab1a8cb22ee681232cce777239ad286/learn/tutorials/lit-element/04__navigation-and-code-splitting/content.adoc#L148
 https://github.com/Esri/calcite-design-system/tree/40ba6f031c256a73dd8ada5526bd37094b8925c9/packages/calcite-components/src/components
 https://github.com/JoernT/Fore/tree/843123286f8b88fe81ce47ced1122775e5e05bf6
+https://github.com/fis-components/components/tree/master
+https://github.com/elmsln/lrnwebcomponents/tree/6ff6962b0eec9688d507b44a5d77938ec08e3bb1/elements
 https://github.com/lekoala/formidable-elements/blob/d2a37318847835935b112f3cf9e0128206426550/package.json
+//injectStyles.js
+//bootstrap
+https://github.com/kiwix/kiwix-js/blob/11138ff5ca3c16f847e68864311d36b0b3ca3e63/rollup.config.js
+https://github.com/videojs/video.js/blob/6fe68e5dad6853d8f0eaf45534873607c1b32277/rollup.config.js#L18
+
+//babel external tabulator
+https://github.com/rollup/rollup-plugin-babel/issues/162
+https://github.com/digital-blueprint/dispatch-app/blob/f5562bf8f8c728a6082b2136fe7440ff0cb9d9e5/rollup.config.js#L17
+https://github.com/geospiza-fortis/owlrepo-client/blob/526d721ea7efef0e07f69772d4b59cae4e69ac79/vite.config.js#L6
+
+https://github.com/lucavallin/verto/blob/aab7dfaa007760317644be8ee31180536e45a2f8/config.json#L1123
+config.json
+https://github.com/autodesk-platform-services/aps-extensions
+https://github.com/btargac/excel-parser-processor/tree/c7e95eabad2f73fcb813b58f236155bd01911847/src
+https://github.com/statgen/bravo_vue/issues/1
+
+rollup class export default class Bundler license bunner
+https://github.com/diopputra/NS-Optimizer/blob/eeffba88112290e136f6b6f265b55f03db28d6e7/script/libs/tabulator-master/build/Bundler.js#L9
+https://github.com/jorgeatgu/ringlera/tree/c2f6f72fee6afe70ac6c7940b5d497830125b7ed
+
+const fontMagician = require('postcss-font-magician'); magician
+https://github.com/briansunter/app-review-dashboard/blob/b4e3ba7ffc6c1bc8e21d771baf7c1231670972cc/rollup.config.js#L12
+
+// removes all tabulator css except for tabulator.min.css and tabulator_semanticui.min.css
+https://github.com/mozilla/fireblocks/blob/3f0c3c69cbab9805040150d4ef25e144df167d46/builder_helper.js#L56
+
+//css.js tabulator
+https://github.com/BiologicalRecordsCentre/brc-ds-eval/blob/4a1ed461fcca03f4aefecdd3c466a0f7c96a528b/src/phenology.js
+
+//generateTLSConfig
+https://github.com/digital-blueprint/toolkit/blob/17341cca68d9b144792026fa25667dcb499428f4/rollup.utils.js
+
+
+
+https://github.com/tastejs/todomvc/blob/efafb5843a52fad8b465f642ee8d5d980ad1ac4d/examples/web-components/src/components/todo-bottombar/todo-bottombar.component.js
+https://github.com/textpattern/textpattern
+https://github.com/cvisionai/tator/tree/97d977570b9ba7c0f3350bfbbc84f324c00f9a79/ui/src/js/components
+
+https://github.com/AdguardTeam/Scriptlets/tree/d71db5c457af311696cf7b96c4306a2e2ece83d1/src
+rollup
+https://github.com/mockingbot/mb-color-picker/blob/ef347f1120939a50a4f3ce52abc879b3249914f4/src/DropDownColors/styles.js
+import url from 'rollup-plugin-url'
+import calc from 'postcss-calc'
+import cssvariables from 'postcss-css-variables'
+
+"modular-css-rollup": "^14.1.0",
+
+npm i modular-css-rollup@^14
+
+
+npm i postcss-calc@6.0.1
+    "postcss-css-variables": "^0.9.0",
+    "postcss-import": "^12.0.0",
+    "postcss-nested": "^4.1.0",
+    "postcss-url": "^8.0.0",
+	
+
+   "postcss-cssnext": "^2.9.0",
+    "postcss-nested": "^1.0.0",
+    "postcss-simple-vars": "^3.0.0",
+	https://github.com/linares/bigpipe/blob/c653a223d1c023851170e20bf324358f836d68a8/bigpipe.js#L345
+	
+	rollup.styles.js
+	https://github.com/Tencent/cherry-markdown/blob/afbf4a101bc6bef87a5f291044cc71b684b2209a/build/rollup.core.config.js
+	
+	gulp build rollup.dev prod
+	https://github.com/priley86/pf4-webcomponents-poc/blob/b2f81bdcbc088899651eeee8b2d0caef70917561/rollup.config.dev.js
+	https://github.com/buttons/github-buttons/blob/789e63cc5343dfaa884423902ebdfdc60038956e/rollup.config.mjs#L51
+	plugin styles
+	https://github.com/Shopify/polaris/tree/88c90b2dc50be0ef3ddf5002c0fba18bc1f128e8/polaris-react/config/rollup
+	
+	https://github.com/search?q=repo%3Agimenete%2Fcomponents%20index.scss&type=code
+	
+	https://github.com/open-nomie/nomie5/blob/401f9c720767851511b3ac5d29c5f3b20d5b877c/rollup.config.js#L71
+	
+	https://github.com/brick-design/brick-design/blob/9efc0a954366d5ef98eb3ec95b21bc91fc7e8999/scripts/create.rollup.config.js#L16
+	
+	https://github.com/schrodinger/fixed-data-table-2/blob/081b363ac6f1a733e1c395e29dc891969e3a7e67/build_helpers/cssRollup.config.js
+	
+	https://github.com/globeandmail/chart-tool/tree/master/src
+	
+	https://github.com/ddamato/damato.design/blob/7882b101b2b22b5086bb91819172d870882ef39e/bin/bundle.js
+	
+	https://stackoverflow.com/questions/55080103/how-to-separate-web-components-to-individual-files-and-load-them
+	
+	https://medium.com/@PepsRyuu/why-i-use-rollup-and-not-webpack-e3ab163f4fd3
+	
+	https://github.com/hironichu/nexplorer/blob/689b1b8f7b33d020141e0abe84ee688e6969ebba/src/components/Explorer.js#L212
+	https://github.com/hashicorp/consul/blob/602e3c4fd50488c9044679c32364550bc7d49b29/ui/packages/consul-ui/ember-cli-build.js#L126
+	https://github.com/django-cms/django-cms/blob/9e56597077e7726f7e98c4fc0a5e2984d6303878/gulpfile.js#L146
+	
+	Compiles all SCSS partials to CSS
+	https://github.com/ampproject/amp.dev/blob/15eff97e222e0a0af8f243ba0ca873041647da83/gulpfile.js/build.js#L44
+	
+	https://stefaniefluin.medium.com/the-new-sass-module-system-out-with-import-in-with-use-e1bd8ba032d0
+	
+	//sso-profile extract to separate file
+	https://github.com/uktrade/great-cms/blob/23a600632245337c53595334114be333538b115b/react-components/webpack.config.js#L91
+	
+	https://github.com/SolarBear/Numenera-FoundryVTT/blob/9943fe54aa6256e017de8a50dd289c26d6f376ae/rollup.config.js#L4
+	
+	https://github.com/code-monki/central-supply-catalog/blob/21f820061d3b110d15e3e4bb8cbcfba7de0c39b0/.eleventy.js#L92
+	
+	https://github.com/zkreations/hamlet/blob/e5e89f9c64572ad2274f38883f0394e03b53e564/src/views/blank.hbs
+	https://github.com/guardian/interactive-cancer-town/tree/bbd481212d5d49a0349fc75358749f8952180f01/src/js
+	icon.scss,postcss-modules-scope,postcss-modules-values,postcss-modules-parser
+	https://github.com/marcintreder/polaris-react/blob/71fb4730dff2b5a24dc70a422d2975dad161b2f8/config/rollup/plugins/styles.js#L13
+	https://github.com/aquent/vt-pattern-library/blob/1355a7f19a1e93172d6fe2cb345d64f895b21521/rollup.config.js#L11
+	
+	
+	// .scss/.sass processor
+	https://github.com/ruige24601/jsv-compiler/blob/997b2c8f677438799445718621c852979100cc66/src/vue-pkg/compiler-sfc.cjs.js#L849
+	magic-string clientInjections css.js
+	https://github.com/Shouhua/note/blob/80d3f2de29e4cff2340d62911492b2b1e7bbfc6d/demo/rollup-demo/rollup-from-scratch/lib/bundle.js
+	
+	//postcssModules
+	https://stackoverflow.com/questions/60712566/nodejs-script-that-compiles-scss-files-fails-because-of-postcss-rule-for-undefin
+	https://stackoverflow.com/questions/48730491/is-there-a-postcss-plugin-which-compiles-scss-to-cssgulp
+	getJSON
+	https://github.com/VKCOM/VKUI/blob/09bf5d708c21d7c081663aa46b024cc5582d45dc/packages/vkui/scripts/postcss.js#L67
+	
+	https://github.com/prrashi/rateYo/blob/fd0b51fa62384307c48b03bd4a9777b3b3622efd/config/rollup.config.js#L4
+	https://github.com/arxpoetica/stallion/blob/44fdfad775b0cfbd019ae1c6feb8720de2b5957c/src/_server/build/rollup.preprocess.js#L4
+	
+	styleInjector: `~${resolve('build/style-injector.mjs')}`,
+	https://github.com/rei/rei-cedar-vue-2/blob/79a31718ccc4efa5235ae196a9ff625ccaa522ea/build/rollup-plugins.js#L83
+	
+	https://github.com/mediacms-io/mediacms/tree/c5047d8df8686d75100e5099489be4fd1bf5f733/frontend/packages
+	
+	https://forum.freecodecamp.org/t/separate-css-files-from-scss-webpack-build/338000
+	//precss
+	https://github.com/acanedo/d2b/blob/9710bbe69fd637969e21297d3b2314732bd91c10/rollup.config.js#L5
+	
+	  swDest: "dist/service-worker.js",
+	https://github.com/Krigu/lurinfacts/blob/fc3cc2b83e3aa23fb90c6c9f4f0039b7bb1333cd/rollup.config.js#L34
+	
+	processAsCssModule
+	https://github.com/foxford/ulms-components/blob/2cff7b1a21915e9552059789b559444ae02bee5e/rollup.d/rollup.config.js#L35
+	// resolve node_modules, @import '~normalize.css/normalize.css'
+	https://github.com/andrewwhitehead/oceanfront/blob/c5d29e745eb29586494ed48bff409d620cba135c/packages/oceanfront/rollup.config.js#L147
+	https://github.com/stupidguy176/change-language/blob/969b187b5a80e5da70da41d8e790290d1a051a73/lib-change-language/rollup.config.js#L9
+	base 64
+	https://github.com/LeoCpii/heatmaps-client/blob/69e23d3cdb63c0256ff949e50e8bcf89ff7c4aa7/packages/shared/ui/rollup.config.js#L26
+	
+	
+	https://github.com/ProgramistaZpolski/boilerroom/blob/master/generator.js
+	## LINTERS
+.babelrc      text
+.csslintrc    text
+.eslintrc     text
+.htmlhintrc   text
+.jscsrc       text
+.jshintrc     text
+.jshintignore text
+.prettierrc   text
+.stylelintrc  text
+
+//i18n
+https://github.com/opencollective/opencollective-frontend/blob/a63f7afb66413c451c7e89ffb92ac9576b054224/lib/guest-accounts.js
+
+https://github.com/zotero/zotero/blob/147ed028dfe237087998b233c55eb7b8934d4710/.eslintrc
+https://github.com/iamparnab/html-custom-elements
+https://github.com/imdwpeng/bpmn-editor/blob/a7ce5cc511262d5803f27b2a514a0e5e76053397/custom-elements/src/containers/modeler/customElements/CustomRenderer.js#L16
+https://github.com/MasuqaT-NET/BlogExamples/blob/cd9e0fc4b8407b163d1566427f433a2813d06118/Web/WebComponents/lit-html-with-scss/src/components/scss-button.js#L6
+
+https://github.com/MasuqaT-NET/BlogExamples/blob/cd9e0fc4b8407b163d1566427f433a2813d06118/Web/WebComponents/lit-html-with-scss/src/components/scss-button.js#L6
+
+stylelintrc  :host([repo-lang="SCSS"]) .lang-circle {
+https://github.com/search?q=repo%3Aelmsln%2Flrnwebcomponents+stylelintrc&type=code
+
+https://github.com/mrlvsb/kelvin/blob/f2d8b5e9204d886a7e1d933f1b298e9afa9bf55c/frontend/rollup.config.js#L4
+
+https://github.com/mrlvsb/kelvin/blob/f2d8b5e9204d886a7e1d933f1b298e9afa9bf55c/frontend/rollup.config.js#L4
+_initShadowRoot
+https://github.com/Maps4HTML/Web-Map-Custom-Element/blob/8f55bcc456f0094bff367b75fc08e33a5c407bfc/src/web-map.js#L212
+
+https://github.com/knownasilya/nomad/blob/6ceee420e4cbab003bb29919280147e32bddf4de/scripts/tasks/build/bundle.js#L5
+
+https://github.com/foundation/foundation-sites/blob/7f74c154cdebb0d1496978f7e09cfe5cb92c3324/gulp/tasks/sass.js#L9
+
+https://github.com/guardian/frontend/blob/158983cced9e6220ad73b1b1c3eb90fa6e123be0/tools/compile-css.js#L14
+
+https://github.com/jiazengp/css/blob/2454d98983f83060adb4654e13314acb6b1eeea6/postcss.config.cjs#L4
+
+https://github.com/vuetifyjs/vuetify/blob/d1251f50f2d85b34c06c65895bd2d2b82bdd412e/packages/vuetify/build/rollup.config.mjs#L8
