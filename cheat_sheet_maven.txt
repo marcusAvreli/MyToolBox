@@ -6,7 +6,8 @@ export M2_HOME=/Users/xxx/sdk/apache-maven-3.0.5
 export M2=$M2_HOME/bin
 export MAVEN_OPTS="-Xmx1048m -Xms256"
 export PATH=$M2:$PATH
-
+//https://stackoverflow.com/questions/49398894/unable-to-compile-simple-java-10-java-11-project-with-maven
+//https://winterbe.com/posts/2018/08/29/migrate-maven-projects-to-java-11-jigsaw/
 
 +-----------------------------------------------------------+
 |															|
@@ -66,6 +67,15 @@ mvn archetype:generate -DgroupId=idmx3RestFrontEnd  -DartifactId=idmManager3 -Da
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
   
+   <properties>
+    
+    
+	 <maven.compiler.release>11</maven.compiler.release>
+	 <java.version>11</java.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+    
+  </properties>
   
 +-----------------------------------------------------------+
 |															|

@@ -1,0 +1,7 @@
++-----------------------------------------------------------+
+|															|
+|		FIND CLASSES IN JARS								|
+|															|
++-----------------------------------------------------------+
+
+find . -name '*.jar' -exec sh -c 'export i; for i do     zipinfo -1 "$i" | awk '\''/SignonEJB.*\.class$/{       print ENVIRON["i"] ": " $0}'\''; done' sh {} +

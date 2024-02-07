@@ -135,7 +135,7 @@ Batch
 	ECHO Finished execution.
 	PAUSE
 
-Find classes in jars (did not work in the past)
+Find classes in jars
 for /R %G in (*.jar) do @jar -tvf "%G" | find "ClassName" > NUL && echo %G
 
 +-----------------------------------------------------------+
