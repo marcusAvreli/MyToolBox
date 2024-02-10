@@ -661,3 +661,43 @@ https://github.com/guardian/frontend/blob/158983cced9e6220ad73b1b1c3eb90fa6e123b
 https://github.com/jiazengp/css/blob/2454d98983f83060adb4654e13314acb6b1eeea6/postcss.config.cjs#L4
 
 https://github.com/vuetifyjs/vuetify/blob/d1251f50f2d85b34c06c65895bd2d2b82bdd412e/packages/vuetify/build/rollup.config.mjs#L8
+
+//buildStart buildEnd get-plugin get-banner
+https://github.com/walrusjs/pansy/blob/b9813e146dc80f15c923f813552483050d092791/src/get-plugin.ts
+
+//  bundleCssConfig
+https://github.com/bitfinexcom/ufx-ui/blob/29aa000a6b161642fd8f4ff496a60513b646dab8/packages/core/rollup.config.js#L171
+
+
+//useStyleSheetTransform useTypescriptXTransform
+https://github.com/eswat2/stencil-tailwind-plugin/blob/b1d5e1e83f48552593854882708611d4a4e0de33/src/plugin.ts
+
+https://github.com/guybedford/rollup-sce-prototype/blob/54a420773f6b93ce2ab44315f1cdf07849264673/compilers/js.js
+
+https://github.com/Shopify/polaris/blob/main/polaris-react/config/rollup/plugin-styles.js#L127
+
+//pipeline
+https://github.com/playcanvas/super-splat/blob/84dcd4cee4b477da177e01593e506d5a19d5e284/rollup.config.mjs#L56
+
+  //pipe injectTransform({ extensions, routix }),
+https://github.com/rixo/svench/blob/ce73a3f7267eb71b4fa0398fc7244e5a7fa580eb/packages/svench/lib/rollup-plugin.js#L182
+//sassPlugin 
+https://github.com/ghettovoice/ol-mapscale/blob/6c3b2ed2d7c494290a2658b58bb9773b95cc86d6/build/util.js#L58
+
+
+//alias
+https://github.com/altai-ui/qui-max/blob/c1f71b3ac7f5bbdc35e0c1d85312e56d928770a7/vite.config.ts#L64
+
+
+/*
+    const { css, map } = await renderSass(options);
+            const cssText = css.toString().trim();
+*/
+https://github.com/phatnguyenuit/learn-rollup-basic/blob/b31c5b0802018b8765bd5f16d24599a171ecd935/custom-plugins/rollup/rollup-plugin-import-sass.js#L3
+
+https://github.com/peterbe/wmr/blob/7443aca5c6162f0a4850f798fcd799f02ff0eb25/packages/wmr/src/lib/plugins.js#L5
+https://github.com/peterbe/wmr/blob/7443aca5c6162f0a4850f798fcd799f02ff0eb25/packages/wmr/src/plugins/sass-plugin.js#L139
+
+https://github.com/egoist/rollup-plugin-postcss/blob/71593d9f4698ce564482b86cc2fa7f69626e8b8a/src/index.js#L79
+
+https://github.com/Zeki411/betaflight-configurator/blob/38688be1f817f80f952c5233625612c6dc550cf6/gulpfile.js#L1038
