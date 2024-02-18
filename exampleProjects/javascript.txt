@@ -648,7 +648,8 @@ https://github.com/search?q=repo%3Aelmsln%2Flrnwebcomponents+stylelintrc&type=co
 
 https://github.com/mrlvsb/kelvin/blob/f2d8b5e9204d886a7e1d933f1b298e9afa9bf55c/frontend/rollup.config.js#L4
 
-https://github.com/mrlvsb/kelvin/blob/f2d8b5e9204d886a7e1d933f1b298e9afa9bf55c/frontend/rollup.config.js#L4
+https://github.com/mrlvsb/kelvin/blob/f2d8b5e9204d886a7e1d933f1b298e9afa9bf55c/frontend/rollup.config.js
+#L4
 _initShadowRoot
 https://github.com/Maps4HTML/Web-Map-Custom-Element/blob/8f55bcc456f0094bff367b75fc08e33a5c407bfc/src/web-map.js#L212
 
@@ -701,3 +702,6 @@ https://github.com/peterbe/wmr/blob/7443aca5c6162f0a4850f798fcd799f02ff0eb25/pac
 https://github.com/egoist/rollup-plugin-postcss/blob/71593d9f4698ce564482b86cc2fa7f69626e8b8a/src/index.js#L79
 
 https://github.com/Zeki411/betaflight-configurator/blob/38688be1f817f80f952c5233625612c6dc550cf6/gulpfile.js#L1038
+
+
+
