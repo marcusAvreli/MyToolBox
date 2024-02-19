@@ -92,3 +92,24 @@ https://github.com/benjaminapetersen/rhelements/blob/0b5af2e312b0dcb36f959934cee
 https://github.com/AdityaOli/freeCodeCamp-1/blob/ccb6a8cc1b98b3411a3a00707609f7a19de8c6e0/curriculum/test-challenges.js
 
 https://github.com/jcdalton2201/tube-timetable/blob/master/rollup.config.js#L14
+
+
+
+ // NOTE: styles plugin runs 2 times. First time it applies all the PostCSS transforms
+    styles({
+      mode: 'emit',
+      config: true,
+      minimize: false
+    }),
+
+    // Second time it applies CSS Modules, extraction and minification. See why https://youtrack.jetbrains.com/issue/RG-2171#focus=Comments-27-5632562.0-0
+    styles({
+https://github.com/JetBrains/ring-ui/blob/c6a0c8d97f12977954b3a05eaebad3e4edf77bac/rollup.config.js#L46
+
+
+const cssLangs = `\\.(css|less|sass|scss|styl|stylus|pcss|postcss)($|\\?)`
+const postcssrc = require('postcss-load-config')
+https://github.com/Shouhua/note/blob/80d3f2de29e4cff2340d62911492b2b1e7bbfc6d/demo/fakeVite2/lib/node/plugins/css.js#L11
+
+
+https://github.com/puppycodes/blueprint/blob/0593d224701e8609dc87c938edc551d0ea1d15b1/packages/core/src/common/_icons.scss#L3
