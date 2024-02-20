@@ -1,0 +1,26 @@
+package.json
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"postcss": "postcss"
+	},
+
+
+postcss.config.js
+	module.exports = {
+	  parser: 'postcss-scss',
+	  map: {
+		sourcesContent: true,
+		annotation: true
+	  },
+	  plugins: {
+		'postcss-node-sass': {
+		//  includePaths: ['node_modules'],
+		  outputStyle: 'compressed'
+		},
+		
+		'autoprefixer': {}
+	  }
+	}
+
+
+postcss  src/index.scss --map --output ./css/index.css
