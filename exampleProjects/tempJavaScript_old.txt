@@ -1,0 +1,165 @@
+https://github.com/HelixDesignSystem/helix-ui/tree/82967eda7ee1542c54312a9c127c262256ad7b3c/tasks/rollup
+
+
+
+/*
+"build": "npm run build:clean && npm run build:library && npm run build:themes",
+"build:clean": "node scripts/clean.js",
+"build:library": "rollup -c",
+"build:themes": "node scripts/themes.js",
+"start": "rollup -c -w",
+*/
+https://github.com/advanced-cropper/react-advanced-cropper/blob/3c36455dd29ef4f9a872ff8460235db627ff7c62/scripts/themes.js#L2
+
+
+https://github.com/GianlucaGuarini/riot-app-example/blob/0113a60ca678c7d3c5cc2b44bd5c00a7859fd2ae/server/middlewares/sass.js
+
+
+//separate compile
+https://github.com/wjohnsto/simple-site/blob/0172220075c4b12b00844fbc73b8afcb231b4bcf/build/scss.js#L5
+
+
+const target = process.argv[3] || 'out.css';
+const out = compileCSS(process.argv[2], target);
+https://github.com/ekafyi/web.dev/blob/61e8c3aea49d236d08d77b71854b58113a895c2f/compile-css.js#L73
+
+
+https://github.com/wjohnsto/simple-site/blob/0172220075c4b12b00844fbc73b8afcb231b4bcf/server/utils/index.ts#L123
+
+
+//https://github.com/Abhi2707/gsoc18_adaptive_images/blob/28dfe8afd50be907851406e2059680f7ecccb79b/build/build-modules-js/compilecejs.js#L8
+//https://github.com/michalzalobny/plain-page-transition/blob/main/rollup.config.js
+//https://github.com/fitzgeraldsteele/design-system/blob/87207af129f5ca6fcf9a21e17dcbc1e6850ffe80/scripts/dist.js#L38
+//https://github.com/YamazakiYasuhiro/d3-mitch-tree/tree/9692de4af5a8244482baf93c80d2bc63732b7e83
+//https://github.com/YamazakiYasuhiro/d3-mitch-tree/blob/9692de4af5a8244482baf93c80d2bc63732b7e83/build/build-sass.js#L58
+
+/*
+export default components.map(([from, to]) => ({
+  input: from,
+  output: {
+    // sourcemap: true,
+    format: "iife",
+    name: "Button",
+    file: to
+  },
+  plugins
+}));
+*/
+
+https://github.com/aaronshaf/panda-ui/blob/9d952b3424594d1846cd4fdaf646a66ce302de66/rollup.config.js#L5
+
+
+
+//locales //layouts
+https://github.com/fitztrev/nodejs.org/blob/fecb2644cecb1715c1bfb5fe29a547359e5f3622/build.js#L281
+
+
+https://github.com/jayfid/vinyl/blob/fd494a30638131e468b74161c55d4613e48a26b4/bin/build.js#L92
+
+//cli keystore
+https://github.com/VladLasitsa/kibana/blob/948bfa9950fb65ed07f5b42f53a9e78e2e23709b/src/legacy/server/sass/build.js#L139
+
+
+https://github.com/PSUGraphicDesign/fresh/blob/e4cc1b7de8ca7c9f5ec3da8248535447088cf2a8/tools/styles.js#L2
+
+
+
+
+/*
+   await rm('./css', {recursive: true, force: true});
+    await mkdir('./css', {recursive: true});
+
+    const files = await readdir('./styles/');
+
+    const promises = files.map((file) => generateCSS({fileName: path.parse(file).name}));
+    await Promise.all(promises);
+
+*/
+https://github.com/WatchGamingVideos/deckdeckgo/blob/47914ebb847546f1d84de90e8ad7959483bd0faa/utils/kit/buildCSS.js#L21
+
+
+
+https://github.com/orneryd/web-components/blob/f9257097f9c92a108ba2f94759acf6d329f303ae/src/loaders/html-loader.js#L137
+
+
+https://github.com/ptzagk/rollup-plugin-scss-smart-asset/blob/9dc02f26f419954be399257e8887435af0a90ac6/lib/index.js#L38
+
+https://github.com/znewsham/reval/tree/b6588bb9af9aa074b657f2c753cf9e202998ecc0/packages/qualia_reval/server/plugins
+
+
+https://github.com/benjaminapetersen/rhelements/blob/0b5af2e312b0dcb36f959934ceed7cca5973bb0f/elements/cp-accordion-panel/gulpfile.js#L9
+
+https://github.com/AdityaOli/freeCodeCamp-1/blob/ccb6a8cc1b98b3411a3a00707609f7a19de8c6e0/curriculum/test-challenges.js
+
+https://github.com/jcdalton2201/tube-timetable/blob/master/rollup.config.js#L14
+
+
+
+ // NOTE: styles plugin runs 2 times. First time it applies all the PostCSS transforms
+    styles({
+      mode: 'emit',
+      config: true,
+      minimize: false
+    }),
+
+    // Second time it applies CSS Modules, extraction and minification. See why https://youtrack.jetbrains.com/issue/RG-2171#focus=Comments-27-5632562.0-0
+    styles({
+https://github.com/JetBrains/ring-ui/blob/c6a0c8d97f12977954b3a05eaebad3e4edf77bac/rollup.config.js#L46
+
+
+const cssLangs = `\\.(css|less|sass|scss|styl|stylus|pcss|postcss)($|\\?)`
+const postcssrc = require('postcss-load-config')
+https://github.com/Shouhua/note/blob/80d3f2de29e4cff2340d62911492b2b1e7bbfc6d/demo/fakeVite2/lib/node/plugins/css.js#L11
+
+
+https://github.com/puppycodes/blueprint/blob/0593d224701e8609dc87c938edc551d0ea1d15b1/packages/core/src/common/_icons.scss#L3
+
+//node-sass loaders less and sass
+https://github.com/intoli/antd-scss-theme-plugin/blob/47eb05bfd97efe1eb4d1ef3f994f0092de0fac44/src/antdSassLoader.js#L27
+
+//check sass build sass yield 
+//https://github.com/alibaba-fusion/next/blob/db57e1f8335118996e57fd98d58a5a61652ca8d8/scripts/check/build-sass.js#L50
+
+
+ logger.error(`\n/~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`);
+      logger.error(`Processing Step: SCSS compilation`);
+      logger.error(`Unable to compile ${file.importPath}\nLine: ${adjustedLineNumber}, Column: ${err.column}\n${err}`);
+      logger.error(`\n/~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`);
+https://github.com/akanix42/meteor-css-modules/blob/98e335b45f6ebd23f4dc81943e6d57af2b016021/scss-processor.js#L7
+
+ejs: "Ejs",
+md: "Markdown",
+jstl: "JavaScriptTemplateLiteral",
+html: "Html",
+hbs: "Handlebars",
+mustache: "Mustache",
+haml: "Haml",
+pug: "Pug",
+njk: "Nunjucks",
+liquid: "Liquid",
+"11ty.js": "JavaScript",
+sass: "Sass"
+https://github.com/sflanker/eleventy/blob/paulwh/src/Engines/TemplateEngine.js#L8
+
+
+    "node-sass-more-utils": "1.0.2",
+    "node-sass-utils": "^1.1.2"
+	
+//compileToCSS 
+https://github.com/Ciuga68/cxjs/blob/a3d083781ec6b2b01b5b6ebd1215107b7e9e8ada/packages/cx/build/rollup-plugin-scss.js#L17
+
+https://github.com/stencila/hub/blob/b0edf060f4cc5494eef81fce62a563bd5b4e8e31/manager/postcss.config.js#L7
+
+https://github.com/guardian/frontend/blob/429898f79b4bb2a5b41df0f896af7761be762c1f/tools/compile-css.js#L14
+
+
+
+compileCoffee (source_path, dest_path, project_directory, cb) {
+    SDKError.log(SDKError
+	
+https://github.com/marquee/static-sdk/blob/774e38e9373b042db78035ecaa6bc0b49fa81237/compiler/compileAssets.js#L12
+	
+https://github.com/panoply/rollup-plugin-scss/blob/38310398cb88ccc8883d9bd68a0096bdc775f349/index.es.js#L22
+	
+//injectStyles 
+https://github.com/igorovic/11ty-boilerplate/blob/53de688b120db1b8bd39469e2962b3dc76a31192/11ty-plugins/minifyHtml.js

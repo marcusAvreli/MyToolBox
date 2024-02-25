@@ -1,3 +1,23 @@
+
+
+
+
+
+
+https://github.com/opentripplanner/OpenTripPlanner/blob/e5b943a4ad5ad1735b88f99cfd80cddb5bc1d0b6/ARCHITECTURE.md
+https://github.com/apiburn/tutorialapi/tree/833d2716329c7caff729123032139dd5b55e397f/tutorialapi-rest/src/main/resources
+https://github.com/search?q=repo%3Akkonstantine%2Ffili+spring&type=code
+https://github.com/theShus/WebProject/blob/eb72d46da419c28d5e025b2442db944b31834269/src/main/java/rs/raf/repositories/SQLRepos/SqlCategoryRepository.java
+https://github.com/manishprivet/airbyte/blob/0192cb343d8933789cbb59cc303361d378d9356c/airbyte-server/src/main/java/io/airbyte/server/ServerApp.java#L88
+https://github.com/dongxiaoman/incubator-pinot/blob/8cdae925020dc8ae32777d3e6205340d22bac7fd/pinot-broker/src/main/java/org/apache/pinot/broker/broker/BrokerAdminApiApplication.java#L49
+https://github.com/apache/drill/blob/051d0595d1bccacca815587c66de491c843148d0/exec/java-exec/src/main/java/org/apache/drill/exec/server/rest/DrillRestServer.java#L191
+https://github.com/digital-botanical-gardens-initiative/LinkedDataHub/blob/fb40b53d5a759fecff3738ee50595905f0f8a39f/src/main/java/com/atomgraph/linkeddatahub/Application.java#L233
+https://github.com/tuwiendsg/RAHYMS/blob/7404db72546a819817585848e6dc2a8ecefd095c/hcu/hcu-rest/src/main/java/at/ac/tuwien/dsg/hcu/rest/rs/TaskRuleRestService.java
+https://github.com/tapis-project/tapis-files/blob/1a60c4f0b463091979aa90761d578e26f8420142/api/src/main/java/edu/utexas/tacc/tapis/files/api/BaseResourceConfig.java
+
+
+
+
 https://github.com/MarcusJyl/SecurityProject
 
 https://github.com/liuyajms/Repo/tree/e4bf10b82a2adf9fd7e61c403e5955503ff40eff/base.war
