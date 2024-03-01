@@ -1,3 +1,21 @@
++-----------------------------------------------------------+
+|															|
+|	Windows environment variables							|
+|															|
++-----------------------------------------------------------+
+
+javac -cp .;C:\Users\User\.m2\repository\org\antlr\antlr4-runtime\4.9.3\antlr4-runtime-4.9.3.jar .\myAntlr3\*.java 
+C:\Users\User\.m2\repository\org\antlr\antlr4-runtime\4.9.3\antlr4-runtime-4.9.3.jar
+
+java -jar C:\Users\User\.m2\repository\org\antlr\antlr4-runtime\4.9.3\antlr4-runtime-4.9.3.jar -package myAntlr3 myAntlr3/*.g4
+
+https://gist.github.com/sharwell/4979017
+https://stackoverflow.com/questions/14926060/how-to-automatically-generate-lexerparser-with-antlr4-and-maven
+https://github.com/antlr/antlr4/blob/master/doc/java-target.md
+
+
+
+
 https://stackoverflow.com/questions/63887658/antlr4-project-directory-structure-issue
 
 https://sites.google.com/site/bingsite/web-development/java-goodies/antlr-parser
@@ -22,3 +40,5 @@ javac -cp .:antlr-4.8-complete.jar com/sevan/pond/*.java
 Fianlly, run TestRig as follows:
 
 java -cp .:antlr-4.8-complete.jar org.antlr.v4.gui.TestRig com.sevan.pond.Pond prog -gui
+
+
