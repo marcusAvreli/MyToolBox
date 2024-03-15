@@ -1,5 +1,17 @@
 
+//binder
+// Data tier
+// Service tier
+https://github.com/jenkins-infra/plugin-site-api/blob/4c28d164ac79c003865d6d3639da27a228d50c6f/src/main/java/io/jenkins/plugins/RestApp.java#L20
+https://github.com/AlanLiu-AI/jersey/blob/d2ac69b78bac928719481a5071cb57f2e531204f/core-server/src/main/java/org/glassfish/jersey/server/ApplicationHandler.java#L144
 
+//search string "extends ResourceConfig" "Filter" language:Java
+https://github.com/dremio/dremio-oss/blob/master/dac/backend/src/main/java/com/dremio/dac/server/DACAuthFilterFeature.java#L32
+https://github.com/logicalclocks/hopsworks/blob/fad2305d216d3855fd8725b87e2a0fc207322c14/hopsworks-ca/src/main/java/io/hops/hopsworks/ca/api/ApplicationConfig.java#L50
+
+
+
+https://github.com/rupurt/featurehub/tree/61f4c863c1d5ddad7f0540e6758175b24cdf49ac/backend/mr/src/main/java/io/featurehub/mr/auth
 https://github.com/gentics/cms-oss/blob/03a944210530e7ee3cde41a3345ef8d20b522d74/cms-core/src/main/java/com/gentics/contentnode/rest/configuration/RESTApplication.java#L2
 https://github.com/AppDirectory/gravitee-api-management/blob/6786c65b67c154b33bfed15d65f9681f505371d3/gravitee-apim-rest-api/gravitee-apim-rest-api-management/gravitee-apim-rest-api-management-rest/src/main/java/io/gravitee/rest/api/management/rest/resource/MetadataResource.java#L72
 https://github.com/winder/Universal-G-Code-Sender/blob/master/ugs-core/src/com/willwinder/universalgcodesender/model/BackendAPI.java

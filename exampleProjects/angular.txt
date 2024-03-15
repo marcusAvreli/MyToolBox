@@ -1,3 +1,9 @@
+generic ngrx 
+export type Actions = Array<Action>;
+https://github.com/WillemJiang/syndesis/tree/35e0a8363a4ae59e5eea6ef5befedaa470c66d90/app/ui/src/app/store
+https://github.com/mpetkov/ng2-finance/blob/1ffb9a08cb5b17ff1c20bd1cc3cc17153275de63/src/app/shared/core/state/api-state.ts#L2
+
+
 https://medium.com/@fwouts/a-quick-intro-to-antlr4-5f4f35719823
 
 https://github.com/Vishal1419/auth2-client/blob/master/src/serviceWorker.js

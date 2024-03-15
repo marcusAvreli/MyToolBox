@@ -20,4 +20,20 @@ Subsequent commits
 //https://stackoverflow.com/questions/50316434/add-all-files-using-git-add-except-one-directory
 git add . -- ':!somefolder' ':!**/some_deep_nested_folder/*'
 
++-----------------------------------------------------------+
+|															|
+|	idm plugin. gradle project								|
+|															|
++-----------------------------------------------------------+
 
+	git init
+	git remote add origin https://github.com/marcusAvreli/idmPlugin
+	echo "./ng2page/node_modules/" >> .gitignore
+	echo "./ng2page/dist" >> .gitignore
+	git add -- . :!"./ng2page/node_modules" :!"./ng2page/dist"	
+	git rm -r --cached ./ng2page/node_modules
+	git rm -r --cached ./ng2page/dist
+	git commit -am "initial_commit"
+	git push origin master
+	git push origin -d main
+	
