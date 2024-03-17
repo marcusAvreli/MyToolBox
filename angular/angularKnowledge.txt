@@ -35,7 +35,7 @@
 +-----------------------------------------------------------+
 
 	npm i @ngrx/core@1.2.0 @ngrx/effects@2.0.3 @ngrx/router-store@1.2.6 @ngrx/store@2.2.3 @ngrx/store-devtools@4.1.1 
-
+ 
 Errors
 Uncaught reflect-metadata shim is required when using class decorators
 In root/src

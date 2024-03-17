@@ -1,4 +1,13 @@
-generic ngrx 
++-----------------------------------------------------------+
+|															|
+|	ANGULAR 4 NGRX 											|
+|															|
++-----------------------------------------------------------+ 
+	ActionReducerMap
+	https://github.com/brandonroberts/store-verbose-umbrella/tree/72c61428ad3d95054eee83f774a297181c3b14f3
+	
+	
+	
 generic ngrx 
 export type Actions = Array<Action>;
 https://github.com/WillemJiang/syndesis/tree/35e0a8363a4ae59e5eea6ef5befedaa470c66d90/app/ui/src/app/store
