@@ -14,6 +14,7 @@
 +-----------------------------------------------------------+
 
 	https://stackoverflow.com/questions/48128847/how-to-install-angular-cli-locally-without-the-g-flag
+	https://stackoverflow.com/questions/43018777/angular-cli-different-versions-in-the-same-computer
 
 +-----------------------------------------------------------+
 |															|
