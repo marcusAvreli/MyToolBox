@@ -83,7 +83,7 @@ inside of engine tag
 	roleSubtree="true"
 	roleNested="true"
 />
-<Host name="novaiquit01.mehmail.loc" appBase="webapps">
+<Host name="<small letters host name>" appBase="webapps">
 	<Context docBase="base_path_to_app" path="/base_path_to_app">
 			<Valve className="org.apache.catalina.authenticator.SpnegoAuthenticator" storeDelegatedCredential="true"/>
 	</Context>
