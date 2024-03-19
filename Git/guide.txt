@@ -22,7 +22,7 @@ And to push changes to remote repo
 
 +-----------------------------------------------------------+
 |															|
-|					Windows`								|
+|					Windows									|
 |															|
 +-----------------------------------------------------------+
 
@@ -50,8 +50,9 @@ git clone <path.to.repo>
 Configure git to use certificate
 
 	Get certificate
-		echo -n | openssl s_client -connect www.github.com:443 | openssl x509 > /etc/openssl/certs/github.com.cert
-
+		by_openssl: echo -n | openssl s_client -connect www.github.com:443 | openssl x509 > /etc/openssl/certs/github.com.cert
+		by_java: keytool -J-Djava.net.useSystemProxies=true -printcert -rfc -sslserver www.github.com:443 > github.pem
+		
 	Set configuration
 		git config --global http.sslCAInfo /etc/openssl/certs/github.com.cert
 
@@ -89,3 +90,16 @@ Make authentication through browser
 https://stackoverflow.com/questions/50316434/add-all-files-using-git-add-except-one-directory
 git add -- . :!"node_modules"
 git add . -- ':!somefolder' ':!**/some_deep_nested_folder/*'
+
+
+
++-----------------------------------------------------------+
+|															|
+|					ERROR									|
+|															|
++-----------------------------------------------------------+
+fatal: unable to access '<http path to repo>.git/': SSL certificate problem: unable to get local issuer certificate
+
+19-03-2024 solved by install github.com certificate
+see: Configure git to use certificate
+
