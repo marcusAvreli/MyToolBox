@@ -1,7 +1,47 @@
++-----------------------------------------------------------+
+|															|
+|	SEVERAL NODE VERSIONS									|
+|															|
++-----------------------------------------------------------+
+
+	https://blog.logrocket.com/how-switch-node-js-versions-nvm/
+
+
++-----------------------------------------------------------+
+|															|
+|	SEVERAL ANGULAR VERSIONS								|
+|															|
++-----------------------------------------------------------+
+
+	https://stackoverflow.com/questions/48128847/how-to-install-angular-cli-locally-without-the-g-flag
+	https://stackoverflow.com/questions/43018777/angular-cli-different-versions-in-the-same-computer
+
++-----------------------------------------------------------+
+|															|
+|	ANGULAR 4												|
+|															|
++-----------------------------------------------------------+
+	@angular/cli : 1.4.10
+	node : 8.17.0
+
+
+	for Angular >= 6.0.0
+	import { of } from 'rxjs';
+
++-----------------------------------------------------------+
+|															|
+|	ANGULAR 4 NGRX SET										|
+|															|
++-----------------------------------------------------------+
+
+	npm i @ngrx/core@1.2.0 @ngrx/effects@2.0.3 @ngrx/router-store@1.2.6 @ngrx/store@2.2.3 @ngrx/store-devtools@4.1.1 
+ 
 Errors
 Uncaught reflect-metadata shim is required when using class decorators
 In root/src
 Update file polyfills.ts
+
+
 
 import 'zone.js';
 import 'reflect-metadata';
@@ -29,14 +69,13 @@ https://medium.com/@UpgradingAJS/the-ultimate-guide-to-setting-up-aot-for-ngupgr
 https://rahuulmiishra.medium.com/journey-to-adding-typescript-in-existing-react-project-bba6e88a9234
 
 node_modules\.bin\eslint --init
-+-----------------------------------------------------------+
-|															|
-|	ANGULAR 4												|
-|															|
-+-----------------------------------------------------------+
-@angular/cli : 1.4.10
-node : 8.17.0
 
+
+
+import { of } from 'rxjs/observable/of';
+
+for Angular <= 5.x.xx
+import 'rxjs/add/observable/of';
 
 npm i @ngrx/core@1.2.0 @ngrx/effects@2.0.3 @ngrx/router-store@1.2.6 @ngrx/store@2.2.3 @ngrx/store-devtools@4.1.1 @angular/http@4.4.7 --global
 npm i ag-grid@17.0.0 ag-grid-angular@17.0.0 moment@2.29.4 ngrx-store-freeze@0.1.9 reselect@3.0.0 --global

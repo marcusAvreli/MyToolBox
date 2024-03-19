@@ -3,10 +3,14 @@
 |					GRADLE									|
 |															|
 +-----------------------------------------------------------+
-	Initializing the Project
-		mkdir pluginRtl
-		cd pluginRtl
-		gradle init
-			Select type of project to generate : Basic
-			Select build script DSL : Groovy
-			Generate build using new APIs and behavior : no
+Initializing the Project
+	mkdir pluginRtl
+	cd pluginRtl
+	gradle init
+		Select type of project to generate : Basic
+		Select build script DSL : Groovy
+		Generate build using new APIs and behavior : no
+		
+gradlew build
+
+http://192.168.243.143:8080/iiq/plugins/pluginPage.jsf?pn=myInterceptor2

@@ -1,4 +1,4 @@
 curl -X GET -H "Content-type: application/json" -H "Accept: application/json" -d {"name":"name1"} http://localhost:8080/reportRest1/report
-
+curl -v -k   -X POST   -d "{\"email\":\"test\",\"password\":\"test\"}" -H "Content-Type: application/json"  http://localhost:8080/myRestApi/user/authenticate
 
 https://stackoverflow.com/questions/978061/http-get-with-request-body

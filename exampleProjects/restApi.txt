@@ -1,7 +1,40 @@
 
+//binder
+// Data tier
+// Service tier
+https://github.com/jenkins-infra/plugin-site-api/blob/4c28d164ac79c003865d6d3639da27a228d50c6f/src/main/java/io/jenkins/plugins/RestApp.java#L20
+https://github.com/AlanLiu-AI/jersey/blob/d2ac69b78bac928719481a5071cb57f2e531204f/core-server/src/main/java/org/glassfish/jersey/server/ApplicationHandler.java#L144
+
+//search string "extends ResourceConfig" "Filter" language:Java
+https://github.com/dremio/dremio-oss/blob/master/dac/backend/src/main/java/com/dremio/dac/server/DACAuthFilterFeature.java#L32
+https://github.com/logicalclocks/hopsworks/blob/fad2305d216d3855fd8725b87e2a0fc207322c14/hopsworks-ca/src/main/java/io/hops/hopsworks/ca/api/ApplicationConfig.java#L50
 
 
 
+https://github.com/rupurt/featurehub/tree/61f4c863c1d5ddad7f0540e6758175b24cdf49ac/backend/mr/src/main/java/io/featurehub/mr/auth
+https://github.com/gentics/cms-oss/blob/03a944210530e7ee3cde41a3345ef8d20b522d74/cms-core/src/main/java/com/gentics/contentnode/rest/configuration/RESTApplication.java#L2
+https://github.com/AppDirectory/gravitee-api-management/blob/6786c65b67c154b33bfed15d65f9681f505371d3/gravitee-apim-rest-api/gravitee-apim-rest-api-management/gravitee-apim-rest-api-management-rest/src/main/java/io/gravitee/rest/api/management/rest/resource/MetadataResource.java#L72
+https://github.com/winder/Universal-G-Code-Sender/blob/master/ugs-core/src/com/willwinder/universalgcodesender/model/BackendAPI.java
+https://github.com/lakodali/osc-core/blob/5f006a1a543d79695dd86485cc15a016f2ea015e/osc-rest-server/src/main/java/org/osc/core/broker/rest/server/api/JobApis.java
+https://github.com/1055129641/datacollector/blob/f283ec73ada061075dd58a3ae964806abfbe47da/container/src/main/java/com/streamsets/datacollector/restapi/PipelineStoreResource.java#L88
+
+https://github.com/alisson-gomesc/jkniv/blob/0594c5ea188823b56cd6ecc3cf9d1571438f159c/jkniv-whinstone/jkniv-whinstone-rest/src/main/java/net/sf/jkniv/whinstone/rest/RestFulReportResources.java#L64
+
+https://github.com/sofastack/sofa-tracer/blob/76e05747c6ea3291c56586d1ddc7788c9f35aad9/tracer-core/src/main/java/com/alipay/common/tracer/core/reporter/digest/AbstractDiskReporter.java
+
+https://github.com/bdavis160/CommunityWitnessAPI/blob/787a3b1f60cf3ff9413020443a427fe4f2a9c5d9/org-communitywitness-api/src/main/java/org/communitywitness/api/ReportResource.java#L18
+https://github.com/dshurt/openstorefront/blob/908e9ce565cea3fd8d63e43d4c88e1dc508e25ad/server/openstorefront/openstorefront-web/src/main/java/edu/usu/sdl/openstorefront/web/rest/resource/ReportResource.java#L85
+https://github.com/search?q=repo%3AF6945469%2Fjweb-cms+consumes&type=code
+
+https://github.com/proofpoint/platform/blob/890d8fdf9f326fa31bf8e41c17b23314b6f8d587/jaxrs/src/main/java/com/proofpoint/jaxrs/JaxrsModule.java#L45
+https://github.com/ianprogrammer/featurehub/blob/master/backend/mr/src/main/java/io/featurehub/mr/ManagementRepositoryFeature.java#L96
+
+
+https://github.com/pohl/ultrasaurus/blob/master/src/main/java/org/screaming/ultrasaurus/server/DependencyBinder.java#L20
+
+
+
+https://github.com/craigcondit/randomcoder-website/blob/0892bd1ef63ba823ebae2bbad9307b6f72de7006/src/main/java/org/randomcoder/website/WebSiteApplication.java#L89
 
 
 https://github.com/opentripplanner/OpenTripPlanner/blob/e5b943a4ad5ad1735b88f99cfd80cddb5bc1d0b6/ARCHITECTURE.md
@@ -145,6 +178,8 @@ RI bundle. Remember that you should make them only compile time dependencies. Th
  https://github.com/karutaproject/karuta-backend_legacy
  https://github.com/personium/personium-core
  http://people.apache.org/~sgoeschl/blog/posts/javamelody/using-java-melody/
+ 
+ ####RESOURCE_CONFIG ROLES
  https://github.com/dotCMS/core/blob/adccf337fc00cb9b4d744ce53cff6ada9bf202bd/dotCMS/src/main/webapp/WEB-INF/web.xml
  https://github.com/tanmoy069/ResearchAndDevelopment-Repo/tree/057698b573a6d1cf1c7aeb5c072c9c64036be414/JerseyWebApiRnd/src/main/java/com/tanmoy/JerseyWebApiRnd
  
