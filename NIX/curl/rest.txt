@@ -1,2 +1,0 @@
-curl -v -k "path" -X POST -d 'data' -H "Content-Type: application/json" --cookie ./cookies.txt
-curl -v -k -H "Content-type":"application/json" -H "Accept":"application/json"  -c cookies.txt -X POST -d 'data' path
