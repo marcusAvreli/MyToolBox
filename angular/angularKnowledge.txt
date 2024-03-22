@@ -23,8 +23,11 @@
 +-----------------------------------------------------------+
 	@angular/cli : 1.4.10
 	node : 8.17.0
-
-
+	//start specific version of angular
+		npx @angular/cli@1.4.10 new manualLazyLoad --skip-git
+	//run application
+		npx ng serve
+	
 	for Angular >= 6.0.0
 	import { of } from 'rxjs';
 
@@ -35,6 +38,53 @@
 +-----------------------------------------------------------+
 
 	npm i @ngrx/core@1.2.0 @ngrx/effects@2.0.3 @ngrx/router-store@1.2.6 @ngrx/store@2.2.3 @ngrx/store-devtools@4.1.1 
+ 
+ RXJS 
+ import { map, switchMap, catchError } from "rxjs/operators";
+ 
+import { Observable } from 'rxjs/Observable';
+import { empty } from 'rxjs/observable/empty';
+import { of } from 'rxjs/observable/of';
+ 
+ https://www.javatpoint.com/rxjs-filter-filtering-operator
+https://github.com/ReactiveX/rxjs/issues/2163
+https://stackoverflow.com/questions/37991713/simple-filter-on-array-of-rxjs-observable
+https://github.com/karthikbalajikb/Treeshaking-with-rollup.js/tree/master/src
+https://www.linkedin.com/pulse/how-create-aotjit-compatible-angular-4-library-external-oleksii/
+https://medium.com/@UpgradingAJS/the-ultimate-guide-to-setting-up-aot-for-ngupgrade-without-jumping-out-a-window-998df2fdd196
+https://rahuulmiishra.medium.com/journey-to-adding-typescript-in-existing-react-project-bba6e88a9234
+https://github.com/vparomskiy/thingsboard/blob/3ac59a95946248d504391bc30541b94c47c878bd/ui-ngx/src/app/modules/home/models/datasource/entity-datasource.ts#L92
+https://github.com/jacklam718/cqrs/blob/96c7ab8ca894d2d34aa8e0de33460da08f7789ec/src/utils/observable-bus.ts#L8
+https://stackoverflow.com/questions/52414920/emitting-a-hot-boolean-observable-using-switchmap
+https://www.grapecity.com/wijmo/api/interfaces/wijmo.icollectionview.html
+https://www.grapecity.com/wijmo/demos/Core/CollectionView/Overview/purejs
+https://yeshasmp.github.io/posts/angular-services/
+https://indepth.dev/posts/1151/a-deep-dive-into-injectable-and-providedin-in-ivy
+https://www.dsebastien.net/2021-03-28-angular-application-bootstrap/
+https://www.intertech.com/top-5-ways-to-misuse-ngrx-selectors/
+https://www.javatpoint.com/rxjs-filter-filtering-operator
+https://github.com/ReactiveX/rxjs/issues/2163
+https://stackoverflow.com/questions/37991713/simple-filter-on-array-of-rxjs-observable
+https://medium.com/angular-in-depth/exploring-angular-dom-abstractions-80b3ebcfc02
+https://stackoverflow.com/questions/56764331/how-to-get-data-from-a-generic-http-get-method-which-returns-observablet-in
+https://github.com/vparomskiy/thingsboard/blob/3ac59a95946248d504391bc30541b94c47c878bd/ui-ngx/src/app/modules/home/models/datasource/entity-datasource.ts#L92
+https://github.com/jacklam718/cqrs/blob/96c7ab8ca894d2d34aa8e0de33460da08f7789ec/src/utils/observable-bus.ts#L8
+https://stackoverflow.com/questions/52414920/emitting-a-hot-boolean-observable-using-switchmap
+https://www.grapecity.com/wijmo/api/interfaces/wijmo.icollectionview.html
+https://www.grapecity.com/wijmo/demos/Core/CollectionView/Overview/purejs
+
+https://github.com/sass/node-sass/issues/2251
+https://github.com/sass/libsass/issues/2244
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
 Errors
 Uncaught reflect-metadata shim is required when using class decorators
@@ -60,13 +110,6 @@ https://www.intertech.com/top-5-ways-to-misuse-ngrx-selectors/
 
 this.clock.subscribe(console.log.bind(console));
 FILTER OBSERVABLES INTERFACES
-https://www.javatpoint.com/rxjs-filter-filtering-operator
-https://github.com/ReactiveX/rxjs/issues/2163
-https://stackoverflow.com/questions/37991713/simple-filter-on-array-of-rxjs-observable
-https://github.com/karthikbalajikb/Treeshaking-with-rollup.js/tree/master/src
-https://www.linkedin.com/pulse/how-create-aotjit-compatible-angular-4-library-external-oleksii/
-https://medium.com/@UpgradingAJS/the-ultimate-guide-to-setting-up-aot-for-ngupgrade-without-jumping-out-a-window-998df2fdd196
-https://rahuulmiishra.medium.com/journey-to-adding-typescript-in-existing-react-project-bba6e88a9234
 
 node_modules\.bin\eslint --init
 
@@ -155,9 +198,6 @@ npx @angular/cli@1.4.10 new manualLazyLoad2 --skip-git
 npx @angular/cli@1.4.10 new manualLazyLoad3 --skip-git
 npx @angular/cli@1.4.10 new directiveReportSelectionLazy --skip-git
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
 
 https://www.geeksforgeeks.org/how-to-add-image-into-dropdown-list-for-each-items/
 
@@ -193,16 +233,7 @@ function OPERATOR() {
     });
   };
 }
-https://github.com/vparomskiy/thingsboard/blob/3ac59a95946248d504391bc30541b94c47c878bd/ui-ngx/src/app/modules/home/models/datasource/entity-datasource.ts#L92
-https://github.com/jacklam718/cqrs/blob/96c7ab8ca894d2d34aa8e0de33460da08f7789ec/src/utils/observable-bus.ts#L8
-https://stackoverflow.com/questions/52414920/emitting-a-hot-boolean-observable-using-switchmap
-https://www.grapecity.com/wijmo/api/interfaces/wijmo.icollectionview.html
-https://www.grapecity.com/wijmo/demos/Core/CollectionView/Overview/purejs
->>>>>>> 741dcd80d7f09202e30245c090cfaaca75974b22
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
 Errors
 Uncaught reflect-metadata shim is required when using class decorators
 In root/src
@@ -217,26 +248,11 @@ Update file tsconfig.app.json
 "types": [
       "node"
     ]
-https://yeshasmp.github.io/posts/angular-services/
-https://indepth.dev/posts/1151/a-deep-dive-into-injectable-and-providedin-in-ivy
-https://www.dsebastien.net/2021-03-28-angular-application-bootstrap/
-https://www.intertech.com/top-5-ways-to-misuse-ngrx-selectors/
+
 
 
 this.clock.subscribe(console.log.bind(console));
 FILTER OBSERVABLES INTERFACES
-https://www.javatpoint.com/rxjs-filter-filtering-operator
-https://github.com/ReactiveX/rxjs/issues/2163
-https://stackoverflow.com/questions/37991713/simple-filter-on-array-of-rxjs-observable
-https://medium.com/angular-in-depth/exploring-angular-dom-abstractions-80b3ebcfc02
-
-+-----------------------------------------------------------+
-|															|
-|	ANGULAR 4												|
-|															|
-+-----------------------------------------------------------+
-@angular/cli : 1.4.10
-node : 8.17.0
 
 
 npm i @ngrx/core@1.2.0 @ngrx/effects@2.0.3 @ngrx/router-store@1.2.6 @ngrx/store@2.2.3 @ngrx/store-devtools@4.1.1 @angular/http@4.4.7 --global
@@ -255,10 +271,7 @@ c:\users\{username}\appdata\roaming\npm-cache\node-sass\4.8.1\
 
 
 npm i gulp-sass@2.2.0
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
+
 npm install ngx-bootstrap@^2.0.3
 npm install moment@^2.21.0
 
@@ -315,14 +328,6 @@ angularRedux
 "@ngrx/store": "^2.2.3",
 "reselect": "^3.0.0",
 "ngrx-store-freeze": "^0.1.9",
-npx @angular/cli@1.4.10 new manualLazyLoad --skip-git
-npx @angular/cli@1.4.10 new manualLazyLoad2 --skip-git
-npx @angular/cli@1.4.10 new manualLazyLoad3 --skip-git
-npx @angular/cli@1.4.10 new directiveReportSelectionLazy --skip-git
-
-<<<<<<< Updated upstream
-=======
-
 
 
 npm i @ngrx/core@^1.2.0 --global
@@ -355,16 +360,5 @@ function OPERATOR() {
     });
   };
 }
-https://stackoverflow.com/questions/56764331/how-to-get-data-from-a-generic-http-get-method-which-returns-observablet-in
-https://github.com/vparomskiy/thingsboard/blob/3ac59a95946248d504391bc30541b94c47c878bd/ui-ngx/src/app/modules/home/models/datasource/entity-datasource.ts#L92
-https://github.com/jacklam718/cqrs/blob/96c7ab8ca894d2d34aa8e0de33460da08f7789ec/src/utils/observable-bus.ts#L8
-https://stackoverflow.com/questions/52414920/emitting-a-hot-boolean-observable-using-switchmap
-https://www.grapecity.com/wijmo/api/interfaces/wijmo.icollectionview.html
-https://www.grapecity.com/wijmo/demos/Core/CollectionView/Overview/purejs
->>>>>>> 741dcd80d7f09202e30245c090cfaaca75974b22
-=======
->>>>>>> Stashed changes
 
-https://github.com/sass/node-sass/issues/2251
-https://github.com/sass/libsass/issues/2244
 Sass 3.5 will support var() as an argument to plain-CSS color functions, similarly to how calc() is treated in 3.4. See sass/sass#2175 for details and sass/sass-spec#1002 for specs.

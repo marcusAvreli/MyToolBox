@@ -5,8 +5,13 @@
 +-----------------------------------------------------------+ 
 	ActionReducerMap
 	https://github.com/brandonroberts/store-verbose-umbrella/tree/72c61428ad3d95054eee83f774a297181c3b14f3
-	
-	
+	https://github.com/eneajaho/observable-store/tree/fe1e52fedb35726aab6f6fe83345f0ab71a3e826/src/app/store
+https://github.com/cjkent/kiosk/tree/1bf18217cfd1b2d34bdac991336ed61a44e10faa
+https://github.com/steelsojka/image-gallery-exercise/tree/3f18e3155746d0bbeb6b62fad88a4b174fea95c1/angular/src/app
+https://github.com/QuinntyneBrown/BlogApp/blob/1b423d3844832773f52191296e9d3cbd079633c5/src/BlogApp.Frontend/src/app/utilities/storage.ts
+https://github.com/brandonroberts/store-verbose-umbrella/blob/72c61428ad3d95054eee83f774a297181c3b14f3/src/app/store/src/store.ts	
+//https://github.com/ng-book/angular2-redux-chat/tree/54d78b2a0413c01dfd6d64d1eba19f52e9a0f8c8/src/app
+//https://github.com/yuhiisk/udemy-angular-ja-typescript/blob/683a8b342fa40450d4b1cc7c14d190c21dc4bd82/05-spread-operator.ts
 	
 generic ngrx 
 export type Actions = Array<Action>;
