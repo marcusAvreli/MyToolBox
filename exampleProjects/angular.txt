@@ -3,9 +3,47 @@
 |	ANGULAR 4 NGRX 											|
 |															|
 +-----------------------------------------------------------+ 
+https://github.com/softmantk/beenion/blob/c4e611ae5d796f2f37332418f21e966d6cb61449/beenion-core/commandHandlers/journal.ts
+https://github.com/takaakit/uml-diagram-for-javascript-design-pattern-examples/blob/master/behavioral-patterns/mediator/DiagramMap.html
+https://github.com/Itchimonji/design-patterns-in-typescript/blob/main/readme/images/13.%20Mediator%20example.jpg
+https://github.com/Itchimonji/design-patterns-in-typescript/blob/main/src/app/13.%20Mediator/mediator.module.ts
+https://masteranyfield.com/2021/07/28/domain-driven-designddd-and-microservice-decomposition/
+
+https://medium.com/@domagojk/patterns-for-designing-flexible-architecture-in-node-js-cqrs-es-onion-7eb10bbefe17
+https://medium.com/@anteburazer/angular-architecture-patterns-additional-application-features-ea8093230f0f
+https://medium.com/@qasimsoomro/building-microservices-using-node-js-with-ddd-cqrs-and-event-sourcing-part-1-of-2-52e0dc3d81df
+https://github.com/starker-xp/var-moto-self/tree/master
+https://franzbascope.github.io/fruit_store/
+https://github.com/andrepraeiro/billing/tree/876398871b2ea974a86ed0d56c4bb0bf6029276f/simpleCQRS/src/domain/order
+https://github.com/qas/examples-nodejs-cqrs-es-swagger
+https://github.com/eugenp/tutorials/blob/master/patterns-modules/cqrs-es/src/main/java/com/baeldung/patterns/escqrs/projectors/UserProjector.java
+https://github.com/Jesse989/cqrs2/blob/master/src/commands/application/games/GameCommandFactory.ts
+https://github.com/learning-zone/javascript-design-patterns?tab=readme-ov-file#-mediator-design-pattern
+https://medium.com/@domagojk/patterns-for-designing-flexible-architecture-in-node-js-cqrs-es-onion-7eb10bbefe17
+https://medium.com/swlh/cqrs-from-scratch-with-typescript-e2ccf7fc2b64
+https://medium.com/swlh/cqrs-from-scratch-with-typescript-e2ccf7fc2b64
+https://clouddevs.com/typescript/advanced-type-mapping/
+https://morioh.com/a/c3a4297aacbd/understanding-redux-build-your-own-store-in-angular
+cqrs
+https://github.com/andrepraeiro/billing/blob/876398871b2ea974a86ed0d56c4bb0bf6029276f/simpleCQRS/src/readModel/readModelFacade.js
+https://github.com/Adaptech/nota/blob/3039e4b0e3c366c7a0d1ce05a88a7aa971c3e155/api/src/infra/initWeb.js
+
+https://github.com/felipefzdz/cqrs-and-event-sourcing-for-dummies/blob/master/js/reveal.js
+
+https://github.com/albe/node-event-storage/blob/main/src/Storage/WritableStorage.js
+
+
+https://github.com/ericksonreyes/cqrs-shopping-cart-api/blob/master/modules/orders.js
+https://stackblitz.com/edit/rxjs-typescript-workshop?file=index.ts
+https://github.com/albe/node-event-storage/tree/main
+
+
+
 	ActionReducerMap
+	https://angularindepth.com/posts/1206/understanding-the-magic-behind-ngrx-effects
 	https://github.com/brandonroberts/store-verbose-umbrella/tree/72c61428ad3d95054eee83f774a297181c3b14f3
 	https://github.com/eneajaho/observable-store/tree/fe1e52fedb35726aab6f6fe83345f0ab71a3e826/src/app/store
+	https://github.com/blove/ngrx-course/blob/081109fc58150c2263e7cbe11e61ce8a777663dd/projects/simple-store/src/app/store/store.ts
 https://github.com/cjkent/kiosk/tree/1bf18217cfd1b2d34bdac991336ed61a44e10faa
 https://github.com/steelsojka/image-gallery-exercise/tree/3f18e3155746d0bbeb6b62fad88a4b174fea95c1/angular/src/app
 https://github.com/QuinntyneBrown/BlogApp/blob/1b423d3844832773f52191296e9d3cbd079633c5/src/BlogApp.Frontend/src/app/utilities/storage.ts
