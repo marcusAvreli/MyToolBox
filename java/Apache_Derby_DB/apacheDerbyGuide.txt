@@ -10,7 +10,7 @@ Apache Derby Guide
 		1. Server.policy file
 			Located in {derby_install_directory}/demo/templates/server.policy
 		2. Java.policy file
-			Located in {jre_install_directory} (NOT IN JDK install directory)/lib/security/java.policy
+			Located in  (IN JDK install directory)/lib/security/java.policy
 
 	Run Database Server Instance
 		1. open cmd line(you don't have to be admin).
