@@ -3,13 +3,26 @@
 |	ANGULAR 4 NGRX 											|
 |															|
 +-----------------------------------------------------------+ 
-https://github.com/softmantk/beenion/blob/c4e611ae5d796f2f37332418f21e966d6cb61449/beenion-core/commandHandlers/journal.ts
+
+#CQRS NGRX ANGULAR 4
+	https://github.com/dancancro/great-big-example-application/blob/fc757ea6e862194deabb1fbb039fd4c6ca230010/src/main/webapp/app/core/store/index.ts#L27
+	
+	#THEORY
+	https://medium.com/@domagojk/patterns-for-designing-flexible-architecture-in-node-js-cqrs-es-onion-7eb10bbefe17
+	
+	#EXAMPLE PROJECT
+	https://github.com/softmantk/beenion/blob/c4e611ae5d796f2f37332418f21e966d6cb61449/beenion-core/commandHandlers/journal.ts
+
+
+
+
+
 https://github.com/takaakit/uml-diagram-for-javascript-design-pattern-examples/blob/master/behavioral-patterns/mediator/DiagramMap.html
 https://github.com/Itchimonji/design-patterns-in-typescript/blob/main/readme/images/13.%20Mediator%20example.jpg
 https://github.com/Itchimonji/design-patterns-in-typescript/blob/main/src/app/13.%20Mediator/mediator.module.ts
 https://masteranyfield.com/2021/07/28/domain-driven-designddd-and-microservice-decomposition/
 
-https://medium.com/@domagojk/patterns-for-designing-flexible-architecture-in-node-js-cqrs-es-onion-7eb10bbefe17
+
 https://medium.com/@anteburazer/angular-architecture-patterns-additional-application-features-ea8093230f0f
 https://medium.com/@qasimsoomro/building-microservices-using-node-js-with-ddd-cqrs-and-event-sourcing-part-1-of-2-52e0dc3d81df
 https://github.com/starker-xp/var-moto-self/tree/master
