@@ -16,6 +16,18 @@
 
 
 
+CUSTOM STORE
+https://github.com/Scandltd/flowrigami/blob/1f9350777802d7a008bfebe11667c647dfe6af20/component/src/flow/store/Store.ts#L6
+https://github.com/nanojsx/nano/blob/00c32e3fce13b5b8963600067e3cd43a3eea48fd/deno_lib/store.ts#L4
+https://github.com/ng-book/angular2-redux-chat/blob/54d78b2a0413c01dfd6d64d1eba19f52e9a0f8c8/tutorial/lib/miniRedux.ts#L4
+https://github.com/thelgevold/bazel-angular-samples/blob/d2289e64451266a1151f73272d3cccfa4d01c6a4/src/apps/demo/shared-components/lazy-loaded-tree-view/redux/store.ts
+https://github.com/DSpace/dspace-angular/blob/41eccbbfe156e15f133f1f519c49844b5921ee80/src/app/store.actions.ts#L11
+https://stackblitz.com/edit/angular-rxjs-store-custom-state-management?file=src%2Fapp%2Fapp.component.ts
+
+
+
+https://medium.com/@afilipovich.qu/angular-state-management-how-we-replaced-ngrx-with-our-own-system-9b308428f549
+
 
 https://github.com/takaakit/uml-diagram-for-javascript-design-pattern-examples/blob/master/behavioral-patterns/mediator/DiagramMap.html
 https://github.com/Itchimonji/design-patterns-in-typescript/blob/main/readme/images/13.%20Mediator%20example.jpg

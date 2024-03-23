@@ -1,3 +1,10 @@
+https://stackoverflow.com/questions/34376854/delegation-eventemitter-or-observable-in-angular
+	Update 2016-06-27: instead of using Observables, use either
+
+	a BehaviorSubject, as recommended by @Abdulrahman in a comment, or
+	a ReplaySubject, as recommended by @Jason Goemaat in a comment
+
+
 +-----------------------------------------------------------+
 |															|
 |	SEVERAL NODE VERSIONS									|
