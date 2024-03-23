@@ -1,4 +1,5 @@
-
+//EntityBusinessException CoffeeGenericException
+https://github.com/vincentgwzhang/coffee/tree/ca0496d9326a5ed0728515d8c40eb0780ae3804d/src/main/java/tina/coffee
 //binder
 // Data tier
 // Service tier
