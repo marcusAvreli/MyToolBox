@@ -31,7 +31,7 @@ https://stackoverflow.com/questions/34376854/delegation-eventemitter-or-observab
 	@angular/cli : 1.4.10
 	node : 8.17.0
 	//start specific version of angular
-		npx @angular/cli@1.4.10 new manualLazyLoad --skip-git
+		npx @angular/cli@1.4.10 new manualLazyLoad --skip-git		
 	//run application
 		npx ng serve
 	

@@ -13,10 +13,39 @@
 	#EXAMPLE PROJECT
 	https://github.com/softmantk/beenion/blob/c4e611ae5d796f2f37332418f21e966d6cb61449/beenion-core/commandHandlers/journal.ts
 
+//with architecture image
+https://github.com/georgybu/SimpleAppArcitecture/blob/035bd5481581a8df7347f8a3853945be6b5b43bc/src/app/services/simple.store.ts#L9
+https://github.com/elie29/store/blob/809c480e867ac8bc351cdaee668a1d31ec336447/src/store.ts#L6
 
+https://github.com/algoyounes/ParkApp/blob/e524bc9fd533f22d40db1be6a7970b740ef96e1f/ParkAppWeb/src/app/helpers/SimpleStore.ts#L10
+//rxjs 5
+https://github.com/couzic/sparix/blob/2a705e2d1b846d628c519726e4c571c769f89c58/src/store.ts#L9
+https://github.com/ngfk/store/blob/0963e44b5ab6e0f75125e6df62174298a7c39f2c/packages/store/src/store.ts#L24
+//angular 4
+https://github.com/benglynn/je-ng-redux-adaptive/blob/307598520b3a8bcf15177cab7f6839d4bfaf1019/src/app/store/store.ts#L20
+https://github.com/hrajchert/meetupjs-rxjs-redux-demo
+//
+https://github.com/benglynn/je-ng-redux-adaptive/blob/307598520b3a8bcf15177cab7f6839d4bfaf1019/src/app/store/store.ts#L20
+angular 17
+https://github.com/Unboundscience/ETHDenver2024/tree/d4e74ff6a02cb201608cb96ad5569d95e4b5fe5f/angular-app
+angular 16
+https://github.com/wardvisual/blog-fe/blob/81589288c0133e2850f5c13aec5f8fb6f019fbc9/src/app/libs/shared/store/app.store.ts
+https://github.com/nufke/LoxBerry-Plugin-LoxBuddy/blob/b30d94e85bf2c6412ace76a060f44633fc7dd52f/bin/client/src/app/services/store.ts#L8
+angular 14
+https://github.com/telerik/rpstrackerng/tree/65507309dc2dc14c9474e47f0ae047c081ce7c40
+https://github.com/SellamAbderrahmane/form-builder/blob/e6c082e256aeee7426394d1e7f75ebb2ac26fe62/src/app/store/Store.ts#L5
+https://github.com/davidtoska/ngx-fire-ui/blob/cbd421682069f131d09230854f681356cd50fdff/modules/core/src/lib/subject-store.ts#L8
+https://github.com/eleboys/nwise-todo/blob/dd209824a38f4df38386b2c3948f27217251638f/src/modules/shared/models/store-base.ts#L4
 
-
+https://github.com/antischematic/angular-state-library/blob/d1600d08db9b8e87bb21fd112107065519b0b299/projects/core/src/select.ts#L103
+//angular 7
+https://github.com/cjkent/kiosk/blob/1bf18217cfd1b2d34bdac991336ed61a44e10faa/src/store/store.ts#L8
+//angular 13
+https://github.com/dherrero/angular-state-manager/blob/3a1dea34209c9fb51ad9267dd9f7eb6369c121cd/src/app/classes/store-service.ts#L4
 CUSTOM STORE
+
+https://github.com/rtang03/fabric-rx-cqrs/blob/0de913b04bb05d75922852ba749d48f3da4f3bfe/src/rx-store/interfaces.ts#L32
+https://github.com/nikunjratanpara/BizOS/blob/ee43f882b6507c0b5e63f38d468322cba04acc28/Client/Angular/src/app/store/store/Store.ts#L11
 https://github.com/Scandltd/flowrigami/blob/1f9350777802d7a008bfebe11667c647dfe6af20/component/src/flow/store/Store.ts#L6
 https://github.com/nanojsx/nano/blob/00c32e3fce13b5b8963600067e3cd43a3eea48fd/deno_lib/store.ts#L4
 https://github.com/ng-book/angular2-redux-chat/blob/54d78b2a0413c01dfd6d64d1eba19f52e9a0f8c8/tutorial/lib/miniRedux.ts#L4
