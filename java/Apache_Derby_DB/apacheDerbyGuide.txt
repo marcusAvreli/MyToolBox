@@ -1,29 +1,46 @@
-Apache Derby Guide
++-----------------------------------------------------------+
+|															|
+|		SET ENVIRONMENT VARIABLES							|
+|															|
++-----------------------------------------------------------+
 
-	Set Environment variables
-		DERBY_INSTALL:	C:\ApacheDerby
-		CLASSPATH:	%DERBY_INSTALL%\lib\derbytools.jar;%DERBY_INSTALL%\lib\derbynet.jar;%DERBY_INSTALL%\lib\derbyclient.jar;
-		
-	Edit config files 
-		(as far as I know by time of writing 08.03.2020)
-		Guide and config files were verified by install from zero on 25-08-2020
-		1. Server.policy file
-			Located in {derby_install_directory}/demo/templates/server.policy
-		2. Java.policy file
-			Located in  (IN JDK install directory)/lib/security/java.policy
+	DERBY_INSTALL:	C:\ApacheDerby
+	CLASSPATH:	%DERBY_INSTALL%\lib\derbytools.jar;%DERBY_INSTALL%\lib\derbynet.jar;%DERBY_INSTALL%\lib\derbyclient.jar;
 
-	Run Database Server Instance
-		1. open cmd line(you don't have to be admin).
-		2. Start server by issuing following command
-			a. regular version: java -Djava.security.manager -Djava.security.policy=C:/dbDerby/demo/templates/server.policy  org.apache.derby.drda.NetworkServerControl start -h localhost
-			b. debug version: java -Djava.security.manager -Djava.security.debug=access,failure -Djava.security.policy=C:/derby/demo/templates/server.policy  org.apache.derby.drda.NetworkServerControl start -h localhost
++-----------------------------------------------------------+
+|															|
+|		EDIT CONFIG FILES									|
+|															|
++-----------------------------------------------------------+
 
-	Run Client connection from cmd
-		1. Open another cmd
-		2. Run client from cmd by issuing following command:
-			java org.apache.derby.tools.ij
-		3. Connect to a database MyDbTest (if it does not exist create it):
-			connect 'jdbc:derby://localhost:1527/C:/dbDerby/demo/databases/MyDbTest;create=true';
+	1. Server.policy file
+		Located in {derby_install_directory}/demo/templates/server.policy
+	2. Java.policy file
+		Located in  (JDK install directory)/lib/security/java.policy
+	#examples of mentioned files can be found in current git directory
+	
++-----------------------------------------------------------+
+|															|
+|		RUN DATABASE SERVER INSTANCE						|
+|															|
++-----------------------------------------------------------+
+	
+	1. open cmd line(you don't have to be admin).
+	2. Start server by issuing following command
+		a. regular version: java -Djava.security.manager -Djava.security.policy=C:/dbDerby/demo/templates/server.policy  org.apache.derby.drda.NetworkServerControl start -h localhost
+		b. debug version: java -Djava.security.manager -Djava.security.debug=access,failure -Djava.security.policy=C:/derby/demo/templates/server.policy  org.apache.derby.drda.NetworkServerControl start -h localhost
+
++-----------------------------------------------------------+
+|															|
+|		RUN CLIENT CONNECTION FROM CMD						|
+|															|
++-----------------------------------------------------------+
+	
+	1. Open another cmd
+	2. Run client from cmd by issuing following command:
+		java org.apache.derby.tools.ij
+	3. Connect to a database MyDbTest (if it does not exist create it):
+		connect 'jdbc:derby://localhost:1527/C:/dbDerby/demo/databases/MyDbTest;create=true';
 
 	Exit ij console
 		1. If you connected to server:
