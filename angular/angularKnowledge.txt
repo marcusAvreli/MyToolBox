@@ -64,8 +64,27 @@ import { Observable } from 'rxjs/Observable';
 import { empty } from 'rxjs/observable/empty';
 import { of } from 'rxjs/observable/of';
 
++-----------------------------------------------------------+
+|															|
+|	ERRORS 													|
+|															|
++-----------------------------------------------------------+
+
+Uncaught reflect-metadata shim is required when using class decorators
+In root/src
+Update file polyfills.ts
 
 
+
+import 'zone.js';
+import 'reflect-metadata';
+
+Cannot find name 'require'
+Update file tsconfig.app.json
+https://stackoverflow.com/questions/44224085/how-to-get-index-of-selected-option-in-angular
+"types": [
+      "node"
+    ]
  
  https://www.javatpoint.com/rxjs-filter-filtering-operator
 https://github.com/ReactiveX/rxjs/issues/2163
@@ -108,21 +127,7 @@ https://github.com/sass/libsass/issues/2244
  
  
 Errors
-Uncaught reflect-metadata shim is required when using class decorators
-In root/src
-Update file polyfills.ts
 
-
-
-import 'zone.js';
-import 'reflect-metadata';
-
-Cannot find name 'require'
-Update file tsconfig.app.json
-https://stackoverflow.com/questions/44224085/how-to-get-index-of-selected-option-in-angular
-"types": [
-      "node"
-    ]
 https://yeshasmp.github.io/posts/angular-services/
 https://indepth.dev/posts/1151/a-deep-dive-into-injectable-and-providedin-in-ivy
 --How Angular applications start
