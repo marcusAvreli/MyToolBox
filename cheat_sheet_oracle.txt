@@ -27,12 +27,12 @@ Finally, we’ll create our SEQUENCE that will be utilized later to actually gen
 CREATE SEQUENCE books_sequence;
 
 
++-----------------------------------------------------------+
+|															|
+|	TIMEZONE												|
+|															|
++-----------------------------------------------------------+ 
 
------------------------------------------------------------
-
-TIMEZONE IN ORACLE
-
------------------------------------------------------------
 select dbtimezone, sessiontimezone from dual
 
 
@@ -64,29 +64,31 @@ from spt_bundle
 
 )
 
-ADD DAYS TO DATE
-
- 
++-----------------------------------------------------------+
+|															|
+|	ADD DAYS TO DATE										|
+|															|
++-----------------------------------------------------------+ 
 
 select my_date2, TO_TIMESTAMP(my_date2,'YYYY-MM-DD HH24:MI:SS')+NUMTODSINTERVAL(2,'DAY') from(
-
-select TO_CHAR (trunc(my_date, 'DD'),                'YYYY-MM-DD HH24:MI:SS') my_date2 from (
-
-select to_date(TO_CHAR(from_tz(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS')+NUMTODSINTERVAL(1594215916868/1000,'SECOND'),(select dbtimezone from dual)) at time zone 'Asia/Jerusalem','MM-DD-YYYY HH24:MI:SS'),'MM-DD-YYYY HH24:MI:SS') my_date from dual
-
+	select TO_CHAR (trunc(my_date, 'DD'),                'YYYY-MM-DD HH24:MI:SS') my_date2 from (
+		select to_date(TO_CHAR(from_tz(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS')+NUMTODSINTERVAL(1594215916868/1000,'SECOND'),(select dbtimezone from dual)) at time zone 'Asia/Jerusalem','MM-DD-YYYY HH24:MI:SS'),'MM-DD-YYYY HH24:MI:SS') my_date from dual
+	)
 )
 
-)
-
- 
-
-FROM DATE STRING TO MILLISECONDS
++-----------------------------------------------------------+
+|															|
+|	FROM DATE STRING TO MILLISECONDS						|
+|															|
++-----------------------------------------------------------+
 
 SELECT to_number(to_date('2020-07-10 16:45:16','YYYY-MM-DD HH24:MI:SS')   - to_date('1970-01-01','YYYY-MM-DD')) * (24 * 60 * 60 * 1000) milliseconds  FROM dual;
 
- 
-
-from milis to date with milis
++-----------------------------------------------------------+
+|															|
+| FROM MILIS TO DATE WITH MILIS								|
+|															|
++-----------------------------------------------------------+
 
 select TO_CHAR(from_tz(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS.FF3')+NUMTODSINTERVAL(1707741040394/1000,'SECOND'),(select dbtimezone from dual)) at time zone 'Asia/Jerusalem','MM-DD-YYYY HH24:MI:SS.FF3') my_date
 
@@ -102,10 +104,22 @@ WHERE COLUMN_VALUE NOT IN (SELECT id_number FROM table);
 drop type string_tab force;
 
 
--count all rows
+
+
++-----------------------------------------------------------+
+|															|
+| COUNT ALL ROWS											|
+|															|
++-----------------------------------------------------------+
+
 select count(*) from table_name
 
---count doubled rows
+
++-----------------------------------------------------------+
+|															|
+| COUNT DOUBLED ROWS										|
+|															|
++-----------------------------------------------------------+
 select count(*) from table_name where rowid not in (select min(rowid)   from table_name group by list_of_fields)
 
 --delete doubled rows
@@ -140,16 +154,14 @@ where not exists (
     from query1
 );
 
-<<<<<<< HEAD
-
 
 +-----------------------------------------------------------+
 |															|
-|		child column is csv									|
+|		CHILD COLUMN IS CSV									|
 |															|
 +-----------------------------------------------------------+
 https://medium.com/swlh/three-routes-convert-comma-separated-column-to-rows-c17c85079ecf
-=======
+
 +-----------------------------------------------------------+
 |															|
 |	Three Routes: Convert Comma-Separated Column to Rows	|
@@ -158,7 +170,7 @@ https://medium.com/swlh/three-routes-convert-comma-separated-column-to-rows-c17c
 //https://medium.com/swlh/three-routes-convert-comma-separated-column-to-rows-c17c85079ecf
 column a is parent column b is csv of children (parent_and_csv_of_children)
 
->>>>>>> eb6c2559bcad0fd16c7606d67b9db8117543d3cf
+
 select t.customer,
 trim(regexp_substr(t.orders, '[^,]+', 1, lines.column_value))
 as "Order"
@@ -175,7 +187,7 @@ lines.column_value;
 
 +-----------------------------------------------------------+
 |															|
-|	check only digits										|
+| CHECK ONLY DIGITS											|
 |															|
 +-----------------------------------------------------------+
 https://stackoverflow.com/questions/3932230/oracle-sql-query-that-returns-rows-with-only-numeric-values
