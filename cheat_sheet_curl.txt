@@ -10,6 +10,37 @@ curl -v -k -H "Content-type":"application/json" -H "Accept":"application/json"  
 curl -X GET -H "Content-type: application/json" -H "Accept: application/json" -d {"name":"name1"} http://localhost:8080/reportRest1/report
 curl -v -k   -X POST   -d "{\"email\":\"test\",\"password\":\"test\"}" -H "Content-Type: application/json"  http://localhost:8080/myRestApi/user/authenticate
 
+curl -v -k http://localhost:8080/myRestApi/user/register -X POST -H "Content-Type: application/json" -d "{\"login\":\"123\",\"email\":\"markgav19@gmail.com\",\"password\":\"12345\",\"langKey\":\"en\"}" 
+
+
+Note: Unnecessary use of -X or --request, POST is already inferred.
+*   Trying [::1]:8080...
+* Connected to localhost (::1) port 8080
+> POST /myRestApi/user/register HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/8.4.0
+> Accept: */*
+> Content-Type: application/json
+> Content-Length: 79
+>
+< HTTP/1.1 400
+###########CORS INCLUDED FLAGS
+< Access-Control-Allow-Origin: *
+< Access-Control-Allow-Headers: CSRF-Token, X-Requested-By, Authorization, Content-Type
+< Access-Control-Request-Method: GET, POST, PUT, DELETE, OPTIONS, HEAD
+< Access-Control-Request-Headers: CSRF-Token, X-Requested-By, Authorization, Content-Type
+< Access-Control-Allow-Credentials: true
+< Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS, HEAD
+< Content-Type: text/plain
+< Content-Length: 368
+< Date: Mon, 25 Mar 2024 16:01:08 GMT
+< Connection: close
+
+
+jersey 2 error
+	Unrecognized field "login" (class myRestApi.model.UserSecurity), not marked as ignorable (7 known properties: "lastname", "role", "token", "id", "email", "firstname", "password"])
+	at [Source: (org.glassfish.jersey.message.internal.ReaderInterceptorExecutor$UnCloseableInputStream); line: 1, column: 11] (through reference chain: myRestApi.model.UserSecurity["login"])* Closing connectio
+
 https://stackoverflow.com/questions/978061/http-get-with-request-body
 
 +-----------------------------------------------------------+

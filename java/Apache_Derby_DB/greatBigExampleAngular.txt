@@ -1,0 +1,15 @@
+CREATE TABLE "ADMIN"."MRK_USER"
+(
+	ID BIGINT not null  generated always as identity
+	,LOGIN  varchar(130) not null default 'not_set'
+	,FIRSTname  varchar(130) not null default 'not_set'
+	,lastname  varchar(130) not null default 'not_set'
+	
+	,langKey  varchar(130) not null default 'not_set'
+	,password  varchar(130) not null default 'not_set'
+	,token  varchar(130) not null default 'not_set'
+	,role  varchar(130) not null default 'not_set'
+	,primary key (ID)
+)
+
+ALTER TABLE "ADMIN"."MRK_USER" ALTER COLUMN password  SET DATA TYPE varchar(450)

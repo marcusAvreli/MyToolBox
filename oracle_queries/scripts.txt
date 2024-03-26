@@ -64,6 +64,33 @@ from spt_bundle
 
 )
 
+ADD DAYS TO DATE
+
+ 
+
+select my_date2, TO_TIMESTAMP(my_date2,'YYYY-MM-DD HH24:MI:SS')+NUMTODSINTERVAL(2,'DAY') from(
+
+select TO_CHAR (trunc(my_date, 'DD'),                'YYYY-MM-DD HH24:MI:SS') my_date2 from (
+
+select to_date(TO_CHAR(from_tz(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS')+NUMTODSINTERVAL(1594215916868/1000,'SECOND'),(select dbtimezone from dual)) at time zone 'Asia/Jerusalem','MM-DD-YYYY HH24:MI:SS'),'MM-DD-YYYY HH24:MI:SS') my_date from dual
+
+)
+
+)
+
+ 
+
+FROM DATE STRING TO MILLISECONDS
+
+SELECT to_number(to_date('2020-07-10 16:45:16','YYYY-MM-DD HH24:MI:SS')   - to_date('1970-01-01','YYYY-MM-DD')) * (24 * 60 * 60 * 1000) milliseconds  FROM dual;
+
+ 
+
+from milis to date with milis
+
+select TO_CHAR(from_tz(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS.FF3')+NUMTODSINTERVAL(1707741040394/1000,'SECOND'),(select dbtimezone from dual)) at time zone 'Asia/Jerusalem','MM-DD-YYYY HH24:MI:SS.FF3') my_date
+
+from dual;
 
 
 --following statement shows id_number that DOES NOT EXIST!!!! table
