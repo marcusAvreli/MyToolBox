@@ -30,13 +30,17 @@ https://stackoverflow.com/questions/34376854/delegation-eventemitter-or-observab
 +-----------------------------------------------------------+
 	@angular/cli : 1.4.10
 	node : 8.17.0
-	//start specific version of angular
-		npx @angular/cli@1.4.10 new manualLazyLoad --skip-git		
-	//run application
-		npx ng serve
 	
-	for Angular >= 6.0.0
-	import { of } from 'rxjs';
++-----------------------------------------------------------+
+|															|
+|	MULTI VERSION ENVIRONMENT								|
+|															|
++-----------------------------------------------------------+
+
+#INIT APP
+	npx @angular/cli@1.4.10 new manualLazyLoad --skip-git
+#START APP
+	npx ng serve	
 
 +-----------------------------------------------------------+
 |															|
@@ -45,13 +49,23 @@ https://stackoverflow.com/questions/34376854/delegation-eventemitter-or-observab
 +-----------------------------------------------------------+
 
 	npm i @ngrx/core@1.2.0 @ngrx/effects@2.0.3 @ngrx/router-store@1.2.6 @ngrx/store@2.2.3 @ngrx/store-devtools@4.1.1 
+
++-----------------------------------------------------------+
+|															|
+|	RXJS 													|
+|															|
++-----------------------------------------------------------+
  
- RXJS 
- import { map, switchMap, catchError } from "rxjs/operators";
- 
+for Angular >= 6.0.0
+	import { of } from 'rxjs';
+	
+import { map, switchMap, catchError } from "rxjs/operators"; 
 import { Observable } from 'rxjs/Observable';
 import { empty } from 'rxjs/observable/empty';
 import { of } from 'rxjs/observable/of';
+
+
+
  
  https://www.javatpoint.com/rxjs-filter-filtering-operator
 https://github.com/ReactiveX/rxjs/issues/2163
@@ -162,14 +176,14 @@ npm install ng-packagr --save-dev
 Libraries
 "moment": "^2.21.0",
 "@ngrx/core": "^1.2.0",
-    "@ngrx/effects": "^2.0.3",
-    "@ngrx/store": "^2.2.3",
-    "@ngrx/router-store": "^1.2.6",
-    "ngrx-store-freeze": "^0.1.9",
-    "reselect": "^3.0.0",
-    "ngx-cookie": "^1.0.0",
-    "@ngrx/store-devtools": "^3.2.4",
-    "@ngrx/store-log-monitor": "^3.0.2",
+"@ngrx/effects": "^2.0.3",
+"@ngrx/store": "^2.2.3",
+"@ngrx/router-store": "^1.2.6",
+"ngrx-store-freeze": "^0.1.9",
+"reselect": "^3.0.0",
+"ngx-cookie": "^1.0.0",
+"@ngrx/store-devtools": "^3.2.4",
+"@ngrx/store-log-monitor": "^3.0.2",
 Tech Stuck
 ngrxIIQReporting2
 "@ngrx/core": "^1.2.0",
@@ -297,14 +311,14 @@ npm install ng-packagr --save-dev
 Libraries
 "moment": "^2.21.0",
 "@ngrx/core": "^1.2.0",
-    "@ngrx/effects": "^2.0.3",
-    "@ngrx/store": "^2.2.3",
-    "@ngrx/router-store": "^1.2.6",
-    "ngrx-store-freeze": "^0.1.9",
-    "reselect": "^3.0.0",
-    "ngx-cookie": "^1.0.0",
-    "@ngrx/store-devtools": "^3.2.4",
-    "@ngrx/store-log-monitor": "^3.0.2",
+"@ngrx/effects": "^2.0.3",
+"@ngrx/store": "^2.2.3",
+"@ngrx/router-store": "^1.2.6",
+"ngrx-store-freeze": "^0.1.9",
+"reselect": "^3.0.0",
+"ngx-cookie": "^1.0.0",
+"@ngrx/store-devtools": "^3.2.4",
+"@ngrx/store-log-monitor": "^3.0.2",
 Tech Stuck
 ngrxIIQReporting2
 "@ngrx/core": "^1.2.0",
