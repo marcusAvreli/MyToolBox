@@ -1,3 +1,50 @@
++-------------------------------------------------------------------------------------------+
+
+|                                                                                                                                                                                                                                                                                                                                                                              |             
+
+|              11. oracle_regex: after slash                                                                                                                                                                                                                                       |
+
+|                                                                                                                                                                                                                                                                                                                                                                              |
+
++-------------------------------------------------------------------------------------------+
+
+ 
+
+select upper(regexp_substr ('string\string1','([^\\.*])+$')) result from dual
+
+ 
+
+ 
+
++-------------------------------------------------------------------------------------------+
+
+|                                                                                                                                                                                                                                                                                                                                                                              |             
+
+|              11. oracle_regex: common name                                                                                                                                                                                                                                              |
+
+|                                                                                                                                                                                                                                                                                                                                                                              |
+
++-------------------------------------------------------------------------------------------+
+
+select regexp_substr ('memberOf.containsAll({"distinguished name"})','(CN=)([^,])+') from dual
+
+ 
+
++-------------------------------------------------------------------------------------------+
+
+|                                                                                                                                                                                                                                                                                                                                                                              |             
+
+|              11. oracle_regex: clean curly parentesess                                                                                                                                                                                             |
+
+|                                                                                                                                                                                                                                                                                                                                                                              |
+
++-------------------------------------------------------------------------------------------+
+
+select regexp_substr ('{string}','\{(.+)\}',1,1,null,1) from dual
+
+ 
+
+
 list user stored procedure
 
 SELECT     object_name FROM     user_procedures WHERE     object_type = 'PROCEDURE'  and object_name like '%'
@@ -390,3 +437,5 @@ from
 start with parent is null 
 connect by prior child = parent
 order by level ;
+
+
