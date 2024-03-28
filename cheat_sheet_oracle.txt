@@ -76,6 +76,7 @@ select upper(regexp_substr ('string\string1','([^\\.*])+$')) result from dual
 select regexp_substr ('memberOf.containsAll({"distinguished name"})','(CN=)([^,])+') from dual
 
  
+ 
 
 +-------------------------------------------------------------------------------------------+
 
