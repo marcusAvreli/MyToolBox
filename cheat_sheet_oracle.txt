@@ -1,6 +1,27 @@
+CREATE TABLE table_name
+
+ 
+
+(
+
+   ID NUMBER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1)
+
+   ,column_name varchar2(450) NOT NULL
+
+  
+
+   ,primary key (id)
+
+  )
+
+ 
+
+
+
+
 +-------------------------------------------------------------------------------------------+ 
 |																							|	
-|	4. crete table with xmltype																	|
+|	4. crete table with xmltype																|
 |																							|
 +-------------------------------------------------------------------------------------------+
 
@@ -29,13 +50,9 @@ insert into test_tbl_xml (xml_data) values(  xmltype(
 
 
 +-------------------------------------------------------------------------------------------+
-
-|                                                                                                                                                                                                                                                                                                                                                                              |             
-
-|              11. oracle_regex: after slash                                                                                                                                                                                                                                       |
-
-|                                                                                                                                                                                                                                                                                                                                                                              |
-
+|
+|              11. oracle_regex: after slash
+|
 +-------------------------------------------------------------------------------------------+
 
  
