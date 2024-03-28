@@ -1,3 +1,182 @@
+list user stored procedure
+
+SELECT     object_name FROM     user_procedures WHERE     object_type = 'PROCEDURE'  and object_name like '%'
+
+
+truncate table T_XML_TEST_1 drop storage
+drop table T_XML_TEST_1
+
+
+
+SELECT ai.index_name, ai.index_type, ai.uniqueness, aic.*
+FROM all_indexes ai INNER JOIN all_ind_columns aic
+     ON ai.owner = aic.index_owner
+     AND ai.index_name = aic.index_name
+WHERE ai.owner = UPPER('<schema_name>')
+  AND ai.table_name = UPPER('<table_name>') and  ai.index_name LIKE '%<name>%'
+ORDER BY aic.column_position 
+
+
+
++-------------------------------------------------------------------------------------------+ 
+|																							|	
+|	4. Add Remove Columns																	|
+|																							|
++-------------------------------------------------------------------------------------------+
+
+
+	alter table <table_name> drop column STATUSMAKAV;
+	
+	alter table <table_name> add   STATUSMAKAV1 varchar2(100);
+	
++-------------------------------------------------------------------------------------------+ 
+|																							|	
+|	5. Modify Existing column																|
+|																							|
++-------------------------------------------------------------------------------------------+
+
+
+--set not null
+	alter table "table_name" modify (user_id not null);
+	
+--set nullable
+	alter table table_name modify (<col_name> null);
+	
++-------------------------------------------------------------------------------------------+ 
+|																							|	
+|	6. Rename Existing column																|
+|																							|
++-------------------------------------------------------------------------------------------+
+	alter table <table_name> rename column <col_name> to name;
+	
+
++-------------------------------------------------------------------------------------------+ 
+|																							|	
+|	7. oracle_regex: everything before first appearance of character						|
+|																							|
++-------------------------------------------------------------------------------------------+
+
+
+select substr('aaa__bbb__ccc__ddd__23__45__tttt.containsAll({"68"})', 1, instr('aaa__bbb__ccc__ddd__23__45__tttt.containsAll({"68"})', '.') -1) from dual
+
+
++-------------------------------------------------------------------------------------------+ 
+|																							|	
+|	8. oracle_regex: everything after first appearance of character							|
+|																							|
++-------------------------------------------------------------------------------------------+
+	select substr('ad_H_A_A_SD',  instr('ad_H_A_A_SD', '_') +1) from dual
+	
++-------------------------------------------------------------------------------------------+ 
+|																							|	
+|	10. oracle_regex: string between parenthesis and quotes									|
+|																							|
++-------------------------------------------------------------------------------------------+
+
+	select regexp_substr ('UPPER("rsd")','\(\"(.+)\"\)',1,1,null,1) from dual
+
++-------------------------------------------------------------------------------------------+ 
+|																							|	
+|	11. oracle_regex: dashes																|
+|																							|
++-------------------------------------------------------------------------------------------+
+ SELECT Trim (REGEXP_SUBSTR('TEST-NAME', '([^-]*)(-|$)', 1, 1, '', 1)) as splitted_test
+ ,Trim (REGEXP_SUBSTR('TEST-NAME', '([^-]*)(-|$)', 1, 2, '', 1)) as splitted_name
+ 
+from dual
+
+
++-------------------------------------------------------------------------------------------+ 
+|																							|	
+|	11. stored procedure arguments															|
+|																							|
++-------------------------------------------------------------------------------------------+
+
+SELECT * FROM USER_ARGUMENTS where object_name like 'stored procedure name%'
+
+
++-------------------------------------------------------------------------------------------+ 
+|																							|	
+|	11. user defined tables functions 														|
+|																							|
++-------------------------------------------------------------------------------------------+
+select * from all_type_ATTRS where owner='<owner_name>'
+select * from user_objects where object_name like 'name%';
+SELECT * FROM USER_ARGUMENTS where object_name like 'name%';
+select obj.owner as schema_name,
+       obj.object_name as function_name,
+       ret.data_type as return_type,
+       LISTAGG(args.in_out || ' ' || args.data_type, '; ')
+              WITHIN GROUP (ORDER BY position) as arguments
+from sys.all_objects obj
+join sys.all_arguments args on args.object_id = obj.object_id
+join (
+      select object_id,
+             object_name,
+             data_type
+      from sys.all_arguments
+      where position = 0
+) ret on ret.object_id = args.object_id
+       and ret.object_name = args.object_name
+where obj.object_type = 'FUNCTION'
+      and obj.owner  in ('ssss')
+      and args.position > 0 AND obj.object_name like '<name>%'
+group by obj.owner,
+         obj.object_name,
+         ret.data_type
+order by schema_name,
+         function_name;
+		 
+		 
++-------------------------------------------------------------------------------------------+ 
+|																							|	
+|	11. user defined types																	|
+|																							|
++-------------------------------------------------------------------------------------------+
+SELECT   table_name FROM   user_tables WHERE    table_name like 'typesss_T%'
+select * from all_types where owner='test' AND TYPE_NAME='typesss_TAB_CRTFCTN_DTLS'
+
+
+select * from user_objects where object_name like 'typesss_%' and object_type='FUNCTION'
+select * from user_objects where object_name like 'typesss_T%'
+SELECT * FROM USER_ARGUMENTS where object_name like 'typesss_RPRT%'
+SELECT * FROM USER_ARGUMENTS where object_name like 'typesss_T%'
+
+
++-------------------------------------------------------------------------------------------+ 
+|																							|	
+|	11. table size																			|
+|																							|
++-------------------------------------------------------------------------------------------+
+
+select segment_name,segment_type, sum(bytes/1024/1024/1024) GB
+from user_segments
+where segment_name='table_name' 
+group by segment_name,segment_type
+union all
+select segment_name,segment_type, sum(bytes/1024/1024/1024) GB
+from user_segments
+where segment_name in( select segment_name from user_lobs
+                       where table_name in ('table_name')
+                       union all
+                       select index_name from user_lobs
+                       where table_name  in ('table_name')
+                       )
+group by segment_name,segment_type
+union all 
+select segment_name,segment_type, sum(bytes/1024/1024/1024) GB
+from user_segments
+where segment_name in( select index_name from user_indexes where table_name  in ('table_name')) 
+group by segment_name,segment_type;
+
+
+select max(identity_id) max_value,min(identity_id) min_value,avg(identity_id) avg_value from
+(
+	select count (*) over (partition by identity_id) identity_id
+	from table_name
+)
+
+
 ##Oracle 12c+ only
 create table t1 (
     c1 NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
