@@ -291,7 +291,7 @@ else
 fi
 
 
-
+https://stackoverflow.com/questions/9619030/resolving-javax-net-ssl-sslhandshakeexception-sun-security-validator-validatore
 
 openssl ocsp -issuer .\crates-io-chain.pem -cert .\crates-io.pem -text -url <ocsp_server_url> -no_nonce
 
@@ -306,3 +306,67 @@ openssl pkcs12 -inkey "${DIR_PATH}/tls/server/private/server.key.pem" -in "${DIR
 
 openssl pkcs12 -in tomcat.pfx -info
 openssl s_client -connect 192.168.243.133:8443 -showcerts
+
+
+
+
+Edit : I tried to format the question and accepted answer in more presentable way at my blog.
+
+Here is the original issue.
+
+I am getting this error:
+
+detailed message sun.security.validator.ValidatorException: PKIX path building failed:
+sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+
+cause javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+
+I am using Tomcat 6 as webserver. I have two HTTPS web applications installed on different Tomcats on different ports but on the same machine. Say App1 (port 8443) and App2 (port 443). App1 connects to App2. When App1 connects to App2 I get the above error. I know this is a very common error so came across many solutions on different forums and sites. I have the below entry in server.xml of both Tomcats:
+
+keystoreFile="c:/.keystore" 
+keystorePass="changeit"
+Every site says the same reason that certificate given by app2 is not in the trusted store of app1 jvm. This seems to be true also when I tried to hit the same URL in IE browser, it works (with warming, There is a problem with this web site's security certificate. Here I say continue to this website). But when same URL is hit by Java client (in my case) I get the above error. So to put it in the truststore I tried these three options:
+
+Option 1
+System.setProperty("javax.net.ssl.trustStore", "C:/.keystore");
+System.setProperty("javax.net.ssl.trustStorePassword", "changeit");
+Option 2
+Setting below in environment variable
+
+CATALINA_OPTS -- param name
+-Djavax.net.ssl.trustStore=C:\.keystore -Djavax.net.ssl.trustStorePassword=changeit ---param value
+Option 3
+Setting below in environment variable
+
+JAVA_OPTS -- param name
+-Djavax.net.ssl.trustStore=C:\.keystore -Djavax.net.ssl.trustStorePassword=changeit ---param value
+Result
+But nothing worked.
+
+What at last worked is executing the Java approach suggested in How to handle invalid SSL certificates with Apache HttpClient? by Pascal Thivent i.e. executing the program InstallCert.
+
+But this approach is fine for devbox setup but I can not use it at production environment.
+
+I am wondering why three approaches mentioned above did not work when I have mentioned the same values in server.xml of App2 server and same values in truststore by setting
+
+System.setProperty("javax.net.ssl.trustStore", "C:/.keystore") and System.setProperty("javax.net.ssl.trustStorePassword", "changeit");
+
+in App1 program.
+
+For more information this is how I am making the connection:
+
+URL url = new URL(urlStr);
+
+URLConnection conn = url.openConnection();
+
+if (conn instanceof HttpsURLConnection) {
+
+  HttpsURLConnection conn1 = (HttpsURLConnection) url.openConnection();
+  
+  conn1.setHostnameVerifier(new HostnameVerifier() {
+    public boolean verify(String hostname, SSLSession session) {
+      return true;
+    }
+  });
+
+  reply.load(conn1.getInputStream());
