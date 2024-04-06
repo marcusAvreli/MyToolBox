@@ -962,5 +962,3 @@ Java persistence with JPA and Hibernate, Part 1
 https://www.javaworld.com/article/3373652/java-persistence-with-jpa-and-hibernate-part-1-entities-and-relationships.html
 Java persistence with JPA and Hibernate, Part 2
 https://www.javaworld.com/article/3387643/java-persistence-with-jpa-and-hibernate-part-2-many-to-many-relationships.html?page=3
-
-

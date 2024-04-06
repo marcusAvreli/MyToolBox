@@ -1,0 +1,691 @@
+public class RMT2XmlUtility {
+
+                private static final Logger logger = LoggerFactory.getLogger(RMT2XmlUtility.class);
+
+ 
+
+               
+
+               
+
+ 
+
+                  /**
+
+     * Creates a XML instance in the form of a org.w3c.dom.Document from a XML
+
+     * document of type String.
+
+     *
+
+     * @param xmlSource
+
+     * @return
+
+     * @throws SystemException
+
+     */
+
+    public static Document toDocument(String pathName) throws SystemException {
+
+       DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
+     //  factory.setValidating(true);
+
+     
+
+        factory.setNamespaceAware(true);
+
+        String encoding = "UTF-8";
+
+        DocumentBuilder builder;
+
+        String errMsg = null;
+
+        try {
+
+            builder = factory.newDocumentBuilder();
+
+           // return builder.parse(new InputSource(new StringReader(xmlSource)));
+
+              InputStream inputStream = new FileInputStream(pathName);
+
+                                                Reader reader = new InputStreamReader(inputStream, encoding);
+
+                                                InputSource is = new InputSource(reader);
+
+                                                is.setEncoding(encoding);
+
+                                                return builder.parse(is);
+
+        } catch (ParserConfigurationException e) {
+
+            errMsg = "Parser configuration error occurred for the XML DocumentBuilder interface";
+
+            logger.error(errMsg, e);
+
+            throw new SystemException(errMsg);
+
+        } catch (SAXException e) {
+
+            errMsg = "Failure to create XML document instance due to malformed XML String:  " + pathName;
+
+            logger.error(errMsg, e);
+
+            throw new SystemException(errMsg);
+
+        } catch (IOException e) {
+
+            errMsg = "Failure to create XML document instance due to  general IO error(s)";
+
+            logger.error(errMsg, e);
+
+            throw new SystemException(errMsg);
+
+        }
+
+    }
+
+ 
+
+ 
+
+  public static String nodeToString(Node node) {
+
+    StringWriter sw = new StringWriter();
+
+    try {
+
+      Transformer t = TransformerFactory.newInstance().newTransformer();
+
+      t.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+
+      t.setOutputProperty(OutputKeys.INDENT, "yes");
+
+      t.transform(new DOMSource(node), new StreamResult(sw));
+
+    } catch (TransformerException te) {
+
+      System.out.println("nodeToString Transformer Exception");
+
+    }
+
+    return sw.toString();
+
+  }
+
+ 
+
+    public static Document nodeToDocument(Node node) {
+
+                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
+                                factory.setNamespaceAware(true);
+
+                                DocumentBuilder builder;
+
+                                Document newDocument =  null;
+
+                                try {
+
+                                                builder = factory.newDocumentBuilder();
+
+                               
+
+                                newDocument = builder.newDocument();
+
+                                Node importedNode = newDocument.importNode(node, true);
+
+                                newDocument.appendChild(importedNode);
+
+                                } catch (ParserConfigurationException e) {
+
+                                                // TODO Auto-generated catch block
+
+                                                e.printStackTrace();
+
+                                }
+
+                                return newDocument;
+
+    }
+
+///umtb
+
+    private static DocumentBuilder createDocumentBuidler() {
+
+                                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
+                                factory.setNamespaceAware(true);
+
+                                factory.setValidating(true);
+
+                                DocumentBuilder builder = null;
+
+                                try {
+
+                                                builder = factory.newDocumentBuilder();
+
+                                } catch (ParserConfigurationException e) {
+
+                                                // TODO Auto-generated catch block
+
+                                                e.printStackTrace();
+
+                                }
+
+                                return builder;
+
+ 
+
+                }
+
+                public static Document createDocument(String objectTypeName) {
+
+ 
+
+                                DocumentBuilder buidler = createDocumentBuidler();
+
+ 
+
+                                Document localDocument = buidler.newDocument();
+
+ 
+
+                                Element root = localDocument.createElement(objectTypeName);
+
+                                localDocument.appendChild(root);
+
+                               
+
+                                return localDocument;
+
+ 
+
+                }
+
+                public static void writeToXml(Document document,String path,String xslPathName) {
+
+                                if(null != document && RMT2Utility.isNotNullOrEmpty(path)) {
+
+                                                TransformerFactory transformerFactory = TransformerFactory.newInstance();                                   
+
+                                                document.setXmlStandalone(true);
+
+                               
+
+                                                Source xslDoc = new StreamSource(xslPathName);
+
+                                                Transformer transformer;
+
+                                                try {
+
+                                                                transformer = transformerFactory.newTransformer(xslDoc);
+
+                                                                DOMSource source = new DOMSource(document);                                                                         
+
+                                                                StreamResult result = new StreamResult(new File(path));                                                             
+
+                                                                transformer.transform(source, result);
+
+                                                } catch (TransformerException e) {
+
+                                                                // TODO Auto-generated catch block
+
+                                                                e.printStackTrace();
+
+                                                }
+
+                                }else {
+
+                                                logger.info("one of inputs are not valid");
+
+                                }
+
+ 
+
+                }
+
+               
+
+                public static Document xslt(Document document,String xslPathName) {
+
+                                Document result = null;
+
+                                TransformerFactory transformerFactory = TransformerFactory.newInstance();
+
+                                Source xslDoc = new StreamSource(xslPathName);
+
+                                Transformer transformer;
+
+                                try {
+
+                                                transformer = transformerFactory.newTransformer(xslDoc);
+
+                                                DOMSource source = new DOMSource(document);
+
+                                                DOMResult domresult = new DOMResult();
+
+                                                transformer.transform(source, domresult);
+
+                                                Node node = domresult.getNode();                                                        
+
+                                                result = (Document) node;
+
+                                } catch (TransformerException e) {
+
+                                                // TODO Auto-generated catch block
+
+                                                e.printStackTrace();
+
+                                }
+
+                                return result;
+
+                }
+
+                public static void writeToXml(Document document,String path) {
+
+                                if(null != document && RMT2Utility.isNotNullOrEmpty(path)) {
+
+                                                TransformerFactory transformerFactory = TransformerFactory.newInstance();                                   
+
+                                                Transformer transformer;
+
+                                                try {
+
+                                                                document.setXmlStandalone(true);
+
+                                                                transformer = transformerFactory.newTransformer();                                                    
+
+                                                                transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount","2");
+
+                                                                transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+
+                                                                transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+
+                                                                transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+
+ 
+
+                                                                DOMImplementation domImpl = document.getImplementation();
+
+                                                                DocumentType doctype = domImpl.createDocumentType("doctype", "sailpoint.dtd", "sailpoint.dtd");
+
+ 
+
+                                                                transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, doctype.getSystemId());
+
+                                                                transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, doctype.getPublicId());
+
+ 
+
+                                                                DOMSource source = new DOMSource(document);
+
+                                                                File file = new File(path);
+
+                                               
+
+                                                                StreamResult result = new StreamResult(file);
+
+ 
+
+                                                                transformer.transform(source, result);
+
+                                                } catch (TransformerException e) {
+
+                                                                // TODO Auto-generated catch block
+
+                                                                e.printStackTrace();
+
+                                                }
+
+                                }else {
+
+                                                logger.warn("document or destination path is not provided");
+
+                                }
+
+ 
+
+                }
+
+                public static Document createImporter(List<Document> documents) {
+
+                                Document importer = RMT2XmlUtility.createDocument("sailpoint");
+
+                                for (Document document : documents) {
+
+                                                umtbAppendDocument(document,importer);
+
+                                }
+
+                                return importer;
+
+                }
+
+               
+
+                public static void umtbAppendDocument(Document sourceDocument,Document destinationDocument) {                               
+
+                                Element importedRoot = sourceDocument.getDocumentElement();
+
+                                Node copied = importedRoot.cloneNode(true);
+
+                                Element root = destinationDocument.getDocumentElement();
+
+                                destinationDocument.adoptNode(copied);
+
+                                root.appendChild(copied);
+
+                }
+
+               
+
+               
+
+               
+
+               
+
+                public static void umtbImportNode(String queryLocation,List<Document> sources,Document destination) {                               
+
+                                if(RMT2Utility.isNotNullOrEmpty(sources) && null !=destination && RMT2Utility.isNotNullOrEmpty(queryLocation) && !"null".equals(queryLocation)) {
+
+                                                for(Document source : sources) {
+
+                                                                umtbImportNode(queryLocation,source,destination);
+
+                                                }
+
+                                }             
+
+                }
+
+                public static void umtbImportNode(String queryLocation,Node source,Document destination) {
+
+                                if(null != source) {
+
+                                Document document = RMT2XmlUtility.nodeToDocument(source);
+
+                                umtbImportNode(queryLocation, document, destination);
+
+                                }
+
+                }
+
+               
+
+                public static void umtbImportNode(String queryLocation,Document source,Document destination) {
+
+                                if(null!= source && null !=destination && RMT2Utility.isNotNullOrEmpty(queryLocation) && !"null".equals(queryLocation)) {
+
+                                                NodeList destinationNodes = RMT2XmlUtility.umtbExecuteQuery(queryLocation, destination);                               
+
+                                                Node node = source.getDocumentElement();
+
+                                                Node imp = destination.importNode(node, true);
+
+                                                destinationNodes.item(0).appendChild(imp);                                     
+
+                                }
+
+                }
+
+                public static void umtbRemoveNode(String queryString,Document document) {
+
+                                NodeList runNodes = umtbExecuteQuery(queryString,
+
+                                                                document);
+
+                                if(null != runNodes) {
+
+                                                Node node = runNodes.item(0);
+
+                                                if(null != node) {                               
+
+                                                                node.getParentNode().removeChild(node);
+
+                                                }
+
+                                }
+
+                }
+
+               
+
+                public static XPath getXpath() {
+
+                                return XPathFactory.newInstance().newXPath();
+
+                }
+
+                public static NodeList umtbExecuteQuery(String xQuery,Document inDocument) {
+
+                                XPath xpath = getXpath();
+
+                                NodeList nodeList = null;
+
+                                try {
+
+                                                nodeList = (NodeList)xpath.evaluate(xQuery, inDocument,XPathConstants.NODESET);
+
+                                } catch (XPathExpressionException e) {
+
+                                                // TODO Auto-generated catch block
+
+                                                e.printStackTrace();
+
+                                }
+
+                               
+
+                                return nodeList;
+
+                }
+
+               
+
+                public static boolean detectCDATA(Node node,boolean detected) {
+
+                                   // is there anything to do?
+
+                      if(node == null) {
+
+                            return false;
+
+                        }
+
+                        int type = node.getNodeType();
+
+                        switch (type) {
+
+                        // print document
+
+                        case Node.DOCUMENT_NODE: {
+
+                               detected = detectCDATA(((Document)node).getDocumentElement(),detected);
+
+                               break;
+
+                            }
+
+                        case Node.ELEMENT_NODE: {
+
+                                NodeList children = node.getChildNodes();
+
+                            if(children != null) {
+
+                               int len = children.getLength();
+
+                                                                                for(int i=0;i<len;i++) {
+
+                                                                                                detected=           detectCDATA(children.item(i),detected);
+
+                                                                                }
+
+                            }
+
+                           
+
+                           break;
+
+                            }
+
+                            // handle entity reference nodes
+
+                        case Node.ENTITY_REFERENCE_NODE: {
+
+                                NodeList children = node.getChildNodes();
+
+                              if(children != null) {
+
+                                    int len = children.getLength();
+
+                                  for(int i=0;i<len;i++){
+
+                                                detected=  detectCDATA(children.item(i),detected);
+
+                                   }
+
+                                }
+
+                               break;
+
+                            }
+
+               
+
+                        case Node.CDATA_SECTION_NODE: {
+
+                               return true;
+
+                            }
+
+               
+
+                        case Node.TEXT_NODE: {
+
+               
+
+                                                Node pn = node.getParentNode();
+
+                                                String pnn = pn.getNodeName();
+
+                                                                break;
+
+                                                            }
+
+               
+
+                        }  // switch
+
+                       
+
+                      return detected;
+
+                }
+
+               
+
+                private void traverse(Node node) {
+
+        // is there anything to do?
+
+      if(node == null) {
+
+            return;
+
+        }
+
+        int type = node.getNodeType();
+
+        switch (type) {
+
+        // print document
+
+        case Node.DOCUMENT_NODE: {
+
+                traverse(((Document)node).getDocumentElement());
+
+               break;
+
+            }
+
+        case Node.ELEMENT_NODE: {
+
+                NodeList children = node.getChildNodes();
+
+            if(children != null) {
+
+               int len = children.getLength();
+
+                                                                for(int i=0;i<len;i++) {
+
+                                                                                traverse(children.item(i));
+
+                                                                }
+
+            }
+
+           
+
+           break;
+
+            }
+
+            // handle entity reference nodes
+
+        case Node.ENTITY_REFERENCE_NODE: {
+
+                NodeList children = node.getChildNodes();
+
+              if(children != null) {
+
+                    int len = children.getLength();
+
+                  for(int i=0;i<len;i++){
+
+                        traverse(children.item(i));
+
+                   }
+
+                }
+
+               break;
+
+            }
+
+
+        case Node.CDATA_SECTION_NODE: {
+
+System.out.println(node.getNodeValue());
+
+              
+
+                break;
+
+            }
+
+
+        case Node.TEXT_NODE: {
+
+
+                                Node pn = node.getParentNode();
+
+                                String pnn = pn.getNodeName();
+
+                                                break;
+
+                                            }
+
+
+        }  // switch
+
+    } // traverse(Node)
+
+               
+
+               
+
+}
