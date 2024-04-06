@@ -486,6 +486,32 @@ https://github.com/kiwix/kiwix-js/blob/11138ff5ca3c16f847e68864311d36b0b3ca3e63/
 https://github.com/videojs/video.js/blob/6fe68e5dad6853d8f0eaf45534873607c1b32277/rollup.config.js#L18
 
 //babel external tabulator
+https://github.com/marcellourbani/vscode_abap_remote_fs/blob/cf89d4746852efa09a9b2d096b70a6660523d54d/client/media/query.js#L9
+function showResult(result) {
+
+    let cols = result.columns.map(obj => {
+        return { title: obj.description, field: obj.name };
+    });
+
+    var table = new Tabulator("#result-table", {
+        data: result.values, //assign data to table
+        columns: cols,
+        // pagination: "local",
+        // paginationSize: 10,
+        // paginationSizeSelector: [10, 20, 50, 100]
+    });
+
+}
+https://github.com/sul-dlss/argo/blob/66a4599d92051d12745c8a0b9d702f448764b9ae/app/javascript/controllers/object_reporter.js#L19
+registerCustomFormatters () {
+    FormatModule.formatters = {
+      ...FormatModule.formatters,
+      linkToPurl: (cell) => `<a target="_blank" href="${cell.getValue()}">${cell.getValue()}</a>`,
+      linkToArgo: (cell) => `<a target="_blank" href="/view/druid:${cell.getValue()}">${cell.getValue()}</a>`
+    }
+  }
+  https://github.com/ign-argentina/argenmap/blob/6d660dceff362159077932a3c8211942fd2ad356/src/js/components/table/UI.js#L406
+   createFilters(data) {
 https://github.com/rollup/rollup-plugin-babel/issues/162
 https://github.com/digital-blueprint/dispatch-app/blob/f5562bf8f8c728a6082b2136fe7440ff0cb9d9e5/rollup.config.js#L17
 https://github.com/geospiza-fortis/owlrepo-client/blob/526d721ea7efef0e07f69772d4b59cae4e69ac79/vite.config.js#L6
