@@ -1,37 +1,17 @@
 public class RMT2XmlUtility {
 
-                private static final Logger logger = LoggerFactory.getLogger(RMT2XmlUtility.class);
-
- 
-
-               
-
-               
-
- 
-
-                  /**
-
+    private static final Logger logger = LoggerFactory.getLogger(RMT2XmlUtility.class);
+    /**
      * Creates a XML instance in the form of a org.w3c.dom.Document from a XML
-
      * document of type String.
-
      *
-
      * @param xmlSource
-
      * @return
-
      * @throws SystemException
-
      */
 
     public static Document toDocument(String pathName) throws SystemException {
-
-       DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-
-     //  factory.setValidating(true);
-
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
      
 
         factory.setNamespaceAware(true);
