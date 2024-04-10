@@ -1,0 +1,359 @@
+import { Component, OnInit, Input,ChangeDetectionStrategy,OnChanges,SimpleChanges,ViewChild,ChangeDetectorRef,AfterViewInit} from '@angular/core';
+
+import { Observable } from 'rxjs/Observable';
+
+import {ReplaySubject} from 'rxjs/ReplaySubject';
+
+import {Subject} from 'rxjs/Subject';
+
+import 'rxjs/add/observable/of';
+
+import { AgGridNg2 } from 'ag-grid-angular';
+
+import {GridOptions} from 'ag-grid/main';
+
+import {ButtonRendererComponent} from './button-renderer.component';
+
+//https://github.com/stajics/poslovna_informatika/blob/d01ae4d4f2fc5e9b7703db2fa699eea3ee39308e/ng2GridReactive/app/ag-grid/ag-grid.component.ts#L6
+
+import {TranslateService} from '@ngx-translate/core';
+
+//import {takeUnitl }from 'rxjs/operators';
+
+//import {takeUntil} from 'rxjs';
+
+//import 'rxjs/add/operator/takeUnitl'
+
+ 
+
+@Component({
+
+  selector: 'simple-ag-grid',
+
+  templateUrl: './simple-ag-grid.component.html',
+
+  changeDetection: ChangeDetectionStrategy.OnPush,
+
+  styleUrls: ['./simple-ag-grid.component.css']
+
+})
+
+export class UIAgGridComponent implements OnInit/*,OnChanges*/,AfterViewInit {
+
+                @ViewChild('agGrid') agGrid: AgGridNg2;
+
+                @Input() gridOptions: Observable<GridOptions[]>; 
+
+                destroy$ = new Subject<void>();
+
+private options$=new ReplaySubject<GridOptions>(1);
+
+@Input()
+
+  frameworkComponents : any;
+
+  overlayNoRowsTemplate;
+
+ 
+
+  constructor(public translate:TranslateService
+
+     /*private cd: ChangeDetectorRef*/) {
+
+//this.frameworkComponents = {
+
+  //    buttonRenderer: ButtonRendererComponent,
+
+    //}
+
+ 
+
+                                }
+
+ 
+
+ 
+
+  ngOnInit() {             
+
+    this.setNoRowTxt();
+
+                this.agGrid.defaultColDef={wrapText:true};
+
+                   this.options$.subscribe((options) => {
+
+       // this.disposeGrid()
+
+        //this.createGrid(options)
+
+                                console.log("options:"+options);
+
+      })
+
+ 
+
+               
+
+  }
+
+ 
+
+  onGridReady(params) {
+
+                                console.log("Grid is Ready");
+
+                                console.log("ng_onchanges"+params.columnDefs);
+
+                                this.options$.subscribe((options) => {
+
+       // this.disposeGrid()
+
+        //this.createGrid(options)
+
+                                console.log("options:"+options);
+
+      })
+
+                                                console.log("ng_onchanges"+params.columnDefs);
+
+                                                console.log("ng_onchanges"+params.api.columnDefs);
+
+                                                console.log("ng_onchanges"+params.api.columns);
+
+                                                console.log("ng_onchanges"+params.columns);
+
+                                                console.log("ng_onchanges"+params.columnApi.columns);
+
+                                                console.log("ng_onchanges"+params.defaultColDef);
+
+                                                console.log("ng_onchanges"+params.api.defaultColDef);
+
+                                                //params.map(data => console.log("=============:"+data));
+
+                                                console.log("after:"+this.gridOptions[0]);
+
+                  console.log("after:"+this.gridOptions[1]);
+
+//                            var gridApi = params.api;
+
+                                const gridApi2 = params.columnApi.getAllColumns();;
+
+                                console.log("ng_onchanges gridApi2: "+gridApi2);
+
+                                this.agGrid.frameworkComponents=this.frameworkComponents;
+
+                /*
+
+                                                this.options$.next(this.gridOptions);      
+
+                                this.options$.subscribe(data => {                                             
+
+                                                this.agGrid.defaultColDef=data.defaultColDef
+
+                                                this.agGrid.enableRtl=(data.enableRtl);
+
+                                                this.agGrid.enableSorting=(data.enableSorting);
+
+                                                this.agGrid.frameworkComponents=this.frameworkComponents;
+
+                                })
+
+                                                                console.log("after:"+this.gridOptions[0]);
+
+                  console.log("after:"+this.gridOptions[1]);
+
+ 
+
+                                if(this.agGrid.api!=undefined){
+
+                                                this.options$.subscribe(data => {
+
+                                                this.agGrid.api.setColumnDefs(data.columnDefs);
+
+                                                this.agGrid.enableRtl=(data.enableRtl);
+
+                                                this.agGrid.enableSorting=(data.enableSorting);
+
+                                               
+
+                                                });
+
+                                }
+
+*/
+
+                console.log("after:"+this.agGrid.gridOptions.api);
+
+                console.log("after:"+this.agGrid.gridOptions.columnApi);
+
+                   console.log("after_here:"+JSON.stringify(this.agGrid.gridOptions.columnDefs));
+
+                console.log("after:"+this.agGrid.gridOptions.columnApi);
+
+  }
+
+ 
+
+  onRowSelected(event){
+
+                  console.log("fsdfsdfsdf");
+
+  }
+
+  ngAfterViewInit(){
+
+                  //console.log("after:"+this.agGrid.columnApi.getColumns());
+
+                  //console.log("after2:"+this.gridOptions.api);
+
+                  console.log("after:"+this.gridOptions[0]);
+
+                  console.log("after:"+this.agGrid.gridOptions.columnDefs);
+
+                  console.log("after:"+this.gridOptions[1]);
+
+                  console.log("after_here:"+JSON.stringify(this.agGrid.gridOptions.columnDefs));
+
+                console.log("after:"+this.agGrid.gridOptions.columnApi);
+
+               
+
+  }
+
+ 
+
+   ngOnChanges(changes: any) {
+
+//console.log("after:"+this.agGrid.columnApi.getAllDisplayedColumns());  
+
+console.log("after:"+this.gridOptions[0]);
+
+                  console.log("after:"+this.gridOptions[1]);
+
+                                console.log("ng_onchanges","started");
+
+                                if(this.agGrid){
+
+                                                console.log("updated_ng_grid");
+
+                                }else{
+
+                                                console.log("updated_ng_grid");
+
+                                }
+
+                                this.options$.next(this.gridOptions);
+
+console.log("changes:"+JSON.stringify(changes));
+
+for(var prop in changes){
+
+               
+
+}             
+
+                                this.gridOptions['onGridReady'] = (agGrid) => {
+
+                                               
+
+                                                const type= typeof agGrid;
+
+                                                console.log("type:"+JSON.stringify(type));
+
+                                }
+
+                                this.options$.subscribe(data => {
+
+                                                console.log("columnApi:"+data.columnApi);
+
+                                                console.log("columnApi:"+data.columnApi);
+
+                                                this.agGrid.defaultColDef=data.defaultColDef                    
+
+                                                this.agGrid.enableRtl=(data.enableRtl);
+
+                                                this.agGrid.enableSorting=(data.enableSorting);
+
+                                                this.agGrid.frameworkComponents=this.frameworkComponents;
+
+                               
+
+                                })
+
+                               
+
+ 
+
+                                if(this.agGrid.api!=undefined){
+
+                                                this.options$.subscribe(data => {
+
+                                                                console.log("ng_onchanges:"+data.columnDefs[2].headerName);
+
+                                                                console.log("ng_onchanges");
+
+                                                this.agGrid.api.setColumnDefs(data.columnDefs);
+
+                                                this.agGrid.enableRtl=(data.enableRtl);
+
+                                                                const gridApi2 = data.columnApi.getAllColumns();;
+
+                               
+
+                                                this.agGrid.enableSorting=(data.enableSorting);
+
+                                               
+
+                                                });
+
+                                }
+
+                                console.log("ng_onchanges","finished");
+
+    }
+
+ 
+
+  private setNoRowTxt() {
+
+    this.overlayNoRowsTemplate = `No Records were fetched. Please try again later.`;
+
+  }
+
+  onBtnExport(): void {
+
+    const params = {
+
+      columnGroups: true,
+
+      allColumns: true,
+
+                onlySelected:true,
+
+      fileName: 'filename_of_your_choice',
+
+      //columnSeparator: document.querySelector("#columnSeparator")
+
+    };
+
+                const selectedNodes2 = this.agGrid.columnApi.getAllColumns();
+
+                //const selectedNodes3 = this.agGrid.getColumnDefs();
+
+                //console.log("selectedNodes2:"+(selectedNodes3));
+
+                //console.log("selectedNodes2:"+(selectedNodes2[0].columnDef));
+
+              const selectedNodes = this.agGrid.api.getSelectedNodes();
+
+                                                                console.log('selectedNodes', selectedNodes);
+
+   
+
+              this.agGrid.api.exportDataAsCsv(params);
+
+}
+
+ 
+
+}
