@@ -12,7 +12,8 @@ curl -v -k   -X POST   -d "{\"email\":\"test\",\"password\":\"test\"}" -H "Conte
 
 curl -v -k http://localhost:8080/myRestApi/user/register -X POST -H "Content-Type: application/json" -d "{\"login\":\"123\",\"email\":\"markgav19@gmail.com\",\"password\":\"12345\",\"langKey\":\"en\"}" 
 curl -v -k http://localhost:8080/myRestApi/rprts/insert -X POST -H "Content-Type: application/json" -d "{\"id\":1,\"name\":\"markgav19@gmail.com\",\"displayName\":\"12345\",\"description\":\"en\",\"disabled\":0}" 
-
+curl -v -k http://localhost:8080/myRestApi/rprts/insert -X POST -H "Content-Type: application/json" -d "{\"id\":-1,\"name\":\"dsadsa\",\"displayName\":null,\"description\":\"asdas\",\"disabled\":0}"
+curl -v -k http://localhost:8080/myRestApi/rprts/getAll -X GET -H "Content-Type: application/json"
 
 Note: Unnecessary use of -X or --request, POST is already inferred.
 *   Trying [::1]:8080...
