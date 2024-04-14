@@ -1,3 +1,11 @@
+get everything after tab
+	find what: \t([^\t]+)$
+
+remove everything before tab
+	find what: ^.*[ ,\t]+
+	replace with: <empty field>
+
+
 keep single space between string
 
 find what: ^ +| +$|( )+
