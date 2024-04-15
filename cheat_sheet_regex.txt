@@ -1,3 +1,14 @@
+Everything after :=, tab
+	:=([^:=]+)$
+	\t([^\t]+)$
+	=([^=]+)$
+
+Everything before :=, tab
+	^.*[ ,:=]+
+	^.*[ ,\t]+
+
+
+
 get everything after tab
 	find what: \t([^\t]+)$
 

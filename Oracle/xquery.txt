@@ -194,6 +194,81 @@ where sptApp.name='<app_name>'  and dbms_lob.getlength(sptLink.ATTRIBUTES)>1;
 
 
 
+conditional xquery
+
+with ir_errors as (
+
+ 
+
+select name
+
+,num_Of_Approvals
+
+,ir_details.err_message from spt_identity_request sptIdentityRequest
+
+ 
+
+,XMLTABLE('
+
+let $map := /Attributes/Map
+
+       let $approvalSummaries := $map/entry[@key="approvalSummaries"]/value/List
+
+       let $numOfApprovals := count($approvalSummaries)
+
+       let $err_message :=       $map/entry[@key="messages"]/value/List/Message/Parameters/Message/Parameters/String
+
+       return
+
+       if($numOfApprovals>0) then
+
+      
+
+      
+
+               element r{
+
+                    
+
+                     }
+
+      
+
+       else (
+
+              element r{
+
+                    
+
+              }
+
+       )
+
+       '
+
+passing case when sptIdentityRequest.ATTRIBUTES is null then null else XMLTYPE(sptIdentityRequest.ATTRIBUTES) end
+
+columns
+
+              err_message varchar2(255) path 'err_message'
+
+              ,num_Of_Approvals number(10) path 'numOfApprovals'
+
+   )ir_details
+
+   where sptIdentityRequest.created >1706824799000 and dbms_lob.getlength(sptIdentityRequest.ATTRIBUTES)>1
+
+ 
+
+   )
+
+ 
+
+   select * from ir_errors
+
+ =======================================================================
+
+
 https://www.sqlservercentral.com/blogs/xquery-accessing-the-attributes-axis
 SELECT t.c.query('.') AS 'SomeElement'
 
