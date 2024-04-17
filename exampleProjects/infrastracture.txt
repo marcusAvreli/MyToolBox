@@ -1,6 +1,6 @@
 https://github.com/Laniax/EventDispatcher/blob/master/src/scripts/laniax/framework/event_dispatcher/EventListener.java
 
-
+https://www.databasesandlife.com/java-docker-aws-ecs-multicore/
 
 https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/JAAS_Cheat_Sheet.md
 Enterprise Java™ Security: Building Secure J2EE™ Applications
