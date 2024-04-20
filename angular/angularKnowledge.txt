@@ -1,11 +1,73 @@
-https://stackoverflow.com/questions/34376854/delegation-eventemitter-or-observable-in-angular
+//wizard
+https://github.com/webosbrew/dev-manager-desktop/blob/364f5e4a36b8c5940eb04b1d773b027a2dce048d/src/app/add-device/wizard/wizard.component.ts#L22
+https://github.com/homebridge/homebridge-config-ui-x/blob/e11fc5a3d1049e8dfe8523b6e3ad70c7115b0307/ui/src/app/core/manage-plugins/manual-plugin-config-modal/manual-plugin-config-modal.component.ts#L90
+
+//drag and drop
+https://github.com/uav4geo/GCPEditorPro/blob/d78143c331a05d8bcf4ba35eaeb23447e04ad357/src/app/app.component.ts#L129
+
+//modal service
+https://github.com/eugenp/tutorials/blob/38bb8c3e913abc4de023b3f8c368123aab9d7d7a/jhipster-modules/jhipster-monolithic/src/main/webapp/app/admin/user-management/user-modal.service.ts
+
+//export abstract class InstructorSessionModalPageComponent 
+https://github.com/TEAMMATES/teammates/blob/fb7c4e874e555c7aa51949f9ae73ddeea3b733a2/src/web/app/pages-instructor/instructor-session-modal-page.component.ts#L44
+
+
+show dialog
+https://github.com/gayemce/ITDeskProject/blob/620e7e4474ffa67c80dde79c857440546df242fa/ITDeskClient/src/app/component/home/home.component.ts#L123
+https://github.com/opensource-emr/hospital-management-emr/blob/8a09a68ffdd65af0f268d68eaf857dafe17f844d/Code/Websites/DanpheEMR/wwwroot/DanpheApp/src/app/shared/danphe-confirmation-dialog/danphe-confirmation.directive.ts#L5
+https://github.com/gayemce/ITDeskProject/blob/620e7e4474ffa67c80dde79c857440546df242fa/ITDeskClient/src/app/component/home/home.component.ts
+
+https://github.com/GrapesJS/grapesjs/blob/c3322e7099d225c38fd2b9d22b2b4c507e3cf317/src/modal_dialog/model/Modal.ts
+	
+	
+DEFAULT PORT
++-----------------------------------------------------------+
+|															|
+|	DEFAULT PORT											|
+|															|
++-----------------------------------------------------------+
+	
+	Angular CLI 1
+	
+	{
+	  "defaults": {
+		"serve": {
+		  "host": "0.0.0.0",
+		  "port": 5000 
+		}
+	  }
+	}
+	
+	Angular CLI
+	
+	 "project-name": {
+        ...
+        "architect": {
+            "serve": {
+                "options": {
+                  "host": "0.0.0.0",
+                  "port": 5000
+                }
+            }
+        }
+        ...
+    }
+	
+	
++-----------------------------------------------------------+
+|															|
+|	DELEGATION: EVENTEMITTER OR OBSERVABLE IN ANGULAR		|
+|															|
++-----------------------------------------------------------+
+	https://stackoverflow.com/questions/34376854/delegation-eventemitter-or-observable-in-angular
+	
 	Update 2016-06-27: instead of using Observables, use either
 		a BehaviorSubject, as recommended by @Abdulrahman in a comment, or
 		a ReplaySubject, as recommended by @Jason Goemaat in a comment
 
 +-----------------------------------------------------------+
 |															|
-|	SHARE MULTIPLE OBSERVERS											|
+|	SHARE MULTIPLE OBSERVERS								|
 |															|
 +-----------------------------------------------------------+
 	https://stackoverflow.com/questions/34376854/delegation-eventemitter-or-observable-in-angular

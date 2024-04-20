@@ -512,6 +512,9 @@ registerCustomFormatters () {
   }
   https://github.com/ign-argentina/argenmap/blob/6d660dceff362159077932a3c8211942fd2ad356/src/js/components/table/UI.js#L406
    createFilters(data) {
+   
+https://github.com/HuskerSam/unacogdemos/blob/fddc4f28b9914f535b6437e656083f290e7af6b6/public/metricext/mainpageapp.ts#L168
+  this.promptsTable.on("cellClick", async (e: Event, cell: any) => {
 https://github.com/rollup/rollup-plugin-babel/issues/162
 https://github.com/digital-blueprint/dispatch-app/blob/f5562bf8f8c728a6082b2136fe7440ff0cb9d9e5/rollup.config.js#L17
 https://github.com/geospiza-fortis/owlrepo-client/blob/526d721ea7efef0e07f69772d4b59cae4e69ac79/vite.config.js#L6
