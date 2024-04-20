@@ -194,17 +194,16 @@ where sptApp.name='<app_name>'  and dbms_lob.getlength(sptLink.ATTRIBUTES)>1;
 
 
 
-conditional xquery
++-----------------------------------------------------------+
+|															|
+|	BASIC CONDITIONAL XQUERY								|
+|															|
++-----------------------------------------------------------+
 
 with ir_errors as (
-
- 
-
-select name
-
-,num_Of_Approvals
-
-,ir_details.err_message from spt_identity_request sptIdentityRequest
+	select name
+	,num_Of_Approvals
+	,ir_details.err_message from spt_identity_request sptIdentityRequest
 
  
 
@@ -220,29 +219,11 @@ let $map := /Attributes/Map
 
        return
 
-       if($numOfApprovals>0) then
-
-      
-
-      
-
-               element r{
-
-                    
-
-                     }
-
-      
-
-       else (
-
-              element r{
-
-                    
-
-              }
-
-       )
+			if($numOfApprovals>0) then
+				element r{}
+			else (
+				element r{}
+			)
 
        '
 
