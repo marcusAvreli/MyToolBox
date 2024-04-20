@@ -1,28 +1,41 @@
-Everything after :=, tab
++-----------------------------------------------------------+
+|															|
+|	AFTER :=,\t,= 											|
+|															|
++-----------------------------------------------------------+
+/*
+semicolon equal,tab, equal SIGN
+*/
 	:=([^:=]+)$
 	\t([^\t]+)$
 	=([^=]+)$
 
-Everything before :=, tab
++-----------------------------------------------------------+
+|															|
+|	BEFORE :=,\t,= 											|
+|															|
++-----------------------------------------------------------+
+/*
+semicolon equal,tab, equal SIGN
+*/
+
 	^.*[ ,:=]+
 	^.*[ ,\t]+
 
++-----------------------------------------------------------+
+|															|
+|	KEEP SINGLE SPACE BETWEEN STRING						|
+|															|
++-----------------------------------------------------------+
 
+	find what: ^ +| +$|( )+
+	replace with: $1
 
-get everything after tab
-	find what: \t([^\t]+)$
-
-remove everything before tab
-	find what: ^.*[ ,\t]+
-	replace with: <empty field>
-
-
-keep single space between string
-
-find what: ^ +| +$|( )+
-replace with: $1
-
-converT all characters to upper case
++-----------------------------------------------------------+
+|															|
+|	CONVERT ALL CHARACTERS TO UPPER CASE					|
+|															|
++-----------------------------------------------------------+
 	find what: ([a-zA-Z]*)
 	replace with: \U\1
 	
