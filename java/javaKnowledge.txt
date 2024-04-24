@@ -1,1 +1,11 @@
 https://java-design-patterns.com/patterns/caching/#related-patterns
+
+JAVA HASHMAP
+https://medium.com/swlh/hashmap-implementation-for-java-90a5f58d4a5b
+
+
+JAVA MEMORY
+https://medium.com/@MrAndroid/java-multithreading-part-1-java-memory-model-fb8e0cfab9d3
+https://medium.com/@MrAndroid/java-multithreading-part-2-atomicity-visibility-ordering-1665ff7c59e6
+
+https://java-design-patterns.com/patterns/caching/#related-patterns

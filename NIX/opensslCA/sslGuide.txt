@@ -291,6 +291,18 @@ else
 fi
 
 
+
+https://www.petefreitag.com/blog/tlsv1-tlsv1-1-disabled-java/
+
+https://stackoverflow.com/questions/59772588/how-to-change-default-truststore-path
+
+
+
+
+
+
+
+
 https://stackoverflow.com/questions/9619030/resolving-javax-net-ssl-sslhandshakeexception-sun-security-validator-validatore
 
 openssl ocsp -issuer .\crates-io-chain.pem -cert .\crates-io.pem -text -url <ocsp_server_url> -no_nonce
