@@ -17,3 +17,15 @@ static String toProperCase(String s) {
     return s.substring(0, 1).toUpperCase() +
                s.substring(1).toLowerCase();
 }
+
+
++-----------------------------------------------------------+
+|															|
+|	FIRST CHARACTER TO LOWER CASE							|
+|															|
++-----------------------------------------------------------+
+	https://stackoverflow.com/questions/4052840/most-efficient-way-to-make-the-first-character-of-a-string-lower-case
+
+	char c[] = string.toCharArray();
+	c[0] = Character.toLowerCase(c[0]);
+	string = new String(c);
