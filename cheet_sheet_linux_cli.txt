@@ -211,166 +211,44 @@ top -H -p <pid> //See running threads for the java process with CPU/MEM for each
  
 
 +---------------------------------------------------+
-
-|                                                                                                                                                                                                              |
-
-|                              RECODE HTML ENTITIES                                                                                |
-
-|                                                                                                                                                                                                              |
+|													|
+|	RECODE HTML ENTITIES							|
+|													|
++---------------------------------------------------+
+	echo 'ככדגכדגכדגכדכ {0}' | recode ..html
+	echo 'ffff- &#1504' | recode html..utf8
 
 +---------------------------------------------------+
-
- 
-
-                echo 'ככדגכדגכדגכדכ {0}' | recode ..html
-
-                echo 'ffff- &#1504' | recode html..utf8
-
+|                       							|
+|   GREP SEARCH IN FILES							|
+|													|
++---------------------------------------------------+
+	grep -rI testTempReplacement *
+	grep -rI value=\"sdsadasdas\" *
+	
++---------------------------------------------------+
+|													|
+|	TEXT EDITOR ENCODING							|
+|                        							|
 +---------------------------------------------------+
 
-|                                                                                                                                                                                                              |
+	vim file
+	:set bomb
+	:set fileencoding=utf-8
+	:wq 
 
-|                                                              GREP SEARCH IN FILES                                                    |
-
-|                                                                                                                                                                                                              |
-
-+---------------------------------------------------+
-
- 
-
-grep -rI testTempReplacement *
-
-grep -rI value=\"sdsadasdas\" *
-
- 
+	:set encoding=latin1 
 
 +---------------------------------------------------+
+|													|
+|	REMOVE ONLY FILES FROM CURRENT DIRECTORY        |
+|                                                   |
++---------------------------------------------------+ 
 
-|                                                                                                                                                                                                              |
-
-|                              DELETE FILES BY EXTENSION                                                                        |
-
-|                                                                                                                                                                                                              |
-
-+---------------------------------------------------+
+	find . -maxdepth 1 -type f -print0 | xargs -0 rm
 
  
 
-                #List file to be deleted
-
-                find . -name "*.bak" -type f
-
-               
-
-                #Delete files
-
-                find . -name "*.bak" -type f -delete
-
-               
-
-+---------------------------------------------------+
-
-|                                                                                                                                                                                                              |
-
-|                              DELETE FILES BY DATE OF CHANGE RANGE                            |
-
-|                                                                                                                                                                                                              |
-
-+---------------------------------------------------+
-
- 
-
-                #List files that were modified between dates
-
-                find /opt/test/test/logs -type f -newermt '01 Jan 2021 00:00:00' -not -newermt '01 May 2022 00:00:00' -ls
-
-               
-
-                #Delete files that were modified between dates
-
-                find /opt/test/test/logs -type f -newermt '01 Jan 2021 00:00:00' -not -newermt '01 May 2022 00:00:00' -delete
-
- 
-
-+---------------------------------------------------+
-
-|                                                                                                                                                                                                              |
-
-|                                              FIND LOCKS ON FILES                                                                                      |
-
-|                                                                                                                                                                                                              |
-
-+---------------------------------------------------+
-
- 
-
-                lsof +g | grep sailpoint.log | sed "s/[a-z]\+\s\+\([0-9]\+\)\s.*/\\1/" | xargs ps
-
- 
-
-+---------------------------------------------------+
-
-|                                                                                                                                                                                                              |
-
-|                                              TEXT EDITOR ENCODING                                                                               |
-
-|                                                                                                                                                                                                              |
-
-+---------------------------------------------------+
-
- 
-
-                vim file
-
-                :set bomb
-
-                :set fileencoding=utf-8
-
-                :wq
-
- 
-
-:set encoding=latin1
-
- 
-
- 
-
-+---------------------------------------------------+
-
-|                                                                                                                                                                                                              |
-
-|              REMOVE ONLY FILES FROM CURRENT DIRECTORY                              |
-
-|                                                                                                                                                                                                              |
-
-+---------------------------------------------------+
-
- 
-
-                find . -maxdepth 1 -type f -print0 | xargs -0 rm
-
- 
-
-+---------------------------------------------------+
-
-|                                                                                                                                                                                                              |
-
-|                                              PERMISSIONS OCTAL PRESENTATION                                      |
-
-|                                                                                                                                                                                                              |
-
-+---------------------------------------------------+
-
- 
-
-                stat -c '%A %a %n' /opt/test/test/logs/sailpoint.log
-
-                stat -c '%A %a %n' /opt/test/test
-
-                stat -c '%A %a %n' /opt/test/
-
- 
 
  
 
