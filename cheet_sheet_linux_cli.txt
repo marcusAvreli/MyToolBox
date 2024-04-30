@@ -1,6 +1,6 @@
 +-----------------------------------------------------------+
 |															|
-|			LOG OUTPUT OF SH SCRIPT							|
+|	LOG OUTPUT OF SH SCRIPT									|
 |															|
 +-----------------------------------------------------------+
 
@@ -9,7 +9,7 @@
 
 +-----------------------------------------------------------+
 |															|
-|			CHECK KERBEROS CONNECTIVITY						|
+|	CHECK KERBEROS CONNECTIVITY								|
 |															|
 +-----------------------------------------------------------+
 
@@ -20,7 +20,7 @@
 
 +-----------------------------------------------------------+
 |															|
-|			DELETE FILES BY EXTENSION						|
+|	DELETE FILES BY EXTENSION								|
 |															|
 +-----------------------------------------------------------+
 
@@ -33,10 +33,9 @@
 
 +-----------------------------------------------------------+
 |															|
-|			DELETE FILES BY DATE OF CHANGE RANGE			|
+|	DELETE FILES BY DATE OF CHANGE RANGE					|
 |															|
 +-----------------------------------------------------------+
-
 	#List files that were modified between dates
 		find . -type f -newermt '01 jan 2009 00:00:00' -not -newermt '01 jan 2012 00:00:00' -ls
 
@@ -46,16 +45,15 @@
 
 +-----------------------------------------------------------+
 |															|
-|				FIND LOCKS ON FILES							|
+|	FIND LOCKS ON FILES										|
 |															|
-+-----------------------------------------------------------+
- 
++-----------------------------------------------------------+ 
 	lsof +g | grep sailpoint.log | sed "s/[a-z]\+\s\+\([0-9]\+\)\s.*/\\1/" | xargs ps
 
 
 +-----------------------------------------------------------+
 |															|
-|				FILE ENCODING								|
+|	FILE ENCODING											|
 |															|
 +-----------------------------------------------------------+
 
@@ -70,10 +68,9 @@
 
 +-----------------------------------------------------------+
 |															|
-|							JQ								|
+|	JQ														|
 |															|
 +-----------------------------------------------------------+
-
 cat fileName.json | jq -c '. | select(.)' #if this works then json file is correct
 cat fileName.json | jq -c '.groups.name[] | select(.)'
 cat fileName.json | jq -c '.groups.name[] | select(.=="valueToFind")'
@@ -82,45 +79,43 @@ cat fileName.json | jq -c '.groups[] | select(.name=="valueToFind")'
 
 +-----------------------------------------------------------+
 |															|
-|							TR								|
+|	TR														|
 |															|
 +-----------------------------------------------------------+
-
 	cat fileName.json | tr ‘\r\n’ ‘ ’ | jq .
-
-+-----------------------------------------------------------+
-|															|
-|							RECODE							|
-|															|
-+-----------------------------------------------------------+
-
-	echo 'טסט מחרוזת' |recode ..html
-
-
-+-----------------------------------------------------------+
-|															|
-|			PERMISSIONS OCTAL PRESENTATION					|
-|															|
-+-----------------------------------------------------------+
 	
+
++-----------------------------------------------------------+
+|															|
+|	RECODE													|
+|															|
++-----------------------------------------------------------+
+	#from hebrew to entity
+		echo 'טסט מחרוזת' |recode ..html
+	#from entity to hebrew	
+		echo 'ffff- &#1504' | recode html..utf8
+
++-----------------------------------------------------------+
+|															|
+|	PERMISSIONS OCTAL PRESENTATION							|
+|															|
++-----------------------------------------------------------+	
 	stat -c '%A %a %n' /etc/passwd
 
 
 +-----------------------------------------------------------+
 |															|
-|			LS												|
+|	LS														|
 |															|
-+-----------------------------------------------------------+
-	
++-----------------------------------------------------------+	
 	ls -ltr --block-size=M
 	
 
 +-----------------------------------------------------------+
 |															|
-|			SIZE											|
+|	SIZE													|
 |															|
 +-----------------------------------------------------------+
-
 	#disk space usage in linux
 		df -H 
 
@@ -133,7 +128,6 @@ cat fileName.json | jq -c '.groups[] | select(.name=="valueToFind")'
 |				SORT FILES BY SIZE IN DIRECTORY				|
 |															|
 +-----------------------------------------------------------+
-
 	#native
 		ls -lSh
 	#reverse
@@ -142,19 +136,17 @@ cat fileName.json | jq -c '.groups[] | select(.name=="valueToFind")'
 	
 +-----------------------------------------------------------+
 |															|
-|				FIND FILES LARGER THAN 4G					|
+|	FIND FILES LARGER THAN 4G								|
 |															|
 +-----------------------------------------------------------+
-
 	find . -type f -size +4G
 
 
 +-----------------------------------------------------------+
 |															|
-|						TAR									|
+|	TAR														|
 |															|
 +-----------------------------------------------------------+
-
 	#CREATE
 		tar cvf name_of_archive.tar dirname/
 	#UNTAR
@@ -163,61 +155,29 @@ cat fileName.json | jq -c '.groups[] | select(.name=="valueToFind")'
 
 +-----------------------------------------------------------+
 |															|
-|		FIND CLASSES IN JARS								|
+|	FIND CLASSES IN JARS									|
 |															|
 +-----------------------------------------------------------+
+	find . -name '*.jar' -exec sh -c 'export i; for i do     zipinfo -1 "$i" | awk '\''/SignonEJB.*\.class$/{       print ENVIRON["i"] ": " $0}'\''; done' sh {} +
 
-
-
-
-
-
-
-find . -name '*.jar' -exec sh -c 'export i; for i do     zipinfo -1 "$i" | awk '\''/SignonEJB.*\.class$/{       print ENVIRON["i"] ": " $0}'\''; done' sh {} +
-
-
-+---------------------------------------------------+
-
-|                                                                                                                                                                                                              |
-
-|                              number of rows in file                                                                                    |
-
-|                                                                                                                                                                                                              |
-
-+---------------------------------------------------+
-
- 
-
-find . -name "*.xml" | xargs wc -l | sort -n
-
-+---------------------------------------------------+
-
-|                                                                                                                                                                                                              |
-
-|                              CHECK JAVA THREADS                                                                                                    |
-
-|                                                                                                                                                                                                              |
-
-+---------------------------------------------------+
-
-jps //Check running java process IDs. 'Bootstrap' = test server
-
- 
-
-top -H -p <pid> //See running threads for the java process with CPU/MEM for each thread
-
- 
-
- 
 
 +---------------------------------------------------+
 |													|
-|	RECODE HTML ENTITIES							|
+|	number of rows in file							|
 |													|
 +---------------------------------------------------+
-	echo 'ככדגכדגכדגכדכ {0}' | recode ..html
-	echo 'ffff- &#1504' | recode html..utf8
+	find . -name "*.xml" | xargs wc -l | sort -n
 
+
++---------------------------------------------------+
+|                                                   |
+|	CHECK JAVA THREADS								|
+|													|
++---------------------------------------------------+
+	jps //Check running java process IDs. 'Bootstrap' = test server
+	top -H -p <pid> //See running threads for the java process with CPU/MEM for each thread 
+	
+	
 +---------------------------------------------------+
 |                       							|
 |   GREP SEARCH IN FILES							|
@@ -225,19 +185,20 @@ top -H -p <pid> //See running threads for the java process with CPU/MEM for each
 +---------------------------------------------------+
 	grep -rI testTempReplacement *
 	grep -rI value=\"sdsadasdas\" *
+
 	
 +---------------------------------------------------+
 |													|
 |	TEXT EDITOR ENCODING							|
 |                        							|
 +---------------------------------------------------+
-
 	vim file
 	:set bomb
 	:set fileencoding=utf-8
 	:wq 
 
 	:set encoding=latin1 
+
 
 +---------------------------------------------------+
 |													|
@@ -273,91 +234,48 @@ ping -c 100 BI4PROD | sed -rn 's|.*=([0-9]+\.?[0-9]+?) ms|\1|p' | LC_ALL=C datam
  
 
 +---------------------------------------------------+
-
-|                                                                                                                                                                                                              |
-
-|                                                              FIND JAVA CLASSES                                                                         |
-
-|                                                                                                                                                                                                              |
-
+|													|
+|	FIND JAVA CLASSES								|
+|													|
 +---------------------------------------------------+
-
- 
-
-                for i in *.jar; do jar -tvf "$i" | grep -Hsi ClassName && echo "$i"; done
+	for i in *.jar; do jar -tvf "$i" | grep -Hsi ClassName && echo "$i"; done
 
                
 
-Checktest Version
+Check tomcat Version
+	cd /opt/test/test/lib
 
-                cd /opt/test/test/lib
-
-                java -cp catalina.jar org.apache.catalina.util.ServerInfo
+	java -cp catalina.jar org.apache.catalina.util.ServerInfo
 
                
 
                
 
 ls -ltr --block-size=M
-
- 
-
-+---------------------------------------------------+
-
-|                                                                                                                                                                                                              |
-
-|                              DISK SPACE USAGE IN LINUX                                                                       |
-
-|                                                                                                                                                                                                              |
+               
 
 +---------------------------------------------------+
-
- 
-
-                df -H
+|                                                   |
+|	SIZE OF DIRECTORY								|
+|													|
++---------------------------------------------------+
+	du -sh /opt/test/test/logs
 
                
 
 +---------------------------------------------------+
-
-|                                                                                                                                                                                                              |
-
-|                              SIZE OF DIRECTORY                                                                                                         |
-
-|                                                                                                                                                                                                              |
-
+|                                                   |
+|	SORT FILES BY SIZE IN DIRECTORY IN REVERSE      |
+|													|
 +---------------------------------------------------+
-
- 
-
-                du -sh /opt/test/test/logs
-
-               
-
-+---------------------------------------------------+
-
-|                                                                                                                                                                                                              |
-
-|              SORT FILES BY SIZE IN DIRECTORY IN REVERSE                     |
-
-|                                                                                                                                                                                                              |
-
-+---------------------------------------------------+
-
- 
-
-                ls -lShr
+	ls -lShr
 
  
 
 +---------------------------------------------------+
-
-|                                                                                                                                                                                                              |
-
-|              SORT FILES BY SIZE IN DIRECTORY IN NATIVE                        |
-
-|                                                                                                                                                                                                              |
-
+|													|
+|	SORT FILES BY SIZE IN DIRECTORY IN NATIVE		|
+|													|
 +---------------------------------------------------+
 
  
@@ -366,21 +284,7 @@ ls -ltr --block-size=M
 
  
 
-+---------------------------------------------------+
 
-|                                                                                                                                                                                                              |
-
-|              FIND FILES LARGER THAN 4G                                                                                       |
-
-|                                                                                                                                                                                                              |
-
-+---------------------------------------------------+
-
- 
-
-                find . -type f -size +4G
-
- 
 
 linux version: lsb_release -a
 
@@ -393,21 +297,12 @@ cat /proc/meminfo
  
 
 +---------------------------------------------------+
-
-|                                                                                                                                                                                                              |
-
-|                                              LIST BACKGROUND JOBS                                                                              |
-
-|                                                                                                                                                                                                              |
-
+|   												|
+|	LIST BACKGROUND JOBS							|
+|													|
 +---------------------------------------------------+
-
- 
-
--bash-4.2$ jobs
-
-                example output: [1]+  Stopped                 rlwrap ./iiq console
-
+	-bash-4.2$ jobs
+	example output: [1]+  Stopped                 rlwrap ./iiq console
  
 
 +---------------------------------------------------+
@@ -427,76 +322,42 @@ cat /proc/meminfo
  
 
 +---------------------------------------------------+
-
-|                                                                                                                                                                                                              |
-
-|                                              CREATE TAR                                                                                                                        |
-
-|                                                                                                                                                                                                              |
-
+|													|
+|	CREATE TAR										|
+|													|
 +---------------------------------------------------+
-
- 
-
-                tar cvf iiqVanaila.tar identityiq/
+	tar cvf iiqVanaila.tar identityiq/
 
  
 
 +---------------------------------------------------+
-
-|                                                                                                                                                                                                              |
-
-|              CREATE TAR OF ENTIRE DIRECTORY                                                                          |
-
-|              (tar everything in specific directory)                                         |
-
-|                                                                                                                                                                                                              |
+|													|
+|	CREATE TAR OF ENTIRE DIRECTORY					|
+|	(tar everything in specific directory)			|
+|                                                   |                                                                                                                                                           |
++---------------------------------------------------+
+	tar -cvf iiq_8_4.tar -C /test/webapps/iiq $(ls -A /test/webapps/iiq)
+	
 
 +---------------------------------------------------+
+|                                                   |
+|	UNTAR											|
+|                                                   |
++---------------------------------------------------+
+	tar  xvf /var/tmp/iiqTmpt.tar --directory /opt/test/test90/webapps
 
- 
-
-                tar -cvf iiq_8_4.tar -C /test/webapps/iiq $(ls -A /test/webapps/iiq)
-
- 
-
- 
 
 +---------------------------------------------------+
-
-|                                                                                                                                                                                                              |
-
-|                                              UNTAR                                                                                                                                 |
-
-|                                                                                                                                                                                                              |
-
+|													|
+|	UNTAR OF ENTIRE DIRECTORY						|
+|	(untar everything in specific directory)		|
+|													|
 +---------------------------------------------------+
+	mkdir /var/tmp/iiq
+	tar  xvf /var/tmp/iiq_8_4.tar --directory /var/tmp/iiq
+	cp -r iiq /opt/webapps 
 
- 
 
-                tar  xvf /var/tmp/iiqTmpt.tar --directory /opt/test/test90/webapps
-
- 
-
-+---------------------------------------------------+
-
-|                                                                                                                                                                                                              |
-
-|              UNTAR OF ENTIRE DIRECTORY                                                                                    |
-
-|              (untar everything in specific directory)                   |
-
-|                                                                                                                                                                                                              |
-
-+---------------------------------------------------+
-
- 
-
-                mkdir /var/tmp/iiq
-
-                tar  xvf /var/tmp/iiq_8_4.tar --directory /var/tmp/iiq
-
-                cp -r iiq /opt/webapps
 
  
 
@@ -545,37 +406,19 @@ cat /proc/Pid/smaps_rollup
  
 
 +---------------------------------------------------+
-
-|                                                                                                                                                                                                              |
-
-|                              SEARCH FOR STRING IN FILES                                                                      |
-
-|                                                                                                                                                                                                              |
+|   												|
+|	SEARCH FOR STRING IN FILES						|
+|													|
++---------------------------------------------------+
+	grep -Rnw . -e 'testCertificationRemediation'
+	
 
 +---------------------------------------------------+
-
- 
-
-                grep -Rnw . -e 'testCertificationRemediation'
-
- 
-
-553
-
+|													|
+|	JAVA 11											|
+|													|
 +---------------------------------------------------+
 
-|                                                                                                                                                                                                              |
-
-|                                                              JAVA 11                                                                                                                                |
-
-|                                                                                                                                                                                                              |
-
-+---------------------------------------------------+
-
- 
-
-tar xf jdk-11.0.20_linux-x64_bin.tar.gz -C /opt
-
-export JAVA_HOME=/opt/jdk-11.0.20
-
-export PATH=${PATH}:${JAVA_HOME}/bin
+	tar xf jdk-11.0.20_linux-x64_bin.tar.gz -C /opt
+	export JAVA_HOME=/opt/jdk-11.0.20
+	export PATH=${PATH}:${JAVA_HOME}/bin
