@@ -3,7 +3,6 @@
 |	LOG OUTPUT OF SH SCRIPT									|
 |															|
 +-----------------------------------------------------------+
-
 	strace -o mylog.txt -f -e trace=file ./startup.sh
 	
 
@@ -12,7 +11,6 @@
 |	CHECK KERBEROS CONNECTIVITY								|
 |															|
 +-----------------------------------------------------------+
-
 	env KRB5_TRACE=/pathToLog/krb5.log 
 	kinit -V
 	kinit -p <username>@domain.name
@@ -23,7 +21,6 @@
 |	DELETE FILES BY EXTENSION								|
 |															|
 +-----------------------------------------------------------+
-
 	#List file to be deleted
 		find . -name "*.bak" -type f
 
@@ -56,7 +53,6 @@
 |	FILE ENCODING											|
 |															|
 +-----------------------------------------------------------+
-
 	#Text editor
 		vim file
 		:set bomb
@@ -71,10 +67,10 @@
 |	JQ														|
 |															|
 +-----------------------------------------------------------+
-cat fileName.json | jq -c '. | select(.)' #if this works then json file is correct
-cat fileName.json | jq -c '.groups.name[] | select(.)'
-cat fileName.json | jq -c '.groups.name[] | select(.=="valueToFind")'
-cat fileName.json | jq -c '.groups[] | select(.name=="valueToFind")'
+	cat fileName.json | jq -c '. | select(.)' #if this works then json file is correct
+	cat fileName.json | jq -c '.groups.name[] | select(.)'
+	cat fileName.json | jq -c '.groups.name[] | select(.=="valueToFind")'
+	cat fileName.json | jq -c '.groups[] | select(.name=="valueToFind")'
 
 
 +-----------------------------------------------------------+
@@ -191,8 +187,7 @@ cat fileName.json | jq -c '.groups[] | select(.name=="valueToFind")'
 |													|
 |	REMOVE ONLY FILES FROM CURRENT DIRECTORY        |
 |                                                   |
-+---------------------------------------------------+ 
-
++---------------------------------------------------+
 	find . -maxdepth 1 -type f -print0 | xargs -0 rm
 
 
@@ -201,17 +196,12 @@ cat fileName.json | jq -c '.groups[] | select(.name=="valueToFind")'
 |	DATAMASH										|
 |													|
 +---------------------------------------------------+
- 
-
-ping -c 100 DC-ITEAM-1.MEHMAIL.LOC  | sed -rn 's|.*=([0-9]+\.?[0-9]+?) ms|\1|p' | LC_ALL=C datamash median 1 perc 1
-ping -c 100 testdb01p.mehmail.loc | sed -rn 's|.*=([0-9]+\.?[0-9]+?) ms|\1|p' | LC_ALL=C datamash median 1 perc 1
-ping -c 100 SAPR3APP01.mehmail.loc | sed -rn 's|.*=([0-9]+\.?[0-9]+?) ms|\1|p' | LC_ALL=C datamash median 1 perc 1
-ping -c 100 sapgwp01.mehmail.loc | sed -rn 's|.*=([0-9]+\.?[0-9]+?) ms|\1|p' | LC_ALL=C datamash median 1 perc 1
-ping -c 100 sapsrmp01.mehmail.loc | sed -rn 's|.*=([0-9]+\.?[0-9]+?) ms|\1|p' | LC_ALL=C datamash median 1 perc 1
-ping -c 100 BI4PROD | sed -rn 's|.*=([0-9]+\.?[0-9]+?) ms|\1|p' | LC_ALL=C datamash median 1 perc 1
-
- 
-
+	ping -c 100 DC-ITEAM-1.MEHMAIL.LOC  | sed -rn 's|.*=([0-9]+\.?[0-9]+?) ms|\1|p' | LC_ALL=C datamash median 1 perc 1
+	ping -c 100 testdb01p.mehmail.loc | sed -rn 's|.*=([0-9]+\.?[0-9]+?) ms|\1|p' | LC_ALL=C datamash median 1 perc 1
+	ping -c 100 SAPR3APP01.mehmail.loc | sed -rn 's|.*=([0-9]+\.?[0-9]+?) ms|\1|p' | LC_ALL=C datamash median 1 perc 1
+	ping -c 100 sapgwp01.mehmail.loc | sed -rn 's|.*=([0-9]+\.?[0-9]+?) ms|\1|p' | LC_ALL=C datamash median 1 perc 1
+	ping -c 100 sapsrmp01.mehmail.loc | sed -rn 's|.*=([0-9]+\.?[0-9]+?) ms|\1|p' | LC_ALL=C datamash median 1 perc 1
+	ping -c 100 BI4PROD | sed -rn 's|.*=([0-9]+\.?[0-9]+?) ms|\1|p' | LC_ALL=C datamash median 1 perc 1
  
 
 +---------------------------------------------------+
@@ -324,19 +314,6 @@ ls -ltr --block-size=M
 	tar  xvf /var/tmp/iiq_8_4.tar --directory /var/tmp/iiq
 	cp -r iiq /opt/webapps 
 
-
-
- 
-
- 
-
-cat /proc/self/smaps > smaps.txt
-
-vi smaps.txt
-
-cat /proc/Pid/smaps_rollup
-
- 
 
 +---------------------------------------------------+
 |													|
