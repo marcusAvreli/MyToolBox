@@ -1,0 +1,8 @@
+context menu
+https://devdevout.com/css/css-list-styles
+
+https://colorlib.com/wp/free-bootstrap-wizards/
+
+wizards/
+https://codepen.io/atulkumarsingh/pen/LYPaQwg
+https://formio.github.io/formio.js/app/examples/conditionalwizard.html

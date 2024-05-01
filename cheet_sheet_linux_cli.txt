@@ -189,44 +189,25 @@ cat fileName.json | jq -c '.groups[] | select(.name=="valueToFind")'
 	
 +---------------------------------------------------+
 |													|
-|	TEXT EDITOR ENCODING							|
-|                        							|
-+---------------------------------------------------+
-	vim file
-	:set bomb
-	:set fileencoding=utf-8
-	:wq 
-
-	:set encoding=latin1 
-
-
-+---------------------------------------------------+
-|													|
 |	REMOVE ONLY FILES FROM CURRENT DIRECTORY        |
 |                                                   |
 +---------------------------------------------------+ 
 
 	find . -maxdepth 1 -type f -print0 | xargs -0 rm
 
+
++---------------------------------------------------+
+|													|
+|	DATAMASH										|
+|													|
++---------------------------------------------------+
  
 
-
- 
-
-df /opt/test/ -h
-
- 
-
-ping -c 100 DC-ITEAM-1.MEHMAIL.LOC  | sed -rn 's|.*=([0-9]+\.?[0-9]+?) ms|\1|p' | LC_ALL=C datamash median 1 perc 1                   
-
-ping -c 100 testdb01p.mehmail.loc | sed -rn 's|.*=([0-9]+\.?[0-9]+?) ms|\1|p' | LC_ALL=C datamash median 1 perc 1               
-
+ping -c 100 DC-ITEAM-1.MEHMAIL.LOC  | sed -rn 's|.*=([0-9]+\.?[0-9]+?) ms|\1|p' | LC_ALL=C datamash median 1 perc 1
+ping -c 100 testdb01p.mehmail.loc | sed -rn 's|.*=([0-9]+\.?[0-9]+?) ms|\1|p' | LC_ALL=C datamash median 1 perc 1
 ping -c 100 SAPR3APP01.mehmail.loc | sed -rn 's|.*=([0-9]+\.?[0-9]+?) ms|\1|p' | LC_ALL=C datamash median 1 perc 1
-
 ping -c 100 sapgwp01.mehmail.loc | sed -rn 's|.*=([0-9]+\.?[0-9]+?) ms|\1|p' | LC_ALL=C datamash median 1 perc 1
-
 ping -c 100 sapsrmp01.mehmail.loc | sed -rn 's|.*=([0-9]+\.?[0-9]+?) ms|\1|p' | LC_ALL=C datamash median 1 perc 1
-
 ping -c 100 BI4PROD | sed -rn 's|.*=([0-9]+\.?[0-9]+?) ms|\1|p' | LC_ALL=C datamash median 1 perc 1
 
  
@@ -239,20 +220,7 @@ ping -c 100 BI4PROD | sed -rn 's|.*=([0-9]+\.?[0-9]+?) ms|\1|p' | LC_ALL=C datam
 |													|
 +---------------------------------------------------+
 	for i in *.jar; do jar -tvf "$i" | grep -Hsi ClassName && echo "$i"; done
-
-               
-
-Check tomcat Version
-	cd /opt/test/test/lib
-
-	java -cp catalina.jar org.apache.catalina.util.ServerInfo
-
-               
-
-               
-
-ls -ltr --block-size=M
-               
+   
 
 +---------------------------------------------------+
 |                                                   |
@@ -260,7 +228,7 @@ ls -ltr --block-size=M
 |													|
 +---------------------------------------------------+
 	du -sh /opt/test/test/logs
-
+ls -ltr --block-size=M
                
 
 +---------------------------------------------------+
@@ -277,24 +245,32 @@ ls -ltr --block-size=M
 |	SORT FILES BY SIZE IN DIRECTORY IN NATIVE		|
 |													|
 +---------------------------------------------------+
+	ls -lSh
 
- 
++---------------------------------------------------+
+|													|
+|	TOMCAT VERSION									|
+|													|
++---------------------------------------------------+
+	cd /opt/<tomcat_dir>/lib
+	java -cp catalina.jar org.apache.catalina.util.ServerInfo
 
-                ls -lSh
++---------------------------------------------------+
+|													|
+|	LINUX VERSION									|
+|													|
++---------------------------------------------------+
+	linux version: lsb_release -a
+	kernel version: uname -r
+	
 
- 
++---------------------------------------------------+
+|													|
+|	NUMBER CPU										|
+|													|
++---------------------------------------------------+	
+	cat /proc/meminfo
 
-
-
-linux version: lsb_release -a
-
-kernel version: uname -r
-
-number of cpu: cat /proc/cpuinfo
-
-cat /proc/meminfo
-
- 
 
 +---------------------------------------------------+
 |   												|
@@ -306,20 +282,12 @@ cat /proc/meminfo
  
 
 +---------------------------------------------------+
-
-|                                                                                                                                                                                                              |
-
-|                                              BRING JOB FOREGROUND                                                                            |
-
-|                                                                                                                                                                                                              |
-
+|													|
+|	BRING JOB FOREGROUND							|
+|                                                   |
 +---------------------------------------------------+
+	fg %2 
 
-                fg %2
-
- 
-
- 
 
 +---------------------------------------------------+
 |													|
@@ -327,14 +295,13 @@ cat /proc/meminfo
 |													|
 +---------------------------------------------------+
 	tar cvf iiqVanaila.tar identityiq/
-
  
 
 +---------------------------------------------------+
 |													|
 |	CREATE TAR OF ENTIRE DIRECTORY					|
 |	(tar everything in specific directory)			|
-|                                                   |                                                                                                                                                           |
+|													|
 +---------------------------------------------------+
 	tar -cvf iiq_8_4.tar -C /test/webapps/iiq $(ls -A /test/webapps/iiq)
 	
@@ -372,36 +339,27 @@ cat /proc/Pid/smaps_rollup
  
 
 +---------------------------------------------------+
-
-|                                                                                                                                                                                                              |
-
-|                                                              AVAILABLE RAM                                                                                               |
-
-|                                                                                                                                                                                                              |
-
+|													|
+|	AVAILABLE RAM									|
+|													|
 +---------------------------------------------------+
 
 ##IT HAS 8GB
 
-                free -mh
-
-                                                                  total        used        free      shared  buff/cache   available
-
-                Mem:           7.6G        7.3G        152M        2.6M        163M         96M
-
-                Swap:           15G         15G        786M
+	free -mh
+				total        used        free      shared  buff/cache   available
+	Mem:           7.6G        7.3G        152M        2.6M        163M         96M
+	Swap:           15G         15G        786M
 
  
 
 ##IT HAS 32GB
 
-                free -mh
+	free -mh
 
-                                                                  total        used        free      shared  buff/cache   available
-
-                Mem:            31G         24G        2.2G        1.0G        4.8G        5.6G
-
-                Swap:           15G        671M         15G
+				total        used        free      shared  buff/cache   available
+	Mem:            31G         24G        2.2G        1.0G        4.8G        5.6G
+	Swap:           15G        671M         15G
 
  
 

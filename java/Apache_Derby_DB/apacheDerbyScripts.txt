@@ -56,7 +56,7 @@ CREATE TABLE "ADMIN"."LTR_LOTTERY"
 alter table LTR_LOTTERY alter column LOTTERY_ID set AUTOINCREMENT: start 1 increment 1
 alter table PRJ_BUSINESS_BUNDLE drop column id;
 alter table PRJ_BUSINESS_BUNDLE add column id int not null generated always as identity  (START WITH 1, INCREMENT BY 1);
-
+alter table rprt add column crtd_date number(19)
 
 alter table LTR_LOTTERY add column DATE_CREATED bigint default 0;
 
