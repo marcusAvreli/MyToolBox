@@ -193,6 +193,33 @@
 |														|
 +-------------------------------------------------------+
 	alter table <table_name> rename column <col_name> to name;
+
+
++-------------------------------------------------------+
+|														|
+|	8. Rename Existing Table							|
+|														|
++-------------------------------------------------------+
+	rename table old_name to new_name;
+	
+	
++-------------------------------------------------------+
+|														|
+|	9. Add Remove Constraints							|
+|														|
++-------------------------------------------------------+
+
+	alter table table_name drop constraint   constraint_name               
+
+	alter table local_table add constraint constrinat_name FOREIGN KEY (local_filed) references another_table(id) on delete cascade
+               
+
++-------------------------------------------------------+
+|														|
+|	12. Drop Table										|
+|														|
++-------------------------------------------------------+
+	drop table table_name cascade constraints purge;
 	
 
 +-------------------------------------------------------------------------------------------+ 
