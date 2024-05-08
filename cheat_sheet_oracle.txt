@@ -269,7 +269,39 @@ group by obj.owner,
 order by schema_name,
          function_name;
 		 
-		 
++-------------------------------------------------------+
+|														|
+|		 orders per date								|
+|														|
++-------------------------------------------------------+
+with ir as ( 
+
+	select name,TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS.ff9')+NUMTODSINTERVAL(created/1000,'SECOND') ir_created from monitored_table where execution_Status='Executing' and state='Approve and Provision'
+
+), ir_range as (
+
+	select trunc(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS.ff9')+NUMTODSINTERVAL(min(created)/1000,'SECOND')) cmin,
+
+	trunc(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS.ff9')+NUMTODSINTERVAL(max(created)/1000,'SECOND')) cmax
+
+	from monitored_table
+
+) 
+
+select dt, count ( ir_created ) num_orders
+  from ( 
+    select cmin + level - 1 as dt 
+    from   ir_range  
+    connect by level <= cmax - cmin + 1 
+  ) 
+
+left join ir 
+on     dt <= ir_created 
+and    dt + 1 > ir_created 
+group  by dt 
+order  by dt;
+
+ 
 +-------------------------------------------------------------------------------------------+ 
 |																							|	
 |	11. user defined types																	|
@@ -354,6 +386,14 @@ CREATE SEQUENCE books_sequence;
 |															|
 +-----------------------------------------------------------+
 select to_char(1593323213071/(1000*60*60*24)+to_date('1970-01-01','YYYY-MM-DD'),'YYYY-MM-DD') as cdate from dual
+
+date time with precision
+select to_char(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS.ff9')+NUMTODSINTERVAL(min(created)/1000,'SECOND'),'YYYY-MM-DD hh24.mi.ss.ff3'),
+
+to_char(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS.ff9')+NUMTODSINTERVAL(max(created)/1000,'SECOND'),'YYYY-MM-DD hh24.mi.ss.ff3')
+
+from <table_name>
+
 
 
 https://topic.alibabacloud.com/a/oracle-convert-milliseconds-to-date-get-information-for-one-day_1_46_30022517.html
