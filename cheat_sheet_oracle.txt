@@ -274,6 +274,7 @@ order by schema_name,
 |		 orders per date								|
 |														|
 +-------------------------------------------------------+
+https://blogs.oracle.com/sql/post/how-to-generate-days-weeks-or-months-between-two-dates-in-oracle-database
 with ir as ( 
 
 	select name,TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS.ff9')+NUMTODSINTERVAL(created/1000,'SECOND') ir_created from monitored_table where execution_Status='Executing' and state='Approve and Provision'
