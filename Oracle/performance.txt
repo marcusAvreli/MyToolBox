@@ -1,0 +1,44 @@
+https://forums.oracle.com/ords/apexds/post/extract-data-from-a-table-with-100-million-rows-0971
+
+
+SQL> set timing on
+SQL> set autotrace traceonly statistics
+SQL> show arraysize
+arraysize 15
+SQL> select rpad(level,100,level) from dual connect by level<=1e5;
+
+100000 rows selected.
+
+Elapsed: 00:00:02.86
+
+Statistics
+----------------------------------------------------------
+   10896012  bytes sent via SQL*Net to client
+       6668  SQL*Net roundtrips to/from client
+     100000  rows processed
+
+SQL> set arraysize 5000
+SQL> select rpad(level,100,level) from dual connect by level<=1e5;
+
+100000 rows selected.
+
+Elapsed: 00:00:00.69
+
+Statistics
+----------------------------------------------------------
+   10222388  bytes sent via SQL*Net to client
+         21  SQL*Net roundtrips to/from client
+     100000  rows processed
+
+SQL> set markup csv on delimiter | quote off
+SQL> select rpad(level,100,level) from dual connect by level<=1e5;
+
+100000 rows selected.
+
+Elapsed: 00:00:00.28
+
+Statistics
+----------------------------------------------------------
+   10222390  bytes sent via SQL*Net to client
+         21  SQL*Net roundtrips to/from client
+     100000  rows processed
