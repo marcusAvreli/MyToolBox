@@ -75,20 +75,50 @@ https://github.com/GrapesJS/grapesjs/blob/c3322e7099d225c38fd2b9d22b2b4c507e3cf3
 |	SHARE MULTIPLE OBSERVERS								|
 |															|
 +-----------------------------------------------------------+
-	https://stackoverflow.com/questions/34376854/delegation-eventemitter-or-observable-in-angular
+		https://stackoverflow.com/questions/34376854/delegation-eventemitter-or-observable-in-angular
 	import 'rxjs/add/operator/share';
 
 	this.navChange$ = new Observable(observer =>
       this._observer = observer).share();
     // share() allows multiple subscribers
+
++-----------------------------------------------------------+
+|															|
+|	POST SCSS												|
+|															|
++-----------------------------------------------------------+
+https://www.npmjs.com/package/node-sass
+	IF YOU GOT
+	Input Error: Did not receive any STDIN
+	RUN 
+	postcss  src/index.scss --map --output ./css/index.css
+
+	COMPILE CSS FROM SCSS
+	postcss  src/index.scss --map --output ./css/index.css
+
+if you got severla node versions
+	Error: Loading PostCSS Plugin failed: Missing binding C:\Users\User\nodeJSDev\myPostCss\node_modules\node-sass\vendor\win32-x64-57\binding.node
+	Node Sass could not find a binding for your current environment: Windows 64-bit with Node.js 8.x	
+	one possible solution:
+		reinstall  "postcss-node-sass": "^2.1.8",
 +-----------------------------------------------------------+
 |															|
 |	SEVERAL NODE VERSIONS									|
 |															|
 +-----------------------------------------------------------+
-
+https://philna.sh/blog/2019/01/10/how-to-start-a-node-js-project/
+https://stackoverflow.com/questions/53653434/is-it-possible-to-use-rollup-for-processing-just-css
 	https://blog.logrocket.com/how-switch-node-js-versions-nvm/
-
+	set installed version
+	#list installed versions
+	nvm ls
+		output
+			18.12.0
+		  * 14.20.1 (Currently using 64-bit executable)
+			8.17.0
+			
+	#switch node versions
+	nvm use 8.17.0
 
 +-----------------------------------------------------------+
 |															|
@@ -141,7 +171,8 @@ https://github.com/GrapesJS/grapesjs/blob/c3322e7099d225c38fd2b9d22b2b4c507e3cf3
  
 for Angular >= 6.0.0
 	import { of } from 'rxjs';
-	
+		https://stackoverflow.com/questions/34376854/delegation-eventemitter-or-observable-in-angular
+	import 'rxjs/add/operator/share';
 import { map, switchMap, catchError } from "rxjs/operators"; 
 import { Observable } from 'rxjs/Observable';
 import { empty } from 'rxjs/observable/empty';

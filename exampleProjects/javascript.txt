@@ -201,8 +201,31 @@ chart
 https://github.com/geyixia/Smart-City/blob/377b416117e275e0d53008ee2fe304c32ab7a950/src/charts/index.js
 
 
+effects against remote
+https://github.com/rwalter88/great-big-angular2-example/blob/7dbb75ccee592ff01d5f4c577024231d55bbce5d/src/app/core/store/crisis/crisis.effects.ts#L31
+
+effects against local
+https://github.com/dancancro/great-big-example-application/tree/fc757ea6e862194deabb1fbb039fd4c6ca230010/src/main/webapp/app/core/store/crisis
+
+
+RTL
+https://github.com/arenasjuanf/bancojj/blob/b947b2efb390a0293daadcab1f7a64a242823f51/src/app/app.service.ts#L14
+
 
 web-components webcomponents customElements
+
+
+
+CUSTOM ELEMENTS LIST
+https://github.com/Memeticode/psm.custom-elements/blob/e1dc368a2478f8f387af707e473a932c6ddb5572/demo/index.html
+https://github.com/yued-fe/lulu/blob/787424ac57308df3d7ac3c237aae53ce9b8104ab/theme/edge/js/common/ui/Select.js#L15
+https://github.com/jk2908/list-box/blob/1da0ae32b648d6abac4f3a8b5aab3a2e6e356251/src/ListBox.js#L11
+https://github.com/jarek-foksa/xel/blob/b10c9d8548119b2b7bc29e67e67cebb3952a91d2/classes/api-parser.js
+https://github.com/dataformsjs/dataformsjs/blob/9b7772c50b39df9068079bc7ba7049903ff57eea/js/web-components/data-list.js#L207
+https://github.com/yued-fe/lulu/blob/787424ac57308df3d7ac3c237aae53ce9b8104ab/theme/hope/ui/Layout/list.js
+https://github.com/sencha/extjs-grid-performance/blob/a97aa4c8fae22823fa81a6854c2f42ff4195dde1/client/src/wijmoGrid/WijmoFlexGridScrollComponent.js
+https://github.com/googlefonts/fontra/blob/d5975409067c947485f39f935bd9e302bca70afc/src/fontra/client/web-components/ui-list.js
+
 https://github.com/trutoo/event-bus/blob/master/docs/react-component.js
 https://itnext.io/building-micro-frontend-applications-with-angular-elements-34483da08bcb
 https://github.com/grandemayta/custom-element-pokemon-cards/tree/master/src
@@ -240,6 +263,9 @@ https://medium.com/php-fad/discovering-web-components-11d924a26651
 https://onebitahead.medium.com/dont-reinvent-the-wheel-use-white-label-web-components-fa57fa54cc15
 https://github.com/search?q=repo%3Avideojs%2Fvideo.js%20customElements&type=code
 https://github.com/mozilla/blurts-server/blob/ea176dc1b070db735e886da2ce886b8cbb5e1396/src/client/js/components/circleChart.js
+
+
+
 https://github.com/carbon-design-system/ibm-security/tree/8c57c28a6d37c928b0ce4472f876cc5d7afe1652/src/components
 
 https://github.com/derikb/character-sheet-app/blob/69c3f58f7d6de38aa4b708d67223567432ed611d/src/components/Modal.js#L104

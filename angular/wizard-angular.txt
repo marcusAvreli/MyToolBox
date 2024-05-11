@@ -1,0 +1,34 @@
+//https://stackblitz.com/edit/angular-46yej6?file=src%2Fapp%2FsharedWizard%2Fsharedwizard.component.ts
+//https://stackblitz.com/edit/angular-multi-step-reactive-form?embed=1&file=src%2Fapp%2Fconstants%2Fmulti-step-form.ts
+//https://medium.com/@hbilaiya2/angular-multi-step-form-with-reactive-forms-sorcery-f34cd0941e2c
+
+
+MultiStepFormComponent language:TypeScript
+https://github.com/heiguy123/church-builder-cms/blob/ea5ce19831c9af3746fbded7d8cfd567fc29f2c9/web-cms/src/app/register/register.component.ts#L5
+
+//isWizard
+https://github.com/DCMattyG/brahma-project/blob/8fedda49f702e167cf7b6c8a92f7f800a7623765/src/app/config/template/template.component.ts#L46
+
+WizComponent 
+https://stackoverflow.com/questions/56430398/is-it-good-idea-to-use-componentfactoryresolver-in-angular7-application (viewContainerRef.createComponent)
+ComponentFactoryResolver
+
+
+https://github.com/turrisxyz/core-3/blob/5df18c5f39e3150efc419eb034500dc1a2ac9f74/ui/apps/dotcms-ui/src/app/view/components/_common/dot-wizard/dot-wizard.component.ts#L34
+
+//ngrx
+https://github.com/filipesilva/ng-dynacomponents/blob/9b94e4ba8b86bec426bd60bb66d894116dd2078b/src/app/states/wizard.store.ts
+
+https://github.com/abdulkadirgenc/ng-wizard/blob/master/src/ng-wizard/lib/core/wizard-step/ng-wizard-step.component.ts
+
+
+https://github.com/kicaj29/angular5-examples/tree/1e0708223a81044e39cf76fcad037ca6f3e8ecdb/src/app/wizard
+https://github.com/JUkhan/angular-app/blob/9b06d540a3a6b38c5267ae562880f9a4a9a0e37b/src/app/stepper/stepper.component.ts#L35
+
+https://github.com/Spotify-2-0/Spotify-2.0/blob/9a69f9dc2bfa54638b5abeecb523706eb5d833cc/frontend/src/app/sites/setup-page/setup-page.component.ts
+
+//slide left slide right
+https://github.com/Reloadly/reloadly-ui/blob/38171523531b1a224d29ac98042a271df53afa4d/src/lib/containers/stepper/stepper.component.ts#L301
+
+
+https://github.com/Ms-fluent/components/blob/b6d12450a4eadc835970820494ba7ccad2b0adfd/src/components/fluent/stepper/stepper-directives.ts
