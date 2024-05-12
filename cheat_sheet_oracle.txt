@@ -133,29 +133,6 @@
 	END get_Sample_request;
 
  
-+-------------------------------------------------------+
-|														|
-|	11. oracle_regex: after slash						|
-|														|
-+-------------------------------------------------------+
-	select upper(regexp_substr ('string\string1','([^\\.*])+$')) result from dual
-	
-
-+-------------------------------------------------------+
-|														|
-|	11. oracle_regex: common name						|
-|														|
-+-------------------------------------------------------+
-	select regexp_substr ('memberOf.containsAll({"distinguished name"})','(CN=)([^,])+') from dual
-	
-	
-+-------------------------------------------------------+
-|														|
-|	11. oracle_regex: clean curly parentesess			|
-|														|
-+-------------------------------------------------------+
-	select regexp_substr ('{string}','\{(.+)\}',1,1,null,1) from dual
-	
 
 +-------------------------------------------------------+
 |														|
@@ -220,40 +197,47 @@
 |														|
 +-------------------------------------------------------+
 	drop table table_name cascade constraints purge;
-	
-
-+-------------------------------------------------------------------------------------------+ 
-|																							|	
-|	7. oracle_regex: everything before first appearance of character						|
-|																							|
-+-------------------------------------------------------------------------------------------+
-	select substr('aaa__bbb__ccc__ddd__23__45__tttt.containsAll({"68"})', 1, instr('aaa__bbb__ccc__ddd__23__45__tttt.containsAll({"68"})', '.') -1) from dual
 
 
-+-------------------------------------------------------------------------------------------+ 
-|																							|	
-|	8. oracle_regex: everything after first appearance of character							|
-|																							|
-+-------------------------------------------------------------------------------------------+
-	select substr('ad_H_A_A_SD',  instr('ad_H_A_A_SD', '_') +1) from dual
++---------------------------------------------------------------------------------------------------------------+
+|	=====1======																								|	
+|									oracle_regex																|
+|										===1===																	|
++---------------------------------------------------------------------------------------------------------------+	
+
+
+1.	oracle_regex: everything before first appearance of character:
+		select substr('aaa__bbb__ccc__ddd__23__45__tttt.containsAll({"68"})', 1, instr('aaa__bbb__ccc__ddd__23__45__tttt.containsAll({"68"})', '.') -1) from dual
+
 	
+2.	oracle_regex: everything after first appearance of character:
+		select substr('ad_H_A_A_SD',  instr('ad_H_A_A_SD', '_') +1) from dual
+		
 	
-+-------------------------------------------------------------------------------------------+ 
-|																							|	
-|	10. oracle_regex: string between parenthesis and quotes									|
-|																							|
-+-------------------------------------------------------------------------------------------+
-	select regexp_substr ('UPPER("rsd")','\(\"(.+)\"\)',1,1,null,1) from dual
+3.	oracle_regex: string between parenthesis and quote:
+		select regexp_substr ('UPPER("rsd")','\(\"(.+)\"\)',1,1,null,1) from dual
+
+		
+4.	oracle_regex: dashes:
+		SELECT Trim (REGEXP_SUBSTR('TEST-NAME', '([^-]*)(-|$)', 1, 1, '', 1)) as splitted_test
+		,Trim (REGEXP_SUBSTR('TEST-NAME', '([^-]*)(-|$)', 1, 2, '', 1)) as splitted_name 		from dual
+
+
+5.	oracle_regex: after slash
+		select upper(regexp_substr ('string\string1','([^\\.*])+$')) result from dual
+
+
+6.	oracle_regex: common name
+		select regexp_substr ('memberOf.containsAll({"distinguished name"})','(CN=)([^,])+') from dual
 	
 
-+-------------------------------------------------------+
-|														|	
-|	11. oracle_regex: dashes							|
-|														|
-+-------------------------------------------------------+
-	SELECT Trim (REGEXP_SUBSTR('TEST-NAME', '([^-]*)(-|$)', 1, 1, '', 1)) as splitted_test
-	,Trim (REGEXP_SUBSTR('TEST-NAME', '([^-]*)(-|$)', 1, 2, '', 1)) as splitted_name
-	from dual
+7.	oracle_regex: clean curly parentesess
+		select regexp_substr ('{string}','\{(.+)\}',1,1,null,1) from dual
+
+	
+8.	oracle_regex: only digits		
+		SELECT X  FROM SO WHERE REGEXP_LIKE(X, '^[[:digit:]]+$');		
+			source:	https://stackoverflow.com/questions/3932230/oracle-sql-query-that-returns-rows-with-only-numeric-values		
 
 
 +-------------------------------------------------------+
@@ -610,13 +594,6 @@ regexp_count(t.orders, ',')+1
 order by customer,
 lines.column_value;
 
-+-----------------------------------------------------------+
-|															|
-| CHECK ONLY DIGITS											|
-|															|
-+-----------------------------------------------------------+
-https://stackoverflow.com/questions/3932230/oracle-sql-query-that-returns-rows-with-only-numeric-values
-SELECT X  FROM SO WHERE REGEXP_LIKE(X, '^[[:digit:]]+$');
 
 
 Oracle Hierarchical query: how to follow max on each level
