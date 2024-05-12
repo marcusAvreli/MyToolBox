@@ -437,14 +437,14 @@ CREATE SEQUENCE books_sequence;
 |															|
 +-----------------------------------------------------------+
 
-==> sydate to miliseconds
+==1==> sydate to miliseconds
 	SELECT 
 		(SYSDATE - TO_DATE('1970/01/01', 'YYYY/MM/DD')) 
 		* (24 * 60 * 60 * 1000) 
 		AS TODAY_MS 
 	FROM DUAL;
 	
-==>	oracle systimestamp (sysdate) to milliseconds
+==2==>	oracle systimestamp (sysdate) to milliseconds
 	DB timezone agnostic
 	with milliseconds
 	works in XE: 
@@ -464,19 +464,19 @@ CREATE SEQUENCE books_sequence;
 	
 	
 	
-==>	date time from miliseconds with precision
+==3==>	date time from miliseconds with precision
 		select TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS.ff9')+NUMTODSINTERVAL(1593323213071/1000,'SECOND') from dual 
 
-	add days to date
+==4==>	add days to date
 		select TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS.ff9')+NUMTODSINTERVAL(1593323213071/1000,'SECOND') +NUMTODSINTERVAL(2,'DAY') from dual 
 
-	from date string to milliseconds
+==5==>	from date string to milliseconds
 		SELECT to_number(to_date('2020-07-10 16:45:16','YYYY-MM-DD HH24:MI:SS')   - to_date('1970-01-01','YYYY-MM-DD')) * (24 * 60 * 60 * 1000) milliseconds  FROM dual;            
 
-	different format
+==6==>	different format
 		select TO_CHAR(TO_TIMESTAMP('10.05.2012', 'DD.MM.YYYY') -        NUMTODSINTERVAL(1/1000, 'SECOND'), 'DD.MM.YYYY HH24:MI:SS:FF3')  Res  from dual;             
 
-	human readable difference between dates
+==7==>	human readable difference between dates
 		select trunc (minutes_ /60) || ' Hours, ' || trunc(mod(minutes_,60)) || ' minutes ' diff from(
 			select  (to_date(TO_CHAR(from_tz(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS')+NUMTODSINTERVAL(1708236730612/1000,'SECOND'),(select dbtimezone from dual)) at time zone 'Asia/Jerusalem','MM-DD-YYYY HH24:MI:SS'),'MM-DD-YYYY HH24:MI:SS')
 			- to_date(TO_CHAR(from_tz(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS')+NUMTODSINTERVAL(1593091693919/1000,'SECOND'),(select dbtimezone from dual)) at time zone 'Asia/Jerusalem','MM-DD-YYYY HH24:MI:SS'),'MM-DD-YYYY HH24:MI:SS')) *24*60 as minutes_ from dual
