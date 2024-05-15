@@ -38,6 +38,7 @@
 		(source: https://superuser.com/questions/1104377/windows-command-prompt-dir-what-option-shows-only-directories-and-not-files )
 		dir /B /AD
 
+
 +-----------------------------------------------------------+
 |															|
 |	COMPARE TWO LISTS										|
@@ -87,7 +88,6 @@
 |	NUMBER OF FILES IN DIRECTORY RECURCIVELY				|
 |															|
 +-----------------------------------------------------------+
-
 	dir /a:-d /s /b "<path-to-directory>" | find /c ":"
 
 +-----------------------------------------------------------+
@@ -194,6 +194,7 @@
 	sc config "Old service name" displayname= "New service name"
 	https://technet.microsoft.com/en-us/library/bb490995.aspx
 		*make sure you have a space between the = and the new name (ie. displayname= "New Name", NOT displayname="New Name")
+
 
 +-----------------------------------------------------------+
 |															|
