@@ -1,6 +1,6 @@
 +-----------------------------------------------------------+
 |															|
-|	create multiple sub-directories							|
+|	1. CREATE MULTIPLE SUB-DIRECTORIES						|
 |															|
 +-----------------------------------------------------------+
 	md data\rs1 data\rs2 data\rs3
@@ -8,7 +8,7 @@
 
 +-----------------------------------------------------------+
 |															|
-|	create empty file										|
+|	2. CREATE EMPTY FILE									|
 |															|
 +-----------------------------------------------------------+
 	type nul > src\index.ts
@@ -16,10 +16,9 @@
 
 +-----------------------------------------------------------+
 |															|
-|	SEARCH													|
+|	3. SEARCH												|
 |															|
 +-----------------------------------------------------------+
-
 	1. SEARCH STRING IN FILE RECURCIVELY	
 		findstr /sin /c:"AnnotationResolver" "C:\Users\User\eclipse-workspace\*.java"
 		findstr /sin /c:"ColumnDefinition" "C:\Users\User\eclipse-workspace\*.java" > "C:\Users\User\output.txt"
@@ -41,7 +40,7 @@
 
 +-----------------------------------------------------------+
 |															|
-|	COMPARE TWO LISTS										|
+|	4. COMPARE TWO LISTS									|
 |															|
 +-----------------------------------------------------------+
 	(source: //https://stackoverflow.com/questions/18466830/how-to-compare-two-lists-using-cli)
@@ -50,7 +49,7 @@
 
 +-----------------------------------------------------------+
 |															|
-|	READ CSV												|
+|	5. READ CSV												|
 |															|
 +-----------------------------------------------------------+	
 	https://stackoverflow.com/questions/24927944/read-csv-file-through-windows-batch-file-and-create-txt-file		
@@ -85,21 +84,23 @@
 
 +-----------------------------------------------------------+
 |															|
-|	NUMBER OF FILES IN DIRECTORY RECURCIVELY				|
+|	6. NUMBER OF FILES IN DIRECTORY RECURCIVELY				|
 |															|
 +-----------------------------------------------------------+
 	dir /a:-d /s /b "<path-to-directory>" | find /c ":"
 
+
 +-----------------------------------------------------------+
 |															|
-|	NUMBER OF SUB-DIRECTORIES IN DIRECTORY RECURCIVELY		|
+|	7. NUMBER OF SUB-DIRECTORIES IN DIRECTORY RECURCIVELY	|
 |															|
 +-----------------------------------------------------------+
 	dir /a:d /s /b "<path-to-directory>" | find /c ":"
 
+
 +-----------------------------------------------------------+
 |															|
-|	KILL ALL JAVA ON WINDOWS								|
+|	10. KILL ALL JAVA ON WINDOWS							|
 |															|
 +-----------------------------------------------------------+
 	taskkill /f /im jqs.exe 
@@ -109,7 +110,7 @@
 
 +-----------------------------------------------------------+
 |															|
-|	POWERSHELL												|
+|	11. POWERSHELL											|
 |															|
 +-----------------------------------------------------------+
 	Get Version of powershell
@@ -118,7 +119,7 @@
 
 +-----------------------------------------------------------+
 |															|
-|	FIND STRING IN DIRECTORY FILES RECURSIVELY				|
+|	12. FIND STRING IN DIRECTORY FILES RECURSIVELY			|
 |															|
 +-----------------------------------------------------------+
 	Batch
@@ -134,9 +135,10 @@
 	Find classes in jars
 	for /R %G in (*.jar) do @jar -tvf "%G" | find "ClassName" > NUL && echo %G
 
+
 +-----------------------------------------------------------+
 |															|
-|	WINDOWS LIST OF DIRECTORIES INCLUDING FILES				|
+|	13. WINDOWS LIST OF DIRECTORIES INCLUDING FILES			|
 |															|
 +-----------------------------------------------------------+
 	dir /s /w/ /p /b c:\build1.0 > output.txt
@@ -144,7 +146,7 @@
 
 +-----------------------------------------------------------+
 |															|
-|	REMOVE DIRECTORY RECURSIVELY							|
+|	14. REMOVE DIRECTORY RECURSIVELY						|
 |															|
 +-----------------------------------------------------------+
 	rmdir c:\test /s/d
@@ -153,7 +155,7 @@
 
 +-----------------------------------------------------------+
 |															|
-|	REMOVE FILES ONLY RECURSIVELY							|
+|	15. REMOVE FILES ONLY RECURSIVELY						|
 |															|
 +-----------------------------------------------------------+
 	/s - recurcively
@@ -163,7 +165,7 @@
 
 +-----------------------------------------------------------+
 |															|
-|		RUN CMD AS ADMIN									|
+|	16. RUN CMD AS ADMIN									|
 |															|
 +-----------------------------------------------------------+
 	runas /user:Administrator cmd
@@ -171,7 +173,7 @@
 
 +-----------------------------------------------------------+
 |															|
-|	3. NET USER												|
+|	17. NET USER											|
 |															|
 +-----------------------------------------------------------+
 	net user <SAMACCOUNT_NAME> /DOMAIN
@@ -179,7 +181,7 @@
 
 +-----------------------------------------------------------+
 |															|
-|	3. JAVA CFR DECOMPILER									|
+|	18. JAVA CFR DECOMPILER									|
 |															|
 +-----------------------------------------------------------+
 	java -jar cfr-0.137.jar <PATH_TO_TARGET_JAR_FILE> --outputdir <PATH_TO_OUTPUT_DIR>
@@ -187,7 +189,7 @@
 
 +-----------------------------------------------------------+
 |															|
-|	3. CHANGE THE DISPLAY NAME OF A SERVICE					|
+|	19. CHANGE THE DISPLAY NAME OF A SERVICE				|
 |															|
 +-----------------------------------------------------------+
 	Stop service
@@ -198,7 +200,7 @@
 
 +-----------------------------------------------------------+
 |															|
-|	3. CHANGE THE EXECUTABLE OF A SERVICE					|
+|	20. CHANGE THE EXECUTABLE OF A SERVICE					|
 |															|
 +-----------------------------------------------------------+
 	sc config "Service name" binpath= "C:\path\to\executable\here"
