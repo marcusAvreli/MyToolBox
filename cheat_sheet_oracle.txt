@@ -465,58 +465,75 @@ CREATE SEQUENCE books_sequence;
 	
 	
 ==3==>	date time from miliseconds with precision
-		select TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS.ff9')+NUMTODSINTERVAL(1593323213071/1000,'SECOND') from dual 
+	select TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS.ff9')+NUMTODSINTERVAL(1593323213071/1000,'SECOND') from dual 
 
 ==4==>	add days to date
-		select TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS.ff9')+NUMTODSINTERVAL(1593323213071/1000,'SECOND') +NUMTODSINTERVAL(2,'DAY') from dual 
+	select TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS.ff9')+NUMTODSINTERVAL(1593323213071/1000,'SECOND') +NUMTODSINTERVAL(2,'DAY') from dual 
 
 ==5==>	from date string to milliseconds
-		SELECT to_number(to_date('2020-07-10 16:45:16','YYYY-MM-DD HH24:MI:SS')   - to_date('1970-01-01','YYYY-MM-DD')) * (24 * 60 * 60 * 1000) milliseconds  FROM dual;            
+	SELECT to_number(to_date('2020-07-10 16:45:16','YYYY-MM-DD HH24:MI:SS')   - to_date('1970-01-01','YYYY-MM-DD')) * (24 * 60 * 60 * 1000) milliseconds  FROM dual;            
 
 ==6==>	different format
-		select TO_CHAR(TO_TIMESTAMP('10.05.2012', 'DD.MM.YYYY') -        NUMTODSINTERVAL(1/1000, 'SECOND'), 'DD.MM.YYYY HH24:MI:SS:FF3')  Res  from dual;             
+	select TO_CHAR(TO_TIMESTAMP('10.05.2012', 'DD.MM.YYYY') -        NUMTODSINTERVAL(1/1000, 'SECOND'), 'DD.MM.YYYY HH24:MI:SS:FF3')  Res  from dual;             
 
 ==7==>	human readable difference between dates
-		select trunc (minutes_ /60) || ' Hours, ' || trunc(mod(minutes_,60)) || ' minutes ' diff from(
+	select trunc (minutes_ /60) || ' Hours, ' || trunc(mod(minutes_,60)) || ' minutes ' diff from(
 			select  (to_date(TO_CHAR(from_tz(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS')+NUMTODSINTERVAL(1708236730612/1000,'SECOND'),(select dbtimezone from dual)) at time zone 'Asia/Jerusalem','MM-DD-YYYY HH24:MI:SS'),'MM-DD-YYYY HH24:MI:SS')
 			- to_date(TO_CHAR(from_tz(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS')+NUMTODSINTERVAL(1593091693919/1000,'SECOND'),(select dbtimezone from dual)) at time zone 'Asia/Jerusalem','MM-DD-YYYY HH24:MI:SS'),'MM-DD-YYYY HH24:MI:SS')) *24*60 as minutes_ from dual
 		)
 
-	timestamp with time zone
-		select TO_CHAR(from_tz(timestamp '2021-11-11 08:00:00','+2:00') at time zone 'Asia/Jerusalem','MM-DD-YYYY HH:MI:SS') from dual
+==8==>	timestamp with time zone
+	select TO_CHAR(from_tz(timestamp '2021-11-11 08:00:00','+2:00') at time zone 'Asia/Jerusalem','MM-DD-YYYY HH:MI:SS') from dual
 
 		https://topic.alibabacloud.com/a/oracle-convert-milliseconds-to-date-get-information-for-one-day_1_46_30022517.html
-	Get the information for a day
-		select * from WORKSCANINFO where TO_CHAR(SCANDATE,‘DD-MM-YY‘) 
+==9==> Get the information for a day
+	select * from WORKSCANINFO where TO_CHAR(SCANDATE,‘DD-MM-YY‘) 
 		in(
 		  SELECT TO_CHAR(1511539200000 / (1000 * 60 * 60 * 24) +      
 				TO_DATE(‘01-01-70‘, ‘DD-MM-YY‘), ‘DD-MM-YY‘) AS CDATE      
 		  FROM DUAL
 		)
 		  
-	Date conversion milliseconds
-		SELECT TO_NUMBER(TO_DATE(‘2014-07-28 17:12:45‘, ‘YYYY-MM-DD HH24:MI:SS‘) -      
+==10==> Date conversion milliseconds
+	SELECT TO_NUMBER(TO_DATE(‘2014-07-28 17:12:45‘, ‘YYYY-MM-DD HH24:MI:SS‘) -      
 				TO_DATE(‘1970-01-01 8:0:0‘, ‘YYYY-MM-DD HH24:MI:SS‘)) * 24 * 60 * 60 * 1000      
 		FROM DUAL;
 		 
-	Oracle milliseconds to date
+==11=> Oracle milliseconds to date
 		SELECT TO_CHAR(1406538765000 / (1000 * 60 * 60 * 24) +      
 			TO_DATE(‘1970-01-01 08:00:00‘, ‘YYYY-MM-DD HH:MI:SS‘), ‘YYYY-MM-DD HH24:MI:SS‘) AS CDATE
 		FROM DUAL;
 
-	Round back to nearest day (time always midnight):
+==12=> Round back to nearest day (time always midnight):
 		TO_CHAR (ROUND (TO_DATE ('11-SEP-1994 10:00 AM','DD-MON-YY HH:MI AM'), 'DD'),'DD-MON-YY HH:MI AM')
 		11-SEP-1994 12:00 AM
 
-	Round forward to the nearest day:      
+==13=> Round forward to the nearest day:      
 		TO_CHAR (ROUND (TO_DATE ('11-SEP-1994 4:00 PM','DD-MON-YY HH:MI AM'), 'DD'),'DD-MON-YY HH:MI AM')
 		12-SEP-1994 12:00 AM
 
-	Round back to the nearest hour: 
+==14=> Round back to the nearest hour: 
 		TO_CHAR (ROUND (TO_DATE ('11-SEP-1994 4:17 PM','DD-MON-YY HH:MI AM'), 'HH'),'DD-MON-YY HH:MI AM')
 		11-SEP-1994 04:00 PM
 
-
+==15=> begin of date (midnight)
+	select  to_number(to_date(date_start,'YYYY-MM-DD HH24:MI:SS') - to_date('1970-01-01','YYYY-MM-DD')) * (24 * 60 * 60 * 1000) time_start 
+		from(
+			select TO_CHAR (trunc(my_date, 'DD'),'YYYY-MM-DD HH24:MI:SS') date_start
+				from (
+					select to_date(TO_CHAR(from_tz(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS')+NUMTODSINTERVAL(pt_CRTD_DATE/1000,'SECOND'),(select dbtimezone from dual)) at time zone 'Asia/Jerusalem','MM-DD-YYYY HH24:MI:SS'),'MM-DD-YYYY HH24:MI:SS') my_date 
+						from(
+							select min(created) pt_CRTD_DATE from table_name
+						)
+					)
+				)
+					
+==16=> timestammp to number
+	SELECT to_number(to_date(to_char(my_date_plus, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') -   to_date('1970-01-01','YYYY-MM-DD')) * (24 * 60 * 60 * 1000) mmyres
+		FROM  (
+			select TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS')+NUMTODSINTERVAL(pt_CRTD_DATE/1000,'SECOND') +NUMTODSINTERVAL(10,'SECOND') my_date_plus from(
+				select max(created) pt_CRTD_DATE from table_name
+		)
 +-----------------------------------------------------------+
 |															|
 |	4. TimeZone												|
