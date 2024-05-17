@@ -1,0 +1,7 @@
++-------------------------------------------------------+
+|										======1======	|
+|	HYPER LINK											|
+|														|
++-------------------------------------------------------+
+==1==> open in new tab securely
+	<a href="<http_addres>" target="_blank" rel="noopener noreferrer"> <h1>YOUR TEXT</h1> </a>
