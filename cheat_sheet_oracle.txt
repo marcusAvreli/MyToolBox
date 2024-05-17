@@ -1,6 +1,6 @@
 +-------------------------------------------------------+
-|														|
-|	1. CREATE TABLE										|
+|										======1======	|
+|	CREATE TABLE										|
 |														|
 +-------------------------------------------------------+
 	CREATE TABLE table_name(
@@ -11,8 +11,8 @@
 	
 
 +-------------------------------------------------------+
-|														|
-|	2. CREATE TABLE WITH XMLTYPE						|
+|										======2======	|
+|	CREATE TABLE WITH XMLTYPE							|
 |														|
 +-------------------------------------------------------+
 	create table test_tbl_xml ( xml_data clob); 
@@ -26,8 +26,8 @@
 	
 	
 +-------------------------------------------------------+
-|														|
-|	3. DB_OBJECTS: USER DEFINED FUNCTION				|
+|										======3======	|
+|	DB_OBJECTS: USER DEFINED FUNCTION					|
 |														|
 +-------------------------------------------------------+
 	drop FUNCTION <function_name>;
@@ -44,8 +44,8 @@
 
 	
 +-------------------------------------------------------+
-|														|
-|	4. DB_OBJECTS:	CREATE STORED PROCEDURE				|
+|										======4======	|
+|	DB_OBJECTS:	CREATE STORED PROCEDURE					|
 |														|
 +-------------------------------------------------------+
 	create or replace procedure <PROC_NAME>
@@ -61,8 +61,8 @@
 	
 	
 +-------------------------------------------------------+
-|														|
-|	5. DB_INFO: USER DEFINED TYPE						|
+|										======5======	|
+|	DB_INFO: USER DEFINED TYPE							|
 |														|
 +-------------------------------------------------------+
 	select allCollTypes.type_name,allCollTypes.elem_type_name,allTypeAttrs.attr_name,allTypeAttrs.ATTR_NO from all_coll_types allCollTypes
@@ -71,16 +71,16 @@
 	
 	
 +-------------------------------------------------------+ 
-|														|
-|	6. DB_INFO:	USER DEFINED FUNCTION					|
+|										======6======	|
+|	DB_INFO: USER DEFINED FUNCTION						|
 |														|
 +-------------------------------------------------------+ 
 	select * from user_objects where object_name like '<name>' and object_type='FUNCTION'
 
 
 +-------------------------------------------------------+
-|														|
-|	7. DB_INFO:	TABLE INFO								|
+|										======7======	|
+|	DB_INFO: TABLE INFO									|
 |														|
 +-------------------------------------------------------+
 	select NULLABLE,COLUMN_NAME,DATA_TYPE,COLUMN_ID,DATA_LENGTH,DATA_DEFAULT 
@@ -90,8 +90,8 @@
 
 
 +-------------------------------------------------------+
-|														|
-|	8. DB_INFO:SHOW INDEXES								|
+|										======8======	|
+|	DB_INFO: SHOW INDEXES								|
 |														|
 +-------------------------------------------------------+
 	SELECT ai.index_name, ai.index_type, ai.uniqueness, aic.*
@@ -104,16 +104,16 @@
 
 
 +-------------------------------------------------------+
-|														|
-|	9. DB_INFO:LIST USER STORED PROCEDURE				|
+|										======9======	|
+|	DB_INFO:LIST USER STORED PROCEDURE					|
 |														|
 +-------------------------------------------------------+
 	SELECT     object_name FROM     user_procedures WHERE     object_type = 'PROCEDURE'  and object_name like '%'
 
 	
 +-------------------------------------------------------+
-|														|
-|	8. CSV AS INPUT PARAM								|
+|										======10======	|
+|	CSV AS INPUT PARAM									|
 |														|
 +-------------------------------------------------------+
 	create or replace PROCEDURE get_Sample_request (
@@ -135,8 +135,8 @@
  
 
 +-------------------------------------------------------+
-|														|
-|	11. TRUNCATE TABLE									|
+|										======11======	|
+|	TRUNCATE TABLE										|
 |														|
 +-------------------------------------------------------+
 	truncate table T_XML_TEST_1 drop storage
@@ -144,8 +144,8 @@
 
 
 +-------------------------------------------------------+
-|														|	
-|	4. Add Remove Columns								|
+|										======12======	|
+|	Add Remove Columns									|
 |														|
 +-------------------------------------------------------+
 	alter table <table_name> drop column STATUSMAKAV;	
@@ -153,8 +153,8 @@
 	
 	
 +-------------------------------------------------------+
-|														|	
-|	5. Modify Existing column							|
+|										======13======	|
+|	Modify Existing column								|
 |														|
 +-------------------------------------------------------+
 --set not null
@@ -165,45 +165,43 @@
 	
 	
 +-------------------------------------------------------+
-|														|
-|	6. Rename Existing column							|
+|										======14======	|
+|	Rename Existing column								|
 |														|
 +-------------------------------------------------------+
 	alter table <table_name> rename column <col_name> to name;
 
 
 +-------------------------------------------------------+
-|														|
-|	8. Rename Existing Table							|
+|										======15======	|
+|	Rename Existing Table								|
 |														|
 +-------------------------------------------------------+
 	rename table old_name to new_name;
 	
 	
 +-------------------------------------------------------+
-|														|
-|	9. Add Remove Constraints							|
+|										======16======	|
+|	Add Remove Constraints								|
 |														|
 +-------------------------------------------------------+
-
-	alter table table_name drop constraint   constraint_name               
-
+	alter table table_name drop constraint   constraint_name
 	alter table local_table add constraint constrinat_name FOREIGN KEY (local_filed) references another_table(id) on delete cascade
                
 
 +-------------------------------------------------------+
-|														|
-|	12. Drop Table										|
+|										======17======	|
+|	Drop Table											|
 |														|
 +-------------------------------------------------------+
 	drop table table_name cascade constraints purge;
 
 
-+---------------------------------------------------------------------------------------------------------------+
-|	=====1======																								|	
-|									oracle_regex																|
-|										===1===																	|
-+---------------------------------------------------------------------------------------------------------------+	
++-------------------------------------------------------+
+|										======18======	|	
+|	oracle_regex										|
+|														|
++-------------------------------------------------------+	
 
 
 1.	oracle_regex: everything before first appearance of character:
@@ -241,23 +239,23 @@
 
 
 +-------------------------------------------------------+
-|														|
-|	11. stored procedure arguments						|
+|										======19======	|
+|	stored procedure arguments							|
 |														|
 +-------------------------------------------------------+
 	SELECT * FROM USER_ARGUMENTS where object_name like 'stored procedure name%'
 
 
 +---------------------------------------------------------------------------------------------------------------+
-|	=====1======																								|	
+|																								======20======	|
 |									USER DEFINED FUNCTIONS														|
-|										===1===																	|
+|																												|
 +---------------------------------------------------------------------------------------------------------------+
 
 
 +-------------------------------------------------------+
-|														|
-|	8. UDF RETURNS SINGLE FIELD							|
+|										===20=1======	|
+|	UDF RETURNS SINGLE FIELD							|
 |		(user-defined function)							|
 +-------------------------------------------------------+
 	CREATE OR REPLACE FUNCTION function_name
@@ -281,11 +279,11 @@
 		select umtb_log_rprt_pt() from dual
 		
 
-+-------------------------------------------------------------------------------------------+ 
-|																							|	
-|	11. user defined tables functions 														|
-|																							|
-+-------------------------------------------------------------------------------------------+
++-------------------------------------------------------+
+|										===20=2======	|	
+|	user defined tables functions	 					|
+|														|
++-------------------------------------------------------+
 select * from all_type_ATTRS where owner='<owner_name>'
 select * from user_objects where object_name like 'name%';
 SELECT * FROM USER_ARGUMENTS where object_name like 'name%';
@@ -316,11 +314,11 @@ order by schema_name,
 
 
  
-+-------------------------------------------------------------------------------------------+ 
-|																							|	
-|	11. user defined types																	|
-|																							|
-+-------------------------------------------------------------------------------------------+
++-------------------------------------------------------+
+|										===20=3======	|	
+|	user defined types									|
+|														|
++-------------------------------------------------------+
 	SELECT   table_name FROM   user_tables WHERE    table_name like 'typesss_T%'
 	select * from all_types where owner='test' AND TYPE_NAME='typesss_TAB_CRTFCTN_DTLS'
 
@@ -331,11 +329,11 @@ order by schema_name,
 	SELECT * FROM USER_ARGUMENTS where object_name like 'typesss_T%'
 
 
-+-------------------------------------------------------------------------------------------+ 
-|																							|	
-|	11. table size																			|
-|																							|
-+-------------------------------------------------------------------------------------------+
++-------------------------------------------------------+
+|										======21======	|
+|	table size											|
+|														|
++-------------------------------------------------------+
 
 select segment_name,segment_type, sum(bytes/1024/1024/1024) GB
 from user_segments
@@ -394,11 +392,11 @@ Finally, we’ll create our SEQUENCE that will be utilized later to actually gen
 CREATE SEQUENCE books_sequence;
 
 
-+-----------------------------------------------------------+
-|															|
-|      DATE TIME datetime									|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|										======22======	|
+|      DATE TIME datetime								|
+|														|
++-------------------------------------------------------+
 
 ==1==> sydate to miliseconds
 	SELECT 
@@ -552,11 +550,11 @@ CREATE SEQUENCE books_sequence;
 	select dbtimezone from dual
 
 
-+-----------------------------------------------------------+
-|															|
-| SHOW ID THAT DOES NOT EXIST								|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|										======23======	|
+| 	SHOW ID THAT DOES NOT EXIST							|
+|														|
++-------------------------------------------------------+
 	drop type string_tab force;
 	
 	create type string_tab is table of varchar(9);
@@ -567,20 +565,20 @@ CREATE SEQUENCE books_sequence;
 	drop type string_tab force;
 	
 
-+-----------------------------------------------------------+
-|															|
-| COUNT ALL ROWS											|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|										======24======	|
+|	COUNT ALL ROWS										|
+|														|
++-------------------------------------------------------+
 
 select count(*) from table_name
 
 
-+-----------------------------------------------------------+
-|															|
-| COUNT DOUBLED ROWS										|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|										======25======	|
+|	COUNT DOUBLED ROWS									|
+|														|
++-------------------------------------------------------+
 select count(*) from table_name where rowid not in (select min(rowid)   from table_name group by list_of_fields)
 
 --delete doubled rows
@@ -588,11 +586,11 @@ delete from table_name where rowid not in (select min(rowid) from table_name gro
 
 
 
-+-----------------------------------------------------------+
-|															|
-|		IF FIRST QUERY RETURN EMPTY USE ANOTHER				|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|										======26======	|
+|	IF FIRST QUERY RETURN EMPTY USE ANOTHER				|
+|														|
++-------------------------------------------------------+
 source (https://stackoverflow.com/questions/12980854/oracle-db-return-second-query-if-first-query-is-empty)
 WITH query1 as (
     select 1, 2
@@ -616,18 +614,19 @@ where not exists (
 );
 
 
-+-----------------------------------------------------------+
-|															|
-|		CHILD COLUMN IS CSV									|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|										======27======	|
+|		CHILD COLUMN IS CSV								|
+|														|
++-------------------------------------------------------+
 https://medium.com/swlh/three-routes-convert-comma-separated-column-to-rows-c17c85079ecf
 
-+-----------------------------------------------------------+
-|															|
-|	Three Routes: Convert Comma-Separated Column to Rows	|
-|															|
-+-----------------------------------------------------------+
+
++-------------------------------------------------------+
+|										======28======	|
+|	Three Routes: Convert Comma-Separated Column to Rows|
+|														|
++-------------------------------------------------------+
 //https://medium.com/swlh/three-routes-convert-comma-separated-column-to-rows-c17c85079ecf
 column a is parent column b is csv of children (parent_and_csv_of_children)
 
