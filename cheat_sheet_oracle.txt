@@ -313,38 +313,7 @@ group by obj.owner,
 order by schema_name,
          function_name;
 		 
-+-------------------------------------------------------+
-|														|
-|		 orders per date								|
-|														|
-+-------------------------------------------------------+
-https://blogs.oracle.com/sql/post/how-to-generate-days-weeks-or-months-between-two-dates-in-oracle-database
-with ir as ( 
 
-	select name,TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS.ff9')+NUMTODSINTERVAL(created/1000,'SECOND') ir_created from monitored_table where execution_Status='Executing' and state='Approve and Provision'
-
-), ir_range as (
-
-	select trunc(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS.ff9')+NUMTODSINTERVAL(min(created)/1000,'SECOND')) cmin,
-
-	trunc(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS.ff9')+NUMTODSINTERVAL(max(created)/1000,'SECOND')) cmax
-
-	from monitored_table
-
-) 
-
-select dt, count ( ir_created ) num_orders
-  from ( 
-    select cmin + level - 1 as dt 
-    from   ir_range  
-    connect by level <= cmax - cmin + 1 
-  ) 
-
-left join ir 
-on     dt <= ir_created 
-and    dt + 1 > ir_created 
-group  by dt 
-order  by dt;
 
  
 +-------------------------------------------------------------------------------------------+ 
@@ -352,14 +321,14 @@ order  by dt;
 |	11. user defined types																	|
 |																							|
 +-------------------------------------------------------------------------------------------+
-SELECT   table_name FROM   user_tables WHERE    table_name like 'typesss_T%'
-select * from all_types where owner='test' AND TYPE_NAME='typesss_TAB_CRTFCTN_DTLS'
+	SELECT   table_name FROM   user_tables WHERE    table_name like 'typesss_T%'
+	select * from all_types where owner='test' AND TYPE_NAME='typesss_TAB_CRTFCTN_DTLS'
 
 
-select * from user_objects where object_name like 'typesss_%' and object_type='FUNCTION'
-select * from user_objects where object_name like 'typesss_T%'
-SELECT * FROM USER_ARGUMENTS where object_name like 'typesss_RPRT%'
-SELECT * FROM USER_ARGUMENTS where object_name like 'typesss_T%'
+	select * from user_objects where object_name like 'typesss_%' and object_type='FUNCTION'
+	select * from user_objects where object_name like 'typesss_T%'
+	SELECT * FROM USER_ARGUMENTS where object_name like 'typesss_RPRT%'
+	SELECT * FROM USER_ARGUMENTS where object_name like 'typesss_T%'
 
 
 +-------------------------------------------------------------------------------------------+ 
@@ -423,12 +392,6 @@ ALTER TABLE books
 Finally, we’ll create our SEQUENCE that will be utilized later to actually generate the unique, auto incremented value.
 
 CREATE SEQUENCE books_sequence;
-
-
-
-
-
-
 
 
 +-----------------------------------------------------------+
@@ -548,11 +511,39 @@ CREATE SEQUENCE books_sequence;
 		)
 		
 		
-+-----------------------------------------------------------+
-|															|
-|	4. TimeZone												|
-|															|
-+-----------------------------------------------------------+
+==17=> orders per date
+
+	https://blogs.oracle.com/sql/post/how-to-generate-days-weeks-or-months-between-two-dates-in-oracle-database
+	with ir as ( 
+
+		select name,TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS.ff9')+NUMTODSINTERVAL(created/1000,'SECOND') ir_created from monitored_table where execution_Status='Executing' and state='Approve and Provision'
+
+	), ir_range as (
+
+		select trunc(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS.ff9')+NUMTODSINTERVAL(min(created)/1000,'SECOND')) cmin,
+
+		trunc(TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS.ff9')+NUMTODSINTERVAL(max(created)/1000,'SECOND')) cmax
+
+		from monitored_table
+
+	) 
+
+	select dt, count ( ir_created ) num_orders
+		from ( 
+			select cmin + level - 1 as dt 
+			from   ir_range  
+			connect by level <= cmax - cmin + 1 
+		) 
+
+	left join ir 
+	on     dt <= ir_created 
+	and    dt + 1 > ir_created 
+	group  by dt 
+	order  by dt;	
+		
+
+==18=> TimeZone
+
 	SELECT * FROM nls_session_parameters WHERE parameter = 'NLS_DATE_LANGUAGE';
 	SELECT * FROM nls_session_parameters WHERE parameter = 'NLS_DATE_FORMAT';
 
@@ -561,17 +552,20 @@ CREATE SEQUENCE books_sequence;
 	select dbtimezone from dual
 
 
-
---following statement shows id_number that DOES NOT EXIST!!!! table
-drop type string_tab force;
-create type string_tab is table of varchar(9);
-SELECT *   FROM TABLE(string_tab('id','id1','id2'))
-WHERE COLUMN_VALUE NOT IN (SELECT id_number FROM table);
---release_variable string_tab
-drop type string_tab force;
-
-
-
++-----------------------------------------------------------+
+|															|
+| SHOW ID THAT DOES NOT EXIST								|
+|															|
++-----------------------------------------------------------+
+	drop type string_tab force;
+	
+	create type string_tab is table of varchar(9);
+	
+	SELECT *   FROM TABLE(string_tab('id','id1','id2')) 	WHERE COLUMN_VALUE NOT IN (SELECT id_number FROM table);
+	
+	--release_variable string_tab
+	drop type string_tab force;
+	
 
 +-----------------------------------------------------------+
 |															|
