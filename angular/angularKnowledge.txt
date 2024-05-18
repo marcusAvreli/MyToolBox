@@ -1,36 +1,8 @@
-
-https://github.com/ieammac/angular-4-custom-context-menu/tree/master
-https://github.com/mdn/webextensions-examples/blob/main/theme-switcher/switcher.js
-//wizard operators value is NonNullable
-https://github.com/webosbrew/dev-manager-desktop/blob/364f5e4a36b8c5940eb04b1d773b027a2dce048d/src/app/add-device/wizard/wizard.component.ts#L22
-
-
-https://github.com/homebridge/homebridge-config-ui-x/blob/e11fc5a3d1049e8dfe8523b6e3ad70c7115b0307/ui/src/app/core/manage-plugins/manual-plugin-config-modal/manual-plugin-config-modal.component.ts#L90
-
-//drag and drop
-https://github.com/uav4geo/GCPEditorPro/blob/d78143c331a05d8bcf4ba35eaeb23447e04ad357/src/app/app.component.ts#L129
-
-//modal service
-https://github.com/eugenp/tutorials/blob/38bb8c3e913abc4de023b3f8c368123aab9d7d7a/jhipster-modules/jhipster-monolithic/src/main/webapp/app/admin/user-management/user-modal.service.ts
-
-//export abstract class InstructorSessionModalPageComponent 
-https://github.com/TEAMMATES/teammates/blob/fb7c4e874e555c7aa51949f9ae73ddeea3b733a2/src/web/app/pages-instructor/instructor-session-modal-page.component.ts#L44
-
-
-show dialog
-https://github.com/gayemce/ITDeskProject/blob/620e7e4474ffa67c80dde79c857440546df242fa/ITDeskClient/src/app/component/home/home.component.ts#L123
-https://github.com/opensource-emr/hospital-management-emr/blob/8a09a68ffdd65af0f268d68eaf857dafe17f844d/Code/Websites/DanpheEMR/wwwroot/DanpheApp/src/app/shared/danphe-confirmation-dialog/danphe-confirmation.directive.ts#L5
-https://github.com/gayemce/ITDeskProject/blob/620e7e4474ffa67c80dde79c857440546df242fa/ITDeskClient/src/app/component/home/home.component.ts
-
-https://github.com/GrapesJS/grapesjs/blob/c3322e7099d225c38fd2b9d22b2b4c507e3cf317/src/modal_dialog/model/Modal.ts
-	
-	
-
-+-----------------------------------------------------------+
-|															|
-|	DEFAULT PORT											|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|										======1======	|
+|	DEFAULT PORT										|
+|														|
++-------------------------------------------------------+
 	https://stackoverflow.com/questions/40717449/how-to-change-angular-port-from-4200-to-any-other
 	Angular CLI 1
 	
@@ -59,16 +31,127 @@ https://github.com/GrapesJS/grapesjs/blob/c3322e7099d225c38fd2b9d22b2b4c507e3cf3
     }
 	
 	
-+-----------------------------------------------------------+
-|															|
-|	DELEGATION: EVENTEMITTER OR OBSERVABLE IN ANGULAR		|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|										======2======	|
+|	DELEGATION: EVENTEMITTER OR OBSERVABLE IN ANGULAR	|
+|														|
++-------------------------------------------------------+
 	https://stackoverflow.com/questions/34376854/delegation-eventemitter-or-observable-in-angular
 	
 	Update 2016-06-27: instead of using Observables, use either
 		a BehaviorSubject, as recommended by @Abdulrahman in a comment, or
 		a ReplaySubject, as recommended by @Jason Goemaat in a comment
+
++-------------------------------------------------------+
+|										======3======	|
+|	SEVERAL NODE VERSIONS								|
+|														|
++-------------------------------------------------------+
+https://philna.sh/blog/2019/01/10/how-to-start-a-node-js-project/
+https://stackoverflow.com/questions/53653434/is-it-possible-to-use-rollup-for-processing-just-css
+	https://blog.logrocket.com/how-switch-node-js-versions-nvm/
+	set installed version
+	#list installed versions
+	nvm ls
+		output
+			18.12.0
+		  * 14.20.1 (Currently using 64-bit executable)
+			8.17.0
+			
+	#switch node versions
+	nvm use 8.17.0
+
++-------------------------------------------------------+
+|										======4======	|
+|	SEVERAL ANGULAR VERSIONS							|
+|														|
++-------------------------------------------------------+
+
+	https://stackoverflow.com/questions/48128847/how-to-install-angular-cli-locally-without-the-g-flag
+	https://stackoverflow.com/questions/43018777/angular-cli-different-versions-in-the-same-computer
+
++-------------------------------------------------------+
+|										======5======	|
+|	ANGULAR 4											|
+|														|
++-------------------------------------------------------+
+	@angular/cli : 1.4.10
+	node : 8.17.0
+	
++-------------------------------------------------------+
+|										======6======	|
+|	MULTI VERSION ENVIRONMENT							|
+|														|
++-------------------------------------------------------+
+
+#INIT APP
+	npx @angular/cli@1.4.10 new manualLazyLoad --skip-git
+#START APP
+	npx ng serve	
+
+
++-------------------------------------------------------+
+|										======7======	|
+|	ERRORS												|
+|														|
++-------------------------------------------------------+
+
+==1===> NPM install error "Unexpected token < in JSON at position 0"
+
+	SOURCE: https://stackoverflow.com/questions/51358648/npm-install-error-unexpected-token-in-json-at-position-0
+
+	Delete the node_modules folder.
+	Delete package-lock.json file.
+	Verify the cache
+	Run npm install again.
+
+	For people who have removed node_modules and facing error after npm install. This can also be a problem if you have a preinstall script under package.json like this:
+
+	"scripts": {
+	  "preinstall": "npx npm-force-resolutions",
+
+
++-------------------------------------------------------+
+|										======8======	|
+|	COMPAITABLITIY										|
+|														|
++-------------------------------------------------------+
+==1===>	NODE SASS
+	https://github.com/sass/node-sass#node-sass
+
+	SOURCE:https://stackoverflow.com/questions/61853150/why-is-npm-install-failing-with-node-sass-related-errors
+
+
+
+
+
+https://github.com/ieammac/angular-4-custom-context-menu/tree/master
+https://github.com/mdn/webextensions-examples/blob/main/theme-switcher/switcher.js
+//wizard operators value is NonNullable
+https://github.com/webosbrew/dev-manager-desktop/blob/364f5e4a36b8c5940eb04b1d773b027a2dce048d/src/app/add-device/wizard/wizard.component.ts#L22
+
+
+https://github.com/homebridge/homebridge-config-ui-x/blob/e11fc5a3d1049e8dfe8523b6e3ad70c7115b0307/ui/src/app/core/manage-plugins/manual-plugin-config-modal/manual-plugin-config-modal.component.ts#L90
+
+//drag and drop
+https://github.com/uav4geo/GCPEditorPro/blob/d78143c331a05d8bcf4ba35eaeb23447e04ad357/src/app/app.component.ts#L129
+
+//modal service
+https://github.com/eugenp/tutorials/blob/38bb8c3e913abc4de023b3f8c368123aab9d7d7a/jhipster-modules/jhipster-monolithic/src/main/webapp/app/admin/user-management/user-modal.service.ts
+
+//export abstract class InstructorSessionModalPageComponent 
+https://github.com/TEAMMATES/teammates/blob/fb7c4e874e555c7aa51949f9ae73ddeea3b733a2/src/web/app/pages-instructor/instructor-session-modal-page.component.ts#L44
+
+
+show dialog
+https://github.com/gayemce/ITDeskProject/blob/620e7e4474ffa67c80dde79c857440546df242fa/ITDeskClient/src/app/component/home/home.component.ts#L123
+https://github.com/opensource-emr/hospital-management-emr/blob/8a09a68ffdd65af0f268d68eaf857dafe17f844d/Code/Websites/DanpheEMR/wwwroot/DanpheApp/src/app/shared/danphe-confirmation-dialog/danphe-confirmation.directive.ts#L5
+https://github.com/gayemce/ITDeskProject/blob/620e7e4474ffa67c80dde79c857440546df242fa/ITDeskClient/src/app/component/home/home.component.ts
+
+https://github.com/GrapesJS/grapesjs/blob/c3322e7099d225c38fd2b9d22b2b4c507e3cf317/src/modal_dialog/model/Modal.ts
+	
+	
+
 
 +-----------------------------------------------------------+
 |															|
@@ -101,52 +184,7 @@ if you got severla node versions
 	Node Sass could not find a binding for your current environment: Windows 64-bit with Node.js 8.x	
 	one possible solution:
 		reinstall  "postcss-node-sass": "^2.1.8",
-+-----------------------------------------------------------+
-|															|
-|	SEVERAL NODE VERSIONS									|
-|															|
-+-----------------------------------------------------------+
-https://philna.sh/blog/2019/01/10/how-to-start-a-node-js-project/
-https://stackoverflow.com/questions/53653434/is-it-possible-to-use-rollup-for-processing-just-css
-	https://blog.logrocket.com/how-switch-node-js-versions-nvm/
-	set installed version
-	#list installed versions
-	nvm ls
-		output
-			18.12.0
-		  * 14.20.1 (Currently using 64-bit executable)
-			8.17.0
-			
-	#switch node versions
-	nvm use 8.17.0
 
-+-----------------------------------------------------------+
-|															|
-|	SEVERAL ANGULAR VERSIONS								|
-|															|
-+-----------------------------------------------------------+
-
-	https://stackoverflow.com/questions/48128847/how-to-install-angular-cli-locally-without-the-g-flag
-	https://stackoverflow.com/questions/43018777/angular-cli-different-versions-in-the-same-computer
-
-+-----------------------------------------------------------+
-|															|
-|	ANGULAR 4												|
-|															|
-+-----------------------------------------------------------+
-	@angular/cli : 1.4.10
-	node : 8.17.0
-	
-+-----------------------------------------------------------+
-|															|
-|	MULTI VERSION ENVIRONMENT								|
-|															|
-+-----------------------------------------------------------+
-
-#INIT APP
-	npx @angular/cli@1.4.10 new manualLazyLoad --skip-git
-#START APP
-	npx ng serve	
 
 +-----------------------------------------------------------+
 |															|
