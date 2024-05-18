@@ -3,6 +3,7 @@
 |	DEFAULT PORT										|
 |														|
 +-------------------------------------------------------+
+==1===> SET DEFAULT PORT
 	https://stackoverflow.com/questions/40717449/how-to-change-angular-port-from-4200-to-any-other
 	Angular CLI 1
 	
@@ -29,8 +30,35 @@
         }
         ...
     }
-	
-	
+==2===> SET SPECIFIC NODE	
+	package.json
+	"engines": {
+    "node": "8.17.0"
+  },
+ 
+  
++-------------------------------------------------------+
+|										======1======	|
+|	NODE JS AND JAVASCRIPT								|
+|														|
++-------------------------------------------------------+
+ https://docs.netlify.com/configure-builds/manage-dependencies/#node-js-and-javascript
+
++-------------------------------------------------------+
+|										======1======	|
+|	SPECIFIC ANGULAR VERSION							|
+|														|
++-------------------------------------------------------+
+  npm install -g @angular/cli@1.4.10
+  
++-------------------------------------------------------+
+|										======1======	|
+|	STRICT MODE											|
+|														|
++-------------------------------------------------------+
+https://github.com/nvm-sh/nvm#nvmrc
+.npmrc > engine-strict=false
+  https://stackoverflow.com/questions/47763783/cant-uninstall-global-npm-packages-after-installing-nvm
 +-------------------------------------------------------+
 |										======2======	|
 |	DELEGATION: EVENTEMITTER OR OBSERVABLE IN ANGULAR	|
@@ -111,6 +139,8 @@ https://stackoverflow.com/questions/53653434/is-it-possible-to-use-rollup-for-pr
 	  "preinstall": "npx npm-force-resolutions",
 
 
+
+
 +-------------------------------------------------------+
 |										======8======	|
 |	COMPAITABLITIY										|
@@ -121,8 +151,9 @@ https://stackoverflow.com/questions/53653434/is-it-possible-to-use-rollup-for-pr
 
 	SOURCE:https://stackoverflow.com/questions/61853150/why-is-npm-install-failing-with-node-sass-related-errors
 
-
-
+==2===> compatibility list for Angular / Angular-CLI and Node.js?
+	SOURCE: https://stackoverflow.com/questions/60248452/is-there-a-compatibility-list-for-angular-angular-cli-and-node-js
+	https://angular.dev/reference/versions
 
 
 https://github.com/ieammac/angular-4-custom-context-menu/tree/master
