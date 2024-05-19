@@ -75,20 +75,24 @@ https://github.com/nvm-sh/nvm#nvmrc
 |	SEVERAL NODE VERSIONS								|
 |														|
 +-------------------------------------------------------+
-https://philna.sh/blog/2019/01/10/how-to-start-a-node-js-project/
-https://stackoverflow.com/questions/53653434/is-it-possible-to-use-rollup-for-processing-just-css
-	https://blog.logrocket.com/how-switch-node-js-versions-nvm/
-	set installed version
-	#list installed versions
+source:	https://blog.logrocket.com/how-switch-node-js-versions-nvm/
+==1===> To install a Node version
+		nvm install 18.12.0
+	
+==2===> list installed versions
 	nvm ls
 		output
 			18.12.0
 		  * 14.20.1 (Currently using 64-bit executable)
 			8.17.0
 			
-	#switch node versions
+==3===> switch node versions
 	nvm use 8.17.0
-
+	
+==4===> uninstal node verions
+	nvm uninstall 18.12.0
+	nvm uninstall 14.20.1
+	nvm uninstall 8.17.0 
 +-------------------------------------------------------+
 |										======4======	|
 |	SEVERAL ANGULAR VERSIONS							|
@@ -154,7 +158,55 @@ https://stackoverflow.com/questions/53653434/is-it-possible-to-use-rollup-for-pr
 ==2===> compatibility list for Angular / Angular-CLI and Node.js?
 	SOURCE: https://stackoverflow.com/questions/60248452/is-there-a-compatibility-list-for-angular-angular-cli-and-node-js
 	https://angular.dev/reference/versions
+	
+	
++-----------------------------------------------------------+
+|											======9======	|
+|	RXJS 													|
+|															|
++-----------------------------------------------------------+
+ 
+	for Angular >= 6.0.0
+		import { of } from 'rxjs';
+			https://stackoverflow.com/questions/34376854/delegation-eventemitter-or-observable-in-angular
+		import 'rxjs/add/operator/share';
+	import { map, switchMap, catchError } from "rxjs/operators"; 
+	import { Observable } from 'rxjs/Observable';
+	import { empty } from 'rxjs/observable/empty';
+	import { of } from 'rxjs/observable/of';
 
+	// RxJS
+	import 'rxjs/add/operator/catch';
+	// import 'rxjs/add/operator/combineLatest';
+	import 'rxjs/add/operator/debounceTime';
+	import 'rxjs/add/operator/distinctUntilChanged';
+	import 'rxjs/add/operator/do';
+	import 'rxjs/add/operator/filter';
+	// import 'rxjs/add/operator/let';
+	import 'rxjs/add/operator/map';
+	// import 'rxjs/add/operator/merge';
+	import 'rxjs/add/operator/mergeAll';
+	import 'rxjs/add/operator/mergeMap';
+	import 'rxjs/add/operator/pluck'
+	import 'rxjs/add/operator/scan';
+	import 'rxjs/add/operator/share';
+	import 'rxjs/add/operator/skip';
+	import 'rxjs/add/operator/startWith';
+	import 'rxjs/add/operator/switchMap';
+	import 'rxjs/add/operator/take';
+	// import 'rxjs/add/operator/takeUntil';
+	// import 'rxjs/add/operator/toArray';
+	import 'rxjs/add/operator/toPromise';
+	import 'rxjs/add/operator/withLatestFrom';
+
+	import 'rxjs/add/observable/empty';
+	import 'rxjs/add/observable/from';
+	import 'rxjs/add/observable/fromEvent';
+	import 'rxjs/add/observable/fromPromise';
+	import 'rxjs/add/observable/interval';
+	import 'rxjs/add/observable/of';
+	import 'rxjs/add/observable/throw';
+	// import 'rxjs/add/observable/zip';
 
 https://github.com/ieammac/angular-4-custom-context-menu/tree/master
 https://github.com/mdn/webextensions-examples/blob/main/theme-switcher/switcher.js
@@ -232,53 +284,7 @@ if you got severla node versions
     "@ngrx/store": "4.0.3",
     "@ngrx/store-devtools": "4.0.0",
 
-+-----------------------------------------------------------+
-|															|
-|	RXJS 													|
-|															|
-+-----------------------------------------------------------+
- 
-for Angular >= 6.0.0
-	import { of } from 'rxjs';
-		https://stackoverflow.com/questions/34376854/delegation-eventemitter-or-observable-in-angular
-	import 'rxjs/add/operator/share';
-import { map, switchMap, catchError } from "rxjs/operators"; 
-import { Observable } from 'rxjs/Observable';
-import { empty } from 'rxjs/observable/empty';
-import { of } from 'rxjs/observable/of';
 
-// RxJS
-import 'rxjs/add/operator/catch';
-// import 'rxjs/add/operator/combineLatest';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/filter';
-// import 'rxjs/add/operator/let';
-import 'rxjs/add/operator/map';
-// import 'rxjs/add/operator/merge';
-import 'rxjs/add/operator/mergeAll';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/pluck'
-import 'rxjs/add/operator/scan';
-import 'rxjs/add/operator/share';
-import 'rxjs/add/operator/skip';
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/take';
-// import 'rxjs/add/operator/takeUntil';
-// import 'rxjs/add/operator/toArray';
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/withLatestFrom';
-
-import 'rxjs/add/observable/empty';
-import 'rxjs/add/observable/from';
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/observable/fromPromise';
-import 'rxjs/add/observable/interval';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/observable/throw';
-// import 'rxjs/add/observable/zip';
 
 
 +-----------------------------------------------------------+
@@ -340,7 +346,8 @@ https://github.com/sass/libsass/issues/2244
  
  
  
- 
+ https://philna.sh/blog/2019/01/10/how-to-start-a-node-js-project/
+https://stackoverflow.com/questions/53653434/is-it-possible-to-use-rollup-for-processing-just-css
  
  
 Errors

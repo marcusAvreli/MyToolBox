@@ -209,4 +209,11 @@
 	sc config "Service name" binpath= "C:\path\to\executable\here"
 	https://technet.microsoft.com/en-us/library/bb490995.aspx
 		*make sure you have a space between the = and the new name (ie. displayname= "New Name", NOT displayname="New Name")
++-------------------------------------------------------+
+|										======18======	|
+|	WINDOWS + R CMD										|
+|														|
++-------------------------------------------------------+
 
+==1===> open system properites from cmd
+		sysdm.cpl
