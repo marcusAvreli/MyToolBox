@@ -1,5 +1,12 @@
 +-------------------------------------------------------+
 |										======1======	|
+|	SPECIFIC ANGULAR VERSION							|
+|														|
++-------------------------------------------------------+
+  npm install -g @angular/cli@1.4.10
+  
++-------------------------------------------------------+
+|										======2======	|
 |	DEFAULT PORT										|
 |														|
 +-------------------------------------------------------+
@@ -38,29 +45,17 @@
  
   
 +-------------------------------------------------------+
-|										======1======	|
+|										======3======	|
 |	NODE JS AND JAVASCRIPT								|
 |														|
 +-------------------------------------------------------+
  https://docs.netlify.com/configure-builds/manage-dependencies/#node-js-and-javascript
 
-+-------------------------------------------------------+
-|										======1======	|
-|	SPECIFIC ANGULAR VERSION							|
-|														|
-+-------------------------------------------------------+
-  npm install -g @angular/cli@1.4.10
+
   
+
 +-------------------------------------------------------+
-|										======1======	|
-|	STRICT MODE											|
-|														|
-+-------------------------------------------------------+
-https://github.com/nvm-sh/nvm#nvmrc
-.npmrc > engine-strict=false
-  https://stackoverflow.com/questions/47763783/cant-uninstall-global-npm-packages-after-installing-nvm
-+-------------------------------------------------------+
-|										======2======	|
+|										======4======	|
 |	DELEGATION: EVENTEMITTER OR OBSERVABLE IN ANGULAR	|
 |														|
 +-------------------------------------------------------+
@@ -71,8 +66,8 @@ https://github.com/nvm-sh/nvm#nvmrc
 		a ReplaySubject, as recommended by @Jason Goemaat in a comment
 
 +-------------------------------------------------------+
-|										======3======	|
-|	SEVERAL NODE VERSIONS								|
+|										======5======	|
+|	SEVERAL NODE VERSIONS NVM							|
 |														|
 +-------------------------------------------------------+
 https://philna.sh/blog/2019/01/10/how-to-start-a-node-js-project/
@@ -89,17 +84,14 @@ https://stackoverflow.com/questions/53653434/is-it-possible-to-use-rollup-for-pr
 	#switch node versions
 	nvm use 8.17.0
 
-+-------------------------------------------------------+
-|										======4======	|
-|	SEVERAL ANGULAR VERSIONS							|
-|														|
-+-------------------------------------------------------+
+==2===> STRICT MODE
+	https://github.com/nvm-sh/nvm#nvmrc
+	.npmrc > engine-strict=false
+	  https://stackoverflow.com/questions/47763783/cant-uninstall-global-npm-packages-after-installing-nvm
 
-	https://stackoverflow.com/questions/48128847/how-to-install-angular-cli-locally-without-the-g-flag
-	https://stackoverflow.com/questions/43018777/angular-cli-different-versions-in-the-same-computer
 
 +-------------------------------------------------------+
-|										======5======	|
+|										======6======	|
 |	ANGULAR 4											|
 |														|
 +-------------------------------------------------------+
@@ -107,8 +99,8 @@ https://stackoverflow.com/questions/53653434/is-it-possible-to-use-rollup-for-pr
 	node : 8.17.0
 	
 +-------------------------------------------------------+
-|										======6======	|
-|	MULTI VERSION ENVIRONMENT							|
+|										======7======	|
+|	SEVERAL ANGULAR VERSIONS							|
 |														|
 +-------------------------------------------------------+
 
@@ -117,9 +109,11 @@ https://stackoverflow.com/questions/53653434/is-it-possible-to-use-rollup-for-pr
 #START APP
 	npx ng serve	
 
+https://stackoverflow.com/questions/48128847/how-to-install-angular-cli-locally-without-the-g-flag
+https://stackoverflow.com/questions/43018777/angular-cli-different-versions-in-the-same-computer
 
 +-------------------------------------------------------+
-|										======7======	|
+|										======8======	|
 |	ERRORS												|
 |														|
 +-------------------------------------------------------+
@@ -139,10 +133,28 @@ https://stackoverflow.com/questions/53653434/is-it-possible-to-use-rollup-for-pr
 	  "preinstall": "npx npm-force-resolutions",
 
 
+==2===> Uncaught reflect-metadata shim is required when using class decorators
+	In root/src
+	Update file polyfills.ts
+	import 'zone.js';
+	import 'reflect-metadata';
 
+==3===> Cannot find name 'require'
+	Update file tsconfig.app.json
 
+	"types": [
+		  "node"
+		]
+
+==4===> Property 'worker' has no initializer and is not definitely assigned in the constructor
+
+Just go to tsconfig.json and set
+"compilerOptions": {
+    "strictPropertyInitialization": false,
+    ...
+}
 +-------------------------------------------------------+
-|										======8======	|
+|										======9======	|
 |	COMPAITABLITIY										|
 |														|
 +-------------------------------------------------------+
@@ -156,51 +168,11 @@ https://stackoverflow.com/questions/53653434/is-it-possible-to-use-rollup-for-pr
 	https://angular.dev/reference/versions
 
 
-https://github.com/ieammac/angular-4-custom-context-menu/tree/master
-https://github.com/mdn/webextensions-examples/blob/main/theme-switcher/switcher.js
-//wizard operators value is NonNullable
-https://github.com/webosbrew/dev-manager-desktop/blob/364f5e4a36b8c5940eb04b1d773b027a2dce048d/src/app/add-device/wizard/wizard.component.ts#L22
-
-
-https://github.com/homebridge/homebridge-config-ui-x/blob/e11fc5a3d1049e8dfe8523b6e3ad70c7115b0307/ui/src/app/core/manage-plugins/manual-plugin-config-modal/manual-plugin-config-modal.component.ts#L90
-
-//drag and drop
-https://github.com/uav4geo/GCPEditorPro/blob/d78143c331a05d8bcf4ba35eaeb23447e04ad357/src/app/app.component.ts#L129
-
-//modal service
-https://github.com/eugenp/tutorials/blob/38bb8c3e913abc4de023b3f8c368123aab9d7d7a/jhipster-modules/jhipster-monolithic/src/main/webapp/app/admin/user-management/user-modal.service.ts
-
-//export abstract class InstructorSessionModalPageComponent 
-https://github.com/TEAMMATES/teammates/blob/fb7c4e874e555c7aa51949f9ae73ddeea3b733a2/src/web/app/pages-instructor/instructor-session-modal-page.component.ts#L44
-
-
-show dialog
-https://github.com/gayemce/ITDeskProject/blob/620e7e4474ffa67c80dde79c857440546df242fa/ITDeskClient/src/app/component/home/home.component.ts#L123
-https://github.com/opensource-emr/hospital-management-emr/blob/8a09a68ffdd65af0f268d68eaf857dafe17f844d/Code/Websites/DanpheEMR/wwwroot/DanpheApp/src/app/shared/danphe-confirmation-dialog/danphe-confirmation.directive.ts#L5
-https://github.com/gayemce/ITDeskProject/blob/620e7e4474ffa67c80dde79c857440546df242fa/ITDeskClient/src/app/component/home/home.component.ts
-
-https://github.com/GrapesJS/grapesjs/blob/c3322e7099d225c38fd2b9d22b2b4c507e3cf317/src/modal_dialog/model/Modal.ts
-	
-	
-
-
-+-----------------------------------------------------------+
-|															|
-|	SHARE MULTIPLE OBSERVERS								|
-|															|
-+-----------------------------------------------------------+
-		https://stackoverflow.com/questions/34376854/delegation-eventemitter-or-observable-in-angular
-	import 'rxjs/add/operator/share';
-
-	this.navChange$ = new Observable(observer =>
-      this._observer = observer).share();
-    // share() allows multiple subscribers
-
-+-----------------------------------------------------------+
-|															|
-|	POST SCSS												|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|										======10======	|
+|	POST SCSS											|
+|														|
++-------------------------------------------------------+
 https://www.npmjs.com/package/node-sass
 	IF YOU GOT
 	Input Error: Did not receive any STDIN
@@ -217,11 +189,25 @@ if you got severla node versions
 		reinstall  "postcss-node-sass": "^2.1.8",
 
 
-+-----------------------------------------------------------+
-|															|
-|	ANGULAR 4 NGRX SET										|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|										======11======	|
+|	SHARE MULTIPLE OBSERVERS							|
+|														|
++-------------------------------------------------------+
+		https://stackoverflow.com/questions/34376854/delegation-eventemitter-or-observable-in-angular
+	import 'rxjs/add/operator/share';
+
+	this.navChange$ = new Observable(observer =>
+      this._observer = observer).share();
+    // share() allows multiple subscribers
+
+
+
++-------------------------------------------------------+
+|										======12======	|
+|	ANGULAR 4 NGRX SET									|
+|														|
++-------------------------------------------------------+
 
 	npm i @ngrx/core@1.2.0 @ngrx/effects@2.0.3 @ngrx/router-store@1.2.6 @ngrx/store@2.2.3 @ngrx/store-devtools@4.1.1 
 	
@@ -232,11 +218,11 @@ if you got severla node versions
     "@ngrx/store": "4.0.3",
     "@ngrx/store-devtools": "4.0.0",
 
-+-----------------------------------------------------------+
-|															|
-|	RXJS 													|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|										======13======	|
+|	RXJS 												|
+|														|
++-------------------------------------------------------+
  
 for Angular >= 6.0.0
 	import { of } from 'rxjs';
@@ -281,27 +267,50 @@ import 'rxjs/add/observable/throw';
 // import 'rxjs/add/observable/zip';
 
 
-+-----------------------------------------------------------+
-|															|
-|	ERRORS 													|
-|															|
-+-----------------------------------------------------------+
-
-Uncaught reflect-metadata shim is required when using class decorators
-In root/src
-Update file polyfills.ts
 
 
 
-import 'zone.js';
-import 'reflect-metadata';
 
-Cannot find name 'require'
-Update file tsconfig.app.json
+
+
+
+
+
+https://github.com/ieammac/angular-4-custom-context-menu/tree/master
+https://github.com/mdn/webextensions-examples/blob/main/theme-switcher/switcher.js
+//wizard operators value is NonNullable
+https://github.com/webosbrew/dev-manager-desktop/blob/364f5e4a36b8c5940eb04b1d773b027a2dce048d/src/app/add-device/wizard/wizard.component.ts#L22
+
+
+https://github.com/homebridge/homebridge-config-ui-x/blob/e11fc5a3d1049e8dfe8523b6e3ad70c7115b0307/ui/src/app/core/manage-plugins/manual-plugin-config-modal/manual-plugin-config-modal.component.ts#L90
+
+//drag and drop
+https://github.com/uav4geo/GCPEditorPro/blob/d78143c331a05d8bcf4ba35eaeb23447e04ad357/src/app/app.component.ts#L129
+
+//modal service
+https://github.com/eugenp/tutorials/blob/38bb8c3e913abc4de023b3f8c368123aab9d7d7a/jhipster-modules/jhipster-monolithic/src/main/webapp/app/admin/user-management/user-modal.service.ts
+
+//export abstract class InstructorSessionModalPageComponent 
+https://github.com/TEAMMATES/teammates/blob/fb7c4e874e555c7aa51949f9ae73ddeea3b733a2/src/web/app/pages-instructor/instructor-session-modal-page.component.ts#L44
+
+
+show dialog
+https://github.com/gayemce/ITDeskProject/blob/620e7e4474ffa67c80dde79c857440546df242fa/ITDeskClient/src/app/component/home/home.component.ts#L123
+https://github.com/opensource-emr/hospital-management-emr/blob/8a09a68ffdd65af0f268d68eaf857dafe17f844d/Code/Websites/DanpheEMR/wwwroot/DanpheApp/src/app/shared/danphe-confirmation-dialog/danphe-confirmation.directive.ts#L5
+https://github.com/gayemce/ITDeskProject/blob/620e7e4474ffa67c80dde79c857440546df242fa/ITDeskClient/src/app/component/home/home.component.ts
+
+https://github.com/GrapesJS/grapesjs/blob/c3322e7099d225c38fd2b9d22b2b4c507e3cf317/src/modal_dialog/model/Modal.ts
+	
+	
+
+
+
+
+
+
+
 https://stackoverflow.com/questions/44224085/how-to-get-index-of-selected-option-in-angular
-"types": [
-      "node"
-    ]
+
  
  https://www.javatpoint.com/rxjs-filter-filtering-operator
 https://github.com/ReactiveX/rxjs/issues/2163
@@ -476,22 +485,6 @@ function OPERATOR() {
     });
   };
 }
-
-Errors
-Uncaught reflect-metadata shim is required when using class decorators
-In root/src
-Update file polyfills.ts
-
-import 'zone.js';
-import 'reflect-metadata';
-
-Cannot find name 'require'
-Update file tsconfig.app.json
-
-"types": [
-      "node"
-    ]
-
 
 
 this.clock.subscribe(console.log.bind(console));
