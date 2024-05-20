@@ -144,6 +144,20 @@ semicolon equal,tab, equal SIGN
 Find Strings without any quotes 
 	^[^'"]*$
 	
++-------------------------------------------------------+
+|														|
+|	EMPTY lINES											|
+|														|
++-------------------------------------------------------+
+	^[ \t]*$\r?\n
+	
+==1==> remove empty lines in notepad++
+Find what: ^[ \t]*$\r?\n
+Replace with: <empty>
+
+
+
+
 Regex find last n chars in string
 .{2}$
 
