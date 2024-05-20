@@ -510,7 +510,7 @@ CREATE SEQUENCE books_sequence;
 		
 		
 ==17=> orders per date
-
+	https://stackoverflow.com/questions/57941932/oracle-sql-sum-and-group-data-by-daily-weekly-and-monthly-with-missing-date
 	https://blogs.oracle.com/sql/post/how-to-generate-days-weeks-or-months-between-two-dates-in-oracle-database
 	with ir as ( 
 
