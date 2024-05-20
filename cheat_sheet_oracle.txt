@@ -549,6 +549,12 @@ CREATE SEQUENCE books_sequence;
 	select dbtimezone, sessiontimezone from dual 
 	select dbtimezone from dual
 
+==19==> select max date with details
+	select A,col_date
+	from (select A,col_date
+		from tablename 
+		  order by col_date desc)
+		  where rownum<2
 
 +-------------------------------------------------------+
 |										======23======	|
