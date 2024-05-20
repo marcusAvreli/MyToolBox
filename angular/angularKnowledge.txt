@@ -70,6 +70,8 @@
 |	SEVERAL NODE VERSIONS NVM							|
 |														|
 +-------------------------------------------------------+
+																 
+																								 
 source:	https://blog.logrocket.com/how-switch-node-js-versions-nvm/
 ==1===> To install a Node version
 		nvm install 18.12.0
@@ -296,7 +298,38 @@ import { Observable } from 'rxjs/Observable';
 import { empty } from 'rxjs/observable/empty';
 import { of } from 'rxjs/observable/of';
 >>>>>>> 4598afceef334cf15060ac8d7610bb2454caee30
+	   
+								 
+											
+										
+												
+							  
+								  
+								  
+							   
+									
+									
+									
+								
+								
+								 
+								
+									 
+									 
+								
+										
+									  
+									 
+										  
 
+								   
+								  
+									   
+										 
+									  
+								
+								   
+									
 
 
 
@@ -383,6 +416,7 @@ https://github.com/sass/libsass/issues/2244
  
  https://philna.sh/blog/2019/01/10/how-to-start-a-node-js-project/
 https://stackoverflow.com/questions/53653434/is-it-possible-to-use-rollup-for-processing-just-css
+ 
  
  
 Errors
