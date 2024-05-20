@@ -510,6 +510,7 @@ CREATE SEQUENCE books_sequence;
 		
 		
 ==17=> orders per date
+	https://blogs.oracle.com/sql/post/group-rows-into-n-minute-intervals-with-sql
 	https://stackoverflow.com/questions/57941932/oracle-sql-sum-and-group-data-by-daily-weekly-and-monthly-with-missing-date
 	https://blogs.oracle.com/sql/post/how-to-generate-days-weeks-or-months-between-two-dates-in-oracle-database
 	with ir as ( 
@@ -539,8 +540,27 @@ CREATE SEQUENCE books_sequence;
 	group  by dt 
 	order  by dt;	
 		
-
-==18=> TimeZone
+==18===>	Group rows into 10-minute buckets with sparse data
+	https://blogs.oracle.com/sql/post/group-rows-into-n-minute-intervals-with-sql
+	with times as (
+	  select to_date ( :start_time, 'DD-MON-YYYY HH24:MI' )
+			   + ( ( level - 1 ) * :duration_in_minutes / 1440 ) dt
+	  from   dual
+	  connect by level <= :number_of_intervals
+	), intervals as (
+	  select dt start_date,
+			 dt + ( :duration_in_minutes / 1440 ) end_date
+	  from   times
+	)
+	  select start_date, end_date, count ( datetime )
+	  from   intervals i
+	  left  join time_data t
+	  on     start_date <= datetime
+	  and    datetime < end_date
+	  group  by start_date, end_date
+	  order  by start_date;
+	  
+==19===> TimeZone
 
 	SELECT * FROM nls_session_parameters WHERE parameter = 'NLS_DATE_LANGUAGE';
 	SELECT * FROM nls_session_parameters WHERE parameter = 'NLS_DATE_FORMAT';
@@ -549,7 +569,7 @@ CREATE SEQUENCE books_sequence;
 	select dbtimezone, sessiontimezone from dual 
 	select dbtimezone from dual
 
-==19==> select max date with details
+==20===> select max date with details
 	select A,col_date
 	from (select A,col_date
 		from tablename 
