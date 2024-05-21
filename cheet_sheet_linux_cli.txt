@@ -181,7 +181,10 @@
 +---------------------------------------------------+
 	grep -rI testTempReplacement *
 	grep -rI value=\"sdsadasdas\" *
-
+	
+	tail -f log_file.log | grep subject_string
+	find . -cnewer log_file.log | xargs grep "subject_string"	
+	grep -Rnw . -e 'testCertificationRemediation'
 	
 +---------------------------------------------------+
 |													|
@@ -345,7 +348,7 @@ ls -ltr --block-size=M
 |	SEARCH FOR STRING IN FILES						|
 |													|
 +---------------------------------------------------+
-	grep -Rnw . -e 'testCertificationRemediation'
+	
 	
 
 +---------------------------------------------------+
