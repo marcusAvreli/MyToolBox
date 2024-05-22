@@ -11,3 +11,14 @@ https://medium.com/@MrAndroid/java-multithreading-part-2-atomicity-visibility-or
 https://java-design-patterns.com/patterns/caching/#related-patterns
 
 https://github.com/mlarocca/AlgorithmsAndDataStructuresInAction/tree/b3e3eda17c2a3afb62612939a1c9d62097f46a7c
+
+
+JAVA HEAP ANLYZERS
+
+https://visualvm.github.io/download.html
+
+https://eclipse.dev/mat/downloads.php
+
+https://www.ibm.com/support/pages/ibm-heapanalyzer
+
+ 
