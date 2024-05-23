@@ -1,6 +1,22 @@
 ktpass /out "<path_to_key_tab>/file_name.keytab" /mapuser <ad_user_name>@domainNameCaseSensitive /princ HTTP/fqdnofTargetServer@domainNameCaseSensitive /pass <password> /ptype krb5_nt_principal /kvno 0 /crypto ALL
 
-contents of key tab
+
+
++-------------------------------------------------------+
+|										======1======	|
+|	PATH TO CUSTOM KRB5 CONF							|
+|														|
++-------------------------------------------------------+
+-Djava.security.krb5.conf=/opt/IBM/IBMSSO/krb5.conf 
+	KRB5_CONFIG
+	export KRB5_CONFIG=/your_krb5_conf_path
+
+
++-------------------------------------------------------+
+|										======1======	|
+|	CONTENTS OF KEY TAB									|
+|														|
++-------------------------------------------------------+
 klist  -kte iiqSpnegoTomcat.keytab
 
   0 01/01/1970 02:00:00 HTTP/fqdnofTargetServer@domainNameCaseSensitive (des-cbc-crc)
