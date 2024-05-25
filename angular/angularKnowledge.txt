@@ -102,7 +102,7 @@ source:	https://blog.logrocket.com/how-switch-node-js-versions-nvm/
 	https://github.com/nvm-sh/nvm#nvmrc
 	.npmrc > engine-strict=false
 	  https://stackoverflow.com/questions/47763783/cant-uninstall-global-npm-packages-after-installing-nvm
->>>>>>> 4598afceef334cf15060ac8d7610bb2454caee30
+
 
 
 +-------------------------------------------------------+
@@ -110,6 +110,7 @@ source:	https://blog.logrocket.com/how-switch-node-js-versions-nvm/
 |	ANGULAR 4											|
 |														|
 +-------------------------------------------------------+
+	ng version
 	@angular/cli : 1.4.10
 	node : 8.17.0
 	
