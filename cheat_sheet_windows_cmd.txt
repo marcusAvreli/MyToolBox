@@ -31,6 +31,8 @@
 
 		findstr /sin /c:"translateService" "C:\Users\User\angularDev\*.ts" | findstr /liv "\\node_modules\\ \\.docker\\ \\server\\ \\Great-Angular\\ \\e2e\\ \\assets\\ \\great-big-example-application"
 
+		JAVASCRIPT SEARCH IN CMD
+		findstr /sin /c:"node-sass-import" "C:\Users\User\nodeJSDev\mgComponents\*.js" | findstr /liv "\\node_modules\\ \\dist\\ \\assets\\"
 	3. FIND FILE SKIPPING DIRECTORIES
 		(source: https://stackoverflow.com/questions/54978756/exclude-windows-folder-in-cmd-search)
 		dir /S /B /A:-D *.mp3 *.mp4 *.jpg | findstr /V /I /C:"\\Microsoft\\" /C:"\\Windows\\" > "C:\output.txt"
