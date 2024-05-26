@@ -234,12 +234,23 @@ https://github.com/bit101/minicomps/tree/master?tab=readme-ov-file
 https://github.com/dataformsjs/dataformsjs/tree/master/js/web-components
 https://github.com/UziTech/web-component-abstract/blob/ee2f2ba574538c27856a4ff545b9603b79483fe5/index.js#L8
 https://github.com/bit101/minicomps/blob/master/src/component.js
+css.js
 https://github.com/megazear7/ziro-components/blob/885fbae4f8009b0ddad1e81ec722ef5c6d9555b8/src/ziro-input.js
 https://github.com/akudev/ui5-webcomponents/blob/master/packages/main/src/TextArea.js
 https://github.com/jarek-foksa/xel/blob/master/elements/x-button.js
 https://github.com/zazaulola/xel-extra/tree/7c17b97bd13258c6c16efbc18e75f9dbbd58847f?tab=readme-ov-file
+
++-------------------------------------------------------+
+|										======1======	|
+|	CUSTOM ELEMENTS										|
+|														|
++-------------------------------------------------------+
+//rtl
+https://github.com/jouni/j-elements/blob/d90428a5cdf263adadd284ef4c361a527404b71b/src/components/OverflowMenu.js#L117
+
 //permission customElements
 https://github.com/lencys/wj-elements/blob/master/packages/wj-element/service/universal-service.js
+
 
 https://github.com/zazaulola/xel-extra/blob/master/elements/x-input.js
 
@@ -271,13 +282,13 @@ https://github.com/carbon-design-system/ibm-security/tree/8c57c28a6d37c928b0ce44
 
 https://github.com/derikb/character-sheet-app/blob/69c3f58f7d6de38aa4b708d67223567432ed611d/src/components/Modal.js#L104
 https://github.com/esiur/iui/blob/1bcc7e0a64a256fe6beaaafed84982f639f079fc/src/Core/IUI.js#L24
-https://github.com/megazear7/ziro-components/tree/885fbae4f8009b0ddad1e81ec722ef5c6d9555b8/src
+
 https://github.com/knowler/knowler.dev/tree/bff674795fb6eb2c2cea0817a4ef315eaf596f68/middleware
 https://github.com/search?q=repo%3Abobbyadamski%2FUmbraco.UI%20custom-elements.json&type=code
 https://github.com/YufJi/tiny/blob/fe35eef306aa4cd53f85e1649bc1ce58935c8023/packages/base/src/webview/web-components/form.js
 https://github.com/JackovAlltrades/io/tree/master/src/elements/core
 https://github.com/HTMLElements/smart-webcomponents/blob/dcbb7cf5436af30f9e9de52b61296b303aa9620e/framework/smart.element.js
-saveAndClose,cancel,save
+saveAndClose,cancel,save, xlsx excel
 https://github.com/pavlism/karaoke/blob/fe791fa336a87efdeb35d4875a1f7d420bb46bf4/public/components/mrp-form.js#L28
 https://github.com/pavlism/karaoke/tree/fe791fa336a87efdeb35d4875a1f7d420bb46bf4/public/components (xlsx)
 https://github.com/Dabolus/vanilla-pwa/tree/bd03984a2abbcd179cfd9ecd392477bc240fd966/components/dynamic-data
@@ -441,38 +452,42 @@ https://github.com/webzhou/mip2/blob/85fc126df3ff84b5dbb113d065ad56e80a6dcec1/pa
  
  copyright
  https://github.com/14hy/chatbot-front/blob/0204e6f0a8f4ad27bb9ba69b8c468c2f3629c20d/server/public/lib/d3/rollup.config.js#L4
- banner
+ banner showGzippedSize
  https://github.com/usablica/intro.js/blob/3cab7911743415f25bd5d9ba250bf69f9e8273f9/rollup.config.js
  
  https://github.com/frappe/charts/blob/f33309601201776c9f724e46badadaeef4663358/src/js/index.js
  https://github.com/webtides/luna-js/blob/bc25f7a48b8f60d12bdde07fc70701be0f4a70a5/packages/cli/build/plugins/rollup-plugin-postcss.js#L35
  
+ customElements
+ https://github.com/xxxily/h5player/blob/a97d0760b1c72d5569cf3747972d5ef8305e52ef/src/h5player/ui/h5playerUI.es.js#L1507
+ 
  babel css resolve rollup
  https://github.com/vectrejs/vectre/tree/9698dfed010f74edf662feff76f7d3bb29969622/build
- http://167.71.109.137:8080/iiq
+
  
- https://github.com/vuetifyjs/vuetify/tree/834c91d0fd08c6c91c8c1d2a7ce69b04e5814de6
+//!!!!!!!!!!!!!!!!! START UP PROJECT scss css
+https://github.com/vuetifyjs/vuetify/blob/d1251f50f2d85b34c06c65895bd2d2b82bdd412e/packages/vuetify/build/rollup.config.mjs#L8
+
 https://github.com/kode-team/codemirror-colorpicker/blob/f73b1638be8dad4b9d9b2ea7521308b7e136ee53/package.json
 
 https://github.com/tsung-ju/parallax-background-image/tree/cc5f1e9138256ee41c088ce79993e730687e93a5
 simple, responsive parallax scrolling effect.
 
 https://github.com/Dabolus/vanilla-pwa/tree/master/components
-https://github.com/megazear7/ziro-components/blob/885fbae4f8009b0ddad1e81ec722ef5c6d9555b8/src/services/css.js
+
 
 https://github.com/UziTech/web-component-abstract/blob/master/index.js
 
 
 https://github.com/derikb/character-sheet-app/blob/69c3f58f7d6de38aa4b708d67223567432ed611d/src/components/Modal.js#L104
 https://github.com/esiur/iui/blob/1bcc7e0a64a256fe6beaaafed84982f639f079fc/src/Core/IUI.js#L24
-https://github.com/megazear7/ziro-components/tree/885fbae4f8009b0ddad1e81ec722ef5c6d9555b8/src
+
 https://github.com/knowler/knowler.dev/tree/bff674795fb6eb2c2cea0817a4ef315eaf596f68/middleware
 https://github.com/search?q=repo%3Abobbyadamski%2FUmbraco.UI%20custom-elements.json&type=code
 https://github.com/YufJi/tiny/blob/fe35eef306aa4cd53f85e1649bc1ce58935c8023/packages/base/src/webview/web-components/form.js
 https://github.com/JackovAlltrades/io/tree/master/src/elements/core
 https://github.com/HTMLElements/smart-webcomponents/blob/dcbb7cf5436af30f9e9de52b61296b303aa9620e/framework/smart.element.js
-https://github.com/pavlism/karaoke/blob/fe791fa336a87efdeb35d4875a1f7d420bb46bf4/public/components/mrp-form.js#L28
-https://github.com/pavlism/karaoke/tree/fe791fa336a87efdeb35d4875a1f7d420bb46bf4/public/components (xlsx)
+
 https://github.com/Dabolus/vanilla-pwa/tree/bd03984a2abbcd179cfd9ecd392477bc240fd966/components/dynamic-data
 
 
@@ -497,7 +512,7 @@ https://github.com/cunzaizhuyi/qwik/blob/98f9bfefb4e276ccaefcbba9fcae89cbd4ee2d6
 WatchMode 
 
 
-https://github.com/vuetifyjs/vuetify/tree/834c91d0fd08c6c91c8c1d2a7ce69b04e5814de6
+
 https://github.com/kode-team/codemirror-colorpicker/blob/f73b1638be8dad4b9d9b2ea7521308b7e136ee53/package.json
 Just some text here
 
@@ -721,7 +736,7 @@ https://github.com/guardian/frontend/blob/158983cced9e6220ad73b1b1c3eb90fa6e123b
 
 https://github.com/jiazengp/css/blob/2454d98983f83060adb4654e13314acb6b1eeea6/postcss.config.cjs#L4
 
-https://github.com/vuetifyjs/vuetify/blob/d1251f50f2d85b34c06c65895bd2d2b82bdd412e/packages/vuetify/build/rollup.config.mjs#L8
+
 
 //buildStart buildEnd get-plugin get-banner
 https://github.com/walrusjs/pansy/blob/b9813e146dc80f15c923f813552483050d092791/src/get-plugin.ts
@@ -1139,12 +1154,10 @@ https://github.com/bit101/minicomps/tree/master?tab=readme-ov-file
 https://github.com/dataformsjs/dataformsjs/tree/master/js/web-components
 https://github.com/UziTech/web-component-abstract/blob/ee2f2ba574538c27856a4ff545b9603b79483fe5/index.js#L8
 https://github.com/bit101/minicomps/blob/master/src/component.js
-https://github.com/megazear7/ziro-components/blob/885fbae4f8009b0ddad1e81ec722ef5c6d9555b8/src/ziro-input.js
+
 https://github.com/akudev/ui5-webcomponents/blob/master/packages/main/src/TextArea.js
 https://github.com/jarek-foksa/xel/blob/master/elements/x-button.js
 https://github.com/zazaulola/xel-extra/tree/7c17b97bd13258c6c16efbc18e75f9dbbd58847f?tab=readme-ov-file
-//permission customElements
-https://github.com/lencys/wj-elements/blob/master/packages/wj-element/service/universal-service.js
 
 https://github.com/zazaulola/xel-extra/blob/master/elements/x-input.js
 
@@ -1173,15 +1186,13 @@ https://github.com/carbon-design-system/ibm-security/tree/8c57c28a6d37c928b0ce44
 
 https://github.com/derikb/character-sheet-app/blob/69c3f58f7d6de38aa4b708d67223567432ed611d/src/components/Modal.js#L104
 https://github.com/esiur/iui/blob/1bcc7e0a64a256fe6beaaafed84982f639f079fc/src/Core/IUI.js#L24
-https://github.com/megazear7/ziro-components/tree/885fbae4f8009b0ddad1e81ec722ef5c6d9555b8/src
+
 https://github.com/knowler/knowler.dev/tree/bff674795fb6eb2c2cea0817a4ef315eaf596f68/middleware
 https://github.com/search?q=repo%3Abobbyadamski%2FUmbraco.UI%20custom-elements.json&type=code
 https://github.com/YufJi/tiny/blob/fe35eef306aa4cd53f85e1649bc1ce58935c8023/packages/base/src/webview/web-components/form.js
 https://github.com/JackovAlltrades/io/tree/master/src/elements/core
 https://github.com/HTMLElements/smart-webcomponents/blob/dcbb7cf5436af30f9e9de52b61296b303aa9620e/framework/smart.element.js
-saveAndClose,cancel,save
-https://github.com/pavlism/karaoke/blob/fe791fa336a87efdeb35d4875a1f7d420bb46bf4/public/components/mrp-form.js#L28
-https://github.com/pavlism/karaoke/tree/fe791fa336a87efdeb35d4875a1f7d420bb46bf4/public/components (xlsx)
+
 https://github.com/Dabolus/vanilla-pwa/tree/bd03984a2abbcd179cfd9ecd392477bc240fd966/components/dynamic-data
 HTMLCollection
 customElements
@@ -1353,28 +1364,27 @@ https://github.com/webzhou/mip2/blob/85fc126df3ff84b5dbb113d065ad56e80a6dcec1/pa
  https://github.com/vectrejs/vectre/tree/9698dfed010f74edf662feff76f7d3bb29969622/build
  http://167.71.109.137:8080/iiq
  
- https://github.com/vuetifyjs/vuetify/tree/834c91d0fd08c6c91c8c1d2a7ce69b04e5814de6
+ 
 https://github.com/kode-team/codemirror-colorpicker/blob/f73b1638be8dad4b9d9b2ea7521308b7e136ee53/package.json
 
 https://github.com/tsung-ju/parallax-background-image/tree/cc5f1e9138256ee41c088ce79993e730687e93a5
 simple, responsive parallax scrolling effect.
 
 https://github.com/Dabolus/vanilla-pwa/tree/master/components
-https://github.com/megazear7/ziro-components/blob/885fbae4f8009b0ddad1e81ec722ef5c6d9555b8/src/services/css.js
+
 
 https://github.com/UziTech/web-component-abstract/blob/master/index.js
 
 
 https://github.com/derikb/character-sheet-app/blob/69c3f58f7d6de38aa4b708d67223567432ed611d/src/components/Modal.js#L104
 https://github.com/esiur/iui/blob/1bcc7e0a64a256fe6beaaafed84982f639f079fc/src/Core/IUI.js#L24
-https://github.com/megazear7/ziro-components/tree/885fbae4f8009b0ddad1e81ec722ef5c6d9555b8/src
+
 https://github.com/knowler/knowler.dev/tree/bff674795fb6eb2c2cea0817a4ef315eaf596f68/middleware
 https://github.com/search?q=repo%3Abobbyadamski%2FUmbraco.UI%20custom-elements.json&type=code
 https://github.com/YufJi/tiny/blob/fe35eef306aa4cd53f85e1649bc1ce58935c8023/packages/base/src/webview/web-components/form.js
 https://github.com/JackovAlltrades/io/tree/master/src/elements/core
 https://github.com/HTMLElements/smart-webcomponents/blob/dcbb7cf5436af30f9e9de52b61296b303aa9620e/framework/smart.element.js
-https://github.com/pavlism/karaoke/blob/fe791fa336a87efdeb35d4875a1f7d420bb46bf4/public/components/mrp-form.js#L28
-https://github.com/pavlism/karaoke/tree/fe791fa336a87efdeb35d4875a1f7d420bb46bf4/public/components (xlsx)
+
 https://github.com/Dabolus/vanilla-pwa/tree/bd03984a2abbcd179cfd9ecd392477bc240fd966/components/dynamic-data
 
 
@@ -1399,7 +1409,7 @@ https://github.com/cunzaizhuyi/qwik/blob/98f9bfefb4e276ccaefcbba9fcae89cbd4ee2d6
 WatchMode 
 
 
-https://github.com/vuetifyjs/vuetify/tree/834c91d0fd08c6c91c8c1d2a7ce69b04e5814de6
+
 https://github.com/kode-team/codemirror-colorpicker/blob/f73b1638be8dad4b9d9b2ea7521308b7e136ee53/package.json
 Just some text here
 
@@ -1594,8 +1604,6 @@ https://github.com/guardian/frontend/blob/158983cced9e6220ad73b1b1c3eb90fa6e123b
 https://github.com/jiazengp/css/blob/2454d98983f83060adb4654e13314acb6b1eeea6/postcss.config.cjs#L4
 
 
-//!!!!!!!!!!!!!!!!! START UP PROJECT scss css
-https://github.com/vuetifyjs/vuetify/blob/d1251f50f2d85b34c06c65895bd2d2b82bdd412e/packages/vuetify/build/rollup.config.mjs#L8
 
 //buildStart buildEnd get-plugin get-banner
 https://github.com/walrusjs/pansy/blob/b9813e146dc80f15c923f813552483050d092791/src/get-plugin.ts
