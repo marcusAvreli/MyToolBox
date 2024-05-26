@@ -85,7 +85,7 @@ source:	https://blog.logrocket.com/how-switch-node-js-versions-nvm/
 			
 ==3===> switch node versions
 	nvm use 8.17.0
-<<<<<<< HEAD
+
 	
 ==4===> uninstal node verions
 	nvm uninstall 18.12.0
@@ -282,8 +282,8 @@ if you got severla node versions
     "@ngrx/store": "4.0.3",
     "@ngrx/store-devtools": "4.0.0",
 
-<<<<<<< HEAD
-=======
+
+
 +-------------------------------------------------------+
 |										======13======	|
 |	RXJS 												|
@@ -298,49 +298,6 @@ import { map, switchMap, catchError } from "rxjs/operators";
 import { Observable } from 'rxjs/Observable';
 import { empty } from 'rxjs/observable/empty';
 import { of } from 'rxjs/observable/of';
->>>>>>> 4598afceef334cf15060ac8d7610bb2454caee30
-	   
-								 
-											
-										
-												
-							  
-								  
-								  
-							   
-									
-									
-									
-								
-								
-								 
-								
-									 
-									 
-								
-										
-									  
-									 
-										  
-
-								   
-								  
-									   
-										 
-									  
-								
-								   
-									
-
-
-
-
-
-
-
-
-
-
 
 https://github.com/ieammac/angular-4-custom-context-menu/tree/master
 https://github.com/mdn/webextensions-examples/blob/main/theme-switcher/switcher.js
