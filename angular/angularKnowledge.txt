@@ -323,6 +323,17 @@ import { Observable } from 'rxjs/Observable';
 import { empty } from 'rxjs/observable/empty';
 import { of } from 'rxjs/observable/of';
 
+
++-------------------------------------------------------+
+|										======15======	|
+|	TS CONFIG											|
+|														|
++-------------------------------------------------------+
+
+
+https://github.com/asmyshlyaev177/react-horizontal-scrolling-menu/blob/b291438ae118eb33a3417c3307acb1c2b0a2cab6/tsconfig.json
+
+
 https://github.com/ieammac/angular-4-custom-context-menu/tree/master
 https://github.com/mdn/webextensions-examples/blob/main/theme-switcher/switcher.js
 //wizard operators value is NonNullable
