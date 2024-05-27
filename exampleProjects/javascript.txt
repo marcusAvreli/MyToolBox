@@ -69,7 +69,7 @@ https://github.com/ing-bank/lion/blob/e930b7b667ceaf66c2fab86a76044d0260b934fa/p
 https://github.com/stjordanis/tutanota/tree/c9b02198b27b6d4ca0e5ce35b4b658f8058e23fd/src/gui/base
 https://github.com/codaxy/cxjs/blob/c4cd764405428e0d6a17cb12228d998a1a143168/packages/cx/src/ui/Container.js
 https://github.com/GoogleChrome/developer.chrome.com/blob/51dd7dd5d510ed85d86f5a91cb8fde50b62351c7/site/_js/web-components/truncate-text.js
-https://github.com/bit101/minicomps/blob/master/src/component.js#L261
+
 https://github.com/bit101/minimalcomps2/blob/b52b9705905b3512a5dff9f1b814de546a894f46/src/textinput.js
 https://github.com/Doenet/DoenetTools/blob/baf78315a28f8d2ea69b8cd1f07d2bc4c5eaee11/src/Core/components/Text.js
 https://github.com/adearriba/ShopifyCheckoutJS/blob/7d0d2afea40a229fb243f5a1b33d79d26ab198e1/src/Components/TextField.js
@@ -132,7 +132,7 @@ https://github.com/CoherentLabs/GameUIComponents/blob/master/components/text-fie
 
 https://github.com/ec-europa/europa-component-library/tree/v3-dev/src/implementations/vanilla/components
 https://github.com/nervetattoo/simple-thermostat/tree/eb0c0d5902a4a1e51d4ae3849417ea3eef7b8886/src/config
-https://github.com/bit101/minicomps/tree/master/src
+
 submenu
 https://github.com/SuryaSankar/listree/tree/master
  data.vertical = this.attr("orient") === "vertical" || data.vertical;
@@ -209,50 +209,45 @@ effects against local
 https://github.com/dancancro/great-big-example-application/tree/fc757ea6e862194deabb1fbb039fd4c6ca230010/src/main/webapp/app/core/store/crisis
 
 
-RTL
-https://github.com/arenasjuanf/bancojj/blob/b947b2efb390a0293daadcab1f7a64a242823f51/src/app/app.service.ts#L14
 
 
 web-components webcomponents customElements
-
-
-
 CUSTOM ELEMENTS LIST
-https://github.com/Memeticode/psm.custom-elements/blob/e1dc368a2478f8f387af707e473a932c6ddb5572/demo/index.html
-https://github.com/yued-fe/lulu/blob/787424ac57308df3d7ac3c237aae53ce9b8104ab/theme/edge/js/common/ui/Select.js#L15
-https://github.com/jk2908/list-box/blob/1da0ae32b648d6abac4f3a8b5aab3a2e6e356251/src/ListBox.js#L11
-https://github.com/jarek-foksa/xel/blob/b10c9d8548119b2b7bc29e67e67cebb3952a91d2/classes/api-parser.js
-https://github.com/dataformsjs/dataformsjs/blob/9b7772c50b39df9068079bc7ba7049903ff57eea/js/web-components/data-list.js#L207
-https://github.com/yued-fe/lulu/blob/787424ac57308df3d7ac3c237aae53ce9b8104ab/theme/hope/ui/Layout/list.js
-https://github.com/sencha/extjs-grid-performance/blob/a97aa4c8fae22823fa81a6854c2f42ff4195dde1/client/src/wijmoGrid/WijmoFlexGridScrollComponent.js
-https://github.com/googlefonts/fontra/blob/d5975409067c947485f39f935bd9e302bca70afc/src/fontra/client/web-components/ui-list.js
 
+https://github.com/googlefonts/fontra/blob/d5975409067c947485f39f935bd9e302bca70afc/src/fontra/client/web-components/ui-list.js
 https://github.com/trutoo/event-bus/blob/master/docs/react-component.js
 https://itnext.io/building-micro-frontend-applications-with-angular-elements-34483da08bcb
 https://github.com/grandemayta/custom-element-pokemon-cards/tree/master/src
-https://github.com/bit101/minicomps/tree/master?tab=readme-ov-file
+
 https://github.com/dataformsjs/dataformsjs/tree/master/js/web-components
 https://github.com/UziTech/web-component-abstract/blob/ee2f2ba574538c27856a4ff545b9603b79483fe5/index.js#L8
-https://github.com/bit101/minicomps/blob/master/src/component.js
-css.js
-https://github.com/megazear7/ziro-components/blob/885fbae4f8009b0ddad1e81ec722ef5c6d9555b8/src/ziro-input.js
 https://github.com/akudev/ui5-webcomponents/blob/master/packages/main/src/TextArea.js
-https://github.com/jarek-foksa/xel/blob/master/elements/x-button.js
-https://github.com/zazaulola/xel-extra/tree/7c17b97bd13258c6c16efbc18e75f9dbbd58847f?tab=readme-ov-file
+
+
+
 
 +-------------------------------------------------------+
 |										======1======	|
 |	CUSTOM ELEMENTS										|
 |														|
 +-------------------------------------------------------+
+css.js
+https://github.com/megazear7/ziro-components/blob/885fbae4f8009b0ddad1e81ec722ef5c6d9555b8/src/ziro-input.js
+https://github.com/bit101/minicomps/blob/master/src/component.js
+https://github.com/sencha/extjs-grid-performance/blob/a97aa4c8fae22823fa81a6854c2f42ff4195dde1/client/src/wijmoGrid/WijmoFlexGridScrollComponent.js
+https://github.com/dataformsjs/dataformsjs/blob/9b7772c50b39df9068079bc7ba7049903ff57eea/js/web-components/data-list.js#L207
+https://github.com/jk2908/list-box/blob/1da0ae32b648d6abac4f3a8b5aab3a2e6e356251/src/ListBox.js#L11
+https://github.com/yued-fe/lulu/blob/787424ac57308df3d7ac3c237aae53ce9b8104ab/theme/hope/ui/Layout/list.js
+https://github.com/Memeticode/psm.custom-elements/blob/e1dc368a2478f8f387af707e473a932c6ddb5572/demo/index.html
 //rtl
 https://github.com/jouni/j-elements/blob/d90428a5cdf263adadd284ef4c361a527404b71b/src/components/OverflowMenu.js#L117
 
 //permission customElements
 https://github.com/lencys/wj-elements/blob/master/packages/wj-element/service/universal-service.js
 
+https://github.com/jarek-foksa/xel
+https://github.com/zazaulola/xel-extra/tree/7c17b97bd13258c6c16efbc18e75f9dbbd58847f?tab=readme-ov-file
 
-https://github.com/zazaulola/xel-extra/blob/master/elements/x-input.js
 
 https://github.com/easylogic/gradientpicker/blob/main/config/rollup.config.prod.js
 https://trailheadtechnology.com/create-and-compile-web-components-in-angular-projects/
@@ -275,6 +270,17 @@ https://medium.com/php-fad/discovering-web-components-11d924a26651
 https://onebitahead.medium.com/dont-reinvent-the-wheel-use-white-label-web-components-fa57fa54cc15
 https://github.com/search?q=repo%3Avideojs%2Fvideo.js%20customElements&type=code
 https://github.com/mozilla/blurts-server/blob/ea176dc1b070db735e886da2ce886b8cbb5e1396/src/client/js/components/circleChart.js
+
++-------------------------------------------------------+
+|										======2======	|
+|	WORKING WITH FILES									|
+|														|
++-------------------------------------------------------+
+
+==1===> readDirRecursive, excel2Json
+	https://github.com/ephemeral98/initDapp/blob/713ec57b78a0b6853c23e6594b0015929ddcec77/trans.js#L84
+
+
 
 
 
@@ -1016,7 +1022,7 @@ https://github.com/ing-bank/lion/blob/e930b7b667ceaf66c2fab86a76044d0260b934fa/p
 https://github.com/stjordanis/tutanota/tree/c9b02198b27b6d4ca0e5ce35b4b658f8058e23fd/src/gui/base
 https://github.com/codaxy/cxjs/blob/c4cd764405428e0d6a17cb12228d998a1a143168/packages/cx/src/ui/Container.js
 https://github.com/GoogleChrome/developer.chrome.com/blob/51dd7dd5d510ed85d86f5a91cb8fde50b62351c7/site/_js/web-components/truncate-text.js
-https://github.com/bit101/minicomps/blob/master/src/component.js#L261
+
 https://github.com/bit101/minimalcomps2/blob/b52b9705905b3512a5dff9f1b814de546a894f46/src/textinput.js
 https://github.com/Doenet/DoenetTools/blob/baf78315a28f8d2ea69b8cd1f07d2bc4c5eaee11/src/Core/components/Text.js
 https://github.com/adearriba/ShopifyCheckoutJS/blob/7d0d2afea40a229fb243f5a1b33d79d26ab198e1/src/Components/TextField.js
@@ -1075,7 +1081,7 @@ https://github.com/CoherentLabs/GameUIComponents/blob/master/components/text-fie
 
 https://github.com/ec-europa/europa-component-library/tree/v3-dev/src/implementations/vanilla/components
 https://github.com/nervetattoo/simple-thermostat/tree/eb0c0d5902a4a1e51d4ae3849417ea3eef7b8886/src/config
-https://github.com/bit101/minicomps/tree/master/src
+
 submenu
 https://github.com/SuryaSankar/listree/tree/master
  data.vertical = this.attr("orient") === "vertical" || data.vertical;
@@ -1150,16 +1156,14 @@ web-components webcomponents customElements
 https://github.com/trutoo/event-bus/blob/master/docs/react-component.js
 https://itnext.io/building-micro-frontend-applications-with-angular-elements-34483da08bcb
 https://github.com/grandemayta/custom-element-pokemon-cards/tree/master/src
-https://github.com/bit101/minicomps/tree/master?tab=readme-ov-file
+
 https://github.com/dataformsjs/dataformsjs/tree/master/js/web-components
 https://github.com/UziTech/web-component-abstract/blob/ee2f2ba574538c27856a4ff545b9603b79483fe5/index.js#L8
-https://github.com/bit101/minicomps/blob/master/src/component.js
+
 
 https://github.com/akudev/ui5-webcomponents/blob/master/packages/main/src/TextArea.js
-https://github.com/jarek-foksa/xel/blob/master/elements/x-button.js
-https://github.com/zazaulola/xel-extra/tree/7c17b97bd13258c6c16efbc18e75f9dbbd58847f?tab=readme-ov-file
 
-https://github.com/zazaulola/xel-extra/blob/master/elements/x-input.js
+
 
 https://github.com/easylogic/gradientpicker/blob/main/config/rollup.config.prod.js
 https://trailheadtechnology.com/create-and-compile-web-components-in-angular-projects/

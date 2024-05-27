@@ -7,6 +7,8 @@
 
 https://github.com/UXAspects/UXAspects/blob/9a060e14c8a55351dd682107b6d1944fe126a9fc/src/package.json
 
+RTL
+https://github.com/arenasjuanf/bancojj/blob/b947b2efb390a0293daadcab1f7a64a242823f51/src/app/app.service.ts#L14
 
 
 +-----------------------------------------------------------+
