@@ -17,4 +17,6 @@ CATALINA_OPTS="
 	-Dsun.security.krb5.debug=true
 	-Dsun.security.spnego.debug=true
 	-Dsun.security.jgss.debug=true
+	-Doracle.jdbc.javaNetNio=false 
+	-Dlog4j2.formatMsgNoLookups=true
 	"

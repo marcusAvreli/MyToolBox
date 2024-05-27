@@ -1,9 +1,13 @@
-ktpass /out "<path_to_key_tab>/file_name.keytab" /mapuser <ad_user_name>@domainNameCaseSensitive /princ HTTP/fqdnofTargetServer@domainNameCaseSensitive /pass <password> /ptype krb5_nt_principal /kvno 0 /crypto ALL
-
-
-
 +-------------------------------------------------------+
 |										======1======	|
+|	CREATE SPN											|
+|														|
++-------------------------------------------------------+
+
+ktpass /out "<path_to_key_tab>/file_name.keytab" /mapuser <ad_user_name>@domainNameCaseSensitive /princ HTTP/fqdnofTargetServer@domainNameCaseSensitive /pass <password> /ptype krb5_nt_principal /kvno 0 /crypto ALL
+
++-------------------------------------------------------+
+|										======2======	|
 |	PATH TO CUSTOM KRB5 CONF							|
 |														|
 +-------------------------------------------------------+
@@ -13,7 +17,7 @@ ktpass /out "<path_to_key_tab>/file_name.keytab" /mapuser <ad_user_name>@domainN
 
 
 +-------------------------------------------------------+
-|										======1======	|
+|										======3======	|
 |	CONTENTS OF KEY TAB									|
 |														|
 +-------------------------------------------------------+
@@ -49,11 +53,11 @@ if keyTab and krb5.conf are configured properly then following commands should w
 			Password for HTTP/fqdnofTargetServer@domainNameCaseSensitive:
 			Authenticated to Kerberos v5
 
-+-------------------------------------------------------------------------------------------+ 
-|                                                                                           |              
-|	5. jaas.conf /<tomcat_root>/conf                                                		|
-|                                                                                           |
-+-------------------------------------------------------------------------------------------+
++-------------------------------------------------------+
+|										======4======	|             
+|	jaas.conf /<tomcat_root>/conf	                	|
+|														|
++-------------------------------------------------------+
 Tomcat {
   com.sun.security.auth.module.Krb5LoginModule required;
 };
@@ -79,11 +83,11 @@ com.sun.security.jgss.krb5.accept {
     storeKey=true;
 };
 
-+-------------------------------------------------------------------------------------------+ 
-|																							|
-|		6. server.xml /<tomcat_root>/conf													|
-|																							|
-+-------------------------------------------------------------------------------------------+
++-------------------------------------------------------+
+|										======5======	|
+|	server.xml /<tomcat_root>/conf						|
+|														|
++-------------------------------------------------------+
 
 
 
@@ -111,60 +115,75 @@ inside of engine tag
 </Host>
 
 
-vi logging.properties
-org.apache.catalina.realm.level = ALL
-org.apache.catalina.realm.useParentHandlers = true
-org.apache.catalina.authenticator.level = ALL
-org.apache.catalina.authenticator.useParentHandlers = true
-org.apache.juli.logging.UserDataHelper.CONFIG = INFO_ALL
-org.apache.coyote.http11.level = DEBUG
 
-web.xml of app
++-------------------------------------------------------+
+|										======7======	|
+|	SETENV SH PARAMS									|
+|														|
++-------------------------------------------------------+
 
-<security-constraint>
-
-        <web-resource-collection>
-
-             <web-resource-name>All JSF Files</web-resource-name>
-
-             <url-pattern>*.jsf</url-pattern>
+	-Djava.security.krb5.conf=${CATALINA_HOME}/conf/krb5.ini
+	-Djava.security.auth.login.config=${CATALINA_HOME}/conf/jaas.conf 
+	-Djavax.security.auth.useSubjectCredsOnly=false
+	-Dsun.security.krb5.debug=true
+	-Dsun.security.spnego.debug=true
 
 
-        </web-resource-collection>
++-------------------------------------------------------+
+|										======8======	|
+|	LOGGING												|
+|														|
++-------------------------------------------------------+
+	vi tomcat90/conf/logging.properties
+	org.apache.catalina.realm.level = ALL
+	org.apache.catalina.realm.useParentHandlers = true
+	org.apache.catalina.authenticator.level = ALL
+	org.apache.catalina.authenticator.useParentHandlers = true
+	org.apache.juli.logging.UserDataHelper.CONFIG = INFO_ALL
+	org.apache.coyote.http11.level = DEBUG
 
-        <auth-constraint>
++-------------------------------------------------------+
+|										======9======	|
+|	WEB.XML												|
+|														|
++-------------------------------------------------------+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>All JSF Files</web-resource-name>
+			<url-pattern>*.jsf</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>*</role-name>
+		</auth-constraint>
+	</security-constraint>
 
-             <role-name>*</role-name>
+	<security-constraint>
+		<display-name>Restrict access to XHTML pages</display-name>
+		<web-resource-collection>
+			<web-resource-name>Restrict access to XHTML pages</web-resource-name>
+			<url-pattern>*.xhtml</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>*</role-name>
+		</auth-constraint>
+	</security-constraint>
 
-        </auth-constraint>
+	<security-role>
+		<role-name>*</role-name>
+	</security-role>
 
-    </security-constraint>
+	<login-config>
+		<auth-method>SPNEGO</auth-method>
+	</login-config>
 
 
-    <security-constraint>
-      <display-name>Restrict access to XHTML pages</display-name>
-      <web-resource-collection>
-        <web-resource-name>Restrict access to XHTML pages</web-resource-name>
-        <url-pattern>*.xhtml</url-pattern>
-      </web-resource-collection>
-<auth-constraint>
 
-             <role-name>*</role-name>
 
-        </auth-constraint>
-    </security-constraint>
 
-   <security-role>
-
-        <role-name>*</role-name>
-
-    </security-role>
-
-    <login-config>
-      <auth-method>SPNEGO</auth-method>
-    </login-config>
-
+https://fermi.servicenowservices.com/kb_view.do?sysparm_article=KB0013251
+setspn -s HTTP/server.realm.com userid
 
 https://www.ibm.com/docs/en/engineering-lifecycle-management-suite/lifecycle-management/6.0.6.1?topic=ldapsdbm-manually-configuring-tomcat-web-container-use-ldap
 https://www.ibm.com/docs/sk/mpf/8.0.0?topic=tomcat-configuration-ldap-authentication-apache
 http://incepttechnologies.blogspot.com/p/weblogic.html
+
