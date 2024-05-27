@@ -169,11 +169,30 @@ Just go to tsconfig.json and set
     "strictPropertyInitialization": false,
     ...
 }
-==4===> Uncaught ReferenceError: process is not defined
+==5===> Uncaught ReferenceError: process is not defined
 	npm install process
 	create file "src/process.ts" and put above code in it
 	in tsconfig.app.json add "src/process.ts" in files section
 	in angular.json add "src/process.ts" in polyfills section
+	
+	"extra-webpack.config.js"
+	
+	const webpack = require('webpack')
+module.exports = {
+	 plugins: [
+      new webpack.ProvidePlugin({
+        process: "process/browser",
+      }),
+    
+    ],
+	resolve:{
+  fallback: {
+       "url": require.resolve("url/"),
+		"util": require.resolve("util/"),
+		"fs": false 
+    }
+	}
+};
 +-------------------------------------------------------+
 |										======10======	|
 |	COMPAITABLITIY										|
