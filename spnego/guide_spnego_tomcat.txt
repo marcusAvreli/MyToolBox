@@ -115,13 +115,38 @@ inside of engine tag
 </Host>
 
 
-vi logging.properties
-org.apache.catalina.realm.level = ALL
-org.apache.catalina.realm.useParentHandlers = true
-org.apache.catalina.authenticator.level = ALL
-org.apache.catalina.authenticator.useParentHandlers = true
-org.apache.juli.logging.UserDataHelper.CONFIG = INFO_ALL
-org.apache.coyote.http11.level = DEBUG
+
++-------------------------------------------------------+
+|										======7======	|
+|	SETENV SH PARAMS									|
+|														|
++-------------------------------------------------------+
+
+	-Djava.security.krb5.conf=${CATALINA_HOME}/conf/krb5.ini
+	-Djava.security.auth.login.config=${CATALINA_HOME}/conf/jaas.conf 
+	-Djavax.security.auth.useSubjectCredsOnly=false
+	-Dsun.security.krb5.debug=true
+	-Dsun.security.spnego.debug=true
+
+
++-------------------------------------------------------+
+|										======8======	|
+|	LOGGING												|
+|														|
++-------------------------------------------------------+
+	vi tomcat90/conf/logging.properties
+	org.apache.catalina.realm.level = ALL
+	org.apache.catalina.realm.useParentHandlers = true
+	org.apache.catalina.authenticator.level = ALL
+	org.apache.catalina.authenticator.useParentHandlers = true
+	org.apache.juli.logging.UserDataHelper.CONFIG = INFO_ALL
+	org.apache.coyote.http11.level = DEBUG
+
++-------------------------------------------------------+
+|										======9======	|
+|	WEB.XML												|
+|														|
++-------------------------------------------------------+
 
 web.xml of app
 
