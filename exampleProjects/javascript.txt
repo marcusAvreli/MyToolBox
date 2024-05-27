@@ -210,27 +210,22 @@ https://github.com/dancancro/great-big-example-application/tree/fc757ea6e862194d
 
 
 
-
-web-components webcomponents customElements
-CUSTOM ELEMENTS LIST
-
-https://github.com/googlefonts/fontra/blob/d5975409067c947485f39f935bd9e302bca70afc/src/fontra/client/web-components/ui-list.js
-https://github.com/trutoo/event-bus/blob/master/docs/react-component.js
-https://itnext.io/building-micro-frontend-applications-with-angular-elements-34483da08bcb
-https://github.com/grandemayta/custom-element-pokemon-cards/tree/master/src
-
-https://github.com/dataformsjs/dataformsjs/tree/master/js/web-components
-https://github.com/UziTech/web-component-abstract/blob/ee2f2ba574538c27856a4ff545b9603b79483fe5/index.js#L8
-https://github.com/akudev/ui5-webcomponents/blob/master/packages/main/src/TextArea.js
-
-
-
-
 +-------------------------------------------------------+
 |										======1======	|
 |	CUSTOM ELEMENTS										|
 |														|
 +-------------------------------------------------------+
+theory
+https://itnext.io/building-micro-frontend-applications-with-angular-elements-34483da08bcb
+https://trailheadtechnology.com/create-and-compile-web-components-in-angular-projects/
+
+https://github.com/dataformsjs/dataformsjs/tree/master/js/web-components
+https://github.com/UziTech/web-component-abstract/blob/ee2f2ba574538c27856a4ff545b9603b79483fe5/index.js#L8
+https://github.com/akudev/ui5-webcomponents/blob/master/packages/main/src/TextArea.js
+https://github.com/grandemayta/custom-element-pokemon-cards/tree/master/src
+//event bus
+https://github.com/trutoo/event-bus/blob/master/docs/react-component.js
+https://github.com/googlefonts/fontra/blob/d5975409067c947485f39f935bd9e302bca70afc/src/fontra/client/web-components/ui-list.js
 css.js
 https://github.com/megazear7/ziro-components/blob/885fbae4f8009b0ddad1e81ec722ef5c6d9555b8/src/ziro-input.js
 https://github.com/bit101/minicomps/blob/master/src/component.js
@@ -250,7 +245,7 @@ https://github.com/zazaulola/xel-extra/tree/7c17b97bd13258c6c16efbc18e75f9dbbd58
 
 
 https://github.com/easylogic/gradientpicker/blob/main/config/rollup.config.prod.js
-https://trailheadtechnology.com/create-and-compile-web-components-in-angular-projects/
+
 .bootstrapModule(ClientFormElementModule)
 constructor(injector: Injector) {
     const ngElement = createCustomElement(ClientFormComponent, {
@@ -1152,16 +1147,9 @@ https://github.com/geyixia/Smart-City/blob/377b416117e275e0d53008ee2fe304c32ab7a
 
 
 
-web-components webcomponents customElements
-https://github.com/trutoo/event-bus/blob/master/docs/react-component.js
-https://itnext.io/building-micro-frontend-applications-with-angular-elements-34483da08bcb
-https://github.com/grandemayta/custom-element-pokemon-cards/tree/master/src
-
-https://github.com/dataformsjs/dataformsjs/tree/master/js/web-components
-https://github.com/UziTech/web-component-abstract/blob/ee2f2ba574538c27856a4ff545b9603b79483fe5/index.js#L8
 
 
-https://github.com/akudev/ui5-webcomponents/blob/master/packages/main/src/TextArea.js
+
 
 
 
@@ -1175,8 +1163,7 @@ constructor(injector: Injector) {
 
     customElements.define('custom-client-form', ngElement);
   }
-https://github.com/CaptainCodeman/hn-webcomponents/tree/c3b14afa5db2cb5d3eb62f36252c973858a285fc?tab=readme-ov-file
-https://github.com/CaptainCodeman/gif-player/tree/54234731e58c579eda454bd5fb52eb453bd5abe5
+
 https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements
 https://developer.mescius.com/wijmo/demos/Grid/Overview/angular
 https://github.com/jeremenichelli/movies-web-components/tree/master/src
