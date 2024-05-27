@@ -147,51 +147,34 @@ inside of engine tag
 |	WEB.XML												|
 |														|
 +-------------------------------------------------------+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>All JSF Files</web-resource-name>
+			<url-pattern>*.jsf</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>*</role-name>
+		</auth-constraint>
+	</security-constraint>
 
-web.xml of app
+	<security-constraint>
+		<display-name>Restrict access to XHTML pages</display-name>
+		<web-resource-collection>
+			<web-resource-name>Restrict access to XHTML pages</web-resource-name>
+			<url-pattern>*.xhtml</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>*</role-name>
+		</auth-constraint>
+	</security-constraint>
 
-<security-constraint>
+	<security-role>
+		<role-name>*</role-name>
+	</security-role>
 
-        <web-resource-collection>
-
-             <web-resource-name>All JSF Files</web-resource-name>
-
-             <url-pattern>*.jsf</url-pattern>
-
-
-        </web-resource-collection>
-
-        <auth-constraint>
-
-             <role-name>*</role-name>
-
-        </auth-constraint>
-
-    </security-constraint>
-
-
-    <security-constraint>
-      <display-name>Restrict access to XHTML pages</display-name>
-      <web-resource-collection>
-        <web-resource-name>Restrict access to XHTML pages</web-resource-name>
-        <url-pattern>*.xhtml</url-pattern>
-      </web-resource-collection>
-<auth-constraint>
-
-             <role-name>*</role-name>
-
-        </auth-constraint>
-    </security-constraint>
-
-   <security-role>
-
-        <role-name>*</role-name>
-
-    </security-role>
-
-    <login-config>
-      <auth-method>SPNEGO</auth-method>
-    </login-config>
+	<login-config>
+		<auth-method>SPNEGO</auth-method>
+	</login-config>
 
 
 
