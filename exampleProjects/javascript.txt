@@ -1,33 +1,79 @@
 https://codepen.io/kevinalku/pen/gwWPWY
++-------------------------------------------------------+
+|										======1======	|
+|	ROLLUP												|
+|														|
++-------------------------------------------------------+
 https://github.com/Sobotkama/umd-experiment/tree/master
+https://github.com/taiga-family/taiga-ui/tree/6ad27708d773bffe95d414947dde80563758ebf4/projects/core/observables/test
+https://github.com/AntonLapshin/popup-validation/blob/master/src/rules.js
+https://github.com/thekevinscott/ml-classifier-ui/blob/f3c81d5ee6c3680bd1da0ee923307fc1f6eaf121/rollup.config.js
+https://github.com/mmahandev/FocusOverlay/blob/master/src/index.js
+//interruptable
+https://github.com/jstejada/interruptible/tree/cefedfab58fd72b0f966f0cefbc7d7c009d350b2/src
+//validation
+https://github.com/wraithyy/validarium/blob/master/packages/core/src/combineValidate.js
+///angular-cli
+https://github.com/consoleui/console-ui-ng/tree/master/src/app/preview
+https://github.com/BenjaminZekavica/easy-toggle-state/blob/master/rollup.config.js
+https://github.com/popcorn-official/pop-api-scraper/blob/659701a4299a4563c9f0d8b3d199f3aaf086a848/rollup.config.js
++-------------------------------------------------------+
+|										======1======	|
+|	DESIGN PATTERN										|
+|														|
++-------------------------------------------------------+
 https://github.com/PureMVC/puremvc-js-multicore-framework/blob/c045fb4ab27c7439a22f6d7e8ed263a65e57fd1c/src/org/puremvc/js/multicore/patterns/observer/Notifier.js
-https://github.com/SAP/openui5/blob/45da40f3b01ab7fea1f524eb84bca6c0bf907a5d/src/sap.ui.commons/src/sap/ui/commons/layout/MatrixLayoutRenderer.js
 https://github.com/petermichaux/maria/blob/a13f0367247bb850da38f11bbc7906302e939954/eg/checkit/src/js/models/TodosModel.js
 https://github.com/loiane/desktop-app-servlets3/blob/f5aa9f5abd9e13ea561d02d2508c9b780e6c0b55/extjs-code/ExtMVC/ext/src/Component.js
 https://github.com/sbworth/getnoc/blob/a9a5647df31822062db3db7afe7ae1c005d166f7/ui/web/sa/managedobjectprofile/Application.js#L119
 https://github.com/scottohara/loot/tree/c8d2ac02cb0d508519bf83b38d87b108b5206518
-https://github.com/molior-dbs/molior-web/tree/edafab24883c30c40f1b310377c7bd9ae67c01fd
-https://github.com/Calvinshi/blog/blob/75b50da000c8b10d65a19a19e43678b83bd1a625/frontEnd/libs/angular-ui-router/src/path/pathFactory.ts
-https://github.com/grafana/grafana/blob/73776f37eb595d8345a34d5e1f0f0c1f9dead986/public/app/core/services/ResponseQueue.test.ts
-https://github.com/taiga-family/taiga-ui/tree/6ad27708d773bffe95d414947dde80563758ebf4/projects/core/observables/test
-https://github.com/NativeScript/NativeScript/blob/82e9c67d3398c376be1641c5f23bf82a492a48c3/apps/ui/src/bindings/main-page.ts
-https://github.com/dotCMS/core/tree/a7af331b7361bffd039413a22bea7dbad7b3d03c/core-web
-https://github.com/AntonLapshin/popup-validation/blob/master/src/rules.js
-https://github.com/Kallenju/simpower-validation/blob/main/src/core/modules/commonFunctions/isEmpty.js
 awareDecorator
 https://github.com/spira/spira/tree/806f60fddbf52b11c91c5caeecf00117363662a9/app/src/common/models/image
 https://github.com/Compro-Single-Step/SIMS-Builder/blob/7d4ba7f0b21b201917458b085ed84bb48735914d/client/app/shared/base.component.ts#L9
-https://github.com/OHDSI/Perseus/blob/4267d0bbf27b607646efb9f6eb0fddcb07258b2b/UI/src/app/models/perseus/concept.ts
 javascript in angular app
 https://github.com/Minds/front/blob/master/src/app/services/api/cookie-http-interceptor.service.ts
 component controller
 https://github.com/WISE-Community/WISE-DEPRECATED/tree/25f6dd52399fa050b5223f2fd0951db317518a19/src/main/webapp/wise5/lib
 https://github.com/matrix-org/thirdroom/tree/01bc731b057bd2a0e01d2152ad4828c05f1f6302
-https://github.com/OnsenUI/OnsenUI/tree/90c0aeb2b2acadfefb66a3da038b6b09cfb5b9c8
-https://github.com/moodlehq/moodleapp/blob/ba50fb8d6e7ca3c5bf1247cebff842861d4d9388/src/core/components/sites-list/sites-list.ts
++-------------------------------------------------------+
+|										======1======	|
+|	WEB PACK											|
+|														|
++-------------------------------------------------------+
+https://github.com/molior-dbs/molior-web/tree/edafab24883c30c40f1b310377c7bd9ae67c01fd
+https://github.com/zircel/co2/tree/49b6fde12c2bfa47338f17da74c4cefe9f33d443/src
++-------------------------------------------------------+
+|										======1======	|
+|	TS TYPESCRIPT										|
+|														|
++-------------------------------------------------------+
+https://github.com/Calvinshi/blog/blob/75b50da000c8b10d65a19a19e43678b83bd1a625/frontEnd/libs/angular-ui-router/src/path/pathFactory.ts
+https://github.com/grafana/grafana/blob/73776f37eb595d8345a34d5e1f0f0c1f9dead986/public/app/core/services/ResponseQueue.test.ts
 //change view
 https://github.com/AjuntamentdeBarcelona/PICS-WEBAPP/tree/ef6b0028020a85d145bfdb38c365d8ca1ee5f69d/src/pages
-https://github.com/odopod/code-library/blob/ceb47654545ec0b734c8650b3128a6c07504845a/packages/odo-draggable/src/settings.js#L17
+
++-------------------------------------------------------+
+|										======1======	|
+|	VALIDATION											|
+|														|
++-------------------------------------------------------+
+https://github.com/Kallenju/simpower-validation/blob/main/src/core/modules/commonFunctions/isEmpty.js
+
+
+
++-------------------------------------------------------+
+|										======1======	|
+|	ideas												|
+|														|
++-------------------------------------------------------+
+
+BrowserInfo Animation
+https://github.com/CyberFlameGO/Hubzilla/blob/0140f9fe560b7cc0f65cbfc7988f6808b4dc1236/library/Sortable/src/EventDispatcher.js
+
+Boxxer - Layout manager
+https://github.com/caplin/boxxer/tree/master
+
+
 https://github.com/Pamblam/ez-drag-n-drop/blob/main/src/EZDnD_Draggable.js
 https://codepen.io/franzcisco/pen/zQwXQy
 https://github.com/aigan/mv-sorter/blob/master/mv-sorter.js
@@ -36,34 +82,35 @@ https://github.com/uuidjs/uuid/tree/main
 https://github.com/TECHOUS/treasurejs.github.io/blob/5264f6b45419f6fc223a001554063e3914718093/scripts/S.js
 https://github.com/jagermesh/draggable/tree/master
 https://github.com/nosir/cleave.js/blob/master/src/shortcuts/NumeralFormatter.js
-	SMOOTH DND
-	https://github.com/kutlugsahin/smooth-dnd
+	
 drop down by div
 https://www.w3schools.com/howto/howto_js_dropdown.asp#:~:text=Use%20any%20element%20to%20open,dropdown%20menu%20correctly%20with%20CSS.
 https://github.com/ComiR/neos-development-collection/blob/e6c7bb9c528c46a2e55c4631e3c725ca2571824e/Neos.Neos/Resources/Public/Library/toastr/toastr.js
 validation localization
 https://github.com/sha256/Pristine/tree/master
 https://github.com/CyberFlameGO/Hubzilla/tree/0140f9fe560b7cc0f65cbfc7988f6808b4dc1236/library/ace
-BrowserInfo
-https://github.com/CyberFlameGO/Hubzilla/blob/0140f9fe560b7cc0f65cbfc7988f6808b4dc1236/library/Sortable/src/EventDispatcher.js
-Boxxer - Layout manager
-	https://github.com/caplin/boxxer/tree/master
-	https://github.com/jillix/svg.draggy.js/
-https://github.com/zircel/co2/tree/49b6fde12c2bfa47338f17da74c4cefe9f33d443/src
 
-//rollup 0.62.0
-https://github.com/thekevinscott/ml-classifier-ui/blob/f3c81d5ee6c3680bd1da0ee923307fc1f6eaf121/rollup.config.js
-//
-https://github.com/mmahandev/FocusOverlay/blob/master/src/index.js
-//interruptable
-https://github.com/jstejada/interruptible/tree/cefedfab58fd72b0f966f0cefbc7d7c009d350b2/src
-//validation
-https://github.com/wraithyy/validarium/blob/master/packages/core/src/combineValidate.js
-	//dispatchEvent delegate
-	https://github.com/cvisionai/tator/blob/9f8c05bad6f8b54ac0e76ba30619aba2c7b0f7e6/ui/src/js/components/inputs/text-input.js#L32
-///angular-cli
-https://github.com/consoleui/console-ui-ng/tree/master/src/app/preview
-//components
+
++-------------------------------------------------------+
+|										======1======	|
+|	DRAG AND DROP										|
+|														|
++-------------------------------------------------------+
+
+
+	https://github.com/kutlugsahin/smooth-dnd
+	https://github.com/jillix/svg.draggy.js/
+
+
++-------------------------------------------------------+
+|										======1======	|
+|	COMPONENTS											|
+|														|
++-------------------------------------------------------+
+dropdown.js	snackbar.js	tabs.js	tooltip.js WEBPACK
+https://github.com/AiviksIQ/JS-library/tree/master/src/js
+https://github.com/odopod/code-library/blob/ceb47654545ec0b734c8650b3128a6c07504845a/packages/odo-draggable/src/settings.js#L17
+https://github.com/NativeScript/NativeScript/blob/82e9c67d3398c376be1641c5f23bf82a492a48c3/apps/ui/src/bindings/main-page.ts
 https://github.com/spckio/spck-ui/tree/master/src
 https://github.com/ing-bank/lion/blob/e930b7b667ceaf66c2fab86a76044d0260b934fa/packages/ui/components/input/src/LionInput.js
 https://github.com/stjordanis/tutanota/tree/c9b02198b27b6d4ca0e5ce35b4b658f8058e23fd/src/gui/base
@@ -90,8 +137,12 @@ https://github.com/NAUMEN-GP/formio.js/blob/8c0a5afd16788c1b968eef3131c84074bf72
 
 
 https://github.com/thepassle/generic-components/blob/0673ce240f2d53cf79de08a8bb471235e4211dce/generic-switch/GenericSwitch.js#L80
-//component
-https://github.com/TatShen/ToDoList/blob/dbb5c51b6a3072a482987579c5247696b2aea756/src/components/atoms/Input/Input.js
+
+
+
+
+
+
 https://github.com/mahi-dev/SDISMap/blob/860bf3173cf617dc8b4c5b9c19c043c605c28df0/src/main/resources/static/public/mahidev/ui/Component.js
 //components
 https://github.com/solv1k/quizio/blob/540256e808f978167090e918f60381d8420ae7b1/src/core/components/RenderableComponent.js
@@ -113,8 +164,7 @@ https://github.com/croquet/microverse/blob/c28fae161d51907be8550d7de314d668f5504
 https://github.com/Mercerenies/pan-unicode-lang/blob/5488b021bc1179da131a1120644dd22d0a06195c/js/unicode_input.js#L37
 https://github.com/koromerzhin/labstag/blob/25671a7609a83910381d92265b840e9e308bd5dd/assets/js/global/elements/input/InputCity.js
 
-dropdown.js	snackbar.js	tabs.js	tooltip.js
-https://github.com/AiviksIQ/JS-library/tree/master/src/js
+
 text editor
 https://github.com/JiHong88/suneditor/blob/master/sample/index.html
 select combo
@@ -215,10 +265,18 @@ https://github.com/dancancro/great-big-example-application/tree/fc757ea6e862194d
 |	CUSTOM ELEMENTS										|
 |														|
 +-------------------------------------------------------+
+
 theory
 https://itnext.io/building-micro-frontend-applications-with-angular-elements-34483da08bcb
 https://trailheadtechnology.com/create-and-compile-web-components-in-angular-projects/
 
+//dispatchEvent delegate
+https://github.com/cvisionai/tator/blob/9f8c05bad6f8b54ac0e76ba30619aba2c7b0f7e6/ui/src/js/components/inputs/text-input.js#L32
+https://github.com/TatShen/ToDoList/blob/dbb5c51b6a3072a482987579c5247696b2aea756/src/components/atoms/Input/Input.js
+https://github.com/OnsenUI/OnsenUI/tree/90c0aeb2b2acadfefb66a3da038b6b09cfb5b9c8
+https://github.com/OHDSI/Perseus/blob/4267d0bbf27b607646efb9f6eb0fddcb07258b2b/UI/src/app/models/perseus/concept.ts
+https://github.com/dotCMS/core/tree/a7af331b7361bffd039413a22bea7dbad7b3d03c/core-web
+https://github.com/SAP/openui5/blob/45da40f3b01ab7fea1f524eb84bca6c0bf907a5d/src/sap.ui.commons/src/sap/ui/commons/layout/MatrixLayoutRenderer.js
 https://github.com/dataformsjs/dataformsjs/tree/master/js/web-components
 https://github.com/UziTech/web-component-abstract/blob/ee2f2ba574538c27856a4ff545b9603b79483fe5/index.js#L8
 https://github.com/akudev/ui5-webcomponents/blob/master/packages/main/src/TextArea.js
@@ -306,8 +364,7 @@ https://coryrylan.com/blog/using-web-components-in-angular-forms-with-element-in
 ngDefaultControl
 
 
-https://github.com/BenjaminZekavica/easy-toggle-state/blob/master/rollup.config.js
-https://github.com/popcorn-official/pop-api-scraper/blob/659701a4299a4563c9f0d8b3d199f3aaf086a848/rollup.config.js
+
 rollup
 
 https://github.com/cunzaizhuyi/qwik/blob/98f9bfefb4e276ccaefcbba9fcae89cbd4ee2d67/scripts/util.ts#L193
@@ -505,8 +562,8 @@ https://coryrylan.com/blog/using-web-components-in-angular-forms-with-element-in
 ngDefaultControl
 
 
-https://github.com/BenjaminZekavica/easy-toggle-state/blob/master/rollup.config.js
-https://github.com/popcorn-official/pop-api-scraper/blob/659701a4299a4563c9f0d8b3d199f3aaf086a848/rollup.config.js
+
+
 rollup
 
 https://github.com/cunzaizhuyi/qwik/blob/98f9bfefb4e276ccaefcbba9fcae89cbd4ee2d67/scripts/util.ts#L193
@@ -947,34 +1004,34 @@ https://github.com/langhuihui/jessibuca/blob/02897b1a583a3fabfe8ccfcec74249e6dd8
 
 
 
-https://github.com/Sobotkama/umd-experiment/tree/master
-https://github.com/PureMVC/puremvc-js-multicore-framework/blob/c045fb4ab27c7439a22f6d7e8ed263a65e57fd1c/src/org/puremvc/js/multicore/patterns/observer/Notifier.js
-https://github.com/SAP/openui5/blob/45da40f3b01ab7fea1f524eb84bca6c0bf907a5d/src/sap.ui.commons/src/sap/ui/commons/layout/MatrixLayoutRenderer.js
-https://github.com/petermichaux/maria/blob/a13f0367247bb850da38f11bbc7906302e939954/eg/checkit/src/js/models/TodosModel.js
-https://github.com/loiane/desktop-app-servlets3/blob/f5aa9f5abd9e13ea561d02d2508c9b780e6c0b55/extjs-code/ExtMVC/ext/src/Component.js
-https://github.com/sbworth/getnoc/blob/a9a5647df31822062db3db7afe7ae1c005d166f7/ui/web/sa/managedobjectprofile/Application.js#L119
-https://github.com/scottohara/loot/tree/c8d2ac02cb0d508519bf83b38d87b108b5206518
-https://github.com/molior-dbs/molior-web/tree/edafab24883c30c40f1b310377c7bd9ae67c01fd
-https://github.com/Calvinshi/blog/blob/75b50da000c8b10d65a19a19e43678b83bd1a625/frontEnd/libs/angular-ui-router/src/path/pathFactory.ts
-https://github.com/grafana/grafana/blob/73776f37eb595d8345a34d5e1f0f0c1f9dead986/public/app/core/services/ResponseQueue.test.ts
+
+
+
+
+
+
+
+
+
+
 https://github.com/taiga-family/taiga-ui/tree/6ad27708d773bffe95d414947dde80563758ebf4/projects/core/observables/test
 https://github.com/NativeScript/NativeScript/blob/82e9c67d3398c376be1641c5f23bf82a492a48c3/apps/ui/src/bindings/main-page.ts
-https://github.com/dotCMS/core/tree/a7af331b7361bffd039413a22bea7dbad7b3d03c/core-web
-https://github.com/AntonLapshin/popup-validation/blob/master/src/rules.js
+
+
 https://github.com/Kallenju/simpower-validation/blob/main/src/core/modules/commonFunctions/isEmpty.js
-awareDecorator
-https://github.com/spira/spira/tree/806f60fddbf52b11c91c5caeecf00117363662a9/app/src/common/models/image
-https://github.com/Compro-Single-Step/SIMS-Builder/blob/7d4ba7f0b21b201917458b085ed84bb48735914d/client/app/shared/base.component.ts#L9
+
+
+
 https://github.com/OHDSI/Perseus/blob/4267d0bbf27b607646efb9f6eb0fddcb07258b2b/UI/src/app/models/perseus/concept.ts
-javascript in angular app
-https://github.com/Minds/front/blob/master/src/app/services/api/cookie-http-interceptor.service.ts
-component controller
-https://github.com/WISE-Community/WISE-DEPRECATED/tree/25f6dd52399fa050b5223f2fd0951db317518a19/src/main/webapp/wise5/lib
-https://github.com/matrix-org/thirdroom/tree/01bc731b057bd2a0e01d2152ad4828c05f1f6302
-https://github.com/OnsenUI/OnsenUI/tree/90c0aeb2b2acadfefb66a3da038b6b09cfb5b9c8
-https://github.com/moodlehq/moodleapp/blob/ba50fb8d6e7ca3c5bf1247cebff842861d4d9388/src/core/components/sites-list/sites-list.ts
-//change view
-https://github.com/AjuntamentdeBarcelona/PICS-WEBAPP/tree/ef6b0028020a85d145bfdb38c365d8ca1ee5f69d/src/pages
+
+
+
+
+
+
+
+
+
 https://github.com/odopod/code-library/blob/ceb47654545ec0b734c8650b3128a6c07504845a/packages/odo-draggable/src/settings.js#L17
 https://github.com/Pamblam/ez-drag-n-drop/blob/main/src/EZDnD_Draggable.js
 https://codepen.io/franzcisco/pen/zQwXQy
@@ -992,17 +1049,17 @@ https://github.com/ComiR/neos-development-collection/blob/e6c7bb9c528c46a2e55c46
 validation localization
 https://github.com/sha256/Pristine/tree/master
 https://github.com/CyberFlameGO/Hubzilla/tree/0140f9fe560b7cc0f65cbfc7988f6808b4dc1236/library/ace
-BrowserInfo
-https://github.com/CyberFlameGO/Hubzilla/blob/0140f9fe560b7cc0f65cbfc7988f6808b4dc1236/library/Sortable/src/EventDispatcher.js
-Boxxer - Layout manager
-	https://github.com/caplin/boxxer/tree/master
-	https://github.com/jillix/svg.draggy.js/
-https://github.com/zircel/co2/tree/49b6fde12c2bfa47338f17da74c4cefe9f33d443/src
 
-//rollup 0.62.0
-https://github.com/thekevinscott/ml-classifier-ui/blob/f3c81d5ee6c3680bd1da0ee923307fc1f6eaf121/rollup.config.js
-//
-https://github.com/mmahandev/FocusOverlay/blob/master/src/index.js
+
+
+	
+	
+
+
+
+
+
+
 //interruptable
 https://github.com/jstejada/interruptible/tree/cefedfab58fd72b0f966f0cefbc7d7c009d350b2/src
 //validation
@@ -1012,7 +1069,7 @@ https://github.com/wraithyy/validarium/blob/master/packages/core/src/combineVali
 ///angular-cli
 https://github.com/consoleui/console-ui-ng/tree/master/src/app/preview
 //components
-https://github.com/spckio/spck-ui/tree/master/src
+
 https://github.com/ing-bank/lion/blob/e930b7b667ceaf66c2fab86a76044d0260b934fa/packages/ui/components/input/src/LionInput.js
 https://github.com/stjordanis/tutanota/tree/c9b02198b27b6d4ca0e5ce35b4b658f8058e23fd/src/gui/base
 https://github.com/codaxy/cxjs/blob/c4cd764405428e0d6a17cb12228d998a1a143168/packages/cx/src/ui/Container.js
@@ -1034,8 +1091,8 @@ https://github.com/npolar/mdc/blob/7eb5ed14637ee39c40fa6c7331033ac3ac312b0b/src/
 //base component BaseComponent 
 https://github.com/NAUMEN-GP/formio.js/blob/8c0a5afd16788c1b968eef3131c84074bf72055b/src/components/base/Base.js
 https://github.com/thepassle/generic-components/blob/0673ce240f2d53cf79de08a8bb471235e4211dce/generic-switch/GenericSwitch.js#L80
-//component
-https://github.com/TatShen/ToDoList/blob/dbb5c51b6a3072a482987579c5247696b2aea756/src/components/atoms/Input/Input.js
+
+
 https://github.com/mahi-dev/SDISMap/blob/860bf3173cf617dc8b4c5b9c19c043c605c28df0/src/main/resources/static/public/mahidev/ui/Component.js
 //components
 https://github.com/solv1k/quizio/blob/540256e808f978167090e918f60381d8420ae7b1/src/core/components/RenderableComponent.js
@@ -1198,8 +1255,8 @@ https://coryrylan.com/blog/using-web-components-in-angular-forms-with-element-in
 ngDefaultControl
 
 
-https://github.com/BenjaminZekavica/easy-toggle-state/blob/master/rollup.config.js
-https://github.com/popcorn-official/pop-api-scraper/blob/659701a4299a4563c9f0d8b3d199f3aaf086a848/rollup.config.js
+
+
 rollup
 
 https://github.com/cunzaizhuyi/qwik/blob/98f9bfefb4e276ccaefcbba9fcae89cbd4ee2d67/scripts/util.ts#L193
@@ -1392,8 +1449,8 @@ https://coryrylan.com/blog/using-web-components-in-angular-forms-with-element-in
 ngDefaultControl
 
 
-https://github.com/BenjaminZekavica/easy-toggle-state/blob/master/rollup.config.js
-https://github.com/popcorn-official/pop-api-scraper/blob/659701a4299a4563c9f0d8b3d199f3aaf086a848/rollup.config.js
+
+
 rollup
 
 https://github.com/cunzaizhuyi/qwik/blob/98f9bfefb4e276ccaefcbba9fcae89cbd4ee2d67/scripts/util.ts#L193
