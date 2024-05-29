@@ -1,3 +1,89 @@
++-------------------------------------------------------+
+|										======1======	|
+|	CUSTOM ELEMENTS										|
+|														|
++-------------------------------------------------------+
+
+theory
+https://itnext.io/building-micro-frontend-applications-with-angular-elements-34483da08bcb
+https://trailheadtechnology.com/create-and-compile-web-components-in-angular-projects/
+
+
+https://github.com/JackovAlltrades/io/tree/master/src/elements/core
+https://github.com/esiur/iui/blob/1bcc7e0a64a256fe6beaaafed84982f639f079fc/src/Core/IUI.js#L24
+https://github.com/joomla-projects/custom-elements/tree/8b60e5a1d77082649028bc8453a84e80c592b47f/src/scss
+https://github.com/dashaudio/dash-components/blob/ad1da78dae93515064a88f1f5c34d4b1da8433e4/package.json
+https://github.com/ing-bank/lion/blob/e930b7b667ceaf66c2fab86a76044d0260b934fa/packages/ui/components/input/src/LionInput.js
+https://github.com/SoundStacks/cmajor/blob/b44d5bc6a03cd67589d4f9709e958734b825a359/javascript/cmaj_api/cmaj-event-listener-list.js#L15
+https://github.com/namphongpt/tator/blob/master/main/static/js/components/tator-element.js#L3
+//dispatchEvent delegate
+https://github.com/cvisionai/tator/blob/9f8c05bad6f8b54ac0e76ba30619aba2c7b0f7e6/ui/src/js/components/inputs/text-input.js#L32
+https://github.com/TatShen/ToDoList/blob/dbb5c51b6a3072a482987579c5247696b2aea756/src/components/atoms/Input/Input.js
+https://github.com/OnsenUI/OnsenUI/tree/90c0aeb2b2acadfefb66a3da038b6b09cfb5b9c8
+https://github.com/OHDSI/Perseus/blob/4267d0bbf27b607646efb9f6eb0fddcb07258b2b/UI/src/app/models/perseus/concept.ts
+https://github.com/dotCMS/core/tree/a7af331b7361bffd039413a22bea7dbad7b3d03c/core-web
+https://github.com/SAP/openui5/blob/45da40f3b01ab7fea1f524eb84bca6c0bf907a5d/src/sap.ui.commons/src/sap/ui/commons/layout/MatrixLayoutRenderer.js
+https://github.com/dataformsjs/dataformsjs/tree/master/js/web-components
+https://github.com/UziTech/web-component-abstract/blob/ee2f2ba574538c27856a4ff545b9603b79483fe5/index.js#L8
+https://github.com/YufJi/tiny/blob/fe35eef306aa4cd53f85e1649bc1ce58935c8023/packages/base/src/webview/web-components/form.js
+https://github.com/akudev/ui5-webcomponents/blob/master/packages/main/src/TextArea.js
+https://github.com/grandemayta/custom-element-pokemon-cards/tree/master/src
+//event bus
+https://github.com/trutoo/event-bus/blob/master/docs/react-component.js
+https://github.com/googlefonts/fontra/blob/d5975409067c947485f39f935bd9e302bca70afc/src/fontra/client/web-components/ui-list.js
+css.js
+https://github.com/megazear7/ziro-components/blob/885fbae4f8009b0ddad1e81ec722ef5c6d9555b8/src/ziro-input.js
+https://github.com/bit101/minicomps/blob/master/src/component.js
+https://github.com/sencha/extjs-grid-performance/blob/a97aa4c8fae22823fa81a6854c2f42ff4195dde1/client/src/wijmoGrid/WijmoFlexGridScrollComponent.js
+https://github.com/dataformsjs/dataformsjs/blob/9b7772c50b39df9068079bc7ba7049903ff57eea/js/web-components/data-list.js#L207
+https://github.com/jk2908/list-box/blob/1da0ae32b648d6abac4f3a8b5aab3a2e6e356251/src/ListBox.js#L11
+https://github.com/yued-fe/lulu/blob/787424ac57308df3d7ac3c237aae53ce9b8104ab/theme/hope/ui/Layout/list.js
+https://github.com/Memeticode/psm.custom-elements/blob/e1dc368a2478f8f387af707e473a932c6ddb5572/demo/index.html
+//rtl
+https://github.com/jouni/j-elements/blob/d90428a5cdf263adadd284ef4c361a527404b71b/src/components/OverflowMenu.js#L117
+https://github.com/jeremenichelli/movies-web-components/tree/master/src
+//permission customElements
+https://github.com/lencys/wj-elements/blob/master/packages/wj-element/service/universal-service.js
+https://github.com/knowler/knowler.dev/tree/bff674795fb6eb2c2cea0817a4ef315eaf596f68/middleware
+https://github.com/jarek-foksa/xel
+https://github.com/zazaulola/xel-extra/tree/7c17b97bd13258c6c16efbc18e75f9dbbd58847f?tab=readme-ov-file
+https://github.com/derikb/character-sheet-app/blob/69c3f58f7d6de38aa4b708d67223567432ed611d/src/components/Modal.js#L104
+
+https://github.com/easylogic/gradientpicker/blob/main/config/rollup.config.prod.js
+https://github.com/HTMLElements/smart-webcomponents/blob/dcbb7cf5436af30f9e9de52b61296b303aa9620e/framework/smart.element.js
+.bootstrapModule(ClientFormElementModule)
+constructor(injector: Injector) {
+    const ngElement = createCustomElement(ClientFormComponent, {
+      injector,
+    });
+
+    customElements.define('custom-client-form', ngElement);
+  }
+https://github.com/CaptainCodeman/hn-webcomponents/tree/c3b14afa5db2cb5d3eb62f36252c973858a285fc?tab=readme-ov-file
+https://github.com/CaptainCodeman/gif-player/tree/54234731e58c579eda454bd5fb52eb453bd5abe5
+https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements
+https://developer.mescius.com/wijmo/demos/Grid/Overview/angular
+
+https://gist.github.com/morewry/6773dd2ba84b8a4b829ae8d2b82891b3
+https://github.com/angular/angular/issues/23732 (example-angular-elments-app - the consuming application)
+https://medium.com/php-fad/discovering-web-components-11d924a26651
+https://onebitahead.medium.com/dont-reinvent-the-wheel-use-white-label-web-components-fa57fa54cc15
+https://github.com/search?q=repo%3Avideojs%2Fvideo.js%20customElements&type=code
+https://github.com/mozilla/blurts-server/blob/ea176dc1b070db735e886da2ce886b8cbb5e1396/src/client/js/components/circleChart.js
+
+saveAndClose,cancel,save, xlsx excel
+https://github.com/pavlism/karaoke/blob/fe791fa336a87efdeb35d4875a1f7d420bb46bf4/public/components/mrp-form.js#L28
+https://github.com/Dabolus/vanilla-pwa/tree/bd03984a2abbcd179cfd9ecd392477bc240fd966/components/dynamic-data
+
+HTMLCollection
+customElements
+middleware
+generate custom-elements.json
+assignedElements 
+service_worker
+formAssociated
+https://github.com/orneryd/web-components/tree/f9257097f9c92a108ba2f94759acf6d329f303ae/src
+
 https://codepen.io/kevinalku/pen/gwWPWY
 +-------------------------------------------------------+
 |										======1======	|
@@ -291,91 +377,7 @@ https://github.com/dancancro/great-big-example-application/tree/fc757ea6e862194d
 
 
 
-+-------------------------------------------------------+
-|										======1======	|
-|	CUSTOM ELEMENTS										|
-|														|
-+-------------------------------------------------------+
 
-theory
-https://itnext.io/building-micro-frontend-applications-with-angular-elements-34483da08bcb
-https://trailheadtechnology.com/create-and-compile-web-components-in-angular-projects/
-
-
-https://github.com/JackovAlltrades/io/tree/master/src/elements/core
-https://github.com/esiur/iui/blob/1bcc7e0a64a256fe6beaaafed84982f639f079fc/src/Core/IUI.js#L24
-https://github.com/joomla-projects/custom-elements/tree/8b60e5a1d77082649028bc8453a84e80c592b47f/src/scss
-https://github.com/dashaudio/dash-components/blob/ad1da78dae93515064a88f1f5c34d4b1da8433e4/package.json
-https://github.com/ing-bank/lion/blob/e930b7b667ceaf66c2fab86a76044d0260b934fa/packages/ui/components/input/src/LionInput.js
-https://github.com/SoundStacks/cmajor/blob/b44d5bc6a03cd67589d4f9709e958734b825a359/javascript/cmaj_api/cmaj-event-listener-list.js#L15
-https://github.com/namphongpt/tator/blob/master/main/static/js/components/tator-element.js#L3
-//dispatchEvent delegate
-https://github.com/cvisionai/tator/blob/9f8c05bad6f8b54ac0e76ba30619aba2c7b0f7e6/ui/src/js/components/inputs/text-input.js#L32
-https://github.com/TatShen/ToDoList/blob/dbb5c51b6a3072a482987579c5247696b2aea756/src/components/atoms/Input/Input.js
-https://github.com/OnsenUI/OnsenUI/tree/90c0aeb2b2acadfefb66a3da038b6b09cfb5b9c8
-https://github.com/OHDSI/Perseus/blob/4267d0bbf27b607646efb9f6eb0fddcb07258b2b/UI/src/app/models/perseus/concept.ts
-https://github.com/dotCMS/core/tree/a7af331b7361bffd039413a22bea7dbad7b3d03c/core-web
-https://github.com/SAP/openui5/blob/45da40f3b01ab7fea1f524eb84bca6c0bf907a5d/src/sap.ui.commons/src/sap/ui/commons/layout/MatrixLayoutRenderer.js
-https://github.com/dataformsjs/dataformsjs/tree/master/js/web-components
-https://github.com/UziTech/web-component-abstract/blob/ee2f2ba574538c27856a4ff545b9603b79483fe5/index.js#L8
-https://github.com/YufJi/tiny/blob/fe35eef306aa4cd53f85e1649bc1ce58935c8023/packages/base/src/webview/web-components/form.js
-https://github.com/akudev/ui5-webcomponents/blob/master/packages/main/src/TextArea.js
-https://github.com/grandemayta/custom-element-pokemon-cards/tree/master/src
-//event bus
-https://github.com/trutoo/event-bus/blob/master/docs/react-component.js
-https://github.com/googlefonts/fontra/blob/d5975409067c947485f39f935bd9e302bca70afc/src/fontra/client/web-components/ui-list.js
-css.js
-https://github.com/megazear7/ziro-components/blob/885fbae4f8009b0ddad1e81ec722ef5c6d9555b8/src/ziro-input.js
-https://github.com/bit101/minicomps/blob/master/src/component.js
-https://github.com/sencha/extjs-grid-performance/blob/a97aa4c8fae22823fa81a6854c2f42ff4195dde1/client/src/wijmoGrid/WijmoFlexGridScrollComponent.js
-https://github.com/dataformsjs/dataformsjs/blob/9b7772c50b39df9068079bc7ba7049903ff57eea/js/web-components/data-list.js#L207
-https://github.com/jk2908/list-box/blob/1da0ae32b648d6abac4f3a8b5aab3a2e6e356251/src/ListBox.js#L11
-https://github.com/yued-fe/lulu/blob/787424ac57308df3d7ac3c237aae53ce9b8104ab/theme/hope/ui/Layout/list.js
-https://github.com/Memeticode/psm.custom-elements/blob/e1dc368a2478f8f387af707e473a932c6ddb5572/demo/index.html
-//rtl
-https://github.com/jouni/j-elements/blob/d90428a5cdf263adadd284ef4c361a527404b71b/src/components/OverflowMenu.js#L117
-https://github.com/jeremenichelli/movies-web-components/tree/master/src
-//permission customElements
-https://github.com/lencys/wj-elements/blob/master/packages/wj-element/service/universal-service.js
-https://github.com/knowler/knowler.dev/tree/bff674795fb6eb2c2cea0817a4ef315eaf596f68/middleware
-https://github.com/jarek-foksa/xel
-https://github.com/zazaulola/xel-extra/tree/7c17b97bd13258c6c16efbc18e75f9dbbd58847f?tab=readme-ov-file
-https://github.com/derikb/character-sheet-app/blob/69c3f58f7d6de38aa4b708d67223567432ed611d/src/components/Modal.js#L104
-
-https://github.com/easylogic/gradientpicker/blob/main/config/rollup.config.prod.js
-https://github.com/HTMLElements/smart-webcomponents/blob/dcbb7cf5436af30f9e9de52b61296b303aa9620e/framework/smart.element.js
-.bootstrapModule(ClientFormElementModule)
-constructor(injector: Injector) {
-    const ngElement = createCustomElement(ClientFormComponent, {
-      injector,
-    });
-
-    customElements.define('custom-client-form', ngElement);
-  }
-https://github.com/CaptainCodeman/hn-webcomponents/tree/c3b14afa5db2cb5d3eb62f36252c973858a285fc?tab=readme-ov-file
-https://github.com/CaptainCodeman/gif-player/tree/54234731e58c579eda454bd5fb52eb453bd5abe5
-https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements
-https://developer.mescius.com/wijmo/demos/Grid/Overview/angular
-
-https://gist.github.com/morewry/6773dd2ba84b8a4b829ae8d2b82891b3
-https://github.com/angular/angular/issues/23732 (example-angular-elments-app - the consuming application)
-https://medium.com/php-fad/discovering-web-components-11d924a26651
-https://onebitahead.medium.com/dont-reinvent-the-wheel-use-white-label-web-components-fa57fa54cc15
-https://github.com/search?q=repo%3Avideojs%2Fvideo.js%20customElements&type=code
-https://github.com/mozilla/blurts-server/blob/ea176dc1b070db735e886da2ce886b8cbb5e1396/src/client/js/components/circleChart.js
-
-saveAndClose,cancel,save, xlsx excel
-https://github.com/pavlism/karaoke/blob/fe791fa336a87efdeb35d4875a1f7d420bb46bf4/public/components/mrp-form.js#L28
-https://github.com/Dabolus/vanilla-pwa/tree/bd03984a2abbcd179cfd9ecd392477bc240fd966/components/dynamic-data
-
-HTMLCollection
-customElements
-middleware
-generate custom-elements.json
-assignedElements 
-service_worker
-formAssociated
-https://github.com/orneryd/web-components/tree/f9257097f9c92a108ba2f94759acf6d329f303ae/src
 +-------------------------------------------------------+
 |										======2======	|
 |	WORKING WITH FILES									|
