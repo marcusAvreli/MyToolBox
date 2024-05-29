@@ -125,6 +125,7 @@ https://github.com/CyberFlameGO/Hubzilla/tree/0140f9fe560b7cc0f65cbfc7988f6808b4
 |	COMPONENTS											|
 |														|
 +-------------------------------------------------------+
+https://github.com/carbon-design-system/ibm-security/tree/8c57c28a6d37c928b0ce4472f876cc5d7afe1652/src/components
 dropdown.js	snackbar.js	tabs.js	tooltip.js WEBPACK
 https://github.com/AiviksIQ/JS-library/tree/master/src/js
 https://github.com/odopod/code-library/blob/ceb47654545ec0b734c8650b3128a6c07504845a/packages/odo-draggable/src/settings.js#L17
@@ -273,7 +274,7 @@ https://github.com/sirmaenterprise/conservation-space/blob/d7e75a3bd56a482febcd8
 https://github.com/sfeir-open-source/talk-control/blob/develop/src/common/event-bus/event-bus-proxy.js#L8
 
 
-eventBus and store
+eventBus and store custom redux
 https://github.com/vladkvn/custom-excel/blob/a92c723d8c4d83d417bb75a5976543671f193144/src/components/excel/Excel.js
 
 https://github.com/YisusYaro/node-ddd-example/tree/02c63a0733df1d897e91095c722c6c681bb19ea0/src/shared/infrastructure
@@ -300,6 +301,9 @@ theory
 https://itnext.io/building-micro-frontend-applications-with-angular-elements-34483da08bcb
 https://trailheadtechnology.com/create-and-compile-web-components-in-angular-projects/
 
+
+https://github.com/JackovAlltrades/io/tree/master/src/elements/core
+https://github.com/esiur/iui/blob/1bcc7e0a64a256fe6beaaafed84982f639f079fc/src/Core/IUI.js#L24
 https://github.com/joomla-projects/custom-elements/tree/8b60e5a1d77082649028bc8453a84e80c592b47f/src/scss
 https://github.com/dashaudio/dash-components/blob/ad1da78dae93515064a88f1f5c34d4b1da8433e4/package.json
 https://github.com/ing-bank/lion/blob/e930b7b667ceaf66c2fab86a76044d0260b934fa/packages/ui/components/input/src/LionInput.js
@@ -314,6 +318,7 @@ https://github.com/dotCMS/core/tree/a7af331b7361bffd039413a22bea7dbad7b3d03c/cor
 https://github.com/SAP/openui5/blob/45da40f3b01ab7fea1f524eb84bca6c0bf907a5d/src/sap.ui.commons/src/sap/ui/commons/layout/MatrixLayoutRenderer.js
 https://github.com/dataformsjs/dataformsjs/tree/master/js/web-components
 https://github.com/UziTech/web-component-abstract/blob/ee2f2ba574538c27856a4ff545b9603b79483fe5/index.js#L8
+https://github.com/YufJi/tiny/blob/fe35eef306aa4cd53f85e1649bc1ce58935c8023/packages/base/src/webview/web-components/form.js
 https://github.com/akudev/ui5-webcomponents/blob/master/packages/main/src/TextArea.js
 https://github.com/grandemayta/custom-element-pokemon-cards/tree/master/src
 //event bus
@@ -332,13 +337,13 @@ https://github.com/jouni/j-elements/blob/d90428a5cdf263adadd284ef4c361a527404b71
 https://github.com/jeremenichelli/movies-web-components/tree/master/src
 //permission customElements
 https://github.com/lencys/wj-elements/blob/master/packages/wj-element/service/universal-service.js
-
+https://github.com/knowler/knowler.dev/tree/bff674795fb6eb2c2cea0817a4ef315eaf596f68/middleware
 https://github.com/jarek-foksa/xel
 https://github.com/zazaulola/xel-extra/tree/7c17b97bd13258c6c16efbc18e75f9dbbd58847f?tab=readme-ov-file
-
+https://github.com/derikb/character-sheet-app/blob/69c3f58f7d6de38aa4b708d67223567432ed611d/src/components/Modal.js#L104
 
 https://github.com/easylogic/gradientpicker/blob/main/config/rollup.config.prod.js
-
+https://github.com/HTMLElements/smart-webcomponents/blob/dcbb7cf5436af30f9e9de52b61296b303aa9620e/framework/smart.element.js
 .bootstrapModule(ClientFormElementModule)
 constructor(injector: Injector) {
     const ngElement = createCustomElement(ClientFormComponent, {
@@ -359,8 +364,18 @@ https://onebitahead.medium.com/dont-reinvent-the-wheel-use-white-label-web-compo
 https://github.com/search?q=repo%3Avideojs%2Fvideo.js%20customElements&type=code
 https://github.com/mozilla/blurts-server/blob/ea176dc1b070db735e886da2ce886b8cbb5e1396/src/client/js/components/circleChart.js
 
+saveAndClose,cancel,save, xlsx excel
+https://github.com/pavlism/karaoke/blob/fe791fa336a87efdeb35d4875a1f7d420bb46bf4/public/components/mrp-form.js#L28
+https://github.com/Dabolus/vanilla-pwa/tree/bd03984a2abbcd179cfd9ecd392477bc240fd966/components/dynamic-data
 
-
+HTMLCollection
+customElements
+middleware
+generate custom-elements.json
+assignedElements 
+service_worker
+formAssociated
+https://github.com/orneryd/web-components/tree/f9257097f9c92a108ba2f94759acf6d329f303ae/src
 +-------------------------------------------------------+
 |										======2======	|
 |	WORKING WITH FILES									|
@@ -374,28 +389,20 @@ https://github.com/mozilla/blurts-server/blob/ea176dc1b070db735e886da2ce886b8cbb
 
 
 
-https://github.com/carbon-design-system/ibm-security/tree/8c57c28a6d37c928b0ce4472f876cc5d7afe1652/src/components
 
-https://github.com/derikb/character-sheet-app/blob/69c3f58f7d6de38aa4b708d67223567432ed611d/src/components/Modal.js#L104
-https://github.com/esiur/iui/blob/1bcc7e0a64a256fe6beaaafed84982f639f079fc/src/Core/IUI.js#L24
 
-https://github.com/knowler/knowler.dev/tree/bff674795fb6eb2c2cea0817a4ef315eaf596f68/middleware
-https://github.com/search?q=repo%3Abobbyadamski%2FUmbraco.UI%20custom-elements.json&type=code
-https://github.com/YufJi/tiny/blob/fe35eef306aa4cd53f85e1649bc1ce58935c8023/packages/base/src/webview/web-components/form.js
-https://github.com/JackovAlltrades/io/tree/master/src/elements/core
-https://github.com/HTMLElements/smart-webcomponents/blob/dcbb7cf5436af30f9e9de52b61296b303aa9620e/framework/smart.element.js
-saveAndClose,cancel,save, xlsx excel
-https://github.com/pavlism/karaoke/blob/fe791fa336a87efdeb35d4875a1f7d420bb46bf4/public/components/mrp-form.js#L28
-https://github.com/pavlism/karaoke/tree/fe791fa336a87efdeb35d4875a1f7d420bb46bf4/public/components (xlsx)
-https://github.com/Dabolus/vanilla-pwa/tree/bd03984a2abbcd179cfd9ecd392477bc240fd966/components/dynamic-data
-HTMLCollection
-customElements
-middleware
-generate custom-elements.json
-assignedElements 
-service_worker
-formAssociated
-https://github.com/orneryd/web-components/tree/f9257097f9c92a108ba2f94759acf6d329f303ae/src
+
+
+
+
+
+
+
+
+
+
+
+
 bindEvents
 https://coryrylan.com/blog/using-web-components-in-angular-forms-with-element-internals
 ngDefaultControl
@@ -434,11 +441,11 @@ WatchMode
 			 "babel-plugin-transform-es2015-modules-systemjs": "6.14.0",
     "babel-preset-es2015": "6.16.0",
 	
-	
+// tweaking for custom claim for RS256
 https://github.com/topcoder-platform/topcoder-x-ui/blob/075ddbd346a85e25f0cf6ec7e66adb39599d0b16/package.json#L90	
-	 "babel-core": "^6.26.3",
-        "babel-preset-env": "^1.7.0",
-        "babel-preset-es2016": "^6.24.1",
+"babel-core": "^6.26.3",
+"babel-preset-env": "^1.7.0",
+"babel-preset-es2016": "^6.24.1",
 		
 npm add -D typescript@2.3.3 babel-core@6.26.3 babel-cli@6.26.0  babel-preset-env@1.7.0 cross-env@5.1.6 rimraf@2.7.1	
 npm add -D typescript@2.3.3 babel-core@6.26.3 											babel-preset-env@1.7.0
