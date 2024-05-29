@@ -17,6 +17,24 @@ https://github.com/wraithyy/validarium/blob/master/packages/core/src/combineVali
 https://github.com/consoleui/console-ui-ng/tree/master/src/app/preview
 https://github.com/BenjaminZekavica/easy-toggle-state/blob/master/rollup.config.js
 https://github.com/popcorn-official/pop-api-scraper/blob/659701a4299a4563c9f0d8b3d199f3aaf086a848/rollup.config.js
+https://github.com/benmccann/routify-site-2020/tree/a7f80f9a32e7c94b575f76dd73a32af0761591f4
+https://github.com/classicvalues/github-buttons/blob/4a0bfa75e18619804dfec24770e8add807130c7b/rollup.config.js#L50
+ https://github.com/ghettovoice/vuelayers/blob/42379e6b63a32b092a77172f4e637094198579d3/build/rollup/sass.js#L6
+   //pipe injectTransform({ extensions, routix }),
+https://github.com/rixo/svench/blob/ce73a3f7267eb71b4fa0398fc7244e5a7fa580eb/packages/svench/lib/rollup-plugin.js#L182
+//sassPlugin 
+https://github.com/ghettovoice/ol-mapscale/blob/6c3b2ed2d7c494290a2658b58bb9773b95cc86d6/build/util.js#L58
+https://github.com/ComcastSamples/wc-components/blob/e5543f5e49cc10c42e58193af91f64dd2c2c084d/rollup.prod.config.js
+ 
+ copyright
+ https://github.com/14hy/chatbot-front/blob/0204e6f0a8f4ad27bb9ba69b8c468c2f3629c20d/server/public/lib/d3/rollup.config.js#L4
+ banner showGzippedSize
+ https://github.com/usablica/intro.js/blob/3cab7911743415f25bd5d9ba250bf69f9e8273f9/rollup.config.js
+ 
+ https://github.com/frappe/charts/blob/f33309601201776c9f724e46badadaeef4663358/src/js/index.js
+ https://github.com/webtides/luna-js/blob/bc25f7a48b8f60d12bdde07fc70701be0f4a70a5/packages/cli/build/plugins/rollup-plugin-postcss.js#L35
+ 
+ 
 +-------------------------------------------------------+
 |										======1======	|
 |	DESIGN PATTERN										|
@@ -112,7 +130,7 @@ https://github.com/AiviksIQ/JS-library/tree/master/src/js
 https://github.com/odopod/code-library/blob/ceb47654545ec0b734c8650b3128a6c07504845a/packages/odo-draggable/src/settings.js#L17
 https://github.com/NativeScript/NativeScript/blob/82e9c67d3398c376be1641c5f23bf82a492a48c3/apps/ui/src/bindings/main-page.ts
 https://github.com/spckio/spck-ui/tree/master/src
-https://github.com/ing-bank/lion/blob/e930b7b667ceaf66c2fab86a76044d0260b934fa/packages/ui/components/input/src/LionInput.js
+
 https://github.com/stjordanis/tutanota/tree/c9b02198b27b6d4ca0e5ce35b4b658f8058e23fd/src/gui/base
 https://github.com/codaxy/cxjs/blob/c4cd764405428e0d6a17cb12228d998a1a143168/packages/cx/src/ui/Container.js
 https://github.com/GoogleChrome/developer.chrome.com/blob/51dd7dd5d510ed85d86f5a91cb8fde50b62351c7/site/_js/web-components/truncate-text.js
@@ -216,16 +234,28 @@ https://github.com/zzllrr/mather/blob/c8358cd1e376e2fadafe03b927bc968a399950a6/a
 pure javascript detect node server. localization without external libs
 https://github.com/search?q=repo%3AShoobx%2Fpdf.js%20viewer.properties&type=code
 
++-------------------------------------------------------+
+|										======1======	|
+|	EVENT_BUS EVENT BUS									|
+|														|
++-------------------------------------------------------+
 
-EVENT_BUS EVENT BUS
-
-
-https://github.com/SoundStacks/cmajor/blob/b44d5bc6a03cd67589d4f9709e958734b825a359/javascript/cmaj_api/cmaj-event-listener-list.js#L15
-https://github.com/renhongl/pomelo-engine/tree/de8395d7e92aa495a0b007a41494f084450c4069/src/pomelo-engine/core
-https://github.com/ornorm/eventslib/tree/d4da926efaf2df2539d5bf19ed05b0da6bc8c332
-https://github.com/Noe-ali/SimpleCountdown/tree/a09ba41328316b135ee99ed0475332ec21c39e63/bin/tsparticles/browser/Core/Utils
+eventBus.js
 https://github.com/zhazhjie/element-ui-admin/tree/e32d84f8ff63c7c271f103e50e10d61169544c83/src/utils
+
+
+loading.js sceneManager.js
+https://github.com/renhongl/pomelo-engine/tree/de8395d7e92aa495a0b007a41494f084450c4069/src/pomelo-engine/core
+event
+https://github.com/ornorm/eventslib/tree/d4da926efaf2df2539d5bf19ed05b0da6bc8c332
+
+ParticlesInteractorBase.js
+https://github.com/Noe-ali/SimpleCountdown/tree/a09ba41328316b135ee99ed0475332ec21c39e63/bin/tsparticles/browser/Core/Utils
+
+
 https://github.com/burdiuz/js-event-dispatcher/tree/1db79d67e303888004e8880bf4056b7b472f4b38
+
+
 https://github.com/TelegramV/App/tree/ead52320975362139cabad18cf8346f98c349a22/src/js/Api/EventBus
 
 https://github.com/SnAlex555/Two-Wheelers-Motorcycle-Store/blob/main/src/core/Router/Link.js#L3
@@ -270,6 +300,11 @@ theory
 https://itnext.io/building-micro-frontend-applications-with-angular-elements-34483da08bcb
 https://trailheadtechnology.com/create-and-compile-web-components-in-angular-projects/
 
+https://github.com/joomla-projects/custom-elements/tree/8b60e5a1d77082649028bc8453a84e80c592b47f/src/scss
+https://github.com/dashaudio/dash-components/blob/ad1da78dae93515064a88f1f5c34d4b1da8433e4/package.json
+https://github.com/ing-bank/lion/blob/e930b7b667ceaf66c2fab86a76044d0260b934fa/packages/ui/components/input/src/LionInput.js
+https://github.com/SoundStacks/cmajor/blob/b44d5bc6a03cd67589d4f9709e958734b825a359/javascript/cmaj_api/cmaj-event-listener-list.js#L15
+https://github.com/namphongpt/tator/blob/master/main/static/js/components/tator-element.js#L3
 //dispatchEvent delegate
 https://github.com/cvisionai/tator/blob/9f8c05bad6f8b54ac0e76ba30619aba2c7b0f7e6/ui/src/js/components/inputs/text-input.js#L32
 https://github.com/TatShen/ToDoList/blob/dbb5c51b6a3072a482987579c5247696b2aea756/src/components/atoms/Input/Input.js
@@ -294,7 +329,7 @@ https://github.com/yued-fe/lulu/blob/787424ac57308df3d7ac3c237aae53ce9b8104ab/th
 https://github.com/Memeticode/psm.custom-elements/blob/e1dc368a2478f8f387af707e473a932c6ddb5572/demo/index.html
 //rtl
 https://github.com/jouni/j-elements/blob/d90428a5cdf263adadd284ef4c361a527404b71b/src/components/OverflowMenu.js#L117
-
+https://github.com/jeremenichelli/movies-web-components/tree/master/src
 //permission customElements
 https://github.com/lencys/wj-elements/blob/master/packages/wj-element/service/universal-service.js
 
@@ -316,13 +351,15 @@ https://github.com/CaptainCodeman/hn-webcomponents/tree/c3b14afa5db2cb5d3eb62f36
 https://github.com/CaptainCodeman/gif-player/tree/54234731e58c579eda454bd5fb52eb453bd5abe5
 https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements
 https://developer.mescius.com/wijmo/demos/Grid/Overview/angular
-https://github.com/jeremenichelli/movies-web-components/tree/master/src
+
 https://gist.github.com/morewry/6773dd2ba84b8a4b829ae8d2b82891b3
 https://github.com/angular/angular/issues/23732 (example-angular-elments-app - the consuming application)
 https://medium.com/php-fad/discovering-web-components-11d924a26651
 https://onebitahead.medium.com/dont-reinvent-the-wheel-use-white-label-web-components-fa57fa54cc15
 https://github.com/search?q=repo%3Avideojs%2Fvideo.js%20customElements&type=code
 https://github.com/mozilla/blurts-server/blob/ea176dc1b070db735e886da2ce886b8cbb5e1396/src/client/js/components/circleChart.js
+
+
 
 +-------------------------------------------------------+
 |										======2======	|
@@ -493,28 +530,20 @@ https://github.com/webzhou/mip2/blob/85fc126df3ff84b5dbb113d065ad56e80a6dcec1/pa
   'input, textarea,  select,  checkbox,  radio,  file,  color,  date,  datetime-local,  email,  month,  number,  password,  search,  tel,  time,  url,  week
  https://github.com/mellambias/tienOn/blob/035b8657b9138c50c4d767a91785b0fd0181560e/public/dashboard/js/webComponents/Form.js
  https://github.com/dataformsjs/dataformsjs/tree/9b7772c50b39df9068079bc7ba7049903ff57eea
- https://github.com/namphongpt/tator/blob/master/main/static/js/components/tator-element.js#L3
+ 
  https://github.com/dataformsjs/dataformsjs/blob/9b7772c50b39df9068079bc7ba7049903ff57eea/js/web-components/i18n-service.js#L246
  
  
  
- https://github.com/dashaudio/dash-components/blob/ad1da78dae93515064a88f1f5c34d4b1da8433e4/package.json
+ 
  https://github.com/classicvalues/github-buttons/blob/4a0bfa75e18619804dfec24770e8add807130c7b/rollup.config.js#L50
- https://github.com/ghettovoice/vuelayers/blob/42379e6b63a32b092a77172f4e637094198579d3/build/rollup/sass.js#L6
+ 
  https://github.com/bitifet/SmarkForm/blob/bd3940e7bd89500ec2d4b515f8da6acefbae5b9c/src/main.js
  https://github.com/roxiness/routify.dev/tree/d8ac6e67858752ff1eb2a350a4a2116c4945c7b5/scss
  https://github.com/EthereansOS/Interfaces-Framework/tree/9045f91627ea7aeaec1b3945c8a00d343e2973ba/packages/components
- https://github.com/benmccann/routify-site-2020/tree/a7f80f9a32e7c94b575f76dd73a32af0761591f4
+ 
  https://github.com/nocestore/gatsby/blob/6864a08c240090ecadba19dd8573e51facb792b0/packages/components/static/fonts.css
- https://github.com/ComcastSamples/wc-components/blob/e5543f5e49cc10c42e58193af91f64dd2c2c084d/rollup.prod.config.js
  
- copyright
- https://github.com/14hy/chatbot-front/blob/0204e6f0a8f4ad27bb9ba69b8c468c2f3629c20d/server/public/lib/d3/rollup.config.js#L4
- banner showGzippedSize
- https://github.com/usablica/intro.js/blob/3cab7911743415f25bd5d9ba250bf69f9e8273f9/rollup.config.js
- 
- https://github.com/frappe/charts/blob/f33309601201776c9f724e46badadaeef4663358/src/js/index.js
- https://github.com/webtides/luna-js/blob/bc25f7a48b8f60d12bdde07fc70701be0f4a70a5/packages/cli/build/plugins/rollup-plugin-postcss.js#L35
  
  customElements
  https://github.com/xxxily/h5player/blob/a97d0760b1c72d5569cf3747972d5ef8305e52ef/src/h5player/ui/h5playerUI.es.js#L1507
@@ -544,7 +573,7 @@ https://github.com/knowler/knowler.dev/tree/bff674795fb6eb2c2cea0817a4ef315eaf59
 https://github.com/search?q=repo%3Abobbyadamski%2FUmbraco.UI%20custom-elements.json&type=code
 https://github.com/YufJi/tiny/blob/fe35eef306aa4cd53f85e1649bc1ce58935c8023/packages/base/src/webview/web-components/form.js
 https://github.com/JackovAlltrades/io/tree/master/src/elements/core
-https://github.com/HTMLElements/smart-webcomponents/blob/dcbb7cf5436af30f9e9de52b61296b303aa9620e/framework/smart.element.js
+
 
 https://github.com/Dabolus/vanilla-pwa/tree/bd03984a2abbcd179cfd9ecd392477bc240fd966/components/dynamic-data
 
@@ -645,7 +674,7 @@ https://github.com/digital-blueprint/toolkit/blob/17341cca68d9b144792026fa25667d
 
 https://github.com/tastejs/todomvc/blob/efafb5843a52fad8b465f642ee8d5d980ad1ac4d/examples/web-components/src/components/todo-bottombar/todo-bottombar.component.js
 https://github.com/textpattern/textpattern
-https://github.com/cvisionai/tator/tree/97d977570b9ba7c0f3350bfbbc84f324c00f9a79/ui/src/js/components
+
 
 https://github.com/AdguardTeam/Scriptlets/tree/d71db5c457af311696cf7b96c4306a2e2ece83d1/src
 rollup
@@ -815,8 +844,7 @@ https://github.com/playcanvas/super-splat/blob/84dcd4cee4b477da177e01593e506d5a1
 
   //pipe injectTransform({ extensions, routix }),
 https://github.com/rixo/svench/blob/ce73a3f7267eb71b4fa0398fc7244e5a7fa580eb/packages/svench/lib/rollup-plugin.js#L182
-//sassPlugin 
-https://github.com/ghettovoice/ol-mapscale/blob/6c3b2ed2d7c494290a2658b58bb9773b95cc86d6/build/util.js#L58
+
 
 
 //alias
@@ -1064,13 +1092,13 @@ https://github.com/CyberFlameGO/Hubzilla/tree/0140f9fe560b7cc0f65cbfc7988f6808b4
 https://github.com/jstejada/interruptible/tree/cefedfab58fd72b0f966f0cefbc7d7c009d350b2/src
 //validation
 https://github.com/wraithyy/validarium/blob/master/packages/core/src/combineValidate.js
-	//dispatchEvent delegate
-	https://github.com/cvisionai/tator/blob/9f8c05bad6f8b54ac0e76ba30619aba2c7b0f7e6/ui/src/js/components/inputs/text-input.js#L32
+	
+	
 ///angular-cli
 https://github.com/consoleui/console-ui-ng/tree/master/src/app/preview
 //components
 
-https://github.com/ing-bank/lion/blob/e930b7b667ceaf66c2fab86a76044d0260b934fa/packages/ui/components/input/src/LionInput.js
+
 https://github.com/stjordanis/tutanota/tree/c9b02198b27b6d4ca0e5ce35b4b658f8058e23fd/src/gui/base
 https://github.com/codaxy/cxjs/blob/c4cd764405428e0d6a17cb12228d998a1a143168/packages/cx/src/ui/Container.js
 https://github.com/GoogleChrome/developer.chrome.com/blob/51dd7dd5d510ed85d86f5a91cb8fde50b62351c7/site/_js/web-components/truncate-text.js
@@ -1171,11 +1199,11 @@ https://github.com/search?q=repo%3AShoobx%2Fpdf.js%20viewer.properties&type=code
 EVENT_BUS EVENT BUS
 
 
-https://github.com/SoundStacks/cmajor/blob/b44d5bc6a03cd67589d4f9709e958734b825a359/javascript/cmaj_api/cmaj-event-listener-list.js#L15
-https://github.com/renhongl/pomelo-engine/tree/de8395d7e92aa495a0b007a41494f084450c4069/src/pomelo-engine/core
+
+
 https://github.com/ornorm/eventslib/tree/d4da926efaf2df2539d5bf19ed05b0da6bc8c332
 https://github.com/Noe-ali/SimpleCountdown/tree/a09ba41328316b135ee99ed0475332ec21c39e63/bin/tsparticles/browser/Core/Utils
-https://github.com/zhazhjie/element-ui-admin/tree/e32d84f8ff63c7c271f103e50e10d61169544c83/src/utils
+
 https://github.com/burdiuz/js-event-dispatcher/tree/1db79d67e303888004e8880bf4056b7b472f4b38
 https://github.com/TelegramV/App/tree/ead52320975362139cabad18cf8346f98c349a22/src/js/Api/EventBus
 
@@ -1223,7 +1251,7 @@ constructor(injector: Injector) {
 
 https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements
 https://developer.mescius.com/wijmo/demos/Grid/Overview/angular
-https://github.com/jeremenichelli/movies-web-components/tree/master/src
+
 https://gist.github.com/morewry/6773dd2ba84b8a4b829ae8d2b82891b3
 https://github.com/angular/angular/issues/23732 (example-angular-elments-app - the consuming application)
 https://medium.com/php-fad/discovering-web-components-11d924a26651
@@ -1239,7 +1267,7 @@ https://github.com/knowler/knowler.dev/tree/bff674795fb6eb2c2cea0817a4ef315eaf59
 https://github.com/search?q=repo%3Abobbyadamski%2FUmbraco.UI%20custom-elements.json&type=code
 https://github.com/YufJi/tiny/blob/fe35eef306aa4cd53f85e1649bc1ce58935c8023/packages/base/src/webview/web-components/form.js
 https://github.com/JackovAlltrades/io/tree/master/src/elements/core
-https://github.com/HTMLElements/smart-webcomponents/blob/dcbb7cf5436af30f9e9de52b61296b303aa9620e/framework/smart.element.js
+
 
 https://github.com/Dabolus/vanilla-pwa/tree/bd03984a2abbcd179cfd9ecd392477bc240fd966/components/dynamic-data
 HTMLCollection
@@ -1274,20 +1302,20 @@ WatchMode
 	
 	
 	
-	https://github.com/fictional-tribble-2/atom--atom/tree/master/src
-	 "babel-code-frame": "^6.26.0",
-            "babel-generator": "^6.26.0",
-            "babel-helpers": "^6.24.1",
-            "babel-messages": "^6.23.0",
-            "babel-register": "^6.26.0",
-            "babel-runtime": "^6.26.0",
-            "babel-template": "^6.26.0",
-            "babel-traverse": "^6.26.0",
-            "babel-types": "^6.26.0",
-			
-			https://github.com/jestintab/Hybrid-Restaurant-App/blob/fe367c716e85d20c7609f60956ca57bcb79582f7/hooks/package.json#L80
-			 "babel-plugin-transform-es2015-modules-systemjs": "6.14.0",
-    "babel-preset-es2015": "6.16.0",
+https://github.com/fictional-tribble-2/atom--atom/tree/master/src
+ "babel-code-frame": "^6.26.0",
+		"babel-generator": "^6.26.0",
+		"babel-helpers": "^6.24.1",
+		"babel-messages": "^6.23.0",
+		"babel-register": "^6.26.0",
+		"babel-runtime": "^6.26.0",
+		"babel-template": "^6.26.0",
+		"babel-traverse": "^6.26.0",
+		"babel-types": "^6.26.0",
+		
+		https://github.com/jestintab/Hybrid-Restaurant-App/blob/fe367c716e85d20c7609f60956ca57bcb79582f7/hooks/package.json#L80
+		 "babel-plugin-transform-es2015-modules-systemjs": "6.14.0",
+"babel-preset-es2015": "6.16.0",
 	
 	
 https://github.com/topcoder-platform/topcoder-x-ui/blob/075ddbd346a85e25f0cf6ec7e66adb39599d0b16/package.json#L90	
@@ -1385,28 +1413,24 @@ https://github.com/webzhou/mip2/blob/85fc126df3ff84b5dbb113d065ad56e80a6dcec1/pa
   'input, textarea,  select,  checkbox,  radio,  file,  color,  date,  datetime-local,  email,  month,  number,  password,  search,  tel,  time,  url,  week
  https://github.com/mellambias/tienOn/blob/035b8657b9138c50c4d767a91785b0fd0181560e/public/dashboard/js/webComponents/Form.js
  https://github.com/dataformsjs/dataformsjs/tree/9b7772c50b39df9068079bc7ba7049903ff57eea
- https://github.com/namphongpt/tator/blob/master/main/static/js/components/tator-element.js#L3
+ 
  https://github.com/dataformsjs/dataformsjs/blob/9b7772c50b39df9068079bc7ba7049903ff57eea/js/web-components/i18n-service.js#L246
  
  
  
- https://github.com/dashaudio/dash-components/blob/ad1da78dae93515064a88f1f5c34d4b1da8433e4/package.json
- https://github.com/classicvalues/github-buttons/blob/4a0bfa75e18619804dfec24770e8add807130c7b/rollup.config.js#L50
- https://github.com/ghettovoice/vuelayers/blob/42379e6b63a32b092a77172f4e637094198579d3/build/rollup/sass.js#L6
+ 
+ 
  https://github.com/bitifet/SmarkForm/blob/bd3940e7bd89500ec2d4b515f8da6acefbae5b9c/src/main.js
  https://github.com/roxiness/routify.dev/tree/d8ac6e67858752ff1eb2a350a4a2116c4945c7b5/scss
  https://github.com/EthereansOS/Interfaces-Framework/tree/9045f91627ea7aeaec1b3945c8a00d343e2973ba/packages/components
- https://github.com/benmccann/routify-site-2020/tree/a7f80f9a32e7c94b575f76dd73a32af0761591f4
+ 
  https://github.com/nocestore/gatsby/blob/6864a08c240090ecadba19dd8573e51facb792b0/packages/components/static/fonts.css
  https://github.com/ComcastSamples/wc-components/blob/e5543f5e49cc10c42e58193af91f64dd2c2c084d/rollup.prod.config.js
  
- copyright
- https://github.com/14hy/chatbot-front/blob/0204e6f0a8f4ad27bb9ba69b8c468c2f3629c20d/server/public/lib/d3/rollup.config.js#L4
- banner
- https://github.com/usablica/intro.js/blob/3cab7911743415f25bd5d9ba250bf69f9e8273f9/rollup.config.js
+ 
  
  https://github.com/frappe/charts/blob/f33309601201776c9f724e46badadaeef4663358/src/js/index.js
- https://github.com/webtides/luna-js/blob/bc25f7a48b8f60d12bdde07fc70701be0f4a70a5/packages/cli/build/plugins/rollup-plugin-postcss.js#L35
+ 
  
  babel css resolve rollup
  https://github.com/vectrejs/vectre/tree/9698dfed010f74edf662feff76f7d3bb29969622/build
@@ -1431,7 +1455,7 @@ https://github.com/knowler/knowler.dev/tree/bff674795fb6eb2c2cea0817a4ef315eaf59
 https://github.com/search?q=repo%3Abobbyadamski%2FUmbraco.UI%20custom-elements.json&type=code
 https://github.com/YufJi/tiny/blob/fe35eef306aa4cd53f85e1649bc1ce58935c8023/packages/base/src/webview/web-components/form.js
 https://github.com/JackovAlltrades/io/tree/master/src/elements/core
-https://github.com/HTMLElements/smart-webcomponents/blob/dcbb7cf5436af30f9e9de52b61296b303aa9620e/framework/smart.element.js
+
 
 https://github.com/Dabolus/vanilla-pwa/tree/bd03984a2abbcd179cfd9ecd392477bc240fd966/components/dynamic-data
 
@@ -1503,7 +1527,7 @@ https://github.com/digital-blueprint/toolkit/blob/17341cca68d9b144792026fa25667d
 
 https://github.com/tastejs/todomvc/blob/efafb5843a52fad8b465f642ee8d5d980ad1ac4d/examples/web-components/src/components/todo-bottombar/todo-bottombar.component.js
 https://github.com/textpattern/textpattern
-https://github.com/cvisionai/tator/tree/97d977570b9ba7c0f3350bfbbc84f324c00f9a79/ui/src/js/components
+
 
 https://github.com/AdguardTeam/Scriptlets/tree/d71db5c457af311696cf7b96c4306a2e2ece83d1/src
 rollup
@@ -1670,10 +1694,7 @@ https://github.com/Shopify/polaris/blob/main/polaris-react/config/rollup/plugin-
 //pipeline
 https://github.com/playcanvas/super-splat/blob/84dcd4cee4b477da177e01593e506d5a19d5e284/rollup.config.mjs#L56
 
-  //pipe injectTransform({ extensions, routix }),
-https://github.com/rixo/svench/blob/ce73a3f7267eb71b4fa0398fc7244e5a7fa580eb/packages/svench/lib/rollup-plugin.js#L182
-//sassPlugin 
-https://github.com/ghettovoice/ol-mapscale/blob/6c3b2ed2d7c494290a2658b58bb9773b95cc86d6/build/util.js#L58
+
 
 
 //alias
@@ -1716,7 +1737,7 @@ https://github.com/vizabi/vizabi-preview/blob/089f9c45f8071ce8f1c4d35269d1a4798f
 //translator
 https://github.com/roland-reed/nanachi-cli/blob/743fc7978b334f8c6be434c3c56b72c6783599b2/src/translator/helpers/slot.js
 
-https://github.com/ghettovoice/vuelayers/blob/42379e6b63a32b092a77172f4e637094198579d3/src/styles/main.scss
+
 
 //scss raw
 https://github.com/tedivm/github-buttons/blob/c3ea563b8ea08ecb85eab84cb587192dcf30d532/rollup.config.js#L143
@@ -1897,8 +1918,7 @@ https://github.com/tabdon/tippyjs/blob/9cb3e54e590dacf17fdb74edd38fe555c1a9137d/
 https://github.com/tgrm/tgrm.github.io/blob/1ae1b3dc14211e0e1459612e2dad6738a5b15a76/rollup.config.mjs#L31
 
 
-//https://github.com/joomla-projects/custom-elements/tree/8b60e5a1d77082649028bc8453a84e80c592b47f/src/scss
-//https://github.com/joomla-projects/custom-elements/blob/8b60e5a1d77082649028bc8453a84e80c592b47f/rollup.config.mjs#L56
+
 
 //worker.js
 //https://github.com/frag-crypto/frag-core/blob/2b05ed856f4bafbc858d047dcc7cb1030bd60d7e/rollup.config.js#L21
