@@ -103,6 +103,10 @@ https://codepen.io/kevinalku/pen/gwWPWY
 |	ROLLUP												|
 |														|
 +-------------------------------------------------------+
+//   globals: globalsConfig,
+//https://github.com/bonlineza/b-lib/blob/012456056b5d89c2d433f04be8f4053fb2a8c1dc/rollup.config.js#L3
+Compiles all SCSS partials to CSS
+	https://github.com/ampproject/amp.dev/blob/15eff97e222e0a0af8f243ba0ca873041647da83/gulpfile.js/build.js#L44
 //https://github.com/nzzdev/ed-tech-components/blob/c9558a95ac25b149f83ef423678e92f37541f687/rollup.config.js#L84
 //https://github.com/aquent/vt-pattern-library/blob/1355a7f19a1e93172d6fe2cb345d64f895b21521/rollup.config.js#L29
 https://github.com/Sobotkama/umd-experiment/tree/master
@@ -746,8 +750,7 @@ npm i postcss-calc@6.0.1
 	https://github.com/hashicorp/consul/blob/602e3c4fd50488c9044679c32364550bc7d49b29/ui/packages/consul-ui/ember-cli-build.js#L126
 	https://github.com/django-cms/django-cms/blob/9e56597077e7726f7e98c4fc0a5e2984d6303878/gulpfile.js#L146
 	
-	Compiles all SCSS partials to CSS
-	https://github.com/ampproject/amp.dev/blob/15eff97e222e0a0af8f243ba0ca873041647da83/gulpfile.js/build.js#L44
+	
 	
 	https://stefaniefluin.medium.com/the-new-sass-module-system-out-with-import-in-with-use-e1bd8ba032d0
 	
@@ -762,7 +765,6 @@ npm i postcss-calc@6.0.1
 	https://github.com/guardian/interactive-cancer-town/tree/bbd481212d5d49a0349fc75358749f8952180f01/src/js
 	icon.scss,postcss-modules-scope,postcss-modules-values,postcss-modules-parser
 	https://github.com/marcintreder/polaris-react/blob/71fb4730dff2b5a24dc70a422d2975dad161b2f8/config/rollup/plugins/styles.js#L13
-	https://github.com/aquent/vt-pattern-library/blob/1355a7f19a1e93172d6fe2cb345d64f895b21521/rollup.config.js#L11
 	
 	
 	// .scss/.sass processor
@@ -1592,9 +1594,7 @@ npm i postcss-calc@6.0.1
 	https://github.com/hashicorp/consul/blob/602e3c4fd50488c9044679c32364550bc7d49b29/ui/packages/consul-ui/ember-cli-build.js#L126
 	https://github.com/django-cms/django-cms/blob/9e56597077e7726f7e98c4fc0a5e2984d6303878/gulpfile.js#L146
 	
-	Compiles all SCSS partials to CSS
-	https://github.com/ampproject/amp.dev/blob/15eff97e222e0a0af8f243ba0ca873041647da83/gulpfile.js/build.js#L44
-	
+
 	https://stefaniefluin.medium.com/the-new-sass-module-system-out-with-import-in-with-use-e1bd8ba032d0
 	
 	//sso-profile extract to separate file
@@ -1608,7 +1608,7 @@ npm i postcss-calc@6.0.1
 	https://github.com/guardian/interactive-cancer-town/tree/bbd481212d5d49a0349fc75358749f8952180f01/src/js
 	icon.scss,postcss-modules-scope,postcss-modules-values,postcss-modules-parser
 	https://github.com/marcintreder/polaris-react/blob/71fb4730dff2b5a24dc70a422d2975dad161b2f8/config/rollup/plugins/styles.js#L13
-	https://github.com/aquent/vt-pattern-library/blob/1355a7f19a1e93172d6fe2cb345d64f895b21521/rollup.config.js#L11
+
 	
 	
 	// .scss/.sass processor
@@ -1941,8 +1941,7 @@ https://github.com/tgrm/tgrm.github.io/blob/1ae1b3dc14211e0e1459612e2dad6738a5b1
 //https://github.com/mediagoom/chunk-upload/tree/1cecec552ca5c224282ca77726f8daa00e98e338/src/core
 //createDirectoryIfDoesNotExist
 //https://github.com/idank/theme-bulma/blob/1433d994ba9d25c89fcae784e572e9e445fd5978/rollup.config.js#L27
-//   globals: globalsConfig,
-//https://github.com/bonlineza/b-lib/blob/012456056b5d89c2d433f04be8f4053fb2a8c1dc/rollup.config.js#L3
+
 //https://github.com/genadis/shepherd/blob/a87a80c9f869616660a2166f92898e731c95ebe1/rollup.config.js#L38
 //  extensions: ['.png', '.svg']
 //https://github.com/bonedaddy/splinter/blob/015e1317a3167db01f44c7add6624fe61e338dcd/canopy/design-system/rollup.config.js#L49
