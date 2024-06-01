@@ -103,8 +103,26 @@ https://codepen.io/kevinalku/pen/gwWPWY
 |	ROLLUP												|
 |														|
 +-------------------------------------------------------+
+https://github.com/cocopon/tweakpane/blob/55631021a0e27dfedff9fb72b3fb39abccf10206/packages/tweakpane/rollup.config.js#L19
+
+https://github.com/ryersondmp/sa11y/blob/f12d7712fe7e96e2d16b7bfaf9f44553bb76ea7d/rollup.config.js#L6
+//https://github.com/zambezi/ez-build/blob/d7f110b3cf136a3a6905d1c3723104a74ca1e5b8/src/builder/css.js#L17
+// cssnano({ preset: ['advanced', { discardComments: { removeAll: true } }] })
+https://github.com/tgrm/tgrm.github.io/blob/1ae1b3dc14211e0e1459612e2dad6738a5b15a76/rollup.config.mjs#L31
+//worker.js
+//https://github.com/frag-crypto/frag-core/blob/2b05ed856f4bafbc858d047dcc7cb1030bd60d7e/rollup.config.js#L21
+
+//https://github.com/acurrieclark/html-placeholder/blob/756c6c68cc223e5a409e06070180e8503a751ee7/rollup.config.js#L6
+
+//https://github.com/dan2dev/mongox/blob/f97b1e94c617cb555a7ae7e4bffa1ee4e76d4f24/rollup.config.js#L40
+//createDirectoryIfDoesNotExist
+//https://github.com/idank/theme-bulma/blob/1433d994ba9d25c89fcae784e572e9e445fd5978/rollup.config.js#L27
+
 //   globals: globalsConfig,
 //https://github.com/bonlineza/b-lib/blob/012456056b5d89c2d433f04be8f4053fb2a8c1dc/rollup.config.js#L3
+//https://github.com/genadis/shepherd/blob/a87a80c9f869616660a2166f92898e731c95ebe1/rollup.config.js#L38
+//  extensions: ['.png', '.svg']
+//https://github.com/bonedaddy/splinter/blob/015e1317a3167db01f44c7add6624fe61e338dcd/canopy/design-system/rollup.config.js#L49
 Compiles all SCSS partials to CSS
 	https://github.com/ampproject/amp.dev/blob/15eff97e222e0a0af8f243ba0ca873041647da83/gulpfile.js/build.js#L44
 //https://github.com/nzzdev/ed-tech-components/blob/c9558a95ac25b149f83ef423678e92f37541f687/rollup.config.js#L84
@@ -1768,9 +1786,7 @@ https://github.com/V4Fire/Client/blob/cd68556213e3325057a0c5d9ba5212f3049d44aa/c
 https://github.com/zkreations/hamlet/blob/bc388a9c88d07b56a03fdbe29a10002da5301d16/app.js#L417
 
 
-https://github.com/cocopon/tweakpane/blob/55631021a0e27dfedff9fb72b3fb39abccf10206/packages/tweakpane/rollup.config.js#L19
 
-https://github.com/ryersondmp/sa11y/blob/f12d7712fe7e96e2d16b7bfaf9f44553bb76ea7d/rollup.config.js#L6
 https://github.com/cehfisher/a11y-style-guide/tree/main
 https://github.com/qq15725/veno-ui/blob/0462751e0662262ef2f7bd7d59fa64ffb7872190/scripts/rollup.config.ts#L8
 
@@ -1873,7 +1889,7 @@ https://github.com/addyosmani/critical/blob/4c15c1edc70afacf553df3a8d5b2ec568e7a
 ////	17_02_2024							////
 ////										////
 ////////////////////////////////////////////////
- //https://github.com/zambezi/ez-build/blob/d7f110b3cf136a3a6905d1c3723104a74ca1e5b8/src/builder/css.js#L17
+ 
 //https://github.com/niksy/css-loader/blob/0c8a23b48521656d8f2ea4c14108b44882ecb0f2/src/plugins/postcss-url-parser.js#L107
 //https://github.com/alexsasharegan/vue-flex/blob/master/rollup.config.js
 //process(styles, { from: 'src' }
@@ -1901,48 +1917,8 @@ https://github.com/tabdon/tippyjs/blob/9cb3e54e590dacf17fdb74edd38fe555c1a9137d/
         })
         .then((result) => result.css),
 //https://github.com/nzzdev/Q-poll-result/blob/d8424a0849e7b6d3dbbd92f1673e54d4d48b0b98/sass.config.js#L3
-
-
-
-   processor: css =>
-                postcss(
-                    cssImport(),
-                    autoprefixer({ remove: true }),
-                    cssnano({ preset: ['advanced', { discardComments: { removeAll: true } }] })
-                )
-                    .process(css, { from: undefined })
-                    .then(
-                        c =>
-                            new Promise((resolve, reject) =>
-                                //@ts-ignore
-                                uncss(template('', ''), { raw: c.css }, (err, output) => {
-                                    if (err) {
-                                        reject(err);
-                                    } else {
-                                        resolve((style = output));
-                                    }
-                                })
-                            )
-                    )
-        }),
-https://github.com/tgrm/tgrm.github.io/blob/1ae1b3dc14211e0e1459612e2dad6738a5b15a76/rollup.config.mjs#L31
-
-
-
-
-//worker.js
-//https://github.com/frag-crypto/frag-core/blob/2b05ed856f4bafbc858d047dcc7cb1030bd60d7e/rollup.config.js#L21
-
-//https://github.com/acurrieclark/html-placeholder/blob/756c6c68cc223e5a409e06070180e8503a751ee7/rollup.config.js#L6
-
-//https://github.com/dan2dev/mongox/blob/f97b1e94c617cb555a7ae7e4bffa1ee4e76d4f24/rollup.config.js#L40
-
-
 //https://github.com/mediagoom/chunk-upload/tree/1cecec552ca5c224282ca77726f8daa00e98e338/src/core
-//createDirectoryIfDoesNotExist
-//https://github.com/idank/theme-bulma/blob/1433d994ba9d25c89fcae784e572e9e445fd5978/rollup.config.js#L27
 
-//https://github.com/genadis/shepherd/blob/a87a80c9f869616660a2166f92898e731c95ebe1/rollup.config.js#L38
-//  extensions: ['.png', '.svg']
-//https://github.com/bonedaddy/splinter/blob/015e1317a3167db01f44c7add6624fe61e338dcd/canopy/design-system/rollup.config.js#L49
+
+
 
