@@ -7,8 +7,19 @@
 theory
 https://itnext.io/building-micro-frontend-applications-with-angular-elements-34483da08bcb
 https://trailheadtechnology.com/create-and-compile-web-components-in-angular-projects/
+https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements
+https://developer.mescius.com/wijmo/demos/Grid/Overview/angular
+https://medium.com/php-fad/discovering-web-components-11d924a26651
+https://onebitahead.medium.com/dont-reinvent-the-wheel-use-white-label-web-components-fa57fa54cc15
 
+//base component BaseComponent container/fixtures/comp1.js
+https://github.com/NAUMEN-GP/formio.js/blob/8c0a5afd16788c1b968eef3131c84074bf72055b/src/components/base/Base.js
+//tagname
+https://github.com/auxfuse/hackathon-git-labs/blob/f018d6f715200c2884cec5cd63694552fbdd1629/assets/js/components/slideshow/slideshow.js
+https://github.com/knowthelist/ftui/blob/master/www/ftui/components/element.component.js#L15
+https://github.com/SDFIdk/skraafoto_frontend/tree/434818945f68b0af767a9fb060f9b3734854b55c/src/components
 
+https://github.com/lekoala/formidable-elements/blob/d2a37318847835935b112f3cf9e0128206426550/package.json
 https://github.com/JackovAlltrades/io/tree/master/src/elements/core
 https://github.com/esiur/iui/blob/1bcc7e0a64a256fe6beaaafed84982f639f079fc/src/Core/IUI.js#L24
 https://github.com/joomla-projects/custom-elements/tree/8b60e5a1d77082649028bc8453a84e80c592b47f/src/scss
@@ -19,27 +30,31 @@ https://github.com/namphongpt/tator/blob/master/main/static/js/components/tator-
 //dispatchEvent delegate
 https://github.com/cvisionai/tator/blob/9f8c05bad6f8b54ac0e76ba30619aba2c7b0f7e6/ui/src/js/components/inputs/text-input.js#L32
 https://github.com/TatShen/ToDoList/blob/dbb5c51b6a3072a482987579c5247696b2aea756/src/components/atoms/Input/Input.js
+//css only
 https://github.com/OnsenUI/OnsenUI/tree/90c0aeb2b2acadfefb66a3da038b6b09cfb5b9c8
 https://github.com/OHDSI/Perseus/blob/4267d0bbf27b607646efb9f6eb0fddcb07258b2b/UI/src/app/models/perseus/concept.ts
+//typescript wizard
 https://github.com/dotCMS/core/tree/a7af331b7361bffd039413a22bea7dbad7b3d03c/core-web
 https://github.com/SAP/openui5/blob/45da40f3b01ab7fea1f524eb84bca6c0bf907a5d/src/sap.ui.commons/src/sap/ui/commons/layout/MatrixLayoutRenderer.js
 https://github.com/dataformsjs/dataformsjs/tree/master/js/web-components
 https://github.com/UziTech/web-component-abstract/blob/ee2f2ba574538c27856a4ff545b9603b79483fe5/index.js#L8
 https://github.com/YufJi/tiny/blob/fe35eef306aa4cd53f85e1649bc1ce58935c8023/packages/base/src/webview/web-components/form.js
 https://github.com/akudev/ui5-webcomponents/blob/master/packages/main/src/TextArea.js
+//scss
 https://github.com/grandemayta/custom-element-pokemon-cards/tree/master/src
 //event bus
 https://github.com/trutoo/event-bus/blob/master/docs/react-component.js
 https://github.com/googlefonts/fontra/blob/d5975409067c947485f39f935bd9e302bca70afc/src/fontra/client/web-components/ui-list.js
-css.js
+//css.js, wizard, ziro-wizard.js
 https://github.com/megazear7/ziro-components/blob/885fbae4f8009b0ddad1e81ec722ef5c6d9555b8/src/ziro-input.js
 https://github.com/bit101/minicomps/blob/master/src/component.js
 https://github.com/sencha/extjs-grid-performance/blob/a97aa4c8fae22823fa81a6854c2f42ff4195dde1/client/src/wijmoGrid/WijmoFlexGridScrollComponent.js
-https://github.com/dataformsjs/dataformsjs/blob/9b7772c50b39df9068079bc7ba7049903ff57eea/js/web-components/data-list.js#L207
+
 https://github.com/jk2908/list-box/blob/1da0ae32b648d6abac4f3a8b5aab3a2e6e356251/src/ListBox.js#L11
+//scss 
 https://github.com/yued-fe/lulu/blob/787424ac57308df3d7ac3c237aae53ce9b8104ab/theme/hope/ui/Layout/list.js
 https://github.com/Memeticode/psm.custom-elements/blob/e1dc368a2478f8f387af707e473a932c6ddb5572/demo/index.html
-//rtl
+//rtl OverflowMenu
 https://github.com/jouni/j-elements/blob/d90428a5cdf263adadd284ef4c361a527404b71b/src/components/OverflowMenu.js#L117
 https://github.com/jeremenichelli/movies-web-components/tree/master/src
 //permission customElements
@@ -61,13 +76,11 @@ constructor(injector: Injector) {
   }
 https://github.com/CaptainCodeman/hn-webcomponents/tree/c3b14afa5db2cb5d3eb62f36252c973858a285fc?tab=readme-ov-file
 https://github.com/CaptainCodeman/gif-player/tree/54234731e58c579eda454bd5fb52eb453bd5abe5
-https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements
-https://developer.mescius.com/wijmo/demos/Grid/Overview/angular
+
 
 https://gist.github.com/morewry/6773dd2ba84b8a4b829ae8d2b82891b3
 https://github.com/angular/angular/issues/23732 (example-angular-elments-app - the consuming application)
-https://medium.com/php-fad/discovering-web-components-11d924a26651
-https://onebitahead.medium.com/dont-reinvent-the-wheel-use-white-label-web-components-fa57fa54cc15
+
 https://github.com/search?q=repo%3Avideojs%2Fvideo.js%20customElements&type=code
 https://github.com/mozilla/blurts-server/blob/ea176dc1b070db735e886da2ce886b8cbb5e1396/src/client/js/components/circleChart.js
 
@@ -83,13 +96,15 @@ assignedElements
 service_worker
 formAssociated
 https://github.com/orneryd/web-components/tree/f9257097f9c92a108ba2f94759acf6d329f303ae/src
-
+https://github.com/zooplus/zoo-web-components
 https://codepen.io/kevinalku/pen/gwWPWY
 +-------------------------------------------------------+
 |										======1======	|
 |	ROLLUP												|
 |														|
 +-------------------------------------------------------+
+//https://github.com/nzzdev/ed-tech-components/blob/c9558a95ac25b149f83ef423678e92f37541f687/rollup.config.js#L84
+//https://github.com/aquent/vt-pattern-library/blob/1355a7f19a1e93172d6fe2cb345d64f895b21521/rollup.config.js#L29
 https://github.com/Sobotkama/umd-experiment/tree/master
 https://github.com/taiga-family/taiga-ui/tree/6ad27708d773bffe95d414947dde80563758ebf4/projects/core/observables/test
 https://github.com/AntonLapshin/popup-validation/blob/master/src/rules.js
@@ -229,16 +244,12 @@ https://github.com/huicloud/mobile/tree/a60be075979cce8889f0610f67c17d6066d55fd4
 https://github.com/rafaelbatistamarcilio/js-spa/blob/master/src/app/core/base.component.js#L1
 //validationContext
 https://github.com/selbekk/calidation/tree/282f7f26fe30107208dc691a4c6a0785dc2e0909/src
-https://github.com/auxfuse/hackathon-git-labs/blob/f018d6f715200c2884cec5cd63694552fbdd1629/assets/js/components/slideshow/slideshow.js
-https://github.com/knowthelist/ftui/blob/master/www/ftui/components/element.component.js#L15
-https://github.com/SDFIdk/skraafoto_frontend/tree/434818945f68b0af767a9fb060f9b3734854b55c/src/components
+
 //components eventListener
 https://github.com/theFDBS/fdbs/blob/95b2ce58e9c74d3cab46e087c4710055a07a020e/resources/js/Classes/Editor/Editor.js
 https://github.com/npolar/mdc/blob/7eb5ed14637ee39c40fa6c7331033ac3ac312b0b/src/input/input.js
 
 
-//base component BaseComponent container/fixtures/comp1.js
-https://github.com/NAUMEN-GP/formio.js/blob/8c0a5afd16788c1b968eef3131c84074bf72055b/src/components/base/Base.js
 
 
 https://github.com/thepassle/generic-components/blob/0673ce240f2d53cf79de08a8bb471235e4211dce/generic-switch/GenericSwitch.js#L80
@@ -538,9 +549,6 @@ https://github.com/webzhou/mip2/blob/85fc126df3ff84b5dbb113d065ad56e80a6dcec1/pa
  querySelectorAll
   'input, textarea,  select,  checkbox,  radio,  file,  color,  date,  datetime-local,  email,  month,  number,  password,  search,  tel,  time,  url,  week
  https://github.com/mellambias/tienOn/blob/035b8657b9138c50c4d767a91785b0fd0181560e/public/dashboard/js/webComponents/Form.js
- https://github.com/dataformsjs/dataformsjs/tree/9b7772c50b39df9068079bc7ba7049903ff57eea
- 
- https://github.com/dataformsjs/dataformsjs/blob/9b7772c50b39df9068079bc7ba7049903ff57eea/js/web-components/i18n-service.js#L246
  
  
  
@@ -572,16 +580,16 @@ simple, responsive parallax scrolling effect.
 https://github.com/Dabolus/vanilla-pwa/tree/master/components
 
 
-https://github.com/UziTech/web-component-abstract/blob/master/index.js
+
 
 
 https://github.com/derikb/character-sheet-app/blob/69c3f58f7d6de38aa4b708d67223567432ed611d/src/components/Modal.js#L104
-https://github.com/esiur/iui/blob/1bcc7e0a64a256fe6beaaafed84982f639f079fc/src/Core/IUI.js#L24
+
 
 https://github.com/knowler/knowler.dev/tree/bff674795fb6eb2c2cea0817a4ef315eaf596f68/middleware
 https://github.com/search?q=repo%3Abobbyadamski%2FUmbraco.UI%20custom-elements.json&type=code
 https://github.com/YufJi/tiny/blob/fe35eef306aa4cd53f85e1649bc1ce58935c8023/packages/base/src/webview/web-components/form.js
-https://github.com/JackovAlltrades/io/tree/master/src/elements/core
+
 
 
 https://github.com/Dabolus/vanilla-pwa/tree/bd03984a2abbcd179cfd9ecd392477bc240fd966/components/dynamic-data
@@ -617,7 +625,7 @@ https://github.com/Esri/calcite-design-system/tree/40ba6f031c256a73dd8ada5526bd3
 https://github.com/JoernT/Fore/tree/843123286f8b88fe81ce47ced1122775e5e05bf6
 https://github.com/fis-components/components/tree/master
 https://github.com/elmsln/lrnwebcomponents/tree/6ff6962b0eec9688d507b44a5d77938ec08e3bb1/elements
-https://github.com/lekoala/formidable-elements/blob/d2a37318847835935b112f3cf9e0128206426550/package.json
+
 //injectStyles.js
 //bootstrap
 https://github.com/kiwix/kiwix-js/blob/11138ff5ca3c16f847e68864311d36b0b3ca3e63/rollup.config.js
@@ -1119,14 +1127,12 @@ https://github.com/huicloud/mobile/tree/a60be075979cce8889f0610f67c17d6066d55fd4
 https://github.com/rafaelbatistamarcilio/js-spa/blob/master/src/app/core/base.component.js#L1
 //validationContext
 https://github.com/selbekk/calidation/tree/282f7f26fe30107208dc691a4c6a0785dc2e0909/src
-https://github.com/auxfuse/hackathon-git-labs/blob/f018d6f715200c2884cec5cd63694552fbdd1629/assets/js/components/slideshow/slideshow.js
-https://github.com/knowthelist/ftui/blob/master/www/ftui/components/element.component.js#L15
-https://github.com/SDFIdk/skraafoto_frontend/tree/434818945f68b0af767a9fb060f9b3734854b55c/src/components
+
+
 //components eventListener
 https://github.com/theFDBS/fdbs/blob/95b2ce58e9c74d3cab46e087c4710055a07a020e/resources/js/Classes/Editor/Editor.js
 https://github.com/npolar/mdc/blob/7eb5ed14637ee39c40fa6c7331033ac3ac312b0b/src/input/input.js
-//base component BaseComponent 
-https://github.com/NAUMEN-GP/formio.js/blob/8c0a5afd16788c1b968eef3131c84074bf72055b/src/components/base/Base.js
+
 https://github.com/thepassle/generic-components/blob/0673ce240f2d53cf79de08a8bb471235e4211dce/generic-switch/GenericSwitch.js#L80
 
 
@@ -1270,12 +1276,12 @@ https://github.com/mozilla/blurts-server/blob/ea176dc1b070db735e886da2ce886b8cbb
 https://github.com/carbon-design-system/ibm-security/tree/8c57c28a6d37c928b0ce4472f876cc5d7afe1652/src/components
 
 https://github.com/derikb/character-sheet-app/blob/69c3f58f7d6de38aa4b708d67223567432ed611d/src/components/Modal.js#L104
-https://github.com/esiur/iui/blob/1bcc7e0a64a256fe6beaaafed84982f639f079fc/src/Core/IUI.js#L24
+
 
 https://github.com/knowler/knowler.dev/tree/bff674795fb6eb2c2cea0817a4ef315eaf596f68/middleware
 https://github.com/search?q=repo%3Abobbyadamski%2FUmbraco.UI%20custom-elements.json&type=code
 https://github.com/YufJi/tiny/blob/fe35eef306aa4cd53f85e1649bc1ce58935c8023/packages/base/src/webview/web-components/form.js
-https://github.com/JackovAlltrades/io/tree/master/src/elements/core
+
 
 
 https://github.com/Dabolus/vanilla-pwa/tree/bd03984a2abbcd179cfd9ecd392477bc240fd966/components/dynamic-data
@@ -1421,11 +1427,6 @@ https://github.com/webzhou/mip2/blob/85fc126df3ff84b5dbb113d065ad56e80a6dcec1/pa
  querySelectorAll
   'input, textarea,  select,  checkbox,  radio,  file,  color,  date,  datetime-local,  email,  month,  number,  password,  search,  tel,  time,  url,  week
  https://github.com/mellambias/tienOn/blob/035b8657b9138c50c4d767a91785b0fd0181560e/public/dashboard/js/webComponents/Form.js
- https://github.com/dataformsjs/dataformsjs/tree/9b7772c50b39df9068079bc7ba7049903ff57eea
- 
- https://github.com/dataformsjs/dataformsjs/blob/9b7772c50b39df9068079bc7ba7049903ff57eea/js/web-components/i18n-service.js#L246
- 
- 
  
  
  
@@ -1454,16 +1455,16 @@ simple, responsive parallax scrolling effect.
 https://github.com/Dabolus/vanilla-pwa/tree/master/components
 
 
-https://github.com/UziTech/web-component-abstract/blob/master/index.js
+
 
 
 https://github.com/derikb/character-sheet-app/blob/69c3f58f7d6de38aa4b708d67223567432ed611d/src/components/Modal.js#L104
-https://github.com/esiur/iui/blob/1bcc7e0a64a256fe6beaaafed84982f639f079fc/src/Core/IUI.js#L24
+
 
 https://github.com/knowler/knowler.dev/tree/bff674795fb6eb2c2cea0817a4ef315eaf596f68/middleware
 https://github.com/search?q=repo%3Abobbyadamski%2FUmbraco.UI%20custom-elements.json&type=code
 https://github.com/YufJi/tiny/blob/fe35eef306aa4cd53f85e1649bc1ce58935c8023/packages/base/src/webview/web-components/form.js
-https://github.com/JackovAlltrades/io/tree/master/src/elements/core
+
 
 
 https://github.com/Dabolus/vanilla-pwa/tree/bd03984a2abbcd179cfd9ecd392477bc240fd966/components/dynamic-data
@@ -1499,7 +1500,7 @@ https://github.com/Esri/calcite-design-system/tree/40ba6f031c256a73dd8ada5526bd3
 https://github.com/JoernT/Fore/tree/843123286f8b88fe81ce47ced1122775e5e05bf6
 https://github.com/fis-components/components/tree/master
 https://github.com/elmsln/lrnwebcomponents/tree/6ff6962b0eec9688d507b44a5d77938ec08e3bb1/elements
-https://github.com/lekoala/formidable-elements/blob/d2a37318847835935b112f3cf9e0128206426550/package.json
+
 //injectStyles.js
 //bootstrap
 https://github.com/kiwix/kiwix-js/blob/11138ff5ca3c16f847e68864311d36b0b3ca3e63/rollup.config.js
@@ -1946,5 +1947,3 @@ https://github.com/tgrm/tgrm.github.io/blob/1ae1b3dc14211e0e1459612e2dad6738a5b1
 //  extensions: ['.png', '.svg']
 //https://github.com/bonedaddy/splinter/blob/015e1317a3167db01f44c7add6624fe61e338dcd/canopy/design-system/rollup.config.js#L49
 
-//https://github.com/nzzdev/ed-tech-components/blob/c9558a95ac25b149f83ef423678e92f37541f687/rollup.config.js#L84
-//https://github.com/aquent/vt-pattern-library/blob/1355a7f19a1e93172d6fe2cb345d64f895b21521/rollup.config.js#L29
