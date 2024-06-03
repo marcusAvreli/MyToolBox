@@ -13,7 +13,10 @@ https://medium.com/php-fad/discovering-web-components-11d924a26651
 https://onebitahead.medium.com/dont-reinvent-the-wheel-use-white-label-web-components-fa57fa54cc15
 https://stackoverflow.com/questions/55080103/how-to-separate-web-components-to-individual-files-and-load-them
 https://stefaniefluin.medium.com/the-new-sass-module-system-out-with-import-in-with-use-e1bd8ba032d0
+https://onebitahead.medium.com/dont-reinvent-the-wheel-use-white-label-web-components-fa57fa54cc15
 
+
+https://github.com/hironichu/nexplorer/blob/689b1b8f7b33d020141e0abe84ee688e6969ebba/src/components/Explorer.js#L212
 HTMLCollection
 customElements
 middleware
@@ -100,21 +103,14 @@ https://github.com/CaptainCodeman/gif-player/tree/54234731e58c579eda454bd5fb52eb
 https://gist.github.com/morewry/6773dd2ba84b8a4b829ae8d2b82891b3
 https://github.com/angular/angular/issues/23732 (example-angular-elments-app - the consuming application)
 
-https://github.com/search?q=repo%3Avideojs%2Fvideo.js%20customElements&type=code
+//video player html5 javascript
+https://github.com/videojs/video.js/blob/a10d25861daec1132dce5805615346d6d0c0ef87/rollup.config.js
 https://github.com/mozilla/blurts-server/blob/ea176dc1b070db735e886da2ce886b8cbb5e1396/src/client/js/components/circleChart.js
 
 saveAndClose,cancel,save, xlsx excel
 https://github.com/pavlism/karaoke/blob/fe791fa336a87efdeb35d4875a1f7d420bb46bf4/public/components/mrp-form.js#L28
 
 
-HTMLCollection
-customElements
-middleware
-generate custom-elements.json
-assignedElements 
-service_worker
-formAssociated
-https://github.com/orneryd/web-components/tree/f9257097f9c92a108ba2f94759acf6d329f303ae/src
 https://github.com/zooplus/zoo-web-components
 https://codepen.io/kevinalku/pen/gwWPWY
 +-------------------------------------------------------+
@@ -129,12 +125,25 @@ theory
 	https://github.com/uktrade/great-cms/blob/23a600632245337c53595334114be333538b115b/react-components/webpack.config.js#L91
 	//css.js tabulator rollup
 https://github.com/BiologicalRecordsCentre/brc-ds-eval/blob/4a1ed461fcca03f4aefecdd3c466a0f7c96a528b/src/phenology.js
+// removes all tabulator css except for tabulator.min.css and tabulator_semanticui.min.css
+https://github.com/mozilla/fireblocks/blob/3f0c3c69cbab9805040150d4ef25e144df167d46/builder_helper.js#L56
+rollup class export default class Bundler license bunner
+https://github.com/diopputra/NS-Optimizer/blob/eeffba88112290e136f6b6f265b55f03db28d6e7/script/libs/tabulator-master/build/Bundler.js#L9
 rollup
 https://github.com/mockingbot/mb-color-picker/blob/ef347f1120939a50a4f3ce52abc879b3249914f4/rollup.config.js#L4
 https://github.com/AdguardTeam/Scriptlets/blob/b920af01efbe8b867c00b0da5ddbd2d6f83ddb80/rollup.config.js#L4
+https://github.com/tastejs/todomvc/blob/feccc2de4bf7a6a7829e0520e4c015ce84a2e6d5/examples/preact/rollup.config.js#L4
+//injectStyles.js
+//bootstrap
+https://github.com/kiwix/kiwix-js/blob/11138ff5ca3c16f847e68864311d36b0b3ca3e63/rollup.config.js
 //i18n
 https://github.com/opencollective/opencollective-frontend/blob/a63f7afb66413c451c7e89ffb92ac9576b054224/lib/guest-accounts.js
 https://github.com/cehfisher/a11y-style-guide/tree/main
+const fontMagician = require('postcss-font-magician'); magician
+https://github.com/briansunter/app-review-dashboard/blob/b4e3ba7ffc6c1bc8e21d771baf7c1231670972cc/rollup.config.js#L12
+//babel external tabulator
+https://github.com/rollup/rollup-plugin-babel/issues/162
+https://github.com/digital-blueprint/dispatch-app/blob/f5562bf8f8c728a6082b2136fe7440ff0cb9d9e5/rollup.config.js#L17
 https://github.com/qq15725/veno-ui/blob/0462751e0662262ef2f7bd7d59fa64ffb7872190/scripts/rollup.config.ts#L8
 https://github.com/lukemarsh/css/blob/d15fc8dc0fa3c3fdbe93d33de8c3a1f778170d47/script/dist.js#L27
 rollup.styles.js
@@ -204,9 +213,9 @@ rollup.styles.js
 	base 64
 	https://github.com/LeoCpii/heatmaps-client/blob/69e23d3cdb63c0256ff949e50e8bcf89ff7c4aa7/packages/shared/ui/rollup.config.js#L26
 	
-https://github.com/MasuqaT-NET/BlogExamples/blob/cd9e0fc4b8407b163d1566427f433a2813d06118/Web/WebComponents/lit-html-with-scss/src/components/scss-button.js#L6
 
-https://github.com/MasuqaT-NET/BlogExamples/blob/cd9e0fc4b8407b163d1566427f433a2813d06118/Web/WebComponents/lit-html-with-scss/src/components/scss-button.js#L6
+	https://github.com/MasuqaT-NET/BlogExamples/blob/cd9e0fc4b8407b163d1566427f433a2813d06118/Web/TypeScript/ts-in-es/rollup.config.js#L4
+
 
 stylelintrc  :host([repo-lang="SCSS"]) .lang-circle {
 https://github.com/search?q=repo%3Aelmsln%2Flrnwebcomponents+stylelintrc&type=code
@@ -542,7 +551,12 @@ https://github.com/ComiR/neos-development-collection/blob/e6c7bb9c528c46a2e55c46
 validation localization
 https://github.com/sha256/Pristine/tree/master
 https://github.com/CyberFlameGO/Hubzilla/tree/0140f9fe560b7cc0f65cbfc7988f6808b4dc1236/library/ace
-
+simple, responsive parallax scrolling effect.
+https://github.com/tsung-ju/parallax-background-image/tree/cc5f1e9138256ee41c088ce79993e730687e93a5
+text editor
+https://github.com/JiHong88/suneditor/blob/master/sample/index.html
+config.json
+https://github.com/autodesk-platform-services/aps-extensions
 
 +-------------------------------------------------------+
 |										======1======	|
@@ -560,6 +574,9 @@ https://github.com/CyberFlameGO/Hubzilla/tree/0140f9fe560b7cc0f65cbfc7988f6808b4
 |	COMPONENTS											|
 |														|
 +-------------------------------------------------------+
+clarity grape city
+https://github.com/noreason/grapesjs/blob/885d5bbdc01256b39841741b799c261640a0f436/src/dom_components/model/ComponentLink.js
+https://github.com/btargac/excel-parser-processor/tree/c7e95eabad2f73fcb813b58f236155bd01911847/src
 https://github.com/rhanb/nativescript-fancy-calendar
 https://github.com/carbon-design-system/ibm-security/tree/8c57c28a6d37c928b0ce4472f876cc5d7afe1652/src/components
 dropdown.js	snackbar.js	tabs.js	tooltip.js WEBPACK
@@ -583,7 +600,7 @@ https://github.com/selbekk/calidation/tree/282f7f26fe30107208dc691a4c6a0785dc2e0
 //components eventListener
 https://github.com/theFDBS/fdbs/blob/95b2ce58e9c74d3cab46e087c4710055a07a020e/resources/js/Classes/Editor/Editor.js
 https://github.com/npolar/mdc/blob/7eb5ed14637ee39c40fa6c7331033ac3ac312b0b/src/input/input.js
-
+https://github.com/carbon-design-system/carbon/blob/e277b2b7cf514dc833334ac11954445efa7577db/packages/styles/tasks/build-css.js#L75
 
 
 
@@ -616,13 +633,12 @@ https://github.com/Mercerenies/pan-unicode-lang/blob/5488b021bc1179da131a1120644
 https://github.com/koromerzhin/labstag/blob/25671a7609a83910381d92265b840e9e308bd5dd/assets/js/global/elements/input/InputCity.js
 
 
-text editor
-https://github.com/JiHong88/suneditor/blob/master/sample/index.html
+
 select combo
 https://github.com/orchidjs/tom-select/blob/master/src/tom-select.ts
-https://github.com/kbrgl/gatsby/tree/1f5e6fc68a6e54b7fbaacca768cc0233fa0c56ee/www/src/components/layout
-clarity grape city
-https://github.com/noreason/grapesjs/blob/885d5bbdc01256b39841741b799c261640a0f436/src/dom_components/model/ComponentLink.js
+
+
+
 core start server listent to events
 	https://github.com/hapijs/hapi/blob/master/lib/core.js
 validator
@@ -865,7 +881,7 @@ https://github.com/webzhou/mip2/blob/85fc126df3ff84b5dbb113d065ad56e80a6dcec1/pa
  https://github.com/roxiness/routify.dev/tree/d8ac6e67858752ff1eb2a350a4a2116c4945c7b5/scss
  https://github.com/EthereansOS/Interfaces-Framework/tree/9045f91627ea7aeaec1b3945c8a00d343e2973ba/packages/components
  
- https://github.com/nocestore/gatsby/blob/6864a08c240090ecadba19dd8573e51facb792b0/packages/components/static/fonts.css
+ 
  
  
  customElements
@@ -880,32 +896,6 @@ https://github.com/vuetifyjs/vuetify/blob/d1251f50f2d85b34c06c65895bd2d2b82bdd41
 
 https://github.com/kode-team/codemirror-colorpicker/blob/f73b1638be8dad4b9d9b2ea7521308b7e136ee53/package.json
 
-https://github.com/tsung-ju/parallax-background-image/tree/cc5f1e9138256ee41c088ce79993e730687e93a5
-simple, responsive parallax scrolling effect.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-HTMLCollection
-customElements
-middleware
-generate custom-elements.json
-assignedElements 
-service_worker
-formAssociated
-https://github.com/orneryd/web-components/tree/f9257097f9c92a108ba2f94759acf6d329f303ae/src
 bindEvents
 https://coryrylan.com/blog/using-web-components-in-angular-forms-with-element-internals
 ngDefaultControl
@@ -924,10 +914,7 @@ https://github.com/JoernT/Fore/tree/843123286f8b88fe81ce47ced1122775e5e05bf6
 https://github.com/fis-components/components/tree/master
 https://github.com/elmsln/lrnwebcomponents/tree/6ff6962b0eec9688d507b44a5d77938ec08e3bb1/elements
 
-//injectStyles.js
-//bootstrap
-https://github.com/kiwix/kiwix-js/blob/11138ff5ca3c16f847e68864311d36b0b3ca3e63/rollup.config.js
-https://github.com/videojs/video.js/blob/6fe68e5dad6853d8f0eaf45534873607c1b32277/rollup.config.js#L18
+
 
 //babel external tabulator
 https://github.com/marcellourbani/vscode_abap_remote_fs/blob/cf89d4746852efa09a9b2d096b70a6660523d54d/client/media/query.js#L9
@@ -963,22 +950,11 @@ https://github.com/rollup/rollup-plugin-babel/issues/162
 https://github.com/digital-blueprint/dispatch-app/blob/f5562bf8f8c728a6082b2136fe7440ff0cb9d9e5/rollup.config.js#L17
 https://github.com/geospiza-fortis/owlrepo-client/blob/526d721ea7efef0e07f69772d4b59cae4e69ac79/vite.config.js#L6
 
-https://github.com/lucavallin/verto/blob/aab7dfaa007760317644be8ee31180536e45a2f8/config.json#L1123
-config.json
-https://github.com/autodesk-platform-services/aps-extensions
-https://github.com/btargac/excel-parser-processor/tree/c7e95eabad2f73fcb813b58f236155bd01911847/src
+
+
+
+
 https://github.com/statgen/bravo_vue/issues/1
-
-rollup class export default class Bundler license bunner
-https://github.com/diopputra/NS-Optimizer/blob/eeffba88112290e136f6b6f265b55f03db28d6e7/script/libs/tabulator-master/build/Bundler.js#L9
-https://github.com/jorgeatgu/ringlera/tree/c2f6f72fee6afe70ac6c7940b5d497830125b7ed
-
-const fontMagician = require('postcss-font-magician'); magician
-https://github.com/briansunter/app-review-dashboard/blob/b4e3ba7ffc6c1bc8e21d771baf7c1231670972cc/rollup.config.js#L12
-
-// removes all tabulator css except for tabulator.min.css and tabulator_semanticui.min.css
-https://github.com/mozilla/fireblocks/blob/3f0c3c69cbab9805040150d4ef25e144df167d46/builder_helper.js#L56
-
 
 https://github.com/tastejs/todomvc/blob/efafb5843a52fad8b465f642ee8d5d980ad1ac4d/examples/web-components/src/components/todo-bottombar/todo-bottombar.component.js
 https://github.com/textpattern/textpattern
@@ -1025,7 +1001,6 @@ npm i postcss-calc@6.0.1
 	
 	https://github.com/schrodinger/fixed-data-table-2/blob/081b363ac6f1a733e1c395e29dc891969e3a7e67/build_helpers/cssRollup.config.js
 	
-	https://github.com/globeandmail/chart-tool/tree/master/src
 	
 	
 	
@@ -1033,8 +1008,9 @@ npm i postcss-calc@6.0.1
 	
 	
 	
-	https://github.com/hironichu/nexplorer/blob/689b1b8f7b33d020141e0abe84ee688e6969ebba/src/components/Explorer.js#L212
-	https://github.com/hashicorp/consul/blob/602e3c4fd50488c9044679c32364550bc7d49b29/ui/packages/consul-ui/ember-cli-build.js#L126
+	
+	
+	
 	https://github.com/django-cms/django-cms/blob/9e56597077e7726f7e98c4fc0a5e2984d6303878/gulpfile.js#L146
 	
 	
@@ -1102,9 +1078,9 @@ npm i postcss-calc@6.0.1
 https://github.com/zotero/zotero/blob/147ed028dfe237087998b233c55eb7b8934d4710/.eslintrc
 https://github.com/iamparnab/html-custom-elements
 https://github.com/imdwpeng/bpmn-editor/blob/a7ce5cc511262d5803f27b2a514a0e5e76053397/custom-elements/src/containers/modeler/customElements/CustomRenderer.js#L16
-https://github.com/MasuqaT-NET/BlogExamples/blob/cd9e0fc4b8407b163d1566427f433a2813d06118/Web/WebComponents/lit-html-with-scss/src/components/scss-button.js#L6
 
-https://github.com/MasuqaT-NET/BlogExamples/blob/cd9e0fc4b8407b163d1566427f433a2813d06118/Web/WebComponents/lit-html-with-scss/src/components/scss-button.js#L6
+
+
 
 stylelintrc  :host([repo-lang="SCSS"]) .lang-circle {
 https://github.com/search?q=repo%3Aelmsln%2Flrnwebcomponents+stylelintrc&type=code
@@ -1249,7 +1225,7 @@ https://github.com/WatchGamingVideos/deckdeckgo/blob/47914ebb847546f1d84de90e8ad
 
 
 
-https://github.com/orneryd/web-components/blob/f9257097f9c92a108ba2f94759acf6d329f303ae/src/loaders/html-loader.js#L137
+
 
 
 https://github.com/ptzagk/rollup-plugin-scss-smart-asset/blob/9dc02f26f419954be399257e8887435af0a90ac6/lib/index.js#L38
@@ -1323,7 +1299,7 @@ https://github.com/NightCatSama/My-Animate/tree/2e78df0a72ff9cd1ee6c1ea884742ffe
 
 https://github.com/palantir/blueprint/blob/5481181c4e48e8006f612a8bdaad46fecd57bb44/packages/node-build-scripts/css-dist.mjs#L8
 
-https://github.com/carbon-design-system/carbon/blob/e277b2b7cf514dc833334ac11954445efa7577db/packages/styles/tasks/build-css.js#L75
+
 
 base64
 https://github.com/langhuihui/jessibuca/blob/02897b1a583a3fabfe8ccfcec74249e6dd8f72ff/rollup.config.js#L87
@@ -1444,9 +1420,8 @@ https://github.com/AiviksIQ/JS-library/tree/master/src/js
 
 select combo
 https://github.com/orchidjs/tom-select/blob/master/src/tom-select.ts
-https://github.com/kbrgl/gatsby/tree/1f5e6fc68a6e54b7fbaacca768cc0233fa0c56ee/www/src/components/layout
-clarity grape city
-https://github.com/noreason/grapesjs/blob/885d5bbdc01256b39841741b799c261640a0f436/src/dom_components/model/ComponentLink.js
+
+
 core start server listent to events
 	https://github.com/hapijs/hapi/blob/master/lib/core.js
 validator
@@ -1462,7 +1437,7 @@ submenu
 https://github.com/SuryaSankar/listree/tree/master
  data.vertical = this.attr("orient") === "vertical" || data.vertical;
 https://github.com/Formstone/Formstone/tree/master/src/js
-https://github.com/10up/component-library/tree/develop/packages
+
 https://github.com/mzusin/toolcool-range-slider/tree/main/src/core/domain
 https://github.com/AiviksIQ/JS-library/tree/master/src/js
 https://github.com/whoisjuan/Reusable-Component-JS-Challenge/tree/master/datagrid/js
@@ -1523,8 +1498,7 @@ https://github.com/vladkvn/custom-excel/blob/a92c723d8c4d83d417bb75a5976543671f1
 
 https://github.com/YisusYaro/node-ddd-example/tree/02c63a0733df1d897e91095c722c6c681bb19ea0/src/shared/infrastructure
 
-chart
-https://github.com/geyixia/Smart-City/blob/377b416117e275e0d53008ee2fe304c32ab7a950/src/charts/index.js
+
 
 
 
@@ -1547,18 +1521,6 @@ constructor(injector: Injector) {
 
 https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements
 https://developer.mescius.com/wijmo/demos/Grid/Overview/angular
-
-https://gist.github.com/morewry/6773dd2ba84b8a4b829ae8d2b82891b3
-https://github.com/angular/angular/issues/23732 (example-angular-elments-app - the consuming application)
-https://medium.com/php-fad/discovering-web-components-11d924a26651
-https://onebitahead.medium.com/dont-reinvent-the-wheel-use-white-label-web-components-fa57fa54cc15
-https://github.com/search?q=repo%3Avideojs%2Fvideo.js%20customElements&type=code
-https://github.com/mozilla/blurts-server/blob/ea176dc1b070db735e886da2ce886b8cbb5e1396/src/client/js/components/circleChart.js
-https://github.com/carbon-design-system/ibm-security/tree/8c57c28a6d37c928b0ce4472f876cc5d7afe1652/src/components
-
-
-
-
 
 
 
@@ -1604,26 +1566,10 @@ https://github.com/topcoder-platform/topcoder-x-ui/blob/075ddbd346a85e25f0cf6ec7
  object assign
  https://github.com/devilwjp/veaury/blob/60e3631802f12c3dd7262d9e95dd91fa0070bf01/rollup.config.js#L2
  
-    "rollup": "^0.66.6", rollup-plugin-typescript2
- https://github.com/Festify/app/blob/6029a3964a15cd3f55b89aa5a5e45e108cd3b72a/package.json
+"rollup": "^0.66.6", rollup-plugin-typescript2
+https://github.com/Festify/app/blob/6029a3964a15cd3f55b89aa5a5e45e108cd3b72a/package.json
  
  https://github.com/melodyWxy/melody-core-utils/blob/8be6575c10bbb7c823ae8d14ccbb17337447dd64/config/rollup.config.dev.js#L3
- 
- 
-
-
-npm add -D cssnano@3.9.1 livereload@0.6.0 npm-run-all@3.1.2 postcss-cssnext@2.9.0 postcss-nested@1.0.0 postcss-simple-vars@3.0.0 
-
-https://www.sensedeep.com/blog/posts/2021/how-to-create-single-source-npm-module.html
-https://github.com/sensedeep/dynamodb-onetable/blob/main/src/index.js
-npm i -S choices-module@file:../../nodeJSDev/my-choices
-npm i -S mycomponents@file:../../nodeJSDev/myComponents
-npm i -S webcomponents@file:../../nodeJSDev/webcomponents
-npm i -S webcomponents2@file:../../nodeJSDev/webcomponents2
-npm i -S webcomponents3@file:../../nodeJSDev/webcomponents3
-npm i clean-css@^4
-npm i html-minifier@^3
-npm i cross-env@^5
 
 npm i -S myzoo@file:../../nodeJSDev/myzoo
 
@@ -1639,7 +1585,7 @@ https://github.com/webzhou/mip2/blob/85fc126df3ff84b5dbb113d065ad56e80a6dcec1/pa
   https://github.com/knownasilya/rss-reader-example-app/tree/0d6929e74de4e6802586e6d7655046ac89dc87b7/static
  https://github.com/EduardoRFS/flow/blob/30f3641e546cb1b9d1daf574990ba5197bae777e/lib/serviceworkers.js
  https://github.com/tangleMesh/base-class/blob/74f87881bd279c3bd230830b951320ae9eeaddf3/scripts/server/component-renderer.js
- https://github.com/tsung-ju/parallax-background-image/blob/cc5f1e9138256ee41c088ce79993e730687e93a5/src/parallax-element.js#L2
+ 
  https://github.com/googlefonts/fontra/blob/main/src/fontra/client/core/html-utils.js#L6
  https://github.com/SVG-Edit/svgedit/blob/19403a275550dd7ebc2f62359de5094728ec4511/src/editor/components/seZoom.js
  
@@ -1652,14 +1598,13 @@ https://github.com/webzhou/mip2/blob/85fc126df3ff84b5dbb113d065ad56e80a6dcec1/pa
  querySelectorAll
   'input, textarea,  select,  checkbox,  radio,  file,  color,  date,  datetime-local,  email,  month,  number,  password,  search,  tel,  time,  url,  week
  https://github.com/mellambias/tienOn/blob/035b8657b9138c50c4d767a91785b0fd0181560e/public/dashboard/js/webComponents/Form.js
- 
- 
+  
  
  https://github.com/bitifet/SmarkForm/blob/bd3940e7bd89500ec2d4b515f8da6acefbae5b9c/src/main.js
  https://github.com/roxiness/routify.dev/tree/d8ac6e67858752ff1eb2a350a4a2116c4945c7b5/scss
  https://github.com/EthereansOS/Interfaces-Framework/tree/9045f91627ea7aeaec1b3945c8a00d343e2973ba/packages/components
  
- https://github.com/nocestore/gatsby/blob/6864a08c240090ecadba19dd8573e51facb792b0/packages/components/static/fonts.css
+ 
  https://github.com/ComcastSamples/wc-components/blob/e5543f5e49cc10c42e58193af91f64dd2c2c084d/rollup.prod.config.js
  
  
@@ -1674,38 +1619,10 @@ https://github.com/webzhou/mip2/blob/85fc126df3ff84b5dbb113d065ad56e80a6dcec1/pa
  
 https://github.com/kode-team/codemirror-colorpicker/blob/f73b1638be8dad4b9d9b2ea7521308b7e136ee53/package.json
 
-https://github.com/tsung-ju/parallax-background-image/tree/cc5f1e9138256ee41c088ce79993e730687e93a5
-simple, responsive parallax scrolling effect.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-HTMLCollection
-customElements
-middleware
-generate custom-elements.json
-assignedElements 
-service_worker
-formAssociated
-https://github.com/orneryd/web-components/tree/f9257097f9c92a108ba2f94759acf6d329f303ae/src
 bindEvents
 https://coryrylan.com/blog/using-web-components-in-angular-forms-with-element-internals
 ngDefaultControl
-
-
-
-
-
 
 
 https://github.com/kode-team/codemirror-colorpicker/blob/f73b1638be8dad4b9d9b2ea7521308b7e136ee53/package.json
@@ -1717,55 +1634,5 @@ https://github.com/Esri/calcite-design-system/tree/40ba6f031c256a73dd8ada5526bd3
 
 https://github.com/elmsln/lrnwebcomponents/tree/6ff6962b0eec9688d507b44a5d77938ec08e3bb1/elements
 
-//injectStyles.js
-//bootstrap
-https://github.com/kiwix/kiwix-js/blob/11138ff5ca3c16f847e68864311d36b0b3ca3e63/rollup.config.js
-https://github.com/videojs/video.js/blob/6fe68e5dad6853d8f0eaf45534873607c1b32277/rollup.config.js#L18
 
-//babel external tabulator
-https://github.com/rollup/rollup-plugin-babel/issues/162
-https://github.com/digital-blueprint/dispatch-app/blob/f5562bf8f8c728a6082b2136fe7440ff0cb9d9e5/rollup.config.js#L17
 https://github.com/geospiza-fortis/owlrepo-client/blob/526d721ea7efef0e07f69772d4b59cae4e69ac79/vite.config.js#L6
-
-https://github.com/lucavallin/verto/blob/aab7dfaa007760317644be8ee31180536e45a2f8/config.json#L1123
-config.json
-https://github.com/autodesk-platform-services/aps-extensions
-https://github.com/btargac/excel-parser-processor/tree/c7e95eabad2f73fcb813b58f236155bd01911847/src
-https://github.com/statgen/bravo_vue/issues/1
-
-rollup class export default class Bundler license bunner
-https://github.com/diopputra/NS-Optimizer/blob/eeffba88112290e136f6b6f265b55f03db28d6e7/script/libs/tabulator-master/build/Bundler.js#L9
-https://github.com/jorgeatgu/ringlera/tree/c2f6f72fee6afe70ac6c7940b5d497830125b7ed
-
-const fontMagician = require('postcss-font-magician'); magician
-https://github.com/briansunter/app-review-dashboard/blob/b4e3ba7ffc6c1bc8e21d771baf7c1231670972cc/rollup.config.js#L12
-
-// removes all tabulator css except for tabulator.min.css and tabulator_semanticui.min.css
-https://github.com/mozilla/fireblocks/blob/3f0c3c69cbab9805040150d4ef25e144df167d46/builder_helper.js#L56
-
-
-
-
-
-
-
-https://github.com/tastejs/todomvc/blob/efafb5843a52fad8b465f642ee8d5d980ad1ac4d/examples/web-components/src/components/todo-bottombar/todo-bottombar.component.js
-https://github.com/textpattern/textpattern
-
-
-
-
-
-	https://github.com/linares/bigpipe/blob/c653a223d1c023851170e20bf324358f836d68a8/bigpipe.js#L345
-	
-	
-	https://github.com/globeandmail/chart-tool/tree/master/src
-	
-	
-	
-	
-	
-	
-	https://github.com/hironichu/nexplorer/blob/689b1b8f7b33d020141e0abe84ee688e6969ebba/src/components/Explorer.js#L212
-	https://github.com/hashicorp/consul/blob/602e3c4fd50488c9044679c32364550bc7d49b29/ui/packages/consul-ui/ember-cli-build.js#L126
-	
