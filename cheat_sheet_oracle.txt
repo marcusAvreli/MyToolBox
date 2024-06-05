@@ -640,6 +640,9 @@ where not exists (
 );
 
 
+
+
+
 +-------------------------------------------------------+
 |										======27======	|
 |		CHILD COLUMN IS CSV								|
@@ -670,6 +673,34 @@ regexp_count(t.orders, ',')+1
 )lines
 order by customer,
 lines.column_value;
+
+
+
++-------------------------------------------------------+
+|										======28======	|
+|		Populating Values using Merge Query				|
+|														|
++-------------------------------------------------------+
+
+
+
+MERGE
+
+INTO    Tab1 c
+
+USING   (select b.emp_reg_id ,a.emp_token_id
+
+from tab2 a , Tab3 b
+
+where a.emp_reg_id = b.emp_reg_id
+
+        ) st
+
+ON (c.emp_token_id = st.emp_token_id  )
+
+WHEN MATCHED THEN
+
+UPDATE SET c.emp_reg_id = st.emp_reg_id ;
 
 
 
