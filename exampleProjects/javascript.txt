@@ -881,17 +881,15 @@ https://github.com/ec-europa/europa-component-library/blob/v3-dev/src/implementa
 https://github.com/10up/component-library/tree/develop/packages
 //reducers components store redux
 https://github.com/Choices-js/Choices/tree/master/src/scripts/components
-https://github.com/m-schuetz/parametric_functions/blob/6f8877faacf84b91a1139bfbd3baf938a3738146/src/InputHandler.js#L161
-https://github.com/croquet/microverse/blob/c28fae161d51907be8550d7de314d668f5504633/src/worldcore/Input.js#L206
-https://github.com/Mercerenies/pan-unicode-lang/blob/5488b021bc1179da131a1120644dd22d0a06195c/js/unicode_input.js#L37
-https://github.com/koromerzhin/labstag/blob/25671a7609a83910381d92265b840e9e308bd5dd/assets/js/global/elements/input/InputCity.js
-
-dropdown.js	snackbar.js	tabs.js	tooltip.js
-https://github.com/AiviksIQ/JS-library/tree/master/src/js
 
 
-select combo
-https://github.com/orchidjs/tom-select/blob/master/src/tom-select.ts
+
+
+
+
+
+
+
 
 
 core start server listent to events
@@ -911,7 +909,7 @@ https://github.com/SuryaSankar/listree/tree/master
 https://github.com/Formstone/Formstone/tree/master/src/js
 
 https://github.com/mzusin/toolcool-range-slider/tree/main/src/core/domain
-https://github.com/AiviksIQ/JS-library/tree/master/src/js
+
 https://github.com/whoisjuan/Reusable-Component-JS-Challenge/tree/master/datagrid/js
 https://github.com/Mevrael/bunny
 https://github.com/y3un9/yui-component/tree/main/components
