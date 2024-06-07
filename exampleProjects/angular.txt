@@ -1,8 +1,8 @@
-+-----------------------------------------------------------+
-|															|
-|	ANGULAR UI	 											|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|														|
+|	ANGULAR UI	 										|
+|														|
++-------------------------------------------------------+
 
 
 https://github.com/UXAspects/UXAspects/blob/9a060e14c8a55351dd682107b6d1944fe126a9fc/src/package.json
@@ -11,11 +11,11 @@ RTL
 https://github.com/arenasjuanf/bancojj/blob/b947b2efb390a0293daadcab1f7a64a242823f51/src/app/app.service.ts#L14
 
 
-+-----------------------------------------------------------+
-|															|
-|	ANGULAR 4 NGRX 											|
-|															|
-+-----------------------------------------------------------+ 
++-------------------------------------------------------+
+|														|
+|	ANGULAR 4 NGRX 										|
+|														|
++-------------------------------------------------------+ 
 
 #CQRS NGRX ANGULAR 4
 	https://github.com/dancancro/great-big-example-application/blob/fc757ea6e862194deabb1fbb039fd4c6ca230010/src/main/webapp/app/core/store/index.ts#L27
