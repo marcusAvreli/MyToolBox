@@ -6,9 +6,14 @@
 theory
 //https://medium.com/@PepsRyuu/why-i-use-rollup-and-not-webpack-e3ab163f4fd3
 //
+//postcssModules
+https://stackoverflow.com/questions/60712566/nodejs-script-that-compiles-scss-files-fails-because-of-postcss-rule-for-undefin
+https://stackoverflow.com/questions/48730491/is-there-a-postcss-plugin-which-compiles-scss-to-cssgulp
+
+
 //sso-profile extract to separate file
-	https://github.com/uktrade/great-cms/blob/23a600632245337c53595334114be333538b115b/react-components/webpack.config.js#L91
-	//css.js tabulator rollup
+https://github.com/uktrade/great-cms/blob/23a600632245337c53595334114be333538b115b/react-components/webpack.config.js#L91
+//css.js tabulator rollup
 https://github.com/BiologicalRecordsCentre/brc-ds-eval/blob/4a1ed461fcca03f4aefecdd3c466a0f7c96a528b/src/phenology.js
 // removes all tabulator css except for tabulator.min.css and tabulator_semanticui.min.css
 https://github.com/mozilla/fireblocks/blob/3f0c3c69cbab9805040150d4ef25e144df167d46/builder_helper.js#L56
@@ -16,6 +21,8 @@ rollup class export default class Bundler license bunner
 https://github.com/diopputra/NS-Optimizer/blob/eeffba88112290e136f6b6f265b55f03db28d6e7/script/libs/tabulator-master/build/Bundler.js#L9
 rollup
 https://github.com/mockingbot/mb-color-picker/blob/ef347f1120939a50a4f3ce52abc879b3249914f4/rollup.config.js#L4
+
+
 https://github.com/AdguardTeam/Scriptlets/blob/b920af01efbe8b867c00b0da5ddbd2d6f83ddb80/rollup.config.js#L4
 https://github.com/tastejs/todomvc/blob/feccc2de4bf7a6a7829e0520e4c015ce84a2e6d5/examples/preact/rollup.config.js#L4
 //injectStyles.js
@@ -32,82 +39,69 @@ https://github.com/digital-blueprint/dispatch-app/blob/f5562bf8f8c728a6082b2136f
 https://github.com/qq15725/veno-ui/blob/0462751e0662262ef2f7bd7d59fa64ffb7872190/scripts/rollup.config.ts#L8
 https://github.com/lukemarsh/css/blob/d15fc8dc0fa3c3fdbe93d33de8c3a1f778170d47/script/dist.js#L27
 rollup.styles.js
-	https://github.com/Tencent/cherry-markdown/blob/afbf4a101bc6bef87a5f291044cc71b684b2209a/build/rollup.core.config.js
-	
-	gulp build rollup.dev prod
-	https://github.com/priley86/pf4-webcomponents-poc/blob/b2f81bdcbc088899651eeee8b2d0caef70917561/rollup.config.dev.js
-	https://github.com/buttons/github-buttons/blob/789e63cc5343dfaa884423902ebdfdc60038956e/rollup.config.mjs#L51
-	plugin styles
-	https://github.com/Shopify/polaris/tree/88c90b2dc50be0ef3ddf5002c0fba18bc1f128e8/polaris-react/config/rollup
-	
-	https://github.com/search?q=repo%3Agimenete%2Fcomponents%20index.scss&type=code
-	
-	https://github.com/open-nomie/nomie5/blob/401f9c720767851511b3ac5d29c5f3b20d5b877c/rollup.config.js#L71
-	
-	https://github.com/brick-design/brick-design/blob/9efc0a954366d5ef98eb3ec95b21bc91fc7e8999/scripts/create.rollup.config.js#L16
-	
-	https://github.com/schrodinger/fixed-data-table-2/blob/081b363ac6f1a733e1c395e29dc891969e3a7e67/build_helpers/cssRollup.config.js
-	
-//sso-profile extract to separate file
-	https://github.com/uktrade/great-cms/blob/23a600632245337c53595334114be333538b115b/react-components/webpack.config.js#L91
-	
-	https://github.com/SolarBear/Numenera-FoundryVTT/blob/9943fe54aa6256e017de8a50dd289c26d6f376ae/rollup.config.js#L4
-	
-	https://github.com/code-monki/central-supply-catalog/blob/21f820061d3b110d15e3e4bb8cbcfba7de0c39b0/.eleventy.js#L92
-	
-	https://github.com/zkreations/hamlet/blob/e5e89f9c64572ad2274f38883f0394e03b53e564/src/views/blank.hbs
-	https://github.com/guardian/interactive-cancer-town/tree/bbd481212d5d49a0349fc75358749f8952180f01/src/js
-	icon.scss,postcss-modules-scope,postcss-modules-values,postcss-modules-parser
-	https://github.com/marcintreder/polaris-react/blob/71fb4730dff2b5a24dc70a422d2975dad161b2f8/config/rollup/plugins/styles.js#L13
+https://github.com/Tencent/cherry-markdown/blob/afbf4a101bc6bef87a5f291044cc71b684b2209a/build/rollup.core.config.js
 
-	
-	
-	// .scss/.sass processor
-	https://github.com/ruige24601/jsv-compiler/blob/997b2c8f677438799445718621c852979100cc66/src/vue-pkg/compiler-sfc.cjs.js#L849
-	magic-string clientInjections css.js
-	https://github.com/Shouhua/note/blob/80d3f2de29e4cff2340d62911492b2b1e7bbfc6d/demo/rollup-demo/rollup-from-scratch/lib/bundle.js
-	
-	//postcssModules
-	https://stackoverflow.com/questions/60712566/nodejs-script-that-compiles-scss-files-fails-because-of-postcss-rule-for-undefin
-	https://stackoverflow.com/questions/48730491/is-there-a-postcss-plugin-which-compiles-scss-to-cssgulp
-	getJSON
-	https://github.com/VKCOM/VKUI/blob/09bf5d708c21d7c081663aa46b024cc5582d45dc/packages/vkui/scripts/postcss.js#L67
-	
-	https://github.com/prrashi/rateYo/blob/fd0b51fa62384307c48b03bd4a9777b3b3622efd/config/rollup.config.js#L4
-	https://github.com/arxpoetica/stallion/blob/44fdfad775b0cfbd019ae1c6feb8720de2b5957c/src/_server/build/rollup.preprocess.js#L4
-	
-	styleInjector: `~${resolve('build/style-injector.mjs')}`,
-	https://github.com/rei/rei-cedar-vue-2/blob/79a31718ccc4efa5235ae196a9ff625ccaa522ea/build/rollup-plugins.js#L83
-	
-	https://github.com/mediacms-io/mediacms/blob/c5047d8df8686d75100e5099489be4fd1bf5f733/frontend/packages/player/config/includes/rollup_builds.js#L11
-	
-	
-	
-	
+gulp build rollup.dev prod
+https://github.com/priley86/pf4-webcomponents-poc/blob/b2f81bdcbc088899651eeee8b2d0caef70917561/rollup.config.dev.js
+
+plugin styles
+https://github.com/Shopify/polaris/tree/88c90b2dc50be0ef3ddf5002c0fba18bc1f128e8/polaris-react/config/rollup
+
+https://github.com/open-nomie/nomie5/blob/401f9c720767851511b3ac5d29c5f3b20d5b877c/rollup.config.js#L71
+
+https://github.com/brick-design/brick-design/blob/9efc0a954366d5ef98eb3ec95b21bc91fc7e8999/scripts/create.rollup.config.js#L16
+
+https://github.com/schrodinger/fixed-data-table-2/blob/081b363ac6f1a733e1c395e29dc891969e3a7e67/build_helpers/cssRollup.config.js
+
+https://github.com/SolarBear/Numenera-FoundryVTT/blob/9943fe54aa6256e017de8a50dd289c26d6f376ae/rollup.config.js#L4
+
+https://github.com/code-monki/central-supply-catalog/blob/21f820061d3b110d15e3e4bb8cbcfba7de0c39b0/.eleventy.js#L92
+
+
+
+icon.scss,postcss-modules-scope,postcss-modules-values,postcss-modules-parser
+https://github.com/marcintreder/polaris-react/blob/71fb4730dff2b5a24dc70a422d2975dad161b2f8/config/rollup/plugins/styles.js#L13
+// .scss/.sass processor
+https://github.com/ruige24601/jsv-compiler/blob/997b2c8f677438799445718621c852979100cc66/src/vue-pkg/compiler-sfc.cjs.js#L849
+magic-string clientInjections css.js
+https://github.com/Shouhua/note/blob/80d3f2de29e4cff2340d62911492b2b1e7bbfc6d/demo/rollup-demo/rollup-from-scratch/lib/bundle.js
+
+
+getJSON
+https://github.com/VKCOM/VKUI/blob/09bf5d708c21d7c081663aa46b024cc5582d45dc/packages/vkui/scripts/postcss.js#L67
+
+https://github.com/prrashi/rateYo/blob/fd0b51fa62384307c48b03bd4a9777b3b3622efd/config/rollup.config.js#L4
+https://github.com/arxpoetica/stallion/blob/44fdfad775b0cfbd019ae1c6feb8720de2b5957c/src/_server/build/rollup.preprocess.js#L4
+
+
+https://github.com/mediacms-io/mediacms/blob/c5047d8df8686d75100e5099489be4fd1bf5f733/frontend/packages/player/config/includes/rollup_builds.js#L11
+
+
+
+
 //precss
-	https://github.com/acanedo/d2b/blob/9710bbe69fd637969e21297d3b2314732bd91c10/rollup.config.js#L5
-	
-	  swDest: "dist/service-worker.js",
-	https://github.com/Krigu/lurinfacts/blob/fc3cc2b83e3aa23fb90c6c9f4f0039b7bb1333cd/rollup.config.js#L34
-	
-	processAsCssModule
-	https://github.com/foxford/ulms-components/blob/2cff7b1a21915e9552059789b559444ae02bee5e/rollup.d/rollup.config.js#L35
-	// resolve node_modules, @import '~normalize.css/normalize.css'
-	https://github.com/andrewwhitehead/oceanfront/blob/c5d29e745eb29586494ed48bff409d620cba135c/packages/oceanfront/rollup.config.js#L147
-	https://github.com/stupidguy176/change-language/blob/969b187b5a80e5da70da41d8e790290d1a051a73/lib-change-language/rollup.config.js#L9
-	base 64
-	https://github.com/LeoCpii/heatmaps-client/blob/69e23d3cdb63c0256ff949e50e8bcf89ff7c4aa7/packages/shared/ui/rollup.config.js#L26
-	
-
-	https://github.com/MasuqaT-NET/BlogExamples/blob/cd9e0fc4b8407b163d1566427f433a2813d06118/Web/TypeScript/ts-in-es/rollup.config.js#L4
+https://github.com/acanedo/d2b/blob/9710bbe69fd637969e21297d3b2314732bd91c10/rollup.config.js#L5
 
 
-stylelintrc  :host([repo-lang="SCSS"]) .lang-circle {
-https://github.com/search?q=repo%3Aelmsln%2Flrnwebcomponents+stylelintrc&type=code
 
-https://github.com/mrlvsb/kelvin/blob/f2d8b5e9204d886a7e1d933f1b298e9afa9bf55c/frontend/rollup.config.js#L4
+
+processAsCssModule
+https://github.com/foxford/ulms-components/blob/2cff7b1a21915e9552059789b559444ae02bee5e/rollup.d/rollup.config.js#L35
+// resolve node_modules, @import '~normalize.css/normalize.css'
+https://github.com/andrewwhitehead/oceanfront/blob/c5d29e745eb29586494ed48bff409d620cba135c/packages/oceanfront/rollup.config.js#L147
+https://github.com/stupidguy176/change-language/blob/969b187b5a80e5da70da41d8e790290d1a051a73/lib-change-language/rollup.config.js#L9
+base 64
+https://github.com/LeoCpii/heatmaps-client/blob/69e23d3cdb63c0256ff949e50e8bcf89ff7c4aa7/packages/shared/ui/rollup.config.js#L26
+
+
+https://github.com/MasuqaT-NET/BlogExamples/blob/cd9e0fc4b8407b163d1566427f433a2813d06118/Web/TypeScript/ts-in-es/rollup.config.js#L4
+
+
+
 
 https://github.com/mrlvsb/kelvin/blob/f2d8b5e9204d886a7e1d933f1b298e9afa9bf55c/frontend/rollup.config.js#L4
+
+
 _initShadowRoot
 https://github.com/Maps4HTML/Web-Map-Custom-Element/blob/8f55bcc456f0094bff367b75fc08e33a5c407bfc/src/web-map.js#L212
 
@@ -131,18 +125,12 @@ https://github.com/bitfinexcom/ufx-ui/blob/29aa000a6b161642fd8f4ff496a60513b646d
 //useStyleSheetTransform useTypescriptXTransform
 https://github.com/eswat2/stencil-tailwind-plugin/blob/b1d5e1e83f48552593854882708611d4a4e0de33/src/plugin.ts
 
-https://github.com/guybedford/rollup-sce-prototype/blob/54a420773f6b93ce2ab44315f1cdf07849264673/compilers/js.js
-
-https://github.com/Shopify/polaris/blob/main/polaris-react/config/rollup/plugin-styles.js#L127
-
-//pipeline
-https://github.com/playcanvas/super-splat/blob/84dcd4cee4b477da177e01593e506d5a19d5e284/rollup.config.mjs#L56
-
-
 
 
 //alias
 https://github.com/altai-ui/qui-max/blob/c1f71b3ac7f5bbdc35e0c1d85312e56d928770a7/vite.config.ts#L64
+
+
 
 
 /*
@@ -150,12 +138,6 @@ https://github.com/altai-ui/qui-max/blob/c1f71b3ac7f5bbdc35e0c1d85312e56d928770a
             const cssText = css.toString().trim();
 */
 https://github.com/phatnguyenuit/learn-rollup-basic/blob/b31c5b0802018b8765bd5f16d24599a171ecd935/custom-plugins/rollup/rollup-plugin-import-sass.js#L3
-
-
-
-
-https://github.com/egoist/rollup-plugin-postcss/blob/71593d9f4698ce564482b86cc2fa7f69626e8b8a/src/index.js#L79
-
 https://github.com/Zeki411/betaflight-configurator/blob/38688be1f817f80f952c5233625612c6dc550cf6/gulpfile.js#L1038
 
 https://github.com/isaacwhite/rollup-plugin-sass/blob/bbba54dc8b63fb3c742ef27257125545836eb176/src/style.js
@@ -197,12 +179,10 @@ https://github.com/zkreations/hamlet/blob/bc388a9c88d07b56a03fdbe29a10002da5301d
 
 https://github.com/emdotnet/dodock/blob/fcda676ffe744292ce308996650d573842669772/rollup/config.js#L122
 
-
-
 DEMOS JAVASCRIPT
 https://github.com/dobromir-hristov/palettify?tab=readme-ov-file
 
-https://github.com/vadirn/sandbox/blob/4d35a43b13e633fe5acb04711afe42e42378e3f1/scripts/bundler/rollup-plugin-scss.js#L33
+
 https://github.com/gera2ld/json-formatter/blob/1d07e6789d36c00823eeffb9a0e111aed5129adc/rollup.conf.js#L25
 
 https://github.com/vadirn/sandbox/blob/4d35a43b13e633fe5acb04711afe42e42378e3f1/scripts/bundler/rollup-plugin-scss.js#L12
@@ -218,6 +198,7 @@ https://github.com/philwareham/hive-framework/blob/11a0596f0d6bafd82a190de1fb4f9
 //rtl
 //A Babel plugin that prevents `customElements.define()` in `carbon-web-components` modules from running.
 https://github.com/oguzhanmeteozturk/carbon-for-ibm-dotcom/blob/0a7a6a71d347a4d89d3c83939ce58051ab95a43f/packages/web-components/tools/get-rollup-config.js#L46
+
 /*
  copy({
          copyOnce: true,
@@ -253,11 +234,13 @@ https://github.com/oguzhanmeteozturk/carbon-for-ibm-dotcom/blob/0a7a6a71d347a4d8
 
 https://github.com/pinterest/gestalt/blob/4757577e103ee796185d2cb41157d168a56a7e02/packages/gestalt-core/build.js#L92
 
- const result = await postcss()
-  const result = await postcss()
-        .use(postcssUrl({url: transform}))
-        .process(css, {from, to});
-      rebased = result.css;
+
+
+	const result = await postcss()
+	const result = await postcss()
+	.use(postcssUrl({url: transform}))
+	.process(css, {from, to});
+	rebased = result.css;
 https://github.com/addyosmani/critical/blob/4c15c1edc70afacf553df3a8d5b2ec568e7a7590/src/file.js#L309
  const output = await postcss().use(inline).process(css, { from: file })
  https://github.com/jsweb/material-icons-base64/blob/46b8cb906c0af445446a6d035817a9860aea9d55/build.mjs#L21
@@ -265,6 +248,8 @@ jsonToJsEmitAssets
  https://github.com/Gapminder/tools-page/blob/bc8976ebc1c2549cdeafa8e8e24c3a02fc8aa836/rollup.config.js#L284
 //const bundleCss = () => {
  https://github.com/iampava/lerna-playground/blob/52406700b8dd6d419029c0903e399120277a5f78/packages/ui-library/rollup.config.js#L167
+
+
  /*
   const meta = {
         name,
@@ -283,10 +268,13 @@ jsonToJsEmitAssets
 //process(styles, { from: 'src' }
 //https://github.com/YangChaoJie/YAlterUI/blob/683ce1879072b511c90d3ba5bbc037e74f9f2c90/packages/yAlterUI/configs/rollup.config.js#L58
 
+
 const cssPrefix = `.${packagejson.name.replace('@axa-ch/', '').replace(new RegExp('-', 'g'),'')}`;
 //https://github.com/fdecollibus/aave_frontend/blob/f4b556d2e833a5b3ccf27b4d9575a26a1b49dcac/rollup.config.js#L7
 //createPluginSCSS	createRollupConfig
 https://github.com/shakir-abdo/tippyjs/blob/master/build/index.js
+
+
 https://github.com/tabdon/tippyjs/blob/9cb3e54e590dacf17fdb74edd38fe555c1a9137d/scripts/rollup.all.config.js
 async function renderSass({ id, ...opts }) { pluginResolve
 https://github.com/peterbe/wmr/blob/main/packages/wmr/src/plugins/sass-plugin.js
@@ -294,6 +282,7 @@ https://github.com/peterbe/wmr/blob/main/packages/wmr/src/plugins/sass-plugin.js
                 targets: [{ src: "src/assets/img/*", dest: "dist/assets/img" }]
             }),
 //https://github.com/Lory1990/react-cool-components/blob/85fcdf2037accf80c9ccc950d55cd51b8d8135a1/rollup.config.js#L43
+
 //from to
   postcss(getPostcssPlugins(isProduction))
         .process(css, {
@@ -302,37 +291,47 @@ https://github.com/peterbe/wmr/blob/main/packages/wmr/src/plugins/sass-plugin.js
           map: { inline: true }, // Set to false after: https://github.com/thgh/rollup-plugin-scss/issues/7
         })
         .then((result) => result.css),
+
+
 //https://github.com/nzzdev/Q-poll-result/blob/d8424a0849e7b6d3dbbd92f1673e54d4d48b0b98/sass.config.js#L3
-//scss raw
-https://github.com/tedivm/github-buttons/blob/c3ea563b8ea08ecb85eab84cb587192dcf30d532/rollup.config.js#L143
+
 https://github.com/cocopon/tweakpane/blob/55631021a0e27dfedff9fb72b3fb39abccf10206/packages/tweakpane/rollup.config.js#L19
 
 https://github.com/ryersondmp/sa11y/blob/f12d7712fe7e96e2d16b7bfaf9f44553bb76ea7d/rollup.config.js#L6
 //https://github.com/zambezi/ez-build/blob/d7f110b3cf136a3a6905d1c3723104a74ca1e5b8/src/builder/css.js#L17
+
+
 // cssnano({ preset: ['advanced', { discardComments: { removeAll: true } }] })
 https://github.com/tgrm/tgrm.github.io/blob/1ae1b3dc14211e0e1459612e2dad6738a5b15a76/rollup.config.mjs#L31
 //worker.js
 //https://github.com/frag-crypto/frag-core/blob/2b05ed856f4bafbc858d047dcc7cb1030bd60d7e/rollup.config.js#L21
 
+
 //https://github.com/acurrieclark/html-placeholder/blob/756c6c68cc223e5a409e06070180e8503a751ee7/rollup.config.js#L6
 
 //https://github.com/dan2dev/mongox/blob/f97b1e94c617cb555a7ae7e4bffa1ee4e76d4f24/rollup.config.js#L40
+
+
 //createDirectoryIfDoesNotExist
 //https://github.com/idank/theme-bulma/blob/1433d994ba9d25c89fcae784e572e9e445fd5978/rollup.config.js#L27
 
 //   globals: globalsConfig,
 //https://github.com/bonlineza/b-lib/blob/012456056b5d89c2d433f04be8f4053fb2a8c1dc/rollup.config.js#L3
+
 //https://github.com/genadis/shepherd/blob/a87a80c9f869616660a2166f92898e731c95ebe1/rollup.config.js#L38
 //  extensions: ['.png', '.svg']
 //https://github.com/bonedaddy/splinter/blob/015e1317a3167db01f44c7add6624fe61e338dcd/canopy/design-system/rollup.config.js#L49
 Compiles all SCSS partials to CSS
-	https://github.com/ampproject/amp.dev/blob/15eff97e222e0a0af8f243ba0ca873041647da83/gulpfile.js/build.js#L44
-//https://github.com/nzzdev/ed-tech-components/blob/c9558a95ac25b149f83ef423678e92f37541f687/rollup.config.js#L84
+https://github.com/ampproject/amp.dev/blob/15eff97e222e0a0af8f243ba0ca873041647da83/gulpfile.js/build.js#L44
+
+
 //https://github.com/aquent/vt-pattern-library/blob/1355a7f19a1e93172d6fe2cb345d64f895b21521/rollup.config.js#L29
+//https://github.com/nzzdev/ed-tech-components/blob/c9558a95ac25b149f83ef423678e92f37541f687/rollup.config.js#L84
 https://github.com/Sobotkama/umd-experiment/tree/master
 https://github.com/taiga-family/taiga-ui/tree/6ad27708d773bffe95d414947dde80563758ebf4/projects/core/observables/test
 https://github.com/AntonLapshin/popup-validation/blob/master/src/rules.js
 https://github.com/thekevinscott/ml-classifier-ui/blob/f3c81d5ee6c3680bd1da0ee923307fc1f6eaf121/rollup.config.js
+
 https://github.com/mmahandev/FocusOverlay/blob/master/src/index.js
 //interruptable
 https://github.com/jstejada/interruptible/tree/cefedfab58fd72b0f966f0cefbc7d7c009d350b2/src
@@ -344,13 +343,10 @@ https://github.com/BenjaminZekavica/easy-toggle-state/blob/master/rollup.config.
 https://github.com/popcorn-official/pop-api-scraper/blob/659701a4299a4563c9f0d8b3d199f3aaf086a848/rollup.config.js
 https://github.com/benmccann/routify-site-2020/tree/a7f80f9a32e7c94b575f76dd73a32af0761591f4
 https://github.com/classicvalues/github-buttons/blob/4a0bfa75e18619804dfec24770e8add807130c7b/rollup.config.js#L50
- https://github.com/ghettovoice/vuelayers/blob/42379e6b63a32b092a77172f4e637094198579d3/build/rollup/sass.js#L6
-   //pipe injectTransform({ extensions, routix }),
-https://github.com/rixo/svench/blob/ce73a3f7267eb71b4fa0398fc7244e5a7fa580eb/packages/svench/lib/rollup-plugin.js#L182
+https://github.com/ghettovoice/vuelayers/blob/42379e6b63a32b092a77172f4e637094198579d3/build/rollup/sass.js#L6
 //sassPlugin 
 https://github.com/ghettovoice/ol-mapscale/blob/6c3b2ed2d7c494290a2658b58bb9773b95cc86d6/build/util.js#L58
 https://github.com/ComcastSamples/wc-components/blob/e5543f5e49cc10c42e58193af91f64dd2c2c084d/rollup.prod.config.js
- 
  copyright
  https://github.com/14hy/chatbot-front/blob/0204e6f0a8f4ad27bb9ba69b8c468c2f3629c20d/server/public/lib/d3/rollup.config.js#L4
  banner showGzippedSize
@@ -368,42 +364,31 @@ https://github.com/digital-blueprint/toolkit/blob/17341cca68d9b144792026fa25667d
 babel css resolve rollup
  https://github.com/vectrejs/vectre/tree/9698dfed010f74edf662feff76f7d3bb29969622/build
  
- //event emitter rollup different environments  rollup 1.20.1
-https://github.com/substance/substance/tree/master
+
 //!!!!!!!!!!!!!!!!! START UP PROJECT scss css
 https://github.com/vuetifyjs/vuetify/blob/d1251f50f2d85b34c06c65895bd2d2b82bdd412e/packages/vuetify/build/rollup.config.mjs#L8
 
 styleInjector: `~${resolve('build/style-injector.mjs')}`,
 https://github.com/rei/rei-cedar-vue-2/blob/79a31718ccc4efa5235ae196a9ff625ccaa522ea/build/rollup-plugins.js#L83
 
-https://github.com/mediacms-io/mediacms/tree/c5047d8df8686d75100e5099489be4fd1bf5f733/frontend/packages
-
 https://forum.freecodecamp.org/t/separate-css-files-from-scss-webpack-build/338000
-//precss
-https://github.com/acanedo/d2b/blob/9710bbe69fd637969e21297d3b2314732bd91c10/rollup.config.js#L5
 
 swDest: "dist/service-worker.js",
 https://github.com/Krigu/lurinfacts/blob/fc3cc2b83e3aa23fb90c6c9f4f0039b7bb1333cd/rollup.config.js#L34
 
-processAsCssModule
-https://github.com/foxford/ulms-components/blob/2cff7b1a21915e9552059789b559444ae02bee5e/rollup.d/rollup.config.js#L35
-// resolve node_modules, @import '~normalize.css/normalize.css'
-https://github.com/andrewwhitehead/oceanfront/blob/c5d29e745eb29586494ed48bff409d620cba135c/packages/oceanfront/rollup.config.js#L147
-https://github.com/stupidguy176/change-language/blob/969b187b5a80e5da70da41d8e790290d1a051a73/lib-change-language/rollup.config.js#L9
-base 64
-https://github.com/LeoCpii/heatmaps-client/blob/69e23d3cdb63c0256ff949e50e8bcf89ff7c4aa7/packages/shared/ui/rollup.config.js#L26
+
+
+
+
 
 
 stylelintrc  :host([repo-lang="SCSS"]) .lang-circle {
 https://github.com/search?q=repo%3Aelmsln%2Flrnwebcomponents+stylelintrc&type=code
 
-https://github.com/mrlvsb/kelvin/blob/f2d8b5e9204d886a7e1d933f1b298e9afa9bf55c/frontend/rollup.config.js#L4
-
-https://github.com/mrlvsb/kelvin/blob/f2d8b5e9204d886a7e1d933f1b298e9afa9bf55c/frontend/rollup.config.js
 
 https://github.com/guybedford/rollup-sce-prototype/blob/54a420773f6b93ce2ab44315f1cdf07849264673/compilers/js.js
 
-https://github.com/Shopify/polaris/blob/main/polaris-react/config/rollup/plugin-styles.js#L127
+
 
 //pipeline
 https://github.com/playcanvas/super-splat/blob/84dcd4cee4b477da177e01593e506d5a19d5e284/rollup.config.mjs#L56
@@ -411,20 +396,6 @@ https://github.com/playcanvas/super-splat/blob/84dcd4cee4b477da177e01593e506d5a1
   //pipe injectTransform({ extensions, routix }),
 https://github.com/rixo/svench/blob/ce73a3f7267eb71b4fa0398fc7244e5a7fa580eb/packages/svench/lib/rollup-plugin.js#L182
 
-
-
-//alias
-https://github.com/altai-ui/qui-max/blob/c1f71b3ac7f5bbdc35e0c1d85312e56d928770a7/vite.config.ts#L64
-
-
-/*
-    const { css, map } = await renderSass(options);
-            const cssText = css.toString().trim();
-*/
-https://github.com/phatnguyenuit/learn-rollup-basic/blob/b31c5b0802018b8765bd5f16d24599a171ecd935/custom-plugins/rollup/rollup-plugin-import-sass.js#L3
-
-https://github.com/ComcastSamples/wc-components/blob/e5543f5e49cc10c42e58193af91f64dd2c2c084d/rollup.prod.config.js
- 
  autoreload live reload
  https://github.com/Chimeejs/chimee/blob/0f04e52355e9ba2316705a0982b134377f3b3729/build/rollup.config.base.js#L11
  
@@ -447,12 +418,6 @@ https://github.com/substance/substance/tree/master
 
 //"rollup-plugin-sass" "processor" "output" "postcss"
 https://github.com/shipshapecode/tether/blob/0c1b36247745679514ddad6c5a77bef0eee33680/rollup.config.js#L30
-
-
-https://github.com/baloise/design-system/blob/b607f3db6c9fbb6656190202c7ac22e9d4da73cf/rollup.base.js#L8
-//https://github.com/baloise/design-system/blob/b607f3db6c9fbb6656190202c7ac22e9d4da73cf/rollup.base.js#L8
-
-
  // NOTE: styles plugin runs 2 times. First time it applies all the PostCSS transforms
     styles({
       mode: 'emit',
@@ -460,106 +425,17 @@ https://github.com/baloise/design-system/blob/b607f3db6c9fbb6656190202c7ac22e9d4
       minimize: false
     }),
 
-    // Second time it applies CSS Modules, extraction and minification. See why https://youtrack.jetbrains.com/issue/RG-2171#focus=Comments-27-5632562.0-0
-    styles({
+// Second time it applies CSS Modules, extraction and minification. See why https://youtrack.jetbrains.com/issue/RG-2171#focus=Comments-27-5632562.0-0
+styles({
 https://github.com/JetBrains/ring-ui/blob/c6a0c8d97f12977954b3a05eaebad3e4edf77bac/rollup.config.js#L46
 
 
 
 https://github.com/jcdalton2201/tube-timetable/blob/master/rollup.config.js#L14
 https://github.com/ptzagk/rollup-plugin-scss-smart-asset/blob/9dc02f26f419954be399257e8887435af0a90ac6/lib/index.js#L38
-
-/*
-export default components.map(([from, to]) => ({
-  input: from,
-  output: {
-    // sourcemap: true,
-    format: "iife",
-    name: "Button",
-    file: to
-  },
-  plugins
-}));
-*/
-
 https://github.com/aaronshaf/panda-ui/blob/9d952b3424594d1846cd4fdaf646a66ce302de66/rollup.config.js#L5
-//https://github.com/michalzalobny/plain-page-transition/blob/main/rollup.config.js
-
-
-/*
-"build": "npm run build:clean && npm run build:library && npm run build:themes",
-"build:clean": "node scripts/clean.js",
-"build:library": "rollup -c",
-"build:themes": "node scripts/themes.js",
-"start": "rollup -c -w",
-*/
+https://github.com/michalzalobny/plain-page-transition/blob/main/rollup.config.js
 https://github.com/advanced-cropper/react-advanced-cropper/blob/3c36455dd29ef4f9a872ff8460235db627ff7c62/scripts/themes.js#L2
-
 https://github.com/HelixDesignSystem/helix-ui/tree/82967eda7ee1542c54312a9c127c262256ad7b3c/tasks/rollup
 https://github.com/egoist/rollup-plugin-postcss/blob/71593d9f4698ce564482b86cc2fa7f69626e8b8a/src/index.js#L79
-
-	icon.scss,postcss-modules-scope,postcss-modules-values,postcss-modules-parser
-	https://github.com/marcintreder/polaris-react/blob/71fb4730dff2b5a24dc70a422d2975dad161b2f8/config/rollup/plugins/styles.js#L13
-	//  bundleCssConfig
-https://github.com/bitfinexcom/ufx-ui/blob/29aa000a6b161642fd8f4ff496a60513b646dab8/packages/core/rollup.config.js#L171
-	
-	https://github.com/SolarBear/Numenera-FoundryVTT/blob/9943fe54aa6256e017de8a50dd289c26d6f376ae/rollup.config.js#L4
-	
-	https://github.com/open-nomie/nomie5/blob/401f9c720767851511b3ac5d29c5f3b20d5b877c/rollup.config.js#L71
-	
-	https://github.com/brick-design/brick-design/blob/9efc0a954366d5ef98eb3ec95b21bc91fc7e8999/scripts/create.rollup.config.js#L16
-	
-	https://github.com/schrodinger/fixed-data-table-2/blob/081b363ac6f1a733e1c395e29dc891969e3a7e67/build_helpers/cssRollup.config.js
-	
-	rollup.styles.js
-	https://github.com/Tencent/cherry-markdown/blob/afbf4a101bc6bef87a5f291044cc71b684b2209a/build/rollup.core.config.js
-	
-	gulp build rollup.dev prod
-	https://github.com/priley86/pf4-webcomponents-poc/blob/b2f81bdcbc088899651eeee8b2d0caef70917561/rollup.config.dev.js
-	https://github.com/buttons/github-buttons/blob/789e63cc5343dfaa884423902ebdfdc60038956e/rollup.config.mjs#L51
-	plugin styles
-	https://github.com/Shopify/polaris/tree/88c90b2dc50be0ef3ddf5002c0fba18bc1f128e8/polaris-react/config/rollup
-	
-	
-rollup
-https://github.com/mockingbot/mb-color-picker/blob/ef347f1120939a50a4f3ce52abc879b3249914f4/src/DropDownColors/styles.js
-import url from 'rollup-plugin-url'
-import calc from 'postcss-calc'
-import cssvariables from 'postcss-css-variables'
-
-"modular-css-rollup": "^14.1.0",
-
-npm i modular-css-rollup@^14
-
-
-npm i postcss-calc@6.0.1
-    "postcss-css-variables": "^0.9.0",
-    "postcss-import": "^12.0.0",
-    "postcss-nested": "^4.1.0",
-    "postcss-url": "^8.0.0",
-	
-
-   "postcss-cssnext": "^2.9.0",
-    "postcss-nested": "^1.0.0",
-    "postcss-simple-vars": "^3.0.0",
-	https://github.com/linares/bigpipe/blob/c653a223d1c023851170e20bf324358f836d68a8/bigpipe.js#L345
-	
-	
-	   this.promptsTable.on("cellClick", async (e: Event, cell: any) => {
-https://github.com/rollup/rollup-plugin-babel/issues/162
-https://github.com/digital-blueprint/dispatch-app/blob/f5562bf8f8c728a6082b2136fe7440ff0cb9d9e5/rollup.config.js#L17
-
- babel css resolve rollup
- https://github.com/vectrejs/vectre/tree/9698dfed010f74edf662feff76f7d3bb29969622/build
- https://github.com/classicvalues/github-buttons/blob/4a0bfa75e18619804dfec24770e8add807130c7b/rollup.config.js#L50
- 
-  autoreload live reload
- https://github.com/Chimeejs/chimee/blob/0f04e52355e9ba2316705a0982b134377f3b3729/build/rollup.config.base.js#L11
- 
- object assign
- https://github.com/devilwjp/veaury/blob/60e3631802f12c3dd7262d9e95dd91fa0070bf01/rollup.config.js#L2
- 
-    "rollup": "^0.66.6", rollup-plugin-typescript2
- https://github.com/Festify/app/blob/6029a3964a15cd3f55b89aa5a5e45e108cd3b72a/package.json
- 
- https://github.com/melodyWxy/melody-core-utils/blob/8be6575c10bbb7c823ae8d14ccbb17337447dd64/config/rollup.config.dev.js#L3
+https://github.com/linares/bigpipe/blob/c653a223d1c023851170e20bf324358f836d68a8/bigpipe.js#L345
