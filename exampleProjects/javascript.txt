@@ -170,7 +170,7 @@ https://github.com/CyberFlameGO/Hubzilla/blob/0140f9fe560b7cc0f65cbfc7988f6808b4
 Boxxer - Layout manager
 https://github.com/caplin/boxxer/tree/master
 
-
+https://github.com/AdrianVillamayor/Wizard-JS/blob/main/src/components/utils.js
 https://github.com/Pamblam/ez-drag-n-drop/blob/main/src/EZDnD_Draggable.js
 https://codepen.io/franzcisco/pen/zQwXQy
 https://github.com/aigan/mv-sorter/blob/master/mv-sorter.js
