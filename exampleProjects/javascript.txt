@@ -29,9 +29,9 @@ https://github.com/orneryd/web-components/tree/f9257097f9c92a108ba2f94759acf6d32
 https://github.com/derikb/character-sheet-app/blob/69c3f58f7d6de38aa4b708d67223567432ed611d/src/components/Modal.js#L104
 
 https://github.com/Dabolus/vanilla-pwa/tree/bd03984a2abbcd179cfd9ecd392477bc240fd966/components/dynamic-data
-https://github.com/ddamato/damato.design/blob/7882b101b2b22b5086bb91819172d870882ef39e/bin/bundle.js
+https://github.com/ddamato/damato.design/tree/7882b101b2b22b5086bb91819172d870882ef39e/js-components
 //https://github.com/Abhi2707/gsoc18_adaptive_images/blob/28dfe8afd50be907851406e2059680f7ecccb79b/build/build-modules-js/compilecejs.js#L8
-https://github.com/zotero/zotero/blob/147ed028dfe237087998b233c55eb7b8934d4710/.eslintrc
+https://github.com/zotero/zotero/tree/98066b1bc5cecbda0fd3c7ae90fced5c3969e0d1/chrome/content/zotero/elements
 https://github.com/iamparnab/html-custom-elements
 //base component BaseComponent container/fixtures/comp1.js
 https://github.com/NAUMEN-GP/formio.js/blob/8c0a5afd16788c1b968eef3131c84074bf72055b/src/components/base/Base.js
@@ -69,11 +69,14 @@ https://github.com/googlefonts/fontra/blob/d5975409067c947485f39f935bd9e302bca70
 //css.js, wizard, ziro-wizard.js
 https://github.com/megazear7/ziro-components/blob/885fbae4f8009b0ddad1e81ec722ef5c6d9555b8/src/ziro-input.js
 https://github.com/bit101/minicomps/blob/master/src/component.js
+//SyncFusionClientFilteringComponent Kendo
 https://github.com/sencha/extjs-grid-performance/blob/a97aa4c8fae22823fa81a6854c2f42ff4195dde1/client/src/wijmoGrid/WijmoFlexGridScrollComponent.js
-
+//selectable ArrowUp ArrowDown
 https://github.com/jk2908/list-box/blob/1da0ae32b648d6abac4f3a8b5aab3a2e6e356251/src/ListBox.js#L11
-//scss 
+//scss selectable list
 https://github.com/yued-fe/lulu/blob/787424ac57308df3d7ac3c237aae53ce9b8104ab/theme/hope/ui/Layout/list.js
+
+select-list.js
 https://github.com/Memeticode/psm.custom-elements/blob/e1dc368a2478f8f387af707e473a932c6ddb5572/demo/index.html
 //rtl OverflowMenu
 https://github.com/jouni/j-elements/blob/d90428a5cdf263adadd284ef4c361a527404b71b/src/components/OverflowMenu.js#L117
@@ -83,6 +86,7 @@ https://github.com/lencys/wj-elements/blob/master/packages/wj-element/service/un
 https://github.com/knowler/knowler.dev/tree/bff674795fb6eb2c2cea0817a4ef315eaf596f68/middleware
 https://github.com/jarek-foksa/xel
 https://github.com/zazaulola/xel-extra/tree/7c17b97bd13258c6c16efbc18e75f9dbbd58847f?tab=readme-ov-file
+//SimpleList
 https://github.com/derikb/character-sheet-app/blob/69c3f58f7d6de38aa4b708d67223567432ed611d/src/components/Modal.js#L104
 
 https://github.com/easylogic/gradientpicker/blob/main/config/rollup.config.prod.js
@@ -95,6 +99,7 @@ constructor(injector: Injector) {
 
     customElements.define('custom-client-form', ngElement);
   }
+  //HNList pagination
 https://github.com/CaptainCodeman/hn-webcomponents/tree/c3b14afa5db2cb5d3eb62f36252c973858a285fc?tab=readme-ov-file
 https://github.com/CaptainCodeman/gif-player/tree/54234731e58c579eda454bd5fb52eb453bd5abe5
 
@@ -102,7 +107,7 @@ https://github.com/CaptainCodeman/gif-player/tree/54234731e58c579eda454bd5fb52eb
 https://gist.github.com/morewry/6773dd2ba84b8a4b829ae8d2b82891b3
 https://github.com/angular/angular/issues/23732 (example-angular-elments-app - the consuming application)
 
-//video player html5 javascript
+//video player html5 javascript TrackList.prototype.allowedEvents_
 https://github.com/videojs/video.js/blob/a10d25861daec1132dce5805615346d6d0c0ef87/rollup.config.js
 https://github.com/mozilla/blurts-server/blob/ea176dc1b070db735e886da2ce886b8cbb5e1396/src/client/js/components/circleChart.js
 
