@@ -61,6 +61,6 @@
 	select to_char(sysdate, 'YYYY-MM-DD HH24:MI:SS') as now_time,
 	  to_char(sysdate, 'SSSSS') as now_secs,  -- from the beginning of today
 	  to_number(to_char(sysdate, 'SSSSS'))/900 as calc1,
-	  floor(to_number(to_char(sysdate, 'SSSSS'))/900) as calc2, --index of part if plit by 15 minutes
+	  floor(to_number(to_char(sysdate, 'SSSSS'))/900) as calc2, --index of part if split by 15 minutes
 	  floor(to_number(to_char(sysdate, 'SSSSS'))/900) * 900 as calc3
 	from dual;
