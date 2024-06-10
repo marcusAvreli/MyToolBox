@@ -46,3 +46,10 @@
 
 	from testdata
 
+
+	select    to_char(SYSDATE - mod((SYSDATE - trunc(SYSDATE))*24*60, 15)/24/60,'YYYY-MM-DD HH24:MI') ft
+	,to_char( SYSDATE + (15 - mod((SYSDATE - trunc(SYSDATE))*24*60, 15))/24/60,'YYYY-MM-DD HH24:MI')
+	tt from dual
+
+ 
+
