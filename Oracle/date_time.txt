@@ -1,0 +1,27 @@
++-------------------------------------------------------+
+|										======1======	|
+|	MILLISECONDS TO TIMESTAMP							|
+|														|
++-------------------------------------------------------+
+	select TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS')+NUMTODSINTERVAL(pt_CRTD_DATE/1000,'SECOND') date_from
+	,TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS')+NUMTODSINTERVAL(pt_CRTD_DATE/1000,'SECOND') +NUMTODSINTERVAL(1,'HOUR') date_to
+	from(
+		select min(created) pt_CRTD_DATE from SPT_PROVISIONING_TRANSACTION
+	)
+
+
++-------------------------------------------------------+
+|										======2======	|
+|	EVERY 15 MINUTES									|
+|														|
++-------------------------------------------------------+ 
+   select
+		trunc(date_from, 'HH') + round(extract(minute from date_from) / 15) * interval '15' minute
+		,trunc(date_to, 'HH') + round(extract(minute from date_to) / 15) * interval '15' minute
+		from(
+			select TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS')+NUMTODSINTERVAL(pt_CRTD_DATE/1000,'SECOND') date_from
+			,TO_TIMESTAMP('1970-01-01','YYYY-MM-DD HH24:MI:SS')+NUMTODSINTERVAL(pt_CRTD_DATE/1000,'SECOND') +NUMTODSINTERVAL(30,'MINUTE') date_to
+			from(
+				select min(created) pt_CRTD_DATE from SPT_PROVISIONING_TRANSACTION
+				)
+		)
