@@ -50,6 +50,17 @@
 	select    to_char(SYSDATE - mod((SYSDATE - trunc(SYSDATE))*24*60, 15)/24/60,'YYYY-MM-DD HH24:MI') ft
 	,to_char( SYSDATE + (15 - mod((SYSDATE - trunc(SYSDATE))*24*60, 15))/24/60,'YYYY-MM-DD HH24:MI')
 	tt from dual
+	
 
- 
-
++-------------------------------------------------------+
+|										======3======	|
+|	ORDINAL NUMBER OF 15 MINUTES PART					|
+|														|
++-------------------------------------------------------+ 
+	source: https://stackoverflow.com/questions/30920975/create-ranges-of-minutes-15-in-select
+	select to_char(sysdate, 'YYYY-MM-DD HH24:MI:SS') as now_time,
+	  to_char(sysdate, 'SSSSS') as now_secs,  -- from the beginning of today
+	  to_number(to_char(sysdate, 'SSSSS'))/900 as calc1,
+	  floor(to_number(to_char(sysdate, 'SSSSS'))/900) as calc2, --index of part if plit by 15 minutes
+	  floor(to_number(to_char(sysdate, 'SSSSS'))/900) * 900 as calc3
+	from dual;
