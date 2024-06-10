@@ -25,3 +25,24 @@
 				select min(created) pt_CRTD_DATE from SPT_PROVISIONING_TRANSACTION
 				)
 		)
+		
+		
++-------------------------------------------------------+
+|										======3======	|
+|	EVERY 15 MINUTES									|
+|														|
++-------------------------------------------------------+ 
+	with testdata as (
+	  select
+		to_date ('2015-08-12 14:11','YYYY-MM-DD HH24:MI') ft,
+		to_date ('2015-08-12 14:11','YYYY-MM-DD HH24:MI') tt
+	  from dual
+	 )
+
+	select
+	to_char(ft - mod((ft - trunc(ft))*24*60, 15)/24/60,'YYYY-MM-DD HH24:MI') ft
+	,to_char(tt + (15 - mod((tt - trunc(tt))*24*60, 15))/24/60,'YYYY-MM-DD HH24:MI') tt
+
+
+	from testdata
+
