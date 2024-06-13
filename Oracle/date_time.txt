@@ -64,3 +64,141 @@
 	  floor(to_number(to_char(sysdate, 'SSSSS'))/900) as calc2, --index of part if split by 15 minutes
 	  floor(to_number(to_char(sysdate, 'SSSSS'))/900) * 900 as calc3
 	from dual;
+
+
++-------------------------------------------------------+
+|										======3======	|
+|	STORED_PROCEDURE: SPLIT EVERY DAY BY 15 MINUTES		|
+|														|
++-------------------------------------------------------+
+	--splits every day by 15 minutes begining from midnight of today till midnight of next day
+	--from 13-06-2024 0:00:00 till 14-06-2024 00:00:00
+	--its good for anylizing history tables where it starts from any date in the past
+	
+create or replace procedure        my_gn_rprt_pt_log
+	AS
+		today_time_s	number:=0;
+		today_time_e	number:=0;
+		interval_min	number:=15;
+		minDate	number:=0;
+		begin_of_all_time	varchar2(12):='1970-01-01';
+		millis_base number:=24 * 60 * 60 * 1000;
+		date_pattern_ymdhm varchar2(20):='YYYY-MM-DD HH24:MI';
+		date_pattern_ymdhms varchar2(25):='YYYY-MM-DD HH24:MI:SS';
+		date_pattern_ymd varchar2(20):='YYYY-MM-DD';
+		
+		begin
+		SELECT min(TIME_START) INTO minDate FROM test_RPRT_PT_LOG umtbRprtLogPt;
+		if minDate is null then
+			--init table data
+				insert into test_RPRT_PT_LOG(
+					ID
+					,TIME_START
+					,TIME_END
+					,ordinal
+					,TIME_START_DAY	--begin of day in milliseconds: 13-06-2024 00:00:00
+					,TIME_END_DAY --end of day in milliseconds: 14-06-2024 00:00:00
+				)
+
+				select
+					test_random_guid()  my_id
+					,to_number(to_date(date_start,date_pattern_ymdhms)   - to_date(begin_of_all_time,date_pattern_ymd)) * millis_base
+					,to_number(to_date(date_end,date_pattern_ymdhms)   - to_date(begin_of_all_time,date_pattern_ymd)) * millis_base
+					,floor(to_number(to_char(to_date(date_start,date_pattern_ymdhm), 'SSSSS'))/900) as ordinal
+					,to_number(to_date(current_day,date_pattern_ymdhms)   - to_date(begin_of_all_time,date_pattern_ymd)) * millis_base
+					,to_number(to_date(next_day,date_pattern_ymdhms)   - to_date(begin_of_all_time,date_pattern_ymd)) * millis_base
+				from(
+					select
+						to_char(date_from - mod((date_from - trunc(date_from))*24*60, interval_min)/24/60,date_pattern_ymdhm) date_start
+						,to_char( date_from + (interval_min - mod((date_from - trunc(date_from))*24*60, interval_min))/24/60,date_pattern_ymdhm) date_end
+						,TO_CHAR (trunc(current_day, 'DD'),               date_pattern_ymdhms) current_day
+						,TO_CHAR (trunc(next_day, 'DD'),              date_pattern_ymdhms) next_day
+					FROM(
+						select 
+							TO_DATE(TO_CHAR(TO_TIMESTAMP(begin_of_all_time,date_pattern_ymdhms)+NUMTODSINTERVAL(pt_CRTD_DATE/1000,'SECOND'),date_pattern_ymdhms),date_pattern_ymdhms) date_from
+							,TO_TIMESTAMP(begin_of_all_time,date_pattern_ymdhms)+NUMTODSINTERVAL(pt_CRTD_DATE/1000,'SECOND') current_day
+							,TO_TIMESTAMP(begin_of_all_time,date_pattern_ymdhms)+NUMTODSINTERVAL(pt_CRTD_DATE/1000,'SECOND') +NUMTODSINTERVAL(1,'DAY') next_day
+						FROM(
+								select MIN(created) pt_CRTD_DATE from SPT_PROVISIONING_TRANSACTION
+							)
+						)
+				);
+
+					commit;
+
+			else
+					--init variable today_time_s
+					select    to_number(to_date(ft,date_pattern_ymdhms)   - to_date(begin_of_all_time,date_pattern_ymd)) * millis_base into today_time_s
+					from(
+						select    to_char(SYSDATE - mod((SYSDATE - trunc(SYSDATE))*24*60, interval_min)/24/60,date_pattern_ymdhm) ft    from dual
+					);
+
+					--init variable today_time_e
+					select    to_number(to_date(tt,date_pattern_ymdhms)   - to_date(begin_of_all_time,date_pattern_ymd)) * millis_base into today_time_e
+					from(
+						select    to_char( SYSDATE + (interval_min- mod((SYSDATE - trunc(SYSDATE))*24*60, interval_min))/24/60,date_pattern_ymdhm) tt  from dual
+					); 
+
+					INSERT ALL
+						INTO test_RPRT_PT_LOG( 
+							ID
+							,TIME_START
+							,TIME_END
+							,ordinal
+							,TIME_START_DAY
+							,TIME_END_DAY) 
+						VALUES (
+							my_guid
+							,time_start
+							,time_end
+							,ordinal
+							,time_start_day
+							,time_end_day
+						)
+
+					WITH source_data AS(
+
+						select
+							test_random_guid()  my_guid
+							,to_number(to_date(date_start,date_pattern_ymdhms)   - to_date(begin_of_all_time,date_pattern_ymd)) * millis_base time_start
+							,to_number(to_date(date_end,date_pattern_ymdhms)   - to_date(begin_of_all_time,date_pattern_ymd)) * millis_base time_end
+							,floor(to_number(to_char(to_date(date_start,date_pattern_ymdhm), 'SSSSS'))/900) as ordinal
+							,to_number(to_date(current_day,date_pattern_ymdhms)   - to_date(begin_of_all_time,date_pattern_ymd)) * millis_base time_start_day
+							,to_number(to_date(next_day,date_pattern_ymdhms)   - to_date(begin_of_all_time,date_pattern_ymd)) * millis_base time_end_day
+						from(
+							select
+								to_char(date_from - mod((date_from - trunc(date_from))*24*60, 15)/24/60,'YYYY-MM-DD HH24:MI') date_start
+								,to_char( date_from + (15 - mod((date_from - trunc(date_from))*24*60, 15))/24/60,'YYYY-MM-DD HH24:MI') date_end
+								,TO_CHAR (trunc(current_day, 'DD'),               date_pattern_ymdhms) current_day
+								,TO_CHAR (trunc(next_day, 'DD'),                date_pattern_ymdhms) next_day
+							from(
+								select
+									TO_DATE(TO_CHAR(TO_TIMESTAMP(begin_of_all_time,date_pattern_ymdhms)+NUMTODSINTERVAL(pt_CRTD_DATE/1000,'SECOND'),date_pattern_ymdhm),date_pattern_ymdhms) date_from
+									,TO_TIMESTAMP(begin_of_all_time,date_pattern_ymdhms)+NUMTODSINTERVAL(pt_CRTD_DATE/1000,'SECOND') current_day
+									,TO_TIMESTAMP(begin_of_all_time,date_pattern_ymdhms)+NUMTODSINTERVAL(pt_CRTD_DATE/1000,'SECOND') +NUMTODSINTERVAL(1,'DAY') next_day
+								from(
+									select max(TIME_END) pt_CRTD_DATE from .test_RPRT_PT_LOG where TIME_END < today_time_s
+								)
+							)
+						)
+
+					)--end of source_data_set
+
+                SELECT 
+					my_guid
+					,time_start
+					,time_end
+					,ordinal
+					,time_start_day
+					,time_end_day
+                FROM   source_data src
+                WHERE  NOT EXISTS (
+					SELECT 1 FROM   test_RPRT_PT_LOG dest
+					WHERE  src.time_start = dest.time_start
+                );
+
+				commit;
+
+		end if;
+
+end my_gn_rprt_pt_log;
