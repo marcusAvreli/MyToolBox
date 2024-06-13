@@ -74,6 +74,9 @@
 	--splits every day by 15 minutes begining from midnight of today till midnight of next day
 	--from 13-06-2024 0:00:00 till 14-06-2024 00:00:00
 	--its good for anylizing history tables where it starts from any date in the past
+	--splitted range is in time_start, time_end
+	--time_start: 13-06-2024 00:00:00 time_end: 13-06-2024 00:15:00
+	--time_start: 13-06-2024 00:15:00 time_end: 13-06-2024 00:30:00
 	
 create or replace procedure        my_gn_rprt_pt_log
 	AS
