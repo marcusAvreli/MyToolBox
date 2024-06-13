@@ -15,7 +15,7 @@ https://stackoverflow.com/questions/55080103/how-to-separate-web-components-to-i
 https://stefaniefluin.medium.com/the-new-sass-module-system-out-with-import-in-with-use-e1bd8ba032d0
 https://onebitahead.medium.com/dont-reinvent-the-wheel-use-white-label-web-components-fa57fa54cc15
 
-
+//ContextMenu
 https://github.com/hironichu/nexplorer/blob/689b1b8f7b33d020141e0abe84ee688e6969ebba/src/components/Explorer.js#L212
 HTMLCollection
 customElements
@@ -29,6 +29,8 @@ https://github.com/orneryd/web-components/tree/f9257097f9c92a108ba2f94759acf6d32
 https://github.com/derikb/character-sheet-app/blob/69c3f58f7d6de38aa4b708d67223567432ed611d/src/components/Modal.js#L104
 
 https://github.com/Dabolus/vanilla-pwa/tree/bd03984a2abbcd179cfd9ecd392477bc240fd966/components/dynamic-data
+
+//a11y-color.js
 https://github.com/ddamato/damato.design/tree/7882b101b2b22b5086bb91819172d870882ef39e/js-components
 //https://github.com/Abhi2707/gsoc18_adaptive_images/blob/28dfe8afd50be907851406e2059680f7ecccb79b/build/build-modules-js/compilecejs.js#L8
 https://github.com/zotero/zotero/tree/98066b1bc5cecbda0fd3c7ae90fced5c3969e0d1/chrome/content/zotero/elements
@@ -65,19 +67,44 @@ https://github.com/akudev/ui5-webcomponents/blob/master/packages/main/src/TextAr
 https://github.com/grandemayta/custom-element-pokemon-cards/tree/master/src
 //event bus
 https://github.com/trutoo/event-bus/blob/master/docs/react-component.js
+keyboard keys
 https://github.com/googlefonts/fontra/blob/d5975409067c947485f39f935bd9e302bca70afc/src/fontra/client/web-components/ui-list.js
 //css.js, wizard, ziro-wizard.js
 https://github.com/megazear7/ziro-components/blob/885fbae4f8009b0ddad1e81ec722ef5c6d9555b8/src/ziro-input.js
 https://github.com/bit101/minicomps/blob/master/src/component.js
 //SyncFusionClientFilteringComponent Kendo
 https://github.com/sencha/extjs-grid-performance/blob/a97aa4c8fae22823fa81a6854c2f42ff4195dde1/client/src/wijmoGrid/WijmoFlexGridScrollComponent.js
-//selectable ArrowUp ArrowDown
+//pagination
+https://github.com/sakibcc/vue-demi-sfc-component/blob/1f04cc88a6ec4e88bdd2f5b87dd54fead98b74bc/src/libs/lulu-ui/js/common/ui/Pagination.js#L9
+https://github.com/EkaterinaTihonenko/GreenShoop/blob/71292ef1e84ea41fa153582ab7f76c20889aa60a/src/components/molecules/Pagination/Pagination.js#L70
+https://github.com/1000copy/js24000/blob/f75cc51f5d07499aea4efa38efb5443f7689e3e8/webcomponent/test/pagination/index.js#L62
+
+
+//paginated list  navItems(forward = true) {
+https://github.com/rvcalisto/mxiv/blob/b3b3e300c1093382e78834658a4fec41c053cbc2/src/app/itemList.js#L38
+https://github.com/Wilber1987/WDevCore/blob/72b49b8ad8a60f756eb7eefb4bf8ce683a260990/WComponents/WPaginatorViewer.js#L552
+
+ this.totalPages = 0;    this.totalPages = 0    this.pageNumber = 1;
+https://github.com/RSVmlyr/safetti/blob/ff9e996fcd794a4229ac258270beb126d83210d8/js/components/paginator/PaginatorElement.js#L5
+https://github.com/codex-press/fx/blob/14022f253d631db4e193dfe72c45fe99af1e165a/paginator.js#L245
+//// NOTE: everything here assumes the so-called "negative scroll type" for RTL
+https://github.com/jinhuan138/vue-book-reader/blob/f5b77fe6bac101b7de3eb866808c1d61aeb8aafa/src/modules/utils/foliate-js/paginator.js#L371
+https://github.com/ttop32/MouseTooltipTranslator/blob/c888f621d0286fa887d911f0f878cad58ddb3fe2/public/foliate-js/paginator.js#L972
+https://github.com/HY-Vae/xy-ui/blob/59f751815b1cd3f52840ea24ce9911f945d68221/components/xy-pagination.js#L237
+///pagination
+https://github.com/rvcalisto/mxiv/blob/b3b3e300c1093382e78834658a4fec41c053cbc2/src/app/itemList.js#L290
+https://github.com/puspamadak/redback/blob/25a0d1b36d044a5cfde60800cdbac89178ce18c5/public/scripts/field/select.js#L44
+//selectable ArrowUp ArrowDown initialState AbortController
 https://github.com/jk2908/list-box/blob/1da0ae32b648d6abac4f3a8b5aab3a2e6e356251/src/ListBox.js#L11
+//abort controller
+https://github.com/renovate-bot/amphtml/blob/ff4766f64a0425fba1196e4346418d33ec620925/src/custom-element.js#L135
 //scss selectable list
 https://github.com/yued-fe/lulu/blob/787424ac57308df3d7ac3c237aae53ce9b8104ab/theme/hope/ui/Layout/list.js
 
-select-list.js
-https://github.com/Memeticode/psm.custom-elements/blob/e1dc368a2478f8f387af707e473a932c6ddb5572/demo/index.html
+select-list.js search bar searchable
+https://github.com/Memeticode/psm.custom-elements/blob/e1dc368a2478f8f387af707e473a932c6ddb5572/elements/select-list/select-list.js
+https://github.com/JohnGorter/IconicaElements/blob/d7cb646a7b9a08f53e36d72e3c19b91d3c1ac04b/ico-wizard.js#L146
+https://github.com/Nicanor008/fly/blob/a150385d14696125d9a9d19e449ae3eb1b70aa2d/pagination/pagination.js#L76
 //rtl OverflowMenu
 https://github.com/jouni/j-elements/blob/d90428a5cdf263adadd284ef4c361a527404b71b/src/components/OverflowMenu.js#L117
 https://github.com/jeremenichelli/movies-web-components/tree/master/src
