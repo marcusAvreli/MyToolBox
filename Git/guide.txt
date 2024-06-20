@@ -1,15 +1,16 @@
 Clone existing public git repository
 	git clone https://github.com/doctral/Medium-Module-Loading-Strategies.git
 
++-------------------------------------------------------+
+|										======1======	|
+|	ADD ALL FILES USING GIT ADD EXCEPT ONE DIRECTORY	|
+|														|
++-------------------------------------------------------+
+	https://stackoverflow.com/questions/50316434/add-all-files-using-git-add-except-one-directory
+	git add -- . :!"node_modules"
+	git add . -- ':!somefolder' ':!**/some_deep_nested_folder/*'
 
-Error message:
-	ensure that no other process has an open file handle on the lock file
-Solution:
-		taskkill /F /IM git.exe
-	On linux/unix/gitbash/cygwin, try
-		rm -f .git/index.lock
-	On Windows Command Prompt, try:
-		del .git\index.lock
+
 
 If you want to remove the file from the Git repository and the filesystem, use:
 	git rm file1.txt 
@@ -20,11 +21,11 @@ And to push changes to remote repo
 	git push origin branch_name
 
 
-+-----------------------------------------------------------+
-|															|
-|					Windows									|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|										======1======	|
+|					WINDOWS								|
+|														|
++-------------------------------------------------------+
 
 INIT GIT CONNECTION
 
@@ -47,7 +48,12 @@ git clone <path.to.repo>
 
 
 
-Configure git to use certificate
+
++-------------------------------------------------------+
+|										======2======	|
+|	CONFIGURE GIT TO USE CERTIFICATE					|
+|														|
++-------------------------------------------------------+
 
 	Get certificate
 		by_openssl: echo -n | openssl s_client -connect www.github.com:443 | openssl x509 > /etc/openssl/certs/github.com.cert
@@ -57,7 +63,7 @@ Configure git to use certificate
 		git config --global http.sslCAInfo /etc/openssl/certs/github.com.cert
 		
 		in case that you work with chained certificate
-		git config --global http.sslCAInfo /<CA certificate <root>)>
+		git config --global http.sslCAInfo /<here goes CA certificate (root)>
 
 	if you already set your git to ignorance of ssl certificates, unset it:
 		git config --global --unset http.sslVerify
@@ -77,6 +83,19 @@ Using personal access token
 	Password for 'https://username@github.com': <PAT>
 
 
+
+
+
++-------------------------------------------------------+
+|										======2======	|
+|					ERROR								|
+|														|
++-------------------------------------------------------+
+fatal: unable to access '<http path to repo>.git/': SSL certificate problem: unable to get local issuer certificate
+
+19-03-2024 solved by install github.com certificate
+see: Configure git to use certificate
+
 git push origin master
 remote: Invalid username or password.
 fatal: Authentication failed for '<repository name>'
@@ -87,19 +106,14 @@ https://github.com/settings/tokens generated token
 Copy the Personal Access Token
 Make authentication through browser
 
-https://stackoverflow.com/questions/50316434/add-all-files-using-git-add-except-one-directory
-git add -- . :!"node_modules"
-git add . -- ':!somefolder' ':!**/some_deep_nested_folder/*'
 
 
 
-+-----------------------------------------------------------+
-|															|
-|					ERROR									|
-|															|
-+-----------------------------------------------------------+
-fatal: unable to access '<http path to repo>.git/': SSL certificate problem: unable to get local issuer certificate
-
-19-03-2024 solved by install github.com certificate
-see: Configure git to use certificate
-
+Error message:
+	ensure that no other process has an open file handle on the lock file
+Solution:
+		taskkill /F /IM git.exe
+	On linux/unix/gitbash/cygwin, try
+		rm -f .git/index.lock
+	On Windows Command Prompt, try:
+		del .git\index.lock

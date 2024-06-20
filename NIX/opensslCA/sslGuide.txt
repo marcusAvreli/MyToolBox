@@ -382,3 +382,6 @@ if (conn instanceof HttpsURLConnection) {
   });
 
   reply.load(conn1.getInputStream());
+  
+  
+  https://stackoverflow.com/questions/40061263/what-is-ca-certificate-and-why-do-we-need-it/59307015#59307015
