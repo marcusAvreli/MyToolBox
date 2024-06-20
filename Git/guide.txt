@@ -53,8 +53,11 @@ Configure git to use certificate
 		by_openssl: echo -n | openssl s_client -connect www.github.com:443 | openssl x509 > /etc/openssl/certs/github.com.cert
 		by_java: keytool -J-Djava.net.useSystemProxies=true -printcert -rfc -sslserver www.github.com:443 > github.pem
 		
-	Set configuration
+	Set configuration (Set git to trust this certificate)
 		git config --global http.sslCAInfo /etc/openssl/certs/github.com.cert
+		
+		in case that you work with chained certificate
+		git config --global http.sslCAInfo /<CA certificate <root>)>
 
 	if you already set your git to ignorance of ssl certificates, unset it:
 		git config --global --unset http.sslVerify
