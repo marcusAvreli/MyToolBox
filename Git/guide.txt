@@ -71,6 +71,18 @@ git clone <path.to.repo>
 	Verify, that you did it all correctly, without spelling errors:
 		git config --global --list
 		
+	
+	debugging
+		curl --http1.1 --ntlm <http> | less
+
+		curl --negotiate  <http>
+		
+		GIT_TRACE=1 git clone <http>
+
+		GIT_CURL_VERBOSE=1 git clone <http>
+
+ 
+		
 Using personal access token
 	first time commit ever
 	git config --global user.email "<your valid email"

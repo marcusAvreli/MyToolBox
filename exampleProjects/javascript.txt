@@ -151,6 +151,8 @@ https://codepen.io/kevinalku/pen/gwWPWY
 |	DESIGN PATTERN										|
 |														|
 +-------------------------------------------------------+
+https://github.com/alexlafroscia/service-locator/blob/master/lib/registry.js
+
 https://github.com/PureMVC/puremvc-js-multicore-framework/blob/c045fb4ab27c7439a22f6d7e8ed263a65e57fd1c/src/org/puremvc/js/multicore/patterns/observer/Notifier.js
 https://github.com/petermichaux/maria/blob/a13f0367247bb850da38f11bbc7906302e939954/eg/checkit/src/js/models/TodosModel.js
 https://github.com/loiane/desktop-app-servlets3/blob/f5aa9f5abd9e13ea561d02d2508c9b780e6c0b55/extjs-code/ExtMVC/ext/src/Component.js
