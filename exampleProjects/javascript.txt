@@ -27,7 +27,8 @@ formAssociated
 bindEvents 
 https://github.com/orneryd/web-components/tree/f9257097f9c92a108ba2f94759acf6d329f303ae/src
 https://github.com/derikb/character-sheet-app/blob/69c3f58f7d6de38aa4b708d67223567432ed611d/src/components/Modal.js#L104
-
+https://github.com/globulario/globular-mvc/blob/19137852d6d76de0ca1305b7b581bd562ab2b05f/components/List.js#L409
+https://github.com/capyloon/nutria/blob/e351dbdb1f8a69507fd5eb843ba8ade783ac9cea/apps/system/components/status_bar.js#L69
 https://github.com/Dabolus/vanilla-pwa/tree/bd03984a2abbcd179cfd9ecd392477bc240fd966/components/dynamic-data
 
 //a11y-color.js
@@ -78,7 +79,7 @@ https://github.com/sencha/extjs-grid-performance/blob/a97aa4c8fae22823fa81a6854c
 https://github.com/sakibcc/vue-demi-sfc-component/blob/1f04cc88a6ec4e88bdd2f5b87dd54fead98b74bc/src/libs/lulu-ui/js/common/ui/Pagination.js#L9
 https://github.com/EkaterinaTihonenko/GreenShoop/blob/71292ef1e84ea41fa153582ab7f76c20889aa60a/src/components/molecules/Pagination/Pagination.js#L70
 https://github.com/1000copy/js24000/blob/f75cc51f5d07499aea4efa38efb5443f7689e3e8/webcomponent/test/pagination/index.js#L62
-
+https://cdn.sencha.com/ext/commercial/4.2.2/docs/index.html#!/api/Ext.toolbar.Paging
 
 //paginated list  navItems(forward = true) {
 https://github.com/rvcalisto/mxiv/blob/b3b3e300c1093382e78834658a4fec41c053cbc2/src/app/itemList.js#L38
