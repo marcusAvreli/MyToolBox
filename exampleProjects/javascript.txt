@@ -14,7 +14,7 @@ https://onebitahead.medium.com/dont-reinvent-the-wheel-use-white-label-web-compo
 https://stackoverflow.com/questions/55080103/how-to-separate-web-components-to-individual-files-and-load-them
 https://stefaniefluin.medium.com/the-new-sass-module-system-out-with-import-in-with-use-e1bd8ba032d0
 https://onebitahead.medium.com/dont-reinvent-the-wheel-use-white-label-web-components-fa57fa54cc15
-
+https://medium.com/@mandy.michael
 //ContextMenu
 https://github.com/hironichu/nexplorer/blob/689b1b8f7b33d020141e0abe84ee688e6969ebba/src/components/Explorer.js#L212
 HTMLCollection
@@ -30,7 +30,7 @@ https://github.com/derikb/character-sheet-app/blob/69c3f58f7d6de38aa4b708d672235
 https://github.com/globulario/globular-mvc/blob/19137852d6d76de0ca1305b7b581bd562ab2b05f/components/List.js#L409
 https://github.com/capyloon/nutria/blob/e351dbdb1f8a69507fd5eb843ba8ade783ac9cea/apps/system/components/status_bar.js#L69
 https://github.com/Dabolus/vanilla-pwa/tree/bd03984a2abbcd179cfd9ecd392477bc240fd966/components/dynamic-data
-https://medium.com/@mandy.michael
+
 //a11y-color.js
 https://github.com/ddamato/damato.design/tree/7882b101b2b22b5086bb91819172d870882ef39e/js-components
 //https://github.com/Abhi2707/gsoc18_adaptive_images/blob/28dfe8afd50be907851406e2059680f7ecccb79b/build/build-modules-js/compilecejs.js#L8
