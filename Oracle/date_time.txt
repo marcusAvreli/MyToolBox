@@ -267,3 +267,36 @@ SELECT
       )
       WHERE ROWNUM <= TO_CHAR(LAST_DAY(SYSDATE), 'DD')
   ) 
+
+
+
++-------------------------------------------------------+
+|										======2======	|
+|	WEEK NUMBER IN YEAR									|
+|														|
++-------------------------------------------------------+
+https://asktom.oracle.com/ords/asktom.search?tag=week-of-year-in-sql-confusing
+Though 4th Jan is always in the first week of the ISO year. So to get the first ISO week of the year I'd argue it's easier to find the start of the ISO week this date falls on:
+
+with rws as (
+  select 2015+level yr from dual
+  connect by level <= 10
+)
+  select yr, 
+         trunc ( 
+           to_date ( yr || '-01-04', 'yyyy-mm-dd' ), 
+           'iw' 
+         ) dt
+  from   rws;
+  
+YR      DT                     
+   2016 04-JAN-2016 00:00:00
+   2017 02-JAN-2017 00:00:00
+   2018 01-JAN-2018 00:00:00
+   2019 31-DEC-2018 00:00:00
+   2020 30-DEC-2019 00:00:00
+   2021 04-JAN-2021 00:00:00
+   2022 03-JAN-2022 00:00:00
+   2023 02-JAN-2023 00:00:00
+   2024 01-JAN-2024 00:00:00
+   2025 30-DEC-2024 00:00:00
