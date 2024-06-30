@@ -218,3 +218,52 @@ create or replace procedure        my_gn_rprt_pt_log
 		end if;
 
 end my_gn_rprt_pt_log;
+
+
+
+https://stackoverflow.com/questions/14898357/calculate-business-days-in-oracle-sqlno-functions-or-procedure
+
+https://stackoverflow.com/questions/14898357/calculate-business-days-in-oracle-sqlno-functions-or-procedure
+Calculate business days in Oracle SQL(no functions or procedure)
+SELECT OrderNumber, InstallDate, CompleteDate,
+  (TRUNC(CompleteDate) - TRUNC(InstallDate) ) +1 - 
+  ((((TRUNC(CompleteDate,'D'))-(TRUNC(InstallDate,'D')))/7)*2) -
+  (CASE WHEN TO_CHAR(InstallDate,'DY','nls_date_language=english')='SUN' THEN 1 ELSE 0 END) -
+  (CASE WHEN TO_CHAR(CompleteDate,'DY','nls_date_language=english')='SAT' THEN 1 ELSE 0 END) as BusinessDays
+FROM Orders
+ORDER BY OrderNumber;
+
+https://stackoverflow.com/questions/3450965/determine-if-oracle-date-is-on-a-weekend
+https://stackoverflow.com/questions/55060368/sql-query-needed-counting-365-days-backwards
+https://community.spiceworks.com/t/day-wise-count-of-current-month/864771/17
+
+SELECT EXTRACT(DAY FROM LAST_DAY(SYSDATE)) num_of_days FROM dual;
+/
+SELECT SYSDATE, TO_CHAR(LAST_DAY(SYSDATE), 'DD') num_of_days FROM dual
+/
+-- Days left in a month --
+SELECT SYSDATE, LAST_DAY(SYSDATE) "Last", LAST_DAY(SYSDATE) - SYSDATE "Days left"
+FROM DUAL
+/
+
+
++-------------------------------------------------------+
+|										======2======	|
+|	WEEK NUMBER IN MONTH								|
+|														|
++-------------------------------------------------------+
+
+SELECT
+    RN
+    ,THE_DATE
+    ,TRUNC((THE_DATE - NEXT_DAY(TRUNC(THE_DATE,'MM') - 8, 'MON')) / 7) + 1 "WEEK_NUM"
+    ,TO_CHAR(THE_DATE, 'DY') "DAY_NAME"
+  FROM
+  (            
+      SELECT TRUNC(SYSDATE,'MM') + ROWNUM-1 THE_DATE, ROWNUM RN
+      FROM
+      (
+        SELECT 1 THE_COLUMN FROM DUAL CONNECT BY LEVEL <= 31
+      )
+      WHERE ROWNUM <= TO_CHAR(LAST_DAY(SYSDATE), 'DD')
+  ) 
