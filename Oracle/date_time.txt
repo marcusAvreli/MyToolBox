@@ -300,3 +300,18 @@ YR      DT
    2023 02-JAN-2023 00:00:00
    2024 01-JAN-2024 00:00:00
    2025 30-DEC-2024 00:00:00
+
++-------------------------------------------------------+
+|										======2======	|
+|	WEEK NUMBER IN YEAR									|
+|														|
++-------------------------------------------------------+
+
+
+select 
+	extract (month from sysdate)as month
+	,mod(floor(extract (month from sysdate)/12),6) half
+	,mod(floor(extract (month from sysdate)/12),4) quarter
+	,to_number(to_char(sysdate,'IW')) as WEEK_of_year
+	,TRUNC((sysdate - NEXT_DAY(TRUNC(sysdate,'MM') - 8, 'א')) / 7) + 1 WEEK_of_month
+from dual
