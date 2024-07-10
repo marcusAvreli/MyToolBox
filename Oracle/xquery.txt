@@ -255,3 +255,6 @@ SELECT t.c.query('.') AS 'SomeElement'
 
    , t.c.value('count(attribute::*)', 'int') AS 'CountOfAttributes'
 FROM @xml.nodes('/Data/SomeElement') t(c)
+
+
+https://stackoverflow.com/questions/8334822/xquery-xpath-using-count-and-max-function-for-return-of-element-with-highes
