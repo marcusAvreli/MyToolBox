@@ -11,3 +11,7 @@ https://css-tricks.com/almanac/properties/g/grid-template-areas/
 https://www.w3docs.com/tools/code-editor/10428
 https://stackoverflow.com/questions/55131372/global-scss-variables-for-angular-components-without-importing-them-everytime
 >>>>>>> 32583f612088e2023decfd127b8daf4b6d61859b:exampleProjects/css.txt
+
+
+https://wpengine.com/resources/combine-flexbox-and-css-grids-for-layouts-how-to/
+https://labs.jensimmons.com/
