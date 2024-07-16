@@ -315,3 +315,28 @@ select
 	,to_number(to_char(sysdate,'IW')) as WEEK_of_year
 	,TRUNC((sysdate - NEXT_DAY(TRUNC(sysdate,'MM') - 8, 'א')) / 7) + 1 WEEK_of_month
 from dual
+
+
+
+
+
++-------------------------------------------------------+
+|										======2======	|
+|	DAY NUMBER IN YEAR									|
+|														|
++-------------------------------------------------------+
+
+SELECT TO_CHAR(sysdate, 'DDD') FROM dual;
+
+
++-------------------------------------------------------+
+|										======2======	|
+|	NAMES OF DAY IN WEEK								|
+|														|
++-------------------------------------------------------+
+
+
+select level as dow,
+    to_char(trunc(sysdate ,'D') + level, 'Day') as day
+from dual
+connect by level <= 7;
