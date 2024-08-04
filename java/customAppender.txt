@@ -1,0 +1,26 @@
+//java call
+Logger corLogger = Logger.getLogger("com.loggerClass.iiq.PrintBeanshellNamespace");
+
+log4j2 properties
+appender.loggerClass.type=RollingFile
+appender.loggerClass.name=namespaceLogger
+appender.loggerClass.fileName=${basePath}/logs/printBeanshellNamespace.log
+appender.loggerClass.filePattern=${basePath}/logs/test_loggerClass.log.%i
+appender.loggerClass.layout.type=PatternLayout
+appender.loggerClass.layout.pattern = %d{ISO8601} %5p %t %c{4}:%L - %m%n
+appender.loggerClass.policies.type=Policies
+ 
+
+#RolingFileAppender rotation policy
+appender.loggerClass.policies.size.type=SizeBasedTriggeringPolicy
+appender.loggerClass.policies.size.size=100MB
+appender.loggerClass.strategy.type=DefaultRolloverStrategy
+appender.loggerClass.strategy.max=20
+
+logger.loggerClass.name= com.loggerClass.iiq.PrintBeanshellNamespace
+logger.loggerClass.additivity = false
+logger.loggerClass.level = debug
+logger.loggerClass.appenderRef.rolling.ref = namespaceLogger
+
+ 
+
