@@ -97,7 +97,7 @@ https://github.com/rvcalisto/mxiv/blob/b3b3e300c1093382e78834658a4fec41c053cbc2/
 https://github.com/puspamadak/redback/blob/25a0d1b36d044a5cfde60800cdbac89178ce18c5/public/scripts/field/select.js#L44
 //selectable ArrowUp ArrowDown initialState AbortController
 https://github.com/jk2908/list-box/blob/1da0ae32b648d6abac4f3a8b5aab3a2e6e356251/src/ListBox.js#L11
-//abort controller signal
+//abort controller signal advertiser adver ads 
 https://github.com/renovate-bot/amphtml/blob/ff4766f64a0425fba1196e4346418d33ec620925/src/custom-element.js#L135
 //scss selectable list
 https://github.com/yued-fe/lulu/blob/787424ac57308df3d7ac3c237aae53ce9b8104ab/theme/hope/ui/Layout/list.js
