@@ -331,7 +331,10 @@ order by schema_name,
 
 +-------------------------------------------------------+
 |										======21======	|
-|	table size											|
+|	table 
+
+
+											|
 |														|
 +-------------------------------------------------------+
 
@@ -723,3 +726,81 @@ connect by prior child = parent
 order by level ;
 
 
+csv parsing sparse missing values
+
+https://lalitkumarb.wordpress.com/2014/12/02/split-comma-delimited-string-into-rows-in-oracle/
+
+WITH input_data AS
+ (SELECT 'a,b,c' str1, 'p,q' str2 FROM dual
+ UNION ALL
+ SELECT 'd,e' str1, 'r,s,t' str2 FROM dual
+ ) ,
+ str_length AS
+ (SELECT str1,
+   regexp_count(str1, ',') cnt1,
+   str2,
+   regexp_count(str2,',') cnt2
+ FROM input_data
+ ) ,
+ append_comma AS
+ (SELECT
+   CASE
+     WHEN (SELECT MAX(cnt1) FROM str_length) -
+          regexp_count(str1, ',') = 1
+     THEN str1
+       ||', '
+     WHEN (SELECT MAX(cnt1) FROM str_length) -
+          regexp_count(str1, ',') = 2
+     THEN str1
+       ||', , '
+     ELSE str1
+   END str1,
+   CASE
+     WHEN (SELECT MAX(cnt2) FROM str_length) -
+          regexp_count(str2, ',') = 1
+     THEN str2
+       ||', '
+     WHEN (SELECT MAX(cnt2) FROM str_length) -
+          regexp_count(str2, ',') = 2
+     THEN str2
+       ||', , '
+     ELSE str2
+   END str2
+ FROM str_length
+ ) ,
+ temp_data1 AS
+ (SELECT rownum rn,
+   trim(COLUMN_VALUE) str1
+ FROM append_comma,
+   xmltable(('"'
+   || REPLACE(str1, ',', '","')
+   || '"'))
+ ) ,
+ temp_data2 AS
+ (SELECT rownum rn,
+   trim(COLUMN_VALUE) str2
+ FROM append_comma,
+   xmltable(('"'
+   || REPLACE(str2, ',', '","')
+   || '"'))
+ )
+ SELECT nvl(t1.str1,'null') str1,
+        nvl(t2.str2,'null') str2
+ FROM temp_data1 t1
+ JOIN temp_data2 t2
+ ON(t1.rn = t2.rn)
+ ORDER BY t1.rn,
+   t2.rn
+ /
+ 
+ https://stackoverflow.com/questions/41699487/convert-comma-separated-values-to-rows-in-oracle
+ csv by xquery and regex
+ 
+ 
+ split delimited column (by line feeds) to rows
+ https://asktom.oracle.com/ords/f?p=100:11:::::P11_QUESTION_ID:9525167800346253512
+ 
+ 
+ 
+ 
+ 
