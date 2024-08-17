@@ -198,7 +198,12 @@ https://github.com/Kallenju/simpower-validation/blob/main/src/core/modules/commo
 |	ideas												|
 |														|
 +-------------------------------------------------------+
-
+https://www.codewithrandom.com/2023/09/05/37-css-progress-bars-examples/
+https://www.codewithrandom.com/2023/02/28/clock-css-animation-clock-animation-using-html-css-javascript/
+https://www.codewithrandom.com/2024/02/15/ecommerce-website-using-html-css-and-javascript/
+https://www.codewithrandom.com/2023/02/28/vertical-stepper-css-sliding-stepper-using-html-css-javascript/
+https://dev.to/cwrcode/create-vertical-stepper-using-html-and-css-4g71
+https://dev.to/peterc/how-to-create-joined-bulletpoint-lists-with-css-bbc-news-style-1eem
 BrowserInfo Animation
 https://github.com/CyberFlameGO/Hubzilla/blob/0140f9fe560b7cc0f65cbfc7988f6808b4dc1236/library/Sortable/src/EventDispatcher.js
 
