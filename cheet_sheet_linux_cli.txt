@@ -319,22 +319,21 @@ ls -ltr --block-size=M
 |													|
 +---------------------------------------------------+
 
-##IT HAS 8GB
+	##IT HAS 8GB
 
-	free -mh
-				total        used        free      shared  buff/cache   available
-	Mem:           7.6G        7.3G        152M        2.6M        163M         96M
-	Swap:           15G         15G        786M
+		free -mh
+						total	used        free      shared  buff/cache   available
+		Mem:			7.6G	7.3G        152M        2.6M        163M         96M
+		Swap:           15G         15G        786M
 
- 
+	 
 
-##IT HAS 32GB
+	##IT HAS 32GB
 
-	free -mh
-
-				total        used        free      shared  buff/cache   available
-	Mem:            31G         24G        2.2G        1.0G        4.8G        5.6G
-	Swap:           15G        671M         15G
+		free -mh
+					total        used        free      shared  buff/cache   available
+		Mem:            31G         24G        2.2G        1.0G        4.8G        5.6G
+		Swap:           15G        671M         15G
 
  
 
@@ -344,6 +343,9 @@ ls -ltr --block-size=M
 |													|
 +---------------------------------------------------+
 	
+	grep -Rnw . -e '<search_string_>'
+	tail -f sailpoint.log | grep flushs
+	find . -cnewer sailpoint.log.8 | xargs grep "<search_string_>"
 	
 
 +---------------------------------------------------+
