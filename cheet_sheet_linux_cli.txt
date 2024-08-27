@@ -3,6 +3,7 @@
 |	LOG OUTPUT OF SH SCRIPT									|
 |															|
 +-----------------------------------------------------------+
+
 	strace -o mylog.txt -f -e trace=file ./startup.sh
 	
 
@@ -11,6 +12,7 @@
 |	CHECK KERBEROS CONNECTIVITY								|
 |															|
 +-----------------------------------------------------------+
+
 	env KRB5_TRACE=/pathToLog/krb5.log 
 	kinit -V
 	kinit -p <username>@domain.name
@@ -21,6 +23,7 @@
 |	DELETE FILES BY EXTENSION								|
 |															|
 +-----------------------------------------------------------+
+
 	#List file to be deleted
 		find . -name "*.bak" -type f
 
@@ -33,6 +36,7 @@
 |	DELETE FILES BY DATE OF CHANGE RANGE					|
 |															|
 +-----------------------------------------------------------+
+
 	#List files that were modified between dates
 		find . -type f -newermt '01 jan 2009 00:00:00' -not -newermt '01 jan 2012 00:00:00' -ls
 
@@ -45,6 +49,7 @@
 |	FIND LOCKS ON FILES										|
 |															|
 +-----------------------------------------------------------+ 
+
 	lsof +g | grep sailpoint.log | sed "s/[a-z]\+\s\+\([0-9]\+\)\s.*/\\1/" | xargs ps
 
 
@@ -53,6 +58,7 @@
 |	FILE ENCODING											|
 |															|
 +-----------------------------------------------------------+
+
 	#Text editor
 		vim file
 		:set bomb
@@ -67,6 +73,7 @@
 |	JQ														|
 |															|
 +-----------------------------------------------------------+
+
 	cat fileName.json | jq -c '. | select(.)' #if this works then json file is correct
 	cat fileName.json | jq -c '.groups.name[] | select(.)'
 	cat fileName.json | jq -c '.groups.name[] | select(.=="valueToFind")'
@@ -78,6 +85,7 @@
 |	TR														|
 |															|
 +-----------------------------------------------------------+
+
 	cat fileName.json | tr ‘\r\n’ ‘ ’ | jq .
 	
 
@@ -86,6 +94,7 @@
 |	RECODE													|
 |															|
 +-----------------------------------------------------------+
+
 	#from hebrew to entity
 		echo 'טסט מחרוזת' |recode ..html
 	#from entity to hebrew	
@@ -96,6 +105,7 @@
 |	PERMISSIONS OCTAL PRESENTATION							|
 |															|
 +-----------------------------------------------------------+	
+
 	stat -c '%A %a %n' /etc/passwd
 
 
@@ -104,6 +114,7 @@
 |	LS														|
 |															|
 +-----------------------------------------------------------+	
+
 	ls -ltr --block-size=M
 	
 
@@ -112,6 +123,7 @@
 |	SIZE													|
 |															|
 +-----------------------------------------------------------+
+
 	#disk space usage in linux
 		df -H 
 
@@ -124,6 +136,7 @@
 |				SORT FILES BY SIZE IN DIRECTORY				|
 |															|
 +-----------------------------------------------------------+
+
 	#native
 		ls -lSh
 	#reverse
@@ -135,6 +148,7 @@
 |	FIND FILES LARGER THAN 4G								|
 |															|
 +-----------------------------------------------------------+
+
 	find . -type f -size +4G
 
 
@@ -357,3 +371,15 @@ ls -ltr --block-size=M
 	tar xf jdk-11.0.20_linux-x64_bin.tar.gz -C /opt
 	export JAVA_HOME=/opt/jdk-11.0.20
 	export PATH=${PATH}:${JAVA_HOME}/bin
+	
+	
++---------------------------------------------------+
+|													|
+|	FIND FILES WITH SAME NAME BUT DIFFERENT CASE	|
+|													|
++---------------------------------------------------+
+	//SOURCE: https://stackoverflow.com/questions/2109056/how-to-find-duplicate-files-with-same-name-but-in-different-case-that-exist-in-s
+
+	ls -1 | tr '[A-Z]' '[a-z]' | sort | uniq -c | grep -v " 1 "
+	find . -type f -printf "%f\n" -name "*.jar" | sort -f | uniq -i -d
+	find . | perl -ne 's!([^/]+)$!lc $1!e; print if 1 == $seen{$_}++'
