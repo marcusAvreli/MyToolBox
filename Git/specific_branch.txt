@@ -1,0 +1,45 @@
++-------------------------------------------------------+
+|														|
+|              INIT REPO								|                                                                                                                                                                                                                         |
+|														|
++-------------------------------------------------------+
+    git init
+
+
++-------------------------------------------------------+
+|														|
+|	EDIT_FILE:           .git/config					|
+|														|
++-------------------------------------------------------+
+	[core]
+		repositoryformatversion = 0
+		filemode = false
+		bare = false
+		logallrefupdates = true
+		symlinks = false
+		ignorecase = true
+
+	[remote "origin"]
+		url = <repo_url>
+		fetch = +refs/heads/*:refs/remotes/origin/*
+
+	[branch "target_branch_name"]
+		remote = origin
+		merge = refs/heads/target_branch_name
+		
+
++-------------------------------------------------------+
+|														|
+|	PULL TREE											|
+|														|
++-------------------------------------------------------+
+	git  -c http.sslVerify=false pull
+	
+
++-------------------------------------------------------+
+|														|
+|	CHECKOUT TARGET BRANCH								|
+|														|
++-------------------------------------------------------+
+	git checkout target_branch_name
+
