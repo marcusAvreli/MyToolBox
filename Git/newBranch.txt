@@ -1,0 +1,25 @@
+https://stackoverflow.com/questions/66882952/how-to-create-new-local-branch-and-switch-between-branches-in-git
++-------------------------------------------------------+
+|														|
+|	CREATE AND SWITCH TO A NEW BRANCH IN GIT			|
+|														|
++-------------------------------------------------------+
+    git checkout -b new-branch-name
+
+
++-------------------------------------------------------+
+|														|
+|	VERIFY IF YOU ARE WORKING ON THAT BRANCH			|
+|														|
++-------------------------------------------------------+
+	git branch
+
+
++-------------------------------------------------------+
+|														|
+|	PUSH CREATED TO A REMOTE REPOSITORY					|
+|														|
++-------------------------------------------------------+
+	git push origin new-branch-name
+
+

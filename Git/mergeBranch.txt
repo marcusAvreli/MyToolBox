@@ -1,0 +1,23 @@
+https://stackoverflow.com/questions/5601931/how-do-i-safely-merge-a-git-branch-into-master
++-------------------------------------------------------+
+|										======1======	|
+|	MERGE												|
+|														|
++-------------------------------------------------------+
+
+	git checkout test
+	git pull origin test
+	git rebase -i master
+	git checkout master
+	git pull origin master
+
+--Test merge before commit, avoid a fast-forward commit by --no-ff
+	git merge --no-ff --no-commit test
+
+--If conflict is encountered, we can run git status to check details about the conflicts and try to solve
+
+	git status
+
+--Once we solve the conflicts, or if there is no conflict, we commit and push them
+	git commit -m 'merge test branch'
+	git push
