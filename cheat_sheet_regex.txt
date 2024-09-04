@@ -158,6 +158,33 @@ Replace with: <empty>
 
 
 
++-------------------------------------------------------+
+|										======17=====	|
+|	REGEX MATCH LINE CONTAINING STRING					|
+|														|
++-------------------------------------------------------+
+	https://stackoverflow.com/questions/1376952/notepad-regular-expression-find-and-delete-a-line
+	Step 1
+
+	Search → Find → (goto Tab) Mark
+	Find what: ^Session.*$
+	Enable the checkbox Bookmark line
+	Enable the checkbox Regular expression (under Search Mode)
+	Click Mark All (this will find the regex and highlights all the lines and bookmark them)
+	Step 2
+
+	Search → Bookmark → Remove Bookmarked Lines
+	
+ 
++-------------------------------------------------------+
+|										======17=====	|
+|	DISTINGUISHED NAME									|
+|														|
++-------------------------------------------------------+
+
+	^((CN=([^,]*)),)?((((?:CN|OU)=[^,]+,?)+),)?((DC=[^,]+,?)+)
+
+
 Regex find last n chars in string
 .{2}$
 
@@ -234,8 +261,7 @@ find everything after := sign
 
  %s/FIND_WHAT/REPLACE_WITH/g
 
- 
 
- 
-DISTINGUISHED NAME
-^((CN=([^,]*)),)?((((?:CN|OU)=[^,]+,?)+),)?((DC=[^,]+,?)+)
+
+
+
