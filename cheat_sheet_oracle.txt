@@ -799,7 +799,7 @@ WITH input_data AS
  
  split delimited column (by line feeds) to rows
  https://asktom.oracle.com/ords/f?p=100:11:::::P11_QUESTION_ID:9525167800346253512
- 
+ https://odieweblog.wordpress.com/2016/05/20/how-to-using-outer-join-with-xmltable-or-xquery/
  
  
  
