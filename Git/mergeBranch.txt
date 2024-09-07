@@ -1,4 +1,6 @@
 https://stackoverflow.com/questions/5601931/how-do-i-safely-merge-a-git-branch-into-master
+https://git-scm.com/book/en/v2/Git-Branching-Rebasing
+https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging#_basic_merging
 +-------------------------------------------------------+
 |										======1======	|
 |	MERGE												|
