@@ -198,7 +198,7 @@ https://github.com/Kallenju/simpower-validation/blob/main/src/core/modules/commo
 |	ideas												|
 |														|
 +-------------------------------------------------------+
-//transfer
+//transferList transfer list
 https://behai-nguyen.github.io/demo/063/css-vertical-scrollbar.html
 https://www.codewithrandom.com/2023/09/05/37-css-progress-bars-examples/
 https://www.codewithrandom.com/2023/02/28/clock-css-animation-clock-animation-using-html-css-javascript/
