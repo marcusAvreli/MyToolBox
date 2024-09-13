@@ -3,7 +3,7 @@
 |	CUSTOM ELEMENTS										|
 |														|
 +-------------------------------------------------------+
-
+https://andyogo.github.io/custom-element-reactions-diagram/
 theory
 https://itnext.io/building-micro-frontend-applications-with-angular-elements-34483da08bcb
 https://trailheadtechnology.com/create-and-compile-web-components-in-angular-projects/
