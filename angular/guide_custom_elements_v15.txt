@@ -1,0 +1,46 @@
+create file appName/extra-webpack.config.js
+	const webpack = require('webpack')
+	module.exports = {
+		 plugins: [
+		  new webpack.ProvidePlugin({
+			process: "process/browser",
+		  }),
+		
+		],
+		resolve:{
+	  fallback: {
+		   "url": require.resolve("url/"),
+			"util": require.resolve("util/"),
+			"fs": false 
+		}
+		}
+	};
+
+angular.json
+	"builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+					"allowedCommonJsDependencies" : ["mgcomponents"],
+
+
+package.config
+
+	"process": "^0.11.10",
+	"path": "^0.12.7",
+	"mgcomponents": "file:../../nodeJSDev/mgComponents",
+	devDependencies
+	"url": "^0.11.3",
+	"util": "^0.12.5",
+	"@angular-builders/custom-webpack": "~15.0.0",
+
+tsconfig.json
+
+	"typeRoots": [
+		"./typings",
+		"./node_modules/@types/"
+	],
+
+tsconfig.app.json
+	"files": [
+		"src/main.ts",
+		"src/process.ts"
+	],

@@ -38,10 +38,20 @@ https://github.com/zotero/zotero/tree/98066b1bc5cecbda0fd3c7ae90fced5c3969e0d1/c
 https://github.com/iamparnab/html-custom-elements
 //base component BaseComponent container/fixtures/comp1.js
 https://github.com/NAUMEN-GP/formio.js/blob/8c0a5afd16788c1b968eef3131c84074bf72055b/src/components/base/Base.js
-//tagname
+//tagname createComponent 
 https://github.com/auxfuse/hackathon-git-labs/blob/f018d6f715200c2884cec5cd63694552fbdd1629/assets/js/components/slideshow/slideshow.js
+//attributeChangedCallback abstract
 https://github.com/knowthelist/ftui/blob/master/www/ftui/components/element.component.js#L15
+component-register.j
 https://github.com/SDFIdk/skraafoto_frontend/tree/434818945f68b0af767a9fb060f9b3734854b55c/src/components
+
+https://github.com/aws-solutions/media-services-application-mapper/tree/9fc443f3604200a1d1089625d6ddde7072310882/source/html/js/app/ui
+window.customElements.define('lap-table', LapTable); tabulator
+https://github.com/raceconditionrunning/raceconditionrunning.github.io/blob/3b9403b7b27e278744b48b00f3bc32842caa5d0c/js/LapTable.js#L121
+//Tabulator
+https://github.com/surveyjs/survey-analytics/blob/4b773c0a255d427a35c85e372e4528bd0e37d012/examples/tabulator-remote.js#L31
+//tabulator TCB.i18next.language;
+https://github.com/som-labs/solidar/blob/ec32b1f90f20fe7a62f2eaf89ea6150f207c99c1/src/legacy/js/InicializaAplicacion.js#L145
 
 https://github.com/lekoala/formidable-elements/blob/d2a37318847835935b112f3cf9e0128206426550/package.json
 https://github.com/JackovAlltrades/io/tree/master/src/elements/core
@@ -62,7 +72,10 @@ https://github.com/dotCMS/core/tree/a7af331b7361bffd039413a22bea7dbad7b3d03c/cor
 https://github.com/SAP/openui5/blob/45da40f3b01ab7fea1f524eb84bca6c0bf907a5d/src/sap.ui.commons/src/sap/ui/commons/layout/MatrixLayoutRenderer.js
 https://github.com/dataformsjs/dataformsjs/tree/master/js/web-components
 https://github.com/UziTech/web-component-abstract/blob/ee2f2ba574538c27856a4ff545b9603b79483fe5/index.js#L8
+//kSplineTableSize 
 https://github.com/YufJi/tiny/blob/fe35eef306aa4cd53f85e1649bc1ce58935c8023/packages/base/src/webview/web-components/form.js
+
+//define register
 https://github.com/akudev/ui5-webcomponents/blob/master/packages/main/src/TextArea.js
 //scss
 https://github.com/grandemayta/custom-element-pokemon-cards/tree/master/src
