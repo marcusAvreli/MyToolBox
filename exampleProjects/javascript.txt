@@ -150,6 +150,14 @@ https://github.com/angular/angular/issues/23732 (example-angular-elments-app - t
 
 //video player html5 javascript TrackList.prototype.allowedEvents_
 https://github.com/videojs/video.js/blob/a10d25861daec1132dce5805615346d6d0c0ef87/rollup.config.js
+ // Properties that will have special handling, not just pass through
+https://github.com/muxinc/media-playlist/blob/5db897fe2cef4706f408653a0f5e0167ad23dc5c/index.js#L362
+  Object.defineProperty(MediaPlaylist.prototype, propName, getterDescriptor);
+  https://github.com/xxxily/h5player/blob/dc61318cbc998fe8c1c2689c6a8e03d5aeecdbbe/src/h5player.js
+  https://github.com/Andy-set-studio/tatl/blob/6d4e86254d34aec2c0eb700d5186a46825cd62d1/src/tatl.js#L84
+
+
+https://frontendmasters.com/blog/vanilla-javascript-reactivity/
 https://github.com/mozilla/blurts-server/blob/ea176dc1b070db735e886da2ce886b8cbb5e1396/src/client/js/components/circleChart.js
 
 saveAndClose,cancel,save, xlsx excel
