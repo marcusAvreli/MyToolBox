@@ -52,7 +52,8 @@ https://github.com/raceconditionrunning/raceconditionrunning.github.io/blob/3b94
 https://github.com/surveyjs/survey-analytics/blob/4b773c0a255d427a35c85e372e4528bd0e37d012/examples/tabulator-remote.js#L31
 //tabulator TCB.i18next.language;
 https://github.com/som-labs/solidar/blob/ec32b1f90f20fe7a62f2eaf89ea6150f207c99c1/src/legacy/js/InicializaAplicacion.js#L145
-
+//tabulator russian
+https://krinopotam.github.io/-krinopotam/ui-kit/demo/
 https://github.com/lekoala/formidable-elements/blob/d2a37318847835935b112f3cf9e0128206426550/package.json
 https://github.com/JackovAlltrades/io/tree/master/src/elements/core
 https://github.com/esiur/iui/blob/1bcc7e0a64a256fe6beaaafed84982f639f079fc/src/Core/IUI.js#L24

@@ -16,8 +16,7 @@ https://github.com/arenasjuanf/bancojj/blob/b947b2efb390a0293daadcab1f7a64a24282
 |	ANGULAR 4 NGRX 										|
 |														|
 +-------------------------------------------------------+ 
-//tabulator russiannnnnnnnnnnnnnnnnnnn
-https://krinopotam.github.io/-krinopotam/ui-kit/demo/
+
 https://github.com/SafwenSoker/ApexERP/blob/0361961e513d3f1854869021c744a28579d35709/src/app/models/evaluation-portal/assessment.ts
 #CQRS NGRX ANGULAR 4
 	https://github.com/dancancro/great-big-example-application/blob/fc757ea6e862194deabb1fbb039fd4c6ca230010/src/main/webapp/app/core/store/index.ts#L27
