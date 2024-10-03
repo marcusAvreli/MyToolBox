@@ -10,7 +10,7 @@ https://stackoverflow.com/questions/6410452/fetch-oracle-table-type-from-stored-
 https://stackoverflow.com/questions/52592000/how-to-get-oracle-array-of-object-and-use-them-in-my-code
 https://stackoverflow.com/questions/13801183/howto-get-a-table-as-a-out-parameter-in-oracle
 
-
+https://github.com/mariogarcia/viewa
 detect log4j2
 https://github.com/dimajix/flowman/blob/b68be70436c9aee2e6269b8841cb185fe63a00c2/flowman-common-java/src/main/java/com/dimajix/flowman/common/Logging.java#L209
 

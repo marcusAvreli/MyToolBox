@@ -31,6 +31,9 @@ https://github.com/globulario/globular-mvc/blob/19137852d6d76de0ca1305b7b581bd56
 https://github.com/capyloon/nutria/blob/e351dbdb1f8a69507fd5eb843ba8ade783ac9cea/apps/system/components/status_bar.js#L69
 https://github.com/Dabolus/vanilla-pwa/tree/bd03984a2abbcd179cfd9ecd392477bc240fd966/components/dynamic-data
 
+
+//StateHandler
+https://github.com/oskariorg/oskari-frontend/blob/master/src/react/util/state/StateHandler.js#L1
 //a11y-color.js
 https://github.com/ddamato/damato.design/tree/7882b101b2b22b5086bb91819172d870882ef39e/js-components
 //https://github.com/Abhi2707/gsoc18_adaptive_images/blob/28dfe8afd50be907851406e2059680f7ecccb79b/build/build-modules-js/compilecejs.js#L8
@@ -44,16 +47,43 @@ https://github.com/auxfuse/hackathon-git-labs/blob/f018d6f715200c2884cec5cd63694
 https://github.com/knowthelist/ftui/blob/master/www/ftui/components/element.component.js#L15
 component-register.j
 https://github.com/SDFIdk/skraafoto_frontend/tree/434818945f68b0af767a9fb060f9b3734854b55c/src/components
+https://github.com/htmlacademy-ecmascript/1564865-big-trip-21/tree/d0226d148b17f68508866e920a6e1d9e3a657878/src/views
+https://github.com/inasekin/oop-big-trip/blob/43a39ad2f61a456e5c677921e79332a2210db5f7/src/presenters/info-presenter.js
 
-https://github.com/aws-solutions/media-services-application-mapper/tree/9fc443f3604200a1d1089625d6ddde7072310882/source/html/js/app/ui
-window.customElements.define('lap-table', LapTable); tabulator
-https://github.com/raceconditionrunning/raceconditionrunning.github.io/blob/3b9403b7b27e278744b48b00f3bc32842caa5d0c/js/LapTable.js#L121
-//Tabulator
-https://github.com/surveyjs/survey-analytics/blob/4b773c0a255d427a35c85e372e4528bd0e37d012/examples/tabulator-remote.js#L31
-//tabulator TCB.i18next.language;
-https://github.com/som-labs/solidar/blob/ec32b1f90f20fe7a62f2eaf89ea6150f207c99c1/src/legacy/js/InicializaAplicacion.js#L145
-//tabulator russian
-https://krinopotam.github.io/-krinopotam/ui-kit/demo/
++-------------------------------------------------------+
+|														|
+|	Tabulator											|
+|														|
++-------------------------------------------------------+
+	//tabulator
+	https://stackoverflow.com/questions/73580713/how-to-use-tabulator-javascript-library-in-observablehg
+	//state observable reactive
+	//observable-element.js observable-proxy.js observable-state.js observable-store.js observable-stream.js observable.js
+	https://github.com/kennyfrc/cami.js/tree/e835aec06335446a145316c182b3acf52469b441/src
+	https://github.com/TodorBelchev/SoftUni/blob/dbc24f58804d70a3a3172a17a0a8d20be72f9a51/JavaScript%20Applications/Web-components/User-cards/card.js
+	https://github.com/aws-solutions/media-services-application-mapper/tree/9fc443f3604200a1d1089625d6ddde7072310882/source/html/js/app/ui
+	window.customElements.define('lap-table', LapTable); tabulator
+	https://github.com/raceconditionrunning/raceconditionrunning.github.io/blob/3b9403b7b27e278744b48b00f3bc32842caa5d0c/js/LapTable.js#L121
+
+	//tabulator dynamic data
+	https://github.com/raceconditionrunning/raceconditionrunning.github.io/blob/ba94074624e740eefce20edd4130c536b2e68dff/js/RelayResultsTable.js#L29
+	//Tabulator
+	https://github.com/surveyjs/survey-analytics/blob/4b773c0a255d427a35c85e372e4528bd0e37d012/examples/tabulator-remote.js#L31
+	//tabulator TCB.i18next.language;
+	https://github.com/som-labs/solidar/blob/ec32b1f90f20fe7a62f2eaf89ea6150f207c99c1/src/legacy/js/InicializaAplicacion.js#L145
+	//tabulator russian
+	https://krinopotam.github.io/-krinopotam/ui-kit/demo/
+
+
++-------------------------------------------------------+
+|														|
+|	REFLECT PROXY LISTENER								|
+|														|
++-------------------------------------------------------+
+	https://github.com/Feodor2/Mypal68/blob/1b3a309103e382efd369c66691cd837cbe5f70d0/toolkit/content/about.js
+
+
+
 https://github.com/lekoala/formidable-elements/blob/d2a37318847835935b112f3cf9e0128206426550/package.json
 https://github.com/JackovAlltrades/io/tree/master/src/elements/core
 https://github.com/esiur/iui/blob/1bcc7e0a64a256fe6beaaafed84982f639f079fc/src/Core/IUI.js#L24

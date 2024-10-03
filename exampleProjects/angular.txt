@@ -68,16 +68,35 @@ https://github.com/DSpace/dspace-angular/blob/41eccbbfe156e15f133f1f519c49844b59
 https://stackblitz.com/edit/angular-rxjs-store-custom-state-management?file=src%2Fapp%2Fapp.component.ts
 
 
+https://github.com/kylecannon/angular-dream-stack/tree/c47a95f11332ff606a56559f92df4e882f213d72
+
+//rxjs only containers
+https://github.com/blove/ngrx-tour-of-heros/blob/master/client/src/app/%2Bheroes/components/heroes/heroes.component.ts
+
+//dependency injection
+https://github.com/dispatchlabs/scanner/blob/4302a5742fced2c1ac000be0e890e643b19d4d1b/src/app/m2-angular/services/m2.service.ts#L159
+
+//charts
+https://github.com/Marcelfrueh/streampipes/blob/dev/ui/src/app/data-explorer/echarts-renderer/echarts-grid-generator.service.ts#L20
+
+database client request counter
+//https://github.com/dashjoin/platform
+//sso refresh service
+https://github.com/ncats/GSRSFrontend/blob/development_3.0/src/app/fda/service/sso-refresh.service.ts#L10
 
 https://medium.com/@afilipovich.qu/angular-state-management-how-we-replaced-ngrx-with-our-own-system-9b308428f549
+https://github.com/dispatchlabs/scanner/tree/master
+https://github.com/saconnolly/ng-conf-demo-mono-repo/tree/6f7d01bea128f8c6f8b3e7668b590244c4af77bc
+  //protected componentFactoryResolver: ComponentFactoryResolver;
 
-
+https://github.com/rpietzsch/platform/blob/c3f58231f37bf9691c220fbb92366315d26cbf09/angular/src/app/instance/instance.component.ts#L89
+https://github.com/gonetwork-project/gonetwork-framework/tree/0c8a77e4d49367b817d67e480752661f211c1f23
 https://github.com/takaakit/uml-diagram-for-javascript-design-pattern-examples/blob/master/behavioral-patterns/mediator/DiagramMap.html
 https://github.com/Itchimonji/design-patterns-in-typescript/blob/main/readme/images/13.%20Mediator%20example.jpg
 https://github.com/Itchimonji/design-patterns-in-typescript/blob/main/src/app/13.%20Mediator/mediator.module.ts
 https://masteranyfield.com/2021/07/28/domain-driven-designddd-and-microservice-decomposition/
-
-
+https://github.com/tabius/tabius/tree/bc5e8b422d7e51e72d76a723cd178bbf913f1b3d
+https://github.com/UUDigitalHumanitieslab/I-analyzer/tree/a6ac9660f7b55cc97dada1cdf868c49730469153
 https://medium.com/@anteburazer/angular-architecture-patterns-additional-application-features-ea8093230f0f
 https://medium.com/@qasimsoomro/building-microservices-using-node-js-with-ddd-cqrs-and-event-sourcing-part-1-of-2-52e0dc3d81df
 https://github.com/starker-xp/var-moto-self/tree/master
