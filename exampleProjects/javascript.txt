@@ -5,6 +5,7 @@
 +-------------------------------------------------------+
 https://andyogo.github.io/custom-element-reactions-diagram/
 theory
+https://konadu.dev/ngrx-redux-is-not-hard-it-is-because-you-dont-understand-the-patterns
 https://itnext.io/building-micro-frontend-applications-with-angular-elements-34483da08bcb
 https://trailheadtechnology.com/create-and-compile-web-components-in-angular-projects/
 https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements
