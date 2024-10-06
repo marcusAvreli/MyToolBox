@@ -21,7 +21,14 @@ angular.json
           "options": {
 					"allowedCommonJsDependencies" : ["mgcomponents"],
 
-
+ "serve": { .....
+            "builder": "@angular-builders/custom-webpack:dev-server",
+		      "options": {
+            "browserTarget": "app:build"
+          },
+		  ....
+		  }
+				
 package.config
 
 	"process": "^0.11.10",
@@ -44,3 +51,16 @@ tsconfig.app.json
 		"src/main.ts",
 		"src/process.ts"
 	],
+	
+	before
+Initial Chunk Files | Names   | Raw Size
+runtime.js          | runtime |  6.51 kB |
+main.js             | main    |  4.07 kB |
+
+after
+Initial Chunk Files   | Names         |  Raw Size
+vendor.js             | vendor        |   1.72 MB |
+polyfills.js          | polyfills     | 318.93 kB |
+styles.css, styles.js | styles        | 214.06 kB |
+runtime.js            | runtime       |   6.51 kB |
+main.js               | main          |   4.07 kB |

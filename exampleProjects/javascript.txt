@@ -65,7 +65,7 @@ https://github.com/inasekin/oop-big-trip/blob/43a39ad2f61a456e5c677921e79332a221
 	window.customElements.define('lap-table', LapTable); tabulator
 	https://github.com/raceconditionrunning/raceconditionrunning.github.io/blob/3b9403b7b27e278744b48b00f3bc32842caa5d0c/js/LapTable.js#L121
 
-	//tabulator dynamic data
+	//tabulator dynamic data promise
 	https://github.com/raceconditionrunning/raceconditionrunning.github.io/blob/ba94074624e740eefce20edd4130c536b2e68dff/js/RelayResultsTable.js#L29
 	//Tabulator
 	https://github.com/surveyjs/survey-analytics/blob/4b773c0a255d427a35c85e372e4528bd0e37d012/examples/tabulator-remote.js#L31
@@ -74,16 +74,59 @@ https://github.com/inasekin/oop-big-trip/blob/43a39ad2f61a456e5c677921e79332a221
 	//tabulator russian
 	https://krinopotam.github.io/-krinopotam/ui-kit/demo/
 
-
+sunhAt-emitter-3jeanette
 +-------------------------------------------------------+
 |														|
 |	REFLECT PROXY LISTENER								|
 |														|
 +-------------------------------------------------------+
+
+https://github.com/Jinntec/Fore/blob/97cc79348b448d8b8b3db3d29faa5dd78ea4e5e2/src/ui/abstract-control.js
+
+https://github.com/bingoboya/webcomponents/blob/90cf4689a50e04f0ef59fa8084cb0f515868bb62/dialog.js#L38
+https://github.com/quanghuyhh/omi/tree/76d3c88086d42047302b3f5620b4707111e01728/packages/omi/src
+
+InputProxy 
+https://github.com/cognitom/dominiq/tree/a974bdd735e3b854ab6868855e8163965178f16b/lib
+
+import { stashe } from './stashe-bind.js'
+import { on, off } from './delegated-events.js'
+	https://github.com/davidmsibley/app-component/blob/5e258a559ac3a54ff82aaa9fec8de10bd2e3166c/src/app-component.js#L3
+
+	requiredAttribute, otherAttributes
+	https://github.com/Andy-set-studio/tatl/blob/master/demo/js/components/input-field.js
+
+	//getInterfaceProxy
 	https://github.com/Feodor2/Mypal68/blob/1b3a309103e382efd369c66691cd837cbe5f70d0/toolkit/content/about.js
-
-
-
+	
+	https://github.com/montagejs/montage/blob/c94e776d0b7fe50047a46311faf144c9351b6868/montage.js#L558
+	
+	https://github.com/clshortfuse/materialdesignweb/blob/0e42ee7c40365ca2b77201dcb21c08030744779f/core/CustomElement.js#L551
+	
+	//new proxy
+	https://github.com/yued-fe/lulu/blob/df15107dd656d8b9d24a62d4eaacc5aea54262b3/theme/hope/ui/Drop/index.js#L37
+	
+	//Reactive templates with one-way binding
+	https://github.com/frameable/el/tree/3cd8809a8891675f1873284598360ce1be513f36?tab=readme-ov-file
+	
+	//bind
+	https://github.com/jasmith79/ui-components-lite/blob/master/src/elements/toggle.js
+	BindableHTMLElement 
+	https://github.com/esnet/grafana-esnet-networkmap-panel/blob/main/src/components/lib/pubsub.js
+	
+	
+	https://github.com/krhoyt/Graphene/blob/main/graphene.js#L33
+	
+	https://github.com/heybran/cucumber-components/tree/main?tab=readme-ov-file
+https://github.com/thepassle/generic-components/blob/master/generic-listbox/test/generic-listbox.test.js
+ // before and after are easier to use, but not so powerful without the additional Map
+  static logBeforeEvent(obj, type, evt, cb) {    
+https://github.com/LivelyKernel/lively4-core/blob/7cecd8c67d0ee3f95485fec502a40450ef1062f4/src/client/morphic/events.js
+//custom elements html only no node js
+https://github.com/gs-nisharma/web-components/tree/21cc1e5a7f97b4fa933a9e2a013b88b41c495229/reactive-comp
+//reactive.js
+https://github.com/tradex-app/TradeX-chart/tree/d9636d301822030ac3c08dfac26a1361498cc8be/src/components/widgets
+https://github.com/ircam-ismm/sc-components/blob/89473b8c34709a445002881ecd46d5a6b36859be/src/sc-tab.js#L21
 https://github.com/lekoala/formidable-elements/blob/d2a37318847835935b112f3cf9e0128206426550/package.json
 https://github.com/JackovAlltrades/io/tree/master/src/elements/core
 https://github.com/esiur/iui/blob/1bcc7e0a64a256fe6beaaafed84982f639f079fc/src/Core/IUI.js#L24
