@@ -1,0 +1,7 @@
+1.	model
+2.	update model index
+3.	define actions
+4.	define reducer
+5.	define combined reducer
+6.	define effects
+7.	define http service methods
