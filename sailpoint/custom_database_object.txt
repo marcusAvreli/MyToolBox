@@ -1,0 +1,120 @@
+https://community.sailpoint.com/t5/IdentityIQ-Forum/Storing-huge-data-set-in-Sailpoint/m-p/104900
+
+artyukhin_ivan
+artyukhin_ivan
+Rigger
+In response to JasdeepM
+‎Oct 04, 2015 09:12 AM
+Example of how to create 'ZDepartment' object with one custom attribute 'code' (some other attributes (like 'name') are inherited from its parent)
+
+1) create Java class and xml file for you object type.
+
+ZDepartment.java:
+
+package com.zzz.sailpoint.object;
+
+import sailpoint.object.SailPointObject;
+
+public class ZDepartment extends SailPointObject {
+
+    private String _code = null;
+
+    public String getCode() {
+
+        return _code;
+
+    }
+
+    public void setCode(String _code) {
+
+        this._code = _code;
+
+    }
+
+}
+
+ZDepartment.hbm.xml:
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" [
+
+  <!ENTITY SailPointObject SYSTEM "classpath://sailpoint/object/SailPointObject.hbm.xml">
+
+]>
+
+<hibernate-mapping>
+
+  <class name="com.zzz.sailpoint.object.ZDepartment">
+
+    &SailPointObject;
+
+    <property name="code" type="string" length="1024"/>
+
+  </class>
+
+</hibernate-mapping>
+
+2) compile java class and copy ZDepartment.class into 'webapps\identityiq\WEB-INF\classes\com\zzz\sailpoint\object' directory
+
+Copy ZDepartment.hbm.xml to the same directory
+
+3) extract hibernate.cfg.xml from identityiq.jar and copy it into webapps\identityiq\WEB-INF\classes
+
+4) edit hibernate.cfg.xml ; add the line
+
+    <mapping resource="com/zzz/sailpoint/object/ZDepartment.hbm.xml"/>
+
+after
+
+    <mapping resource="sailpoint/object/WorkItemConfig.hbm.xml"/>
+
+5) create table (example for MS SQL)
+
+CREATE TABLE [identityiq].[spt_zdepartment](
+
+  [id] [nvarchar](128) NOT NULL,
+
+  [created] [numeric](19, 0) NULL,
+
+  [modified] [numeric](19, 0) NULL,
+
+  [owner] [nvarchar](128) NULL,
+
+  [assigned_scope] [nvarchar](128) NULL,
+
+  [assigned_scope_path] [nvarchar](450) NULL,
+
+  [name] [nvarchar](128) NOT NULL,
+
+  [code] [nvarchar](1024) NULL
+
+)
+
+You can even get this script using standard iiq schema
+
+6) restart application server
+
+Now you can create objects of ZDepartment type the same way as all standard objects. You can also query them using context.getObjectById(ZDepartment.class, "...")  . 
+
+Your case is a little bit more complicated, You should
+
+1) extend you class from sailpoint.object.Custom
+
+2) base a table for a new object type on identityiq.spt_custom table
+
+3) change xml-file
+
+I personally didn't try this scenario it but I'm sure it can be done
+
+I hope you get the idea how to do it.
+
+Regards,
+
+Ivan Artyukhin
+
+View solution in original post

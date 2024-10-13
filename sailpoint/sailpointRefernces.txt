@@ -3,3 +3,4 @@ https://community.sailpoint.com/t5/Technical-White-Papers/IdentityIQ-REST-API-In
 
 Idm_Plugin_Url
 http://<host_name:port>/identityiq/plugins/pluginPage.jsf?pn=ScaffoldingPlugin
+https://community.sailpoint.com/t5/IdentityIQ-Forum/Storing-huge-data-set-in-Sailpoint/m-p/104900
