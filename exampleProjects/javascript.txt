@@ -6,7 +6,9 @@
 https://andyogo.github.io/custom-element-reactions-diagram/
 theory
 https://konadu.dev/ngrx-redux-is-not-hard-it-is-because-you-dont-understand-the-patterns
+https://frontendmasters.com/blog/vanilla-javascript-reactivity/
 https://itnext.io/building-micro-frontend-applications-with-angular-elements-34483da08bcb
+https://github.com/boromijovic/smart-webcomponents/blob/50bd574d558584b501a2652330a7e7df0fda3268/framework/smart.element.js#L2578
 https://trailheadtechnology.com/create-and-compile-web-components-in-angular-projects/
 https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements
 https://developer.mescius.com/wijmo/demos/Grid/Overview/angular
@@ -232,7 +234,7 @@ https://github.com/muxinc/media-playlist/blob/5db897fe2cef4706f408653a0f5e0167ad
   https://github.com/Andy-set-studio/tatl/blob/6d4e86254d34aec2c0eb700d5186a46825cd62d1/src/tatl.js#L84
 
 
-https://frontendmasters.com/blog/vanilla-javascript-reactivity/
+
 https://github.com/mozilla/blurts-server/blob/ea176dc1b070db735e886da2ce886b8cbb5e1396/src/client/js/components/circleChart.js
 
 saveAndClose,cancel,save, xlsx excel
