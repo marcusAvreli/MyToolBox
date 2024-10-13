@@ -1,5 +1,16 @@
 +-------------------------------------------------------+
 |										======1======	|
+|	DRAG AND DROP	DND									|
+|														|
++-------------------------------------------------------+
+	//typescript rollup
+	https://github.com/kutlugsahin/smooth-dnd
+	
+	//typescript rollup
+	https://github.com/lukasoppermann/html5sortable/tree/master/src
+
++-------------------------------------------------------+
+|										======1======	|
 |	CUSTOM ELEMENTS										|
 |														|
 +-------------------------------------------------------+
@@ -415,7 +426,7 @@ core start server listent to events
 	https://github.com/hapijs/hapi/blob/master/lib/core.js
 validator
 	https://github.com/geraintluff/tv4/tree/master
-https://github.com/lukasoppermann/html5sortable/tree/master/src
+
 https://github.com/audi/audi-ui/blob/03b8cd1ca4d44ea63081bbf61791965ff0a2df6c/src/textfield/_textfield.scss
 https://github.com/CoherentLabs/GameUIComponents/blob/master/components/text-field/script.js
 
@@ -954,8 +965,7 @@ https://github.com/uuidjs/uuid/tree/main
 https://github.com/TECHOUS/treasurejs.github.io/blob/5264f6b45419f6fc223a001554063e3914718093/scripts/S.js
 https://github.com/jagermesh/draggable/tree/master
 https://github.com/nosir/cleave.js/blob/master/src/shortcuts/NumeralFormatter.js
-	SMOOTH DND
-	https://github.com/kutlugsahin/smooth-dnd
+	
 drop down by div
 https://www.w3schools.com/howto/howto_js_dropdown.asp#:~:text=Use%20any%20element%20to%20open,dropdown%20menu%20correctly%20with%20CSS.
 https://github.com/ComiR/neos-development-collection/blob/e6c7bb9c528c46a2e55c4631e3c725ca2571824e/Neos.Neos/Resources/Public/Library/toastr/toastr.js
