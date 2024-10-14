@@ -1,0 +1,22 @@
+//https://confluence.atlassian.com/bitbucketserverkb/unable-to-find-remote-helper-for-https-during-git-fetch-clone-1071830596.html
+Diagnosis
+	git clone https://repo.com/project/sample.git
+	Cloning into sample...
+	fatal: Unable to find remote helper for 'https'
+	
+Cause
+	issue: git --exec-path
+	output: /usr/libexec/git-core
+	
+	ls -l /usr/libexec/git-core
+		lrwxr-xr-x   1 root  admin       13  4 Aug  2020 git-remote -> ../../bin/git
+		lrwxr-xr-x   1 root  admin       13  4 Aug  2020 git-remote-ext -> ../../bin/git
+		lrwxr-xr-x   1 root  admin       13  4 Aug  2020 git-remote-fd -> ../../bin/git
+		lrwxr-xr-x   1 root  admin       15  4 Aug  2020 git-remote-ftp -> git-remote-http
+		lrwxr-xr-x   1 root  admin       15  4 Aug  2020 git-remote-ftps -> git-remote-http
+		-rwxr-xr-x   1 root  wheel  1641568  3 May  2020 git-remote-http
+		lrwxr-xr-x   1 root  admin       15  4 Aug  2020 git-remote-https -> git-remote-http
+		-rwxr-xr-x   1 root  wheel  1609104  3 May  2020 git-remote-testsvn
+		
+Solution
+	find / -name git-remote-http
