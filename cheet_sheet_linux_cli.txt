@@ -383,3 +383,8 @@ ls -ltr --block-size=M
 	ls -1 | tr '[A-Z]' '[a-z]' | sort | uniq -c | grep -v " 1 "
 	find . -type f -printf "%f\n" -name "*.jar" | sort -f | uniq -i -d
 	find . | perl -ne 's!([^/]+)$!lc $1!e; print if 1 == $seen{$_}++'
+
+
+https://stackoverflow.com/questions/762348/how-can-i-exclude-all-permission-denied-messages-from-find
+
+	find . 2>/dev/null > files_and_folders
