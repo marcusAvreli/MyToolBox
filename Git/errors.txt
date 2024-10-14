@@ -20,3 +20,8 @@ Cause
 		
 Solution
 	find / -name git-remote-http
+	
+	
+.bashrc
+	export GIT_EXEC_PATH=~/git/
+	export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
