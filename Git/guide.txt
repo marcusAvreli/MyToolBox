@@ -81,6 +81,11 @@ git clone <path.to.repo>
 
 		GIT_CURL_VERBOSE=1 git clone <http>
 
+	CHECK SECURED CONNECTIVITY TO TFS
+		curl -v --capath  "abs_path_to_directory" repo_url
+		curl -v --cacert  "<abs_path_to_pem_file>" repo_url
+
+ 
  
 		
 Using personal access token
