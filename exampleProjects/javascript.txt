@@ -17,7 +17,10 @@
 https://andyogo.github.io/custom-element-reactions-diagram/
 theory
 https://konadu.dev/ngrx-redux-is-not-hard-it-is-because-you-dont-understand-the-patterns
+https://www.sitepoint.com/redux-without-react-state-management-vanilla-javascript/#anapplicationfromscratch
+https://github.com/morkro/tetrys/blob/master/src/scripts/worker.js
 https://frontendmasters.com/blog/vanilla-javascript-reactivity/
+https://marmelab.com/blog/2015/12/17/react-directory-structure.html
 https://itnext.io/building-micro-frontend-applications-with-angular-elements-34483da08bcb
 https://github.com/boromijovic/smart-webcomponents/blob/50bd574d558584b501a2652330a7e7df0fda3268/framework/smart.element.js#L2578
 https://trailheadtechnology.com/create-and-compile-web-components-in-angular-projects/
