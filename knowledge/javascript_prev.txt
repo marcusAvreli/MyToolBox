@@ -3,3 +3,25 @@ https://rakish-labs.medium.com/the-ultimate-introductory-guide-for-bundling-type
 mkdir my-lib
 cd my-lib
 mkdir src
+
+//Tabulator 5+
+this.table.on("cellClick", function(e, cell){
+        //e - the click event object
+        //cell - cell component
+		console.log("here_1");
+});
+
+this.table.on("cellClick",this.cellClicked.bind(this))
+
+cellClicked( event,cell) {	   
+   //damast
+   console.log("clicked");
+   const field = cell.getColumn().getField();	   
+   switch (field) {
+		case 'delete':
+			return this.onDelete(event, cell);
+		default:
+			console.log("cell clicked 2");
+		return;
+   } 
+}
