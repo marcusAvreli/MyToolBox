@@ -69,3 +69,51 @@ Tue Oct 15 18:34:11 IDT 2024 Thread[DRDAConnThread_3,5,main] WARNING: the proper
                 
 Tue Oct 15 18:34:11 IDT 2024 Thread[DRDAConnThread_3,5,main] WARNING: the property derby.database.defaultConnectionMode could not be read due to a security exception: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "derby.database.defaultConnectionMode" "read"). This could pose a security risk.
                 
+Wed Oct 16 18:06:30 IDT 2024 Thread[DRDAConnThread_4,5,main] WARNING: the property derby.database.fullAccessUsers could not be read due to a security exception: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "derby.database.fullAccessUsers" "read"). This could pose a security risk.
+                
+Wed Oct 16 18:06:30 IDT 2024 Thread[DRDAConnThread_4,5,main] WARNING: the property derby.database.fullAccessUsers could not be read due to a security exception: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "derby.database.fullAccessUsers" "read"). This could pose a security risk.
+                
+Wed Oct 16 18:06:30 IDT 2024 Thread[DRDAConnThread_4,5,main] WARNING: the property derby.database.readOnlyAccessUsers could not be read due to a security exception: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "derby.database.readOnlyAccessUsers" "read"). This could pose a security risk.
+                
+Wed Oct 16 18:06:30 IDT 2024 Thread[DRDAConnThread_4,5,main] WARNING: the property derby.database.readOnlyAccessUsers could not be read due to a security exception: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "derby.database.readOnlyAccessUsers" "read"). This could pose a security risk.
+                
+Wed Oct 16 18:06:30 IDT 2024 Thread[DRDAConnThread_4,5,main] WARNING: the property derby.database.defaultConnectionMode could not be read due to a security exception: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "derby.database.defaultConnectionMode" "read"). This could pose a security risk.
+                
+Wed Oct 16 18:06:30 IDT 2024 Thread[DRDAConnThread_4,5,main] WARNING: the property derby.database.defaultConnectionMode could not be read due to a security exception: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "derby.database.defaultConnectionMode" "read"). This could pose a security risk.
+                
+Wed Oct 16 18:06:30 IDT 2024 Thread[DRDAConnThread_4,5,main] WARNING: the property derby.database.fullAccessUsers could not be read due to a security exception: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "derby.database.fullAccessUsers" "read"). This could pose a security risk.
+                
+Wed Oct 16 18:06:30 IDT 2024 Thread[DRDAConnThread_4,5,main] WARNING: the property derby.database.fullAccessUsers could not be read due to a security exception: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "derby.database.fullAccessUsers" "read"). This could pose a security risk.
+                
+Wed Oct 16 18:06:30 IDT 2024 Thread[DRDAConnThread_4,5,main] WARNING: the property derby.database.readOnlyAccessUsers could not be read due to a security exception: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "derby.database.readOnlyAccessUsers" "read"). This could pose a security risk.
+                
+Wed Oct 16 18:06:30 IDT 2024 Thread[DRDAConnThread_4,5,main] WARNING: the property derby.database.readOnlyAccessUsers could not be read due to a security exception: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "derby.database.readOnlyAccessUsers" "read"). This could pose a security risk.
+                
+Wed Oct 16 18:06:30 IDT 2024 Thread[DRDAConnThread_4,5,main] WARNING: the property derby.database.defaultConnectionMode could not be read due to a security exception: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "derby.database.defaultConnectionMode" "read"). This could pose a security risk.
+                
+Wed Oct 16 18:06:30 IDT 2024 Thread[DRDAConnThread_4,5,main] WARNING: the property derby.database.defaultConnectionMode could not be read due to a security exception: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "derby.database.defaultConnectionMode" "read"). This could pose a security risk.
+                
+Wed Oct 16 18:15:16 IDT 2024 Thread[DRDAConnThread_5,5,main] WARNING: the property derby.database.fullAccessUsers could not be read due to a security exception: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "derby.database.fullAccessUsers" "read"). This could pose a security risk.
+                
+Wed Oct 16 18:15:16 IDT 2024 Thread[DRDAConnThread_5,5,main] WARNING: the property derby.database.fullAccessUsers could not be read due to a security exception: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "derby.database.fullAccessUsers" "read"). This could pose a security risk.
+                
+Wed Oct 16 18:15:16 IDT 2024 Thread[DRDAConnThread_5,5,main] WARNING: the property derby.database.readOnlyAccessUsers could not be read due to a security exception: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "derby.database.readOnlyAccessUsers" "read"). This could pose a security risk.
+                
+Wed Oct 16 18:15:16 IDT 2024 Thread[DRDAConnThread_5,5,main] WARNING: the property derby.database.readOnlyAccessUsers could not be read due to a security exception: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "derby.database.readOnlyAccessUsers" "read"). This could pose a security risk.
+                
+Wed Oct 16 18:15:16 IDT 2024 Thread[DRDAConnThread_5,5,main] WARNING: the property derby.database.defaultConnectionMode could not be read due to a security exception: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "derby.database.defaultConnectionMode" "read"). This could pose a security risk.
+                
+Wed Oct 16 18:15:16 IDT 2024 Thread[DRDAConnThread_5,5,main] WARNING: the property derby.database.defaultConnectionMode could not be read due to a security exception: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "derby.database.defaultConnectionMode" "read"). This could pose a security risk.
+                
+Wed Oct 16 18:15:16 IDT 2024 Thread[DRDAConnThread_5,5,main] WARNING: the property derby.database.fullAccessUsers could not be read due to a security exception: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "derby.database.fullAccessUsers" "read"). This could pose a security risk.
+                
+Wed Oct 16 18:15:16 IDT 2024 Thread[DRDAConnThread_5,5,main] WARNING: the property derby.database.fullAccessUsers could not be read due to a security exception: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "derby.database.fullAccessUsers" "read"). This could pose a security risk.
+                
+Wed Oct 16 18:15:16 IDT 2024 Thread[DRDAConnThread_5,5,main] WARNING: the property derby.database.readOnlyAccessUsers could not be read due to a security exception: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "derby.database.readOnlyAccessUsers" "read"). This could pose a security risk.
+                
+Wed Oct 16 18:15:16 IDT 2024 Thread[DRDAConnThread_5,5,main] WARNING: the property derby.database.readOnlyAccessUsers could not be read due to a security exception: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "derby.database.readOnlyAccessUsers" "read"). This could pose a security risk.
+                
+Wed Oct 16 18:15:16 IDT 2024 Thread[DRDAConnThread_5,5,main] WARNING: the property derby.database.defaultConnectionMode could not be read due to a security exception: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "derby.database.defaultConnectionMode" "read"). This could pose a security risk.
+                
+Wed Oct 16 18:15:16 IDT 2024 Thread[DRDAConnThread_5,5,main] WARNING: the property derby.database.defaultConnectionMode could not be read due to a security exception: java.security.AccessControlException: access denied ("java.util.PropertyPermission" "derby.database.defaultConnectionMode" "read"). This could pose a security risk.
+                
