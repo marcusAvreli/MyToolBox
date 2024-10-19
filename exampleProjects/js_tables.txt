@@ -1,0 +1,49 @@
++-------------------------------------------------------+
+|										======1======	|
+|	TABLE												|
+|														|
++-------------------------------------------------------+
+	https://github.com/ASNA/avr-restful-api-with-tabulator/tree/9124e7355c9280ce4ce94e28c0ca4a191a630bc6
+	DataTables
+	Tabulator
+	dgrid
+	jsGrid
+	jqGrid
+	SlickGrid
+
+
+DataTables is powerful and relatively simple to use, but it has a dependency on jQuery, a very popular JavaScript library. A jQuery dependence isn't that bad—Bootstrap 4 also requires jQuery so jQuery is usually present anyway. However, I like to avoid jQuery when I can. That's one of the reasons this example uses Tabulator. It is a pure JavaScript component with no other dependencies.
+
+Another plus in Tabulator's favor is that, surprisingly, it doesn't render its grid as an HTML table, rather it renders as a div tabs cleverly stitched together with very effectively CSS. This makes the Tabulator a lot more responsive than grids that render as an HTML tables.
+
+I've not used the other grids in the list above, but the code used here for Tabulator is similiar in both concept and execution to the code you'd use for DataTables (and by quickly looking at the docs, most of the others as well). Use this example to get familiar with the general concept of populating a client-grid and then go shopping. Read the docs for each grid above (and any other than you can find) and pick one that works best for you.
+
+Warning: JavaScript ahead! To use a client-side grid you're going to need to do some client-side work. That means JavaScript. This article doesn't attempt to teach any JavaScript. If you're not up to speed with JavaScript (and modern Web developers need to be!), take a look at Web Bos's free 30 day JavaScript coding challenge. This is a great introduction to many quick JavaScript concepts. If you like what you see there Wes has many other courses for sale that are highly recommended. (Disclaimer: we are in no way affilated with Wes Bos—if you google 'learn JavaScrip't you can find many other resources).
+
+tabulator
+https://github.com/Back2Dev/attendance/blob/f4e8472e1063fd737a9792b58d8fc43e64f67009/scripts/module.templates/list.js#L103
+  tableRef.current.table.setFilter('search', 'like', e.target.value)
+    localStorage.setItem(FILTER_NAME, e.target.value)
+  
+  
+  
+  https://github.com/olifolkerd/tabulator/issues/3715
+  Tabulator.prototype.getActiveSelectedData = function ()
+{
+  const activeRows = this.getRows("active");
+
+  return this.getSelectedRows().filter(x => x.getTreeParent() !== false || activeRows.indexOf(x) !== -1).map(item => item.getData());
+};
+
+https://github.com/tofulionraven/podfics/blob/8d6f90be87e3a4499276cadc0aa10ab6cdef996b/docs/javascript/phone_table.js#L112
+
+https://github.com/takielias/tablar-kit/blob/91fe0e22d6ee8284b71834bbed21bf163d3fc1e7/resources/views/components/table/tabulator.blade.php#L181
+https://github.com/olifolkerd/tabulator/issues/4225
+
+https://github.com/olifolkerd/tabulator/issues/505
+Unfortunately method below doesn't work:
+
+tabulator.setFilter([ {field:"col_a", type:"like", value:input.value}, {field:"col_b", type:"like", value:input.value}, ]);
+
+https://stackoverflow.com/questions/63607444/how-to-do-full-line-search-with-tabulator
+https://github.com/Simle-Infotech/gandaki_portal/blob/5e1697910550f609ccc0c5606085558bbb66981c/src/index.html#L14
