@@ -27,7 +27,7 @@
 
 	2. FIND STRING SKIPPING DIRECTORIES
 		findstr /sin /c:"addTable" "C:\Users\User\gtable\dynagent\*.java" | findstr /liv "\\server\\ \\Nucleo"	
-		findstr /sin /c:"filter" "C:\Users\User\gtable\dynagent\*.java" | findstr /liv "\\server\\ \\Nucleo\\ \\test\\ \\ruleengine\\ \\updaters\\ \\importers\\ \\xml"
+		findstr /sin /c:"idmRestBackEnd.jar" "C:\Users\User\eclipse-workspace\*.xml" | findstr /liv "\\server\\ \\Nucleo\\ \\test\\ \\ruleengine\\ \\updaters\\ \\importers\\ \\xml\\ \\gtable\\ \\.metadata"
 
 		findstr /sin /c:"translateService" "C:\Users\User\angularDev\*.ts" | findstr /liv "\\node_modules\\ \\.docker\\ \\server\\ \\Great-Angular\\ \\e2e\\ \\assets\\ \\great-big-example-application"
 
