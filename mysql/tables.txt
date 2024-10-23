@@ -99,14 +99,21 @@ insert into tbl_report_fields (report_id,name,display_name,output_ordering,descr
 ALTER TABLE tbl_Report_SP_Params add CONSTRAINT FOREIGN KEY sp_id refrences tbl_Report_Stored_Procs.id on delete cascade on update restrict
 
 
-
+CREATE TABLE IF NOT EXISTS tbl_rprt (
+	id int(11) NOT NULL auto_increment,  
+	name int(11) NOT NULL,
+	display_name varchar(450) NOT NULL,
+	disabled int(1) not null default 0,
+	description varchar(450) ,
+	PRIMARY KEY  (id)
+);
 
 CREATE TABLE IF NOT EXISTS tbl_fields (
 	id int(11) NOT NULL auto_increment,  
 	name int(11) NOT NULL,
 	display_name varchar(450) NOT NULL,
 	disabled int(1) not null default 0,
-	
+	description varchar(450) ,
 	PRIMARY KEY  (id)
 );
 ALTER TABLE tbl_fields ADD name varchar(450) NOT NULL;

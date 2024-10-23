@@ -29,7 +29,9 @@
 		findstr /sin /c:"addTable" "C:\Users\User\gtable\dynagent\*.java" | findstr /liv "\\server\\ \\Nucleo"	
 		findstr /sin /c:"idmRestBackEnd.jar" "C:\Users\User\eclipse-workspace\*.xml" | findstr /liv "\\server\\ \\Nucleo\\ \\test\\ \\ruleengine\\ \\updaters\\ \\importers\\ \\xml\\ \\gtable\\ \\.metadata"
 
-		findstr /sin /c:"translateService" "C:\Users\User\angularDev\*.ts" | findstr /liv "\\node_modules\\ \\.docker\\ \\server\\ \\Great-Angular\\ \\e2e\\ \\assets\\ \\great-big-example-application"
+		findstr /sin /c:"idmRestBackEnd" "C:\Users\User\angularDev\*.ts" | findstr /liv "\\node_modules\\ \\.docker\\ \\server\\ \\Great-Angular\\ \\e2e\\ \\assets\\ \\dist\\ \\great-big-example-application\\ \\.git"
+		
+		findstr /sin /c:"idmRestBackEnd" "C:\Users\User\angular15\*.ts" | findstr /liv "\\node_modules\\ \\.docker\\ \\server\\ \\Great-Angular\\ \\e2e\\ \\assets\\ \\dist\\ \\great-big-example-application \\.git"
 
 		JAVASCRIPT SEARCH IN CMD
 		findstr /sin /c:"node-sass-import" "C:\Users\User\nodeJSDev\mgComponents\*.js" | findstr /liv "\\node_modules\\ \\dist\\ \\assets\\"

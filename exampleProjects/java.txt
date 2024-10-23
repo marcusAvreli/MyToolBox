@@ -2,8 +2,9 @@ database sql parser
 https://github.com/jdbi/jdbi/tree/master
 https://medium.com/codex/antlr-magic-developing-mainframe-language-applications-using-language-recognizer-5262726e1e93
 https://github.com/antlr/grammars-v4/blob/master/bicep/Bicep.g4
-
-
+https://github.com/AdrianCitu/GenericCSRFFilter
+csrf roles 
+https://github.com/ldhardy/emissary/blob/a3cb7d71d1d4e91ce613546299b4d342879b759f/src/main/java/emissary/server/EmissaryServer.java#L638
 
 dependency injection
 

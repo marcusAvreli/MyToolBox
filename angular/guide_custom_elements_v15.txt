@@ -1,4 +1,4 @@
-create file appName/extra-webpack.config.js
+create file <appName>/extra-webpack.config.js
 	const webpack = require('webpack')
 	module.exports = {
 		 plugins: [
@@ -17,6 +17,7 @@ create file appName/extra-webpack.config.js
 	};
 
 angular.json
+   "architect": {
 	"builder": "@angular-builders/custom-webpack:browser",
           "options": {
 					"allowedCommonJsDependencies" : ["mgcomponents"],
@@ -28,7 +29,9 @@ angular.json
           },
 		  ....
 		  }
-				
+"customWebpackConfig": {
+              "path": "./extra-webpack.config.js"
+            },				
 package.config
 
 	"process": "^0.11.10",
