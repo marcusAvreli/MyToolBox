@@ -47,6 +47,8 @@ CREATE TABLE IF NOT EXISTS tbl_report_type (
 	PRIMARY KEY  (id)
 
 );
+ALTER TABLE tbl_rprt MODIFY name varchar(255);
+
 ALTER TABLE tbl_report_type ADD disabled int(1) not null default 0;
 ALTER TABLE tbl_report_type ADD name varchar(225) not null;
 ALTER TABLE tbl_report_type ADD display_name varchar(450);

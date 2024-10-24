@@ -9,7 +9,8 @@
 	
 	//typescript rollup
 	https://github.com/lukasoppermann/html5sortable/tree/master/src
-
+https://rxjs.dev/api/index/function/map
+https://github.com/PublicisSapient/enable-a11y/blob/d170968c4ae6549f363636f4f249fdacbe162478/js/modules/tooltip.js
 +-------------------------------------------------------+
 |										======1======	|
 |	CUSTOM ELEMENTS										|

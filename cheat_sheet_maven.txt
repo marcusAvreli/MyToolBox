@@ -176,3 +176,15 @@ Change packaging of myBootAngularV2-server to <packaging>war</packaging>
 mvn archetype:generate -DgroupId=myBootAngularV2 -DartifactId=myBootAngularV2-frontend -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
 
 Change packaging of myBootAngularV2-server to <packaging>jar</packaging>
+
++-------------------------------------------------------+
+|										======2======	|
+|	2. COMPILE MAIN METHOD FROM CMD`					|
+|														|
++-------------------------------------------------------+
+
+	"mvn compile exec:java" will compile and run the main method.
+
+Project is setup according to the standard Maven structure.
+
+Generated source is in src/main/generated-sources
