@@ -14,7 +14,16 @@ https://stackoverflow.com/questions/14926060/how-to-automatically-generate-lexer
 https://github.com/antlr/antlr4/blob/master/doc/java-target.md
 https://codevomit.wordpress.com/2015/03/15/antlr4-project-with-maven-tutorial-episode-1/
 
-
+//https://github.com/mauriceoc/antlr4-maven-example/tree/master
+//https://github.com/ivanyu/logical-rules-parser-antlr/tree/master
+//https://github.com/pditommaso/antlr-hello/blob/master/src/main/Hello.java
+//https://meri-stuff.blogspot.com/2011/08/antlr-tutorial-hello-word.html
+//https://tomassetti.me/antlr-mega-tutorial/
+//https://github.com/ivanyu/logical-rules-parser-antlr/blob/master/src/main/java/me/ivanyu/CompilerApplication.java
+//https://github.com/mauriceoc/antlr4-maven-example/blob/master/src/main/java/org/antlrfun/HelloWalker.java
+//https://issues.apache.org/jira/browse/MNG-6649
+//https://stackoverflow.com/questions/16683135/use-maven-antlr4-plugin-to-generate-grammars-from-other-artifacts
+//https://meri-stuff.blogspot.com/2011/08/antlr-tutorial-hello-word.html
 
 https://stackoverflow.com/questions/63887658/antlr4-project-directory-structure-issue
 
