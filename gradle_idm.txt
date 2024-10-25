@@ -1,16 +1,163 @@
-+-----------------------------------------------------------+
-|															|
-|					GRADLE									|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|										======1======	|
+|					GRADLE								|
+|														|
++-------------------------------------------------------+
 Initializing the Project
-	mkdir pluginRtl
-	cd pluginRtl
+	mkdir <dir_name>
+	cd <dir_name>
+init gradle and install graddle wrapper
 	gradle init
 		Select type of project to generate : Basic
 		Select build script DSL : Groovy
 		Generate build using new APIs and behavior : no
 		
+	for java 1.8 
+	gradle wrapper --gradle-version 4.1
+	
+	for java 11
+	gradle wrapper --gradle-version 5.0
+	
+	
++-------------------------------------------------------+
+|										======1======	|
+|For this point forward you'll be using wrapper			|
+|	Check version										|
+|														|
++-------------------------------------------------------+	
+	gradlew -v
+	
+	
++-------------------------------------------------------+
+|										======1======	|
+|	Update settings.gradle on the root directory		|
+|	 to drive the build at the top level				|
+|														|
++-------------------------------------------------------+
+	rootProject.name="mgPluginReport"
+	include 'plugin'
+	include 'restapi'
+	include 'ng2page'
+	
+
++-------------------------------------------------------+
+|										======1======	|
+|	Create gradle.properties							|
+|														|
++-------------------------------------------------------+
+	version = 1.1.0-SNAPSHOT
+	pluginName = mgPluginReport
+	pluginDisplayName = mgPluginReport
+	//sanbox root url including credentials
+	distUrl = http://spadmin:admin@192.168.243.143:8080/iiq
+	
+	
+	
++-------------------------------------------------------+
+|										======1======	|
+|	Next update build.gradle							|
+|														|
++-------------------------------------------------------+	
+	
+subprojects {
+
+    // Declare where to find the dependencies of the project
+
+    repositories {
+
+        // Use maven for resolving dependencies.
+
+        mavenCentral()
+
+        // this is where identityiq.jar lives
+
+        mavenLocal()
+
+    }
+
+}
+
+ext {
+
+    zipName = "${pluginName}.${version}.zip"
+
+    distDir = "dist"
+
+}
+
+task clean {
+
+    delete "${distDir}"
+
+}
+
+task build(type: Zip, dependsOn: [':ng2page:build',  ':plugin:build']) {
+
+    archiveName "${zipName}"
+
+    destinationDir file("${distDir}")
+
+    into('/') {
+
+        from { project(':plugin').file('build/plugin') }
+
+    }
+
+    into('/ui/ng') {
+
+        from { project(':ng2page').file('dist') }
+
+    }
+
+   
+
+}
+
+task deploy(type: Exec, dependsOn: build) {
+
+    commandLine 'curl',"--insecure", "${distUrl}/rest/plugins", "--form", "file=@${distDir}/${zipName};fileName=${zipName}"
+
+}
+	
++-------------------------------------------------------+
+|										======1======	|
+|	CREATE RESTAPI MODULE								|
+|														|
++-------------------------------------------------------+	
+	
+	md restapi\src\main\java\sailpoint\plugin\rest
+	md restapi\src\test\java
+	
+	
+	
++-------------------------------------------------------+
+|										======1======	|
+|	CREATE restapi\build.gradle							|
+|														|
++-------------------------------------------------------+
+	
+	
+
++-------------------------------------------------------+
+|										======1======	|
+|	CREATE PLUGIN MODULE								|
+|														|
++-------------------------------------------------------+	
+	md plugin\src\import\install
+	md plugin\src\import\upgrade
+	md plugin\src\ui\css
+	md plugin\src\ui\js
+
++-------------------------------------------------------+
+|										======1======	|
+|	CREATE plugin/build.gradle							|
+|														|
++-------------------------------------------------------+
+
+
 gradlew build
 
+http://192.168.243.143:8080/iiq/plugins/pluginPage.jsf?pn=mgPluginReport
 http://192.168.243.143:8080/iiq/plugins/pluginPage.jsf?pn=myInterceptor2
+http://192.168.243.143:8080/iiq/plugins/pluginPage.jsf?pn=ScaffoldingPlugin
+http://<host_name:port>/identityiq/plugins/pluginPage.jsf?pn=ScaffoldingPlugin
