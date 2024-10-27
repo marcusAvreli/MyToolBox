@@ -1,0 +1,3 @@
+<concat destfile="bigxml.xml" append="true">
+	<file file="header.txt" />       
+</concat>

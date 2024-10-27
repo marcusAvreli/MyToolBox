@@ -175,6 +175,16 @@ Replace with: <empty>
 
 	Search → Bookmark → Remove Bookmarked Lines
 	
+	
++-------------------------------------------------------+
+|										======17=====	|
+|	change under_score_case to CamelCase				|
+|														|
++-------------------------------------------------------+
+	first make all leters lowercase
+	A simple find/replace will do this in NP++:
+	Find: [_]{1,1}([a-z])
+	Replace: \U$1
  
 +-------------------------------------------------------+
 |										======17=====	|
