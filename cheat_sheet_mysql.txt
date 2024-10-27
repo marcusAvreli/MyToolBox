@@ -1,0 +1,21 @@
++-------------------------------------------------------+
+|										======1======	|
+|	CREATE TABLE										|
+|														|
++-------------------------------------------------------+
+	--with id column
+
+	
+	CREATE TABLE regions (
+		region_id INT (11) AUTO_INCREMENT PRIMARY KEY,
+		region_name VARCHAR (25) DEFAULT NULL
+	);
+
+
+	--with foreign key
+	CREATE TABLE countries (
+		country_id CHAR (2) PRIMARY KEY,
+		country_name VARCHAR (40) DEFAULT NULL,
+		region_id INT (11) NOT NULL,
+		FOREIGN KEY (region_id) REFERENCES regions (region_id) ON DELETE CASCADE ON UPDATE CASCADE
+	);

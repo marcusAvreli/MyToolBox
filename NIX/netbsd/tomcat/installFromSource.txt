@@ -1,60 +1,179 @@
-1. Host
++-------------------------------------------------------+
+|										======1======	|
+|	HOST												|
+|														|
++-------------------------------------------------------+
 	command: uname -a
 	output: NetBSD netbsd 9.2 NetBSD 9.2 (GENERIC) #0: Wed May 12 13:15:55 UTC 2021  mkrepro@mkrepro.NetBSD.org:/usr/src/sys/arch/amd64/compile/GENERIC amd64
-2. Required soft
+	
+	
++-------------------------------------------------------+
+|										======2======	|
+|	required soft										|
+|														|
++-------------------------------------------------------+
 	java jdk
 	ant
-3. download required version of tomcat source distribution
-4. untar
-	command: tar -zxvf apache-tomcat-10.0.10-src.tar.gz
-5. rename
+
+
++-------------------------------------------------------+
+|										======3======	|
+|	download											|
+|														|
++-------------------------------------------------------+
+	download required version of tomcat source distribution
+
+
++-------------------------------------------------------+
+|										======4======	|
+|	UNTAR												|
+|														|
++-------------------------------------------------------+
+	tar -zxvf apache-tomcat-10.0.10-src.tar.gz
+
+	
++-------------------------------------------------------+
+|										======5======	|
+|	RENAME												|
+|														|
++-------------------------------------------------------+
 	mv apache-tomcat-10.0.10-src tomcatSource
-6. enter directory
+
+	
++-------------------------------------------------------+
+|										======6======	|
+|	ENTER DIRECTORY										|
+|														|
++-------------------------------------------------------+
 	cd tomcatSource
-7. execute command
+	
+	
++-------------------------------------------------------+
+|										======7======	|
+|	EXECUTE COMMAND										|
+|														|
++-------------------------------------------------------+
 	ant
-8. resultant server is in output/build directory
-9. move to opt
+
+
++-------------------------------------------------------+
+|										======8======	|
+|	RESULT SERVER										|
+|														|
++-------------------------------------------------------+	
+	resultant server is in output/build directory
+
+
++-------------------------------------------------------+
+|										======9======	|
+|	MOVE												|
+|														|
++-------------------------------------------------------+
 	mv build /opt/tomcat10
-10. cd /opt/tomcat10/bin
-11. if not exist, create setenv.sh (see setenv.sh)
+	
+	
++-------------------------------------------------------+
+|										======10======	|
+|	CHANGE DIRECTORY									|
+|														|
++-------------------------------------------------------+
+	cd /opt/tomcat10/bin
+
+	
++-------------------------------------------------------+
+|										======11======	|
+|	FILE setenv.sh										|
+|														|
++-------------------------------------------------------+
+	if not exist, create setenv.sh (see setenv.sh)
 	cd /opt/tomcat9/bin
-	vi setenv.sh
+	vi setenv.sh	
 	export JAVA_OPTS="$JAVA_OPTS -Djava.nio.channels.spi.SelectorProvider=sun.nio.ch.PollSelectorProvider -XX:MaxPermSize=128m  -XX:MaxNewSize=1024m"
-12. configure npf (network packet filter) (see npf.conf)
+	
+	
++-------------------------------------------------------+
+|										======12======	|
+|	configure npf (network packet filter)				|
+|														|
++-------------------------------------------------------+		
+	see npf.conf
+
 	npfctl debug
+
 	//-----if no errors
 	npfctl save
 	npfctl reload
+
 	//--review current rule in human readable
 	npfctl show
+
 	//--review passed blocked packets
 	npfctl stats
-13. excute ./startup.sh
-14. copy tomcatScript into rc.d directory. 
-	b. mv tomcatScript tomcat10
-	a. chmod 555 tomcat10	
-15. execute service tomcat10 start
-16. try access tomcat by http://<IP.address>:8080
------------------------------------------------------------------------------
------------------------------------------------------------------------------
-17.	list tomcat processes
+
+
++-------------------------------------------------------+
+|										======13======	|
+|	START SERVER by default script						|
+|														|
++-------------------------------------------------------+	
+	excute ./startup.sh
+
+
++-------------------------------------------------------+
+|										======14======	|
+|	move tomcatScript into rc.d directory				|
+|														|
++-------------------------------------------------------+
+	mv tomcatScript tomcat10
+	chmod 555 tomcat10
+	
+	
++-------------------------------------------------------+
+|										======15======	|
+|	START SERVER										|
+|														|
++-------------------------------------------------------+	
+	execute service tomcat10 start
+	
+	
++-------------------------------------------------------+
+|										======16======	|
+|	ACCESS SERVER										|
+|														|
++-------------------------------------------------------+
+	try access tomcat by http://<IP.address>:8080
+
+
++-------------------------------------------------------+
+|										======17======	|
+|	list tomcat processes								|
+|														|
++-------------------------------------------------------+
 	https://unix.stackexchange.com/questions/316065/how-to-kill-all-process-with-given-name
 	ps -A | grep tomcat | awk '{print $1}' | xargs -n1
-18.	delete all tomcat processes
-	ps -A | grep tomcat | awk '{print $1}' | xargs kill -9 $1
------------------------------------------------------------------------------
------------------------------------------------------------------------------
-log rotate
-/etc/logrotate.d/tomcat
-/opt/tomcat10/logs/catalina.out {
-    copytruncate
-    daily
-    rotate 8
-    compress
-    missingok
-    maxsize 1G
-    create 0644 tomcat tomcat
-} 
-
 	
+	
++-------------------------------------------------------+
+|										======18======	|
+|	delete all tomcat processes							|
+|														|
++-------------------------------------------------------+
+	ps -A | grep tomcat | awk '{print $1}' | xargs kill -9 $1
+
+
++-------------------------------------------------------+
+|										======19======	|
+|	log rotate											|
+|														|
++-------------------------------------------------------+
+
+	/etc/logrotate.d/tomcat
+	/opt/tomcat10/logs/catalina.out {
+		copytruncate
+		daily
+		rotate 8
+		compress
+		missingok
+		maxsize 1G
+		create 0644 tomcat tomcat
+	}
