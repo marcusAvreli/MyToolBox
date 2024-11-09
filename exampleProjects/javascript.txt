@@ -6,7 +6,7 @@
 +-------------------------------------------------------+
 	//typescript rollup
 	https://github.com/kutlugsahin/smooth-dnd
-	
+	https://stackoverflow.com/questions/51759599/opening-modal-from-function-in-pure-javascript
 	//typescript rollup
 	https://github.com/lukasoppermann/html5sortable/tree/master/src
 https://rxjs.dev/api/index/function/map

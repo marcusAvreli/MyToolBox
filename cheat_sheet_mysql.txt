@@ -1,0 +1,26 @@
++-------------------------------------------------------+
+|										===20=2======	|
+|	constraint: foreign key			 					|
+|														|
++-------------------------------------------------------+
+	CREATE TABLE IF NOT EXISTS tbl_all_type_attrs(
+		name varchar(255) NOT NULL,
+		function_name varchar(255) not null,
+		CONSTRAINT UC_FIELD_FUNCTION UNIQUE (name,function_name),
+		CONSTRAINT FK_F_NAME FOREIGN KEY (function_name)  REFERENCES tbl_all_objects(name) ON DELETE cascade
+		
+	);
+
+	CREATE TABLE IF NOT EXISTS tbl_all_objects (
+		name varchar(255) NOT NULL,
+		type varchar(255) not null,
+		UNIQUE (name)
+	);
+	
+
++-------------------------------------------------------+
+|										======13======	|
+|	Modify Existing column								|
+|														|
++-------------------------------------------------------+
+	ALTER TABLE tbl_rprt MODIFY name varchar(255);

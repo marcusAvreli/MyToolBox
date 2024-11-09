@@ -184,6 +184,17 @@ Replace with: <empty>
 
 	^((CN=([^,]*)),)?((((?:CN|OU)=[^,]+,?)+),)?((DC=[^,]+,?)+)
 
+https://stackoverflow.com/questions/63123224/how-do-i-exclude-a-list-of-folders-in-search-in-notepad
+To accomplish what you're describing, you could try:
+
+*.* !\node_modules !\bin !\dist
+Or, to exclude those folders recursively:
+
+*.* !+\node_modules !+\bin !+\dist
+I find this to be useful:
+
+*.* !+\node_modules !+\bin !+\obj !+\lib !+\packages
+
 
 Regex find last n chars in string
 .{2}$

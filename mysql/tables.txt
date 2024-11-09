@@ -118,7 +118,45 @@ CREATE TABLE IF NOT EXISTS tbl_fields (
 	description varchar(450) ,
 	PRIMARY KEY  (id)
 );
+
+
+CREATE TABLE IF NOT EXISTS tbl_all_type_attrs(
+	name varchar(255) NOT NULL,
+	function_name varchar(255) not null,
+	CONSTRAINT UC_FIELD_FUNCTION UNIQUE (name,function_name),
+	CONSTRAINT FK_F_NAME FOREIGN KEY (function_name)  REFERENCES tbl_all_objects(name) ON DELETE cascade
+	
+);
+--meta data. built-in oracle feature
+CREATE TABLE IF NOT EXISTS tbl_all_objects (
+	name varchar(255) NOT NULL,
+	type varchar(255) not null,
+	UNIQUE (name)
+);
+--application table contains list of defined reports
+CREATE TABLE IF NOT EXISTS tbl_rprt (
+	name varchar(255) NOT NULL
+	,display_name varchar(255) not null
+	,description varchar(255) not null
+	,disabled int(1) not null default 0
+	,CONSTRAINT FK_F_NAME FOREIGN KEY (name)  REFERENCES tbl_all_objects(name) ON DELETE cascade
+	,CONSTRAINT UC_Rprt UNIQUE (name)
+);
+CREATE TABLE IF NOT EXISTS tbl_rprt_field (
+	name varchar(255) NOT NULL
+	,rprt_name varchar(255) not null
+	,description varchar(255)
+	,disabled int(1) not null default 0
+	,not_visible int(1) not null default 0
+	,display_iw varchar(255)
+	,CONSTRAINT FK_RPRT_NAME FOREIGN KEY (rprt_name)  REFERENCES tbl_rprt(name) ON DELETE cascade
+	
+	,CONSTRAINT UC_Rprt_Field UNIQUE (name,rprt_name)
+);
 ALTER TABLE tbl_fields ADD name varchar(450) NOT NULL;
+ALTER TABLE Persons DROP INDEX UC_Person;
+ALTER TABLE Orders ADD FOREIGN KEY (PersonID) REFERENCES Persons(PersonID);
+ALTER TABLE Orders DROP FOREIGN KEY FK_PersonOrder;
 ALTER TABLE tbl_report_fields add CONSTRAINT FOREIGN KEY (field_id) references tbl_fields(id) on delete cascade on update restrict;
 insert into tbl_fields (name,display_name,description) values ('ir_name','identityRequestName','ir_name_description');
 insert into tbl_fields (name,display_name,description) values ('ir_state','myStatus','ir_status_description');
