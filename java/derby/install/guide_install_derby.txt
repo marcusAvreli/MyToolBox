@@ -1,17 +1,17 @@
-+-----------------------------------------------------------+
-|															|
-|		SET ENVIRONMENT VARIABLES							|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|										======1======	|
+|		SET ENVIRONMENT VARIABLES						|
+|														|
++-------------------------------------------------------+
 
 	DERBY_INSTALL:	C:\ApacheDerby
 	CLASSPATH:	%DERBY_INSTALL%\lib\derbytools.jar;%DERBY_INSTALL%\lib\derbynet.jar;%DERBY_INSTALL%\lib\derbyclient.jar;
 
-+-----------------------------------------------------------+
-|															|
-|		EDIT CONFIG FILES									|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|										======2======	|
+|		EDIT CONFIG FILES								|
+|														|
++-------------------------------------------------------+
 
 	1. Server.policy file
 		Located in {derby_install_directory}/demo/templates/server.policy
@@ -19,22 +19,22 @@
 		Located in  (JDK install directory)/lib/security/java.policy
 	#examples of mentioned files can be found in current git directory
 	
-+-----------------------------------------------------------+
-|															|
-|		RUN DATABASE SERVER INSTANCE						|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|										======3======	|
+|		RUN DATABASE SERVER INSTANCE					|
+|														|
++-------------------------------------------------------+
 	
 	1. open cmd line(you don't have to be admin).
 	2. Start server by issuing following command
 		a. regular version: java -Djava.security.manager -Djava.security.policy=C:/dbDerby/demo/templates/server.policy  org.apache.derby.drda.NetworkServerControl start -h localhost
 		b. debug version: java -Djava.security.manager -Djava.security.debug=access,failure -Djava.security.policy=C:/derby/demo/templates/server.policy  org.apache.derby.drda.NetworkServerControl start -h localhost
 
-+-----------------------------------------------------------+
-|															|
-|		RUN CLIENT CONNECTION FROM CMD						|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|										======4======	|
+|		RUN CLIENT CONNECTION FROM CMD					|
+|														|
++-------------------------------------------------------+
 	
 	1. Open another cmd
 	2. Run client from cmd by issuing following command:

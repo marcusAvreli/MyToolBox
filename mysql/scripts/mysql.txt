@@ -58,3 +58,23 @@ CREATE TABLE dependents (
 	employee_id INT (11) NOT NULL,
 	FOREIGN KEY (employee_id) REFERENCES employees (employee_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+
+CREATE TABLE "ADMIN"."RPRT_JSTFCTN"
+( 
+   id BIGINT  not null  generated always as identity,
+   JUSTIFICATION varchar(200) NOT NULL,
+  
+   primary key (ID)
+)
+
+
+CREATE TABLE "ADMIN"."RPRT_JSTFCTN_RL"
+( 
+   JSTFCTN BIGINT not null  ,
+   rprt BIGINT NOT NULL,
+   FOREIGN KEY (JSTFCTN) REFERENCES RPRT_JSTFCTN (id) ON DELETE CASCADE ON UPDATE RESTRICT,
+   FOREIGN KEY (rprt) REFERENCES RPRT (id) ON DELETE CASCADE ON UPDATE RESTRICT
+  
+   
+)
