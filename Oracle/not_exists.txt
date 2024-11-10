@@ -1,0 +1,29 @@
+with e as (
+      SELECT *
+      FROM employees
+      WHERE first_name = 'foobar'
+     ),
+     j as (
+      SELECT *
+      FROM jobs
+      WHERE job_title LIKE 'foobar%' AND
+            NOT EXISTS (SELECT 1 FROM e)
+    ),
+    d as (
+     SELECT *
+     FROM departments
+     WHERE department_name LIKE '%foobar' AND
+           NOT EXISTS (SELECT 1 FROM e) AND
+           NOT EXISTS (SELECT 1 FROM j)
+    ),
+    l as (
+     SELECT *
+     FROM locations WHERE city LIKE '%foobar%' AND
+           NOT EXISTS (SELECT 1 FROM e) AND
+           NOT EXISTS (SELECT 1 FROM j) AND
+           NOT EXISTS (SELECT 1 FROM d)
+    )
+SELECT e.* FROM e UNION ALL
+SELECT j.* FROM j UNION ALL
+SELECT d.* FROM e UNION ALL
+SELECT l.* FROM l ;
