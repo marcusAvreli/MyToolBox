@@ -16,6 +16,15 @@ https://github.com/PublicisSapient/enable-a11y/blob/d170968c4ae6549f363636f4f249
 |	CUSTOM ELEMENTS										|
 |														|
 +-------------------------------------------------------+
+
+<!-- embedded templates -->
+
+    <template id="contacts-list-tpl">
+        <textarea data-codeblock>
+
+https://dev.to/mrhdias/creating-html-templates-for-binding-json-data-with-javascript-template-literals-3p9f
+
+https://github.com/kerrishotts/PhoneGap101-Filer/tree/master
 https://andyogo.github.io/custom-element-reactions-diagram/
 theory
 https://github.com/jolares/example-vanilla-custom-elements-module-federation/blob/main/shell/main.ts
