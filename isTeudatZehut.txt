@@ -1,0 +1,132 @@
++-------------------------------------------------------+
+|										======1======	|
+|			POWERSHELL									|
+|														|
++-------------------------------------------------------+
+function IsTeudatZehut{
+    [CmdletBinding()]
+    param(
+        #[Parameter(Mandatory=$True)]
+        [string]$TeudatZehut
+    )
+
+	$CharArray = $TeudatZehut.ToCharArray()
+	$sum=0
+	$size = $CharArray.length
+	$converted = [int[]]::new($size)
+	$supportString = 1,2,1,2,1,2,1,2,1
+
+	for($i=0; $i -lt $size; $i++){
+					$converted[$i]=[int][string]$CharArray[$i]
+	}
+
+	for($i=0;$i -lt $size;$i++){                             
+		$item = $converted[$i]*$supportString[$i]
+		$round = [math]::floor(($item/10))
+		$sum+=$round+($item%10)
+	}
+
+	if($sum%10 -eq 0){
+		return $True
+	}else{
+		return $False
+	}
+	return $True
+}
+
++-------------------------------------------------------+
+|										======1======	|
+|			JAVA										|
+|														|
++-------------------------------------------------------+
+public boolean isTeudatZehut(String testIdNum){
+	boolean validTZ=false;
+	char[] arrayString=testIdNum.toCharArray();
+	int sum=0;
+	if(Util.isNotNullOrEmpty(testIdNum)){         
+		int size=arrayString.length;
+		int[] arrConverted=new int[size];
+		int[] supportString=new int[]{1,2,1,2,1,2,1,2,1};
+		for(int i=0;i<size;i++){
+			 arrConverted[i]=Integer.parseInt(arrayString[i].toString());
+		}
+		for(int i=0;i<size;i++){         
+		int item=arrConverted[i]*supportString[i];           
+		sum+=(((item/10)+(item%10)));
+		testDebug("devide " +(item/10) + " modulo " +               (item%10));
+		}             
+		if(sum%10==0){
+			 validTZ=true;
+		}
+		if(sum%10!=0){
+			 validTZ=false;
+		}
+   }
+   return  validTZ;
+}
+
++-------------------------------------------------------+
+|										======1======	|
+|			ORACLE										|
+|														|
++-------------------------------------------------------+
+create or replace FUNCTION is_teudat_zehut(
+	in_Teudat_Zehut in varchar2
+)
+
+RETURN number
+
+as
+
+  type t_num is table of number;
+  num t_num  := t_num(9);
+  testresult number;
+  v_length number(10);
+  v_out_char varchar2(1);
+  v_out_number number(1);
+  item number;
+  sum_of_items number:=0;
+
+begin
+
+v_length := length(in_Teudat_Zehut);
+
+if v_length = 9 then
+
+	  -- fill collection from query
+
+	  num.extend(9);
+	  num(1) := 1;
+	  num(2) := 2;
+	  num(3) := 1;
+	  num(4) := 2;
+	  num(5) := 1;
+	  num(6) := 2;
+	  num(7) := 1;
+	  num(8) := 2;
+	  num(9) := 1;
+	  for i in 1..v_length
+	  loop
+		v_out_char  := substr(in_Teudat_Zehut,i,1) ;
+		v_out_number :=To_Number(v_out_char);
+		item := v_out_number*num(i);
+		sum_of_items :=sum_of_items+ trunc(item/10)+mod(item,10);
+	  end loop;
+
+	  if mod(sum_of_items,10)=0 then
+		testresult :=1;
+	  else
+		testresult :=0;
+	  end if;
+  
+else
+	testresult :=0;
+end if;
+return testresult;
+   EXCEPTION
+	WHEN others THEN
+		return 0;
+end;
+
+ 
+
