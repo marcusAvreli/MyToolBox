@@ -1,4 +1,8 @@
-#install java
++-------------------------------------------------------+
+|														|
+|	INSTALL JAVA										|
+|														|
++-------------------------------------------------------+
 	sudo mkdir -p /usr/local/java
 	sudo cp -r jdk-8u341-linux-x64.tar.gz /usr/local/java
 	cd /usr/local/java
@@ -7,7 +11,11 @@
 	echo 'export PATH=$PATH:$JAVA_HOME/bin' >> /etc/profile
 	source /etc/profile
 
-#create logical volume
++-------------------------------------------------------+
+|														|
+|	CREATE LOGICAL VOLUME								|
+|														|
++-------------------------------------------------------+
 	//https://serverfault.com/questions/100596/linux-quota-per-directory
 	lvcreate -L 15g -n project1 fedora_fedora
 	mke2fs -j /dev/fedora_fedora/project1	
@@ -25,7 +33,11 @@
 		drwx------. 2 root root  16K Jul 21 15:13 lost+found
 
 
-#Install Prerequisites
++-------------------------------------------------------+
+|														|
+|	INSTALL PREREQUISITES								|
+|														|
++-------------------------------------------------------+
 	dnf install -y  https://rpmfind.net/linux/centos/7.9.2009/os/x86_64/Packages/compat-libcap1-1.10-7.el7.x86_64.rpm
 	dnf install -y https://rpmfind.net/linux/centos/7.9.2009/os/x86_64/Packages/compat-libstdc++-33-3.2.3-72.el7.x86_64.rpm	
 	dnf install -y libnsl.so.1*64*	
