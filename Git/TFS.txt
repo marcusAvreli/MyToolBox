@@ -4,7 +4,7 @@
 |														|
 +-------------------------------------------------------+
 
-https://<url>/_admin/_versioncontrol?repositoryId 
+https://<url>/_admin/_versioncontrol?repositoryId=<repo_id>&branchName=<branchName>&a_=policy
 
 1. Settings
 2. Version Control
@@ -15,3 +15,18 @@ https://<url>/_admin/_versioncontrol?repositoryId
 7. Code Review requirements
 
  
+ 
++-------------------------------------------------------+
+|														|               
+|	CONFIGURE STORIES ASSIGNED TO ME         			|
+|                                                       |
++-------------------------------------------------------+
+	https://<url>/_backlogs/board/Stories
+
+
++-------------------------------------------------------+
+|														|
+|	MY ASSIGNMENTS										|
+|														|
++-------------------------------------------------------+
+	https://<url>/_backlogs/TaskBoard/2024?_a=requirements
