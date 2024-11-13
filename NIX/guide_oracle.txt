@@ -83,6 +83,7 @@
 |	VERIFY THAT ALL LIBRARIES ARE IN PLACE				|
 |														|
 +-------------------------------------------------------+
+	#List_Dynamic_Dependencies
 	ldd /opt/oracle/product/18c/dbhomeXE/bin/orabase
 	ldd /opt/oracle/product/18c/dbhomeXE/perl/bin/perl
 
