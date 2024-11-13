@@ -1,5 +1,5 @@
 +-------------------------------------------------------+
-|														|
+|										======1======	|
 |	INSTALL JAVA										|
 |														|
 +-------------------------------------------------------+
@@ -11,8 +11,9 @@
 	echo 'export PATH=$PATH:$JAVA_HOME/bin' >> /etc/profile
 	source /etc/profile
 
+
 +-------------------------------------------------------+
-|														|
+|										======2======	|
 |	CREATE LOGICAL VOLUME								|
 |														|
 +-------------------------------------------------------+
@@ -34,7 +35,7 @@
 
 
 +-------------------------------------------------------+
-|														|
+|										======3======	|
 |	INSTALL PREREQUISITES								|
 |														|
 +-------------------------------------------------------+
@@ -43,13 +44,23 @@
 	dnf install -y libnsl.so.1*64*	
 	dnf install -y libcrypt.so.1*64*
 	dnf -y groupinstall "Development Tools" 
-	
-#import thrid party repository
+
+
++-------------------------------------------------------+
+|										======4======	|
+|	IMPORT THRID PARTY REPOSITORY						|
+|														|
++-------------------------------------------------------+
 	sudo rpm --import https://raw.githubusercontent.com/UnitedRPMs/unitedrpms/master/URPMS-GPG-PUBLICKEY-Fedora
 	sudo dnf -y install https://github.com/UnitedRPMs/unitedrpms/releases/download/20/unitedrpms-$(rpm -E %fedora)-20.fc$(rpm -E %fedora).noarch.rpm
 	sudo dnf install xorg-x11-utils 
 
-#install oracle
+
++-------------------------------------------------------+
+|										======5======	|
+|	INSTALL ORACLE										|
+|														|
++-------------------------------------------------------+
 	curl -o oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm https://yum.oracle.com/repo/OracleLinux/OL7/latest/x86_64/getPackage/oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm
 	dnf localinstall -y oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm
 	dnf localinstall -y oracle-database-xe-18c-1.0-1.x86_64.rpm
@@ -67,13 +78,20 @@
 		DBFILE_DEST=/projects/project1
 
 
-
-#verify that all libraries are in place
++-------------------------------------------------------+
+|										======6======	|
+|	VERIFY THAT ALL LIBRARIES ARE IN PLACE				|
+|														|
++-------------------------------------------------------+
 	ldd /opt/oracle/product/18c/dbhomeXE/bin/orabase
 	ldd /opt/oracle/product/18c/dbhomeXE/perl/bin/perl
 
 
-#set environment variables
++-------------------------------------------------------+
+|										======7======	|
+|	SET ENVIRONMENT VARIABLES							|
+|														|
++-------------------------------------------------------+
 	echo '' >> /etc/profile;
 	echo '#Oracle Environment Variables' >> /etc/profile;
 	echo 'export PATH="/opt/oracle/product/18c/dbhomeXE/bin:$PATH"' >> /etc/profile;
@@ -90,14 +108,20 @@
 	echo 'export ORACLE_HOME="/opt/oracle/product/18c/dbhomeXE"' >> $HOME/.bashrc
 	source $HOME/.bashrc
 
-#CONFIGURE DATABASE
+
++-------------------------------------------------------+
+|										======8======	|
+|	CONFIGURE DATABASE									|
+|														|
++-------------------------------------------------------+
 	/etc/init.d/oracle-xe-18c configure
 
-
-
-
 	
-#FIREWALL
++-------------------------------------------------------+
+|										======9======	|
+|	FIREWALL											|
+|														|
++-------------------------------------------------------+
 	#open database port on firewall
 		firewall-cmd  --add-port=1521/tcp
 		firewall-cmd --runtime-to-permanent
@@ -110,7 +134,11 @@
 		firewall-cmd --zone=FedoraServer --add-port=5500/tcp
 
 
-#START ORACLE
++-------------------------------------------------------+
+|										======10======	|
+|	START ORACLE										|
+|														|
++-------------------------------------------------------+
 	/etc/init.d/oracle-xe-18c start
 
 
@@ -118,8 +146,11 @@
 
 //https://docs.oracle.com/en/database/oracle/oracle-database/21/xeinw/starting-and-stopping-oracle-database-xe.html#GUID-831D014C-E163-45F6-9B44-611EE772E2E2
 
-
-#WEB CONSOLE
++-------------------------------------------------------+
+|										======11======	|
+|	WEB CONSOLE											|
+|														|
++-------------------------------------------------------+
 	Connect to Oracle Database using one of the connect strings:
 		 Pluggable database: fedora/XEPDB1
 		 Multitenant container database: fedora
@@ -128,7 +159,11 @@
 		EXEC DBMS_XDB.SETLISTENERLOCALACCESS(FALSE);
 
 
-#DELETE ORACLE
++-------------------------------------------------------+
+|										======12======	|
+|	DELETE ORACLE										|
+|														|
++-------------------------------------------------------+
 	/etc/init.d/oracle-xe-18c stop
 	/etc/init.d/oracle-xe-18c delete
 	dnf remove oracle-database-xe-18c.x86_64 
