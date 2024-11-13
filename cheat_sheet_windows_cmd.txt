@@ -32,6 +32,9 @@
 		findstr /sin /c:"idmRestBackEnd" "C:\Users\User\angularDev\*.ts" | findstr /liv "\\node_modules\\ \\.docker\\ \\server\\ \\Great-Angular\\ \\e2e\\ \\assets\\ \\dist\\ \\great-big-example-application\\ \\.git"
 		
 		findstr /sin /c:"idmRestBackEnd" "C:\Users\User\angular15\*.ts" | findstr /liv "\\node_modules\\ \\.docker\\ \\server\\ \\Great-Angular\\ \\e2e\\ \\assets\\ \\dist\\ \\great-big-example-application \\.git"
+		
+		findstr /sin /c:"404" "C:\Users\user\Downloads\apache-tomcat-9.0.97\apache-tomcat-9.0.97" | findstr /liv "\\node_modules\\ \\.docker\\ \\server\\ \\Great-Angular\\ \\e2e\\ \\assets\\ \\dist\\ \\great-big-example-application \\.git"
+		
 
 		JAVASCRIPT SEARCH IN CMD
 		findstr /sin /c:"node-sass-import" "C:\Users\User\nodeJSDev\mgComponents\*.js" | findstr /liv "\\node_modules\\ \\dist\\ \\assets\\"

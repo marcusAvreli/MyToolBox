@@ -1,0 +1,17 @@
++-------------------------------------------------------+
+|               										|
+|	CONFIGURE PULL REQUEST WITH APPROVALS				|
+|														|
++-------------------------------------------------------+
+
+https://<url>/_admin/_versioncontrol?repositoryId 
+
+1. Settings
+2. Version Control
+3. Repositiories
+4. BKS
+5. branch: master
+6. now you should see screen named BKS(master) Branch Policies
+7. Code Review requirements
+
+ 
