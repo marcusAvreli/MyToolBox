@@ -1,0 +1,38 @@
++-------------------------------------------------------+
+|											=====2====	|
+|	REDUCER												|
+|														|
++-------------------------------------------------------+
+The final result of running the reducer across all elements of the array is a single value
+------------1
+var resulrTest = Array.from(someCollection).reduce((acc, element) => {
+  var array_name = ["item1"];
+ 
+  return array_name;
+}, {});
+------------2
+var resulrTest2 = Array.from(someCollection).reduce(this.someFn2, {});
+
+someFn2(acc,element){
+	console.log("someFn2:"+someFn2);
+}
+
+
++-------------------------------------------------------+
+|											=====2====	|
+|	FOREACH												|
+|														|
++-------------------------------------------------------+
+Array.from(someCollection).forEach( this.someFn) 
+
+someFn(element)
+
+Array.from(someCollection).forEach(item =>{---some processing---});
+
+
+
+ showFooForEach: function() {
+    this.things.map(function(thing) {
+      console.log(this.foo, thing);
+    }, this);
+  }

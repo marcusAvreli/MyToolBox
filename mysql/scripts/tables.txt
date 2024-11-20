@@ -121,6 +121,7 @@ CREATE TABLE IF NOT EXISTS tbl_fields (
 
 
 CREATE TABLE IF NOT EXISTS tbl_all_type_attrs(
+
 	name varchar(255) NOT NULL,
 	function_name varchar(255) not null,
 	CONSTRAINT UC_FIELD_FUNCTION UNIQUE (name,function_name),
@@ -135,12 +136,14 @@ CREATE TABLE IF NOT EXISTS tbl_all_objects (
 );
 --application table contains list of defined reports
 CREATE TABLE IF NOT EXISTS tbl_rprt (
-	name varchar(255) NOT NULL
+	id varchar(32) NOT NULL
+	,name varchar(255) NOT NULL
 	,display_name varchar(255) not null
 	,description varchar(255) not null
 	,disabled int(1) not null default 0
 	,CONSTRAINT FK_F_NAME FOREIGN KEY (name)  REFERENCES tbl_all_objects(name) ON DELETE cascade
 	,CONSTRAINT UC_Rprt UNIQUE (name)
+	,PRIMARY KEY  (id)
 );
 CREATE TABLE IF NOT EXISTS tbl_rprt_field (
 	name varchar(255) NOT NULL
@@ -153,6 +156,23 @@ CREATE TABLE IF NOT EXISTS tbl_rprt_field (
 	
 	,CONSTRAINT UC_Rprt_Field UNIQUE (name,rprt_name)
 );
+
+CREATE TABLE IF NOT EXISTS tbl_rprt_uvc (
+	field_id varchar(32) NOT NULL
+	,ordering int
+	,CONSTRAINT FK_RPRT_UV FOREIGN KEY (field_id)  REFERENCES tbl_rprt_field(id) ON DELETE cascade
+)
+
+CREATE TABLE IF NOT EXISTS tbl_rprt_uv (
+	id varchar(32) NOT NULL
+	,rprt_id varchar(32) NOT NULL
+	,name varchar(255)
+	,display_name varchar(255)
+	,description varchar(255)
+	,CONSTRAINT FK_RPRT_UV FOREIGN KEY (rprt_id)  REFERENCES tbl_rprt(id) ON DELETE cascade
+	, PRIMARY KEY (ID)
+)
+
 ALTER TABLE tbl_fields ADD name varchar(450) NOT NULL;
 ALTER TABLE Persons DROP INDEX UC_Person;
 ALTER TABLE Orders ADD FOREIGN KEY (PersonID) REFERENCES Persons(PersonID);

@@ -10,8 +10,8 @@
 	jsGrid
 	jqGrid
 	SlickGrid
-
-
+handsontable
+	https://github.com/handsontable/handsontable?tab=readme-ov-file
 DataTables is powerful and relatively simple to use, but it has a dependency on jQuery, a very popular JavaScript library. A jQuery dependence isn't that bad—Bootstrap 4 also requires jQuery so jQuery is usually present anyway. However, I like to avoid jQuery when I can. That's one of the reasons this example uses Tabulator. It is a pure JavaScript component with no other dependencies.
 
 Another plus in Tabulator's favor is that, surprisingly, it doesn't render its grid as an HTML table, rather it renders as a div tabs cleverly stitched together with very effectively CSS. This makes the Tabulator a lot more responsive than grids that render as an HTML tables.
@@ -47,3 +47,35 @@ tabulator.setFilter([ {field:"col_a", type:"like", value:input.value}, {field:"c
 
 https://stackoverflow.com/questions/63607444/how-to-do-full-line-search-with-tabulator
 https://github.com/Simle-Infotech/gandaki_portal/blob/5e1697910550f609ccc0c5606085558bbb66981c/src/index.html#L14
+
+https://github.com/h-tendy/datagroom-ui/blob/ad8dd2b40927c37f384dc293fe10d68a5102b002/src/common/routes/home/DsViewEdit.js#L73
+this.hideColumn = this.hideColumn.bind(this);
+
+https://github.com/mark-mengu/m_NSDev/blob/2d31df69bb12350a06659b892bc4e1ccf2c9991d/TADI/UTILS/index.js#L223
+ columnsToHide.forEach(column => table.hideColumn(column));
+ 
+ 
+ https://github.com/bboerst/stratum-work/blob/2e9615879ef16ecc8d99ced1b1a0583c3f007ccf/webapp/static/main.js#L233
+ function applyColumnVisibility() {
+    Object.entries(savedColumnVisibility).forEach(([field, isVisible]) => {
+      if (!isVisible) table.hideColumn(field);
+    });
+  }
+  
+  https://github.com/IfcOpenShell/IfcOpenShell/blob/e0f4fc0759e161dda0a63190088aea5dfe9a4f9a/src/bonsai/bonsai/bim/data/webui/static/js/index.js#L263
+  autoColumnsDefinitions: function (definitions) {
+      headerMenu = createHeaderMenu(definitions, table);
+      definitions.forEach((column) => {
+        column.headerMenu = headerMenu;
+        column.contextMenu = createColumnContextMenu(column);
+      });
+      return definitions;
+    },
+	
+	https://github.com/Aspine/aspine/blob/8f583ea4a56be8b3e78ac074bf8159ab18122ec1/public/js/home.js#L366
+	tableBuilt: function () {
+		window.addEventListener('resize', () => adjustColumns(this));
+	},
+	
+	
+tblRprtField.name ,tblRprtField.rprt_id ,tblRprtField.description ,tblRprtField.disabled ,tblRprtField.not_visible ,tblRprtField.display_iw ,tblRprtField.id
