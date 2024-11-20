@@ -27,3 +27,21 @@ SELECT e.* FROM e UNION ALL
 SELECT j.* FROM j UNION ALL
 SELECT d.* FROM e UNION ALL
 SELECT l.* FROM l ;
+
+
+I would like to get airport_id where flying_id present in flying table but not present in airport table. I rote the following query using nested select query. Is there anyway I can improve without writing nested?
+
+There are two ways.
+
+LEFT JOIN
+    SELECT DISTINCT F.*
+      FROM FLYING F 
+    LEFT JOIN AIRPORT A
+        ON F.FLYING_ID = A.FLYING_ID
+    WHERE A.AIRPORT_ID IS NULL;
+NOT EXISTS
+SELECT F.*
+  FROM FLYING F
+ WHERE NOT EXISTS 
+       (SELECT 1 FROM AIRPORT A
+         WHERE A.FLYING_ID = F.FLYING_ID);

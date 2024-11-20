@@ -1,0 +1,3 @@
+https://linguistics.stackexchange.com/questions/43859/change-reason-for-iso-639-hebrew-language-code-from-iw-il-to-he-il
+iw comes from Iwrit or Iwrith, a somewhat-archaic German borrowing of עברית‎ (the more common German term nowadays, in my experience, is Hebräische). In the 1989 revisions, two of the changes involved replacing codes based on German names with codes based on English ones: Yiddish changed from ji to yi, and Hebrew from iw to he.
+https://www.oracle.com/java/technologies/javase7locales.html#util-text
