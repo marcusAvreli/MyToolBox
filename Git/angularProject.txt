@@ -22,7 +22,7 @@
 +-------------------------------------------------------+
 	git status
 	git add tomcat.txt
-	[ git add -- . :!"node_modules" ]//add all
+	[ git add -- . :!"node_modules" :!"dist"]//add all
 	git commit -am "new regex added"
 	git push origin master
 	
