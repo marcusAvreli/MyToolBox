@@ -1,121 +1,96 @@
 +-------------------------------------------------------+
 |											=====1====	|
-|	constraint: foreign key			 					|
+|	CREATE TABLE										|
 |														|
 +-------------------------------------------------------+
-	CREATE TABLE IF NOT EXISTS tbl_all_type_attrs(
-		name varchar(255) NOT NULL,
-		function_name varchar(255) not null,
-		CONSTRAINT UC_FIELD_FUNCTION UNIQUE (name,function_name),
-		CONSTRAINT FK_F_NAME FOREIGN KEY (function_name)  REFERENCES tbl_all_objects(name) ON DELETE cascade
-		
+	--with id column	
+	CREATE TABLE regions (
+		region_id INT (11) AUTO_INCREMENT PRIMARY KEY,
+		region_name VARCHAR (25) DEFAULT NULL
 	);
+
+	CREATE TABLE IF NOT EXISTS tbl_rprt_uv (
+		id varchar(32) NOT NULL
+		,rprt_id varchar(32) NOT NULL
+		,name varchar(255)
+		,display_name varchar(255)
+		,description varchar(255)
+		,CONSTRAINT FK_RPRT_UV FOREIGN KEY (rprt_id)  REFERENCES tbl_rprt(id) ON DELETE cascade
+		, PRIMARY KEY (ID)
+	)
 
 	CREATE TABLE IF NOT EXISTS tbl_all_objects (
 		name varchar(255) NOT NULL,
 		type varchar(255) not null,
 		UNIQUE (name)
 	);
-	
+
+
 +-------------------------------------------------------+
 |											=====2====	|
 |	ADD COLUMN											|
 |														|
 +-------------------------------------------------------+
-ALTER TABLE tbl_rprt_uvc ADD id varchar(32) not null
+	ALTER TABLE tbl_rprt_uvc ADD id varchar(32) not null
+
 
 +-------------------------------------------------------+
-|											=====2====	|
-|	ADD PRIMARY KEY										|
-|														|
-+-------------------------------------------------------+
-
-ALTER TABLE tbl_rprt_uvc ADD PRIMARY KEY (ID);
-+-------------------------------------------------------+
-|											=====2====	|
-|	DROP FOREIGN KEY									|
-|														|
-+-------------------------------------------------------+	
-	
-	ALTER TABLE tbl_rprt_user_view drop FOREIGN KEY FK_RPRT_UV
-
-+-------------------------------------------------------+
-|											=====2====	|
-|	Modify Existing column								|
+|											=====3====	|
+|	MODIFY EXISTING COLUMN								|
 |														|
 +-------------------------------------------------------+
 	ALTER TABLE tbl_rprt MODIFY name varchar(255);
 
+	--Make Column Integer Boolean
+	ALTER TABLE tbl_rprt_field MODIFY not_visible tinyint(1);
+	
 
 +-------------------------------------------------------+
-|											=====2====	|
-|	Rename Existing column								|
+|											=====4====	|
+|	RENAME EXISTING COLUMN								|
 |														|
 +-------------------------------------------------------+
-ALTER TABLE tbl_rprt_field RENAME COLUMN rprt_name TO rprt_id;
-
+	ALTER TABLE tbl_rprt_field RENAME COLUMN rprt_name TO rprt_id;
+	
+	
 +-------------------------------------------------------+
-|											=====3====	|
-|	Drop Existing column								|
+|											=====5====	|
+|	DROP EXISTING COLUMN								|
 |														|
 +-------------------------------------------------------+
 	ALTER TABLE tbl_report_type DROP  description;
 
 
 +-------------------------------------------------------+
-|											=====4====	|
-|	Make Column Integer Boolean							|
+|											=====6====	|
+|	ADD PRIMARY KEY										|
 |														|
 +-------------------------------------------------------+
-	ALTER TABLE tbl_rprt_field MODIFY not_visible tinyint(1);
+	ALTER TABLE tbl_rprt_uvc ADD PRIMARY KEY (ID);
+
 
 +-------------------------------------------------------+
-|											=====4====	|
-|	add foreignkey										|
+|											=====7====	|
+|	DROP FOREIGN KEY									|
 |														|
-+-------------------------------------------------------+
++-------------------------------------------------------+		
+	ALTER TABLE tbl_rprt_user_view drop FOREIGN KEY FK_RPRT_UV
 
-ALTER TABLE Orders ADD FOREIGN KEY (PersonID) REFERENCES Persons(PersonID);
-ALTER TABLE tbl_rprt_field add CONSTRAINT FK_RPRT_ID FOREIGN KEY (rprt_id)  REFERENCES tbl_rprt(id) ON DELETE cascade
+
 +-------------------------------------------------------+
-|											=====4====	|
-|	DROP CONSTRAINT							|
+|											=====8====	|
+|	ADD FOREIGNKEY										|
 |														|
 +-------------------------------------------------------+
-ALTER TABLE tbl_rprt_field
-  DROP FOREIGN KEY FK_RPRT_NAME;
-ALTER TABLE tbl_rprt_field
-  DROP CONSTRAINT  UC_Rprt_Field;
+	ALTER TABLE Orders ADD FOREIGN KEY (PersonID) REFERENCES Persons(PersonID);
+	ALTER TABLE tbl_rprt_field add CONSTRAINT FK_RPRT_ID FOREIGN KEY (rprt_id)  REFERENCES tbl_rprt(id) ON DELETE cascade
+
+
++-------------------------------------------------------+
+|											=====9====	|
+|	DROP CONSTRAINT										|
+|														|
++-------------------------------------------------------+
+	ALTER TABLE tbl_rprt_field   DROP FOREIGN KEY FK_RPRT_NAME;
+	ALTER TABLE tbl_rprt_field   DROP CONSTRAINT  UC_Rprt_Field;
  
-
-+-------------------------------------------------------+
-|											=====5====	|
-|	CREATE TABLE										|
-|														|
-+-------------------------------------------------------+
-	--with id column
-
-	
-	CREATE TABLE regions (
-		region_id INT (11) AUTO_INCREMENT PRIMARY KEY,
-		region_name VARCHAR (25) DEFAULT NULL
-	);
-
-
-	--with foreign key
-	CREATE TABLE countries (
-		country_id CHAR (2) PRIMARY KEY,
-		country_name VARCHAR (40) DEFAULT NULL,
-		region_id INT (11) NOT NULL,
-		FOREIGN KEY (region_id) REFERENCES regions (region_id) ON DELETE CASCADE ON UPDATE CASCADE
-	);
-
-CREATE TABLE IF NOT EXISTS tbl_rprt_uv (
-	id varchar(32) NOT NULL
-	,rprt_id varchar(32) NOT NULL
-	,name varchar(255)
-	,display_name varchar(255)
-	,description varchar(255)
-	,CONSTRAINT FK_RPRT_UV FOREIGN KEY (rprt_id)  REFERENCES tbl_rprt(id) ON DELETE cascade
-	, PRIMARY KEY (ID)
-)
