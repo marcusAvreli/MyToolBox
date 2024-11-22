@@ -42,9 +42,13 @@ Array.from(someCollection).forEach(item =>{---some processing---});
 |											=====3====	|
 |	SUBSEQUENT CHAINED OBSERVABLES						|
 |														|
-+-------------------------------------------------------+ 
++-------------------------------------------------------+
+https://cosmincrisan.medium.com/angular-http-calls-chain-execution-with-rxjs-mergemap-eb2d7f25139
 var observableUV = this.uvService.insert(uv);
 var observableUVC = this.uvcService.insertMany(resultTest2)
 
 observableUV.pipe(
-	mergeMap(() => observableUVC)).subscribe(data => {console.log("success")})
+	mergeMap(() => observableUVC)
+	
+	
+	).subscribe(() => {console.log("success")})

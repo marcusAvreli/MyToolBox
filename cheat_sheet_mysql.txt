@@ -93,4 +93,24 @@
 +-------------------------------------------------------+
 	ALTER TABLE tbl_rprt_field   DROP FOREIGN KEY FK_RPRT_NAME;
 	ALTER TABLE tbl_rprt_field   DROP CONSTRAINT  UC_Rprt_Field;
- 
+
+
++-------------------------------------------------------+
+|											=====9====	|
+|	CREATE STORED PROCEDURE								| 
+|														|
++-------------------------------------------------------+
+--without parameters
+DELIMITER //
+
+CREATE PROCEDURE umtb_gn_rprt_ad()
+BEGIN
+	SELECT *  FROM umtb_rprt_ad;
+END //
+
+DELIMITER ;
+
+--from source file:
+	mysql> source /home/admin/umtb_gn_rprt_ad.sql
+	mysql> call umtb_gn_rprt_ad()
+
