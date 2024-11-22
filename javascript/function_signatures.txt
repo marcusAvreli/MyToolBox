@@ -36,3 +36,15 @@ Array.from(someCollection).forEach(item =>{---some processing---});
       console.log(this.foo, thing);
     }, this);
   }
+  
+  
++-------------------------------------------------------+
+|											=====3====	|
+|	SUBSEQUENT CHAINED OBSERVABLES						|
+|														|
++-------------------------------------------------------+ 
+var observableUV = this.uvService.insert(uv);
+var observableUVC = this.uvcService.insertMany(resultTest2)
+
+observableUV.pipe(
+	mergeMap(() => observableUVC)).subscribe(data => {console.log("success")})
