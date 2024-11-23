@@ -4,7 +4,7 @@ msgbox "START"
 Dim VRstatmt
 Dim resultFileName: resultFileName="output.csv"
 Dim targetSchema : targetSchema = "IDENTITYIQ"
-Dim targetTable : targetTable = "tbl_Report_SP_Params"
+Dim targetTable : targetTable = "umtb_rprt_ad"
 Dim originalString : originalString = "insert into """ & targetSchema & """."  &"""" & targetTable & """"
 Dim sql_text :    sql_text = "Select * FROM [" & targetTable & "$]" & VRstatmt
 
@@ -106,7 +106,23 @@ function parseAndFormatValues(ByRef targetTable,ByRef csvFields,ByRef fields)
 					csvValue = CInt(fields.item(currentFieldName))
 					csvValues(j) = csvValue
 			end select    
-end if			
+		end if
+		if targetTable = "umtb_rprt_ad" then
+			select case currentFieldName
+				case  "ad_field_3"
+					csvValue = Cstr(fields.item(currentFieldName))
+					csvValue = replace(csvValue,"'","''")
+					csvValues(j) = "'" & csvValue & "'"	
+				case  "ad_field_2"
+					csvValue = Cstr(fields.item(currentFieldName))
+					csvValue = replace(csvValue,"'","''")
+					csvValues(j) = "'" & csvValue & "'"	
+				case  "ad_field_4"
+					csvValue = Cstr(fields.item(currentFieldName))
+					csvValue = replace(csvValue,"'","''")
+					csvValues(j) = "'" & csvValue & "'"	
+			end select   
+		end if
 		end if
 	next
 	

@@ -77,5 +77,19 @@ https://github.com/mark-mengu/m_NSDev/blob/2d31df69bb12350a06659b892bc4e1ccf2c99
 		window.addEventListener('resize', () => adjustColumns(this));
 	},
 	
-	
-tblRprtField.name ,tblRprtField.rprt_id ,tblRprtField.description ,tblRprtField.disabled ,tblRprtField.not_visible ,tblRprtField.display_iw ,tblRprtField.id
+
+
+
++-------------------------------------------------------+
+|										======1======	|
+|	EXPORT_TO_EXCEL										|
+|														|
++-------------------------------------------------------+
+
+
+	"xlsx": "https://cdn.sheetjs.com/xlsx-0.20.2/xlsx-0.20.2.tgz"
+	<script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
+	<script type="text/javascript" src="assets/xlsx.full.min.js"></script>
+
+
+
