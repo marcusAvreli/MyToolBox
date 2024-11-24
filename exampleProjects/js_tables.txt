@@ -10,7 +10,7 @@
 	jsGrid
 	jqGrid
 	SlickGrid
-handsontable
+	handsontable
 	https://github.com/handsontable/handsontable?tab=readme-ov-file
 DataTables is powerful and relatively simple to use, but it has a dependency on jQuery, a very popular JavaScript library. A jQuery dependence isn't that bad—Bootstrap 4 also requires jQuery so jQuery is usually present anyway. However, I like to avoid jQuery when I can. That's one of the reasons this example uses Tabulator. It is a pure JavaScript component with no other dependencies.
 

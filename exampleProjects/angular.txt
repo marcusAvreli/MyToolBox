@@ -3,8 +3,9 @@
 |	ANGULAR UI	 										|
 |														|
 +-------------------------------------------------------+
-
-
+fullObserver
+https://medium.com/angular-in-depth/learn-to-combine-rxjs-sequences-with-super-intuitive-interactive-diagrams-20fce8e6511
+https://stackblitz.com/edit/combining-sequences-race-b-is-ignored?file=utils.ts
 https://github.com/UXAspects/UXAspects/blob/9a060e14c8a55351dd682107b6d1944fe126a9fc/src/package.json
 
 RTL

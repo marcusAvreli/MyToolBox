@@ -1,0 +1,94 @@
++-------------------------------------------------------+
+|										======1======	|
+|	DATABASE								|
+|														|
++-------------------------------------------------------+
+
+tbl_all_objects
+	tbl_all_type_attrs foreign key to tbl_all_objects
+
+
+
+
++-------------------------------------------------------+
+|										======1======	|
+|	SHOW FUNCTION EDITOR								|
+|														|
++-------------------------------------------------------+
+	configures data sources
+	created specifically for mysql, oracle has built in tables ALL_OBJECTS, ALL_TYPE_ATTRS
+	
+	dataSource: tbl_all_objects
+	table_functionality:
+		1.	delete rows
+		2.	add rows
+		3.	search
+	artifacts:
+		Directory: function
+		Container:	EditFunctionComponent
+			Components: 
+					1. ListFunctionComponent
+					2. AddFunctionComponent
+
++-------------------------------------------------------+
+|										======2======	|
+|	ADD FIELD											|
+|														|
++-------------------------------------------------------+
+	configures fields for data source
+	
+	created specifically for mysql, oracle has built in tables ALL_OBJECTS, ALL_TYPE_ATTRS
+	
+	dataSource: tbl_all_type_attrs
+	
+	purpose: edit list of fields for data source	
+	
+	table_functionality:
+		1.	delete rows
+		2.	add rows
+		3.	search
+		
+	artifacts:
+		Directory: field
+		Container:	EditFieldComponent
+			Components: 
+					1. ListFieldComponent
+					2. AddFieldComponent
+
++-------------------------------------------------------+
+|										======3======	|
+|	EDIT DATA SOURCE									|
+|														|
++-------------------------------------------------------+
+	shows available data sources
+	dataSource: tbl_all_objects
+	
+	purpose: edit details of data sources
+	
+	
+	table_functionality:
+		1.	select row
+		2.	edit details of selected row
+		3.	search
+	
+	artifacts:
+			Directory: dataSource
+			Container:	EditFieldComponent
+			Components: 
+					1. ListDataSourceComponent
+					2. AddDataSourceComponent
+
+
++-------------------------------------------------------+
+|										======3======	|
+|	SHOW DATA SOURCE COLUMN								|
+|														|
++-------------------------------------------------------+
+	dataSource: tbl_rprt
+	purpose: edit details of columns of data source
+	artifacts:
+			Directory: sourceColumn
+			Container:	EditDataSourceColumnComponent
+				Components: 
+						1. ListDataSourceColumnComponent
+						2. AddDataSourceColumnComponent
