@@ -241,6 +241,16 @@
 9. change under_score_case to CamelCase
 	select substr(lower('Camel Case means the first char should be lower cased'),1,1)||substr(replace(initcap('Camel Case means the first char should be lower cased'),' '),2) from dual;
 	select substr(lower('Camel_Case_means_the_first_char_should_be_lower_cased'),1,1)||substr(replace(initcap('Camel_Case_means_the_first_char_should_be_lower_cased'),'_'),2) from dual;
+	
++-------------------------------------------------------+
+|										======19======	|
+|	STRING MANIPULATIONS								|
+|														|
++-------------------------------------------------------+	
+1. remove_last_character
+	//https://stackoverflow.com/questions/60938354/how-to-remove-first-3-and-last-5-characters-from-account-column-in-oracle-sql
+	SELECT substr( 'last_character',1, length('last_character')-1 ) as "Result" from dual
+
 
 +-------------------------------------------------------+
 |										======19======	|

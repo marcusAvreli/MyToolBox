@@ -1,0 +1,15 @@
++-------------------------------------------------------+
+|										======01======	|
+|	STRING_MANIPULATIONS								|
+|														|
++-------------------------------------------------------+	
+1. remove_last_character
+	//https://stackoverflow.com/questions/60938354/how-to-remove-first-3-and-last-5-characters-from-account-column-in-oracle-sql
+	let $cutted :=  substring($students, 1, string-length($students) - 1)
+
+
+	<xsl:template name="strip-end-characters">
+		<xsl:param name="text"/>
+		<xsl:param name="strip-count"/>
+		<xsl:value-of select="substring($text, 1, string-length($text) - $strip-count)"/>
+	</xsl:template>
