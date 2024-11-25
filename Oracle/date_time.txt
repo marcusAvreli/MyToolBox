@@ -340,3 +340,11 @@ select level as dow,
     to_char(trunc(sysdate ,'D') + level, 'Day') as day
 from dual
 connect by level <= 7;
+
++-------------------------------------------------------+
+|										======2======	|
+|	DIFF IN WHOLE NUMBER OF DAYS						|
+|														|
++-------------------------------------------------------+
+
+select trunc(sysdate) - to_date('2009-10-01', 'yyyy-mm-dd') diff 
