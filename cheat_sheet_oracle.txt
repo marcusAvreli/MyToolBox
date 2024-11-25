@@ -62,7 +62,7 @@
 	
 +-------------------------------------------------------+
 |										======5======	|
-|	DB_INFO: USER DEFINED TYPE							|
+|	DB_INFO:	USER DEFINED TYPE						|
 |														|
 +-------------------------------------------------------+
 	select allCollTypes.type_name,allCollTypes.elem_type_name,allTypeAttrs.attr_name,allTypeAttrs.ATTR_NO from all_coll_types allCollTypes
@@ -72,7 +72,7 @@
 	
 +-------------------------------------------------------+ 
 |										======6======	|
-|	DB_INFO: USER DEFINED FUNCTION						|
+|	DB_INFO:	USER DEFINED FUNCTION					|
 |														|
 +-------------------------------------------------------+ 
 	select * from user_objects where object_name like '<name>' and object_type='FUNCTION'
@@ -80,7 +80,7 @@
 
 +-------------------------------------------------------+
 |										======7======	|
-|	DB_INFO: TABLE INFO									|
+|	DB_INFO:	TABLE INFO								|
 |														|
 +-------------------------------------------------------+
 	select NULLABLE,COLUMN_NAME,DATA_TYPE,COLUMN_ID,DATA_LENGTH,DATA_DEFAULT 
@@ -91,7 +91,7 @@
 
 +-------------------------------------------------------+
 |										======8======	|
-|	DB_INFO: SHOW INDEXES								|
+|	DB_INFO:	SHOW INDEXES							|
 |														|
 +-------------------------------------------------------+
 	SELECT ai.index_name, ai.index_type, ai.uniqueness, aic.*
@@ -105,32 +105,13 @@
 
 +-------------------------------------------------------+
 |										======9======	|
-|	DB_INFO:LIST USER STORED PROCEDURE					|
+|	DB_INFO:	LIST USER STORED PROCEDURE				|
 |														|
 +-------------------------------------------------------+
 	SELECT     object_name FROM     user_procedures WHERE     object_type = 'PROCEDURE'  and object_name like '%'
 
 	
-+-------------------------------------------------------+
-|										======10======	|
-|	CSV AS INPUT PARAM									|
-|														|
-+-------------------------------------------------------+
-	create or replace PROCEDURE get_Sample_request (
-		in_request_status IN  VARCHAR2,
-		out_cursor       OUT SYS_REFCURSOR
 
-	) AS
-		sql_qry     VARCHAR2 (150);
-		emp_tot     NUMBER(3);
-	BEGIN
-		OPEN out_cursor FOR
-		  SELECT *
-		  FROM   user_requests
-		  WHERE  request_status IN (SELECT REGEXP_SUBSTR(in_request_status, '[^,]+', 1, LEVEL)
-									FROM   DUAL
-									CONNECT BY LEVEL <= REGEXP_COUNT(in_request_status, '[^,]+'));
-	END get_Sample_request;
 
  
 
@@ -145,7 +126,7 @@
 
 +-------------------------------------------------------+
 |										======12======	|
-|	Add Remove Columns									|
+|	ADD REMOVE COLUMNS									|
 |														|
 +-------------------------------------------------------+
 	alter table <table_name> drop column STATUSMAKAV;	
@@ -154,7 +135,7 @@
 	
 +-------------------------------------------------------+
 |										======13======	|
-|	Modify Existing column								|
+|	MODIFY EXISTING COLUMN								|
 |														|
 +-------------------------------------------------------+
 --set not null
@@ -166,7 +147,7 @@
 	
 +-------------------------------------------------------+
 |										======14======	|
-|	Rename Existing column								|
+|	RENAME EXISTING COLUMN								|
 |														|
 +-------------------------------------------------------+
 	alter table <table_name> rename column <col_name> to name;
@@ -174,7 +155,7 @@
 
 +-------------------------------------------------------+
 |										======15======	|
-|	Rename Existing Table								|
+|	RENAME EXISTING TABLE								|
 |														|
 +-------------------------------------------------------+
 	rename table old_name to new_name;
@@ -182,7 +163,7 @@
 	
 +-------------------------------------------------------+
 |										======16======	|
-|	Add Remove Constraints								|
+|	ADD REMOVE CONSTRAINTS								|
 |														|
 +-------------------------------------------------------+
 	alter table table_name drop constraint   constraint_name
@@ -191,7 +172,7 @@
 
 +-------------------------------------------------------+
 |										======17======	|
-|	Drop Table											|
+|	DROP TABLE											|
 |														|
 +-------------------------------------------------------+
 	drop table table_name cascade constraints purge;
@@ -254,7 +235,7 @@
 
 +-------------------------------------------------------+
 |										======19======	|
-|	show: stored procedure arguments					|
+|	DB_INFO:	STORED PROCEDURE ARGUMENTS				|
 |														|
 +-------------------------------------------------------+
 	SELECT * FROM USER_ARGUMENTS where object_name like 'stored procedure name%'
@@ -295,7 +276,7 @@
 
 +-------------------------------------------------------+
 |										===20=2======	|
-|	user defined tables functions	 					|
+|	DB_INFO:	USER DEFINED TABLES FUNCTIONS 			|
 |														|
 +-------------------------------------------------------+
 select * from all_type_ATTRS where owner='<owner_name>'
@@ -330,7 +311,7 @@ order by schema_name,
  
 +-------------------------------------------------------+
 |										===20=3======	|	
-|	user defined types									|
+|	DB_INFO:	USER DEFINED TYPES						|
 |														|
 +-------------------------------------------------------+
 	SELECT   table_name FROM   user_tables WHERE    table_name like 'typesss_T%'
@@ -345,10 +326,7 @@ order by schema_name,
 
 +-------------------------------------------------------+
 |										======21======	|
-|	table 
-
-
-											|
+|	DB_INFO:	SIZE OF TABLE 							|
 |														|
 +-------------------------------------------------------+
 
@@ -660,42 +638,12 @@ where not exists (
 
 
 
-+-------------------------------------------------------+
-|										======27======	|
-|		CHILD COLUMN IS CSV								|
-|														|
-+-------------------------------------------------------+
-https://medium.com/swlh/three-routes-convert-comma-separated-column-to-rows-c17c85079ecf
-
-
-+-------------------------------------------------------+
-|										======28======	|
-|	Three Routes: Convert Comma-Separated Column to Rows|
-|														|
-+-------------------------------------------------------+
-//https://medium.com/swlh/three-routes-convert-comma-separated-column-to-rows-c17c85079ecf
-column a is parent column b is csv of children (parent_and_csv_of_children)
-
-
-select t.customer,
-trim(regexp_substr(t.orders, '[^,]+', 1, lines.column_value))
-as "Order"
-from checkout t,
-table(cast(multiset(
-select level from dual
-connect by level <=
-regexp_count(t.orders, ',')+1
-) as sys.odciNumberList
-)
-)lines
-order by customer,
-lines.column_value;
 
 
 
 +-------------------------------------------------------+
 |										======28======	|
-|		Populating Values using Merge Query				|
+|		POPULATING VALUES USING MERGE QUERY				|
 |														|
 +-------------------------------------------------------+
 
@@ -740,75 +688,8 @@ connect by prior child = parent
 order by level ;
 
 
-csv parsing sparse missing values
 
-https://lalitkumarb.wordpress.com/2014/12/02/split-comma-delimited-string-into-rows-in-oracle/
-
-WITH input_data AS
- (SELECT 'a,b,c' str1, 'p,q' str2 FROM dual
- UNION ALL
- SELECT 'd,e' str1, 'r,s,t' str2 FROM dual
- ) ,
- str_length AS
- (SELECT str1,
-   regexp_count(str1, ',') cnt1,
-   str2,
-   regexp_count(str2,',') cnt2
- FROM input_data
- ) ,
- append_comma AS
- (SELECT
-   CASE
-     WHEN (SELECT MAX(cnt1) FROM str_length) -
-          regexp_count(str1, ',') = 1
-     THEN str1
-       ||', '
-     WHEN (SELECT MAX(cnt1) FROM str_length) -
-          regexp_count(str1, ',') = 2
-     THEN str1
-       ||', , '
-     ELSE str1
-   END str1,
-   CASE
-     WHEN (SELECT MAX(cnt2) FROM str_length) -
-          regexp_count(str2, ',') = 1
-     THEN str2
-       ||', '
-     WHEN (SELECT MAX(cnt2) FROM str_length) -
-          regexp_count(str2, ',') = 2
-     THEN str2
-       ||', , '
-     ELSE str2
-   END str2
- FROM str_length
- ) ,
- temp_data1 AS
- (SELECT rownum rn,
-   trim(COLUMN_VALUE) str1
- FROM append_comma,
-   xmltable(('"'
-   || REPLACE(str1, ',', '","')
-   || '"'))
- ) ,
- temp_data2 AS
- (SELECT rownum rn,
-   trim(COLUMN_VALUE) str2
- FROM append_comma,
-   xmltable(('"'
-   || REPLACE(str2, ',', '","')
-   || '"'))
- )
- SELECT nvl(t1.str1,'null') str1,
-        nvl(t2.str2,'null') str2
- FROM temp_data1 t1
- JOIN temp_data2 t2
- ON(t1.rn = t2.rn)
- ORDER BY t1.rn,
-   t2.rn
- /
  
- https://stackoverflow.com/questions/41699487/convert-comma-separated-values-to-rows-in-oracle
- csv by xquery and regex
  
  
  split delimited column (by line feeds) to rows

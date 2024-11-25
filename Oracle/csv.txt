@@ -1,0 +1,256 @@
++-------------------------------------------------------+
+|										======10======	|
+|	CSV AS INPUT PARAM									|
+|														|
++-------------------------------------------------------+
+	create or replace PROCEDURE get_Sample_request (
+		in_request_status IN  VARCHAR2,
+		out_cursor       OUT SYS_REFCURSOR
+
+	) AS
+		sql_qry     VARCHAR2 (150);
+		emp_tot     NUMBER(3);
+	BEGIN
+		OPEN out_cursor FOR
+		  SELECT *
+		  FROM   user_requests
+		  WHERE  request_status IN (SELECT REGEXP_SUBSTR(in_request_status, '[^,]+', 1, LEVEL)
+									FROM   DUAL
+									CONNECT BY LEVEL <= REGEXP_COUNT(in_request_status, '[^,]+'));
+	END get_Sample_request;
+	
+
+
++-------------------------------------------------------+
+|														|
+|      CSV_TO_COLUMNS                                   |
+|														|
++-------------------------------------------------------+
+
+	select
+	   trim(',' from regexp_substr(request_data, '^[^,]*' ,1, 1)) col_1,
+	   trim(',' from regexp_substr(request_data, ',[^,]*' ,1, 1)) col_2,
+	   trim(',' from regexp_substr(request_data, ',[^,]*' ,1, 2)) col_3,
+	   trim(',' from regexp_substr(request_data, ',[^,]*' ,1, 3)) col_4,
+	   trim(',' from regexp_substr(request_data, ',[^,]*' ,1, 4)) col_5
+	from
+	  SPT_BATCH_REQUEST_ITEM sptBatchRequestItem
+	  
+
++-------------------------------------------------------+
+|														|
+|		CSV_TO_ROWS		                                |
+|														|
++-------------------------------------------------------+
+--Source: https://stackoverflow.com/questions/41699487/convert-comma-separated-values-to-rows-in-oracle
+//BY_XML
+
+       with t(class_id, student, marks) as (
+               select 1, 'tom', '55' from dual union all
+               select 2, 'rim,gum,ram', '33,66,77' from dual
+           )
+           select class_id,new_student from t
+            ,xmltable('
+				if(contains($students,",")) then
+                    for $i in ora:tokenize($students,",") return $i
+                    else($students)
+              '
+              passing student as "students"
+              columns new_student varchar2(20) path '.'
+              )
+
+       -- ,xmltable('for $j in ora:tokenize($marks,",") return $j' passing marks as "marks" columns new_marks varchar2(20) path '.')
+
+ 
+
+ 
+
+//BY_REGEX
+       with temp as
+       (
+			select 1 class_id     , 'tom,jam,tim' student, '55,65,75' marks    from dual
+
+           union all
+
+           select 2 class_id     , 'rim,gum,ram' student, '33,66,77' marks    from dual
+
+       )
+
+       select distinct
+
+         t.class_id,
+
+         trim(regexp_substr(t.student, '[^,]+', 1, students.column_value))  as students,
+
+         trim(regexp_substr(t.marks, '[^,]+', 1, marks.column_value))  as marks
+
+       from
+
+         temp t,
+
+         table(cast(multiset(select level from dual connect by  level <= length (regexp_replace(t.student, '[^,]+'))  + 1) as sys.OdciNumberList)) students,
+
+         table(cast(multiset(select level from dual connect by  level <= length (regexp_replace(t.marks, '[^,]+'))  + 1) as sys.OdciNumberList)) marks
+
+       order by class_id;
+	   
+
++-------------------------------------------------------+
+|														|
+|		CSV_SPARSE		                                |
+|														|
++-------------------------------------------------------+
+--Source: https://lalitkumarb.wordpress.com/2014/12/02/split-comma-delimited-string-into-rows-in-oracle/
+WITH input_data AS
+
+(SELECT 'a,b,c' str1, 'p,q' str2 FROM dual
+
+UNION ALL
+
+SELECT 'd,e' str1, 'r,s,t' str2 FROM dual
+
+) ,
+
+str_length AS
+
+(SELECT str1,
+
+  regexp_count(str1, ',') cnt1,
+
+  str2,
+
+  regexp_count(str2,',') cnt2
+
+FROM input_data
+
+) ,
+
+append_comma AS
+
+(SELECT
+
+  CASE
+
+    WHEN (SELECT MAX(cnt1) FROM str_length) -
+
+         regexp_count(str1, ',') = 1
+
+    THEN str1
+
+      ||', '
+
+    WHEN (SELECT MAX(cnt1) FROM str_length) -
+
+            regexp_count(str1, ',') = 2
+
+       THEN str1
+
+         ||', , '
+
+       ELSE str1
+
+     END str1,
+
+     CASE
+
+       WHEN (SELECT MAX(cnt2) FROM str_length) -
+
+            regexp_count(str2, ',') = 1
+
+       THEN str2
+
+         ||', '
+
+       WHEN (SELECT MAX(cnt2) FROM str_length) -
+
+            regexp_count(str2, ',') = 2
+
+       THEN str2
+
+         ||', , '
+
+       ELSE str2
+
+     END str2
+
+   FROM str_length
+
+   ) ,
+
+   temp_data1 AS
+
+   (SELECT rownum rn,
+
+     trim(COLUMN_VALUE) str1
+
+   FROM append_comma,
+
+     xmltable(('"'
+
+     || REPLACE(str1, ',', '","')
+
+     || '"'))
+
+   ) ,
+
+   temp_data2 AS
+
+   (SELECT rownum rn,
+
+     trim(COLUMN_VALUE) str2
+
+   FROM append_comma,
+
+     xmltable(('"'
+
+     || REPLACE(str2, ',', '","')
+
+     || '"'))
+
+   )
+
+SELECT nvl(t1.str1,NULL) str1,
+
+        nvl(t2.str2,NULL) str2
+
+FROM temp_data1 t1
+
+JOIN temp_data2 t2
+
+ON(t1.rn = t2.rn)
+
+ORDER BY t1.rn,
+
+   t2.rn
+   
+   
++-------------------------------------------------------+
+|										======27======	|
+|		CHILD COLUMN IS CSV								|
+|														|
++-------------------------------------------------------+
+	https://medium.com/swlh/three-routes-convert-comma-separated-column-to-rows-c17c85079ecf
+
+
++-------------------------------------------------------+
+|										======28======	|
+|	Three Routes: Convert Comma-Separated Column to Rows|
+|														|
++-------------------------------------------------------+
+//https://medium.com/swlh/three-routes-convert-comma-separated-column-to-rows-c17c85079ecf
+column a is parent column b is csv of children (parent_and_csv_of_children)
+
+
+select t.customer,
+trim(regexp_substr(t.orders, '[^,]+', 1, lines.column_value))
+as "Order"
+from checkout t,
+table(cast(multiset(
+select level from dual
+connect by level <=
+regexp_count(t.orders, ',')+1
+) as sys.odciNumberList
+)
+)lines
+order by customer,
+lines.column_value;
