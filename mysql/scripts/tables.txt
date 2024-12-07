@@ -184,3 +184,21 @@ insert into tbl_fields (name,display_name,description) values ('ir_source','mySo
 insert into tbl_fields (name,display_name,description) values ('ir_type','irType','ir_type_description');
 
 ALTER TABLE tbl_fields ADD CONSTRAINT tblfieldName UNIQUE (name);
+
+
+
+CREATE TABLE IF NOT EXISTS umtb_rprt_bo (
+	bo_field_1 varchar(255)
+	,bo_field_2 varchar(255)
+	,bo_field_3 varchar(255)
+	,bo_field_4 varchar(255)
+	
+)
+
+CREATE TABLE IF NOT EXISTS umtb_rprt_sap (
+	sap_1 varchar(255)
+	,sap_2 varchar(255)
+	,sap_3 varchar(255)
+	
+	
+)

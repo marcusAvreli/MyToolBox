@@ -1,3 +1,19 @@
++-------------------------------------------------------+
+|										======1======	|
+|	CREATE PROCEDURE									|
+|														|
++-------------------------------------------------------+
+	
+DELIMITER //
+
+CREATE PROCEDURE umtb_gn_rprt_ad()
+BEGIN
+        SELECT *  FROM umtb_rprt_ad;
+END //
+
+DELIMITER ;
+
+
 use identityiq;
 DROP PROCEDURE IF EXISTS GetIdentityRequestByRange;
 
@@ -187,3 +203,5 @@ SELECT *
 FROM INFORMATION_SCHEMA.COLUMNS 
 WHERE TABLE_NAME = 'spt_bundle'
     AND TABLE_SCHEMA = 'identityiq'
+
+

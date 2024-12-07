@@ -75,16 +75,15 @@
 |														|
 +-------------------------------------------------------+		
 	ALTER TABLE tbl_rprt_user_view drop FOREIGN KEY FK_RPRT_UV
-
-
+	alter table tbl_all_type_attrs drop CONSTRAINT FK_F_NAME 
 +-------------------------------------------------------+
 |											=====8====	|
 |	ADD FOREIGNKEY										|
 |														|
 +-------------------------------------------------------+
 	ALTER TABLE Orders ADD FOREIGN KEY (PersonID) REFERENCES Persons(PersonID);
-	ALTER TABLE tbl_rprt_field add CONSTRAINT FK_RPRT_ID FOREIGN KEY (rprt_id)  REFERENCES tbl_rprt(id) ON DELETE cascade
-
+	ALTER TABLE tbl_rprt_field add CONSTRAINT FK_RPRT_ID FOREIGN KEY (rprt_id)  REFERENCES tbl_rprt(id) ON DELETE cascade;
+	ALTER TABLE tbl_all_type_attrs add CONSTRAINT FK_F_NAME FOREIGN KEY (function_name)  REFERENCES tbl_all_objects(name) ON DELETE cascade ON UPDATE 	cascade;
 
 +-------------------------------------------------------+
 |											=====9====	|

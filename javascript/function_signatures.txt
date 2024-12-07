@@ -65,3 +65,26 @@ html component
                </div>
 from component
 	this.idProp="add_data_source_column_table_"+uuidv4();
+	
++-------------------------------------------------------+
+|											=====3====	|	
+|	JavaScript one-liner to get element’s				|
+|	text content without its child nodes				|
+|														|
++-------------------------------------------------------+
+// Returns the text content as a string
+[].reduce.call(parentElement.childNodes, function(a, b) { return a + (b.nodeType === 3 ? b.textContent : ''); }, '');
+
+
++-------------------------------------------------------+
+|											=====3====	|
+|	Click a button programmatically - JS				|
+|														|
++-------------------------------------------------------+
+window.onload = function() {
+    var userImage = document.getElementById('imageOtherUser');
+    var hangoutButton = document.getElementById("hangoutButtonId");
+    userImage.onclick = function() {
+       hangoutButton.click(); // this will trigger the click event
+    };
+};
