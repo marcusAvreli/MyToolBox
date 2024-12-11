@@ -187,81 +187,68 @@ public class RMT2XmlUtility {
 
                
 
-		public static void umtbAppendDocument(Document sourceDocument,Document destinationDocument) {
-			Element importedRoot = sourceDocument.getDocumentElement();
-			Node copied = importedRoot.cloneNode(true);
-			Element root = destinationDocument.getDocumentElement();
-			destinationDocument.adoptNode(copied);
-			root.appendChild(copied);
-		}
+	public static void umtbAppendDocument(Document sourceDocument,Document destinationDocument) {
+		Element importedRoot = sourceDocument.getDocumentElement();
+		Node copied = importedRoot.cloneNode(true);
+		Element root = destinationDocument.getDocumentElement();
+		destinationDocument.adoptNode(copied);
+		root.appendChild(copied);
+	}
 
-		public static void importNode(String queryLocation,List<Document> sources,Document destination) {                               
-			if(RMT2Utility.isNotNullOrEmpty(sources) && null !=destination && RMT2Utility.isNotNullOrEmpty(queryLocation) && !"null".equals(queryLocation)) {
-				for(Document source : sources) {
-					importNode(queryLocation,source,destination);
-				}
+	public static void importNode(String queryLocation,List<Document> sources,Document destination) {                               
+		if(RMT2Utility.isNotNullOrEmpty(sources) && null !=destination && RMT2Utility.isNotNullOrEmpty(queryLocation) && !"null".equals(queryLocation)) {
+			for(Document source : sources) {
+				importNode(queryLocation,source,destination);
 			}
 		}
+	}
 
-		public static void importNode(String queryLocation,Node source,Document destination) {
-			if(null != source) {
-				Document document = RMT2XmlUtility.nodeToDocument(source);
-				importNode(queryLocation, document, destination);
+	public static void importNode(String queryLocation,Node source,Document destination) {
+		if(null != source) {
+			Document document = RMT2XmlUtility.nodeToDocument(source);
+			importNode(queryLocation, document, destination);
+		}
+	}
+
+		   
+
+	public static void importNode(String queryLocation,Document source,Document destination) {
+		if(null!= source && null !=destination && RMT2Utility.isNotNullOrEmpty(queryLocation) && !"null".equals(queryLocation)) {
+			NodeList destinationNodes = RMT2XmlUtility.umtbExecuteQuery(queryLocation, destination);
+			Node node = source.getDocumentElement();
+			Node imp = destination.importNode(node, true);
+			destinationNodes.item(0).appendChild(imp);
+		}
+	}
+
+	public static void umtbRemoveNode(String queryString,Document document) {
+		NodeList runNodes = umtbExecuteQuery(queryString,document);
+		if(null != runNodes) {
+			Node node = runNodes.item(0);
+			if(null != node) {
+				node.getParentNode().removeChild(node);
 			}
 		}
+	}
 
                
 
-		public static void importNode(String queryLocation,Document source,Document destination) {
-			if(null!= source && null !=destination && RMT2Utility.isNotNullOrEmpty(queryLocation) && !"null".equals(queryLocation)) {
-				NodeList destinationNodes = RMT2XmlUtility.umtbExecuteQuery(queryLocation, destination);
-				Node node = source.getDocumentElement();
-				Node imp = destination.importNode(node, true);
-				destinationNodes.item(0).appendChild(imp);
-			}
+	public static XPath getXpath() {
+		return XPathFactory.newInstance().newXPath();
+	}
+
+	public static NodeList umtbExecuteQuery(String xQuery,Document inDocument) {
+		XPath xpath = getXpath();
+		NodeList nodeList = null;
+		try {
+			nodeList = (NodeList)xpath.evaluate(xQuery, inDocument,XPathConstants.NODESET);
+		} catch (XPathExpressionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return nodeList;
 
-		public static void umtbRemoveNode(String queryString,Document document) {
-			NodeList runNodes = umtbExecuteQuery(queryString,document);
-			if(null != runNodes) {
-				Node node = runNodes.item(0);
-				if(null != node) {
-					node.getParentNode().removeChild(node);
-				}
-			}
-		}
-
-               
-
-                public static XPath getXpath() {
-
-                                return XPathFactory.newInstance().newXPath();
-
-                }
-
-                public static NodeList umtbExecuteQuery(String xQuery,Document inDocument) {
-
-                                XPath xpath = getXpath();
-
-                                NodeList nodeList = null;
-
-                                try {
-
-                                                nodeList = (NodeList)xpath.evaluate(xQuery, inDocument,XPathConstants.NODESET);
-
-                                } catch (XPathExpressionException e) {
-
-                                                // TODO Auto-generated catch block
-
-                                                e.printStackTrace();
-
-                                }
-
-                               
-
-                                return nodeList;
-
-                }
+	}
 
                
 
@@ -286,175 +273,92 @@ public class RMT2XmlUtility {
 					NodeList children = node.getChildNodes();
 					if(children != null) {
 						int len = children.getLength();
+						for(int i=0;i<len;i++) {
+							detected=detectCDATA(children.item(i),detected);
+						}
+                    }
+					break;
+				}
 
-                                                                                for(int i=0;i<len;i++) {
+				// handle entity reference nodes
+				case Node.ENTITY_REFERENCE_NODE: {
+					NodeList children = node.getChildNodes();
+					if(children != null) {
+						int len = children.getLength();
+						for(int i=0;i<len;i++){
+							detected=  detectCDATA(children.item(i),detected);
 
-                                                                                                detected=           detectCDATA(children.item(i),detected);
+						}
+					}
+					break;
+				}            
 
-                                                                                }
+				case Node.CDATA_SECTION_NODE: {
+					return true;
+				}             
 
-                            }
-
-                           
-
-                           break;
-
-                            }
-
-                            // handle entity reference nodes
-
-                        case Node.ENTITY_REFERENCE_NODE: {
-
-                                NodeList children = node.getChildNodes();
-
-                              if(children != null) {
-
-                                    int len = children.getLength();
-
-                                  for(int i=0;i<len;i++){
-
-                                                detected=  detectCDATA(children.item(i),detected);
-
-                                   }
-
-                                }
-
-                               break;
-
-                            }
+				case Node.TEXT_NODE: {              
+					Node pn = node.getParentNode();
+					String pnn = pn.getNodeName();
+					break;
+				}
+			}  // switch
+		  return detected;
+		}
 
                
 
-                        case Node.CDATA_SECTION_NODE: {
+	private void traverse(Node node) {
 
-                               return true;
-
-                            }
-
-               
-
-                        case Node.TEXT_NODE: {
-
-               
-
-                                                Node pn = node.getParentNode();
-
-                                                String pnn = pn.getNodeName();
-
-                                                                break;
-
-                                                            }
-
-               
-
-                        }  // switch
-
-                       
-
-                      return detected;
-
-                }
-
-               
-
-                private void traverse(Node node) {
-
-        // is there anything to do?
-
-      if(node == null) {
-
-            return;
-
-        }
+		// is there anything to do?
+		if(node == null) {
+			return;
+		}
 
         int type = node.getNodeType();
-
         switch (type) {
-
-        // print document
-
-        case Node.DOCUMENT_NODE: {
-
-                traverse(((Document)node).getDocumentElement());
-
-               break;
-
+			// print document
+			case Node.DOCUMENT_NODE: {
+				traverse(((Document)node).getDocumentElement());
+				break;
             }
 
-        case Node.ELEMENT_NODE: {
-
-                NodeList children = node.getChildNodes();
-
-            if(children != null) {
-
-               int len = children.getLength();
-
-                                                                for(int i=0;i<len;i++) {
-
-                                                                                traverse(children.item(i));
-
-                                                                }
-
-            }
-
-           
-
-           break;
-
+			case Node.ELEMENT_NODE: {
+				NodeList children = node.getChildNodes();
+				if(children != null) {
+					int len = children.getLength();
+					for(int i=0;i<len;i++) {
+						traverse(children.item(i));
+					}
+				}
+				break;
             }
 
             // handle entity reference nodes
 
-        case Node.ENTITY_REFERENCE_NODE: {
-
+			case Node.ENTITY_REFERENCE_NODE: {
                 NodeList children = node.getChildNodes();
-
-              if(children != null) {
-
-                    int len = children.getLength();
-
-                  for(int i=0;i<len;i++){
-
+				if(children != null) {
+					int len = children.getLength();
+					for(int i=0;i<len;i++){
                         traverse(children.item(i));
-
                    }
-
                 }
-
-               break;
-
+				break;
             }
 
 
-        case Node.CDATA_SECTION_NODE: {
-
-System.out.println(node.getNodeValue());
-
-              
-
-                break;
-
-            }
+			case Node.CDATA_SECTION_NODE: {
+				System.out.println(node.getNodeValue());
+				break;
+			}
 
 
-        case Node.TEXT_NODE: {
-
-
-                                Node pn = node.getParentNode();
-
-                                String pnn = pn.getNodeName();
-
-                                                break;
-
-                                            }
-
-
-        }  // switch
-
+			case Node.TEXT_NODE: {
+				Node pn = node.getParentNode();
+				String pnn = pn.getNodeName();
+				break;
+			}
+		}  // switch
     } // traverse(Node)
-
-               
-
-               
-
 }
