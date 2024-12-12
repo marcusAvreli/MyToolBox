@@ -1,0 +1,114 @@
++-------------------------------------------------------+
+|										======1_of_4===	|
+|	REQUIRED LIBS										|
+|														|
++-------------------------------------------------------+
+	slf4j-api-1.7.25.jar
+	log4j-slf4j-impl-2.15.0.jar
+	log4j-core-2.15.0.jar
+	log4j-api-2.15.0.jar
+
+
++-------------------------------------------------------+
+|										======2_of_4===	|
+|	module-info.java									|
+|														|
++-------------------------------------------------------+
+	module xslProject {
+		requires java.scripting;
+		requires slf4j.api;
+		requires org.apache.logging.log4j.core;
+		requires org.apache.logging.log4j;		
+	}
+
+
++-------------------------------------------------------+
+|										======3_of_4===	|
+|	Application											|
+|														|
++-------------------------------------------------------+
+
+public class Application {
+	public static final Logger logger = LogManager.getLogger(Application.class);
+	private static String workingDirPathName = System.getProperty("user.dir");
+	public static void main(String[] args) {			
+		Context.getInstance().initApp(workingDirPathName);
+		logger.error("This is error message comming from ");
+		logger.info("This is info message comming from ");
+		logger.trace("This is trace message comming from ");
+	}
+}
+
+
++-------------------------------------------------------+
+|										======4_of_4===	|
+|	Context												|
+|														|
++-------------------------------------------------------+
+public class Context {
+	
+	public void initApp(String inWorkingDirPathName) {
+		Properties appProperties = initSettings(inWorkingDirPathName,"/resources/application.properties");	           
+		String log4jPahName = appProperties.getProperty("LOG4J");			
+		Properties properties = initSettings(inWorkingDirPathName,log4jPahName);
+		if (null != properties) {
+			LoggerContext context = (LoggerContext) LogManager.getContext(false);
+			Configuration config = new PropertiesConfigurationBuilder()
+					.setConfigurationSource(ConfigurationSource.NULL_SOURCE).setRootProperties(properties)
+					.setLoggerContext(context).build();
+
+			context.setConfiguration(config);
+			Configurator.initialize(config);
+   		}
+	}
+	
+	
+/*
+	+-------------------------------------------------------+
+	|										======1======	|
+	|	LOAD PROPERTIES										|
+	|														|
+	+-------------------------------------------------------+
+*/
+
+	public static Properties initSettings(String inWorkingDirPathName,String inSettingsFileName) {	           
+    	InputStream inputStream = null;
+    	Properties result = null;    	
+    	try {
+			inputStream = new FileInputStream(new File(inWorkingDirPathName+inSettingsFileName));
+			result = new Properties();
+			result.load(inputStream);
+    		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				inputStream.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+    	return result;    	
+	}
+	
+/*
+	+-------------------------------------------------------+
+	|										======1======	|
+	|	SINGLETON											|
+	|														|
+	+-------------------------------------------------------+
+*/
+	public static Context getInstance() {
+		return ContextSingleton.INSTANCE;
+	}
+	
+	private static class ContextSingleton{
+		private static final Context INSTANCE = new Context(null);
+	}
+	
+	public Context(Object object) {
+		
+	}
+}
