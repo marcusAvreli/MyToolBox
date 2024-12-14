@@ -88,3 +88,19 @@ window.onload = function() {
        hangoutButton.click(); // this will trigger the click event
     };
 };
+
+
++-------------------------------------------------------+
+|											=====3====	|
+|	EXPORT FUNCTION										|
+|														|
++-------------------------------------------------------+
+file_name: wj-utils.js
+	export const formatDateTime = (value,mask) => {  
+	  return moment(value).format(mask);
+	}
+	
+another file: input.js
+import {formatDateTime} from './wj-utils.js';
+
+call function: formatDateTime("value","mask");
