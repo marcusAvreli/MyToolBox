@@ -1,19 +1,30 @@
-+-----------------------------------------------------------+
-|															|
-|			JAVA COMPILE FROM CMD							|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|										======1======	|
+|			JAVA COMPILE FROM CMD						|
+|														|
++-------------------------------------------------------+
 	COMPILE JAVA CLASSES CMD CLI
 	# *nix
 	javac -cp .:/usr/local/lib/antlr-4.8-complete.jar ./com/sevan/pond/*.java
 
 	# Windows
 	javac -cp .;path\to\antlr-4.8-complete.jar .\com\sevan\pond\*.java
-+-----------------------------------------------------------+
-|															|
-|			JAVA ENVIRONMENTAL VARIABLES					|
-|															|
-+-----------------------------------------------------------+
+	
+	
++-------------------------------------------------------+
+|										======2======	|
+|	INSTALL JAVA										|
+|														|
++-------------------------------------------------------+
+	tar -zxvf jdk-17.0.11_linux-x64_bin.tar.gz
+	mv jdk-17.0.11 /opt
+
+
++-------------------------------------------------------+
+|										======3======	|
+|	JAVA ENVIRONMENTAL VARIABLES						|
+|														|
++-------------------------------------------------------+
 	echo 'export JAVA_HOME=/opt/jdk' >> /etc/profile;		
 	echo 'export PATH=${PATH}:${JAVA_HOME}/bin' >> /etc/profile;
 	source /etc/profile
@@ -22,34 +33,62 @@
 	echo $JAVA_HOME
 		/usr/local/java/jdk1.8.0_341
 		
-#ANT FROM SOURCE
-	tar -zxvf apache-ant-1.10.13-src.tar.gz;
-	mv apache-ant-1.10.13 ant;
-	mv ant /opt/
-	cd /opt/ant; 
 
-	./build.sh -Ddist.dir=/opt/ant dist	
-+-----------------------------------------------------------+
-|															|
-|			ANT ENVIRONMENTAL VARIABLES						|
-|															|
-+-----------------------------------------------------------+
-	echo 'export ANT_HOME="/opt/ant"' >> /etc/profile
+
++-------------------------------------------------------+
+|										======4======	|
+|	INSTALL ANT											|
+|														|
++-------------------------------------------------------+
+	tar -zxvf apache-ant-1.10.15-src.tar.gz
+	mkdir /opt/ant10
+	mv apache-ant-1.10.15/* /opt/ant10
+	
+	echo 'export ANT_HOME="/opt/ant10"' >> /etc/profile
 	echo 'export PATH=$PATH:$ANT_HOME/bin' >> /etc/profile
 	source /etc/profile
 	
-#TOMCAT FORM SOURCE
-	tar -zxvf apache-tomcat-9.0.73-src.tar.gz
-	mv apache-tomcat-9.0.73-src tomcat90Source
-	cd tomcat90Source
-	ant
-	#result server is in output/build
-	mkdir /opt/tomcat
-	cp -r output/build/*	/opt/tomcat
+	cd /opt/ant10; 
+	run_command: ant
 
-#USERS AND PERMISSIONS
 	
+
+	###ant
+	###./build.sh -Ddist.dir=/opt/ant dist	
 	
+		
++-------------------------------------------------------+
+|										======4======	|
+|			ANT ENVIRONMENTAL VARIABLES					|
+|														|
++-------------------------------------------------------+
+	echo 'export ANT_HOME="/opt/ant"' >> /etc/profile
+	echo 'export PATH=$PATH:$ANT_HOME/bin' >> /etc/profile
+	source /etc/profile
+
+
++-------------------------------------------------------+
+|										======3======	|
+|	INSTALL TOMCAT										|
+|														|
++-------------------------------------------------------+
+	tar -zxvf apache-tomcat-9.0.73-src.tar.gz //RUNS ON JAVA 11+
+	tar -zxvf apache-tomcat-9.0.98-src.tar.gz //runs ON java 17+
+	
+	mv  apache-tomcat-9.0.98-src tomcat90Source
+	cd tomcat90Source
+	ant		
+	
+	mkdir /opt/tomcat90
+	#result server is in output/build
+	cp -r output/build/*	/opt/tomcat90	
+
+
++-------------------------------------------------------+
+|										======3======	|
+|	USERS AND PERMISSIONS								|
+|														|
++-------------------------------------------------------+
 	useradd -r -s /bin/false tomcat
 	groupadd --system tomcat
 	
@@ -75,16 +114,23 @@
 		usermod -a -G tomcat root
 
 
-#FIREWALL
++-------------------------------------------------------+
+|										======3======	|
+|	FIREWALL											|
+|														|
++-------------------------------------------------------+
 	firewall-cmd  --add-port=8080/tcp
 	firewall-cmd --runtime-to-permanent
 	firewall-cmd --reload
-
-
-#LOGROTATE 
-	#conf
-		vi /etc/logrotate.conf
 	
+
++-------------------------------------------------------+
+|										======3======	|
+|	LOGROTATE											|
+|														|
++-------------------------------------------------------+
+	#conf
+		vi /etc/logrotate.conf	
 	
 	#define logrotate
 		vi /etc/logrotate.d/tomcat
@@ -108,11 +154,11 @@
 #COPYRIGHT:
 	https://superuser.com/questions/632618/best-practice-for-access-permission-to-users-for-apache-tomcat
 
-+-----------------------------------------------------------+
-|															|
-|			TOMCAT SYSTEMD SERVICE							|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|										======3======	|
+|			TOMCAT SYSTEMD SERVICE						|
+|														|
++-------------------------------------------------------+
 
 
 # Systemd unit file for tomcat
