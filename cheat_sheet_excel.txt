@@ -16,7 +16,7 @@
 
 +-------------------------------------------------------+
 |									======3_OF_8======	|
-|	CONVERT DATETIME TO MILLISECODNS					|
+|	CONVERT DATE TIME TO MILLISECODNS					|
 |														|
 +-------------------------------------------------------+	
 	millisecodns
