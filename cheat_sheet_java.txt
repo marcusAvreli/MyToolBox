@@ -1,0 +1,32 @@
++-------------------------------------------------------+
+|									======1_of_3======	|
+|			FIND JAVA CLASSES IN JARS					|
+|														|
++-------------------------------------------------------+
+	for i in *.jar; do jar -tvf "$i" | grep -Hsi ClassName && echo "$i"; done
+
+
++-------------------------------------------------------+
+|									======2_of_3======	|
+|	ECLIPSE DONT SHOW UP								|
+|														|
++-------------------------------------------------------+
+	https://stackoverflow.com/questions/19083821/eclipse-does-not-start-when-i-run-the-exe
+	eclipse.exe -clean -clearPersistedState
+
+	Unable to acquire application service. Ensure that the org.eclipse.core.runtime bundle is resolved and started (see config.ini)
+
+	java -XshowSettings:all
+
+
++-------------------------------------------------------+
+|									======3_of_3======	|
+|			JAVA COMPILE FROM CMD						|
+|														|
++-------------------------------------------------------+	
+	# *nix
+	javac -cp .:/usr/local/lib/antlr-4.8-complete.jar ./com/sevan/pond/*.java
+
+	# Windows
+	javac -cp .;path\to\antlr-4.8-complete.jar .\com\sevan\pond\*.java
+	

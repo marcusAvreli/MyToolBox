@@ -93,3 +93,25 @@ https://github.com/mark-mengu/m_NSDev/blob/2d31df69bb12350a06659b892bc4e1ccf2c99
 
 
 
+
+https://stackoverflow.com/questions/68612223/datetime-picker-in-tabulator
+
+var dateEditor = (cell, onRendered, success, cancel, editorParams) => {
+  var editor = document.createElement("input");
+  editor.value = cell.getValue();
+
+  var datepicker = flatpickr(editor, {
+    enableTime: true,
+    dateFormat: "j-n-Y H:i",
+    onClose: (selectedDates, dateStr, instance) => {
+      success(dateStr);
+      instance.destroy();
+    },
+  });
+
+  onRendered(() => {
+    editor.focus();
+  });
+
+  return editor;
+};
