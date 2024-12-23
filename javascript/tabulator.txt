@@ -1,0 +1,111 @@
++-------------------------------------------------------+
+|											=====2====	|
+|	DATE EDITOR											|
+|														|
++-------------------------------------------------------+
+
+https://github.com/olifolkerd/tabulator/issues/640
+
+  function flatpickerEditor(cell, onRendered, success, cancel)
+   {
+      var input = $("<input type='text'/>");
+
+      input.flatpickr({
+         enableTime: true,
+         dateFormat: "Y-m-d H:i",
+         time_24hr: true,
+         locale: current_language, // global variable with locale 'en', 'fr', ...
+         defaultDate: cell.getValue(),
+         onClose: function (selectedDates, dateStr, instance) {
+            evt = window.event;
+            var isEscape = false;
+            if ("key" in evt)
+            {
+               isEscape = (evt.key === "Escape" || evt.key === "Esc");
+            } else
+            {
+               isEscape = (evt.keyCode === 27);
+            }
+            if (isEscape)
+            {
+               // user hit escape
+               cancel();
+            } else
+            {
+               success(dateStr);
+            }
+         }
+      });
+
+      input.css({
+         "border": "1px",
+         "background": "transparent",
+         "padding": "4px",
+         "width": "100%",
+         "box-sizing": "border-box"
+      });
+
+      input.val(cell.getValue());
+
+      var inputBlur = function (e) {
+         if (e.target !== input[0])
+         {
+            if ($(e.target).closest(".flatpicker-input").length === 0)
+            {
+               $(document).off("mousedown", inputBlur);
+            }
+         }
+      };
+
+      $(document).on("mousedown", inputBlur);
+
+      onRendered(function () {
+         input.focus();
+      });
+
+      return input;
+   }
+Now in tabulator, to call the editor you have something like that (I have added a formatter which highlights the date part using moment.js):
+
+    columns: [
+        {
+            title: i18n[current_language].t_date_deb_presta,
+            field: "date_deb_presta",
+            align: "center",
+            headerFilter: 'input',
+            formatter: function (cell, formatParams) {
+                var data = cell.getRow().getData().date_deb_presta;
+                var mm0 = moment(data, "YYYY-MM-DD HH:mm:ss");
+                if (mm0.isValid())
+                {
+                   var partDate = mm0.format("YYYY-MM-DD");
+                   var partTime = mm0.format("HH:mm");
+                   return '<strong>' + partDate + '</strong> ' + partTime;
+                }
+                return '';
+            },
+            editor: flatpickerEditor
+        },
+    ],
+And to handle the escape key you add:
+
+     cellEditCancelled: function (cell) {
+        var curr_value = cell.getValue();
+        var old_value = cell.getOldValue();
+        var curr_field_edited = cell.getColumn().getField();
+        if (old_value !== curr_value)
+        {
+           // reset to old value
+           var myObject = {};
+           myObject[curr_field_edited] = old_value;
+           cell.getRow().update(myObject);
+        }
+     },
+	 
++-------------------------------------------------------+
+|											=====2====	|
+|	DATE EDITOR											|
+|														|
++-------------------------------------------------------+	 
+	 
+	 https://github.com/olifolkerd/tabulator/issues/1950

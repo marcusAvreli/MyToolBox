@@ -1,0 +1,4 @@
+https://stackoverflow.com/questions/63123224/how-do-i-exclude-a-list-of-folders-in-search-in-notepad
+Find in files
+skip directories
+Filters: *.scss !+\scss !+\themes
