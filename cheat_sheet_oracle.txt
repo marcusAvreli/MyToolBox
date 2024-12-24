@@ -636,10 +636,77 @@ where not exists (
 
 
 
++-------------------------------------------------------+
+|										======28======	|
+|		PRIVILEGES	PERMISSIONS ROLES					|
+|														|
++-------------------------------------------------------+
+--https://stackoverflow.com/questions/9811670/how-to-show-all-privileges-from-a-user-in-oracle
+https://stackoverflow.com/questions/9811670/how-to-show-all-privileges-from-a-user-in-oracle
+	--DIRECT
+	SELECT * FROM USER_SYS_PRIVS; 
+	SELECT * FROM USER_TAB_PRIVS;
+	SELECT * FROM USER_ROLE_PRIVS;
 
-
-
-
+	--INDIRECT
+	select * from dba_role_privs connect by prior granted_role = grantee start with grantee = '&USER' order by 1,2,3;
+	select * from dba_sys_privs  where grantee = '&USER' or grantee in (select granted_role from dba_role_privs connect by prior granted_role = grantee start with grantee = '&USER') order by 1,2,3;
+	select * from dba_tab_privs  where grantee = '&USER' or grantee in (select granted_role from dba_role_privs connect by prior granted_role = grantee start with grantee = '&USER') order by 1,2,3,4;
+	
+	
+	SELECT
+    PRIVILEGE,
+    OBJ_OWNER,
+    OBJ_NAME,
+    USERNAME,
+    LISTAGG(GRANT_TARGET, ',') WITHIN GROUP (ORDER BY GRANT_TARGET) AS GRANT_SOURCES, -- Lists the sources of the permission
+    MAX(ADMIN_OR_GRANT_OPT) AS ADMIN_OR_GRANT_OPT, -- MAX acts as a Boolean OR by picking 'YES' over 'NO'
+    MAX(HIERARCHY_OPT) AS HIERARCHY_OPT -- MAX acts as a Boolean OR by picking 'YES' over 'NO'
+FROM (
+    -- Gets all roles a user has, even inherited ones
+    WITH ALL_ROLES_FOR_USER AS (
+        SELECT DISTINCT CONNECT_BY_ROOT GRANTEE AS GRANTED_USER, GRANTED_ROLE
+        FROM DBA_ROLE_PRIVS
+        CONNECT BY GRANTEE = PRIOR GRANTED_ROLE
+    )
+    SELECT
+        PRIVILEGE,
+        OBJ_OWNER,
+        OBJ_NAME,
+        USERNAME,
+        REPLACE(GRANT_TARGET, USERNAME, 'Direct to user') AS GRANT_TARGET,
+        ADMIN_OR_GRANT_OPT,
+        HIERARCHY_OPT
+    FROM (
+        -- System privileges granted directly to users
+        SELECT PRIVILEGE, NULL AS OBJ_OWNER, NULL AS OBJ_NAME, GRANTEE AS USERNAME, GRANTEE AS GRANT_TARGET, ADMIN_OPTION AS ADMIN_OR_GRANT_OPT, NULL AS HIERARCHY_OPT
+        FROM DBA_SYS_PRIVS
+        WHERE GRANTEE IN (SELECT USERNAME FROM DBA_USERS)
+        UNION ALL
+        -- System privileges granted users through roles
+        SELECT PRIVILEGE, NULL AS OBJ_OWNER, NULL AS OBJ_NAME, ALL_ROLES_FOR_USER.GRANTED_USER AS USERNAME, GRANTEE AS GRANT_TARGET, ADMIN_OPTION AS ADMIN_OR_GRANT_OPT, NULL AS HIERARCHY_OPT
+        FROM DBA_SYS_PRIVS
+        JOIN ALL_ROLES_FOR_USER ON ALL_ROLES_FOR_USER.GRANTED_ROLE = DBA_SYS_PRIVS.GRANTEE
+        UNION ALL
+        -- Object privileges granted directly to users
+        SELECT PRIVILEGE, OWNER AS OBJ_OWNER, TABLE_NAME AS OBJ_NAME, GRANTEE AS USERNAME, GRANTEE AS GRANT_TARGET, GRANTABLE, HIERARCHY
+        FROM DBA_TAB_PRIVS
+        WHERE GRANTEE IN (SELECT USERNAME FROM DBA_USERS)
+        UNION ALL
+        -- Object privileges granted users through roles
+        SELECT PRIVILEGE, OWNER AS OBJ_OWNER, TABLE_NAME AS OBJ_NAME, ALL_ROLES_FOR_USER.GRANTED_USER AS USERNAME, ALL_ROLES_FOR_USER.GRANTED_ROLE AS GRANT_TARGET, GRANTABLE, HIERARCHY
+        FROM DBA_TAB_PRIVS
+        JOIN ALL_ROLES_FOR_USER ON ALL_ROLES_FOR_USER.GRANTED_ROLE = DBA_TAB_PRIVS.GRANTEE
+    ) ALL_USER_PRIVS
+    -- Adjust your filter here
+    WHERE USERNAME = 'USER_NAME'
+) DISTINCT_USER_PRIVS
+GROUP BY
+    PRIVILEGE,
+    OBJ_OWNER,
+    OBJ_NAME,
+    USERNAME
+;
 
 +-------------------------------------------------------+
 |										======28======	|
