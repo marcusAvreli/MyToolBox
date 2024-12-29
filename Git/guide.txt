@@ -2,7 +2,7 @@ Clone existing public git repository
 	git clone https://github.com/doctral/Medium-Module-Loading-Strategies.git
 
 +-------------------------------------------------------+
-|										======1======	|
+|										======1_OF_7===	|
 |	ADD ALL FILES USING GIT ADD EXCEPT ONE DIRECTORY	|
 |														|
 +-------------------------------------------------------+
@@ -11,32 +11,34 @@ Clone existing public git repository
 	git add . -- ':!somefolder' ':!**/some_deep_nested_folder/*'
 
 
++-------------------------------------------------------+
+|										======2_OF_7===	|
+|	REMOVE THE FILE/DIRECTORY							|
+|														|
++-------------------------------------------------------+
 
-If you want to remove the file from the Git repository and the filesystem, use:
-	git rm file1.txt 
-	git commit -m "remove file1.txt"
-But if you want to remove the file only from the Git repository and not remove it from the filesystem, use:
-	git rm --cached file1.txt git commit -m "remove file1.txt"
-And to push changes to remote repo
-	git push origin branch_name
+	##FILE	
+		git rm file1.txt 
+		git commit -m "remove file1.txt"
+	##DIRECTORY
+		git rm -r one-of-the-directories // This deletes from filesystem
+		git commit . -m "Remove duplicated directory"
 
-
-
-https://stackoverflow.com/questions/6313126/how-do-i-remove-a-directory-from-a-git-repository
-
-Remove directory from Git and local
-Checkout 'master' with both directories:
-
-git rm -r one-of-the-directories // This deletes from filesystem
-git commit . -m "Remove duplicated directory"
-git push origin <your-git-branch> (typically 'master', but not always)
-Remove directory from Git but NOT local
-To remove this directory from Git, but not delete it entirely from the filesystem (local):
-
-git rm -r --cached myFolder
 
 +-------------------------------------------------------+
-|										======1======	|
+|										======3_OF_7===	|
+|	REMOVE THE FILE/DIRECTORY FROM REMOTE ONLY			|
+|														|
++-------------------------------------------------------+
+	https://stackoverflow.com/questions/6313126/how-do-i-remove-a-directory-from-a-git-repository
+	##FILE
+		git rm --cached file1.txt git commit -m "remove file1.txt"
+	##DIRECTORY
+		git rm -r --cached myFolder
+
+
++-------------------------------------------------------+
+|										======4_OF_7===	|
 |					WINDOWS								|
 |														|
 +-------------------------------------------------------+
@@ -61,10 +63,8 @@ INIT GIT CONNECTION
 git clone <path.to.repo>
 
 
-
-
 +-------------------------------------------------------+
-|										======2======	|
+|										======5_OF_7===	|
 |	CONFIGURE GIT TO USE CERTIFICATE					|
 |														|
 +-------------------------------------------------------+
@@ -114,11 +114,8 @@ Using personal access token
 	Password for 'https://username@github.com': <PAT>
 
 
-
-
-
 +-------------------------------------------------------+
-|										======2======	|
+|										======6_OF_7===	|
 |					ERROR								|
 |														|
 +-------------------------------------------------------+
@@ -149,8 +146,9 @@ Solution:
 	On Windows Command Prompt, try:
 		del .git\index.lock
 
+
 +-------------------------------------------------------+
-|										======2======	|
+|										======7_OF_7===	|
 |	PRINT COMMIT LOG									|
 |														|
 +-------------------------------------------------------+
