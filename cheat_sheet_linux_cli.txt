@@ -388,3 +388,6 @@ ls -ltr --block-size=M
 https://stackoverflow.com/questions/762348/how-can-i-exclude-all-permission-denied-messages-from-find
 
 	find . 2>/dev/null > files_and_folders
+
+
+https://unix.stackexchange.com/questions/718295/awk-check-date-if-today-then-filter-only-that-content

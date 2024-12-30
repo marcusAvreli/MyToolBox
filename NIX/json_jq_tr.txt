@@ -62,3 +62,22 @@ Select list of entities
 
 jq -r '.rows.array[] | select(.Id ==("x123",”y123”))| .Roles[]' input.json
 
+
+
+
++-------------------------------------------------------+
+|														|
+|	FILTER BY DATE TIME (not checked)					|
+|														|
++-------------------------------------------------------+
+
+https://github.com/jqlang/jq/issues/1053
+
+$ TZ=/usr/share/zoneinfo/UTC jq -n '"2015-12-24T09:29:30+00:00" | sub("(?<before>.*):"; .before ) | strptime("%Y-%m-%dT%H:%M:%S%z") | todate'
+"2015-12-24T09:29:30Z"
+$ TZ=/usr/share/zoneinfo/UTC jq -n '"2015-12-24T09:29:30+01:00" | sub("(?<before>.*):"; .before ) | strptime("%Y-%m-%dT%H:%M:%S%z") | todate'
+"2015-12-24T08:29:30Z"
+
+echo '{"date": "2015-03-06T04:21:47Z", "offset": 6.5}' \
+| jq '(.date | fromdate) - 3600 * .offset | todate'
+"2015-03-05T22:51:47Z"
