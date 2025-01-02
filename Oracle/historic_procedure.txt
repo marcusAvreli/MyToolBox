@@ -1,0 +1,158 @@
+create or replace procedure test_gn_rprt_ir
+	as
+		n_counter NUMBER:=0;
+		start_time_log number:=0;
+		end_time_log number:=0;
+		date_pattern_yhm varchar2(20):='YYYY-MM-DD HH24:MI';
+		date_pattern_yhms varchar2(25):='YYYY-MM-DD HH24:MI:SS';
+		date_pattern_y varchar2(20):='YYYY-MM-DD';
+		start_date_str   varchar2(20);
+		s1970_01_01      varchar2(11)       :=            '1970/01/01';
+		s1970_01_01_format     varchar2(11)       :=            'YYYY/MM/DD';
+		s24_hours           number(10)        :=            (24 * 60 * 60 * 1000);
+		log_id varchar2(32):=null;
+		ex_start_time number(19):=null;
+		ex_end_time number(19):=null;
+		test_exception       EXCEPTION;
+		v_err_code VARCHAR2(10) := null;
+		v_err_msg VARCHAR2(1000) := null;
+		test_rprt_name varchar2(100):='test_RPRT_IR';
+		--last_execution_time
+		test_last_end_ex number(19):=null;
+		--number_of_days_back_to_make_monitoring
+		test_live_range number(10):=180;
+		test_live_from number(19):=null;
+		time_end_ex number(19):=null;
+		lowest_limit number(19):=null;
+		test_run_id varchar2(32):=null;
+		is_live_mode number(1):=0;
+		test_generated_id varchar2(32):=test_random_guid();
+		--test_only
+		valid_to_m number(19):=(SYSDATE - test_live_range - TO_DATE(s1970_01_01, s1970_01_01_format))                * (s24_hours) ;
+		--execution_status
+		--null - never run
+		--1 - running
+		--2 - finished
+		begin
+			begin
+                select id into test_run_id from test_rprt_status where execution_status = 1 and name=test_rprt_name;
+					EXCEPTION
+					WHEN NO_DATA_FOUND THEN null;
+					test_run_id:=null;
+			end ;
+
+	if test_run_id is null then
+        --there_are_no_currently_running_instances
+		insert into test_rprt_status (id,NAME) values (test_generated_id,test_rprt_name);
+		commit; 
+
+		select (SYSDATE - test_live_range - TO_DATE(s1970_01_01, s1970_01_01_format))           * (s24_hours)                 into test_live_from         from dual;
+		select  case when max(time_end) is null then 0 else max(time_end) end  into lowest_limit from test_rprt_ir_log testRprtIrLog
+		inner join test_rprt_status testRprtStatus on testRprtStatus.id = testRprtIrLog.test_run_id
+		where testRprtStatus.execution_status =2 and testRprtStatus.name=test_rprt_name;
+
+		if lowest_limit <= test_live_from then
+			--historical_mode
+			test_gn_rprt_ir_log(test_generated_id);
+			select max(testRprtIrLog.time_start) into start_time_log from test_rprt_ir_log testRprtIrLog
+			inner join test_rprt_status testRprtStatus on testRprtStatus.id=testRprtIrLog.test_run_id
+			where testRprtStatus.execution_status  is null;
+			select to_char(TO_TIMESTAMP('1970-01-01',date_pattern_yhm)+NUMTODSINTERVAL(start_time_log/1000,'SECOND'),date_pattern_yhm) into start_date_str from dual;
+			update test_rprt_status set test_MODE=0 where id=test_generated_id;
+			commit;
+		else
+			--live_mode
+			select 1 into is_live_mode from dual;
+			update test_rprt_status set test_MODE=1 where id=test_generated_id;
+			commit;
+		end if;
+        begin
+
+			select max(TIME_END_EX) into test_last_end_ex from test_RPRT_STATUS where  execution_status=2 and name=test_rprt_name;
+
+			EXCEPTION
+                WHEN NO_DATA_FOUND THEN null;
+				--it_is_cold_start_no_data
+					TIME_END_EX:=null;
+					dbms_output.put_line('it_is_cold_start_no_data');
+				end ;
+
+			if test_last_end_ex is null then
+				--cold_start        no_data_test_RPRT_STATUS
+				dbms_output.put_line('cold_start');
+				--execution_start_time
+				select extract(day from(sys_extract_utc(systimestamp) - to_timestamp(s1970_01_01, s1970_01_01_format))) * s24_hours   + to_number(to_char(sys_extract_utc(systimestamp), 'SSSSSFF3')) into ex_start_time from dual;
+				update  test_rprt_status set TIME_START_EX = ex_start_time,execution_status =1 where id = test_generated_id;
+				commit;
+				dbms_output.put_line('start_cold_mode');
+
+ 
+
+----+-------------------------------------------------------+
+----|														|
+----|       start_cold_mode_calculations   ir_processing	|
+----|														|
+----+-------------------------------------------------------+
+                dbms_output.put_line('cold_mode');                   
+----+-------------------------------------------------------+
+----|														|
+----|       end_cold_mode_calculations     ir_processing	|
+----|														|
+----+-------------------------------------------------------+
+  ---end ir_processing cold_start
+	select extract(day from(sys_extract_utc(systimestamp) - to_timestamp(s1970_01_01, s1970_01_01_format))) * s24_hours   + to_number(to_char(sys_extract_utc(systimestamp), 'SSSSSFF3')) into ex_end_time from dual;
+	update test_rprt_status set TIME_END_EX = ex_end_time ,execution_status = 2 where id = test_generated_id;
+	commit;
+	dbms_output.put_line('end_cold_mode');
+
+	else
+		if is_live_mode = 0 then
+		--historical_mode
+		dbms_output.put_line('start_historical_mode');
+		select extract(day from(sys_extract_utc(systimestamp) - to_timestamp(s1970_01_01, s1970_01_01_format))) * s24_hours   + to_number(to_char(sys_extract_utc(systimestamp), 'SSSSSFF3')) into ex_start_time from dual;
+		update  test_rprt_status set TIME_START_EX = ex_start_time,execution_status =1,test_mode=0 where id = test_generated_id;
+	commit;
+----+-------------------------------------------------------+
+----|														|
+----|start_historical_mode_calculations	ir_processing		|
+----|														|
+----+-------------------------------------------------------+
+	dbms_output.put_line('historical_mode');
+----+-------------------------------------------------------+
+----|														|
+----|	end_historical_mode_calculations	ir_processing	|
+----|                                                       |
+----+-------------------------------------------------------+
+
+begin
+	---end ir_processing historical_mode
+	select extract(day from(sys_extract_utc(systimestamp) - to_timestamp(s1970_01_01,s1970_01_01_format))) * s24_hours   + to_number(to_char(sys_extract_utc(systimestamp), 'SSSSSFF3')) into ex_end_time from dual;
+	update test_rprt_status set TIME_END_EX = ex_end_time ,execution_status = 2 where id = test_generated_id;
+	EXCEPTION
+		WHEN others then
+			dbms_output.put_line('historical_mode_1');
+
+		end;
+		commit;
+		dbms_output.put_line('end_historical_mode');
+		else
+
+		----+-------------------------------------------------------+
+        ----|														|
+		----|	start_live_mode_calculations     ir_processing		|                
+		----|                                                       |
+		----+-------------------------------------------------------+
+				dbms_output.put_line('live_mode');
+		----+-------------------------------------------------------+
+		----|														|
+		----|       end_live_mode_calculations      ir_processing	|               
+		----|														|
+		----+-------------------------------------------------------+
+			end if ; --live mode
+
+  end if; --historical mode
+  end if; --can run
+end test_gn_rprt_ir;
+
+ 
+
