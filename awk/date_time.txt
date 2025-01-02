@@ -1,3 +1,40 @@
 date time to milliseconds
+https://blog.jpalardy.com/posts/parsing-and-validate-dates-in-awk/
+https://www.gnu.org/software/gawk/manual/html_node/Time-Functions.html
 
 echo "2022-04-12 16:30:59" | awk '{ d = mktime(gensub(/[-:]/," ","g",$0) " 0 0 0"); print d }'
+
+echo "2022-04-12 16:30:59" | awk '{ d = mktime(gensub(/[-:]/," ","g",$0) " 0 0 0"); print d"0000" }'
+
+echo "2022-04-12 16:30:59" | awk '{ d = mktime(gensub(/[-:]/," ","g",$0) " 0 0 0");  n = 14 - length(d);  while(n-->0) { d = d"0" } print d; }'
+
+
+
+local functions
+//https://stackoverflow.com/questions/55358991/create-timestamp-with-fractional-seconds
+awk '@load "time"
+     function get_uptime(   a) {
+        if((getline line < "/proc/uptime") > 0)
+        split(line,a," ")
+        close("/proc/uptime")
+        return a[1]
+     }
+     function curtime(    cmd, line, time) {
+        cmd = "date \047+%Y/%m/%d %H:%M:%S.%N\047"
+        if ( (cmd | getline line) > 0 ) {
+           time = line
+        }
+        else {
+           print "Error: " cmd " failed" | "cat>&2"
+        }
+        close(cmd)
+        return time
+      }
+      BEGIN{
+        t1=gettimeofday(); curtime(); t2=gettimeofday();
+        print "curtime()",t2-t1
+        t1=gettimeofday(); get_uptime(); t2=gettimeofday();
+        print "get_uptime()",t2-t1
+        t1=gettimeofday(); gettimeofday(); t2=gettimeofday();
+        print "gettimeofday()",t2-t1
+      }'
