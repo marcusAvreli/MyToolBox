@@ -8,7 +8,9 @@ echo "2022-04-12 16:30:59" | awk '{ d = mktime(gensub(/[-:]/," ","g",$0) " 0 0 0
 
 echo "2022-04-12 16:30:59" | awk '{ d = mktime(gensub(/[-:]/," ","g",$0) " 0 0 0");  n = 14 - length(d);  while(n-->0) { d = d"0" } print d; }'
 
+echo "2022-04-12T16:30:59,15" | awk '{d = gensub("[-+T:,]"," ","g",$0); print d;}'
 
+echo "2022-04-12T16:30:59,15" | awk '{d = mktime(gensub("[-+T:,]"," ","g",$0) " 0 0 0"); print d;}'
 
 local functions
 //https://stackoverflow.com/questions/55358991/create-timestamp-with-fractional-seconds
@@ -38,3 +40,27 @@ awk '@load "time"
         t1=gettimeofday(); gettimeofday(); t2=gettimeofday();
         print "gettimeofday()",t2-t1
       }'
+	  
+	  
+	  
+nanoseconds
+
+date "+%Y/%m/%d %H:%M:%S,%N"
+2024/12/31 07:18:05,188397563
+
+
+ls -l --time-style='+%Y%m%d %H:%M'
+total 1
+-rw-r--r-- 1 cas cas 0 20171230 21:26 ffd_ik_imp_bus.dat
+-rw-r--r-- 1 cas cas 0 20171230 21:26 ffd_in_imp_bus.dat
+From man ls:
+
+--time-style=STYLE
+
+with -l, show times using style STYLE: full-iso, long-iso, iso, locale, or +FORMAT
+
+FORMAT is interpreted like in `date'
+
+if FORMAT is FORMAT1<newline>FORMAT2, then FORMAT1 applies to non-recent files and FORMAT2 to recent files.
+
+if STYLE is prefixed with posix-, STYLE takes effect only outside the POSIX locale

@@ -81,3 +81,10 @@ $ TZ=/usr/share/zoneinfo/UTC jq -n '"2015-12-24T09:29:30+01:00" | sub("(?<before
 echo '{"date": "2015-03-06T04:21:47Z", "offset": 6.5}' \
 | jq '(.date | fromdate) - 3600 * .offset | todate'
 "2015-03-05T22:51:47Z"
+
+
+
+
+Converting non-iso8601 datetime strings to epoch (mktime) format
+https://github.com/jqlang/jq/issues/3047
+non-iso8601 datetime strings to epoch (mktime)

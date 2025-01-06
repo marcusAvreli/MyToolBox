@@ -391,3 +391,6 @@ https://stackoverflow.com/questions/762348/how-can-i-exclude-all-permission-deni
 
 
 https://unix.stackexchange.com/questions/718295/awk-check-date-if-today-then-filter-only-that-content
+https://unix.stackexchange.com/questions/256791/how-to-get-filenames-when-using-find-and-sed
+https://superuser.com/questions/1536840/convert-dates-to-epoch-value-on-multiple-columns-using-awk
+https://unix.stackexchange.com/questions/751665/select-everything-between-two-timestamps-in-a-log-file

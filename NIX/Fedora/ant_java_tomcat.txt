@@ -177,3 +177,47 @@ Group=tomcat
 
 [Install]
 WantedBy=multi-user.target
+
+
+
++-------------------------------------------------------+
+|									======10_of_10=====	|
+|			HARDENING									|
+|														|
++-------------------------------------------------------+
+
+
+rm -rf /opt/tomcat90/webapps/examples/ /opt/tomcat90/webapps/manager/ /opt/tomcat90/webapps/host-manager/ /opt/tomcat90/webapps/docs/
+
+ 
+
+cd /opt/tomcat90/webapps/ROOT
+
+	1. remove all files BUT NOT WEB-INF		
+		--list
+		find . -maxdepth 1 -type f -print
+		--remove
+		#find . -maxdepth 1 -type f -print0 | xargs -0 rm
+		
+	2. ADD index.jsp with the following content:
+		<% response.sendRedirect("/iiq"); %>
+
+ 
+
+ 
+
+       vi /opt/tomcat90/webapps/<web-app>/WEB-INF/web.xml
+
+              <session-config>  
+
+                     <tracking-mode>COOKIE</tracking-mode>
+
+                     <cookie-config>
+
+                           <http-only>true</http-only>
+
+                           <secure>true</secure>
+
+                     </cookie-config>
+
+              </session-config>
