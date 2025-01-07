@@ -64,3 +64,6 @@ FORMAT is interpreted like in `date'
 if FORMAT is FORMAT1<newline>FORMAT2, then FORMAT1 applies to non-recent files and FORMAT2 to recent files.
 
 if STYLE is prefixed with posix-, STYLE takes effect only outside the POSIX locale
+
+
+https://github.com/tzador/tglang/blob/fabbde1dd25c1fa80e7c016a9ef9a217b2e45a6e/data/snippets/AWK/02b5428cec637a9a44090ea18b2beee225981e3c7eb6035c624856d2a7bc1dd6.txt
