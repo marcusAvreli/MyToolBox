@@ -1,3 +1,342 @@
+declare function local:testParseWrittenValueLeft($singleValueNode as node(),$appName as xs:string) as element()* {
+
+                                                if($appName) then
+
+                                                                if($appName="Atlas") then
+
+                                                                                if(contains($singleValueNode,":")) then                                                                
+
+                                                                                                element r{
+
+                                                                                                                element node_value {data(ora:tokenize($singleValueNode,":")[1])}
+
+                                                                                                }
+
+                                                                                else(
+
+                                                                                                $singleValueNode
+
+                                                                                )
+
+                                                                else(
+
+                                                                                $singleValueNode
+
+                                                                )
+
+                                                else(
+
+                                                                $singleValueNode
+
+                                                )
+
+ 
+
+                                };
+
+                                declare function local:testParseWrittenValueRight($operation as xs:string,$singleValueNode as node(),$appName as xs:string) as element()* {
+
+                                                if($appName) then
+
+                                                                if($appName="Atlas") then
+
+                                                                                if(contains($singleValueNode,":")) then
+
+                                                                                                let $opAtlas := ora:tokenize($singleValueNode,":")[2]
+
+                                                                                                return
+
+                                                                                                if($opAtlas) then
+
+                                                                                                                if($opAtlas="remove") then
+
+                                                                                                                                element r{
+
+                                                                                                                                                element node_value {data("Remove")}
+
+                                                                                                                                }
+
+                                                                                                                else(
+
+                                                                                                                                if($opAtlas="add") then
+
+                                                                                                                                                element r{
+
+                                                                                                                                                                element node_value {data("Add")}
+
+                                                                                                                                                }
+
+                                                                                                                                else(
+
+                                                                                                                                                element r{
+
+                                                                                                                                                                element node_value {data($opAtlas)}
+
+                                                                                                                                                }
+
+                                                                                                                                )
+
+                                                                                                                )
+
+                                                                                                else(
+
+                                                                                                                element r{
+
+                                                                                                                                element node_value {data($singleValueNode)}
+
+                                                                                                                }
+
+                                                                                                )
+
+                                                                                else(
+
+                                                                                                element r{
+
+                                                                                                                element node_value {data($operation)}
+
+                                                                                                }
+
+                                                                                )
+
+                                                                else(
+
+                                                                                element r{
+
+                                                                                                element node_value {data($operation)}
+
+                                                                                }
+
+                                                                )
+
+                                                else(
+
+                                                                element r{
+
+                                                                                element node_value {data($operation)}
+
+                                                                }
+
+                                                )
+
+ 
+
+                                };
+
+                                declare function local:testNestedNodes($parentNode as node()) as node()* {                                                                                        
+
+                                                $parentNode/AttributeRequest                               
+
+                                };
+
+ 
+
+                                                declare function local:testListKeys($singleValueNode as  node(),$appName as xs:string) as element()* {
+
+                                if($singleValueNode/Value/List/String)then                        
+
+                                                $singleValueNode/Value/List/String
+
+                                else(
+
+ 
+
+                                                if($singleValueNode/Value/Map) then
+
+ 
+
+                                                                (:$singleValueNode/Value/Map/entry/@key:)
+
+                                                                let $writtenNodes :=$singleValueNode/Value/Map/entry/@key
+
+                                                                let $countOfWrittenValues :=     count($singleValueNode/Value/Map/entry/@key)
+
+                                                                return
+
+                                                                                for $j in 1 to $countOfWrittenValues
+
+                                                                                return element r{
+
+                                       element message_key {data($writtenNodes[$j])}
+
+                                    }
+
+                                                else(
+
+                                                                if($singleValueNode/@value) then
+
+ 
+
+                                                                                if($appName = "Atlas") then
+
+                                                                                                if(contains($singleValueNode/@value,",")) then
+
+                                                                                                                for $i in ora:tokenize($singleValueNode/@value,",")
+
+                                                                                                                return
+
+                                                                                                                                element r{
+
+                                                                                              element node_value {data($i)}
+
+                                                                                    }
+
+                                                    else(
+
+                                                                                                                element message_key {data($singleValueNode/@value)}
+
+                                                    )
+
+                                    else(
+
+                                                    element r{
+
+                                                       element message_key {data($singleValueNode/@value)}
+
+                                                    }
+
+                                    )
+
+ 
+
+                    else(
+
+                                    if($singleValueNode/Attributes/Map) then
+
+ 
+
+                                                               let $writtenNodes := $singleValueNode/Attributes/Map/entry/@key
+
+                                                                                                let $countOfWrittenValues :=     count($writtenNodes)
+
+                                                                                                return
+
+                                                                                                                for $j in 1 to $countOfWrittenValues
+
+                                                                                                                return element r{
+
+                                                                       element message_key {data($writtenNodes[$j])}
+
+                                                                    }
+
+                                              else(
+
+                                                                                                                (:element message_key {data("undefined")}:)
+
+                                              )
+
+                    )
+
+                                                )
+
+                                )
+
+                };
+
+ 
+
+                declare function local:testListValues($singleValueNode as  node(),$appName as xs:string) as element()* {
+
+ 
+
+                                                if($singleValueNode/Value/Map) then
+
+                                                                let $writtenNodes :=$singleValueNode/Value/Map/entry/@value
+
+                                                                let $countOfWrittenValues :=     count($writtenNodes)
+
+                                                                return
+
+                                                                                for $j in 1 to $countOfWrittenValues
+
+                                                                                                return element r{
+
+                                                       element message_key {data($writtenNodes[$j])}
+
+                                                    }
+
+                                                else(
+
+                                                                if($singleValueNode/Attributes/Map) then
+
+                                                                                let $writtenNodes :=$singleValueNode/Attributes/Map//entry/@value
+
+                                                                                let $countOfWrittenValues :=     count($writtenNodes)
+
+                                                                                return
+
+                                                                                for $j in 1 to $countOfWrittenValues
+
+                                                                                                return element r{
+
+                                                       element message_key {data($writtenNodes[$j])}
+
+                                                    }
+
+                                                                else()
+
+                                                )
+
+ 
+
+                };
+
+ 
+
+ 
+
+declare function local:ParseSingleValueNode($singleValueNode as node(),$stringName as xs:string?) as element()* {
+
+            if(fn:exists($singleValueNode/entry[@key=$stringName])) then
+
+                   let $tempValue := $singleValueNode/entry[@key=$stringName]/@value
+
+                   return
+
+                       if($tempValue) then
+
+                           element r{
+
+                              element message_key {data($tempValue)}
+
+                           }
+
+                       else (
+
+                           if($singleValueNode/entry[@key=$stringName]/value/List/String) then
+
+                          $singleValueNode/entry[@key=$stringName]/value/List/String
+
+                        else(
+
+                          element r{
+
+                                                       element message_key {"umtb_empty"}
+
+                                                }
+
+                                         )
+
+                                  )
+
+ 
+
+            else (
+
+                 element r{
+
+                    element message_key {"umtb_empty"}
+
+                 }
+
+            )
+
+        };
+
+ 
+
+ 
+
+
 with RoleDetections  as (
                 select name
                 ,x.detection_date
