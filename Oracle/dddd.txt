@@ -1,0 +1,73 @@
+with test_end_system_link as(
+
+select t2.IDENTITY_ID ,t2.id lnk_id
+
+,t1.name app_name
+
+        from spt_link t2
+
+        partition by(t2.IDENTITY_ID)
+
+        right outer join spt_application t1
+
+        on(t1.id= t2.APPLICATION)
+
+)
+
+ 
+
+ 
+
+ 
+
+select
+
+        distinct(sptIdentity.test_ID_NUM)
+
+ 
+
+,test_end_system_link.identity_id
+
+from spt_identity sptIdentity
+
+inner join test_end_system_link on test_end_system_link.identity_id = sptIdentity.id
+
+inner join spt_link sptLink on sptLink.identity_id = sptIdentity.id
+
+where app_name='app_name_3' and lnk_id is  null
+
+and   sptLink.IDENTITY_ID in(     
+
+select
+
+                sptLink.identity_id
+
+                from  spt_link sptLink
+
+                inner join spt_application sptApplication on sptApplication.id=sptLink.application
+
+                where sptApplication.name = 'app_name_2'
+
+                intersect
+
+                select
+
+                sptLink.identity_id
+
+                from  spt_link sptLink
+
+                inner join spt_application sptApplication on sptApplication.id=sptLink.application
+
+                where sptApplication.name = 'app_name'
+
+                )
+
+        and sptIdentity.test_ in ('ffff')
+
+and sptIdentity.correlated=1
+
+and (sptIdentity.workgroup='0' or sptIdentity.workgroup is null)
+
+ 
+
+ 
