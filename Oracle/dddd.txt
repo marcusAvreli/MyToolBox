@@ -60,6 +60,7 @@ select
 
                 where sptApplication.name = 'app_name'
 
+
                 )
 
         and sptIdentity.test_ in ('ffff')
