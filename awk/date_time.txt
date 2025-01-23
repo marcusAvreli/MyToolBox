@@ -1,6 +1,9 @@
 date time to milliseconds
 https://blog.jpalardy.com/posts/parsing-and-validate-dates-in-awk/
 https://www.gnu.org/software/gawk/manual/html_node/Time-Functions.html
+https://github.com/learnbyexample/learn_gnuawk/blob/96b8442fc372303f1be838bf01a2210ded152b58/exercises/fw.txt
+https://github.com/tzador/tglang/blob/fabbde1dd25c1fa80e7c016a9ef9a217b2e45a6e/data/snippets/AWK/02b5428cec637a9a44090ea18b2beee225981e3c7eb6035c624856d2a7bc1dd6.txt
+
 
 echo "2022-04-12 16:30:59" | awk '{ d = mktime(gensub(/[-:]/," ","g",$0) " 0 0 0"); print d }'
 
