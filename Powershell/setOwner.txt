@@ -1,0 +1,268 @@
+
+Mark Gavrilman
+11:20 AM (0 minutes ago)
+to me
+
+Import-Module ActiveDirectory
+
+##setOwner
+
+function Get-ADUserInfo
+
+{
+
+    [CmdletBinding()]
+
+    param(
+
+        #[Parameter(Mandatory=$True)]
+
+        [object[]]$Users= '*'
+
+ 
+
+    )
+
+    Begin{
+
+        $results = @()
+
+        $maxPasswordAge = (Get-ADDefaultDomainPasswordPolicy).MaxPasswordAge.Days
+
+        $Headers= @{Label="ID";Expression={$_.SAMAccountName}},
+
+       @{Label="Name";Expression={$_.Name}},
+
+        @{Label="Password Never Expires?";Expression={$_.PasswordNeverExpires}},
+
+        @{Label="Locked Out";Expression={$_.LockedOut}},
+
+        @{Label="Password Last Set";Expression={$_.PasswordLastSet}},
+
+        @{Label="Distinguished Name";Expression={$_.distinguishedName}},
+
+        @{Label="Expiry Date";Expression={$_.PasswordLastSet.AddDays($maxPasswordAge)}},
+
+        @{Label="Last Logon Date";Expression={$_.LastLogOnDate}},
+
+        @{Label="OU Path";Expression={$_.CanonicalName}}
+
+ 
+
+    }
+
+    Process{
+
+        foreach ($user in $Users){
+
+                     $id = $user.id
+
+                     $groupName = $user.groupName
+
+       #            $results += Get-ADUser -Filter {SAMAccountName -like $id} -Properties PasswordNeverExpires,LockedOut,PasswordLastSet,LastLogOnDate,CanonicalName,DistinguishedName | select $Headers
+
+                                  $resultUserProperties = Get-ADUser -Filter {SAMAccountName -like $id} -Properties PasswordNeverExpires,LockedOut,PasswordLastSet,LastLogOnDate,CanonicalName,DistinguishedName
+
+                     $resultObject = Get-ADGroup -Filter{name -like $groupName} -Properties owner,distinguishedName,samaccountName,dlMemSubmitPerms,authOrig
+
+       #             $resultObject | ConvertTo-CSV -NoTypeInformation | out-file -filepath ./outputFileGroup.txt -Append -encoding unicode
+
+                     $currentOwner=$resultObject.owner
+
+                     $dlMemSubmitPerms = $resultObject.dlMemSubmitPerms
+
+                     $authOrig=$resultObject.authOrig
+
+                     $groupDistinguishedName=$resultObject.distinguishedName
+
+                     $groupSamaccountName=$resultObject.samaccountName
+
+                     $userDistinguishedName = $resultUserProperties.DistinguishedName
+
+                     if($userDistinguishedName ){
+
+                           #write-host "dn is not empty"
+
+                     }else{
+
+                           #write-host "dn is empty"
+
+                     }
+
+ 
+
+                     if($authOrig){
+
+                           write-host "auth orig is not null"
+
+                     }else{
+
+                           write-host "auth orig is null"
+
+                           Set-ADGroup -Identity $groupDistinguishedName  -Add @{authOrig = $userDistinguishedName}
+
+                     }
+
+                     if($dlMemSubmitPerms){
+
+                           write-host "dlMemSubmitPerms is not null"
+
+                     }else{
+
+                           write-host "dlMemSubmitPerms is null"
+
+                           #Set-ADGroup -Identity $groupDistinguishedName  -Add @{dlMemSubmitPerms = $userDistinguishedName}
+
+                     }
+
+                     if($groupSamaccountName -ceq $groupName){
+
+                           #write-host "Distinguished Name:" $groupDistinguishedName
+
+                           # $userDistinguishedName | out-file -filepath ./outputUserFile.txt -Append -encoding unicode
+
+                           if($currentOwner){
+
+                                  write-host "Owner is not null"
+
+              #                    Set-ADGroup -Identity $groupDistinguishedName  -Add @{dlMemSubmitPerms = $userDistinguishedName}
+
+                           }else{
+
+                                  write-host "Owner is empty"
+
+              #             Set-ADGroup -Identity $groupDistinguishedName  -Replace @{authOrig = $userDistinguishedName}
+
+                           }
+
+                     }
+
+ 
+
+        }
+
+    }
+
+    End{
+
+#       $results | ConvertTo-CSV -NoTypeInformation | out-file -filepath ./outputFile.txt -Append -encoding unicode
+
+    }
+
+}
+
+ 
+
+ 
+
+ 
+
+ 
+
+$path     = Split-Path -parent $MyInvocation.MyCommand.Definition 
+
+$newpath  = $path + "\listOfUsers.txt"
+
+$outputFileName = $path+"\outputFile.txt"
+
+if(Test-Path $outputFileName){
+
+       Remove-Item $outputFileName
+
+       write-host $outputFileName " of previous result was deleted"
+
+}
+
+$Users      = Import-Csv -Path $newpath -Encoding UTF8
+
+Get-ADUserInfo $Users
+
+ 
+
+##create ou
+
+function New-OrganizationalUnitFromDN
+
+{
+
+    [CmdletBinding(SupportsShouldProcess=$true)]
+
+    param(
+
+        [object[]]$OUNames= '*'
+
+    )
+
+       $alreadyPassed=@()
+
+       foreach ($OUName in $OUNames){
+
+              $DN=$OUName.OUName        
+
+              [bool] $exists=[ADSI]::Exists("LDAP://$DN")
+
+              if($exists){
+
+              get-ADOrganizationalUnit -Identity $DN |   set-ADOrganizationalUnit –ProtectedFromAccidentalDeletion $false
+
+ 
+
+                     Remove-ADOrganizationalUnit -Identity $DN -Confirm:$false
+
+                     $report=[pscustomobject]@{"OUName"=$DN;"Status"="deleted"}
+
+                     $report|Export-Csv -Path ".\output.txt"  -NoTypeInformation -Append
+
+                          
+
+              }else{
+
+                    
+
+                     $report=[pscustomobject]@{"OUName"=$DN;"Status"="does not eixst"}
+
+                     $report|Export-Csv -Path ".\output.txt" -NoTypeInformation -Append
+
+                    
+
+              }
+
+      
+
+       }
+
+ 
+
+}
+
+ 
+
+$path     = Split-Path -parent $MyInvocation.MyCommand.Definition 
+
+$newpath  = $path + "\input.txt"
+
+$outputFileName = $path+"\output.txt"
+
+if(Test-Path $outputFileName){
+
+       Remove-Item $outputFileName
+
+       write-host $outputFileName " of previous result was deleted"
+
+}
+
+Add-Content -Path $outputFileName -Value '"OUName","Status"'
+
+ 
+
+$OUNames      = Import-Csv -Path $newpath -Encoding UTF8
+
+ 
+
+ 
+
+New-OrganizationalUnitFromDN -OUNames $OUNames
+
+ 
+
+ 
