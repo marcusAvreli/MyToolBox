@@ -1,3 +1,10 @@
+#-------------------------------------------------------+
+#										=====1_OF_=====	|
+# 	CREATE OU											|
+#														|
+#-------------------------------------------------------+
+#https://github.com/EvotecIT/PSSharedGoods/blob/83c09827c7d03239cdb190aaa94e6b95ec0e18e2/Build/Manage-PSSharedGoods.ps1
+
 function New-OrganizationalUnitFromDN
 {
     [CmdletBinding(SupportsShouldProcess=$true)]
@@ -17,7 +24,7 @@ function New-OrganizationalUnitFromDN
 
                                 # We'll need to traverse the path, level by level, let's figure out the number of possible levels 
                                 $Depth = ($DN -split $DNRegex).Count
-[bool] $exists=[ADSI]::Exists("LDAP://$DN")
+								[bool] $exists=[ADSI]::Exists("LDAP://$DN")
                                 if(!$exists){
                                 # Step through each possible parent OU
                                 for($i = 1;$i -le $Depth;$i++)
