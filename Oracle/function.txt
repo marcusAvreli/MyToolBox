@@ -1,0 +1,45 @@
+CREATE OR REPLACE TYPE thisLocal_type_admin_actions as object(
+
+field_name         varchar2(128)
+
+ 
+
+ 
+
+);
+
+CREATE OR REPLACE TYPE thisLocal_tab_admin_actions as table of thisLocal_type_admin_actions;
+
+ 
+
+ 
+
+CREATE OR REPLACE FUNCTION thisLocal_rprt_dmn_actns(
+
+ 
+
+)
+
+RETURN thisLocal_tab_admin_actions
+
+as
+
+thisLocal_fnctn_rslt thisLocal_tab_admin_actions;
+
+BEGIN
+
+ 
+
+ 
+
+ 
+
+SELECT thisLocal_rprt_dmn_actns(
+
+ )
+
+bulk collect
+
+into thisLocal_fnctn_rslt
+
+from thisLocal_temp_report  thisLocalTempReport ;
