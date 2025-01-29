@@ -1,0 +1,129 @@
+##testThis_TABLE_LIST_MAIL_START
+
+     #if($dynamicHistoryApprovalData)
+
+                                  #set($testThisResultSet = $dynamicHistoryApprovalData.testThisResultSet)
+
+                                                 #set($testThisReportSortingMap = $dynamicHistoryApprovalData.testThisReportSortingMap)
+
+                                               #if($testThisResultSet and !$testThisResultSet.isEmpty())
+
+   
+
+          <p class="testThis_P_class">
+
+ 
+
+        
+
+ 
+
+        </p>
+
+ 
+
+   
+
+      <table border="1">
+
+ 
+
+    #foreach($mapEntry in $testThisResultSet.entrySet())
+
+          #set($rowNumber=$mapEntry.key)
+
+          #set($payLoadMap =$mapEntry.value)
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+          #if ($rowNumber  == 1)
+
+ 
+
+ 
+
+          <tr>
+
+          #set ($bgcolor = "#FFFFFF")
+
+          <th bgcolor="$bgcolor">#</th>
+
+          #foreach($testThisReportSortingEntry in $testThisReportSortingMap.entrySet())
+
+            #set($sortingValue=$testThisReportSortingEntry.value)
+
+ 
+
+ 
+
+             <th bgcolor="$bgcolor">$sortingValue</th>                        
+
+ 
+
+          #end
+
+        </tr>
+
+        #end
+
+ 
+
+          #if ($rowNumber % 2 == 0)
+
+            #set ($bgcolor = "#FFFFFF")
+
+          #else
+
+            #set ($bgcolor = "#CCCCCC")        
+
+          #end
+
+         <tr>
+
+         <td bgcolor="$bgcolor">$rowNumber</td>
+
+        #foreach( $testThisReportSortingEntry in $testThisReportSortingMap.entrySet())    
+
+          #set($payLoadValue=$payLoadMap.get($testThisReportSortingEntry.value))
+
+          #set($payLoadKey=$testThisReportSortingEntry.key)
+
+          #if("$payLoadValue"!="")
+
+            <td bgcolor="$bgcolor">$!payLoadValue</td>                     
+
+          #else
+
+            <td bgcolor="$bgcolor"></td>                     
+
+          #end
+
+          #set($payLoadValue="")
+
+        #end
+
+         </tr>
+
+               
+
+  
+
+  
+
+ 
+
+    #end
+
+  
+
+</table>
+
+    ##testThis_TABLE_LIST_MAIL_END

@@ -1,0 +1,4068 @@
+import com.sap.conn.jco.JCoParameterFieldIterator;
+import com.sap.conn.jco.JCoRecordFieldIterator;
+import com.sap.conn.jco.JCoDestinationManager;
+import com.sap.conn.jco.JCoFunctionTemplate;
+import com.sap.conn.jco.JCoParameterField;
+import com.sap.conn.jco.JCoRecordMetaData;
+import com.sap.conn.jco.JCoFieldIterator;
+import com.sap.conn.jco.JCoParameterList;
+import com.sap.conn.jco.JCoListMetaData;
+import com.sap.conn.jco.JCoRecordField;
+import com.sap.conn.jco.JCoDestination;
+import com.sap.conn.jco.JCoRepository;
+import com.sap.conn.jco.JCoException;
+import com.sap.conn.jco.JCoStructure;
+import com.sap.conn.jco.JCoFunction;
+import com.sap.conn.jco.JCoContext;
+import com.sap.conn.jco.JCoRecord;
+import com.sap.conn.jco.JCoTable;
+import com.sap.conn.jco.JCoField;
+import sailpoint.tools.GeneralException;
+import sailpoint.object.Application;
+import sailpoint.api.SailPointContext;
+import sailpoint.connector.Connector;
+import sailpoint.object.Identity;
+import sailpoint.object.Attributes;
+
+               
+
+               
+
+               
+
+               
+
+ 
+
+public JCoFunction getRfcReadTable(JCoRepository sapRepository,String sapTableName){
+	JCoFunctionTemplate functionTemplate = sapRepository.getFunctionTemplate("RFC_READ_TABLE");
+	JCoFunction resultJcoFunction = functionTemplate.getFunction();
+	resultJcoFunction.getImportParameterList().setValue("QUERY_TABLE",sapTableName);
+	resultJcoFunction.getImportParameterList().setValue("DELIMITER","|");
+	resultJcoFunction.getImportParameterList().setValue("ROWSKIPS",Integer.valueOf(0));
+	resultJcoFunction.getImportParameterList().setValue("ROWCOUNT",Integer.valueOf(0));
+	return resultJcoFunction;
+}
+
+ 
+
+ 
+
+//*
+//|
+//|
+//|	PARSE_SAP_OUTPUT_UTILS
+//|
+//|
+//|
+
+public List<String> testThisGetSapPlainTableFieldNames(JCoTable jcoTablef){
+	List<String> resultList=null;
+	int numRows = jcoTablef.getNumRows();
+	for(int i=0;i<numRows;i++){
+		jcoTablef.setRow(i);
+		JCoFieldIterator fieldIterator=jcoTablef.getFieldIterator();
+		firstCellTaken=false;
+		while(fieldIterator.hasNextField()){
+			JCoField field=fieldIterator.nextField();
+
+			if(!firstCellTaken){
+				firstCellTaken=true;
+				String fieldName=jcoTablef.getValue(field.getName());
+				if(null == resultList){
+					resultList = new ArrayList<String>();
+				}
+				resultList.add(fieldName);
+			}
+		}
+	}
+	return resultList;
+}
+
+ 
+
+public Map testThisGetPlainTableSapDataMap(List<String> fieldNames,JCoTable jcoTabled){
+	String artName="testThisGetPlainTableSapDataMap";
+	Map testThisResultSet = null;
+	Map resultMap = null;
+	int counter = 0;
+	int numRows=0;
+
+	if(null !=fieldNames && !fieldNames.isEmpty()){
+		numRows = jcoTabled.getNumRows(); 
+		if(numRows>0){                  
+
+		resultMap=new HashMap();
+		for(int i = 0;i<numRows;i++){
+
+			jcoTabled.setRow(i);
+
+			counter++;
+
+			JCoFieldIterator fieldIterator=jcoTabled.getFieldIterator();
+
+
+
+			while(fieldIterator.hasNextField()){
+
+                                                                                JCoField field=fieldIterator.nextField();
+
+                                                                                String fieldName=field.getName();
+
+                                                                               
+
+                                                                                String[] rawValues=jcoTabled.getValue(fieldName).toString().split("\\|");
+
+                                                                                for(int j=0;j<rawValues.length;j++){                                                                        
+
+                                                                                                if(Util.isNotNullOrEmpty(rawValues[j])){
+
+                                                                                                                String trimmedValue= rawValues[j].trim();                                                                                                                          
+
+                                                                                                                resultMap.put(fieldNames.get(j),trimmedValue);
+
+                                                                                                }                                             
+
+                                                                                }                                             
+
+                                                                }
+
+                                                               
+
+                                                                if(null == testThisResultSet){
+
+                                                                                testThisResultSet = new HashMap();
+
+                                                                }
+
+                                                                testThisResultSet.put(counter,  resultMap);                                                                                                                                       
+
+                                                }
+
+                                               
+
+                                }
+
+                }             
+
+               
+
+	return testThisResultSet;                             
+
+               
+
+	}
+
+public HashMap testThisGetPlainTableSapDataMapReport(List<String> fieldNames,JCoTable jcoTabled){
+
+                Map testThisResultSet = null;
+
+                Map testThisResultRow = null;
+
+                int counter=0;
+
+               
+
+                int numRows=0;
+
+                if(null !=fieldNames && !fieldNames.isEmpty()){
+
+                                numRows = jcoTabled.getNumRows();
+
+                                               
+
+                                if(            numRows>0 /*&& numRows==1*/){                      
+
+                                                resultMap=new HashMap();      
+
+                                                for(int i = 0;i<numRows;i++){
+
+                                                                jcoTabled.setRow(i);
+
+                                                                JCoFieldIterator fieldIterator=jcoTabled.getFieldIterator();
+
+                                                                counter++;
+
+                                                                while(fieldIterator.hasNextField()){
+
+                                                                                JCoField field=fieldIterator.nextField();
+
+                                                                                String fieldName=field.getName();
+
+                                                                               
+
+                                                                                String[] rawValues=jcoTabled.getValue(fieldName).toString().split("\\|");
+
+                                                                                for(int j=0;j<rawValues.length;j++){                                                                        
+
+                                                                                                if(Util.isNotNullOrEmpty(rawValues[j])){
+
+                                                                                                                String trimmedValue= rawValues[j].trim();
+
+                                                                                                                if(null ==              testThisResultRow){
+
+                                                                                                                                testThisResultRow = new HashMap();
+
+                                                                                                                }                                                                                                             
+
+                                                                                                                testThisResultRow.put(fieldNames.get(j),trimmedValue);
+
+                                                                                                }                                             
+
+                                                                                }                                             
+
+                                                                }
+
+                                                                if(null ==              testThisResultSet){
+
+                                                                                testThisResultSet = new HashMap();
+
+                                                                }
+
+                                                                testThisResultSet.put(counter,  testThisResultRow);
+
+                                                                testThisResultRow = null;                                                                                             
+
+                                                }
+
+                                               
+
+                                }
+
+                }              //testThisDebug("testThisResultSet:"+testThisResultSet);
+
+                return testThisResultSet;                             
+
+               
+
+}
+
+ 
+
+//*
+
+//|         
+
+//|
+
+//|                          RFC_READ_TABLE_UTILS
+
+//|
+
+//|
+
+//|
+
+ 
+
+public void testThisSapBuildPlainTableFilter(JCoTable returnOptions,HashMap inputParams, String tableName){
+
+                //JCoParameterList jcoTableParameterList = function.getTableParameterList();
+
+                //JCoTable returnOptions = jcoTableParameterList.getTable("OPTIONS");
+
+                Date today = new Date();
+
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+
+                Date dateYesterday = new Date(today.getTime() + TimeUnit.DAYS.toMillis(-1));
+
+                String strToday=simpleDateFormat.format(today);
+
+                String strYesterday = simpleDateFormat.format(dateYesterday);
+
+                String identityName =    inputParams.get("identityName");
+
+                String testThisPersonalArea = inputParams.get("testThisPersonalArea");
+
+                String testThisEffectiveSubarea = inputParams.get("testThisEffectiveSubarea");
+
+                String fdsfdgKod = inputParams.get("fdsfdgKod");
+
+                String perNr =    inputParams.get("perNr");
+
+                switch(tableName){
+
+                                case "PA0030":
+
+                                                               
+
+                                                returnOptions.appendRow();
+
+                                                returnOptions.setValue("TEXT","PERNR = '"+perNr+"'");                                                                
+
+                                                returnOptions.appendRow();
+
+                                                returnOptions.setValue("TEXT","AND ENDDA = '99991231' AND VOLMA IN ('10' , '30')");                
+
+                                break;
+
+                                case "T77UA":                                                                                  
+
+                                                returnOptions.appendRow();
+
+                                                returnOptions.setValue("TEXT","UNAME = '"+identityName+"'");
+
+                               
+
+                                                returnOptions.appendRow();
+
+                                                returnOptions.setValue("TEXT","AND BEGDA BETWEEN '00010101' AND '"+strYesterday+"' ");
+
+                               
+
+                                                returnOptions.appendRow();
+
+                                                returnOptions.setValue("TEXT","AND ENDDA BETWEEN '"+strToday+"' AND  '99991231'");                                               
+
+                                break;
+
+                                case "T526":                                      
+
+                                                returnOptions.appendRow();
+
+                                                returnOptions.setValue("TEXT","USRID = '"+identityName+"'");
+
+                                break;                  
+
+                                case "PA0001":
+
+                                                                //returns kod fdsfdg field                          SACHZ
+
+                                                returnOptions.appendRow();
+
+                                                returnOptions.setValue("TEXT","WERKS = '"+testThisPersonalArea+"'");
+
+                                               
+
+                                                returnOptions.appendRow();
+
+                                                returnOptions.setValue("TEXT","AND BTRTL = '"+testThisEffectiveSubarea+"'");
+
+                                               
+
+                                                returnOptions.appendRow();
+
+                                                returnOptions.setValue("TEXT","AND ENDDA >= '"+strToday+"' AND BEGDA <= '"+strToday+"'");
+
+                                                //persg - employee group
+
+                                                returnOptions.appendRow();
+
+                                                returnOptions.setValue("TEXT","AND PERSG IN ('1')");
+
+                                                //not in operator does not take more than 4 items in a row so "stell not in" was splitted in to two parts
+
+                                                //stell - jobKey
+
+                                                returnOptions.appendRow();
+
+                                                returnOptions.setValue("TEXT","AND STELL NOT IN ()");
+
+                                               
+
+                                                returnOptions.appendRow();
+
+                                                returnOptions.setValue("TEXT","AND STELL NOT IN ()");     
+
+                                break;  
+
+                                case "testThisCustom_fdsfdg_ROLES":
+
+                                                returnOptions.appendRow();
+
+                                                returnOptions.setValue("TEXT","inputParma = '"++"'");                                   
+
+                                break;
+
+                }
+
+               
+
+}
+
+ 
+
+public Object testThisQueryPlainSapTable(JCoDestination destination,JCoRepository sapRepository, HashMap inputParams,String sapTableName){
+
+                List<String> fieldNames=null;
+
+                HashMap testThisSapDataMap = null;                    
+
+                if(null == sapRepository){
+
+                                sapRepository=testThisGetRepository(destination);
+
+                }
+
+                JCoFunction function = getRfcReadTable(sapRepository,sapTableName);
+
+                JCoParameterList jcoTableParameterList = function.getTableParameterList();
+
+                JCoTable returnOptions = jcoTableParameterList.getTable("OPTIONS"); 
+
+                testThisSapBuildPlainTableFilter(returnOptions,inputParams,sapTableName);                    
+
+                function.execute(destination);  
+
+                JCoTable jcoTablef = jcoTableParameterList.getTable("FIELDS");                                                
+
+                JCoTable jcoTabled = jcoTableParameterList.getTable("DATA");                 
+
+                fieldNames = testThisGetSapPlainTableFieldNames(jcoTablef);  
+
+                testThisSapDataMap=   testThisGetPlainTableSapDataMap(fieldNames,jcoTabled);          
+
+                return testThisSapDataMap;
+
+ 
+
+}
+
+public Object testThisQueryPlainSapTable(JCoDestination destination, HashMap inputParams,String sapTableName){               
+
+                JCoRepository sapRepository = testThisGetRepository(destination);
+
+                HashMap testThisSapDataMap = testThisQueryPlainSapTable(destination,sapRepository,inputParams,sapTableName);
+
+                return testThisSapDataMap;
+
+}
+
+ 
+
+ 
+
+//query pa0030 table sap ecc
+
+public String getPA0030(JCoDestination destination, JCoRepository sapRepository, String idNumber){
+
+                //called from
+
+                //1. testThis-Sap Ecc-Build Map
+
+                String artName="getPA0030_UPdated";
+
+                testThisDebug(getLogStartMessage(artName));
+
+                String resultString = null;
+
+                if(Util.isNotNullOrEmpty(idNumber)){   
+
+                                Identity identity=retrieveIdentity(idNumber);
+
+                                if(identity!=null){
+
+                                                String perNr=identity.getAttribute("testThisEmpNum");
+
+                                                if(Util.isNotNullOrEmpty(perNr)){                                                                                            
+
+                                                                Map inputParams = new HashMap();
+
+                                                                inputParams.put("perNr",perNr);
+
+                                                                Map testThisSapDataMap = testThisQueryPlainSapTable(destination,sapRepository,inputParams, "PA0030");
+
+                                                                if(null != testThisSapDataMap && !testThisSapDataMap.isEmpty() && testThisSapDataMap.size()==1){
+
+                                                                                resultString = testThisSapDataMap.get(1).get("VOLMA");
+
+                                                                }
+
+                                                }//pernr not null
+
+                                                else{
+
+                                                                //log.error("PERNR is null. Id_Number = "+idNumber);
+
+                                                }             
+
+                                }//identity not null
+
+                                else{
+
+                                                log.error("[getfdsfdgSap]: Identity is null. \U\1  received is:"+idNumber);
+
+                                }             
+
+                }//idNUmber is not null
+
+                else{
+
+                                log.error("\U\1  is null");
+
+                }
+
+                testThisDebug(getLogFinishMessage(artName));
+
+                return resultString;
+
+}
+
+ 
+
+ 
+
+ 
+
+ 
+
+public JCoFunction callBapiForApp5(String appName, String bapiName, HashMap inputParams)throws GeneralException, JCoException {            
+
+                JCoDestination destination = testThisGetDestination(appName);
+
+                String tid=destination.createTID();          
+
+                sapRepository = testThisGetRepository(destination);
+
+                if (sapRepository == null) {                           
+
+                                log.error("SapHr_BuildMap_Could_not_get_repository");
+
+                }
+
+                testThisDebug("About to call BAPI: " + bapiName);
+
+                testThisDebug("TID: " + tid);       
+
+                JCoFunctionTemplate template = sapRepository.getFunctionTemplate(bapiName);
+
+               
+
+                JCoFunction function = template.getFunction();
+
+                if (inputParams.size() > 0) {                         
+
+                                JCoFieldIterator iter=function.getImportParameterList().getFieldIterator();
+
+                                while(iter.hasNextField()){                                          
+
+                                                JCoField f=iter.nextField();
+
+                                                testThisDebug("FIELD ==> "+f.getName()+", VALUE ==> "+inputParams.get(f.getName()));                                                               
+
+                                                Object tempMapObj= inputParams.get(f.getName());
+
+                                                if(null!=tempMapObj){
+
+                                                                if(tempMapObj instanceof String){
+
+                                                                                f.setValue((String)tempMapObj);
+
+                                                                }
+
+                                                }                                                                                             
+
+                                }                                             
+
+                }//inputParams has size
+
+                function.execute(destination);  
+
+               JCoFunction commitfunction = destination.getRepository().getFunction("BAPI_TRANSACTION_COMMIT");
+
+                commitfunction.getImportParameterList().setValue("WAIT","X");
+
+                commitfunction.execute(destination,tid);
+
+                destination.confirmTID(tid);      
+
+                return function;
+
+}
+
+ 
+
+ 
+
+public void callBapiForApp(String appName, String bapiName, HashMap inputParams){
+
+                Application app = retrieveApplication(appName);
+
+                Connector connector = ConnectorFactory.getConnector(app, null);
+
+                try {
+
+                                connector.testConfiguration();
+
+                } catch (ConnectorException e) {
+
+                                // TODO Auto-generated catch block
+
+                                e.printStackTrace();
+
+                }
+
+                JCoDestination destination = JCoDestinationManager.getDestination(appName);
+
+                String tid=destination.createTID();          
+
+                JCoRepository sapRepository = destination.getRepository();
+
+                if (sapRepository == null) {
+
+                                System.out.println("Could not get repository");
+
+                                log.error("callYbbpReadAttributes_Could_not_get_repository");
+
+                }
+
+ 
+
+                JCoParameterList outTables = null;
+
+                JCoFunctionTemplate functionTemplate = sapRepository.getFunctionTemplate(bapiName);
+
+                                               
+
+                testThisDebug("Function_Template:"+functionTemplate);
+
+                JCoFunction function = functionTemplate.getFunction();
+
+                if (inputParams.size() > 0) {                         
+
+                                JCoFieldIterator iter=function.getImportParameterList().getFieldIterator();
+
+                                while(iter.hasNextField()){
+
+                               
+
+                                                JCoField f=iter.nextField();
+
+                                                testThisDebug("FIELD ==> "+f.getName()+", VALUE ==> "+inputParams.get(f.getName()));
+
+                                               
+
+                                                Object tempMapObj= inputParams.get(f.getName());
+
+                                                if(null!=tempMapObj){
+
+                                                                if(tempMapObj instanceof String){
+
+                                                                                f.setValue((String)tempMapObj);
+
+                                                                }
+
+                                                                if(tempMapObj instanceof JCoTable){
+
+                                                                                testThisDebug("Got_Table_As_Input"+tempMapObj);
+
+                                                                                f.setValue(tempMapObj);
+
+                                                                }
+
+                                                }             
+
+                                                                               
+
+                                }                                             
+
+                }//inputParams has size
+
+                function.execute(destination);
+
+               
+
+               JCoFunction commitfunction = destination.getRepository().getFunction("BAPI_TRANSACTION_COMMIT");
+
+                commitfunction.getImportParameterList().setValue("WAIT","X");
+
+                commitfunction.execute(destination,tid);
+
+                destination.confirmTID(tid);
+
+               
+
+                JCoParameterList outTables = function.getTableParameterList();
+
+               
+
+               
+
+                JCoParameterList outputJCoParameterList = function.getExportParameterList();
+
+                List<String> outputFieldNames = new ArrayList<String>();
+
+                if(null != outputJCoParameterList){
+
+                                JCoFieldIterator iterator = outputJCoParameterList.getFieldIterator();
+
+                                while(iterator.hasNextField()){
+
+                                                JCoField field = iterator.nextField();
+
+                                                String fieldName = field.getName();
+
+                                                outputFieldNames.add(fieldName);
+
+                                                testThisDebug("Field:"+fieldName);
+
+                                }
+
+                                if(outputFieldNames.contains("")){
+
+                                                JCoTable jcoTable  = outputJCoParameterList.getTable("");
+
+                                                if(null != jcoTable){
+
+                                                                JCoFieldIterator tableIterator = jcoTable.getFieldIterator();
+
+                                                                while(tableIterator.hasNextField()){
+
+                                                                                JCoField field = tableIterator.nextField();
+
+                                                                                String fieldName = field.getName();
+
+                                                                                testThisDebug("Field:"+fieldName+ " Value : "+field.getValue());
+
+                                                                }
+
+                                                }
+
+                                }
+
+                                if(outputFieldNames.contains("")){
+
+                                                JCoTable jcoTable  = outputJCoParameterList.getTable("");
+
+                                                if(null != jcoTable){
+
+                                                                JCoFieldIterator tableIterator = jcoTable.getFieldIterator();
+
+                                                                while(tableIterator.hasNextField()){
+
+                                                                                JCoField field = tableIterator.nextField();
+
+                                                                                String fieldName = field.getName();
+
+                                                                                testThisDebug("Field:"+fieldName+ " Value : "+field.getValue());
+
+                                                                }
+
+                                                }
+
+                                }
+
+                }
+
+               
+
+                if(null != outTables ){
+
+                                testThisDebug("got_out_tables");
+
+                }else{
+
+                                testThisDebug("no_out_tables");
+
+                }
+
+                testThisDebug("FINISH");
+
+               
+
+}
+
+ 
+
+public HashMap getSapHrSingleEmployeeRecord(String appName, String bapiName, String misparOved){
+
+                HashMap inputParams = new HashMap();
+
+                HashMap resultRecord = new HashMap();
+
+                inputParams.put("EMPLOYEE_ID",misparOved);
+
+                //inputParams.put("COSTCENTER","00001101");
+
+                Application app = retrieveApplication("SAP ECC");
+
+               
+
+               
+
+                Connector connector = ConnectorFactory.getConnector(app, null);
+
+                try {
+
+                                connector.testConfiguration();
+
+                } catch (ConnectorException e) {
+
+                                // TODO Auto-generated catch block
+
+                                e.printStackTrace();
+
+                }
+
+                JCoDestination destination = JCoDestinationManager.getDestination(appName);
+
+                String tid=destination.createTID();
+
+                JCoRepository sapRepository = destination.getRepository();
+
+                if (sapRepository == null) {
+
+                                System.out.println("Could not get repository");
+
+                                log.error("callYbbpReadAttributes_Could_not_get_repository");
+
+                }
+
+ 
+
+                JCoParameterList outTables = null;
+
+                JCoFunctionTemplate functionTemplate = sapRepository.getFunctionTemplate(bapiName);         
+
+                JCoFunction function = functionTemplate.getFunction();
+
+                if (inputParams.size() > 0) {                         
+
+                                JCoFieldIterator iter=function.getImportParameterList().getFieldIterator();
+
+                                while(iter.hasNextField()){                          
+
+                                                JCoField f=iter.nextField();                                          
+
+                                                Object tempMapObj= inputParams.get(f.getName());
+
+                                                if(null!=tempMapObj){
+
+                                                                if(tempMapObj instanceof String){
+
+                                                                                f.setValue((String)tempMapObj);
+
+                                                                }
+
+                                                                if(tempMapObj instanceof JCoTable){
+
+                                                                                testThisDebug("Got_Table_As_Input"+tempMapObj);
+
+                                                                                f.setValue(tempMapObj);
+
+                                                                }
+
+                                                }             
+
+                                                                               
+
+                                }                                             
+
+                }//inputParams has size
+
+                function.execute(destination);
+
+               
+
+               JCoFunction commitfunction = destination.getRepository().getFunction("BAPI_TRANSACTION_COMMIT");
+
+                commitfunction.getImportParameterList().setValue("WAIT","X");
+
+                commitfunction.execute(destination,tid);
+
+                destination.confirmTID(tid);      
+
+                               
+
+                JCoTable jcoTable = function.getTableParameterList().getTable("PERSONAL_DATA");
+
+                JCoParameterList outputJCoParameterList = function.getExportParameterList();
+
+                if(null != outputJCoParameterList){
+
+                JCoParameterFieldIterator iterator = outputJCoParameterList.getParameterFieldIterator();
+
+               
+
+                while(iterator.hasNext()){
+
+                                JCoParameterField field = iterator.nextParameterField();
+
+                               
+
+                                testThisDebug(""+field);
+
+                }
+
+}
+
+               
+
+                if(!jcoTable.isEmpty()){
+
+                List<String> fieldNames = new ArrayList<String>();
+
+                JCoFieldIterator fieldNamesIter = jcoTable.getFieldIterator();
+
+                while (fieldNamesIter.hasNextField()) {
+
+                                                JCoField fieldName = fieldNamesIter.nextField();
+
+                                                fieldNames.add(fieldName.getName());
+
+                                }
+
+                                               
+
+                                                for (String fieldName : fieldNames) {
+
+                                                String value = jcoTable.getString(fieldName);
+
+                                                testThisDebug(fieldName+ "\t"+ value);
+
+                                                resultRecord.put(fieldName, value);
+
+                                                }
+
+                }else{
+
+                                testThisDebug("PERSONAL_DATA is empty");
+
+                }
+
+                jcoTable = function.getTableParameterList().getTable("ORG_ASSIGNMENT");
+
+                if(!jcoTable.isEmpty()){
+
+                                testThisDebug("ORG_ASSIGNMENT");
+
+                                JCoFieldIterator fieldNamesIter = jcoTable.getFieldIterator();
+
+                                while (fieldNamesIter.hasNextField()) {
+
+                                                JCoField fieldName = fieldNamesIter.nextField();
+
+                                                fieldNames.add(fieldName.getName());
+
+                                }
+
+                                                               
+
+                                for (String fieldName : fieldNames) {
+
+                                                String value = jcoTable.getString(fieldName);
+
+                                                testThisDebug(fieldName+ "\t"+ value);
+
+                                }
+
+                }else{
+
+                                testThisDebug("ORG_ASSIGNMENT is empty");
+
+                }
+
+                jcoTable = function.getTableParameterList().getTable("INTERNAL_CONTROL");
+
+                if(!jcoTable.isEmpty()){
+
+                                testThisDebug("ORG_ASSIGNMENT");
+
+                                JCoFieldIterator fieldNamesIter = jcoTable.getFieldIterator();
+
+                                while (fieldNamesIter.hasNextField()) {
+
+                                                JCoField fieldName = fieldNamesIter.nextField();
+
+                                                fieldNames.add(fieldName.getName());
+
+                                }
+
+                                                               
+
+                                for (String fieldName : fieldNames) {
+
+                                                String value = jcoTable.getString(fieldName);
+
+                                                testThisDebug(fieldName+ "\t"+ value);
+
+                                }
+
+                }else{
+
+                                testThisDebug("INTERNAL_CONTROL is empty");
+
+                }
+
+                jcoTable = function.getTableParameterList().getTable("COMMUNICATION");
+
+                if(!jcoTable.isEmpty()){
+
+                                testThisDebug("ORG_ASSIGNMENT");
+
+                                JCoFieldIterator fieldNamesIter = jcoTable.getFieldIterator();
+
+                                while (fieldNamesIter.hasNextField()) {
+
+                                                JCoField fieldName = fieldNamesIter.nextField();
+
+                                                fieldNames.add(fieldName.getName());
+
+                                }
+
+                                                               
+
+                                for (String fieldName : fieldNames) {
+
+                                                String value = jcoTable.getString(fieldName);
+
+                                                testThisDebug(fieldName+ "\t"+ value);
+
+                                }
+
+                }else{
+
+                                testThisDebug("COMMUNICATION is empty");
+
+                }
+
+                return resultRecord;
+
+}
+
+ 
+
+public void readUSR02(String appName, String identityName){
+
+                Application application = retrieveApplication(appName);
+
+                String[] strParts = null;
+
+                if(null != application){
+
+                                testThisDebug("yes");
+
+                }
+
+                String tableName="USR02";
+
+                //String tableName="PA0030";
+
+                Connector connector = ConnectorFactory.getConnector(application, null);
+
+                connector.testConfiguration(); 
+
+                JCoDestination destination=getDestination(appName);
+
+                JCoRepository sapRepository=destination.getRepository();
+
+ 
+
+                if(sapRepository==null){
+
+                                testThisDebug("Could not get repository");
+
+                }
+
+ 
+
+                JCoFunctionTemplate template2 = sapRepository.getFunctionTemplate("RFC_READ_TABLE");
+
+ 
+
+                JCoFunction readTable = template2.getFunction();
+
+                readTable.getImportParameterList().setValue("QUERY_TABLE",tableName);
+
+ 
+
+                readTable.getImportParameterList().setValue("DELIMITER",",");
+
+                //readTable.getImportParameterList().setValue("ROWSKIPS",Integer.valueOf(0));
+
+                //readTable.getImportParameterList().setValue("ROWCOUNT",Integer.valueOf(0));
+
+ 
+
+                //testThisDebug("function2:"+function2);
+
+               
+
+ 
+
+                List fields = new ArrayList();
+
+                fields.add("MANDT");
+
+                fields.add("BNAME");
+
+                fields.add("BCODE");
+
+                fields.add("GLTGV");
+
+                fields.add("GLTGB");
+
+                fields.add("USTYP");
+
+                fields.add("CLASS");
+
+                fields.add("LOCNT");
+
+                fields.add("UFLAG");
+
+                fields.add("ACCNT");
+
+                fields.add("ANAME");
+
+                fields.add("ERDAT");
+
+                fields.add("TRDAT");
+
+                fields.add("LTIME");
+
+                fields.add("OCOD1");
+
+                fields.add("BCDA1");
+
+                fields.add("CODV1");
+
+                fields.add("OCOD2");
+
+                fields.add("BCDA2");
+
+                fields.add("CODV2");
+
+                fields.add("OCOD3");
+
+                fields.add("BCDA3");
+
+                fields.add("CODV3");
+
+                fields.add("OCOD4");
+
+                fields.add("BCDA4");
+
+                fields.add("CODV4");
+
+                fields.add("OCOD5");
+
+                fields.add("BCDA5");
+
+                fields.add("CODV5");
+
+                fields.add("VERSN");
+
+                fields.add("CODVN");
+
+                fields.add("TZONE");
+
+                fields.add("ZBVMASTER");
+
+                fields.add("PASSCODE");
+
+                fields.add("PWDCHGDATE");
+
+                fields.add("PWDSTATE");
+
+                fields.add("RESERVED");
+
+                fields.add("PWDHISTORY");
+
+                fields.add("PWDLGNDATE");
+
+                fields.add("PWDSETDATE");
+
+                fields.add("PWDINITIAL");
+
+                /*fields.add("PWDLOCKDATE");
+
+                fields.add("PWDSALTEDHASH");
+
+                fields.add("SECURITY_POLICY");*/
+
+ 
+
+               
+
+                //misparOved = "024526774";
+
+               
+
+ 
+
+                JCoTable optionsTable = readTable.getTableParameterList().getTable("OPTIONS");           
+
+                optionsTable.appendRow();
+
+                optionsTable.setValue("TEXT","BNAME = '"+identityName+"'");
+
+               
+
+                //returnOptions.appendRow();
+
+                //returnOptions.setValue("TEXT","ENDDA = '99991231'");
+
+               
+
+                JCoTable fieldsTable;
+
+      if (!Util.isEmpty(fields))
+
+      {
+
+        fieldsTable = readTable.getTableParameterList().getTable("FIELDS");
+
+        for (String field : fields)
+
+        {
+
+          fieldsTable.appendRow();
+
+          fieldsTable.setValue("FIELDNAME", field);
+
+        }
+
+      }
+
+               
+
+               
+
+               
+
+                                readTable.execute(destination);
+
+                JCoTable jcoTablef = readTable.getTableParameterList().getTable("FIELDS");
+
+                                                               
+
+                                JCoTable jcoTabled = readTable.getTableParameterList().getTable("DATA");
+
+               
+
+                                int icodeOffSet = 0;
+
+                                int icodeLength = 0;
+
+               
+
+                                int numRows = jcoTabled.getNumRows();
+
+                                String value = "";
+
+                                List data = new ArrayList();
+
+                               
+
+                               
+
+                                //testThisDebug("[PA0030]: Num Rows Retruned for ==> "+idNumber +" is ==> "+ numRows.toString());
+
+                                for(int i = 0;i<numRows;i++){
+
+                                                jcoTabled.setRow(i);                                                                                                     
+
+                                                strParts = jcoTabled.getString("WA").split("\\|");
+
+                                                if(null != strParts){
+
+                                                testThisDebug("strParts:"+strParts.length);
+
+                                                testThisDebug("strParts:"+strParts[0]);
+
+                                                return strParts;
+
+                                                }
+
+                                                }
+
+ 
+
+return strParts;
+
+ 
+
+}
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+public JCoParameterList callBapiForApp3(JCoDestination destination,HashMap inputParams){
+
+                //called by
+
+                //1. sapBwRsecShowAuthFromUserApi
+
+                //2. sapBwRsecUnassignUserAuthApi
+
+               
+
+                JCoRepository sapRepository = destination.getRepository();
+
+                JCoParameterList outputJCoParameterList = null;
+
+                if (sapRepository == null) {                           
+
+                                log.error("callYbbpReadAttributes_Could_not_get_repository");
+
+                }
+
+ 
+
+                if (null != inputParams && !inputParams.isEmpty()) {       
+
+                               
+
+                                String tid=destination.createTID();
+
+                                String bapiName = inputParams.get("bapiName");
+
+                                inputParams.remove("bapiName");
+
+                                JCoFunctionTemplate functionTemplate = sapRepository.getFunctionTemplate(bapiName);
+
+                               
+
+                                JCoFunction function = functionTemplate.getFunction();
+
+                                if (null != inputParams && !inputParams.isEmpty()) {
+
+                                                JCoFieldIterator iter=function.getImportParameterList().getFieldIterator();
+
+                                                while(iter.hasNextField()){                          
+
+                                                                JCoField f=iter.nextField();                          
+
+                                                                Object tempMapObj= inputParams.get(f.getName());
+
+                                                                if(null!=tempMapObj){
+
+                                                                                if(tempMapObj instanceof String){
+
+                                                                                                f.setValue((String)tempMapObj);
+
+                                                                                }
+
+                                                                                if(tempMapObj instanceof JCoTable){                                                                    
+
+                                                                                                f.setValue(tempMapObj);
+
+                                                                                }
+
+                                                                }                                                                                             
+
+                                                }
+
+                                }                                             
+
+                               
+
+                                function.execute(destination);
+
+                               
+
+                               JCoFunction commitfunction = destination.getRepository().getFunction("BAPI_TRANSACTION_COMMIT");
+
+                                commitfunction.getImportParameterList().setValue("WAIT","X");
+
+                                commitfunction.execute(destination,tid);
+
+                                destination.confirmTID(tid);
+
+                                outputJCoParameterList = function.getExportParameterList();
+
+                }             
+
+                               
+
+                return outputJCoParameterList;
+
+               
+
+}
+
+ 
+
+public String sapBwRsecShowAuthFromUserApi(String identityName,JCoDestination destination){
+
+                String resultString = null;
+
+               
+
+                HashMap inputParams = new HashMap();
+
+                inputParams.put("I_USERNAME",identityName);
+
+                inputParams.put("I_WITH_GENERATED","X");
+
+                inputParams.put("I_WITH_ROLE","");
+
+                inputParams.put("bapiName",ATTR_BAPI_NAME_RSEC_SHOW_AUTH_FROM_USER_API);
+
+               
+
+                JCoParameterList outputJCoParameterList =callBapiForApp3(destination,inputParams);
+
+                if(null != outputJCoParameterList){
+
+                                JCoTable eTAuthsTable = outputJCoParameterList.getTable("E_T_AUTHS");
+
+                                if(null != eTAuthsTable){
+
+                                                int numRows = eTAuthsTable.getNumRows();                    
+
+                                                if(numRows > 0){
+
+                                                                eTAuthsTable.setRow(0);
+
+                                                                resultString =eTAuthsTable.getString("AUTH");                                                 
+
+                                                }
+
+                                }
+
+                }
+
+               
+
+               
+
+               
+
+               
+
+                return resultString;         
+
+               
+
+}
+
+public String sapBwRsecShowAuthFromUserApi(String identityName){
+
+                String resultString = null;
+
+                JCoDestination destination = testThisGetDestination(ATTR_APP_NAME_SAP_BW);
+
+                resultString = sapBwRsecShowAuthFromUserApi(identityName,destination);      
+
+                return resultString;         
+
+}
+
+ 
+
+ 
+
+ 
+
+//*
+
+//|         
+
+//|
+
+//|                          GET_SAP_REPOSITORY_UTILS
+
+//|
+
+//|
+
+//|
+
+public JCoRepository testThisGetRepository(Application application){     
+
+                JCoDestination destination = testThisGetDestination(application);
+
+                JCoRepository sapRepository=testThisGetRepository(destination);           
+
+                return sapRepository;
+
+}
+
+ 
+
+public JCoRepository testThisGetRepository(String appName){
+
+                //called by         
+
+                Application application = retrieveApplication(appName);
+
+                JCoRepository sapRepository = testThisGetRepository(application);
+
+                return sapRepository;
+
+}
+
+public JCoDestination testThisGetDestination(Application application){
+
+                Connector connector = ConnectorFactory.getConnector(application, null);
+
+                try {
+
+                                connector.testConfiguration();
+
+                } catch (ConnectorException e) {
+
+                                // TODO Auto-generated catch block
+
+                                e.printStackTrace();
+
+                }
+
+                JCoDestination destination = JCoDestinationManager.getDestination(application.getName());
+
+                return destination;
+
+}
+
+ 
+
+public JCoDestination testThisGetDestination(String appName){
+
+                //called by
+
+                //1. sapBwRsecUnassignUserAuthApi
+
+                //2. sapBwRsecShowAuthFromUserApi
+
+                //3. getInputTable
+
+                //4. getSingleEmployeeRecord
+
+                Application app = retrieveApplication(appName);
+
+                JCoDestination destination = testThisGetDestination(app);
+
+                return destination;
+
+}
+
+ 
+
+public JCoRepository testThisGetRepository(JCoDestination destination){             
+
+                JCoRepository sapRepository=destination.getRepository();
+
+                //sapRepository.clear();
+
+                return sapRepository;
+
+}
+
+ 
+
+ 
+
+ 
+
+ 
+
+public void sapBwRsecUnassignUserAuthApi(String identityName,String E_T_AUTHS){
+
+                testThisDebug("Running:"+ATTR_BAPI_NAME_RSEC_UNASSIGN_USER_AUTH_API);
+
+                JCoTable inputTable = getInputTable("I_T_AUTHS",ATTR_APP_NAME_SAP_BW,ATTR_BAPI_NAME_RSEC_UNASSIGN_USER_AUTH_API);
+
+                if(null != inputTable){
+
+                                inputTable.appendRow();
+
+                                inputTable.appendRow();
+
+                                inputTable.setValue("AUTHNAME",E_T_AUTHS);
+
+                }
+
+                HashMap inputParams = new HashMap();           
+
+                inputParams.put("I_USERNAME",identityName);
+
+                inputParams.put("I_T_AUTHS",inputTable);
+
+                inputParams.put("bapiName",ATTR_BAPI_NAME_RSEC_UNASSIGN_USER_AUTH_API);
+
+               
+
+                JCoDestination destination = testThisGetDestination(ATTR_APP_NAME_SAP_BW);           
+
+                JCoParameterList outputJCoParameterList = callBapiForApp3(destination,inputParams);
+
+                if(null != outputJCoParameterList){         
+
+                                JCoTable etMessages = outputJCoParameterList.getTable("");     
+
+                                if(null != etMessages){
+
+                                                int numRows = etMessages.getNumRows();                       
+
+                                                if(numRows > 0){
+
+                                                                testThisDebug("Result_Table_Is_Not_Empty");                                 
+
+                                                                etMessages.setRow(0);                                
+
+                                                                JCoFieldIterator fieldIterator = etMessages.getFieldIterator();
+
+                                                                int messageCount = etMessages.getValue("");         
+
+                                                                testThisDebug("messageCount: "+messageCount);
+
+                                                                if(messageCount > 0 ){
+
+                                                                                String message1 = etMessages.getValue("MSGV1");
+
+                                                                                String message2 = etMessages.getValue("MSGV2");
+
+                                                                                String message3 = etMessages.getValue("MSGV3");
+
+                                                                                String message4 = etMessages.getValue("MSGV4");
+
+                                                                                log.warn("Message1:"+message1);
+
+                                                                                log.warn("Message2:"+message2);
+
+                                                                                log.warn("Message3:"+message3);
+
+                                                                                log.warn("Message4:"+message4);
+
+                                                                }                                                                                                             
+
+                                                }else{
+
+                                                                testThisDebug("Result_Table_Is_Empty");
+
+                                                }
+
+                                }
+
+                                testThisDebug("After_Delete_is_notEmpty");
+
+                }else{
+
+                                testThisDEbug("after delete is empty");
+
+                }
+
+}
+
+ 
+
+public JCoTable getInputTable(String tableName,String appName,String bapiName){
+
+                String artName="getInputTable";
+
+                testThisDebug(getLogStartMessage(artName));
+
+                JCoTable resultInputTable = null;              
+
+                JCoDestination destination = testThisGetDestination(appName);
+
+                String tid=destination.createTID();
+
+                JCoRepository sapRepository=destination.getRepository();
+
+                if (sapRepository == null) {                           
+
+                                log.error("Could not get repository");
+
+                }
+
+               
+
+                JCoFunctionTemplate functionTemplate = sapRepository.getFunctionTemplate(bapiName);         
+
+                JCoFunction function = functionTemplate.getFunction();                               
+
+                JCoParameterList importParameterListr=function.getImportParameterList();
+
+                if(null != importParameterListr){
+
+                                resultInputTable = importParameterListr.getTable(tableName); 
+
+                }
+
+                testThisDebug(getLogFinishMessage(artName));
+
+                return resultInputTable;
+
+               
+
+}
+
+ 
+
+ 
+
+ 
+
+private void bapiEmployeeGetData(String username,String appName) { 
+
+    String bapiName = "BAPI_EMPLOYEE_GETDATA";        
+
+                HashMap inputParams = new HashMap();
+
+                inputParams.put("EMPLOYEE_ID",username);
+
+                JCoFunction function=callBapiForApp5(appName,bapiName,inputParams);
+
+                               
+
+                try {                       
+
+                                JCoTable archiveLink = function.getTableParameterList().getTable("ARCHIVELINK");
+
+                                JCoTable communication = function.getTableParameterList().getTable("COMMUNICATION");
+
+                                JCoTable internalControl = function.getTableParameterList().getTable("INTERNAL_CONTROL");
+
+                                JCoTable orgAssignment = function.getTableParameterList().getTable("ORG_ASSIGNMENT");
+
+                                JCoTable personalData = function.getTableParameterList().getTable("PERSONAL_DATA");
+
+                                //testThisDebug("archiveLink" + archiveLink);
+
+                                //testThisDebug("communication" + communication);
+
+                                //testThisDebug("internalControl" + internalControl);
+
+                                //testThisDebug("orgAssignment" + orgAssignment);
+
+                                //testThisDebug("personalData" + personalData);
+
+                                JCoParameterList epl = function.getExportParameterList();
+
+                               
+
+                                List<String> parameters = null;
+
+                                JCoParameterList epl = function.getExportParameterList();
+
+       
+
+                                testThisDebug("reading all structure parameters from ExportParameterList");
+
+                                parameters = getAllStructureParameters(epl);  
+
+ 
+
+        for (String param : parameters) {
+
+               testThisDebug("Param:"+param);
+
+               JCoStructure structure = epl.getStructure(param);       
+
+                                                JCoFieldIterator fieldIterator = structure.getFieldIterator();          
+
+                                               
+
+                                                while(fieldIterator.hasNextField()){
+
+                                                                JCoField field = fieldIterator.nextField();
+
+                                                                String fieldName = field.getName();
+
+                                                                String fieldValue = field.getString();
+
+                                                                testThisDebug(fieldName +" : "+fieldValue);
+
+                                                }
+
+              
+
+              
+
+        }
+
+      
+
+                }catch(ConnectorException ex){
+
+                                log.error("[T526]: Error ==> "+ex.getMessage());
+
+                                ex.printStackTrace();
+
+                }
+
+                catch(JCoException ex){
+
+                                log.error("[T526]: Error ==> "+ex.getMessage());
+
+                                ex.printStackTrace();
+
+                }
+
+ 
+
+}
+
+ 
+
+ 
+
+private List<String> getAllStructureParameters(JCoParameterList epl) {
+
+                List<String> parameters = new LinkedList<String>();
+
+                JCoListMetaData lmd = epl.getListMetaData();
+
+                for (int i = 0; i < lmd.getFieldCount(); i++) {
+
+                                if (lmd.isStructure(i)) {
+
+                                                parameters.add(lmd.getName(i));
+
+                                }
+
+                }
+
+ 
+
+                return parameters;
+
+}
+
+ 
+
+ 
+
+public String getT77UAMfdsfdg(String identityName){
+
+                String resultString = null;
+
+                String appName = "SAP ECC";     
+
+                JCoDestination destination =       testThisGetDestination(appName);         
+
+                JCoRepository sapRepository=  testThisGetRepository(destination);
+
+               
+
+                Map resultMap =  getT77UA(destination,sapRepository,identityName);
+
+                if(null != resultMap && !resultMap.isEmpty()){
+
+                                for(Map.Entry resultEntry : resultMap.entrySet()){
+
+                                                Map testThisRowMap = resultEntry.getValue();
+
+                                                if(null != testThisRowMap && !testThisRowMap.isEmpty()){
+
+                                                                resultString = testThisRowMap.get("PROFL");
+
+                                                                if(Util.isNotNullOrEmpty(resultString) && resultString.equals("fdsfdg")){
+
+                                                                                return resultString;
+
+                                                                }
+
+                                                }
+
+                                }
+
+                }
+
+                return resultString;
+
+}
+
+ 
+
+//JCoRepository
+
+public Map getT77UA(JCoDestination destination,JCoRepository sapRepository,String identityName){
+
+               
+
+                String tableName="T77UA";
+
+ 
+
+               
+
+                JCoFunction function = getRfcReadTable(sapRepository,tableName);                                      
+
+                                               
+
+                                                Date date = new Date();
+
+ 
+
+                                                Date dateBefore = new Date(date.getTime() + TimeUnit.DAYS.toMillis(-1));
+
+                               
+
+                                                SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+
+                                                String dayBefore = formatter.format(dateBefore);
+
+                                                String toDay = formatter.format(date);
+
+                               
+
+                                                JCoTable returnOptions = function.getTableParameterList().getTable("OPTIONS");
+
+                               
+
+                                                returnOptions.appendRow();
+
+                                                returnOptions.setValue("TEXT","UNAME = '"+identityName+"'");
+
+                               
+
+                                                returnOptions.appendRow();
+
+                                                returnOptions.setValue("TEXT","AND BEGDA BETWEEN '00010101' AND '"+dayBefore+"' ");
+
+                               
+
+                                                returnOptions.appendRow();
+
+                                                returnOptions.setValue("TEXT","AND ENDDA BETWEEN '"+toDay+"' AND  '99991231'");
+
+                               
+
+                                                JCoTable returnFields = function.getTableParameterList().getTable("FIELDS");
+
+                               
+
+                                                returnFields.appendRow();
+
+                                                returnFields.setValue("FIELDNAME","PROFL");
+
+                                                returnFields.appendRow();
+
+                                                returnFields.setValue("FIELDNAME","UNAME");
+
+                                                returnFields.appendRow();
+
+                                                returnFields.setValue("FIELDNAME","BEGDA");
+
+                                                returnFields.appendRow();
+
+                                                returnFields.setValue("FIELDNAME","ENDDA");
+
+                                                returnFields.appendRow();
+
+                                                returnFields.setValue("FIELDNAME","GEN_FLAG");
+
+                               
+
+                                                function.execute(destination);
+
+                                                JCoTable jcoTablef = function.getTableParameterList().getTable("FIELDS");                                           
+
+                                                JCoTable jcoTabled = function.getTableParameterList().getTable("DATA");            
+
+                                               
+
+                                                List<String> fieldNames = testThisGetSapPlainTableFieldNames(jcoTablef);
+
+                                                Map resultMap = testThisGetPlainTableSapDataMapReport(fieldNames,jcoTabled);
+
+                                               
+
+                                               
+
+                                               
+
+                                               
+
+                                               
+
+                return   resultMap;                                                         
+
+}
+
+ 
+
+public List<String> getT77UA(JCoRepository sapRepository, String identityName){
+
+               
+
+                //called from
+
+                //1. testThis-Sap Ecc-Build Map
+
+                String artName="getT77UA";
+
+                log.warn(getLogStartMessage(artName));
+
+                List<String> resultList=null;         
+
+                if(Util.isNotNullOrEmpty(identityName)){                            
+
+                                String tableName="T77UA";                                                      
+
+                                try{                        
+
+                                                if(sapRepository==null){
+
+                                                                testThisDebug("Could not get repository");
+
+                                                }                                             
+
+                                                JCoFunction function = getRfcReadTable(sapRepository,tableName);                                      
+
+                                               
+
+                                                Date date = new Date();
+
+ 
+
+                                                Date dateBefore = new Date(date.getTime() + TimeUnit.DAYS.toMillis(-1));
+
+                               
+
+                                                SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+
+                                                String dayBefore = formatter.format(dateBefore);
+
+                                                String toDay = formatter.format(date);
+
+                               
+
+                                                JCoTable returnOptions = function.getTableParameterList().getTable("OPTIONS");
+
+                               
+
+                                                returnOptions.appendRow();
+
+                                                returnOptions.setValue("TEXT","UNAME = '"+identityName+"'");
+
+                               
+
+                                                returnOptions.appendRow();
+
+                                                returnOptions.setValue("TEXT","AND BEGDA BETWEEN '00010101' AND '"+dayBefore+"' ");
+
+                               
+
+                                                returnOptions.appendRow();
+
+                                                returnOptions.setValue("TEXT","AND ENDDA BETWEEN '"+toDay+"' AND  '99991231'");
+
+                               
+
+                                                JCoTable returnFields = function.getTableParameterList().getTable("FIELDS");
+
+                               
+
+                                                returnFields.appendRow();
+
+                                                returnFields.setValue("FIELDNAME","PROFL");
+
+                                                returnFields.appendRow();
+
+                                                returnFields.setValue("FIELDNAME","UNAME");
+
+                                                returnFields.appendRow();
+
+                                                returnFields.setValue("FIELDNAME","BEGDA");
+
+                                                returnFields.appendRow();
+
+                                                returnFields.setValue("FIELDNAME","ENDDA");
+
+                                                returnFields.appendRow();
+
+                                                returnFields.setValue("FIELDNAME","GEN_FLAG");
+
+                               
+
+                                                function.execute(destination);
+
+                                                JCoTable jcoTablef = function.getTableParameterList().getTable("FIELDS");
+
+                               
+
+                                                JCoTable jcoTabled = function.getTableParameterList().getTable("DATA");            
+
+                                                int numRows = jcoTabled.getNumRows();
+
+                                                String value = "";
+
+                                                List data = new ArrayList();
+
+                                               
+
+                                                for(int i = 0;i<numRows;i++){
+
+                                                                jcoTabled.setRow(i);                     
+
+                                                                String[] strParts = jcoTabled.getString("WA").split("\\|");
+
+                                                                if (strParts.length > 4){  
+
+                                                                                data.add(strParts[0]);
+
+                                                                }
+
+                                                                else{
+
+                                                                                data.add(strParts[0]);   
+
+                                                                }
+
+                                                }
+
+                                               
+
+                                                if(data!=null){                   
+
+                                                                resultList=new ArrayList();                          
+
+                                                                for(String strData : data){
+
+                                                                                resultList.add(strData.replaceAll("\\s+",""));
+
+                                                                }                                             
+
+                                                }                                             
+
+                                }
+
+                                catch(ConnectorException ex){
+
+                                                log.error("[T526]: Error ==> "+ex.getMessage());
+
+                                                ex.printStackTrace();
+
+                                }
+
+                                catch(JCoException ex){
+
+                                                log.error("[T526]: Error ==> "+ex.getMessage());
+
+                                                ex.printStackTrace();
+
+                                }
+
+                }//identityName not null
+
+                log.warn(getLogFinishMessage(artName));
+
+                return resultList;
+
+               
+
+}
+
+ 
+
+//query T526 table sap ecc
+
+ 
+
+public boolean isT526(JCoDestination destination,JCoRepository sapRepository, String identityName){    
+
+                //called from
+
+                //1. testThis-Sap Ecc-Build Map
+
+                String artName="getT526";
+
+                log.warn(getLogStartMessage(artName));
+
+                if(Util.isNotNullOrEmpty(identityName)){                            
+
+                                Map inputParams = new HashMap();
+
+                                inputParams.put("identityName",identityName);
+
+                                Map testThisSapDataMap = testThisQueryPlainSapTable(destination,sapRepository,inputParams, "");                                               
+
+                                if(null != testThisSapDataMap && !testThisSapDataMap.isEmpty() &&                 testThisSapDataMap.size()==1){                                                               
+
+                                                return true;                       
+
+                                }
+
+                }
+
+                //identityName not null
+
+                log.warn(getLogFinishMessage(artName));
+
+                return false;      
+
+}
+
+ 
+
+ 
+
+ 
+
+ 
+
+public HashMap getPA0001(SailPointContext context, Connector connector, Identity identity,String appName){ 
+
+                String testThisEmpNum=identity.getAttribute("testThisEmpNum");
+
+                String testThisEffectiveSubarea=identity.getAttribute("testThisEffectiveSubarea");
+
+                String testThisPersonalArea=identity.getAttribute("testThisPersonalArea");
+
+ 
+
+                HashMap resultMap=getPA0001(connector,testThisPersonalArea,testThisEffectiveSubarea,testThisEmpNum,appName);
+
+                return resultMap;
+
+}
+
+ 
+
+public HashMap getPA0001(Connector connector, String testThisPersonalArea,String testThisEffectiveSubarea,String testThisEmpNum,String appName){
+
+                //gets fdsfdg code. field name is  SACHZ
+
+                String artName="getPA0001";
+
+                log.warn(getLogStartMessage(artName));
+
+                String tableName="PA0001";     
+
+                connector.testConfiguration();
+
+                JCoDestination destination=JCoDestinationManager.getDestination(appName);
+
+                JCoContext.begin(destination);
+
+                JCoRepository sapRepository=destination.getRepository();
+
+ 
+
+                if(sapRepository==null){
+
+                                testThisDebug("Could not get repository");
+
+                }
+
+                Map inputParams = new HashMap();
+
+                inputParams.put("testThisEffectiveSubarea",testThisEffectiveSubarea);
+
+                inputParams.put("testThisPersonalArea",testThisPersonalArea);
+
+                Map testThisSapDataMap = testThisQueryPlainSapTable(destination,sapRepository,inputParams, "PA0001");
+
+                log.warn(getLogFinishMessage(artName));
+
+                return testThisSapDataMap;
+
+}
+
+ 
+
+public String test(Identity identity){ 
+
+                testThisDebug("updated_get_fdsfdg_kod");
+
+                String resultfdsfdgKod=null;
+
+                String appName = "SAP ECC";
+
+                Application app=context.getObject(Application.class,appName);
+
+                Connector connector=ConnectorFactory.getConnector(app,null);
+
+                HashMap resultMap=getPA0001(context,connector,identity,appName);
+
+                if(null !=resultMap && !resultMap.isEmpty()){
+
+                                resultfdsfdgKod=resultMap.get(1).get("SACHZ");
+
+                }             
+
+                return resultfdsfdgKod;           
+
+}
+
+ 
+
+public String getKod(JCoDestination destination,String identityName){  
+
+                String resultfdsfdgKod=null;  
+
+                HashMap resultMap = testThisQueryPlainSapTable(destination,identityName,"PA0001");                              
+
+                if(null !=resultMap && !resultMap.isEmpty()){
+
+                                resultfdsfdgKod=resultMap.get(1).get("SACHZ");
+
+                }             
+
+                return resultfdsfdgKod;           
+
+}
+public HashMap getfdsfdgRoles(SailPointContext context, String fdsfdgKod){
+
+
+                String artName="getfdsfdgRoles";
+
+                //testThisDebug(getLogStartMessage(artName));
+
+                String appName = "SAP ECC";
+
+                HashMap resultMap=null;           
+
+                Application app = retrieveApplication(appName);            
+
+               
+
+                Connector connector=ConnectorFactory.getConnector(app,null);
+
+                HashMap tempMap=getfdsfdgRolesTbl(context,connector,appName,fdsfdgKod);
+
+                if(null !=tempMap && !tempMap.isEmpty()){
+
+                                for(Map.Entry tempMapEntry : tempMap.entrySet()){
+
+                                                String tempKey=tempMapEntry.getKey();
+
+                                                String tempValue=tempMapEntry.getValue();
+
+                                                if(!tempKey.equals("")){
+
+                                                                if(!tempKey.equals("KOD_fdsfdg")){
+
+                                                                               
+
+                                                                                if(Util.isNotNullOrEmpty(tempValue)){
+
+                                                                                                String [] splittedValue=tempValue.split(";");
+
+                                                                                                if(tempKey.contains("ECC")){
+
+                                                                                                               
+
+                                                                                                                if(null ==resultMap ){
+
+                                                                                                                               
+
+                                                                                                                                resultMap=new HashMap();
+
+                                                                                                                                List<String> result=Arrays.stream(splittedValue).collect(Collectors.toList());
+
+                                                                                                                                resultMap.put("SAP ECC",result);
+
+                                                                                                                }else{
+
+                                                                                                                               
+
+                                                                                                                                List<String> tempResult=resultMap.get("SAP ECC");
+
+                                                                                                                                List<String> result=Arrays.stream(splittedValue).collect(Collectors.toList());
+
+                                                                                                                                if(null != tempResult && !tempResult.isEmpty()){
+
+                                                                                                                                                result.addAll(tempResult);
+
+                                                                                                                                }                                                                                                                             
+
+                                                                                                                                resultMap.put("SAP ECC",result);
+
+                                                                                                                }
+
+                                                                                                               
+
+                                                                                                }
+
+                                                                                                if(tempKey.contains("SRM")){
+
+                                                                                                               
+
+                                                                                                                if(null ==resultMap ){                                                                                                                    
+
+                                                                                                                                resultMap=new HashMap();
+
+                                                                                                                                List<String> result=Arrays.stream(splittedValue).collect(Collectors.toList());
+
+                                                                                                                                resultMap.put("SAP SRM",result);
+
+                                                                                                                }else{                                                                                                   
+
+                                                                                                                                List<String> tempResult=resultMap.get("SAP SRM");                                                                                                                               
+
+                                                                                                                                List<String> result=Arrays.stream(splittedValue).collect(Collectors.toList());                                                                                                                 
+
+                                                                                                                                if(null != tempResult && !tempResult.isEmpty()){
+
+                                                                                                                                                result.addAll(tempResult);
+
+                                                                                                                                }
+
+                                                                                                                                resultMap.put("SAP SRM",result);
+
+                                                                                                                }
+
+                                                                                                               
+
+                                                                                                }
+
+                                                                                }
+
+                                                                }else{
+
+                                                                                //it is kod fdsfdg field
+
+                                                                                resultMap.put("KOD_fdsfdg",tempValue);
+
+                                                                }
+
+                                                }
+
+                                }
+
+                }
+
+                //testThisDebug("[getfdsfdgRoles]: resultMap ==> "+resultMap);
+
+                //testThisDebug(getLogFinishMessage(artName));
+
+                return resultMap;
+
+}
+
+public HashMap getfdsfdgRolesTbl(SailPointContext context, Connector connector, String appName,String fdsfdgKod){
+
+               
+
+                String tableName="testThisCustom_fdsfdg_ROLES";
+
+                HashMap resultMap=null;           
+
+                List<String> fieldNames=null;
+
+               
+
+                               
+
+                               
+
+                if(Util.isNotNullOrEmpty(fdsfdgKod)){
+
+                                JCoRepository sapRepository;   
+
+                                Application app = retrieveApplication(appName);
+
+                                Connector connector=ConnectorFactory.getConnector(app,null);
+
+                                connector.testConfiguration(); 
+
+                                JCoDestination destination=JCoDestinationManager.getDestination(appName);
+
+                               
+
+               
+
+                                JCoDestinationManager.getDestination(appName);
+
+                                JCoContext.begin(destination);
+
+                                sapRepository=destination.getRepository();
+
+               
+
+                                if(sapRepository==null){
+
+                                                testThisDebug("Could not get repository");
+
+                                }
+
+               
+
+                                JCoFunctionTemplate template2 = sapRepository.getFunctionTemplate("RFC_READ_TABLE");
+
+               
+
+                                JCoFunction function2 = template2.getFunction();
+
+                                function2.getImportParameterList().setValue("QUERY_TABLE",tableName);
+
+               
+
+                                function2.getImportParameterList().setValue("DELIMITER","|");
+
+                                function2.getImportParameterList().setValue("ROWSKIPS",Integer.valueOf(0));
+
+                                function2.getImportParameterList().setValue("ROWCOUNT",Integer.valueOf(0));
+
+               
+
+               
+
+                               
+
+                                JCoTable returnOptions = function2.getTableParameterList().getTable("OPTIONS");         
+
+                                returnOptions.appendRow();
+
+                                returnOptions.setValue("TEXT","KOD_fdsfdg = '"+fdsfdgKod+"'");                                                   
+
+                                function2.execute(destination);
+
+                                JCoTable jcoTableFields = function2.getTableParameterList().getTable("FIELDS");               
+
+                                JCoTable jcoTableData = function2.getTableParameterList().getTable("DATA");
+
+                               
+
+                                int numRows = jcoTableFields.getNumRows();   
+
+                               
+
+                               
+
+                                for(int i=0;i<numRows;i++){
+
+                                                jcoTableFields.setRow(i);
+
+                                                JCoFieldIterator fieldIterator=jcoTableFields.getFieldIterator();
+
+                                                firstCellTaken=false;
+
+                                                while(fieldIterator.hasNextField()){
+
+                                                                JCoField field=fieldIterator.nextField();                                 
+
+                                                               
+
+                                                                if(!firstCellTaken){
+
+                                                                                firstCellTaken=true;
+
+                                                                                String fieldName=jcoTableFields.getValue(field.getName());
+
+                                                                                if(null == fieldNames){
+
+                                                                                                fieldNames = new ArrayList<String>();
+
+                                                                                }
+
+                                                                                fieldNames.add(fieldName);
+
+                                                                }
+
+                                                               
+
+                                                }
+
+                                               
+
+                                }
+
+                                if(null !=fieldNames && !fieldNames.isEmpty()){
+
+                                                numRows = jcoTableData.getNumRows();           
+
+                                                if(            numRows>0 && numRows==1){               
+
+                                                                resultMap=new HashMap();      
+
+                                                                for(int i = 0;i<numRows;i++){
+
+                                                                                jcoTableData.setRow(i);
+
+                                                                                JCoFieldIterator fieldIterator=jcoTableData.getFieldIterator();
+
+                                                                                while(fieldIterator.hasNextField()){
+
+                                                                                                JCoField field=fieldIterator.nextField();
+
+                                                                                                String fieldName=field.getName();
+
+                                                                                                String[] rawValues=jcoTableData.getValue(fieldName).toString().split("\\|");
+
+                                                                                                for(int j=0;j<rawValues.length;j++){                                                                        
+
+                                                                                                                if(Util.isNotNullOrEmpty(rawValues[j])){
+
+                                                                                                                                String trimmedValue= rawValues[j].trim();
+
+                                                                                                                                resultMap.put(fieldNames.get(j),trimmedValue);
+
+                                                                                                                               
+
+                                                                                                                }                                             
+
+                                                                                                }                                             
+
+                                                                                }                                                                                                                                                             
+
+                                                                }
+
+                                                               
+
+                                                }
+
+                                }
+
+                }//fdsfdgkod is not null
+
+               
+
+               
+
+                return resultMap;
+
+}
+
+ 
+
+ 
+
+ 
+
+//process results of callYbbpReadAttributes
+
+public HashMap getProcurementCode(Identity identity){
+
+                String identityName = null;
+
+                HashMap resultMap=null;
+
+                if(null != identity){
+
+                                identityName = identity.getName();
+
+                                resultMap = getProcurementCode(identityName);
+
+                }
+
+                return resultMap;
+
+}
+
+ 
+
+public HashMap getProcurementCode( String identityName){
+
+                String artName="getProcurementCode";
+
+                testThisDebug(getLogStartMessage(artName));
+
+                String appName="SAP SRM";
+
+                String bapiName="";
+
+                HashMap inputParams=null;
+
+                HashMap resultMap=null;
+
+                JCoTable jcoTable=null;
+
+                if(Util.isNotNullOrEmpty(identityName)){
+
+                                testThisDebug("[getProcurementCode]: Processing Identity ==> "+identityName);
+
+                                inputParams=new HashMap();
+
+                               
+
+                                inputParams.put("IV_USER",identityName);                       
+
+                                JCoFunction function=callBapiForApp5(appName,bapiName,inputParams);
+
+                                jcoTable= function.getTableParameterList().getTable(0);
+
+                }
+
+                if(null != jcoTable && !jcoTable.isEmpty()){
+
+                                List<String> fieldNames=new ArrayList<String>();
+
+                                fieldNames.add("");
+
+                                fieldNames.add("");
+
+                                fieldNames.add("");
+
+                                fieldNames.add("");
+
+                                int numRows=jcoTable.getNumRows();                 
+
+                                resultMap=new HashMap();
+
+                                testThisDebug("[getProcurementCode]: Num of rows ==> "+jcoTable.getNumRows());
+
+                                for(int i=0;i<numRows;i++){
+
+                                                jcoTable.setRow(i);
+
+                                               
+
+                                                JCoRecordFieldIterator recordFieldIterator=jcoTable.getRecordFieldIterator();
+
+                                               
+
+                                                int counter=0;
+
+                                                boolean fieldFound=false;
+
+                                                String nameToSave=null;
+
+                                                while(recordFieldIterator.hasNextField()){
+
+                                                                JCoRecordField field=recordFieldIterator.nextRecordField();                                        
+
+                                                                                               
+
+                                                                String fieldName=field.getString();
+
+                                                               
+
+                                                                if(fieldNames.contains(fieldName) && !fieldFound){
+
+                                                               
+
+                                                                                fieldFound=true;
+
+                                                                                nameToSave=fieldName;
+
+                                                                }
+
+                                                                if(fieldFound){
+
+                                                                                //once field was found in fifth one one will be the value
+
+                                                                                counter++;
+
+                                                                                if(counter==5){
+
+                                                                                                if(null == resultMap){
+
+                                                                                                                resultMap=new HashMap();
+
+                                                                                                }
+
+                                                                                                resultMap.put(nameToSave,field.getString());
+
+                                                                                                counter=0;
+
+                                                                                                fieldFound=false;
+
+                                                                                                nameToSave=null;
+
+                                                                                               
+
+                                                                                }else{
+
+                                                                                               
+
+                                                                                }
+
+                                                                }
+
+                                                }
+
+                                }             
+
+                                               
+
+                               
+
+                }
+
+                testThisDebug("[getProcurementCode]: resultMap ==> "+resultMap);
+
+                testThisDebug(getLogFinishMessage(artName));
+
+                return resultMap;
+
+}
+
+ 
+
+public void bapiUserChange(SailPointContext context, Connector connector,Identity identity,String appName,int Lic_Type){
+
+                String identityName = identity.getName();
+
+                bapiUserChange( context,  connector,  identityName, appName,Lic_Type);
+
+}
+
+public void bapiUserChange(SailPointContext context, Connector connector, String idNumber,String appName, int Lic_Type){
+
+                //used to update lic_type during fdsfdg sap assignmnet
+
+                connector.testConfiguration();
+
+ 
+
+                JCoDestination destination=JCoDestinationManager.getDestination(appName);
+
+                JCoRepository sapRepository;
+
+ 
+
+                JCoDestinationManager.getDestination(appName);
+
+                String sapTid = destination.createTID();
+
+               
+
+ 
+
+                JCoContext.begin(destination);
+
+                sapRepository=destination.getRepository();
+
+ 
+
+                if(sapRepository==null){
+
+                                testThisDebug("Could not get repository");
+
+                }
+
+ 
+
+                JCoFunctionTemplate functionTemplate = sapRepository.getFunctionTemplate("BAPI_USER_CHANGE");
+
+                JCoFunction jcoFunction = functionTemplate.getFunction();
+
+                JCoParameterList jcoParameterList = jcoFunction.getImportParameterList();
+
+                jcoFunction.getImportParameterList().setValue("USERNAME",identityName);     
+
+                JCoStructure uclassX = jcoParameterList.getStructure("UCLASSX");
+
+                uclassX.setValue("UCLASS", "X");
+
+                JCoStructure uclass = jcoParameterList.getStructure("UCLASS");
+
+                uclass.setValue("",Lic_Type);   
+
+                               
+
+                try {
+
+                                jcoFunction.execute(destination);
+
+                } catch (JCoException e) {
+
+                                e.printStackTrace();
+
+                }
+
+                               
+
+                testThisSapParseResponse(jcoFunction);
+
+                               
+
+                JCoContext.end(destination);    
+
+}
+
+ 
+
+private testThisSapParseResponse(JCoFunction jcoFunction){
+
+                if(null != jcoFunction){
+
+                                JCoParameterList tableParameterList = jcoFunction.getTableParameterList();
+
+                                if(null != tableParameterList){
+
+                                                JCoTable returnTable = tableParameterList.getTable("RETURN");
+
+                                                if(null != returnTable){
+
+                                                                testThisDebug("Result Message ==>"+returnTable.getString("MESSAGE"));
+
+                                                }
+
+                                }             
+
+                }
+
+               
+
+}
+
+ 
+
+ 
+
+ 
+
+private Map testThisBapiUserGetDetail(String appName,List<String> identityNames) throws Exception{
+
+                String bapiName = "BAPI_USER_GET_DETAIL";
+
+                Application app = retrieveApplication(appName);
+
+                Connector connector = ConnectorFactory.getConnector(app, null);
+
+                testThisDebug(" ***** Initialize SAP connection for " + app.getName() + "*****************");
+
+                testThisDebug("Creating SAP Connection for " + appName + " - BEFORE: " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()));
+
+                Map testThisResultSet = null;
+
+                Map testThisResultMap = null;
+
+                int counter = 0;
+
+                try {
+
+                                connector.testConfiguration();
+
+                } catch (ConnectorException e) {
+
+                                // TODO Auto-generated catch block
+
+                                e.printStackTrace();
+
+                }
+
+                JCoDestination destination = testThisGetDestination(appName);
+
+                sapRepository = destination.getRepository();
+
+                String tid=destination.createTID();
+
+                if (sapRepository == null) {                           
+
+                                throw new Exception("callYbbpReadAttributes_Could_not_get_repository");
+
+                }
+
+                JCoFunctionTemplate functionTemplate = sapRepository.getFunctionTemplate(bapiName);
+
+                JCoFunction function = functionTemplate.getFunction();
+
+               
+
+                for( String identityName : identityNames){
+
+                                function.getImportParameterList().setValue("USERNAME", identityName);
+
+                               
+
+                                function.execute(this.destination);
+
+                                JCoParameterList jcoParameterList = function.getExportParameterList();
+
+                                               
+
+               
+
+                               
+
+                                JCoStructure jcoLogonDataStructure = jcoParameterList.getStructure("LOGONDATA");
+
+                                JCoStructure jcoAddressStructure = jcoParameterList.getStructure("ADDRESS");
+
+                                JCoStructure jcoSncStructure = jcoParameterList.getStructure("SNC");
+
+                                //testThisDebug(""+jcoSncStructure);
+
+                                String codvc = jcoLogonDataStructure.getString("CODVC");
+
+               
+
+                                String sncName = jcoSncStructure.getString("PNAME");
+
+               
+
+                                String firstName = jcoAddressStructure.getString("FIRSTNAME");
+
+                                String lastName = jcoAddressStructure.getString("LASTNAME");
+
+                                String email = jcoAddressStructure.getString("E_MAIL");
+
+                                String persNo = jcoAddressStructure.getString("PERS_NO");
+
+                                String sncName = jcoSncStructure.getString("PNAME");
+
+                               
+
+                                testThisResultMap = new HashMap();
+
+                                testThisResultMap.put("SNC_NAME",sncName);
+
+                                testThisResultMap.put("PERS_NO",persNo);
+
+                                testThisResultMap.put("EMAIL",email);
+
+                                testThisResultMap.put("FIRST_NAME",firstName);
+
+                                testThisResultMap.put("LAST_NAME",lastName);
+
+                                testThisResultMap.put("IDENTITY_NAME",identityName);
+
+                               
+
+                                if(null == testThisResultSet || testThisResultSet.isEmpty()){
+
+                                                testThisResultSet = new HashMap();
+
+                                }
+
+                                counter++;
+
+                                testThisResultSet.put(counter,testThisResultMap);
+
+                }
+
+                return testThisResultSet;
+
+}
+
+ 
+
+ 
+
+private void readRoles(SailPointContext context,  String username,String appName) {
+
+ 
+
+                String bapiName = "BAPI_USER_GET_DETAIL";
+
+                Application app = retrieveApplication(appName);
+
+                Connector connector = ConnectorFactory.getConnector(app, null);
+
+                testThisDebug(" ***** Initialize SAP connection for " + app.getName() + "*****************");
+
+                testThisDebug("Creating SAP Connection for " + appName + " - BEFORE: " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()));
+
+                try {
+
+                                connector.testConfiguration();
+
+                } catch (ConnectorException e) {
+
+                                // TODO Auto-generated catch block
+
+                                e.printStackTrace();
+
+                }
+
+                testThisDebug("Creating SAP Connection for " + appName + " - AFTER: " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()));
+
+ 
+
+                JCoDestination destination = JCoDestinationManager.getDestination(appName);
+
+                String tid=destination.createTID();
+
+                JCoRepository sapRepository;
+
+               
+
+                sapRepository = destination.getRepository();
+
+                if (sapRepository == null) {
+
+                                System.out.println("Could not get repository");
+
+                                log.error("callYbbpReadAttributes_Could_not_get_repository");
+
+                }
+
+                                JCoParameterList outTables = null;
+
+                                JCoFunctionTemplate template2 = sapRepository.getFunctionTemplate(bapiName);
+
+                                                               
+
+                               
+
+                                JCoFunction function = template2.getFunction();
+
+                                function.getImportParameterList().setValue("USERNAME", username);
+
+                               
+
+               
+
+                               
+
+                                try {
+
+                                                function.execute(destination);
+
+                                                JCoTable resultTable = function.getTableParameterList().getTable("ACTIVITYGROUPS");
+
+                                                testThisDebug(""+resultTable.getNumRows());
+
+                               
+
+                                } catch (JCoException e) {
+
+                                                // TODO Auto-generated catch block
+
+                                                e.printStackTrace();
+
+                                }
+
+                                return linkedList;
+
+ 
+
+                }             
+
+               
+
+ 
+
+public HashMap getSingleEmployeeRecord(String appName,String bapiName,String misparOved){
+
+               
+
+                HashMap resultRecord = new HashMap();           
+
+                JCoDestination destination =       testThisGetDestination(appName);
+
+                String tid=destination.createTID();
+
+                JCoRepository sapRepository;
+
+                JCoDestinationManager.getDestination(appName);
+
+                sapRepository = destination.getRepository();
+
+                sapRepository.removeFunctionTemplateFromCache(bapiName);
+
+                sapRepository.clear();
+
+                if (sapRepository == null) {
+
+                                System.out.println("Could not get repository");
+
+                                log.error("SapHr_BuildMap_Could_not_get_repository");
+
+                }
+
+                JCoFunctionTemplate functionTemplate = sapRepository.getFunctionTemplate(bapiName);
+
+                JCoFunction jcoFunction = functionTemplate.getFunction();        
+
+                JCoParameterList input = jcoFunction.getImportParameterList();
+
+                JCoTable inputTable = input.getTable("PERNR");
+
+                inputTable.appendRow();           
+
+                inputTable.setValue("PERNR",misparOved);       
+
+                jcoFunction.execute(destination);
+
+                JCoParameterList outputJCoParameterList = jcoFunction.getExportParameterList();
+
+               
+
+                //boolean debugEnabeld = jcoFunction.isAbapClassExceptionEnabled();
+
+                //testThisDebug("DebugEnabled:"+debugEnabeld);
+
+                JCoParameterList resultTables = jcoFunction.getTableParameterList();    
+
+                JCoTable  resultTable = resultTables.getTable("ITAB_EMP");
+
+                List<String> fieldNames = new ArrayList<String>();
+
+                JCoFieldIterator fieldNamesIter = resultTable.getFieldIterator();
+
+                while (fieldNamesIter.hasNextField()) {
+
+                                JCoField fieldName = fieldNamesIter.nextField();
+
+                                fieldNames.add(fieldName.getName());
+
+                }
+
+                               
+
+                for (String fieldName : fieldNames) {
+
+                                String value = resultTable.getString(fieldName);
+
+                                resultRecord.put(fieldName, value);
+
+                }
+
+               
+
+                return resultRecord;
+
+               
+
+}
+
+ 
+
+ 
+
+public Attributes bapiGetEmployeeData(Attributes object){
+
+                String appName="SAP HR";
+
+                HashMap sapMapping = getSapHRMapping();
+
+                String empNumber = object.getString("Employee Number");// PERNR
+
+                // List of IIQ attributes that should be boolean - if the return value from BAPI
+
+                                // is null, value is "1", else "0"
+
+                                ArrayList booleanFields = new ArrayList(Arrays.asList("sapHR_Has_Outlook", "sapHR_Has_External_Email","sapHR_Has_ADaccount"));
+
+                Application app=context.getObject(Application.class,appName);
+
+                                Connector connector=ConnectorFactory.getConnector(app,null);
+
+                testThisDebug(" ***** Initialize SAP connection *****************");
+
+                               
+
+                                testThisDebug("SapHr_BuildMap_testConfiguration_Before_:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()));
+
+                                connector.testConfiguration();
+
+                                testThisDebug("SapHr_BuildMap_testConfiguration_After_:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()));
+
+               
+
+                                JCoDestination destination = JCoDestinationManager.getDestination(appName);
+
+                                JCoRepository sapRepository;
+
+                                JCoDestinationManager.getDestination(appName);
+
+                                sapRepository = destination.getRepository();
+
+                                if (sapRepository == null) {
+
+                                                System.out.println("Could not get repository");
+
+                                                log.error("SapHr_BuildMap_Could_not_get_repository");
+
+                                }
+
+               
+
+                                JCoFunctionTemplate template2 = sapRepository.getFunctionTemplate("testThisCustom_thisLocal_GET_EMPLOYEE_DATA");
+
+                                JCoFunction function2 = template2.getFunction();
+
+                                JCoTable inputTable = function2.getImportParameterList().getTable(0);
+
+               
+
+                                inputTable.appendRow();
+
+                                inputTable.setValue("PERNR", empNumber);
+
+                                testThisDebug("SapHr_BuildMap_PERNR_" + empNumber);                       
+
+                                testThisDebug(" ***** End Initialize SAP connection *****************");
+
+               
+
+               
+
+                                //Call BAPI
+
+                                testThisDebug("SapHr_BuildMap_BeforeExecution_:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()));
+
+                                function2.execute(destination);
+
+                                testThisDebug("SapHr_BuildMap_AfterExecution_:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()));
+
+                                JCoTable employeeRecord = function2.getTableParameterList().getTable(0);
+
+               
+
+                                if (employeeRecord.getNumRows() > 0) {
+
+                                                JCoParameterList jcoParams = function2.getTableParameterList();
+
+                                                Map records = new HashMap();
+
+                                                records.put("myTable", jcoParams.getTable(0));
+
+                                                JCoRecord outParams = records.get("myTable");
+
+               
+
+                                                JCoFieldIterator fieldIter = outParams.getFieldIterator();
+
+                                                while (fieldIter.hasNextField()) {
+
+                                                                JCoField field = fieldIter.nextField();
+
+                                                                String fieldname = field.getName();                                                        
+
+                                                                String mappedTo = sapMapping.get(fieldname);
+
+                                               
+
+                                                                String value = field.getString();
+
+                                                                if (booleanFields.contains(mappedTo)) {
+
+                                                                                if (value.equals("")) {
+
+                                                                                                value = "1";
+
+                                                                                } else {
+
+                                                                                                value = "0";
+
+                                                                                }
+
+                                                                }
+
+                                                                object.put(mappedTo, value);
+
+                                                }
+
+                                               
+
+                               
+
+                                                testThisDebug("object_build_successfully_"+empNumber);
+
+                                               
+
+                                } else {
+
+                                                testThisDebug("tableOfZeroRows_empNumber_"+empNumber);                                             
+
+                                                object.put("sapHR_Personal_Id_Number", "NOT_SET");
+
+                                }
+
+   
+
+    return object;
+
+    }
+
+ 
+
+public void bapiDeleteT77ua(String testThisIdNum,String profile){
+
+                                String artName="bapiDeleteT77ua";
+
+                                testThisDebug(getLogStartMessage(artName));
+
+                                String appName="SAP ECC";          
+
+                    String bapiName="testThisCustom_thisLocal_DELETE_T77UA";                 
+
+                    HashMap inputParams=new HashMap();                         
+
+                JCoParameterList outputJCoParameterList = null;
+
+                                try{
+
+                                                inputParams.put("UNAME",testThisIdNum);
+
+                                                inputParams.put("PROFL",profile);                                                         
+
+                                                JCoFunction function = callBapiForApp5(appName, bapiName, inputParams)       ;                                                                                             
+
+                                                testThisSapParseResponse(function);                    
+
+                                }             
+
+                               
+
+                                catch(JCoException e){
+
+                                                log.error("bapiDeleteT77ua Error "+testThisIdNum+" prodile:"+profile,e);                                            
+
+                                }
+
+               
+
+                                testThisDebug(getLogFinishMessage(artName));               
+
+    }
+
+   
+
+    
+
+     public void bapiDeleteUST04(String identityName){
+
+                               String artName="bapiDeleteUST04";
+
+                               testThisDebug(getLogStartMessage(artName));
+
+                               String appName="SAP BW";
+
+                    String bapiName="BAPI_USER_PROFILES_DELETE";
+
+                               HashMap inputParams=new HashMap();              
+
+                                inputParams.put("USERNAME",identityName);
+
+                               try{                       
+
+                                                JCoFunction function = callBapiForApp5(appName, bapiName, inputParams);                                    
+
+                                                testThisSapParseResponse(function);                                    
+
+                                }
+
+                                catch(JCoException e){
+
+                                                log.error("bapiDeleteUST04 Error"+e.getMessage());
+
+                                                testThisDebug("bapiDeleteUST04 start print stack trace");
+
+                                                e.printStackTrace();
+
+                                                testThisDebug("bapiDeleteUST04 finish print stack trace");
+
+                                }                             
+
+                                testThisDebug(getLogFinishMessage(artName));               
+
+    }
+
+    public HashMap bapiGetSingleEmployeeData(String empNumber, SailPointContext context)
+
+    {
+
+                String appName="SAP HR";
+
+                HashMap object=new HashMap();
+
+                object.put("Employee Number",empNumber);
+
+                HashMap sapMapping = getSapHRMapping();
+
+                String empNumber = object.get("Employee Number");// PERNR
+
+                // List of IIQ attributes that should be boolean - if the return value from BAPI
+
+                                // is null, value is "1", else "0"
+
+                                ArrayList booleanFields = new ArrayList(Arrays.asList("sapHR_Has_Outlook", "sapHR_Has_External_Email","sapHR_Has_ADaccount"));
+
+                Application app=context.getObject(Application.class,appName);
+
+                                Connector connector=ConnectorFactory.getConnector(app,null);
+
+                testThisDebug(" ***** Initialize SAP connection *****************");
+
+                               
+
+                                testThisDebug("SapHr_BuildMap_testConfiguration_Before_:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()));
+
+                                connector.testConfiguration();
+
+                                testThisDebug("SapHr_BuildMap_testConfiguration_After_:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()));
+
+               
+
+                                JCoDestination destination = JCoDestinationManager.getDestination(appName);
+
+                                JCoRepository sapRepository;
+
+                                JCoDestinationManager.getDestination(appName);
+
+                                sapRepository = destination.getRepository();
+
+                                if (sapRepository == null) {
+
+                                                System.out.println("Could not get repository");
+
+                                                log.error("SapHr_BuildMap_Could_not_get_repository");
+
+                                }
+
+               
+
+                                JCoFunctionTemplate template2 = sapRepository.getFunctionTemplate("testThisCustom_thisLocal_GET_EMPLOYEE_DATA");
+
+                                JCoFunction function2 = template2.getFunction();
+
+                                JCoTable inputTable = function2.getImportParameterList().getTable(0);
+
+               
+
+                                inputTable.appendRow();
+
+                                inputTable.setValue("PERNR", empNumber);
+
+                                testThisDebug("SapHr_BuildMap_PERNR_" + empNumber);                       
+
+                                testThisDebug(" ***** End Initialize SAP connection *****************");
+
+               
+
+               
+
+                                //Call BAPI
+
+                                testThisDebug("SapHr_BuildMap_BeforeExecution_:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()));
+
+                                function2.execute(destination);
+
+                                testThisDebug("SapHr_BuildMap_AfterExecution_:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()));
+
+                                JCoTable employeeRecord = function2.getTableParameterList().getTable(0);
+
+               
+
+                                if (employeeRecord.getNumRows() > 0) {
+
+                                                JCoParameterList jcoParams = function2.getTableParameterList();
+
+                                                Map records = new HashMap();
+
+                                                records.put("myTable", jcoParams.getTable(0));
+
+                                                JCoRecord outParams = records.get("myTable");
+
+                                                testThisDebug(""+outParams.toXML());
+
+                                                JCoFieldIterator fieldIter = outParams.getFieldIterator();
+
+                                                while (fieldIter.hasNextField()) {
+
+                                                                JCoField field = fieldIter.nextField();
+
+                                                                String fieldname = field.getName();                                                        
+
+                                                                String mappedTo = sapMapping.get(fieldname);
+
+                                                               
+
+                                                                String value = field.getString();
+
+                                                                if (booleanFields.contains(mappedTo)) {
+
+                                                                                if (value.equals("")) {
+
+                                                                                                value = "1";
+
+                                                                                } else {
+
+                                                                                                value = "0";
+
+                                                                                }
+
+                                                                }
+
+                                                                object.put(mappedTo, value);
+
+                                                }
+
+                                               
+
+                                               
+
+                                                testThisDebug("object_build_successfully_"+empNumber);
+
+                                               
+
+                                } else {
+
+                                                testThisDebug("tableOfZeroRows_empNumber_"+empNumber);                                             
+
+                                                object.put("sapHR_Personal_Id_Number", "NOT_SET");
+
+                                }
+
+   
+
+    return object;
+
+    }
+
+    public void bapiInsertUST04(String identityName){
+
+    
+
+                                String artName="bapiInsertUST04";
+
+                                testThisDebug(getLogStartMessage(artName));
+
+                    Identity iden=context.getObject(Identity.class,identityName);
+
+                    String bapiName="";
+
+                    String appName="SAP BW";
+
+                                String testThisIdNum=iden.getAttribute("testThisIdNum");
+
+                                String testThisEmpNum=iden.getAttribute("testThisEmpNum");                
+
+                    testThisDebug("[bapiInsertUST04]: Processing identity ==> "+testThisIdNum);
+
+                    testThisDebug("[bapiInsertUST04]: Employee number ==> "+testThisEmpNum);
+
+                   
+
+                    HashMap inputParams=new HashMap();
+
+                    try{                     
+
+                                    inputParams.put("IV_UNAME",testThisIdNum);
+
+                                    inputParams.put("IV_PERNR",testThisEmpNum);                                         
+
+                                                JCoFunction function = callBapiForApp5(appName, bapiName, inputParams);                                    
+
+                                                testThisSapParseResponse(function);                                                                    
+
+                                }
+
+                                catch(JCoException e){
+
+                                                log.error("bapiInsertUST04 Error"+e.getMessage());
+
+                                                testThisDebug("bapiInsertUST04 start print stack trace");
+
+                                                e.printStackTrace();
+
+                                                testThisDebug("bapiInsertUST04 finish print stack trace");
+
+                                }             
+
+                                testThisDebug(getLogFinishMessage(artName));
+
+    }
+
+     public void bapiInsertUST04(String testThisIdNum,String testThisEmpNum){
+
+    
+
+                                String artName="bapiInsertUST04";
+
+                                testThisDebug(getLogStartMessage(artName));    
+
+                    String bapiName="ZBW_thisLocal_SINGLE_USER_AUTH_LOAD";
+
+                    String appName="SAP BW";      
+
+                    HashMap inputParams=new HashMap();
+
+                    try{                     
+
+                                    inputParams.put("IV_UNAME",testThisIdNum);
+
+                                    inputParams.put("IV_PERNR",testThisEmpNum);
+
+                                    JCoFunction function = callBapiForApp5(appName, bapiName, inputParams);                                
+
+                                                testThisSapParseResponse(function);                                    
+
+                                                                               
+
+                                }
+
+                                catch(JCoException e){
+
+                                                log.error("bapiInsertUST04 Error"+e.getMessage());
+
+                                                testThisDebug("bapiInsertUST04 start print stack trace");
+
+                                                e.printStackTrace();
+
+                                                testThisDebug("bapiInsertUST04 finish print stack trace");
+
+                                }             
+
+                                testThisDebug(getLogFinishMessage(artName));
+
+    }
+
+   
+
+      public void bapiInsertT77ua(String testThisIdNum,String profile){
+
+                String artName="bapiInsertT77ua";
+
+                testThisDebug(getLogStartMessage(artName));
+
+                                String appName="SAP ECC";                                           
+
+                    String bapiName="testThisCustom_thisLocal_INSERT_T77UA";
+
+                   
+
+                    HashMap inputParams=new HashMap();
+
+                                testThisDebug("[bapiInsertT77ua]: Processing identity ==> "+testThisIdNum);
+
+                                testThisDebug("[bapiInsertT77ua]: Processing profile ==> "+profile);                       
+
+                                testThisDebug("[bapiInsertT77ua]: profile fdsfdg ==> "+profile.equals("fdsfdg"));
+
+                                testThisDebug("[bapiInsertT77ua]: profile fdsfdg-SNIF ==> "+profile.equals("fdsfdg-SNIF"));
+
+                               try{                        
+
+                                                inputParams.put("UNAME",testThisIdNum);
+
+                                                inputParams.put("PROFL",profile);
+
+                                                if(profile.equals("fdsfdg-SNIF")){
+
+                                                                testThisDebug("[bapiInsertT77ua]: setting begda fdsfdg ==> "+profile);
+
+                                                                inputParams.put("BEGDA",lastDayPreviousMonth());
+
+                                                }
+
+                                               
+
+                                                if(profile.equals("fdsfdg")){
+
+                                                                testThisDebug("[bapiInsertT77ua]: setting begda manager ==> "+profile);                             
+
+                                                                inputParams.put("BEGDA",new SimpleDateFormat("yyyyMMdd").format(new Date()));
+
+                                                }
+
+                                                inputParams.put("ENDDA","99991231");                                              
+
+                                                JCoFunction function = callBapiForApp5(appName, bapiName, inputParams);                                   
+
+                                                testThisSapParseResponse(function);     
+
+                                }
+
+                                catch(JCoException e){
+
+                                                log.error("bapiInsertT77ua Error"+e.getMessage());
+
+                                                testThisDebug("bapiInsertT77ua start print stack trace");
+
+                                                e.printStackTrace();
+
+                                                testThisDebug("bapiInsertT77ua finish print stack trace");
+
+                                }
+
+                               testThisDebug(getLogFinishMessage(artName));                              
+
+    }
+
+   
+
+     public void bapiDeleteT77ua(String testThisIdNum,String profile){
+
+                                String artName="bapiDeleteT77ua";
+
+                                testThisDebug(getLogStartMessage(artName));
+
+                                String appName="SAP ECC";          
+
+                    String bapiName="testThisCustom_thisLocal_DELETE_T77UA";
+
+                   
+
+                    HashMap inputParams=new HashMap();
+
+                                testThisDebug("[bapiDeleteT77ua]: Processing identity ==> "+testThisIdNum);
+
+                                testThisDebug("[bapiDeleteT77ua]: Processing profile ==> "+profile);
+
+   
+
+                                try{
+
+                                                inputParams.put("UNAME",testThisIdNum);
+
+                                                inputParams.put("PROFL",profile);
+
+                                               
+
+                                                JCoFunction function = callBapiForApp5(appName, bapiName, inputParams);                                   
+
+                                                testThisSapParseResponse(function);                     
+
+                                }
+
+                                catch(JCoException e){
+
+                                                log.error("bapiDeleteT77ua Error"+e.getMessage());
+
+                                                testThisDebug("bapiDeleteT77ua start print stack trace");
+
+                                                e.printStackTrace();
+
+                                                testThisDebug("bapiDeleteT77ua finish print stack trace");
+
+                                }
+
+               
+
+                                testThisDebug(getLogFinishMessage(artName));               
+
+    }
+
+ 
+
+ 
+
+ 
+
+public void fdsfdg0030(Identity identity,String action,String fdsfdgCode){
+
+                //action
+
+                //U-add
+
+                //D-delete
+
+                testThisDebug("fdsfdg0030_updated_1");
+
+                String appName="SAP ECC";
+
+                String bapiName="testThisCustom_thisLocal_CREATE_fdsfdg_0030";
+
+                SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+
+                Date today = new Date();
+
+                String identityName=identity.getName();
+
+                fdsfdg0030(identityName,action,fdsfdgCode);
+
+}
+
+ 
+
+public void fdsfdg0030(String identityName,String action,String fdsfdgCode){
+
+ 
+
+                //action
+
+                //U-add
+
+                //D-delete
+
+                String appName="SAP ECC";
+
+                String bapiName="testThisCustom_thisLocal_CREATE_fdsfdg_0030";
+
+                SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+
+                Date today = new Date();
+
+               
+
+                //check that provided parameters are not null or empty
+
+                                               
+
+                if(!Util.isNullOrEmpty(identityName)
+
+                && !Util.isNullOrEmpty(action)
+
+                && !Util.isNullOrEmpty(fdsfdgCode)){
+
+               
+
+                //check that action parameter and fdsfdg code parameter are valid
+
+                if((action.equals("U") || action.equals("D"))
+
+                                && (fdsfdgCode.equals("1") || fdsfdgCode.equals("2"))){
+
+                                                HashMap inputParams=new HashMap();
+
+                                                inputParams.put("USRID",identityName);
+
+                                                inputParams.put("manee",fdsfdgCode);
+
+                                                if(action.equals("U")){
+
+                                                                testThisDebug("identityName:"+identityName+"\nisAdded to PA0030"+"\nBEGDA:"+fmt.format(today));
+
+                                                                inputParams.put("BEGDA",formatDate(today));
+
+                                                                inputParams.put("ENDDA","");
+
+                                                                JCoFunction function = callBapiForApp5(appName, bapiName, inputParams);                                     
+
+                                                                testThisSapParseResponse(function);
+
+                                                }
+
+                                                else{
+
+                                                                testThisDebug("identityName:"+identityName+"\nisRemoved from PA0030"+"\nENDDA:"+fmt.format(today));
+
+                                                                inputParams.put("BEGDA","");
+
+                                                                inputParams.put("ENDDA",formatDate(today));
+
+ 
+
+                                                                JCoFunction function = callBapiForApp5(appName, bapiName, inputParams);                                     
+
+                                                                testThisSapParseResponse(function);
+
+        
+
+                                                }
+
+                                }//parameters are valid
+
+                }//parameters are not null
+
+ 
+
+}
+
+ 
+
+public void bapiT526(String identityName,String action,String machlaka){
+
+ 
+
+                //action
+
+                //U-add
+
+                //D-delete
+
+                String appName="SAP ECC";
+
+                String bapiName="testThisCustom_thisLocal_UPDATE_DELETE_T526";
+
+                testThisDebug("bapiT526_updated_1");
+
+               
+
+               
+
+                //check that provided parameters are not null or empty
+
+                                               
+
+                if(!Util.isNullOrEmpty(identityName) && !Util.isNullOrEmpty(action)){
+
+               
+
+                                Identity identity=context.getObject(Identity.class,identityName);
+
+                                testThisDebug("[bapiT526] processing identity ==> "+identityName);
+
+                                testThisDebug("[bapiT526] processing machlaka ==> "+machlaka);
+
+                               
+
+                                if(indentity!=null && Util.isNotNullOrEmpty(machlaka)){
+
+                                               
+
+                                                String testThisEmpFullName=identity.getAttribute("testThisEmpFullName");                                                       
+
+                                               
+
+                                                bapiT526(identityName,action,machlaka,testThisEmpFullName);
+
+                               
+
+                               
+
+                                }//identity not null
+
+                }//function parameters are not null
+
+}
+
+ 
+
+ 
+
+public void bapiT526(String identityName,String action,String machlaka,String testThisEmpFullName){
+
+ 
+
+                //action
+
+                //U-add
+
+                //D-delete
+
+                String appName="SAP ECC";
+
+                String bapiName="testThisCustom_thisLocal_UPDATE_DELETE_T526";
+
+               
+
+               
+
+               
+
+                //check that provided parameters are not null or empty
+
+                                               
+
+                if(!Util.isNullOrEmpty(identityName) && !Util.isNullOrEmpty(action)){
+
+               
+
+                               
+
+                                testThisDebug("[bapiT526] Processing_identity:"+identityName);
+
+                                testThisDebug("[bapiT526] Processing_machlaka: ==> "+machlaka);
+
+                               
+
+                                if(indentity!=null && Util.isNotNullOrEmpty(machlaka)){
+
+                                               
+
+                                                                                                               
+
+                                                String werks=  "0001";
+
+                                               
+
+                                                //check that action parameter and fdsfdg code parameter are valid
+
+                                                if((action.equals("U") || action.equals("D"))                                        && !Util.isNullOrEmpty(machlaka)                                   && !Util.isNullOrEmpty(testThisEmpFullName)){
+
+                                                               
+
+                                                                HashMap inputParams=new HashMap();
+
+                                                                inputParams.put("ACTION",action);
+
+                                                                inputParams.put("USRID",identityName);
+
+                                                                inputParams.put("SACHX",machlaka);
+
+                                                                inputParams.put("SACHN",testThisEmpFullName);          
+
+                                                                inputParams.put("WERKS",werks);
+
+                                                                try{
+
+                                                                                JCoFunction function = callBapiForApp5(appName, bapiName, inputParams);                                              
+
+                                                                                testThisSapParseResponse(function);
+
+                                                                }
+
+                                                                catch(JCoException e){
+
+                                                                }                             
+
+                                                }//parameters are valid
+
+                                }//identity not null
+
+                }//function parameters are not null
+
+}
