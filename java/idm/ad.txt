@@ -1,0 +1,216 @@
+Application adApp = context.getObject(Application.class,ATTR_APP_NAME_ACTIVE_DIRECTORY);
+
+Attributes adAttributes = adApp.getAttributes();
+
+List domainSettings = adAttributes.get("domainSettings");
+
+Map domainSetting = domainSettings.get(0);
+
+String domainDN = domainSetting.get("domainDN");
+
+String port = domainSetting.get("port");
+
+Boolean useSSL =  domainSetting.get("useSSL");
+
+String protocol = null;
+
+if(useSSL){
+
+                thisLocalDebug("use_ssl:"+useSSL);
+
+                protocol = "ldaps";
+
+}else{
+
+                protocol = "ldap";
+
+}
+
+thisLocalDebug("domainDN:"+domainDN);
+
+String thisLocalAdServerName = thisLocalBuildAdServerName(domainDN);
+
+thisLocalDebug("thisLocalAdServerName:"+thisLocalAdServerName);
+
+String providerUrl = thisLocalBuildProviderUrl(protocol,port,thisLocalAdServerName);
+
+ 
+
+ 
+
+ 
+
+String securityPrincipal = domainSetting.get("user");
+
+String securityCredentialsEncrypted = domainSetting.get("password");
+
+String securityCredentials = context.decrypt(securityCredentialsEncrypted);
+
+ 
+
+ 
+
+Hashtable ldapEnv = new Hashtable();
+
+ldapEnv.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
+
+ldapEnv.put(Context.PROVIDER_URL, providerUrl);
+
+ldapEnv.put(Context.SECURITY_AUTHENTICATION, "simple");
+
+ldapEnv.put(Context.SECURITY_PRINCIPAL,securityPrincipal);
+
+ldapEnv.put(Context.SECURITY_CREDENTIALS, securityCredentials);
+
+ldapEnv.put(Context.REFERRAL, "follow");
+
+int counter =0 ;
+
+     byte[] cookie = null;
+
+          int pageSize = 20; // 20 entries per page
+
+LdapContext ldapContext  = new InitialLdapContext(ldapEnv,null);
+
+     ldapContext.setRequestControls(new Control[]{
+
+         new PagedResultsControl(pageSize, Control.CRITICAL)
+
+        /* , new SortControl("sAMAccountName", Control.CRITICAL)*/});
+
+ 
+
+                                String filter = "(objectClass=user)";
+
+                                               
+
+                                               
+
+                                SearchControls searchCtls = new SearchControls();
+
+                                String[] att = {"cn","sAMAccountName" };
+
+                                searchCtls.setSearchScope(SearchControls.SUBTREE_SCOPE);
+
+                                searchCtls.setReturningAttributes(att);
+
+                               
+
+                                try{
+
+                                do{
+
+                                NamingEnumeration<SearchResult> userData  = ldapContext.search(domainDN, filter, searchCtls);
+
+                                List<String> sAMAccountNames = null;                                                  
+
+                                while(userData != null && userData.hasMore()) {
+
+                                          // Display an entry
+
+                                         SearchResult entry = (SearchResult)userData.next();               
+
+                                         javax.naming.directory.Attributes attributes = entry.getAttributes();
+
+                                                                javax.naming.directory.Attribute attribute = attributes.get("sAMAccountName");
+
+                                                                String sAMAccountName = attribute.get();
+
+                                                                  
+
+                                                                 sAMAccountNames = thisLocalUpdateObjectList(sAMAccountNames,  sAMAccountName);
+
+                                         if(entry instanceof HasControls) {                                 
+
+                                             // thisLocalDebug("has controls:"+entry);
+
+                                         }
+
+                                          counter++;
+
+                                      }
+
+                                                                if(null != sAMAccountNames && !sAMAccountNames.isEmpty()){
+
+                                                                                if(null != thisLocalExistingAccountsSet && !thisLocalExistingAccountsSet.isEmpty()){
+
+                                                                                                Iterator iterator = thisLocalExistingAccountsSet.entrySet().iterator();
+
+                                                                                                while(iterator.hasNext()){
+
+                                                                                                                Map thisLocalExistingAccountsMap = iterator.next().getValue();
+
+                                                                                                                                                                                                                                                                                                                                               
+
+                                                                                                                String existingAccount = thisLocalExistingAccountsMap.get("SAMACCOUNTNAME");
+
+                                                                                                                if(sAMAccountNames.contains(existingAccount)){
+
+                                                                                                                                iterator.remove();
+
+                                                                                                                }
+
+                                                                                                }
+
+                                                                                }
+
+                                                                }
+
+                                                               
+
+                                                                  // Examine the paged results control response
+
+         Control[] controls = ldapContext.getResponseControls();
+
+        if(controls != null) {
+
+             for (int i = 0; i < controls.length; i++) {
+
+                if(controls[i] instanceof PagedResultsResponseControl) {
+
+                     PagedResultsResponseControl prrc = (PagedResultsResponseControl)controls[i];
+
+                     total = prrc.getResultSize();                   
+
+                     cookie = prrc.getCookie();                   
+
+                 } else {
+
+                     // Handle other response controls (if any)
+
+                 }
+
+             }
+
+         }else{
+
+               thisLocalDebug("controls is  null");
+
+         }
+
+                                // Re-activate paged results
+
+         ldapContext.setRequestControls(new Control[]{new PagedResultsControl(pageSize, cookie, Control.CRITICAL) });
+
+                                                               
+
+                                                               
+
+                                               
+
+                                                }while(cookie !=null);
+
+                                               
+
+                                               
+
+                }catch(Exception ex){
+
+                                thisLocalDebug("exception: " + ex.getMessage());
+
+                }
+
+                finally{ 
+
+               
+

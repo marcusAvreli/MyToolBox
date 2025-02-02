@@ -1,0 +1,844 @@
+     public  void addFunctionProfile(JSONObject userToUpdate) {
+
+                                JSONObject jsonObject = new JSONObject();
+
+                                try {                       
+
+                                                jsonObject.put("id", 1);                
+
+                                                userToUpdate.put("functionProfile", jsonObject);
+
+ 
+
+                                } catch (JSONException e) {
+
+                                                // TODO Auto-generated catch block
+
+                                                e.printStackTrace();
+
+                                }
+
+ 
+
+                }
+
+                public  void addDataProfile(JSONObject userToUpdate) {
+
+                                JSONObject dataProfile = new JSONObject();
+
+ 
+
+                                try {
+
+                                                dataProfile.put("id", 2);
+
+                                                userToUpdate.put("dataProfile", dataProfile);
+
+                                } catch (JSONException e) {
+
+                                                // TODO Auto-generated catch block
+
+                                                e.printStackTrace();
+
+                                }
+
+                }
+
+               
+
+Application application = retrieveApplication(appName);
+
+String genericWebServiceBaseUrl =  getGenericWebServiceBaseUrl(application);
+
+List<Map> connectionParameters = thisLocalGetConnectionParameters(application);
+
+Map thisLocalEndPointDictionary = thisLocalBuildEndPointDictionary(connectionParameters);
+
+Map appParams = new HashMap();
+
+appParams.put("url",genericWebServiceBaseUrl);
+
+WebServicesClient webServiceClient = new WebServicesClient(appParams);                        
+
+//String commandName=ATTR_OT_DELETE_ACCOUNT;
+
+String commandName=ATTR_OT_ADD_ENTITLEMENT;
+
+String response = null;
+
+EndPoint endPoint = null;
+
+ 
+
+Map connectionParameter = null;
+
+if(commandName.equals(ATTR_OT_PASS_THROUGH_AUTHENTICATION)){
+
+                               
+
+               
+
+                Map inputParams = thisLocalGetPathTrailAndMethod(application,ATTR_OT_PASS_THROUGH_AUTHENTICATION);
+
+                JSONObject credentials=  getCredentials(application);
+
+                inputParams.put("payLoadJSON",credentials);
+
+                inputParams.put("genericWebServiceBaseUrl",genericWebServiceBaseUrl);        
+
+                inputParams.put("appName",appName);
+
+                inputParams.put("operationType",ATTR_OT_PASS_THROUGH_AUTHENTICATION);          
+
+                JSONObject resultObject =  thisLocalRestClientV2(inputParams);
+
+                thisLocalDebug("cookie_Updated: "+resultObject);
+
+                String cookie = resultObject.getString("Cookie");              
+
+                thisLocalDebug("cookie: "+cookie);
+
+}
+
+ 
+
+if(commandName.equals(ATTR_OT_UPDATE_ACCOUNT)){
+
+                connectionParameter = connectionParameters.get(thisLocalEndPointDictionary.get(commandName)-1);
+
+                String ruleName = connectionParameter.get("beforeRule");
+
+                if(Util.isNotNullOrEmpty(ruleName)){
+
+                                String;                  
+
+                                JSONObject inputJSON = new JSONObject();
+
+                                inputJSON.put("id",id);
+
+                                inputJSON.put("mailAddress","test2@thisLocal.co.il");
+
+                               
+
+                                Map bodyMap = connectionParameter.get("body");
+
+                                bodyMap.put("jsonBody",inputJSON.toString());
+
+                                endPoint = thisLocalGetEndPoint(connectionParameter,genericWebServiceBaseUrl);
+
+                                Map params = new HashMap();
+
+                                params.put("requestEndPoint",endPoint);
+
+                                params.put("application",application);
+
+                                Rule rule = context.getObject(Rule.class,ruleName);
+
+                                Object returnObj=context.runRule(rule,params);
+
+                                context.decache(rule); 
+
+                               
+
+                                               
+
+                                RestRequestExecutor restRequestExecutor = new RestRequestExecutor();                            
+
+                                String output = restRequestExecutor.executeHttpRequest(webServiceClient,returnObj);
+
+                                Map responseHeaders = webServiceClient.getResponseHeaders();
+
+                                response = webServiceClient.getResponseBody();
+
+                               
+
+                }
+
+                ruleName = connectionParameter.get("afterRule");
+
+                if(Util.isNotNullOrEmpty(ruleName)){    
+
+                                Map params = new HashMap();
+
+                                params.put("requestEndPoint",endPoint);
+
+                                params.put("application",application);
+
+                                params.put("restClient",webServiceClient);
+
+                                if(Util.isNotNullOrEmpty(response)){
+
+                                                rawResponseObject = new JSONObject(response);
+
+                                                params.put("rawResponseObject",rawResponseObject);
+
+                                }
+
+                                Rule rule = context.getObject(Rule.class,ruleName);
+
+                               
+
+                                Object returnObj=context.runRule(rule,params);
+
+                                context.decache(rule);
+
+                               
+
+                               
+
+                }                             
+
+}
+
+ 
+
+ 
+
+ 
+
+ 
+
+if(commandName.equals(ATTR_OT_GET_OBJECT)){
+
+                connectionParameter = connectionParameters.get(thisLocalEndPointDictionary.get(commandName)-1);
+
+                String ruleName = connectionParameter.get("beforeRule");
+
+                if(Util.isNotNullOrEmpty(ruleName)){
+
+                                String;
+
+                                JSONObject inputJSON = new JSONObject();
+
+                                inputJSON.put("id",id);
+
+                               
+
+                                Map bodyMap = connectionParameter.get("body");
+
+                                bodyMap.put("jsonBody",inputJSON.toString());
+
+                                endPoint = thisLocalGetEndPoint(connectionParameter,genericWebServiceBaseUrl);
+
+                                Map params = new HashMap();
+
+                                params.put("requestEndPoint",endPoint);
+
+                                params.put("application",application);
+
+                                Rule rule = context.getObject(Rule.class,ruleName);
+
+                                Object returnObj=context.runRule(rule,params);
+
+                                context.decache(rule); 
+
+                               
+
+                                               
+
+                                RestRequestExecutor restRequestExecutor = new RestRequestExecutor();                            
+
+                                String output = restRequestExecutor.executeHttpRequest(webServiceClient,returnObj);
+
+                                Map responseHeaders = webServiceClient.getResponseHeaders();
+
+                                response = webServiceClient.getResponseBody();
+
+               
+
+                               
+
+                }
+
+               
+
+                ruleName = connectionParameter.get("afterRule");
+
+                if(Util.isNotNullOrEmpty(ruleName)){
+
+               
+
+                               
+
+                                Map params = new HashMap();
+
+                                params.put("requestEndPoint",endPoint);
+
+                                params.put("application",application);
+
+                                params.put("restClient",webServiceClient);
+
+                                JSONObject rawResponseObject = null;
+
+                                if(Util.isNotNullOrEmpty(response)){
+
+                                                rawResponseObject = new JSONObject(response);
+
+                                                params.put("rawResponseObject",rawResponseObject);
+
+                                }
+
+                                params.put("restClient",webServiceClient);
+
+                                Rule rule = context.getObject(Rule.class,ruleName);
+
+                               
+
+                                Object returnObj=context.runRule(rule,params);
+
+                                context.decache(rule);
+
+                               
+
+                               
+
+                }                             
+
+                               
+
+}
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+if(commandName.equals(ATTR_OT_CREATE_ACCOUNT)){
+
+                connectionParameter = connectionParameters.get(thisLocalEndPointDictionary.get(commandName)-1);
+
+               
+
+                if(null != connectionParameter ){             
+
+                                String ruleName = connectionParameter.get("beforeRule");
+
+                               
+
+                               
+
+                                if(Util.isNotNullOrEmpty(ruleName)){
+
+                                                String identityName = "014900617";
+
+                                                Identity identity = context.getObject(Identity.class,identityName);
+
+                                                String thisLocalFirstNameEng = identity.getAttribute("thisLocalFirstNameEng");
+
+                                                String thisLocalLastNameEng = identity.getAttribute("thisLocalLastNameEng");
+
+                                                String mail = identity.getAttribute("email");
+
+                                               
+
+                                                JSONObject createAccountJSON = new JSONObject();
+
+                                                createAccountJSON.put("identifier",identityName);
+
+                                                createAccountJSON.put("firstName",thisLocalFirstNameEng);
+
+                                                createAccountJSON.put("lastName",thisLocalLastNameEng);
+
+                                                createAccountJSON.put("mailAddress",mail);
+
+                                                addFunctionProfile(createAccountJSON);
+
+                                                addDataProfile(createAccountJSON);
+
+                                                Map bodyMap = connectionParameter.get("body");
+
+                                                bodyMap.put("jsonBody",createAccountJSON.toString());
+
+                                                endPoint = thisLocalGetEndPoint(connectionParameter,genericWebServiceBaseUrl);
+
+                                                Map params = new HashMap();
+
+                                                params.put("requestEndPoint",endPoint);
+
+                                                params.put("application",application);
+
+                                                Rule rule = context.getObject(Rule.class,ruleName);
+
+                                                Object returnObj=context.runRule(rule,params);
+
+                                                context.decache(rule); 
+
+                                               
+
+                                                               
+
+                                                RestRequestExecutor restRequestExecutor = new RestRequestExecutor();                            
+
+                                                String output = restRequestExecutor.executeHttpRequest(webServiceClient,returnObj);
+
+                                                Map responseHeaders = webServiceClient.getResponseHeaders();
+
+                                                response = webServiceClient.getResponseBody();
+
+                                               
+
+                                               
+
+                                }
+
+                                ruleName = connectionParameter.get("afterRule");
+
+                                if(Util.isNotNullOrEmpty(ruleName)){
+
+                               
+
+                                                //EndPoint endPoint = thisLocalGetEndPoint(connectionParameter,genericWebServiceBaseUrl);
+
+                                                Map params = new HashMap();
+
+                                                params.put("requestEndPoint",endPoint);
+
+                                                params.put("application",application);
+
+                                                params.put("restClient",webServiceClient);
+
+                                                JSONObject rawResponseObject = null;
+
+                                                if(Util.isNotNullOrEmpty(response)){
+
+                                                                rawResponseObject = new JSONObject(response);
+
+                                                                params.put("rawResponseObject",rawResponseObject);
+
+                                                }
+
+                                                params.put("restClient",webServiceClient);
+
+                                                Rule rule = context.getObject(Rule.class,ruleName);
+
+                                               
+
+                                                Object returnObj=context.runRule(rule,params);
+
+                                                context.decache(rule);
+
+                                               
+
+                                               
+
+                                }                             
+
+                }
+
+}
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+if(commandName.equals(ATTR_OT_ADD_ENTITLEMENT)){
+
+thisLocalDebug("thisLocalEndPointDictionary: "+thisLocalEndPointDictionary);
+
+thisLocalDebug("commandName: "+commandName);
+
+                connectionParameter = connectionParameters.get(thisLocalEndPointDictionary.get(commandName)-1);
+
+                if(null != connectionParameter ){             
+
+                                                String ruleName = connectionParameter.get("beforeRule");
+
+                                                thisLocalDebug("===============ruleName================ :"+ruleName);
+
+                                                if(Util.isNotNullOrEmpty(ruleName)){
+
+                                                                /*JSONObject tempObject = new JSONObject();
+
+                                                                tempObject.put("id","15001");
+
+                                                                JSONObject idOfProfile = new JSONObject();
+
+                                                                idOfProfile.put("id",2);
+
+                                                               
+
+                                                                tempObject.put("functionProfile",idOfProfile);
+
+                                                               
+
+                                                               
+
+                                                                */
+
+                                                               
+
+                                                                JSONObject tempObject = new JSONObject();
+
+                                                                tempObject.put("name","012157772");
+
+                                                               
+
+                                                                tempObject.put("id","17567");
+
+                                                               
+
+                                               
+
+                                                                Map bodyMap = connectionParameter.get("body");
+
+                                                                bodyMap.put("jsonBody",tempObject.toString());
+
+                                                                endPoint = thisLocalGetEndPoint(connectionParameter,genericWebServiceBaseUrl);
+
+                                                                Map params = new HashMap();
+
+                                                                params.put("requestEndPoint",endPoint);
+
+                                                                params.put("application",application);
+
+                                                                Rule rule = context.getObject(Rule.class,ruleName);
+
+                                                               
+
+                                                                Object returnObj=context.runRule(rule,params);
+
+                                                                context.decache(rule);
+
+                                                               
+
+                                               
+
+                                                                RestRequestExecutor restRequestExecutor = new RestRequestExecutor();                            
+
+                                                                String output = restRequestExecutor.executeHttpRequest(webServiceClient,returnObj);
+
+                                                                Map responseHeaders = webServiceClient.getResponseHeaders();
+
+                                                                response = webServiceClient.getResponseBody();
+
+                                                               
+
+                                                }             
+
+                                                ruleName = connectionParameter.get("afterRule");
+
+                                                if(Util.isNotNullOrEmpty(ruleName)){                                    
+
+                                                                Map params = new HashMap();
+
+                                                                params.put("requestEndPoint",endPoint);
+
+                                                                params.put("application",application);
+
+                                                                params.put("restClient",webServiceClient);
+
+                                                                JSONObject rawResponseObject = null;
+
+                                                                if(Util.isNotNullOrEmpty(response)){
+
+                                                                                rawResponseObject = new JSONObject(response);
+
+                                                                                params.put("rawResponseObject",rawResponseObject);
+
+                                                                }
+
+                                                                params.put("restClient",webServiceClient);
+
+                                                                Rule rule = context.getObject(Rule.class,ruleName);
+
+                                                               
+
+                                                                Object returnObj=context.runRule(rule,params);
+
+                                                                context.decache(rule);
+
+                                                               
+
+                                                               
+
+                                                }                             
+
+                }else{
+
+                                thisLocalDebug("parameter is null");
+
+                }
+
+}
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+if(commandName.equals(ATTR_OT_DISABLE_ACCOUNT)){
+
+                thisLocalDebug("=================================");
+
+                connectionParameter = connectionParameters.get(thisLocalEndPointDictionary.get(commandName)-1);
+
+                if(null != connectionParameter ){             
+
+                                                String ruleName = connectionParameter.get("beforeRule");
+
+                                                if(Util.isNotNullOrEmpty(ruleName)){
+
+                                                                JSONObject enableAccountJson = new JSONObject();
+
+                                                                enableAccountJson.put("id","15001");
+
+                                                                Map bodyMap = connectionParameter.get("body");
+
+                                                                bodyMap.put("jsonBody",enableAccountJson.toString());
+
+                                                                endPoint = thisLocalGetEndPoint(connectionParameter,genericWebServiceBaseUrl);
+
+                                                                Map params = new HashMap();
+
+                                                                params.put("requestEndPoint",endPoint);
+
+                                                                params.put("application",application);
+
+                                                                Rule rule = context.getObject(Rule.class,ruleName);
+
+                                                               
+
+                                                                Object returnObj=context.runRule(rule,params);
+
+                                                                context.decache(rule);
+
+                                                               
+
+                                               
+
+                                                                RestRequestExecutor restRequestExecutor = new RestRequestExecutor();                            
+
+                                                                String output = restRequestExecutor.executeHttpRequest(webServiceClient,returnObj);
+
+                                                                Map responseHeaders = webServiceClient.getResponseHeaders();
+
+                                                                response = webServiceClient.getResponseBody();
+
+                                                               
+
+                                                }             
+
+                                                ruleName = connectionParameter.get("afterRule");
+
+                                                if(Util.isNotNullOrEmpty(ruleName)){
+
+                                                                Map params = new HashMap();                                
+
+                                                                params.put("requestEndPoint",endPoint);
+
+                                                                params.put("application",application);
+
+                                                                params.put("restClient",webServiceClient);
+
+                                                                JSONObject rawResponseObject = null;
+
+                                                                if(Util.isNotNullOrEmpty(response)){
+
+                                                                                rawResponseObject = new JSONObject(response);
+
+                                                                                params.put("rawResponseObject",rawResponseObject);
+
+                                                                }
+
+                                                                params.put("restClient",webServiceClient);
+
+                                                                Rule rule = context.getObject(Rule.class,ruleName);
+
+                                                               
+
+                                                                Object returnObj=context.runRule(rule,params);
+
+                                                                context.decache(rule);                                                 
+
+                                                }                             
+
+                }else{
+
+                                thisLocalDebug("parameter is null");
+
+                }
+
+}
+
+if(commandName.equals(ATTR_OT_DELETE_ACCOUNT)){
+
+ 
+
+                connectionParameter = connectionParameters.get(thisLocalEndPointDictionary.get(commandName)-1);
+
+                if(null != connectionParameter ){             
+
+                                                String ruleName = connectionParameter.get("beforeRule");
+
+                                               
+
+                                                if(Util.isNotNullOrEmpty(ruleName)){
+
+                                                                JSONObject enableAccountJson = new JSONObject();
+
+                                                                //enableAccountJson.put("id","15002");
+
+                                                                enableAccountJson.put("id","85011");
+
+                                                                Map bodyMap = connectionParameter.get("body");
+
+                                                                bodyMap.put("jsonBody",enableAccountJson.toString());
+
+                                                                endPoint = thisLocalGetEndPoint(connectionParameter,genericWebServiceBaseUrl);
+
+                                                                Map params = new HashMap();
+
+                                                                params.put("requestEndPoint",endPoint);
+
+                                                                params.put("application",application);
+
+                                                                params.put("restClient",webServiceClient);
+
+                                                                Rule rule = context.getObject(Rule.class,ruleName);
+
+                                                               
+
+                                                                Object returnObj=context.runRule(rule,params);
+
+                                                                context.decache(rule);
+
+                                                               
+
+                                                               
+
+                                                                RestRequestExecutor restRequestExecutor = new RestRequestExecutor();                            
+
+                                                                String output = restRequestExecutor.executeHttpRequest(webServiceClient,returnObj);
+
+                                                                Map responseHeaders = webServiceClient.getResponseHeaders();
+
+                                                                response = webServiceClient.getResponseBody();
+
+                                                               
+
+                                                               
+
+                                                               
+
+                                                }             
+
+                                                ruleName = connectionParameter.get("afterRule");
+
+                                                if(Util.isNotNullOrEmpty(ruleName)){
+
+                                               
+
+                                                               
+
+                                                                Map params = new HashMap();
+
+                                                                params.put("requestEndPoint",endPoint);
+
+                                                                params.put("application",application);
+
+                                                                params.put("restClient",webServiceClient);
+
+                                                                JSONObject rawResponseObject = null;
+
+                                                                if(Util.isNotNullOrEmpty(response)){
+
+                                                                                rawResponseObject = new JSONObject(response);
+
+                                                                                params.put("rawResponseObject",rawResponseObject);
+
+                                                                }
+
+                                                                params.put("restClient",webServiceClient);
+
+                                                                Rule rule = context.getObject(Rule.class,ruleName);
+
+                                                               
+
+                                                                Object returnObj=context.runRule(rule,params);
+
+                                                                context.decache(rule);
+
+                                                               
+
+                                                               
+
+                                                }                             
+
+                }else{
+
+                                thisLocalDebug("parameter is null");
+
+                }
+
+ 
+
+}
+
+ 
+
