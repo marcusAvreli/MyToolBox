@@ -1,0 +1,165 @@
+web/menu.xhtml
+
+<!--        thisLocal_customization dont show options to change password or define forward workitem
+
+              <ui:fragment rendered="#{menu.preferencesEnabled}">
+
+                  <li role="presentation">
+
+                    <a href="#{base.requestContextPath}/dashboard/identityPreferences.jsf" role="menuitem" >
+
+                      <i role="presentation" aria-hidden="true" class="fa fa-wrench m-r-xs"></i>
+
+                      #{msgs.preferences}
+
+                    </a>
+
+                  </li>
+
+              </ui:fragment>
+
+-->
+
+ 
+
+ 
+
+Web/css/ui-custom.css
+
+ 
+
+/* thisLocal_customization self service message */
+
+div[role="alert"] .formInfo {
+
+    font-size: large;
+
+    padding: 30px;
+
+    text-align: center;
+
+}
+
+ 
+
+Web/debug/debug.xhtml
+
+ 
+
+<script type="text/javascript">
+
+      <!--//--><![CDATA[//><!--
+
+        helpKey = 'DEBUG';
+
+ 
+
+        var classes = #{debug.objectClassNamesJson};
+
+        //thisLocal_customization
+
+        classes.push("thisLocalNovaApp");
+
+        var readOnly = #{debug.readOnly};
+
+        var grid = null;
+
+ 
+
+        //pass these to advanced search fields defined in AccessRequestStatusGrid.js
+
+        var jsonFilterRequesterIdentity = null;
+
+        var jsonFilterRequesteeIdentity = null;
+
+ 
+
+        Ext.onReady(function(){
+
+ 
+
+            Ext.QuickTips.init();
+
+ 
+
+            grid = SailPoint.initObjectBrowser(classes, readOnly);
+
+ 
+
+            var viewport = SailPoint.getViewport({
+
+                bodyContent: grid,
+
+                title: "Debug!"
+
+            });
+
+ 
+
+            viewport.doLayout();
+
+        });
+
+ 
+
+      //--><!]]>
+
+    </script>
+
+ 
+
+ 
+
+Web/scripts/custom.js
+
+ 
+
+//mtb_customization
+
+//[Avshalom] Allow Selection in tables
+
+Ext.override(Ext.grid.View, {enableTextSelection:true});
+
+ 
+
+//[Avshalom] Color uncorrelated identities in red in Identity Warehouse
+
+renderIdentityName = function (value, metadata, record,rowIdx,colIdx,store) {
+
+                var html = "";
+
+                var correlated = record.get('correlated');
+
+                if (!correlated) {
+
+                                html = '<p style="color:red">' + value + '</p>';
+
+                } else {
+
+                                html = value;
+
+                }
+
+                return html;
+
+}
+
+ 
+
+/*
+
+renderApprovers = function (value, metadata, record,rowIdx,colIdx,store) {
+
+                var html = "";
+
+                var workitemid = record.get('workItemId');
+
+                html = workitemid;
+
+                return html;
+
+}
+
+ 
+
+*/

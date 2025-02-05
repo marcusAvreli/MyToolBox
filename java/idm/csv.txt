@@ -1,0 +1,436 @@
+Storing huge data set in Sailpoint
+
+https://community.sailpoint.com/t5/IdentityIQ-Forum/Storing-huge-data-set-in-Sailpoint/m-p/104900
+
+
+private Map thisLocalaaaaReadCsv(String inTargetFile) throws Exception{
+
+                                String artName = "thisLocalaaaaReadCsv";
+
+                               
+
+                                String targetFile = "/var/tmp/thisLocalaaaaCsvInput"+"/"+inTargetFile+ ".csv";
+
+                                HashMap thisLocalaaaaResultMap = null;
+
+                                HashMap csvDataRow = null;
+
+                                int counter=0;
+
+                               String delimiter = ",";
+
+                               String line = null;
+
+                                int lineNo = 0;
+
+                                Rfc4180CsvBuilder rfc4180CsvBuilder = new Rfc4180CsvBuilder(delimiter);
+
+                                try {
+
+                                                InputStream ips = new FileInputStream(targetFile);
+
+                                                InputStreamReader ipsr = new InputStreamReader(ips);
+
+                                                BufferedReader csvReader = new BufferedReader(ipsr);
+
+                                                String line;          
+
+                                                RFC4180LineIterator it = new RFC4180LineIterator(csvReader);
+
+                                                RFC4180LineParser parser = new RFC4180LineParser(delimiter);
+
+                                                parser.tolerateMissingColumns(true);
+
+                                               
+
+                                                // Read first line for headers
+
+                                                String headerLine = it.readLine();
+
+                                                if(Util.isNotNullOrEmpty(headerLine)){
+
+                                                                List headers = parser.parseLine(headerLine);
+
+                                                                for (int i = 0; i < headers.size(); i++) {                                       
+
+                                                                                String headerName = (String) headers.get(i);
+
+                                                                                if (headerName != null) {
+
+                                                                                                headerName = headerName;
+
+                                                                                                if ("".equals(headerName)) {
+
+                                                                                                                throw new Exception("Found empty header in CSV file " + filename + ", header index " + i);
+
+                                                                                                }
+
+                                                                                                headers.set(i, headerName);
+
+                                                                                }
+
+                                                                }                                                             
+
+                                                                while ((line = it.readLine()) != null) {
+
+                                                                                lineNo++;
+
+                                                                                List data = parser.parseLine(line);
+
+                                                                                //check that the CSV row is not malformed
+
+                                                                                if (data.size() != headers.size()) {
+
+                                                                                                System.out.println("data"+data.size());
+
+                                                                                                                throw new Exception("incorrect number of columns in " + filename + ", line #" + line + ". Expected " + headers.size() + ", Line has "
+
+                                                                                                                                                + data.size());
+
+                                                                                }                                                             
+
+                                                                                csvDataRow = new HashMap();
+
+                                                                                if (data != null) {
+
+                                                                                                for (int i = 0; i < data.size(); i++) {
+
+                                                                                                                String colValue = (String) data.get(i);
+
+                                                                                                                if (colValue != null) {
+
+                                                                                                                                colValue = colValue;
+
+                                                                                                                                if ("".equals(colValue)) {
+
+                                                                                                                                                colValue = null;
+
+                                                                                                                                }
+
+                                                                                                                                data.set(i, colValue);
+
+                                                                                                                }
+
+                                                                                                                String headerName = headers.get(i);
+
+                                                                                                               
+
+                                                                                                                if(null != colValue){                                                                                                                                                                                                                                         
+
+                                                                                                                                if(headerName.toUpperCase().endsWith("_DATE")){                                                                                               
+
+                                                                                                                                                try{                                                                                                                                                                                                                                                        
+
+                                                                                                                                                                SimpleDateFormat simpleDateFormat=new SimpleDateFormat(ATTR_UNIX_DATE_PATTERN);                                                                                                                                                                                                                                           
+
+                                                                                                                                                                Date formattedDate = simpleDateFormat.parse(colValue);                                                                                                       
+
+                                                                                                                                                                csvDataRow.put(headerName, formattedDate.getTime());         
+
+                                                                                                                                                }
+
+                                                                                                                                                catch(Exception ex){                                                                                                      
+
+                                                                                                                                                                csvDataRow.put(headerName, colValue);           
+
+                                                                                                                                                }
+
+                                                                                                                                }else{                                                                                                   
+
+                                                                                                                                                csvDataRow.put(headerName, colValue);
+
+                                                                                                                                }
+
+                                                                                                               
+
+                                                                                                                }else{
+
+                                                                                                                                csvDataRow.put(headerName, colValue);
+
+                                                                                                                }
+
+                                                                                                }                                                                             
+
+                                                                               
+
+                                                                                if(null == thisLocalaaaaResultMap || thisLocalaaaaResultMap.isEmpty()){
+
+                                                                                                thisLocalaaaaResultMap=new HashMap();
+
+                                                                                }
+
+                                                                                thisLocalaaaaResultMap.put(lineNo,csvDataRow);
+
+                                                                                }
+
+                                                                               
+
+                                                                }
+
+                                                }                                                                                                                             
+
+                                                csvReader.close();
+
+                                }
+
+                                catch (Exception e) {
+
+                                               
+
+                                                throw new Exception("thisLocalaaaaReadCsv_error_reading_csv: " + e.getMessage());
+
+                                               
+
+                                }
+
+                                //thisLocalaaaaResultMap = thisLocalaaaaTrimCsvInput(thisLocalaaaaResultMap);
+
+                                return thisLocalaaaaResultMap;               
+
+                }
+
+public void thisLocalaaaaWriteCsv(Map content,Map sortedMap, Map csvSettings){
+
+                String dirName = csvSettings.get("dirName");
+
+                String fileName = csvSettings.get("fileName");
+
+                Boolean refNumbering = csvSettings.get("refNumbering");
+
+                SimpleDateFormat simpleDateFormat=new SimpleDateFormat(ATTR_UNIX_DATE_PATTERN);     
+
+                Boolean deletePreviousOutputs = csvSettings.get("deletePreviousOutputs");
+
+                Boolean generationDateFlag = csvSettings.get("generationDateFlag");
+
+                String encoding = csvSettings.get("encoding");
+
+                Map thisLocalaaaaDisplayNamesMap = csvSettings.get("thisLocalaaaaDisplayNamesMap");
+
+                Boolean convertDateToHR = csvSettings.get("convertDateToHR");
+
+                if(null == convertDateToHR){
+
+                                convertDateToHR = Boolean.TRUE;
+
+                }
+
+                String delimiter = ",";
+
+                if(Util.isNullOrEmpty(dirName)){
+
+                                dirName="/var/tmp/thisLocalaaaaCsvOutput";
+
+                }else{
+
+                               
+
+                }
+
+               
+
+ 
+
+                if(Util.isNullOrEmpty(fileName) || fileName.equals("/")){
+
+                                fileName = "/csvOutput.csv";
+
+                }else{
+
+                                fileName = "/"+fileName;
+
+                }
+
+               
+
+               
+
+                Rfc4180CsvBuilder rfc4180CsvBuilder = new Rfc4180CsvBuilder(delimiter);
+
+                createDirInPath(dirName);
+
+ 
+
+                if(null !=content && !content.isEmpty()){                             
+
+                                //setHeaders;
+
+                                if(refNumbering){
+
+                                                rfc4180CsvBuilder.addValue("RefNo"); 
+
+                               
+
+                                }
+
+                               
+
+                               
+
+                                for(Map.Entry sortedEntry : sortedMap.entrySet()){                        
+
+                                                String fieldName = sortedEntry.getValue();
+
+                                                if(null != thisLocalaaaaDisplayNamesMap && !thisLocalaaaaDisplayNamesMap.isEmpty()){
+
+                                                                String displayName = thisLocalaaaaDisplayNamesMap.get(fieldName);
+
+                                                                if(Util.isNotNullOrEmpty(displayName)){
+
+                                                                                rfc4180CsvBuilder.addValue(displayName);
+
+                                                                }else{
+
+                                                                                rfc4180CsvBuilder.addValue(fieldName);
+
+                                                                }
+
+                                                }else{
+
+                                               
+
+                                                                rfc4180CsvBuilder.addValue(fieldName);                                             
+
+                                                }
+
+                                }
+
+                               
+
+                                if(generationDateFlag){
+
+                                                rfc4180CsvBuilder.addValue("Report_Created_Date");
+
+                                }
+
+                               
+
+                                rfc4180CsvBuilder.setQuoteLineFeed(false);                                       
+
+                                String csvLine = rfc4180CsvBuilder.build(false);
+
+                                writeToFileByDir(csvLine.trim(),dirName,fileName,encoding);
+
+                                rfc4180CsvBuilder.flush();
+
+ 
+
+                                for(Map.Entry contentEntry : content.entrySet()){           
+
+                                                if(refNumbering){
+
+                                                                int refNo =          contentEntry.getKey();
+
+                                                               
+
+                                                                rfc4180CsvBuilder.addValue(String.valueOf(refNo));
+
+                                                }
+
+                                                Map contentMap = contentEntry.getValue();
+
+                                                                                               
+
+ 
+
+                                                for(Map.Entry sortedEntry : sortedMap.entrySet()){
+
+                                                                String fieldName = sortedEntry.getValue();         
+
+                                                                Object valueToWrtieObject = contentMap.get(fieldName);
+
+                                                                               
+
+                                                                if(null != valueToWrtieObject){
+
+                                                                                Class clazz = valueToWrtieObject.getClass();
+
+                                                                                if(String.class.isAssignableFrom(clazz)){                                                                                
+
+                                                                                                rfc4180CsvBuilder.addValue(valueToWrtieObject);
+
+                                                                                }
+
+                                                                                                                                               
+
+                                                                                if(Number.class.isAssignableFrom(clazz)){
+
+                                                                                                if(convertDateToHR){
+
+                                                                                                                if(fieldName.toUpperCase().endsWith("_DATE")){                                                                                            
+
+                                                                                                                                try{
+
+                                                                                                                                                Long originalLong = valueToWrtieObject.longValue();                                                                                             
+
+                                                                                                                                                                                                                               
+
+                                                                                                                                                Date date = new Date(originalLong);                                                                      
+
+                                                                                                                                                String formattedDate = simpleDateFormat.format(date);                                                                                                             
+
+                                                                                                                                                rfc4180CsvBuilder.addValue(String.valueOf(formattedDate));
+
+                                                                                                                                }
+
+                                                                                                                                catch(Exception ex){
+
+                                                                                                                                                                                                                               
+
+                                                                                                                                                rfc4180CsvBuilder.addValue(String.valueOf(valueToWrtieObject));          
+
+                                                                                                                                }
+
+                                                                                                                               
+
+                                                                                                                }else{                                                                                                   
+
+                                                                                                               
+
+                                                                                                                                rfc4180CsvBuilder.addValue(String.valueOf(valueToWrtieObject));
+
+                                                                                                                }
+
+                                                                                                }else{
+
+                                                                                               
+
+                                                                                                                                rfc4180CsvBuilder.addValue(String.valueOf(valueToWrtieObject));
+
+                                                                                                }
+
+                                                                                }                                                                                                                                                                                             
+
+                                                                }else{   
+
+                                                                               
+
+                                                                                rfc4180CsvBuilder.addValue("");                                              
+
+                                                                }
+
+                                                }
+
+                                                if(generationDateFlag){
+
+                                                                Date today = new Date();
+
+                                                                String reportCreatedDateStr = simpleDateFormat.format(today);
+
+                                                                rfc4180CsvBuilder.addValue(String.valueOf(reportCreatedDateStr));
+
+                                                }
+
+                                                rfc4180CsvBuilder.setQuoteLineFeed(false);                                       
+
+                                                String csvLine = rfc4180CsvBuilder.build(false);
+
+                                                writeToFileByDir(csvLine.trim(),dirName,fileName,encoding);
+
+                                                rfc4180CsvBuilder.flush();                                                           
+
+                                }                                             
+
+                }
+
+}
