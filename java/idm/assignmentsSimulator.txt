@@ -1,0 +1,75 @@
+import sailpoint.api.EntitlementCorrelator;
+
+import sailpoint.object.Bundle;
+
+import sailpoint.object.Identity;
+
+import sailpoint.object.RoleAssignment;
+
+import sailpoint.tools.GeneralException;
+
+              Logger log = Logger.getLogger("Test Role Assignments");
+
+              Identity identity = context.getObject(Identity.class, "identityName");
+
+              log.error("Checking roles for " + identity.getName());
+
+              EntitlementCorrelator correlator = EntitlementCorrelator.createDefaultEntitlementCorrelator(context);
+
+              correlator.processIdentity(identity);
+
+              List<RoleAssignment> newRoles = correlator.getNewRoleAssignments();
+
+              List<Bundle> autoRoles =correlator.getAutoAssignedRoles();
+
+              List<Bundle> newDetected = correlator.getDetectedRoles();
+
+              String msg = "";
+
+ 
+
+              log.error("New Assignments:");
+
+              msg += "New Assignments:";
+
+              for (RoleAssignment ra : newRoles) {
+
+                     log.error("\t" + ra.getRoleName());
+
+                     msg += "\t" + ra.getRoleName();
+
+              }
+
+             
+
+             
+
+              log.error("Auto Assignments:");
+
+              msg += "Auto Assignments:";
+
+              for (Bundle ra : autoRoles) {
+
+                     log.error("\t" + ra.getName());
+
+                     msg += "\t" + ra.getName();
+
+              }
+
+             
+
+              log.error("New Detected:");
+
+              msg += "New Detected:";
+
+              for (Bundle role : newDetected) {
+
+                     log.error("\t" + role.getName());
+
+                     msg += "\t" + role.getName();
+
+              }
+
+              return msg;
+
+ 
