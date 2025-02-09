@@ -1,0 +1,1181 @@
++-------------------------------------------------------+
+|										======1_of_4===	|
+|	git													|
+|														|
++-------------------------------------------------------+
+private static final Logger logger = LoggerFactory.getLogger(GitClient.class);
+
+       String remote = "origin";
+
+       //String branch = "refs/heads/master";
+
+       String branch = "refs/heads/dfds";
+
+       //String trackingBranch = "refs/remotes/" + remote + "/master";
+
+       String trackingBranch = "refs/remotes/" + remote + "/fsdfd";
+
+ 
+
+       Repository repo;
+
+       Git gitRepo;
+
+ 
+
+       public GitClient() {
+
+ 
+
+              try {
+
+                     //this.repo = new FileRepository("C:/Users/323438499/NOVA_TEST/.git");
+
+                     this.repo = new FileRepository("C:/Users//git/ V18/.git");
+
+              } catch (IOException e) {
+
+                     // TODO Auto-generated catch block
+
+                     e.printStackTrace();
+
+              }
+
+              this.gitRepo = new Git(repo);
+
+       }
+
+ 
+
+       public void addFile(Set<String> pathNames) {
+
+              if(Util.isNotNullOrEmpty(pathNames)) {
+
+              logger.info("files to add:" + pathNames.size());
+
+             
+
+              AddCommand add = gitRepo.add();
+
+              for (String pathToPush : pathNames) {
+
+                     add.addFilepattern(pathToPush);
+
+              }
+
+ 
+
+              try {
+
+                     add.call();
+
+                     commitAndClose();
+
+              } catch (GitAPIException | RevisionSyntaxException   e) {
+
+                     // TODO Auto-generated catch block
+
+                     logger.error ("error occured:"+e.getMessage());
+
+              }
+
+              }
+
+       }
+
+ 
+
+       public void removeFile(Set<String> pathNames) {
+
+              if(Util.isNotNullOrEmpty(pathNames)) {
+
+                     logger.info("files to remove:" + pathNames.size());
+
+                     RmCommand remove = gitRepo.rm();
+
+                     for (String pathToPush : pathNames) {
+
+                           remove.addFilepattern(pathToPush);
+
+                     }
+
+ 
+
+                     try {
+
+                           remove.call();
+
+                           commitAndClose();
+
+                     } catch (GitAPIException | RevisionSyntaxException e) {
+
+                           // TODO Auto-generated catch block
+
+                           e.printStackTrace();
+
+                     }
+
+              }
+
+       }
+
+ 
+
+       private void commitAndClose() {
+
+              try {
+
+                     RefSpec spec = new RefSpec(branch + ":" + branch);
+
+                     Iterable<PushResult> resultIterable = gitRepo.push().setRemote(remote).setRefSpecs(spec).call();
+
+                     PushResult result = resultIterable.iterator().next();
+
+ 
+
+                     TrackingRefUpdate trackingRefUpdate = result.getTrackingRefUpdate(trackingBranch);
+
+                     //gitRepo.commit().setMessage("saving production changes").call();
+
+                     gitRepo.commit().setMessage("sync from prod to v18").call();
+
+ 
+
+                     RevWalk walk = new RevWalk(repo);
+
+                     ObjectId head = repo.resolve("HEAD");
+
+                     if (null != head) {
+
+                           RevCommit lastCommit = walk.parseCommit(head);
+
+                           logger.info("Full Commit Id:" + lastCommit.getId().getName());
+
+                           logger.info("Abbreviated Name:" + lastCommit.getId().abbreviate(8).name());
+
+                     }
+
+              } catch (GitAPIException | RevisionSyntaxException | IOException e) {
+
+                     // TODO Auto-generated catch block
+
+                     logger.error ("error occured:",e.getMessage());
+
+              } finally {
+
+                     gitRepo.close();
+
+              }
+
+       }
+
+ 
+
+ 
+
++-------------------------------------------------------+
+|										======1_of_4===	|
+|	csv													|
+|														|
++-------------------------------------------------------+
+
+public class CSVClient  extends IOFile{
+
+ 
+
+                private static final Logger logger = LoggerFactory.getLogger(CSVClient.class);
+
+                String sourcePathName;
+
+                CSVParser parser;
+
+                String outputCSVPathName;
+
+                private Set<String> headersOutput;
+
+                private HashMap<String,String> outputData;
+
+                private Map<Integer,String> outputFieldsOrder;
+
+ 
+
+               
+
+                public void read() {                         
+
+                                String dirName = getInputDirPathName();
+
+                                String fileName = getFileName();
+
+                                String pathName = dirName+"/"+fileName;
+
+                               
+
+                                CSVClient csv = new CSVClient();
+
+                                csv.setSourcePathName(pathName);
+
+                                List<thisLocalaaaaDto> resultList = null;
+
+                                csv.connectionOpen();
+
+                                CSVParser parser = csv.getParser();
+
+                                Map<String,Integer> map = parser.getHeaderMap();
+
+                                Map<String,Object> thisLocalaaaaResultMap = null;
+
+                                thisLocalaaaaDto dataObject = null;
+
+                                                                               
+
+                                for (CSVRecord record : parser) {                                                                              
+
+                                                thisLocalaaaaResultMap = new HashMap();
+
+                                                for(Map.Entry<String,Integer> headerEntry : map.entrySet()) {
+
+                                                                String key = headerEntry.getKey();
+
+                                                                thisLocalaaaaResultMap.put(key,record.get(key));
+
+                                                }
+
+                                                if(!RMT2Utility.isNotNullOrEmpty(resultList)) {
+
+                                                                resultList = new ArrayList<thisLocalaaaaDto>();
+
+                                                }
+
+                                                dataObject = new thisLocalaaaaDto();
+
+                                                dataObject.setthisLocalaaaaDataMap(thisLocalaaaaResultMap);                                               
+
+                                                resultList.add(dataObject);
+
+                                }
+
+                                csv.connectionClose();                                 
+
+                                setSubjectList(resultList);
+
+                }
+
+               
+
+                public void addToOutputsFields(String fieldName) {
+
+                                Map<Integer,String> tempMap = getOutputFieldsOrder();
+
+                                if(null == tempMap  || tempMap.isEmpty()) {
+
+                                                tempMap=new TreeMap<Integer,String>();
+
+                                }
+
+                                int size = tempMap.size();
+
+                                size++;
+
+                                tempMap.put(size,fieldName);
+
+                                setOutputFieldsOrder(tempMap);
+
+                }
+
+                public void write() {
+
+                                String dirName = getOutputDirPathName();
+
+                                String fileName = getFileName();
+
+                                String pathName = dirName+"/"+fileName;
+
+                               
+
+                                BufferedWriter writer;
+
+                                CSVPrinter csvPrinter = null;
+
+                                logger.info("writing pathName:"+pathName);
+
+                                List<thisLocalaaaaDto> outputData = getSubjectList();
+
+                                Map<String,Object> thisLocalaaaaDataMap = outputData.get(0).getthisLocalaaaaDataMap();
+
+                               
+
+                                Map<Integer,String> outputOrder = getOutputFieldsOrder();
+
+                                if(null == outputOrder) {
+
+                                                outputOrder = thisLocalaaaaDto.thisLocalaaaaBuildSortingMap(outputData);
+
+                                }
+
+                               
+
+                                Object[] arr = outputOrder.values().toArray();
+
+                                String[] myArray = new String[arr.length];
+
+                                int itemCount =0;
+
+                                for(Object arrItem : arr) {
+
+                                               
+
+                                                myArray[itemCount] = String.valueOf(arrItem);
+
+                                                itemCount++;
+
+                                }
+
+                               
+
+                                try {
+
+                                                File file = new File(pathName);                                 
+
+                                                if(!file.exists()){
+
+                                                                writer = Files.newBufferedWriter(Paths.get(pathName), StandardOpenOption.APPEND,
+
+                                                                                                StandardOpenOption.CREATE);
+
+                                                                csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT.withHeader(myArray));
+
+                                                }else {
+
+                                                                writer = Files.newBufferedWriter(Paths.get(pathName), StandardOpenOption.APPEND);
+
+                                                                csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT.withSkipHeaderRecord());
+
+                                                }
+
+                                                String[] rowValues = new String[outputOrder.size()];                      
+
+                                                for(thisLocalaaaaDto outputObj : outputData ) {
+
+                                                                int counter =0;
+
+                                                                Map<String,Object> targetObject = new HashMap();
+
+                                                               
+
+                                                                for(Map.Entry<Integer,String> outputOrderEntry : outputOrder.entrySet()) {
+
+                                                                                String fieldName = outputOrderEntry.getValue();
+
+                                                                                Object fieldValue = outputObj.getthisLocalaaaaDataMap().get(fieldName);               
+
+                                                                               
+
+                                                                                if(fieldValue instanceof Long) {
+
+                                                                                                if(fieldName.endsWith("_DATE")) {
+
+                                                                                                                String formatted = RMT2Date.formatDate((Long)fieldValue,"dd-MM-yyyy HH:mm:ss");
+
+                                                                                                                rowValues[counter] =formatted;
+
+                                                                                                }
+
+                                                                                }else {
+
+                                                                                                if(null == fieldValue) {
+
+                                                                                                                rowValues[counter] ="";
+
+                                                                                                }else {
+
+                                                                                                                if(fieldValue instanceof String) {
+
+                                                                                                                                String fieldValueString = (String)fieldValue;
+
+                                                                                                                                if(fieldValueString.equals("null")) {
+
+                                                                                                                                                rowValues[counter] ="";
+
+                                                                                                                                }else {
+
+                                                                                                                                                rowValues[counter] =String.valueOf(fieldValue);
+
+                                                                                                                                }
+
+                                                                                                                }else {
+
+                                                                                                                                //it is not string
+
+                                                                                                                                rowValues[counter] =String.valueOf(fieldValue);
+
+                                                                                                                }
+
+                                                                                                }
+
+                                                                                }
+
+                                                                                counter++;
+
+                                                                }
+
+                                                                csvPrinter.printRecord((Object[])rowValues);
+
+                                                }
+
+                                                csvPrinter.flush();
+
+                                } catch ( Exception e) {
+
+ 
+
+                                                e.printStackTrace();
+
+                                }
+
+                               
+
+                               
+
+                }
+
+               
+
+               
+
+                public void connectionOpen() {
+
+                                BufferedReader bufferedReaader = null;
+
+                                CSVParser parser = null;
+
+                                try {
+
+                                                bufferedReaader = new BufferedReader(new FileReader(getSourcePathName()));
+
+                                                parser = CSVParser.parse(bufferedReaader, CSVFormat.EXCEL.withFirstRecordAsHeader());
+
+                                } catch (IOException e) {
+
+                                                // TODO Auto-generated catch block
+
+                                                e.printStackTrace();
+
+                                }
+
+                                setParser(parser);
+
+                               
+
+                }
+
+               
+
+               
+
+               
+
+                public void connectionClose() {
+
+                                CSVParser parser = getParser();
+
+                                try {
+
+                                                parser.close();
+
+                                } catch (IOException e) {
+
+                                                // TODO Auto-generated catch block
+
+                                                e.printStackTrace();
+
+                                }
+
+                }
+
+                public Set<String> getHeadersOutput() {
+
+                                return headersOutput;
+
+                }
+
+ 
+
+ 
+
+                public void setHeadersOutput(Set<String> headersOutput) {
+
+                                this.headersOutput = headersOutput;
+
+                }
+
+                public Map<Integer,String> getOutputFieldsOrder() {
+
+                                return outputFieldsOrder;
+
+                }
+
+ 
+
+                public void setOutputFieldsOrder(Map outputFieldsOrder) {
+
+                                this.outputFieldsOrder = outputFieldsOrder;
+
+                }
+
+ 
+
+ 
+
+ 
+
+                public String getOutputCSVPathName() {
+
+                                return outputCSVPathName;
+
+                }
+
+ 
+
+ 
+
+                public void setOutputCSVPathName(String outputCSVPathName) {
+
+                                this.outputCSVPathName = outputCSVPathName;
+
+                }
+
+ 
+
+                public String getSourcePathName() {
+
+                                return sourcePathName;
+
+                }
+
+ 
+
+                public void setSourcePathName(String sourcePathName) {
+
+                                this.sourcePathName = sourcePathName;
+
+                }
+
+ 
+
+                public CSVParser getParser() {
+
+                                return parser;
+
+                }
+
+ 
+
+                public void setParser(CSVParser parser) {
+
+                                this.parser = parser;
+
+                }
+
+                public HashMap<String, String> getOutputData() {
+
+                                return outputData;
+
+                }
+
+ 
+
+ 
+
+                public void setOutputData(HashMap<String, String> outputData) {
+
+                                this.outputData = outputData;
+
+                }
+
+                @Override
+
+                public List<thisLocalaaaaDto> write(List<thisLocalaaaaDto> query) {
+
+                                // TODO Auto-generated method stub
+
+                                return null;
+
+                }
+
+                @Override
+
+                public List<thisLocalaaaaDto> compare(List<thisLocalaaaaDto> query) {
+
+                                // TODO Auto-generated method stub
+
+                                return null;
+
+                }
+
+               
+
+}
+
+ 
+
+ 
++-------------------------------------------------------+
+|										======1_of_4===	|
+|	excel												|
+|														|
++-------------------------------------------------------+
+ 
+
+public class ExcelClient extends IOFile {
+
+                private static final Logger logger = LoggerFactory.getLogger(ExcelClient.class);
+
+                private  String tabName;
+
+               
+
+                public String getTabName() {
+
+                                return tabName;
+
+                }
+
+ 
+
+                public void setTabName(String tabName) {
+
+                                this.tabName = tabName;
+
+                }
+
+ 
+
+                @Override
+
+                public void read() {
+
+                                logger.info("excel_read_started");
+
+                                FileInputStream file;
+
+                                String absFileName = getInputDirPathName()+"/"+getFileName();
+
+                                logger.info("absFileName:"+absFileName);
+
+                                List<thisLocalaaaaDto> excelRecords = new ArrayList<thisLocalaaaaDto>();
+
+                                try {
+
+                                                file = new FileInputStream(absFileName);
+
+                                                XSSFWorkbook workbook = new XSSFWorkbook(file);
+
+                                                String sheetName = getTabName();
+
+                                                logger.info("absFileName:"+sheetName);
+
+                                                XSSFSheet sheet = workbook.getSheet(sheetName);
+
+                                                Iterator<Row> rowIterator = sheet.iterator();
+
+                                                boolean firstRow = true;
+
+                                                //Map<String,Object> excelRecord = new HashMap<String,Object>();
+
+                                                Map<Integer,String> fieldOrdering = new HashMap<Integer,String>();
+
+                                                int numberOfRows = sheet.getPhysicalNumberOfRows();
+
+                                                logger.info("checkPost_1");
+
+                                                if(numberOfRows >1) {
+
+                                                                Row row = sheet.getRow(0);
+
+                                                                int numberOfCells = row.getPhysicalNumberOfCells();
+
+                                                                for(int i=0;i<numberOfCells;i++) {
+
+                                                                                String rowHeaderName = row.getCell(i).getStringCellValue();
+
+                                                                                fieldOrdering.put(i,rowHeaderName);
+
+                                                                }
+
+                                                }
+
+                                                logger.info("checkPost_2");
+
+                                                DataFormatter formatter = new DataFormatter();
+
+                                                Map<String,Object> thisLocalaaaaDataMap;       
+
+                                                for(int i=1;i<numberOfRows;i++) {
+
+                                                                Row row = sheet.getRow(i);
+
+                                                                int numberOfCells = row.getPhysicalNumberOfCells();
+
+                                                                int lastCell = row.getLastCellNum();
+
+                                                                thisLocalaaaaDataMap = new HashMap<String,Object>();
+
+                                                               
+
+                                                //            excelRecord = new HashMap<String,Object>();
+
+                                                                for(int j=0;j<lastCell;j++) {
+
+                                                                               
+
+                                                                                Cell cell = row.getCell(j);
+
+                                                                                String formattedValue = formatter.formatCellValue(cell);                                                                             
+
+                                                                                String rowHeaderName = fieldOrdering.get(j);
+
+                                                                                thisLocalaaaaDataMap.put(rowHeaderName.trim(),formattedValue);
+
+                                                                               
+
+                                                               
+
+                                                                               
+
+                                                                }
+
+                                                                logger.info("checkPost_4:"+thisLocalaaaaDataMap);
+
+                                                                thisLocalaaaaDto dbCommand = new thisLocalaaaaDto();
+
+                                                                dbCommand.setthisLocalaaaaDataMap(thisLocalaaaaDataMap);
+
+                                                                logger.info("checkPost_4:"+dbCommand.getthisLocalaaaaDataMap());
+
+                                                                excelRecords.add(dbCommand);
+
+                                                               
+
+                                                }
+
+                                } catch ( IOException e) {
+
+                                                // TODO Auto-generated catch block
+
+                                                e.printStackTrace();
+
+                                }
+
+                               
+
++-------------------------------------------------------+
+|										======1_of_4===	|
+|	word												|
+|														|
++-------------------------------------------------------+                              
+public class WordClient extends IOFile {
+
+       private static final Logger logger = LoggerFactory.getLogger(WordClient.class);
+
+ 
+
+       private String templatePathName;
+
+       public enum TextOrientation {
+
+         LTR,
+
+         RTL
+
+      }
+
+ 
+
+       @Override
+
+       public void read() {
+
+              // TODO Auto-generated method stub
+
+ 
+
+       }
+
+ 
+
+       @Override
+
+       public List write(List<thisLocalaaaaDto> datas) {
+
+             
+
+              String dirName = getOutputDirPathName();
+
+              String fileName = getFileName();
+
+              String pathName = dirName+"/"+fileName;
+
+             
+
+              String absFileName = pathName;
+
+             
+
+              Path templatePath = Paths.get(absFileName);
+
+              XWPFDocument doc;
+
+              try {
+
+                    
+
+                     // doc = replaceTextFor(doc, "UNIQUE_VAR", "MyValue1");
+
+                     if (RMT2Utility.isNotNullOrEmpty(datas)) {
+
+                           for (thisLocalaaaaDto thisLocalaaaaDto : datas) {
+
+                                  Map<String, Object> thisLocalaaaaDataMap = thisLocalaaaaDto.getthisLocalaaaaDataMap();
+
+                                 
+
+                                  String businessType = thisLocalaaaaDto.getBusinessType();
+
+                                  if (businessType.equals("CustomApplication")) {
+
+                                        
+
+                                         String name = (String) thisLocalaaaaDataMap.get("name");
+
+                                         String roleNameTemplate = "{0}.docx";
+
+                                         MessageFormat messageFormat = new MessageFormat(roleNameTemplate);
+
+                                         String roleNamePattern = messageFormat.format(new Object[] { name });
+
+                                         //outputFileName = outputFileName + "/" + roleNamePattern;
+
+                                  }
+
+                                  doc = new XWPFDocument(Files.newInputStream(templatePath));
+
+                                  List<XWPFParagraph> paragraphs = doc.getParagraphs();
+
+                                  for (XWPFParagraph paragraph : paragraphs) {
+
+ 
+
+                                         // Here you have your paragraph;
+
+                                         CTP ctp = paragraph.getCTP();
+
+                                         CTPPr ctppr = ctp.getPPr();
+
+                                         if(ctppr == null) ctppr = ctp.addNewPPr();
+
+                                         ctppr.addNewBidi().setVal(true);
+
+                                         // Get all bookmarks and loop through them
+
+                                         List<CTBookmark> bookmarks = ctp.getBookmarkStartList();
+
+                                         Iterator<CTBookmark> iterator = bookmarks.iterator();
+
+                                 
+
+                                         //setOrientation(paragraph, TextOrientation.RTL);
+
+                                         while (iterator.hasNext()) {
+
+                                               
+
+                                                CTBookmark bookmark = iterator.next();
+
+                                                String bookMarkName = bookmark.getName();
+
+ 
+
+                                                String valueToAdd = (String) thisLocalaaaaDataMap.get(bookMarkName);
+
+                                               
+
+                                                insertReplacementRuns(paragraph, valueToAdd);
+
+                                                iterator.remove();
+
+                                               
+
+                                         }
+
+                                  }
+
+                                  
+
+                                  XWPFTable table = doc.createTable();
+
+ 
+
+                               //create first row
+
+                               XWPFTableRow tableRowOne = table.getRow(0);
+
+                               tableRowOne.getCell(0).setText("col one, row one");
+
+                               tableRowOne.addNewTableCell().setText("col two, row one");
+
+                                tableRowOne.addNewTableCell().setText("col three, row one");
+
+ 
+
+                                 
+
+                                  doc.getPackage().replaceContentType(
+
+                                                "application/vnd.openxmlformats-officedocument.wordprocessingml.template.main+xml",
+
+                                                "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml");
+
+                                  //saveWord(outputFileName, doc);
+
+                           //     outputFileName = getPathName();
+
+                                  // break;
+
+                           }
+
+ 
+
+                     }
+
+              } catch (IOException e) {
+
+                     // TODO Auto-generated catch block
+
+                     e.printStackTrace();
+
+              }
+
+ 
+
+              return null;
+
+       }
+
+    private static void setOrientation(XWPFParagraph par, TextOrientation orientation) {
+
+        if(par.getCTP().getPPr()==null ) {
+
+              par.getCTP().addNewPPr();
+
+          }
+
+        if(par.getCTP().getPPr().getBidi()==null ) {
+
+             par.getCTP().getPPr().addNewBidi();
+
+          }
+
+          par.getCTP().getPPr().getBidi().setVal(orientation==TextOrientation.RTL?STOnOffStyleType.ON:STOnOffStyleType.OFF);
+
+       }
+
+ 
+
+       private void insertReplacementRuns(XWPFParagraph paragraph, String replacedText) {
+
+              XWPFRun newRun = paragraph.insertNewRun(1);
+
+              newRun.setText(replacedText);
+
+              newRun.setFontFamily("Tahoma");
+
+              newRun.setFontSize(11);
+
+             
+
+       }
+
+ 
+
+       public String getTemplatePathName() {
+
+              return templatePathName;
+
+       }
+
+ 
+
+       public void setTemplatePathName(String templatePathName) {
+
+              this.templatePathName = templatePathName;
+
+       }
+
+ 
+
+       private void saveWord(String filePath, XWPFDocument doc) throws FileNotFoundException, IOException {
+
+              FileOutputStream out = null;
+
+              try {
+
+                     out = new FileOutputStream(filePath);
+
+                     doc.write(out);
+
+              } catch (Exception e) {
+
+                     e.printStackTrace();
+
+              } finally {
+
+                     out.close();
+
+              }
+
+       }
+
+ 
+
+       @Override
+
+       public List<thisLocalaaaaDto> compare(List<thisLocalaaaaDto> query) {
+
+              // TODO Auto-generated method stub
+
+              return null;
+
+       }
+
+ 
+
+       @Override
+
+       public void write() {
+
+              // TODO Auto-generated method stub
+
+             
+
+       }
+
+ 
+
+}
+
++-------------------------------------------------------+
+|										======1_of_4===	|
+|	insert clob into oracle								|
+|														|
++-------------------------------------------------------+   
+ 
+ public static void insertData2(File descFile)
+
+                       throws Exception {
+
+                     Date start = new Date();
+
+                     logger.info("start insert with clob");
+
+                           String dbDriverName = "oracle.jdbc.driver.OracleDriver";
+
+                           Connection connection = null;
+
+                          
+
+                                  Class.forName(dbDriverName);
+
+                                  connection = (DriverManager.getConnection(DATABASE_URL, USER_ID, PASSWORD));
+
+                          
+
+                   
+
+                           connection.setAutoCommit(true);
+
+ 
+
+                    String sql = "insert into T_XML_TEST_1(exception_id ,  xml_data) values (?,?)";
+
+                    //String sql = "insert into T_XML_TEST_1(exception_id) values (?)";
+
+ 
+
+                    PreparedStatement pstmt = null;
+
+                    pstmt = connection.prepareStatement(sql);
+
+                
+
+                   
+
+                    String inString = null;
+
+                  
+
+                    for(int i=0;i<1000;i++) {
+
+                       pstmt.setInt(1, 102);
+
+ 
+
+                 
+
+                    
+
+                    Clob clob = connection.createClob();
+
+                    FileReader reader = new FileReader(descFile);
+
+                    BufferedReader inStream = new BufferedReader(reader);
+
+                    Writer writer = clob.setCharacterStream(1);
+
+                    int j = -1;
+
+                    while ((inString = inStream.readLine()) != null) {
+
+ 
+
+                       writer.write(inString);
+
+                     
+
+                    }
+
+                    writer.flush();
+
+      
+
+                    pstmt.setClob(2, clob);
+
+                    pstmt.executeUpdate();
+
+ 
+
+                    reader.close();
+
+                   
+
+                    }
+
+                   
+
+ 
+
+                    pstmt.close();
+
+                 
+
+                    connection.close();
+
+                    logger.info("finish insert with clob");
+
+                    Date finish = new Date();
+
+                    Long diff = finish.getTime() - start.getTime();
+
+                    logger.info("Difference:"+diff);
+
+                 }

@@ -1,0 +1,186 @@
+
+Mark Gavrilman
+10:05 AM (6 minutes ago)
+to me
+
+public static void main(String[] args) {
+
+              initApp();         
+
+              logger.info("APPLICATION_STARTED");
+
+              try {
+
+                     DriverManager.registerDriver(new SQLServerDriver());
+
+                     Connection conn=DriverManager.getConnection(getDbUrl());
+
+                     if(null != conn) {
+
+                           DatabaseMetaData dm = (DatabaseMetaData)conn.getMetaData();
+
+                           logger.info("Driver Name:"+dm.getDriverName());
+
+                     }else {
+
+                     logger.info("connection_is_null");
+
+                     }
+
+              } catch (SQLException e) {
+
+                     // TODO Auto-generated catch block
+
+                     e.printStackTrace();
+
+              }
+
+             
+
+      
+
+              logger.info("APPLICATION_FINISHED");         
+
+       }
+
+ 
+
+                public static void main(String[] args) {
+
+                                initApp();                            
+
+                                logger.info("APPLICATION_STARTED");
+
+                               
+
+                                // Recipient's email ID needs to be mentioned.
+
+        String to = "Adam.Kennedy@sdfsdf.test";
+
+ 
+
+     // Sender's email ID needs to be mentioned
+
+                                String from = "adminDev@sdfsdf.test";
+
+ 
+
+                                // Assuming you are sending email from localhost
+
+                                String host = "smtp.sdfsdf.loc";
+
+ 
+
+        // Get system properties
+
+        Properties properties = System.getProperties();
+
+ 
+
+        // Setup mail server
+
+        properties.setProperty("mail.smtp.host", host);
+
+ 
+
+        // Get the default Session object.
+
+        Session session = Session.getDefaultInstance(properties);
+
+       String result =  StringEscapeUtils.escapeXml("i'm paragraph <p>paragraph content</p>");
+
+        logger.info("result: "+result);
+
+        result =  StringEscapeUtils.unescapeHtml4("i'm paragraph <p>paragraph content</p>");
+
+        StringEscapeUtils utils = new StringEscapeUtils();
+
+        utils.unescapeHtml4("sdfsdfsd")
+
+        logger.info("result2: "+result);
+
+        try {
+
+ 
+
+            /* first, get and initialize an engine */
+
+            VelocityEngine ve = new VelocityEngine();
+
+            ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+
+            ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+
+            ve.init();
+
+            Util util = new Util();
+
+            /* next, get the Template */
+
+            Template t = ve.getTemplate("thisLocalaaaaTestResultEmail.vm");
+
+            /* create a context and add data */
+
+            VelocityContext context = new VelocityContext();
+
+            context.put("test", "testString");
+
+            context.put("Html", util);
+
+            /* now render the template into a StringWriter */
+
+            StringWriter writer = new StringWriter();
+
+            t.merge(context, writer);
+
+            /* show the World */
+
+            // System.out.println( writer.toString() );
+
+            // Create a default MimeMessage object.
+
+            MimeMessage message = new MimeMessage(session);
+
+ 
+
+            // Set From: header field of the header.
+
+            message.setFrom(new InternetAddress(from));
+
+ 
+
+            // Set To: header field of the header.
+
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+ 
+
+            // Set Subject: header field
+
+            message.setSubject("This is the Subject Line!");
+
+ 
+
+            // Now set the actual message
+
+            message.setContent(writer.toString(), "text/html");
+
+ 
+
+            // Send message
+
+            Transport.send(message);
+
+            logger.info("Sent message successfully....");
+
+                     } catch (Exception mex) {
+
+                            mex.printStackTrace();
+
+                     }
+
+       
+
+                                logger.info("APPLICATION_FINISHED");                 
+
+                }
