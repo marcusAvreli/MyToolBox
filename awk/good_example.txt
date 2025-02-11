@@ -1,0 +1,6 @@
+#!/usr/bin/awk -f
+
+BEGIN {
+	#Beginning of the AWK program
+	print "Hello World!"
+}

@@ -1,0 +1,8 @@
+Nom;Age;nom_Age
+---------------------------------------;;---_
+CAMILLE;7;cam_7
+CHLOE;12;chl_12
+CLARA;11;cla_11
+CLEMENT;7;cle_7
+EMMA;6;emm_6
+THEO;8;the_8

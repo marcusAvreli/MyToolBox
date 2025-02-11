@@ -1,0 +1,8 @@
+Nom;Age
+---------------------------------------;
+CAMILLE;7
+CHLOE;12
+CLARA;11
+CLEMENT;7
+EMMA;6
+THEO;8
