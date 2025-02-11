@@ -265,6 +265,10 @@ ls -ltr --block-size=M
 	linux version: lsb_release -a
 	kernel version: uname -r
 	
+#FEDORA
+	hostnamectl	
+	cat /etc/fedora-release
+	cat /etc/issue
 
 +---------------------------------------------------+
 |													|
