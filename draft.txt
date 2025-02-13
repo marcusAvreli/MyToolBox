@@ -1,0 +1,75 @@
+diff --git a/angular/angularKnowledge.txt b/angular/angularKnowledge.txt
+index 6d28f75..80aecc9 100644
+--- a/angular/angularKnowledge.txt
++++ b/angular/angularKnowledge.txt
+@@ -16,7 +16,8 @@ https://yeshasmp.github.io/posts/angular-services/
+ https://indepth.dev/posts/1151/a-deep-dive-into-injectable-and-providedin-in-ivy
+ https://www.dsebastien.net/2021-03-28-angular-application-bootstrap/
+ https://www.intertech.com/top-5-ways-to-misuse-ngrx-selectors/
+-
++https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
++https://stackblitz.com/edit/angular-multiple-entities-in-same-state?file=src%2Fapp%2Fstate%2Freducers%2Fexample.reducer.ts
+ 
+ FILTER OBSERVABLES INTERFACES
+ https://www.javatpoint.com/rxjs-filter-filtering-operator
+@@ -30,7 +31,7 @@ npm i ng-packagr@1.3.0
+ 
+ npm i sass@1.1.1
+ npm i gulp-sass@2.2.0
+-
++npm i reselect@3.0.0
+ 
+ 
+ npm i @ngrx/core@^1.2.0 --global
+diff --git a/exampleProjects/angular.txt b/exampleProjects/angular.txt
+index 92cba2d..ea274dc 100644
+--- a/exampleProjects/angular.txt
++++ b/exampleProjects/angular.txt
+@@ -108,7 +108,7 @@ CUSTOM COMPONENTS
+ 		https://github.com/giniedp/nw-buddy/blob/11019fe6674c853c06910ab29138602902992d29/apps/web/app/ui/ag-grid/ag-grid.component.ts
+ 		https://github.com/eskeinet/grid-list/tree/600958d085cea98fb26a43d322bd8a34419114ef
+ 
+-
++	https://github.com/ultimatejetvacations/booking-engine/tree/7378adf5a7866d70cd0e80b2b708b972c32bc082/angular-hotels/app/components
+ 	https://rangle.io/blog/angular-2-ngmodel-and-custom-form-components
+ 	https://github.com/clbond/form-example/blob/master/src/app/components/index.ts
+ 	https://medium.com/@tarik.nzl/angular-2-custom-form-control-with-validation-json-input-2b4cf9bc2d73
+npm i popper.js@^1
+npm i jquery@^3
+npm i tether --save
+
+
+
+https://github.com/opentripplanner/OpenTripPlanner/blob/e5b943a4ad5ad1735b88f99cfd80cddb5bc1d0b6/ARCHITECTURE.md
+https://github.com/apiburn/tutorialapi/tree/833d2716329c7caff729123032139dd5b55e397f/tutorialapi-rest/src/main/resources
+https://github.com/search?q=repo%3Akkonstantine%2Ffili+spring&type=code
+https://github.com/theShus/WebProject/blob/eb72d46da419c28d5e025b2442db944b31834269/src/main/java/rs/raf/repositories/SQLRepos/SqlCategoryRepository.java
+https://github.com/manishprivet/airbyte/blob/0192cb343d8933789cbb59cc303361d378d9356c/airbyte-server/src/main/java/io/airbyte/server/ServerApp.java#L88
+https://github.com/dongxiaoman/incubator-pinot/blob/8cdae925020dc8ae32777d3e6205340d22bac7fd/pinot-broker/src/main/java/org/apache/pinot/broker/broker/BrokerAdminApiApplication.java#L49
+https://github.com/apache/drill/blob/051d0595d1bccacca815587c66de491c843148d0/exec/java-exec/src/main/java/org/apache/drill/exec/server/rest/DrillRestServer.java#L191
+https://github.com/digital-botanical-gardens-initiative/LinkedDataHub/blob/fb40b53d5a759fecff3738ee50595905f0f8a39f/src/main/java/com/atomgraph/linkeddatahub/Application.java#L233
+https://github.com/tuwiendsg/RAHYMS/blob/7404db72546a819817585848e6dc2a8ecefd095c/hcu/hcu-rest/src/main/java/at/ac/tuwien/dsg/hcu/rest/rs/TaskRuleRestService.java
+https://github.com/tapis-project/tapis-files/blob/1a60c4f0b463091979aa90761d578e26f8420142/api/src/main/java/edu/utexas/tacc/tapis/files/api/BaseResourceConfig.java
+
+https://stackoverflow.com/questions/3876503/content-type-missing-start-tag-in-java-soap-client-attachment-not-found-by-s
+https://www.experts-exchange.com/questions/23475147/Help-Needed-with-SOAP-And-Apache-Axis.html
+https://stackoverflow.com/questions/30776582/creating-and-sending-a-soap-message-in-java-to-a-very-simple-web-service
+
+
+https://github.com/JayReturns/SimpleCacheManager
+https://github.com/harjot-oberai/MusicDNA/blob/e102b5b2665d963fededc9ee3362d48270d56a65/app/src/main/java/com/sdsmdg/harjot/MusicDNA/imageLoader/MemoryCache.java#L16
+https://github.com/wqandroid/ihepai/blob/478f5cdda0eefd3e3b0d9450fec38ff197e0ae87/letPapa/src/main/java/com/nostra13/universalimageloader/cache/memory/impl/LimitedAgeMemoryCache.java#L33
+
+https://github.com/gabrielmoreira/wro4j/blob/13bab74fd8e34d037110a0243e32a4c49ff42cdf/wro4j-core/src/main/java/ro/isdc/wro/cache/impl/MemoryCacheStrategy.java#L24
+https://github.com/search?q=repo%3Ajavaparser%2Fjavaparser+supplier&type=code
+
+https://github.com/prashantbhat/simple-cache/blob/master/src/test/java/simple/cache/SimpleCacheTest.java
+
+
+https://medium.com/swlh/hashmap-implementation-for-java-90a5f58d4a5b
+https://medium.com/@MrAndroid/java-multithreading-part-1-java-memory-model-fb8e0cfab9d3
+https://medium.com/@MrAndroid/java-multithreading-part-2-atomicity-visibility-ordering-1665ff7c59e6
+
+https://java-design-patterns.com/patterns/caching/#related-patterns
+
+https://github.com/mlarocca/AlgorithmsAndDataStructuresInAction/tree/b3e3eda17c2a3afb62612939a1c9d62097f46a7c
