@@ -1,0 +1,10 @@
+#!/usr/bin/awk -f
+#action block will never end
+BEGIN {
+ printf "begin block"
+}
+{ printf "action block"
+}
+END{
+   printf "end block"
+}
