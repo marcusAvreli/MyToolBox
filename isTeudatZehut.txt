@@ -162,7 +162,7 @@ NR>1{
 			split("1,2,1,2,1,2,1,2,1",support_array,",")
 			split($1,a,"")
 			for (tmp2 in a) {
-					item = a[tmp2] * support_array[tmp2]				
+					item = a[tmp2] * support_array[tmp2]
 					sum+=(((int(item/10))+(item%10)))
 			}
 			print sum
