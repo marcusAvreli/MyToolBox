@@ -1,0 +1,12 @@
+#!/usr/bin/awk -f
+
+BEGIN {
+   
+}
+NR==1 {
+    printf "Reading file"
+    next
+}
+{
+   
+}
