@@ -1,0 +1,42 @@
+#!/usr/bin/awk -f
+
+function isnumeric(x){
+    switch (typeof(x)) {
+    case "strnum":
+    case "number":
+        return 1;
+        break;
+        case "string":
+        break;
+    default:
+        return 0;
+    }
+    return 0;
+}
+
+function isTeudatZehut(inputValue){
+	sum=0;
+	split("1,2,1,2,1,2,1,2,1",support_array,",")
+	split(inputValue,arrayTZ,"")
+
+	for (tmp2 in arrayTZ) {
+		item = arrayTZ[tmp2] * support_array[tmp2]
+		sum+=(((int(item/10))+(item%10)))
+	}
+	if(sum%10==0){
+			return 0;
+	}
+
+	return 1;
+}
+
+
+NR>1{
+	new_var=isnumeric($1)
+	if(new_var==1){
+		if(isTeudatZehut($1)==0){
+			print "yes";
+		}
+	}
+}
+
