@@ -1,0 +1,34 @@
+//print MisparOved, firstName of Jobkey=15 with headers a and b
+cat sample_01.txt | jq '["a","b"], (.[]|select (."JobKey"==15)|{"MisparOved","FirstName"}| [.MisparOved, .FirstName])|   @csv' > output.csv
+
+//print firstName of Jobkey=15
+cat sample_01.txt | jq '.[]|select (."JobKey"==15)|."FirstName"'
+
+
+//without slashes
+cat sample_01.txt | jq -r '["a","b"], (.[]|select (."JobKey"==15)|{"MisparOved","FirstName"}| [.MisparOved, .FirstName])|   @csv' > output.csv
+
+//with slashes
+cat sample_01.txt | jq -r '["a","b"], (.[]|select (."JobKey"==15)|{"MisparOved","FirstName"}| [.MisparOved, .FirstName])|   @csv' > output.csv
+
+//if this works then json file is valid
+	//pretty look
+	cat sample_01.txt | jq -r '.|select(.)'
+
+	//horizontal view
+	cat sample_01.txt | jq -c '.|select(.)'
+	
+	
+cat sample_02.txt | jq -c '["a"], (.[]|{ id :.MisparOved,Ents : .Ents.EntRec[].EntId})'
+
+cat sample_03.txt | jq -c '["a"], (.[]| select(.MisparOved==("30495","2"))'
+
+cat sample_02.txt | jq -r '["a","b"], (.[]|{ id :.MisparOved,Ents : .Ents.EntRec[].EntId, Attribute: .Ents.EntRec[].EntAttribute})'
+
+cat sample_02.txt | jq -r '["a","b"], (.[]| .MisparOved as $t| .JobKey as $tid| .Ents.EntRec[]| [$t,$tid, .EntId, .EntAttribute])| @csv' > output.csv  
+
+cat sample_02.txt | jq -r .[] | jq -s length
+
+cat sample_03.txt | jq -r '.[] | select(.MisparOved | index("30495"))|.Ents'
+cat sample_03.txt | jq -c '(.[]| select(.MisparOved==("30495","2")))| .FirstName'
+cat sample_04.txt| jq  '.|map({abc: .entType})| group_by (.abc)| map({EntType: .[0].abc,Count:length})'

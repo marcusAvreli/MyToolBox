@@ -1,0 +1,32 @@
+[
+{
+        "MisparOved":1
+        ,"FirstName":"FN1"
+        ,"Description":"MO1Desc1"
+        ,"JobKey":15
+                ,"Ents":{
+                        "EntRec":[
+                        {
+                                "EntId":1
+                                ,"EntAttribute":"1111"
+                                ,"EntDesc":"entrDesc"
+                        }
+,                       {
+                                "EntId":2
+                                ,"EntAttribute":"122"
+                                ,"EntDesc":"entrDesc"
+                        }
+
+                        ]
+                }
+}
+
+,{
+        "MisparOved":2
+        ,"FirstName":"FN2"
+        ,"MOArray":[ 1,2]
+        ,"JobKey":15
+ ,"Ents":{"EntRec":[]}
+}
+
+]
