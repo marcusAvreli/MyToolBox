@@ -10,8 +10,16 @@ https://github.com/UXAspects/UXAspects/blob/9a060e14c8a55351dd682107b6d1944fe126
 
 RTL
 https://github.com/arenasjuanf/bancojj/blob/b947b2efb390a0293daadcab1f7a64a242823f51/src/app/app.service.ts#L14
-
-
+reporting
+https://github.com/Mgiepz/saiku-reporting-ui/tree/master/js/backbone
+https://github.com/boldreports/javascript-samples?tab=readme-ov-file#online-demos
+https://github.com/Citizen-Report/citizen-report-app/tree/main/client
+https://github.com/pa11y/pa11y/tree/main/lib/reporters
+https://github.com/souzacristsf/eReports-open-source/blob/master/eReports/app/errors/system.js
+https://github.com/souzacristsf/eReports-open-source/blob/master/db-oracle/start.sh
+https://github.com/mendhak/angular-performance
+https://github.com/springload/css-reporter
+https://github.com/badqiu/report-engine/blob/master/src/main/java/com/github/reportengine/model/Script.java
 +-------------------------------------------------------+
 |														|
 |	ANGULAR 4 NGRX 										|

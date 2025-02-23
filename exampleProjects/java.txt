@@ -519,7 +519,9 @@ https://github.com/marcosgsilva/crud-jsf/tree/master/src/main
 https://github.com/algaworks/curso-jpa-hibernate/blob/master/Aulas/Multi-Tenancy%20com%20Banco%20de%20dados%20separados/gerenciador-acesso/pom.xml
 https://github.com/rmnresende/exemplo-jsf23-cdi-20-tomcat/blob/master/pom.xml
 
-
+//reporting with angular
+//https://github.com/AbsaOSS/inception/tree/e752c4b0f1d9843b749a9389b58a0deb0f558f22/src
+//https://github.com/littlecm/Sold-Used-Report-CSV-Column-Mapper?tab=readme-ov-file
 Baskaran Test Project
 i71186/basktest: Baskaran Test Project
 
