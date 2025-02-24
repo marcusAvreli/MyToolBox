@@ -11,11 +11,17 @@
 	https://github.com/lukasoppermann/html5sortable/tree/master/src
 https://rxjs.dev/api/index/function/map
 https://github.com/PublicisSapient/enable-a11y/blob/d170968c4ae6549f363636f4f249fdacbe162478/js/modules/tooltip.js
+//https://github.com/cachrisman/simple_login/blob/747a8a4e760b1bdb090d95e96696897c41167405/package.json
 +-------------------------------------------------------+
 |										======1======	|
 |	CUSTOM ELEMENTS										|
 |														|
 +-------------------------------------------------------+
+
+	startup compononent
+		https://github.com/UziTech/web-component-abstract/blob/ee2f2ba574538c27856a4ff545b9603b79483fe5/index.js
+
+
 
 <!-- embedded templates -->
 
@@ -175,7 +181,7 @@ https://github.com/OHDSI/Perseus/blob/4267d0bbf27b607646efb9f6eb0fddcb07258b2b/U
 https://github.com/dotCMS/core/tree/a7af331b7361bffd039413a22bea7dbad7b3d03c/core-web
 https://github.com/SAP/openui5/blob/45da40f3b01ab7fea1f524eb84bca6c0bf907a5d/src/sap.ui.commons/src/sap/ui/commons/layout/MatrixLayoutRenderer.js
 https://github.com/dataformsjs/dataformsjs/tree/master/js/web-components
-https://github.com/UziTech/web-component-abstract/blob/ee2f2ba574538c27856a4ff545b9603b79483fe5/index.js#L8
+
 //kSplineTableSize 
 https://github.com/YufJi/tiny/blob/fe35eef306aa4cd53f85e1649bc1ce58935c8023/packages/base/src/webview/web-components/form.js
 
