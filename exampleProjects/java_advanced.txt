@@ -1,0 +1,10 @@
+
+detect log4j2 dynamic logging
+https://github.com/dimajix/flowman/blob/b68be70436c9aee2e6269b8841cb185fe63a00c2/flowman-common-java/src/main/java/com/dimajix/flowman/common/Logging.java#L209
+
+https://medium.com/java-developers-community/exploring-the-chain-of-responsibility-design-pattern-with-a-logging-system-in-java-bde69fc9a38b
+
+https://medium.com/@thecodebean/decorator-design-pattern-implementation-in-java-af632380e249
+https://stackoverflow.com/questions/4781361/which-uml-diagram-is-correct-for-chain-of-responsibility-pattern
+http://www.vincehuston.org/dp/chain.html
+https://github.com/Deepak607398/SystemDesign/blob/main/LoggerLLD/src/main/java/com/example/LoggerLLD/lld/Logger.java
