@@ -1,0 +1,8 @@
+xml
+https://github.com/emmahogan/jabref/blob/1a43290a5e306a4ceb2c58d2d01ec9bca4163516/src/main/resources/build.properties
+https://github.com/InCar/flair-tbox/blob/679e579c8b4d00fec568e38d2daea22c3a494e83/src/main/java/com/incarcloud/saic/App.java#L10 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.config.Configuration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;

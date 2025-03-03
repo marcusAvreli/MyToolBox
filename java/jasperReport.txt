@@ -1,58 +1,111 @@
-public class Application {
-	public static final Logger logger = LogManager.getLogger(Application.class);
-	https://community.jaspersoft.com/knowledgebase/how-to/how-pass-java-list-or-list-chart-datasource-jrxml-based-reports/
-	https://satyacodes.medium.com/spring-boot-reporting-with-jasper-reports-d4ed3128f0fe
-	public static void main(String[] args) {
-		//https://stackoverflow.com/questions/3733307/how-to-export-to-excel-and-csv-format-in-jasper-report
-		Context.getInstance();
-		 String template = "./reports/emp24.jrxml";
-		    Map<String, Object> parameters = new HashMap<>();
-		    parameters.put("comanyName", "BLACK STAR TECHNOLOGIES");
-		    parameters.put("address", "Address: Raheja Mind Space Entrance Gate, HITEC City, Hyderabad -500081");
-		    parameters.put("header", "Employees Salary Report");
-		    
-		    parameters.put("createdBy","Satya Kaveti");
-		    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		    
-		    Map<String,Object> row = new HashMap<String,Object>();
-		    row.put("id",1);
-		    row.put("name", "name1");
-		    
-		    Collection<Map<String, ?>> rows = new ArrayList<Map<String,?>>();
-		    rows.add(row);
-		    
-		    //2.Create DataSource
-		    JRMapCollectionDataSource beanCollectionDataSource = new JRMapCollectionDataSource (rows);
-		    //3.Compile .jrmxl template, stored in JasperReport object
-		    
-		    JasperReport jasperReport;
-			try {
-				jasperReport = JasperCompileManager.compileReport(template);
-				JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, beanCollectionDataSource);
-				  JRCsvExporter csvExporter = new JRCsvExporter();
-		            csvExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-		           // csvExporter.setExporterOutput(new SimpleWriterExporterOutput(outputStream));
-		            csvExporter.setExporterOutput(new SimpleWriterExporterOutput(new FileOutputStream(new File("csv1.csv"))));
+module jasperSample {
+	requires java.scripting;	
+	requires java.sql;
+	requires org.slf4j;
+	requires net.tascalate.javaflow.api;
+	requires org.apache.logging.log4j.core;
+	requires org.apache.logging.log4j;
+	requires jasperreports.javaflow;
+}
+//logging
+log4j-api-2.19.0.jar
+log4j-core-2.19.0.jar
+log4j-slf4j2-impl-2.19.0.jar
+slf4j-api-2.0.0.jar
 
-		            csvExporter.exportReport();
-			} catch (JRException | FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		    //4.Fill Report - by passing complied .jrxml object, paramters, datasource
+
+//jasper
+>>>>>>>>>most-important>>>>>>>>jasperreports-javaflow-6.20.5.jar
+commons-beanutils-1.9.4.jar
+commons-collections-3.2.2.jar
+commons-collections4-4.2.jar
+commons-digester-2.1.jar
+commons-logging-1.1.1.jar
+ecj-3.21.0.jar
+jackson-annotations-2.14.1.jar
+jackson-core-2.14.1.jar
+jackson-databind-2.14.1.jar
+jackson-dataformat-xml-2.14.1.jar
+jcommon-1.0.23.jar
+jfreechart-1.0.19.jar
+net.tascalate.javaflow.api-2.7.1.jar
+net.tascalate.javaflow.api-2.7.3.jar
+openpdf-1.3.30.jaspersoft.2.jar
+stax2-api-4.2.1.jar
+woodstox-core-6.4.0.jar
+
+
+//https://community.jaspersoft.com/knowledgebase/how-to/how-pass-java-list-or-list-chart-datasource-jrxml-based-reports/
+//https://satyacodes.medium.com/spring-boot-reporting-with-jasper-reports-d4ed3128f0fe
+//https://stackoverflow.com/questions/3733307/how-to-export-to-excel-and-csv-format-in-jasper-report
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRMapCollectionDataSource;
+import net.sf.jasperreports.engine.export.JRCsvExporter;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleWriterExporterOutput;
+
+public class Application {
+	public static final Logger logger =  LoggerFactory.getLogger(Application.class);
+	
+	public static void main(String[] args) {		
+		Context.getInstance();		 
+		logger.error("This is error message comming from ghkgh");
+		logger.info("This is info message comming from ghk");
+
+		String template = "./reports/emp24.jrxml";
+		Map<String, Object> parameters = new HashMap<>();
+		parameters.put("comanyName", "BLACK STAR TECHNOLOGIES");
+		parameters.put("address", "Address: Raheja Mind Space Entrance Gate, HITEC City, Hyderabad -500081");
+		parameters.put("header", "Employees Salary Report");		    
+		parameters.put("createdBy","Satya Kaveti");
+		    
+		
+		Map<String,Object> row = new HashMap<String,Object>();
+		row.put("id",1);
+		row.put("name", "name1");
+		
+		Collection<Map<String, ?>> rows = new ArrayList<Map<String,?>>();
+		rows.add(row);
+		
+		//2.Create DataSource
+		JRMapCollectionDataSource beanCollectionDataSource = new JRMapCollectionDataSource (rows);
+		//3.Compile .jrmxl template, stored in JasperReport object
+		    
+		JasperReport jasperReport;
+		try {
+			jasperReport = JasperCompileManager.compileReport(template);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, beanCollectionDataSource);
+			JRCsvExporter csvExporter = new JRCsvExporter();
+			csvExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+			csvExporter.setExporterOutput(new SimpleWriterExporterOutput(new FileOutputStream(new File("csv1.csv"))));
+			csvExporter.exportReport();
+		} catch (JRException | FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//4.Fill Report - by passing complied .jrxml object, paramters, datasource
 		    
 		logger.error("This is error message comming from ");
 		logger.info("This is info message comming from ");
-		Map<String, Object> mapParameters = new HashMap<String, Object>(5);
-		mapParameters.put("USER_NAME", "sdfsd");
 
-//		JasperPrint print = JasperFillManager.fillReport(report, mapParameters);
-		logger.trace("This is trace message comming from ");
+
 	}
 }
-
-
-
 
 
 

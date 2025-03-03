@@ -1,4 +1,6 @@
 //https://stackoverflow.com/questions/1350816/what-is-the-purpose-of-jndi
+//https://stackoverflow.com/questions/2521421/how-do-i-lookup-a-jndi-datasource-from-outside-a-web-container
+//https://github.com/h-thurow/Simple-JNDI/blob/e8152eaaca8e0f93cb96e1ba1dd626568881a40c/src/main/java/org/osjava/sj/SimpleContextFactory.java
 Properties props = new Properties();
 //field Context.INITIAL_CONTEXT_FACTORY => property name java.naming.factory.initial
     //field Context.PROVIDER_URL => property name java.naming.provider.url
