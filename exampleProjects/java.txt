@@ -5,7 +5,7 @@ https://github.com/antlr/grammars-v4/blob/master/bicep/Bicep.g4
 https://github.com/AdrianCitu/GenericCSRFFilter
 csrf roles 
 https://github.com/ldhardy/emissary/blob/a3cb7d71d1d4e91ce613546299b4d342879b759f/src/main/java/emissary/server/EmissaryServer.java#L638
-
+https://github.com/philipgreat/simple-workflow-engine/blob/b8320b9806b8aa3993a4b38a5c912ad43ca2b775/workflow/atm-workflow1.xml
 dependency injection
 
 	//draw io

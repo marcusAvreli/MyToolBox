@@ -1,0 +1,8 @@
+//https://stackoverflow.com/questions/1350816/what-is-the-purpose-of-jndi
+Properties props = new Properties();
+//field Context.INITIAL_CONTEXT_FACTORY => property name java.naming.factory.initial
+    //field Context.PROVIDER_URL => property name java.naming.provider.url
+props.load(new FileInputStream("*properties file*")); //prop file in this case
+
+Context ctx = new InitialContext(props);
+    Object o = ctx.lookup("*name of resource*");

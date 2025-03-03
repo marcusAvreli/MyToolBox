@@ -12,6 +12,7 @@
 https://rxjs.dev/api/index/function/map
 https://github.com/PublicisSapient/enable-a11y/blob/d170968c4ae6549f363636f4f249fdacbe162478/js/modules/tooltip.js
 //https://github.com/cachrisman/simple_login/blob/747a8a4e760b1bdb090d95e96696897c41167405/package.json
+//https://github.com/LazarBojanic/movie-app-js/tree/main/movie-app-frontend-vuejs
 +-------------------------------------------------------+
 |										======1======	|
 |	CUSTOM ELEMENTS										|
