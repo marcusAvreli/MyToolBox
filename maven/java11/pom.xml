@@ -1,0 +1,74 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+ 
+  <groupId>com.mycompany.app</groupId>
+  <artifactId>my-app</artifactId>
+  <version>1.0-SNAPSHOT</version>
+ 
+  <properties>
+    
+    
+	 <maven.compiler.release>11</maven.compiler.release>
+	 <java.version>11</java.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+    
+  </properties>
+  
+   <dependencies>
+   
+
+<dependency>
+   <groupId>com.sun.activation</groupId>
+      <artifactId>javax.activation</artifactId>
+      <version>1.2.0</version>
+</dependency>
+  </dependencies>
+  
+   <build>
+        <pluginManagement>
+            <plugins>
+			<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>2.22.0</version>
+    <configuration>
+        <argLine>
+            --illegal-access=permit
+        </argLine>
+    </configuration>
+</plugin>
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-failsafe-plugin</artifactId>
+    <version>2.22.0</version>
+    <configuration>
+        <argLine>
+            --illegal-access=permit
+        </argLine>
+    </configuration>
+</plugin>
+			<!-- 
+			This plugin helps finding the latest plugin or dependency versions for your modules. Open up the terminal and execute this command to find the plugin versions you have to update
+			-->
+			<plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>versions-maven-plugin</artifactId>
+    <version>2.5</version>
+    <configuration>
+        <generateBackupPoms>false</generateBackupPoms>
+    </configuration>
+</plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.1</version>
+					<configuration>
+        <release>11</release>  <!--or <release>10</release>-->
+    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
