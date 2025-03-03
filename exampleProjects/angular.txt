@@ -20,6 +20,11 @@ https://github.com/souzacristsf/eReports-open-source/blob/master/db-oracle/start
 https://github.com/mendhak/angular-performance
 https://github.com/springload/css-reporter
 https://github.com/badqiu/report-engine/blob/master/src/main/java/com/github/reportengine/model/Script.java
+https://github.com/ErickWendel/processing-large-reports-in-the-browser?tab=readme-ov-file
+https://github.com/postcss/postcss-reporter
+https://github.com/segmentio/dependency-report
+https://github.com/dtschust/redux-bug-reporter?tab=readme-ov-file
+https://github.com/jsreport/jsreport
 +-------------------------------------------------------+
 |														|
 |	ANGULAR 4 NGRX 										|

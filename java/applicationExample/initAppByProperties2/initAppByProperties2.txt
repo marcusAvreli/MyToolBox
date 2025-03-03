@@ -1,0 +1,109 @@
+package myStartUpApp2;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
+
+public class Application {
+	public static final Logger logger = LogManager.getLogger(Application.class);
+	
+	public static void main(String[] args) {
+		Context.getInstance();
+		logger.error("This is error message comming from ");
+		logger.info("This is info message comming from ");
+		logger.trace("This is trace message comming from ");
+	}
+}
+
+package myStartUpApp2;
+
+import java.util.Properties;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.config.Configuration;
+import org.apache.logging.log4j.core.config.ConfigurationSource;
+import org.apache.logging.log4j.core.config.Configurator;
+import org.apache.logging.log4j.core.config.properties.PropertiesConfigurationBuilder;
+
+import myStartUpApp2.api.util.RMT2File;
+
+public class Context {
+	private final Properties appProperties;
+	public Properties getAppProperties() {
+		return appProperties;
+	}
+/*
+	+-------------------------------------------------------+
+	|										======1======	|
+	|	SINGLETON											|
+	|														|
+	+-------------------------------------------------------+
+*/
+	public static Context getInstance() {
+		return ContextSingleton.INSTANCE;
+	}
+	
+	private static class ContextSingleton{
+		private static final Context INSTANCE = new Context(null);
+	}
+	
+	public Context(Object object) {	
+		this.appProperties = RMT2File.loadPropertiesFromClasspath("resources.application");
+		 // Setup Logging environment
+		String log4jPahName = appProperties.getProperty("LOG4J");
+        Properties properties = RMT2File.loadPropertiesFromClasspath(log4jPahName);       
+        LoggerContext context = (LoggerContext) LogManager.getContext(false);
+		Configuration config = new PropertiesConfigurationBuilder()
+				.setConfigurationSource(ConfigurationSource.NULL_SOURCE).setRootProperties(properties)
+				.setLoggerContext(context).build();
+
+		context.setConfiguration(config);
+		Configurator.initialize(config);
+     
+	}
+}
+
+
+package myStartUpApp2.api.util;
+
+import java.util.Enumeration;
+import java.util.Locale;
+import java.util.Properties;
+import java.util.ResourceBundle;
+
+public class RMT2File {
+//https://github.com/rmt2bsc/application_framework_suite/blob/master/fw_parent/fw_core/src/main/java/com/api/util/RMT2File.java
+	public static Properties loadPropertiesFromClasspath(String propFileName) {
+		ResourceBundle rb = null;
+
+		rb = loadAppConfigProperties(propFileName);
+
+		return convertResourceBundleToProperties(rb);
+	}
+
+	public static Properties convertResourceBundleToProperties(ResourceBundle resource) {
+		Enumeration iter;
+		if (resource == null) {
+			return null;
+		}
+		Properties props = new Properties();
+		iter = resource.getKeys();
+		while (iter.hasMoreElements()) {
+			String key = (String) iter.nextElement();
+			String value = resource.getString(key);
+			props.put(key, value);
+		}
+		return props;
+	}
+
+	public static ResourceBundle loadAppConfigProperties(String propFileName) {
+		ResourceBundle bundle;
+		Locale currentLocale = new Locale.Builder().setLanguage("en").build();
+		bundle = ResourceBundle.getBundle(propFileName, currentLocale);
+		return bundle;
+
+	}
+
+}
