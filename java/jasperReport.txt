@@ -1,6 +1,7 @@
 public class Application {
 	public static final Logger logger = LogManager.getLogger(Application.class);
-	
+	https://community.jaspersoft.com/knowledgebase/how-to/how-pass-java-list-or-list-chart-datasource-jrxml-based-reports/
+	https://satyacodes.medium.com/spring-boot-reporting-with-jasper-reports-d4ed3128f0fe
 	public static void main(String[] args) {
 		//https://stackoverflow.com/questions/3733307/how-to-export-to-excel-and-csv-format-in-jasper-report
 		Context.getInstance();
