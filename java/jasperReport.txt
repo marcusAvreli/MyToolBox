@@ -39,6 +39,8 @@ woodstox-core-6.4.0.jar
 //https://satyacodes.medium.com/spring-boot-reporting-with-jasper-reports-d4ed3128f0fe
 //https://stackoverflow.com/questions/3733307/how-to-export-to-excel-and-csv-format-in-jasper-report
 //https://github.com/mapfish/mapfish-print/blob/master/examples/src/test/resources/examples/verboseExample/simpleReport.jrxml
+//https://www.slf4j.org/codes.html#noProviders
+//https://logging.apache.org/log4j/2.x/manual/installation.html
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

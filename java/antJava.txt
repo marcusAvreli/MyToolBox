@@ -25,6 +25,7 @@ try {
 	 while ((line = reader.readLine()) != null) {
 		   logger.info(line);
 	 }
+	 int exitValue = process.waitFor();
 	 logger.info("Ant file executed");
 
 } catch (IOException e) {
