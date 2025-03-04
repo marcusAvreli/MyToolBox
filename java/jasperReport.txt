@@ -15,7 +15,7 @@ slf4j-api-2.0.0.jar
 
 
 //jasper
->>>>>>>>>most-important>>>>>>>>jasperreports-javaflow-6.20.5.jar
+>>>>>>>>>most-important>>>>>>>>jasperreports-javaflow-6.20.5.jar 
 commons-beanutils-1.9.4.jar
 commons-collections-3.2.2.jar
 commons-collections4-4.2.jar
@@ -38,6 +38,7 @@ woodstox-core-6.4.0.jar
 //https://community.jaspersoft.com/knowledgebase/how-to/how-pass-java-list-or-list-chart-datasource-jrxml-based-reports/
 //https://satyacodes.medium.com/spring-boot-reporting-with-jasper-reports-d4ed3128f0fe
 //https://stackoverflow.com/questions/3733307/how-to-export-to-excel-and-csv-format-in-jasper-report
+//https://github.com/mapfish/mapfish-print/blob/master/examples/src/test/resources/examples/verboseExample/simpleReport.jrxml
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
