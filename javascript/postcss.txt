@@ -24,3 +24,94 @@ postcss.config.js
 
 
 postcss  src/index.scss --map --output ./css/index.css
+
+
+
+post css project
+
+npm init -y
+
+https://github.com/sawyerh/demo-uswds-mayflower/blob/0a3c75a33cc5072489dd7f2288b3364eda40b7b3/package.json
+https://github.com/tony-jones/jekyll-starter-kit/tree/12e20d918654ba4c1752abdad020edca4b855683
+https://github.com/tableflip/landexplorer/tree/685214d15664d65157bb8d3943c75bee4b0d31b4/src/pages/data
+https://github.com/Aniket-Engg/react-redux-toastr/blob/6aac56c1188165225547568b17dcbabcae7e907d/package.json
+https://github.com/netease-im/NIM_Web_Demo_H5/tree/c5d89f93b3cc4bb9fa2ad38d9ef2eb861cb87877/src
+https://github.com/epam/miew/blob/d6854537f00bb1ed4587cb9a35c92fd1af3f575e/postcss.config.js#L7
+https://github.com/ntu-aris/MMAUD/tree/cfa51444a1dea193ccf3451833c1da7c0c4b2811
+https://github.com/grishka/Smithereen/blob/master/src/main/java/smithereen/templates/Templates.java#L77
+//build.js
+https://github.com/grishka/Smithereen/blob/c530e8b8fcb8145b8e78de142710736e6bf46c3c/src/main/web/package.json#L5
+"postcss": "postcss src/** -d build --ext css",
+
+
+const fs=require("fs");
+const path=require("path");
+const postcss=require("postcss");
+
+var cssFiles=["src/index.scss"];
+
+// PostCSS
+
+var postCssConfig=require("./postcss.config.js");
+var postCssPromises=[];
+var resOutputDir='dist';
+
+for(var cssFile of cssFiles){
+	console.log(`Running PostCSS on ${cssFile}`);
+	var css=fs.readFileSync(cssFile, "utf-8");
+	var outFile=path.join(resOutputDir, cssFile.replace(".scss", ".css"));
+	var promise=postcss(postCssConfig.plugins)
+		.process(css, {from: cssFile, to: outFile})
+		.then(result=>{
+			fs.writeFileSync(result.opts.to, result.css);
+			//staticFileVersions[path.basename(result.opts.to)]=crypto.createHash("sha1").update(result.css).digest("hex");
+		});
+	postCssPromises.push(promise);
+}
+
+Promise.all(postCssPromises).then(results=>{
+//	fs.writeFileSync(path.join(projectDir, "target/generated-resources/static_file_versions.json"), JSON.stringify(staticFileVersions));
+});
+
+
+module.exports = {
+	 
+	 parser: 'postcss-scss',
+		plugins: [
+			require('postcss-import')(),
+			require('postcss-advanced-variables')(),
+			require('postcss-nested')(),
+			require('postcss-calc')(),
+			require('autoprefixer')(),
+			require('cssnano')()
+		]
+	}
+	
+
+
+
+{
+ "name": "encodings",
+ "version": "1.0.0",
+ "description": "",
+ "main": "index.js",
+ "scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "postcss": "postcss",
+  "build":"node build.js"
+ },
+ "keywords": [],
+ "author": "",
+ "license": "ISC",
+ "dependencies": {
+  "resolve": "^1.1.6",
+  "autoprefixer": "^6.0.0",
+  "postcss-import": "^7",
+  "postcss-advanced-variables": "^1.0.0",
+  "postcss-nested": "^1.0.0",
+  "postcss-calc": "^5.0.0",
+  "cssnano": "^3.0.0",
+  "postcss": "^5.0.4",
+  "postcss-cli": "^2.1.0"
+ }
+}
