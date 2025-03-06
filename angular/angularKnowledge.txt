@@ -49,9 +49,10 @@
 |	NODE JS AND JAVASCRIPT								|
 |														|
 +-------------------------------------------------------+
- https://docs.netlify.com/configure-builds/manage-dependencies/#node-js-and-javascript
-
-
+https://docs.netlify.com/configure-builds/manage-dependencies/#node-js-and-javascript
+https://medium.com/rewrite-tech/how-to-create-a-monorepo-with-lerna-3ed6dfec5021
+https://b-benjithomas.medium.com/streamlining-frontend-development-with-gulp-a-comprehensive-guide-273375c57185
+https://medium.com/reactbrasil/reuse-your-eslint-prettier-config-in-a-monorepo-with-lerna-54c1800cacdc
   
 
 +-------------------------------------------------------+
