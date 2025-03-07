@@ -133,6 +133,7 @@
 |	KILL BY PORT NUMBER									|
 |														|
 +-------------------------------------------------------+
+//https://stackoverflow.com/questions/41716833/getting-an-error-listen-eaddrinuse-3000-on-windows-machine
 	netstat -a -o -n | findstr :3000
 	taskkill /F /PID (yourprocessID)
 
@@ -141,6 +142,7 @@
 |	KILL EXECUTABLE										|
 |														|
 +-------------------------------------------------------+
+//https://superuser.com/questions/232703/taskkill-exe-dont-throw-an-error-if-the-process-is-not-running
 	tasklist | find /i "w3wp.exe" && taskkill /im w3wp.exe /F || echo process "w3wp.exe" not running.
 	
 
