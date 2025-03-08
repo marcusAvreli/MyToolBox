@@ -1,0 +1,18 @@
++-------------------------------------------------------+
+|										======1======	|
+|	LERNA												|
+|														|
++-------------------------------------------------------+
+
+git remote add origin https://github.com/marcusAvreli/lerna-monorepo-starter.git
+echo "node_modules/" >> .gitignore
+echo "packages/package1/node_modules/" >> .gitignore
+echo "packages/package2/node_modules/" >> .gitignore
+echo "dist/" >> .gitignore
+git add -- . :!"node_modules" :!"packages/package1/node_modules" :!"packages/package2/node_modules" :!"dist"	
+git rm -r --cached node_modules
+git rm -r --cached packages/package1/node_modules
+git rm -r --cached packages/package2/node_modules
+git rm -r --cached dist
+git commit -am "initial_commit"
+git push origin master
