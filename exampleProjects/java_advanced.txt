@@ -1,3 +1,8 @@
+https://github.com/rmt2bsc/application_framework_suite/blob/631862d782c6812df90b15fdcac910317e7db8b8/fw_parent/fw_web/src/main/java/com/api/web/controller/ReportingServlet.java#L4
+
+https://stackoverflow.com/questions/51482683/how-to-actually-implement-pagination-sorting-filtering-in-a-jax-rs-jersey-rest-a
+
+
 
 detect log4j2 dynamic logging
 https://github.com/dimajix/flowman/blob/b68be70436c9aee2e6269b8841cb185fe63a00c2/flowman-common-java/src/main/java/com/dimajix/flowman/common/Logging.java#L209

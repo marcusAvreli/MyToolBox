@@ -1,0 +1,123 @@
+CREATE TABLE tbl_all_objects
+(
+   name varchar(255) NOT NULL,
+   type varchar(255) NOT NULL
+)
+;
+CREATE UNIQUE INDEX name ON tbl_all_objects(name)
+;
+CREATE TABLE tbl_all_type_attrs
+(
+   name varchar(255) NOT NULL,
+   function_name varchar(255) NOT NULL
+)
+;
+ALTER TABLE tbl_all_type_attrs
+ADD CONSTRAINT FK_F_NAME
+FOREIGN KEY (function_name)
+REFERENCES tbl_all_objects(name) ON DELETE CASCADE ON UPDATE CASCADE
+;
+CREATE INDEX FK_F_NAME ON tbl_all_type_attrs(function_name)
+;
+CREATE UNIQUE INDEX UC_FIELD_FUNCTION ON tbl_all_type_attrs
+(
+  name,
+  function_name
+)
+;
+CREATE TABLE tbl_rprt
+(
+   id varchar(32) PRIMARY KEY NOT NULL,
+   name varchar(255) NOT NULL,
+   display_name varchar(255) NOT NULL,
+   description varchar(255) NOT NULL,
+   disabled int DEFAULT 0 NOT NULL
+)
+;
+CREATE UNIQUE INDEX UC_Rprt ON tbl_rprt(name)
+;
+CREATE TABLE tbl_rprt_field
+(
+   name varchar(255) NOT NULL,
+   rprt_id varchar(32) NOT NULL,
+   description varchar(255),
+   disabled int DEFAULT 0 NOT NULL,
+   not_visible int DEFAULT 0 NOT NULL,
+   display_iw varchar(255),
+   id varchar(32) PRIMARY KEY NOT NULL
+)
+;
+ALTER TABLE tbl_rprt_field
+ADD CONSTRAINT FK_RPRT_ID
+FOREIGN KEY (rprt_id)
+REFERENCES tbl_rprt(id) ON DELETE CASCADE
+;
+CREATE INDEX FK_RPRT_ID ON tbl_rprt_field(rprt_id)
+;
+CREATE UNIQUE INDEX UC_Rprt_Field ON tbl_rprt_field
+(
+  name,
+  rprt_id
+)
+;
+CREATE TABLE tbl_rprt_uv
+(
+   id varchar(32) PRIMARY KEY NOT NULL,
+   rprt_id varchar(32) NOT NULL,
+   name varchar(255),
+   display_name varchar(255),
+   description varchar(255)
+)
+;
+ALTER TABLE tbl_rprt_uv
+ADD CONSTRAINT FK_RPRT_UV
+FOREIGN KEY (rprt_id)
+REFERENCES tbl_rprt(id) ON DELETE CASCADE
+;
+CREATE INDEX FK_RPRT_UV ON tbl_rprt_uv(rprt_id)
+;
+CREATE TABLE tbl_rprt_uvc
+(
+   field_id varchar(32) NOT NULL,
+   ordering int,
+   id varchar(32) PRIMARY KEY NOT NULL,
+   uv_id varchar(32) NOT NULL
+)
+;
+ALTER TABLE tbl_rprt_uvc
+ADD CONSTRAINT FK_RPRT_UVC
+FOREIGN KEY (field_id)
+REFERENCES tbl_rprt_field(id) ON DELETE CASCADE
+;
+ALTER TABLE tbl_rprt_uvc
+ADD CONSTRAINT FK_RPRT_UV_ID
+FOREIGN KEY (uv_id)
+REFERENCES tbl_rprt_uv(id) ON DELETE CASCADE
+;
+CREATE INDEX FK_RPRT_UV_ID ON tbl_rprt_uvc(uv_id)
+;
+CREATE INDEX FK_RPRT_UVC ON tbl_rprt_uvc(field_id)
+;
+CREATE TABLE umtb_rprt_ad
+(
+   ad_field_4 varchar(255),
+   ad_field_2 varchar(255),
+   ad_field_3 varchar(255)
+)
+;
+CREATE TABLE umtb_rprt_bo
+(
+   bo_field_1 varchar(255),
+   bo_field_2 varchar(255),
+   bo_field_3 varchar(255),
+   bo_field_4 varchar(255)
+)
+;
+CREATE TABLE umtb_rprt_sap
+(
+   sap_1 varchar(255),
+   sap_2 varchar(255),
+   sap_3 varchar(255),
+   sap_created_date bigint
+)
+;
