@@ -1,5 +1,9 @@
 option explicit
 on error resume next
+''EXPECTED RESULT 
+''ResultReport.csv file in current directory
+''if ole db exists there will be ResultReport.csv file with list of drivers
+
 ''The registry key: HKEY_CLASSES_ROOT\Microsoft.ACE.OLEDB.12.0 should exist
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 ''run in cmd
