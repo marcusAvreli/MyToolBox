@@ -39,6 +39,9 @@ https://github.com/netease-im/NIM_Web_Demo_H5/tree/c5d89f93b3cc4bb9fa2ad38d9ef2e
 https://github.com/epam/miew/blob/d6854537f00bb1ed4587cb9a35c92fd1af3f575e/postcss.config.js#L7
 https://github.com/ntu-aris/MMAUD/tree/cfa51444a1dea193ccf3451833c1da7c0c4b2811
 https://github.com/grishka/Smithereen/blob/master/src/main/java/smithereen/templates/Templates.java#L77
+https://medium.com/rewrite-tech/how-to-create-a-monorepo-with-lerna-3ed6dfec5021
+https://b-benjithomas.medium.com/streamlining-frontend-development-with-gulp-a-comprehensive-guide-273375c57185
+https://medium.com/reactbrasil/reuse-your-eslint-prettier-config-in-a-monorepo-with-lerna-54c1800cacdc
 //build.js
 https://github.com/grishka/Smithereen/blob/c530e8b8fcb8145b8e78de142710736e6bf46c3c/src/main/web/package.json#L5
 "postcss": "postcss src/** -d build --ext css",
