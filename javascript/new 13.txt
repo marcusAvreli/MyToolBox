@@ -1,0 +1,2 @@
+DebugResource.java this.getClass()
+row 58 debug.xhtml objectClassNamesJson
