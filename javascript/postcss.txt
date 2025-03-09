@@ -42,7 +42,26 @@ https://github.com/grishka/Smithereen/blob/master/src/main/java/smithereen/templ
 https://medium.com/rewrite-tech/how-to-create-a-monorepo-with-lerna-3ed6dfec5021
 https://b-benjithomas.medium.com/streamlining-frontend-development-with-gulp-a-comprehensive-guide-273375c57185
 https://medium.com/reactbrasil/reuse-your-eslint-prettier-config-in-a-monorepo-with-lerna-54c1800cacdc
+
+
+
+https://github.com/dorianbayart/DexPairs/blob/ec4783bb29062f2a1362c10542ef05e490001470/front.js#L217
+case INTERVAL_4H:
+
+https://github.com/Yonas650/Smart-Nutrition-Assistant/blob/78a774126cdb2ba095ff8f44325c01df00b1a50f/app.mjs#L207
+getStartDate
+Chart.js
+https://stackblitz.com/edit/ngx-timeline-albe?file=package.json
+ngx-timeline-alb
+
+
+https://stackblitz.com/edit/angular-ivy-svljzq?file=package.json
+ngx-mat-timeline
+https://angularscript.com/responsive-vertical-timeline-directive-angularjs/
 //build.js
+
+https://medium.com/@krissanawat/40-best-jquery-timeline-plugins-tutorials-with-demo-3ce232b7ee07
+
 https://github.com/grishka/Smithereen/blob/c530e8b8fcb8145b8e78de142710736e6bf46c3c/src/main/web/package.json#L5
 "postcss": "postcss src/** -d build --ext css",
 
