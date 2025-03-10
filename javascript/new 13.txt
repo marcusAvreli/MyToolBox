@@ -1,7 +1,29 @@
 DebugResource.java this.getClass()
 row 58 debug.xhtml objectClassNamesJson
+https://stackoverflow.com/questions/9679932/how-to-use-executables-from-a-package-installed-locally-in-node-modules
+update: If you're on the recent npm (version >5.2)
+You can use:
 
+npx <command>
+npx looks for command in .bin directory of your node_modules
 
+old answer:
+For Windows
+Store the following in a file called npm-exec.bat and add it to your %PATH%
+
+@echo off
+set cmd="npm bin"
+FOR /F "tokens=*" %%i IN (' %cmd% ') DO SET modules=%%i
+"%modules%"\%*
+Usage
+Then you can use it like npm-exec <command> <arg0> <arg1> ...
+
+For example
+
+To execute wdio installed in local node_modules directory, do:
+
+npm-exec wdio wdio.conf.js
+i.e. it will run .\node_modules\.bin\wdio wdio.conf.js
 {
   "name": "themes",
   "version": "1.0.0",
