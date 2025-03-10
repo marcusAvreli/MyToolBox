@@ -1,2 +1,28 @@
 DebugResource.java this.getClass()
 row 58 debug.xhtml objectClassNamesJson
+
+
+{
+  "name": "themes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+	  "@test-lerna/cli": "1.0.0",
+    "lodash": "^4.17.21"
+  },
+   "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {   
+    "build": "npx carbon-cli"
+    
+  }
+}
