@@ -27,3 +27,5 @@ https://angularscript.com/responsive-vertical-timeline-directive-angularjs/
 //build.js
 
 https://medium.com/@krissanawat/40-best-jquery-timeline-plugins-tutorials-with-demo-3ce232b7ee07
+
+https://stackoverflow.com/questions/9679932/how-to-use-executables-from-a-package-installed-locally-in-node-modules
