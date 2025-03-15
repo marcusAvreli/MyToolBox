@@ -1,3 +1,38 @@
++-----------------------------------------------------------+
+|															|
+|	INSTALL PACKAGE GLOBALLY								|
+|															|
++-----------------------------------------------------------+
+	npm install --global lerna@4.0.0
+
+
++-----------------------------------------------------------+
+|															|
+|	USE GLOBAL INSTALLED LERNA								|
+|															|
++-----------------------------------------------------------+
+	lerna init
+
+
++-----------------------------------------------------------+
+|															|
+|	LIST GLOBALLY INSTALLED PACKAGE							|
+|															|
++-----------------------------------------------------------+
+	npm ls --depth=0 -global
+
+
++-----------------------------------------------------------+
+|															|
+|	INSTALL DEV DEPENDECNY									|
+|															|
++-----------------------------------------------------------+
+	npm install --save-dev brunch@^2.0.4
+
+
+
+
+
 https://www.freecodecamp.org/news/setup-babel-in-nodejs/
 
 https://copyprogramming.com/howto/node-js-syntaxerror-unexpected-token-import

@@ -1,0 +1,131 @@
++-----------------------------------------------------------+
+|															|
+|	INIT LERNA PROJECT										|
+|															|
++-----------------------------------------------------------+
+	git init lerna-monorepo2 && cd lerna-monorepo2
+
+
++-----------------------------------------------------------+
+|															|
+|	ADD PACKAGE CLI-REPORT									|
+|															|
++-----------------------------------------------------------+
+	lerna create cli-report --yes
+
+
++-----------------------------------------------------------+
+|															|
+|	INIT GITIGNORE											|
+|															|
++-----------------------------------------------------------+
+	echo "node_modules/" >> .gitignore
+	echo "**/node_modules/*"  >> .gitignore
+	
+
++-----------------------------------------------------------+
+|															|
+|	CLI-REPORT: add dependency								|
+|															|
++-----------------------------------------------------------+
+	lerna add chalk@^4.0.0 --scope=@lerna-monorepo2/cli-report
+
+
++-----------------------------------------------------------+
+|															|
+|	ADD PACKAGE CLI											|
+|															|
++-----------------------------------------------------------+
+	lerna create @lerna-monorepo2/cli --yes
+	
+
++-----------------------------------------------------------+
+|															|
+|	CLI: add dependencies									|
+|															|
++-----------------------------------------------------------+
+lerna exec npm i @babel/core@^7.24.7 @babel/node@^7.24.7 @rollup/plugin-babel@^6.0.0 @rollup/plugin-commonjs@^28.0.0 @rollup/plugin-node-resolve@^15.0.0 chalk@^4.0.0 change-case@3.0.0 fs-extra@5.0.0 lodash@4.17.21 rollup@2.79.1 yargs@16.0.0 --scope=@lerna-monorepo2/cli
+
+
++-----------------------------------------------------------+
+|															|
+|	ADD PACKAGE scss-generator								|
+|															|
++-----------------------------------------------------------+
+	lerna create @lerna-monorepo2/scss-generator --yes
+
+
++-----------------------------------------------------------+
+|															|
+|	SCSS-GENERATOR:	add dependencies						|
+|															|
++-----------------------------------------------------------+
+	lerna exec npm i prettier@^2.0.0 --scope=@lerna-monorepo2/scss-generator
+	
+	
++-----------------------------------------------------------+
+|															|
+|	ADD PACKAGE layout										|
+|															|
++-----------------------------------------------------------+
+	lerna create @lerna-monorepo2/layout --yes
+	
++-----------------------------------------------------------+
+|															|
+|	LAYOUT:	add dependencies								|
+|															|
++-----------------------------------------------------------+
+	lerna exec npm i  "core-js@^3.16.0 rimraf@^4.0.0 --save-dev" --scope=@lerna-monorepo2/layout
+	lerna exec npm i  "@lerna-monorepo234/cli-report@^1.0.0 --save-dev" --scope=@lerna-monorepo234/layout
+	
+
+
+"@lerna-monorepo2/scss-generator":"^1.0.0",
+	lerna add @lerna-monorepo234/cli-report@^1.0.0 --scope=@lerna-monorepo234/layout
+	
+lerna add @lerna-monorepo234/cli-report@^1.0.0 --dev --scope=@lerna-monorepo234/layout
+lerna add @lerna-monorepo234/cli@1.0.0 --dev --scope=@lerna-monorepo234/layout
+lerna add @lerna-monorepo234/scss-generator@1.0.0 --dev --scope=@lerna-monorepo234/layout
+
+
++-----------------------------------------------------------+
+|															|
+|	ADD PACKAGE grid										|
+|															|
++-----------------------------------------------------------+
+	lerna create @lerna-monorepo234/grid --yes
+	
+
+
+lerna add @lerna-monorepo234/cli@1.0.0 --dev --scope=@lerna-monorepo234/grid
+lerna add @lerna-monorepo234/layout@1.0.1  --scope=@lerna-monorepo234/grid
+
+
+
+
+
+lerna exec npm i  "rimraf@^4.0.0 --save-dev" --scope=@lerna-monorepo234/grid
+klaw-sync
+lerna exec npm i  "klaw-sync@6.0.0" --scope=@lerna-monorepo234/cli
+lerna exec npm i  "replace-in-file@6.0.0"  --scope=@lerna-monorepo234/cli
+lerna exec npm i  "fast-glob@3.0.0"  --scope=@lerna-monorepo234/cli
+lerna exec npm i  "sass@1.77.7"  --scope=@lerna-monorepo234/cli
+
+
++-----------------------------------------------------------+
+|															|
+|	ADD PACKAGE colors										|
+|															|
++-----------------------------------------------------------+
+
+lerna create @lerna-monorepo234/colors --yes
+
+lerna exec npm i  "change-case@^3.0.0 fs-extra@^5.0.0 rimraf@^4.0.0 --save-dev" --scope=@lerna-monorepo234/colors
+"change-case@^3.0.0" 
+    "fs-extra@^5.0.0",
+    "rimraf@^4.0.0"
+	
+
+lerna add @lerna-monorepo234/cli@1.0.0  --dev --scope=@lerna-monorepo234/colors
+lerna add @lerna-monorepo234/cli-report@1.0.0  --dev --scope=@lerna-monorepo234/colors
+lerna add @lerna-monorepo234/scss-generator@1.0.0  --dev --scope=@lerna-monorepo234/colors

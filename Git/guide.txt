@@ -13,6 +13,15 @@ Clone existing public git repository
 
 +-------------------------------------------------------+
 |										======2_OF_7===	|
+|	GITIGNORE											|
+|														|
++-------------------------------------------------------+
+//https://stackoverflow.com/questions/2545602/how-can-i-git-ignore-subfolders-subdirectories
+	echo "node_modules/" >> .gitignore
+	echo "**/node_modules/*"  >> .gitignore
+
++-------------------------------------------------------+
+|										======2_OF_7===	|
 |	REMOVE THE FILE/DIRECTORY							|
 |														|
 +-------------------------------------------------------+

@@ -30,7 +30,7 @@ https://github.com/PublicisSapient/enable-a11y/blob/d170968c4ae6549f363636f4f249
         <textarea data-codeblock>
 
 https://dev.to/mrhdias/creating-html-templates-for-binding-json-data-with-javascript-template-literals-3p9f
-
+https://dev.to/samuel_kinuthia/mastering-lerna-a-guide-to-managing-javascript-monorepos-4f2b
 https://github.com/kerrishotts/PhoneGap101-Filer/tree/master
 https://andyogo.github.io/custom-element-reactions-diagram/
 theory
