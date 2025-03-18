@@ -255,3 +255,11 @@
 
 ==1===> open system properites from cmd
 		sysdm.cpl
+		
+		
++-------------------------------------------------------+
+|										======23======	|
+| RESTART REMOTE MACHINE FROM LOCAL MACHINE				|
+|														|
++-------------------------------------------------------+
+	shutdown /r /m \\<hostname> \t 1
