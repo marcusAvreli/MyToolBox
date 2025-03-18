@@ -1,3 +1,6 @@
+https://github.com/lerna/lerna/issues/720
+
+
 DebugResource.java this.getClass()
 row 58 debug.xhtml objectClassNamesJson
 https://stackoverflow.com/questions/9679932/how-to-use-executables-from-a-package-installed-locally-in-node-modules
