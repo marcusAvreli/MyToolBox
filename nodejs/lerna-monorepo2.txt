@@ -5,14 +5,14 @@
 +-----------------------------------------------------------+
 	git init lerna-monorepo2 && cd lerna-monorepo2
 
-	lerna init
+	lerna init && npm install
 
 +-----------------------------------------------------------+
 |															|
 |	ADD PACKAGE CLI-REPORT									|
 |															|
 +-----------------------------------------------------------+
-	lerna create cli-report --yes
+	lerna create cli-reporter --yes
 
 
 +-----------------------------------------------------------+
@@ -29,7 +29,7 @@
 |	CLI-REPORT: add dependency								|
 |															|
 +-----------------------------------------------------------+
-	lerna add chalk@^4.0.0 --scope=@lerna-monorepo2/cli-report
+	lerna add chalk@^4.0.0 --scope=@lerna-monorepo2/cli-reporter
 
 
 +-----------------------------------------------------------+
