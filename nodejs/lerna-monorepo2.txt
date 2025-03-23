@@ -12,7 +12,7 @@
 |	ADD PACKAGE CLI-REPORT									|
 |															|
 +-----------------------------------------------------------+
-	lerna create cli-reporter --yes
+	lerna create @lerna-monorepo2/cli-reporter --yes
 
 
 +-----------------------------------------------------------+
@@ -20,7 +20,7 @@
 |	INIT GITIGNORE											|
 |															|
 +-----------------------------------------------------------+
-	echo "node_modules/" >> .gitignore
+	echo "node_modules/" >> .gitignore 
 	echo "**/node_modules/*"  >> .gitignore
 	
 
@@ -130,3 +130,5 @@ lerna exec npm i  "change-case@^3.0.0 fs-extra@^5.0.0 rimraf@^4.0.0 --save-dev" 
 lerna add @lerna-monorepo234/cli@1.0.0  --dev --scope=@lerna-monorepo234/colors
 lerna add @lerna-monorepo234/cli-report@1.0.0  --dev --scope=@lerna-monorepo234/colors
 lerna add @lerna-monorepo234/scss-generator@1.0.0  --dev --scope=@lerna-monorepo234/colors
+
+

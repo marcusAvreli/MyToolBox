@@ -1,0 +1,1 @@
+SELECT cast(sptApplication.attributes as xml).value('(/Attributes/Map/entry[@key="ADAppVersion"]/@value)[1]', 'char(11)') as markTest from spt_application sptApplication where name='Active Directory'
