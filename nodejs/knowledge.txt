@@ -64,3 +64,4 @@ npm init -y
 	 
 	 https://medium.com/hackernoon/a-complete-workshop-build-your-es6-code-into-a-library-using-webpack-80295faeb833
 	 https://www.learnwithjason.dev/blog/learn-rollup-js
+	 https://stackoverflow.com/questions/6319274/how-do-i-run-msbuild-from-the-command-line-using-windows-sdk-7-1
