@@ -3,7 +3,7 @@
 |	INIT LERNA PROJECT										|
 |															|
 +-----------------------------------------------------------+
-	git init lerna-monorepo2 && cd lerna-monorepo2 && lerna init && npm install
+	cd C:\nodeDev && git init lerna-monorepo2 && cd lerna-monorepo2 && lerna init && npm install
 	
 
 
