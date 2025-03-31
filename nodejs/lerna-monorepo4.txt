@@ -1,0 +1,258 @@
++-----------------------------------------------------------+
+|															|
+|	INIT LERNA PROJECT										|
+|															|
++-----------------------------------------------------------+
+	cd C:\nodeDev && git init lerna-monorepo4 && cd lerna-monorepo4 && lerna init && npm install
+	
+	
++-----------------------------------------------------------+
+|															|
+|	ADD PACKAGE cli-reporter								|
+|															|
++-----------------------------------------------------------+
+	lerna create @lerna-monorepo4/cli-reporter --yes
+	
+	lerna exec npm i "chalk@^4.1.1" --scope=@lerna-monorepo4/cli-reporter
+	
+
++-----------------------------------------------------------+
+|															|
+|	ADD PACKAGE cli											|
+|															|
++-----------------------------------------------------------+
+	lerna create @lerna-monorepo4/cli --yes
+	
+	
+	lerna add @lerna-monorepo4/cli-reporter@^1.0.0  --scope=@lerna-monorepo4/cli
+	
++-----------------------------------------------------------+
+|															|
+|	ADD PACKAGE scss-generator								|
+|															|
++-----------------------------------------------------------+
+	lerna create @lerna-monorepo4/scss-generator --yes
+	
++-----------------------------------------------------------+
+|															|
+|	ADD PACKAGE layout										|
+|															|
++-----------------------------------------------------------+
+	lerna create @lerna-monorepo4/layout --yes
+	
+
+	
+		
+	lerna add @lerna-monorepo4/cli@^1.0.0 --dev --scope=@lerna-monorepo4/layout
+	lerna add @lerna-monorepo4/cli-reporter@^1.0.0 --dev --scope=@lerna-monorepo4/layout
+	lerna add @lerna-monorepo4/scss-generator@^1.0.0 --dev --scope=@lerna-monorepo4/layout
+	
++-----------------------------------------------------------+
+|															|
+|	ADD PACKAGE import-once									|
+|															|
++-----------------------------------------------------------+
+	lerna create @lerna-monorepo4/import-once --yes
+
+
++-----------------------------------------------------------+
+|															|
+|	ADD PACKAGE grid										|
+|															|
++-----------------------------------------------------------+
+	lerna create @lerna-monorepo4/grid --yes	
+lerna add @lerna-monorepo4/import-once@^1.0.0 --scope=@lerna-monorepo4/grid
+lerna add @lerna-monorepo4/layout@^1.0.0 --scope=@lerna-monorepo4/grid
+
+lerna add @lerna-monorepo4/cli@^1.0.0 --dev --scope=@lerna-monorepo4/grid
+    "rimraf": "^3.0.0"
+lerna exec npm i "rimraf@^3.0.0 --save-dev" --scope=@lerna-monorepo4/grid
+
+
++-----------------------------------------------------------+
+|															|
+|	ADD PACKAGE colors										|
+|															|
++-----------------------------------------------------------+
+	lerna create @lerna-monorepo4/colors --yes
+	
+	@lerna-monorepo4/colors
+	
+lerna add @lerna-monorepo4/cli@^1.0.0 --dev --scope=@lerna-monorepo4/colors
+lerna add @lerna-monorepo4/cli-reporter@^1.0.0  --dev --scope=@lerna-monorepo4/colors
+lerna add @lerna-monorepo4/scss-generator@^1.0.0  --dev --scope=@lerna-monorepo4/colors
+lerna exec npm i "change-case@^4.1.1 fs-extra@^11.0.0 rimraf@^6.0.0 --save-dev" --scope=@lerna-monorepo4/colors
+
+
++-----------------------------------------------------------+
+|															|
+|	ADD PACKAGE type										|
+|															|
++-----------------------------------------------------------+
+	lerna create @lerna-monorepo4/type --yes
+	
+lerna add @lerna-monorepo4/import-once@^1.0.0 --scope=@lerna-monorepo4/type
+lerna add @lerna-monorepo4/layout@^1.0.0  --scope=@lerna-monorepo4/type
+	
+	dev
+lerna add @lerna-monorepo4/cli@^1.0.0 --dev --scope=@lerna-monorepo4/type
+lerna exec npm i "change-case@^4.1.1 rimraf@^3.0.0 --save-dev" --scope=@lerna-monorepo4/type   
+   
+   
++-----------------------------------------------------------+
+|															|
+|	ADD PACKAGE icon-helpers								|
+|															|
++-----------------------------------------------------------+
+	lerna create @lerna-monorepo4/icon-helpers --yes
+	
+	dev
+	lerna add @lerna-monorepo4/cli@^1.0.0 --dev --scope=@lerna-monorepo4/icon-helpers
+   lerna exec npm i "rimraf@^3.0.0 --save-dev" --scope=@lerna-monorepo4/icon-helpers 
+   
+
++-----------------------------------------------------------+
+|															|
+|	ADD PACKAGE icon-build-helpers							|
+|															|
++-----------------------------------------------------------+
+	lerna create @lerna-monorepo4/icon-build-helpers --yes
+	lerna add @lerna-monorepo4/cli-reporter@^1.0.0 --dev --scope=@lerna-monorepo4/icon-build-helpers	
+	lerna add @lerna-monorepo4/icon-helpers@^1.0.0 --dev --scope=@lerna-monorepo4/icon-build-helpers
+		
+	lerna exec npm i "svgson@^5.2.1" --scope=@lerna-monorepo4/icon-build-helpers 
+	  
+  	lerna add  browserslist-config-carbon@^1.0.0  --dev --scope=@lerna-monorepo4/icon-build-helpers
+
+
++-----------------------------------------------------------+
+|															|
+|	ADD PACKAGE icons										|
+|															|
++-----------------------------------------------------------+
+	 lerna create @lerna-monorepo4/icons --yes
+	 
+	 
+	  lerna exec npm i "svgson@^5.2.1" --scope=@lerna-monorepo4/icons 
+	  
+	  dev
+	lerna add @lerna-monorepo4/cli@^1.0.0 --dev --scope=@lerna-monorepo4/icons	
+	lerna add @lerna-monorepo4/icon-build-helpers@^1.0.0  --dev --scope=@lerna-monorepo4/icons
+	lerna exec npm i "rimraf@^3.0.0 --save-dev" --scope=@lerna-monorepo4/icons
+	 
+
++-----------------------------------------------------------+
+|															|
+|	ADD PACKAGE themes										|
+|															|
++-----------------------------------------------------------+
+	 lerna create @lerna-monorepo4/themes --yes
+	 
+
+	dependencies
+		lerna add @lerna-monorepo4/colors@^1.0.0 --scope=@lerna-monorepo4/themes
+		lerna add @lerna-monorepo4/layout@^1.0.0 --scope=@lerna-monorepo4/themes
+		lerna add @lerna-monorepo4/type@^1.0.0 --scope=@lerna-monorepo4/themes
+		lerna exec npm i "color@^3.1.2" --scope=@lerna-monorepo4/themes 
+  lerna exec npm i "@babel/preset-env@^7.14.2" --scope=@lerna-monorepo4/themes 
+  
+	devDependencies
+		lerna exec npm i "@babel/node@^7.14.2 @babel/preset-env@^7.14.2   --save-dev" --scope=@lerna-monorepo4/themes 
+		
+		lerna add @lerna-monorepo4/cli@^1.0.0 --dev --scope=@lerna-monorepo4/themes
+		lerna add @lerna-monorepo4/cli-reporter@^1.0.0 --dev --scope=@lerna-monorepo4/themes
+		lerna add @lerna-monorepo4/scss-generator@^1.0.0 --dev --scope=@lerna-monorepo4/themes
+		
+		lerna exec npm i "change-case@^4.1.1 core-js@^3.6.5  fs-extra@^8.1.0 js-yaml@^3.13.0   rimraf@^3.0.0 --save-dev" --scope=@lerna-monorepo4/themes 
+		
+		lerna exec npm i "node-sass@^4.13.1 --ignore-script  --save-dev" --scope=@lerna-monorepo4/themes 
+		
+    "@babel/node": "^7.14.2",
+    "@babel/preset-env": "^7.14.2",
+    "@carbon/cli": "^10.26.0",
+    "@carbon/cli-reporter": "^10.5.0",
+    "@carbon/scss-generator": "^10.13.0",
+    "@carbon/test-utils": "^10.16.0",
+    "change-case": "^4.1.1",
+    "core-js": "^3.6.5",
+    "fs-extra": "^8.1.0",
+    "js-yaml": "^3.13.0",
+    "node-sass": "^4.13.1",
+    "rimraf": "^3.0.0"
+  },
+  Error: `gyp` failed with exit code: 1
+gyp ERR! node -v v14.17.3
+gyp ERR! node-gyp -v v3.8.0
+gyp ERR! not ok
+
+
+@babel/preset-env
+
++-----------------------------------------------------------+
+|															|
+|	ADD PACKAGE icons-handlebars							|
+|															|
++-----------------------------------------------------------+
+	 lerna create @lerna-monorepo4/icons-handlebars --yes
+dependencies
+	lerna add @lerna-monorepo4/icon-helpers@^1.0.0 --scope=@lerna-monorepo4/icons-handlebars
+	lerna add @lerna-monorepo4/icons@^1.0.0 --scope=@lerna-monorepo4/icons-handlebars
+devDependencies
+	lerna exec npm i "handlebars@^4.0.12   --save-dev" --scope=@lerna-monorepo4/icons-handlebars 
+
+
++-----------------------------------------------------------+
+|															|
+|	ADD PACKAGE motion										|
+|															|
++-----------------------------------------------------------+
+ lerna create @lerna-monorepo4/motion --yes
+ 
+devDependencies
+	lerna add @lerna-monorepo4/cli@^1.0.0 --dev --scope=@lerna-monorepo4/motion
+	lerna exec npm i "rimraf@^3.0.0   --save-dev" --scope=@lerna-monorepo4/motion
+   
+   
+   
++-----------------------------------------------------------+
+|															|
+|	ADD PACKAGE elements										|
+|															|
++-----------------------------------------------------------+
+ lerna create @lerna-monorepo4/elements --yes  
+	dependencies	
+		lerna add @lerna-monorepo4/colors@^1.0.0 --scope=@lerna-monorepo4/elements
+		lerna add @lerna-monorepo4/grid@^1.0.0 --scope=@lerna-monorepo4/elements
+		lerna add @lerna-monorepo4/icons@^1.0.0 --scope=@lerna-monorepo4/elements
+		lerna add @lerna-monorepo4/import-once@^1.0.0 --scope=@lerna-monorepo4/elements
+		lerna add @lerna-monorepo4/layout@^1.0.0 --scope=@lerna-monorepo4/elements
+		lerna add @lerna-monorepo4/motion@^1.0.0 --scope=@lerna-monorepo4/elements
+		lerna add @lerna-monorepo4/themes@^1.0.0 --scope=@lerna-monorepo4/elements
+		lerna add @lerna-monorepo4/type@^1.0.0 --scope=@lerna-monorepo4/elements
+	
+	
+	
+	
+	
+	
+    "@carbon/colors": "^10.29.0",
+    "@carbon/grid": "^10.32.0",
+    "@carbon/icons": "^10.36.0",
+    "@carbon/import-once": "^10.6.0",
+    "@carbon/layout": "^10.28.0",
+    "@carbon/motion": "^10.21.0",
+    "@carbon/themes": "^10.39.0",
+    "@carbon/type": "^10.32.0"
+  },
+  "devDependencies": {
+  
+		lerna add @lerna-monorepo4/cli@^1.0.0 --dev --scope=@lerna-monorepo4/elements
+    "@carbon/cli": "^10.26.0",
+	
+	lerna exec npm i "fs-extra@^8.1.0  klaw-sync@^6.0.0 replace-in-file@^3.4.2 rimraf@^3.0.0 --save-dev" --scope=@lerna-monorepo4/elements
+	
+    "fs-extra": "^8.1.0",
+    "klaw-sync": "^6.0.0",
+    "replace-in-file": "^3.4.2",
+    "rimraf": "^3.0.0"
+  }

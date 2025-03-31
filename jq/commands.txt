@@ -1,3 +1,9 @@
++-------------------------------------------------------+
+|											=====1====	|
+|	LINUX												|
+|														|
++-------------------------------------------------------+
+
 //print MisparOved, firstName of Jobkey=15 with headers a and b
 cat sample_01.txt | jq '["a","b"], (.[]|select (."JobKey"==15)|{"MisparOved","FirstName"}| [.MisparOved, .FirstName])|   @csv' > output.csv
 
@@ -32,3 +38,12 @@ cat sample_02.txt | jq -r .[] | jq -s length
 cat sample_03.txt | jq -r '.[] | select(.MisparOved | index("30495"))|.Ents'
 cat sample_03.txt | jq -c '(.[]| select(.MisparOved==("30495","2")))| .FirstName'
 cat sample_04.txt| jq  '.|map({abc: .entType})| group_by (.abc)| map({EntType: .[0].abc,Count:length})'
+
+
++-------------------------------------------------------+
+|											=====2====	|
+|	WINDOWS												|
+|														|
++-------------------------------------------------------+
+windows
+	jq-windows-amd64.exe select(.)[].employee_number output.txt

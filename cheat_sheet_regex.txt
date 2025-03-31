@@ -19,7 +19,7 @@ semicolon equal,tab, equal SIGN
 /*
 semicolon equal,tab, equal SIGN
 */
-
+	^(.+?): 
 	^.*[ ,:=]+
 	^.*[ ,\t]+
 
