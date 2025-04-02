@@ -263,3 +263,17 @@
 |														|
 +-------------------------------------------------------+
 	shutdown /r /m \\<hostname> \t 1
+	
+	
++-------------------------------------------------------+
+|										======23======	|
+|	RESTRART SERVICE									|
+|														|
++-------------------------------------------------------+
+	https://stackoverflow.com/questions/7831519/how-to-restart-service-using-command-prompt
+	net stop "my service name"
+	net start "my service name"
+	
+	net.exe stop "servicename" && net.exe start "servicename"
+
+net stop "service name" && net start "service name"

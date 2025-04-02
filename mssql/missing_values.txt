@@ -1,0 +1,5 @@
+https://stackoverflow.com/questions/14163312/t-sql-cross-join-to-get-missing-values
+
+
+https://forums.sqlteam.com/t/join-to-child-table-multiple-times-to-flatten-the-data/10777
+https://www.red-gate.com/simple-talk/databases/sql-server/t-sql-programming-sql-server/filling-in-missing-values-using-the-t-sql-window-frame/
