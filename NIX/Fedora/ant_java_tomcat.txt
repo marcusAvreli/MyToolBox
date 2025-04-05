@@ -27,12 +27,14 @@
 |	INSTALL ANT											|
 |														|
 +-------------------------------------------------------+
+	curl -L 	https://dlcdn.apache.org//ant/source/apache-ant-1.10.15-src.tar.gz --output apache-ant-1.10.15-src.tar.gz
+
 	tar -zxvf apache-ant-1.10.15-src.tar.gz
 	mkdir /opt/ant10
-	mv apache-ant-1.10.15/* /opt/ant10
+	mv apache-ant-1.10.15 /opt/ant10
 	
 	echo 'export ANT_HOME="/opt/ant10"' >> /etc/profile
-	echo 'export PATH=$PATH:$ANT_HOME/bin' >> /etc/profile
+	echo 'export PATH=${PATH}:${ANT_HOME}/bin' >> /etc/profile
 	source /etc/profile
 	
 	cd /opt/ant10; 
@@ -41,7 +43,7 @@
 	
 
 	###ant
-	###./build.sh -Ddist.dir=/opt/ant dist	
+	###./build.sh -Ddist.dir=/opt/ant10 dist	
 	
 		
 +-------------------------------------------------------+
@@ -59,6 +61,7 @@
 |	INSTALL TOMCAT										|
 |														|
 +-------------------------------------------------------+
+	curl -L 	https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.73/src/apache-tomcat-9.0.73-src.tar.gz --output apache-tomcat-9.0.73-src.tar.gz
 	tar -zxvf apache-tomcat-9.0.73-src.tar.gz //RUNS ON JAVA 11+
 	tar -zxvf apache-tomcat-9.0.98-src.tar.gz //runs ON java 17+
 	
@@ -147,7 +150,7 @@
 |														|
 +-------------------------------------------------------+
 
-
+# https://unix.stackexchange.com/questions/675521/make-systemd-service-inherit-environment-variables-from-etc-profile-d
 # Systemd unit file for tomcat
 #place in /etc/systemd/system/tomcat.service
 #source:

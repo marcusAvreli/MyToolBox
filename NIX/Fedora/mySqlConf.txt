@@ -1,16 +1,16 @@
-+-----------------------------------------------------------++-----------------------------------------------------------++-------------------------------------------------------------+
-|																																														|
-|																				FROM SOURCE																								|
-|																																														|
-+-----------------------------------------------------------++-----------------------------------------------------------++-------------------------------------------------------------+
-COPYRIGHT:https://noknow.info/it/os/install_mysql_from_source?lang=en
++-------------------------------------------------------+
+|														|
+|	FROM SOURCE											|
+|														|
++-------------------------------------------------------+
+	COPYRIGHT:https://noknow.info/it/os/install_mysql_from_source?lang=en
 
 
-+-----------------------------------------------------------+
-|															|
-|			MYSQL ENVIRONMENTAL VARIABLES					|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|														|
+|	MYSQL ENVIRONMENTAL VARIABLES						|
+|														|
++-------------------------------------------------------+
 /etc/profile
 		MYSQL_HOME=/opt/mysql5
         MYSQL_BIN=$MYSQL_HOME/bin
@@ -82,22 +82,23 @@ vi /etc/my.cnf
 Initialize MySQL
 	mysqld --defaults-file=/etc/my.cnf --initialize
 
-+-----------------------------------------------------------+
-|															|
-|			MYSQLD FIREWALL									|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|														|
+|	MYSQLD FIREWALL										|
+|														|
++-------------------------------------------------------+
 	firewall-cmd --list-ports
 	firewall-cmd --add-port=3306/tcp --permanent
 	firewall-cmd --reload
 	firewall-cmd --list-ports
 	
 
-+-----------------------------------------------------------+
-|															|
-|			MYSQLD SYSTEMD SERVICE							|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|														|
+|	MYSQLD SYSTEMD SERVICE								|
+|														|
++-------------------------------------------------------+
+
 	vi /etc/systemd/system/mysqld.service
 	[Unit]
 	Description=MySQL Server
@@ -117,11 +118,11 @@ Initialize MySQL
 	[Install]
 	WantedBy=multi-user.target
 	
-+-----------------------------------------------------------+
-|															|
-|			STATUS MYSQLD SERVICE							|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|														|
+|			STATUS MYSQLD SERVICE						|
+|														|
++-------------------------------------------------------+
 
 	systemctl status mysqld
 	systemctl start mysqld
@@ -138,39 +139,71 @@ Initialize MySQL
 mysql -u root -p
 Enter password: 
 
-+-----------------------------------------------------------+
-|															|
-|			CREATE USER 									|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|														|
+|	CREATE USER 										|
+|														|
++-------------------------------------------------------+
+	CREATE USER identityiq IDENTIFIED BY 'zubur1';
+	GRANT ALL PRIVILEGES ON identityiq.* TO identityiq;
+	FLUSH PRIVILEGES;
 
-CREATE USER identityiq IDENTIFIED BY 'zubur1';
-GRANT ALL PRIVILEGES ON identityiq.* TO identityiq;
-FLUSH PRIVILEGES;
 
-+-----------------------------------------------------------+
-|															|
-|			RUN SCRIPT	 									|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|														|
+|	RUN SCRIPT			 								|
+|														|
++-------------------------------------------------------+
 	mysql > source /root/create_identityiq_tables-8.4.mysql
 
 
 
 
-+-----------------------------------------------------------++-----------------------------------------------------------++-------------------------------------------------------------+
-|																																														|
-|																				INSTALL FROM RPM																						|
-|																																														|
-+-----------------------------------------------------------++-----------------------------------------------------------++-------------------------------------------------------------+
-COPYRIGHT: https://www.linuxcapable.com/how-to-install-mysql-8-0-on-almalinux/
-try this: https://tecadmin.net/how-to-install-mysql-on-centos-9/
++-------------------------------------------------------+
+|														|
+|	CANCEL 	mysql_secure_installation					|
+|														|
++-------------------------------------------------------+
+//https://stackoverflow.com/questions/1708409/how-to-start-mysql-with-skip-grant-tables
+
+/usr/libexec/mysqld  --print-defaults
+/usr/libexec/mysqld  --verbose --help | grep -A 1 "Default options"
+	#first value takes
+	/etc/my.cnf /etc/mysql/my.cnf ~/.my.cnf
+
+	#add following snippet into mycnf
+	# SERVER SECTION
+	# ----------------------------------------------------------------------
+	#
+	# The following options will be read by the MySQL Server. Make sure that
+	# you have installed the server correctly (see above) so it reads this 
+	# file.
+	#
+	[mysqld]
+
+	skip-grant-tables
 
 
-+-----------------------------------------------------------++-----------------------------------------------------------++-------------------------------------------------------------+
-|																																														|
-|																				PROGRAMMING LANGUAGES																					|
-|																																														|
-+-----------------------------------------------------------++-----------------------------------------------------------++-------------------------------------------------------------+
+
+
+strace -fe open mysqld start 2>&1|grep my.cnf
+
+
+
++-------------------------------------------------------+
+|														|
+|	INSTALL FROM RPM									|
+|														|
++-------------------------------------------------------+																							|
+
+	COPYRIGHT: https://www.linuxcapable.com/how-to-install-mysql-8-0-on-almalinux/
+	try this: https://tecadmin.net/how-to-install-mysql-on-centos-9/
+
+
++-------------------------------------------------------+
+|														|
+|		PROGRAMMING LANGUAGES							|
+|														|
++-------------------------------------------------------+
 JAVA connection stirng
 	jdbc:mysql://host_ip_or_name:3306/database_name

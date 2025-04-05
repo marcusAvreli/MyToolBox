@@ -1,9 +1,17 @@
 +-----------------------------------------------------------+
 |															|
-|	INIT LERNA PROJECT										|
+|	INSTALL LERNA GLOBALLY									|
 |															|
 +-----------------------------------------------------------+
-	cd C:\nodeDev && git init lerna-monorepo4 && cd lerna-monorepo4 && lerna init && npm install
+	npm install lerna@^3 --g
+
+
++-----------------------------------------------------------+
+|															|
+|	INIT LERNA PROJECT										|
+|															|
++-----------------------------------------------------------+	
+	cd C:\nodeDev && git init my-Lerna && cd my-Lerna && lerna init && npm install
 	
 	
 +-----------------------------------------------------------+
