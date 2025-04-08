@@ -4,7 +4,7 @@
 |														|
 +-------------------------------------------------------+
 	COPYRIGHT:https://noknow.info/it/os/install_mysql_from_source?lang=en
-
+	http://dev.cs.ovgu.de/db/mysql/Installing-source.html
 
 +-------------------------------------------------------+
 |														|
@@ -183,8 +183,12 @@ Enter password:
 
 	skip-grant-tables
 
-
-
+https://stackoverflow.com/questions/73723026/mysql-unable-to-reset-admin-password-skip-grant-tables-disallowing-alter-use
+https://stackoverflow.com/questions/52719378/failed-to-find-valid-data-directory-mysql-generic-binary-installion/65214867#65214867
+https://dev.mysql.com/doc/refman/8.4/en/resetting-permissions.html
+FLUSH PRIVILEGES;
+UPDATE mysql.user SET plugin='mysql_native_password' WHERE User='root';
+ALTER USER 'root'@'localhost' IDENTIFIED BY '';
 
 strace -fe open mysqld start 2>&1|grep my.cnf
 
