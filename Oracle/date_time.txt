@@ -14,7 +14,7 @@
 |										======2======	|
 |	EVERY 30 MINUTES									|
 |														|
-+-------------------------------------------------------+ 
++-------------------------------------------------------+
    select
 		trunc(date_from, 'HH') + round(extract(minute from date_from) / 15) * interval '15' minute
 		,trunc(date_to, 'HH') + round(extract(minute from date_to) / 15) * interval '15' minute

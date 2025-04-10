@@ -1,5 +1,28 @@
++-------------------------------------------------------+
+|										======1======	|
+|	MISSING_VALUES	MSSQL								|
+|														|
++-------------------------------------------------------+
+
+COPYRIGHT: https://stackoverflow.com/questions/71156569/add-missing-rows-within-a-table
+
+WITH expected_lines AS (
+    SELECT distinct(sptLinkIdentity.identity_id),sptLinkApplication.application
+FROM spt_link sptLinkApplication,spt_link sptLinkIdentity
+)
+SELECT  el.application,el.identity_id expected_identity,sptIdentity.name expected_name,t.identity_id real_identity,sptApplication.name
+FROM expected_lines el
+LEFT JOIN spt_link t ON el.identity_id = t.identity_id AND el.application = t.application
+inner join spt_application sptApplication on sptApplication.id = el.application
+inner join spt_identity sptIdentity on sptIdentity.id = el.identity_id
+where sptIdentity.name='<identity_name>' and sptApplication.name='<app_name>' and t.identity_id is null
+
+
+
 https://stackoverflow.com/questions/14163312/t-sql-cross-join-to-get-missing-values
 
-
+https://learn.microsoft.com/en-us/sql/t-sql/queries/select-group-by-transact-sql?view=sql-server-ver16#group-by-rollup
 https://forums.sqlteam.com/t/join-to-child-table-multiple-times-to-flatten-the-data/10777
 https://www.red-gate.com/simple-talk/databases/sql-server/t-sql-programming-sql-server/filling-in-missing-values-using-the-t-sql-window-frame/
+
+
