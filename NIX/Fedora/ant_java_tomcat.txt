@@ -219,6 +219,17 @@ cd /opt/tomcat90/webapps/ROOT
 			  
 	
 
+APACHE ANT
+##http://www.techoism.com/how-to-install-apache-ant-on-centos/
+cd /opt
+wget http://www.us.apache.org/dist/ant/binaries/apache-ant-1.9.11-bin.tar.gz
+tar -zxvf apache-ant-1.9.11-bin.tar.gz
+mv /opt/apache-ant-1.9.11 /opt/ant
+
+sh -c 'echo ANT_HOME=/opt/ant >> /etc/environment'
+ln -s /opt/ant/bin/ant /usr/bin/ant
+
+ant -version
 
 
 
