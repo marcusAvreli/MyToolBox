@@ -84,13 +84,14 @@ Initialize MySQL
 
 +-------------------------------------------------------+
 |														|
-|	MYSQLD FIREWALL										|
+|	FIREWALL											|
 |														|
 +-------------------------------------------------------+
 	firewall-cmd --list-ports
-	firewall-cmd --add-port=3306/tcp --permanent
+	firewall-cmd  --add-port=3306/tcp
+	firewall-cmd --runtime-to-permanent
 	firewall-cmd --reload
-	firewall-cmd --list-ports
+	
 	
 
 +-------------------------------------------------------+
@@ -144,11 +145,16 @@ Enter password:
 |	CREATE USER 										|
 |														|
 +-------------------------------------------------------+
-	CREATE USER identityiq IDENTIFIED BY 'zubur1';
-	GRANT ALL PRIVILEGES ON identityiq.* TO identityiq;
-	FLUSH PRIVILEGES;
+//https://stackoverflow.com/questions/20353402/mysql-access-denied-for-user-testlocalhost-using-password-yes-except-ro
+
+	DROP User 'identityiq'@'localhost';
+	SELECT * from information_schema.user_privileges where grantee like "'identityiq'%";
+
+	CREATE USER 'identityiq'@'localhost' IDENTIFIED WITH mysql_native_password BY 'zubur1';
 
 
+	CREATE USER 'mark'@'192.168.%' IDENTIFIED WITH mysql_native_password BY 'zubur1';
+	GRANT ALL PRIVILEGES ON *.* to 'mark'@'192.168.%';
 +-------------------------------------------------------+
 |														|
 |	RUN SCRIPT			 								|
@@ -201,8 +207,7 @@ strace -fe open mysqld start 2>&1|grep my.cnf
 	COPYRIGHT: https://docs.fedoraproject.org/en-US/quick-docs/installing-mysql-mariadb/
 	sudo dnf install mysql-server
 
-	sudo systemctl start mysqld
-	sudo systemctl enable mysqld
+	sudo systemctl start mysqld && 	sudo systemctl enable mysqld
 	
 	
 less /var/log/mysql/mysqld.log	
