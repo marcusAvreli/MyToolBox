@@ -27,32 +27,25 @@
 |	INSTALL ANT											|
 |														|
 +-------------------------------------------------------+
+	COPYRIGHT: https://fr.linuxfromscratch.org/view/blfs-8.2-fr/general/apache-ant.html
 	curl -L 	https://dlcdn.apache.org//ant/source/apache-ant-1.10.15-src.tar.gz --output apache-ant-1.10.15-src.tar.gz
 
 	tar -zxvf apache-ant-1.10.15-src.tar.gz
-	mkdir /opt/ant10
-	mv apache-ant-1.10.15 /opt/ant10
 	
-	echo 'export ANT_HOME="/opt/ant10"' >> /etc/profile
-	echo 'export PATH=${PATH}:${ANT_HOME}/bin' >> /etc/profile
-	source /etc/profile
 	
-	cd /opt/ant10; 
-	run_command: ant
-
+	./bootstrap.sh
+	bootstrap/bin/ant -f fetch.xml -Ddest=system || true && cp -v lib/*.jar lib/optional/
+	./build.sh -Ddist.dir=$PWD/apache-ant-1.10.15 dist
+	 cp -rv apache-ant-1.10.15 /opt/            && chown -R root:root /opt/apache-ant-1.10.15 && ln -sfv apache-ant-1.10.15 /opt/ant
 	
-
-	###ant
-	###./build.sh -Ddist.dir=/opt/ant10 dist	
 	
-		
 +-------------------------------------------------------+
 |									======4_of_9======	|
 |			ANT ENVIRONMENTAL VARIABLES					|
 |														|
 +-------------------------------------------------------+
-	echo 'export ANT_HOME="/opt/ant"' >> /etc/profile
-	echo 'export PATH=$PATH:$ANT_HOME/bin' >> /etc/profile
+	echo 'export ANT_HOME="/opt/ant/apache-ant-1.10.15"' >> /etc/profile
+	echo 'export PATH=${PATH}:${ANT_HOME}/bin' >> /etc/profile
 	source /etc/profile
 
 
@@ -65,7 +58,7 @@
 	tar -zxvf apache-tomcat-9.0.73-src.tar.gz //RUNS ON JAVA 11+
 	tar -zxvf apache-tomcat-9.0.98-src.tar.gz //runs ON java 17+
 	
-	mv  apache-tomcat-9.0.98-src tomcat90Source
+	mv  apache-tomcat-9.0.73-src tomcat90Source
 	cd tomcat90Source
 	ant		
 	
@@ -79,27 +72,26 @@
 |	USERS AND PERMISSIONS								|
 |														|
 +-------------------------------------------------------+
-	useradd -r -s /bin/false tomcat
-	groupadd --system tomcat
+	useradd -r -s /bin/false tomcat &&	groupadd --system tomcat
 	
 	#We put the tomcat user as the owner of the folder of tomcat:
-	chown -R tomcat:tomcat /opt/tomcat
+	chown -R tomcat:tomcat /opt/tomcat90
 	
 	#Users can not modify the configuration of tomcat:
-	chmod -R g+r /opt/tomcat/conf
+	chmod -R g+r /opt/tomcat90/conf
 	
 	#Users can modify the other folders:
 
-		chmod -R g+w /opt/tomcat/logs;
-		chmod -R g+w /opt/tomcat/temp;
-		chmod -R g+w /opt/tomcat/webapps;
+		chmod -R g+w /opt/tomcat90/logs;
+		chmod -R g+w /opt/tomcat90/temp;
+		chmod -R g+w /opt/tomcat90/webapps;
 		#chmod -R g+w /opt/tomcat/work;
 	#Activate the sticky-bit for new files keep permissions defined:
-		chmod -R g+s /opt/tomcat/conf
-		chmod -R g+s /opt/tomcat/logs
-		chmod -R g+s /opt/tomcat/temp
-		chmod -R g+s /opt/tomcat/webapps
-		chmod -R g+s /opt/tomcat/work
+		chmod -R g+s /opt/tomcat90/conf
+		chmod -R g+s /opt/tomcat90/logs
+		chmod -R g+s /opt/tomcat90/temp
+		chmod -R g+s /opt/tomcat90/webapps
+		chmod -R g+s /opt/tomcat90/work
 	#Finally, we add the tomcat group we want users who can use the tomcat:
 		usermod -a -G tomcat root
 
@@ -163,7 +155,7 @@ Description=Apache Tomcat Web Application Container for ShopWorx
 After=syslog.target network.target
 
 [Service]
-Environment=JAVA_HOME=/usr/local/java/jdk1.8.0_341
+Environment=JAVA_HOME=/opt/jdk
 Environment=CATALINA_PID=/opt/tomcat90/temp/tomcat.pid
 Environment=CATALINA_HOME=/opt/tomcat90/
 Environment=CATALINA_BASE=/opt/tomcat90/
@@ -224,3 +216,64 @@ cd /opt/tomcat90/webapps/ROOT
                      </cookie-config>
 
               </session-config>
+			  
+	
+
+
+
+
+	
+curl -L 	https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/javax/media/jai-core/1.1.3/jai-core-1.1.3.jar --output jai-core-1.1.3.jar
+
+curl -L 	https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/com/sun/media/jai-codec/1.1.3/jai-codec-1.1.3.jar  --output jai-codec-1.1.3.jar
+
+curl -L 	https://mvnrepository.com/artifact/org.tukaani/xz/1.0/xz-1.0.jar  --output xz-1.0.jar 
+
+curl -L 	http://www.netrexx.org/files/NetRexx-3.06-GA.zip  --output NetRexx-3.06-GA.zip	  
+Apache ANT
+https://github.com/hamcrest/JavaHamcrest/commit/2df96c1357e996e3b522aae13e3cd67c4194ef93
+Disable doclint in javadoc build, so that it works on JDK 1.8. See is…
+destdir="build/temp/@{modulename}-${version}-javadoc.jar.contents" author="true" version="true"
+                     use="true" windowtitle="Hamcrest" source="${javaversion}" failonerror="yes" defaultexcludes="yes">
+                <classpath refid="cp-@{modulename}-main"/>
+                <arg value="-Xdoclint:none"/>
+            </javadoc>
+            <jar-module-component modulename="@{modulename}" suffix="-javadoc"/>
+        </sequential>
+
+Linne 1482<arg value="-Xdoclint:none"/>
+
+http://fr.linuxfromscratch.org/view/blfs-8.2-fr/general/apache-ant.html
+cp -v ../jai-core-1.1.3.jar  \
+      ../jai-codec-1.1.3.jar \
+      ../xz-1.0.jar  lib     &&
+unzip -p ../NetRexx-3.06-GA.zip lib/NetRexxC.jar > lib/NetRexxC.jar
+Construct a limited bootstrap version of Apache Ant with the following command:
+
+./bootstrap.sh
+Download the rest of the runtime dependencies with the build script ant fetch.xml :
+
+bootstrap/bin/ant -f fetch.xml -Ddest=system || true &&
+cp -v lib/*.jar lib/optional/
+Build Apache Ant by running the following commands:
+
+./build.sh -Ddist.dir=$PWD/ant-1.10.2 dist
+Install, as a user root.
+
+cp -rv ant-1.10.2 /opt/            &&
+chown -R root:root /opt/ant-1.10.2 &&
+ln -sfv ant-1.10.2 /opt/ant
+
+Configuration information
+Some packages will require that ant be in the search path and that the variable ANT_HOME be set. Satisfy these requirements by typing as a user root :
+
+cat > /etc/profile.d/ant.sh << EOF
+# Begin /etc/profile.d/ant.sh
+
+pathappend /opt/ant/bin
+export ANT_HOME=/opt/ant
+
+# End /etc/profile.d/ant.sh
+EOF
+export PATH=$PATH:$ANT_HOME/bin
+export ANT_HOME=$ANT_HOME:/opt/ant-1.10.2

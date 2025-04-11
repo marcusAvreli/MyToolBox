@@ -3,8 +3,8 @@
 |	FROM SOURCE											|
 |														|
 +-------------------------------------------------------+
-	COPYRIGHT:https://noknow.info/it/os/install_mysql_from_source?lang=en
 	http://dev.cs.ovgu.de/db/mysql/Installing-source.html
+
 
 +-------------------------------------------------------+
 |														|
@@ -154,9 +154,7 @@ Enter password:
 |	RUN SCRIPT			 								|
 |														|
 +-------------------------------------------------------+
-	mysql > source /root/create_identityiq_tables-8.4.mysql
-
-
+	mysql > source /home/admin/create_identityiq_tables-8.4.mysql
 
 
 +-------------------------------------------------------+
@@ -200,10 +198,22 @@ strace -fe open mysqld start 2>&1|grep my.cnf
 |														|
 +-------------------------------------------------------+																							|
 
-	COPYRIGHT: https://www.linuxcapable.com/how-to-install-mysql-8-0-on-almalinux/
-	try this: https://tecadmin.net/how-to-install-mysql-on-centos-9/
+	COPYRIGHT: https://docs.fedoraproject.org/en-US/quick-docs/installing-mysql-mariadb/
+	sudo dnf install mysql-server
+
+	sudo systemctl start mysqld
+	sudo systemctl enable mysqld
+	
+	
+less /var/log/mysql/mysqld.log	
+	[Server] /usr/libexec/mysqld (mysqld 8.0.40) initializing of server in progress as process 1313
+	[InnoDB] InnoDB initialization has started.
+	[InnoDB] InnoDB initialization has ended.
+	[Server] root@localhost is created with an empty password ! Please consider switching off the --initialize-insecure option.
 
 
+//https://dev.mysql.com/doc/refman/8.4/en/default-privileges.html#:~:text=If%20the%20root%20account%20has,a%20row%20in%20the%20mysql.
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'zubur1';
 +-------------------------------------------------------+
 |														|
 |		PROGRAMMING LANGUAGES							|
