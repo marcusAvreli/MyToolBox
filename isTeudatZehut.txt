@@ -1,5 +1,5 @@
 +-------------------------------------------------------+
-|									======1_OF_4======	|
+|									======1_OF_5======	|
 |			POWERSHELL									|
 |														|
 +-------------------------------------------------------+
@@ -36,7 +36,7 @@ function IsTeudatZehut{
 
 
 +-------------------------------------------------------+
-|									======2_OF_4======	|
+|									======2_OF_5======	|
 |			JAVA										|
 |														|
 +-------------------------------------------------------+
@@ -68,7 +68,7 @@ public boolean isTeudatZehut(String testIdNum){
 
 
 +-------------------------------------------------------+
-|									======3_OF_4======	|
+|									======3_OF_5======	|
 |			ORACLE										|
 |														|
 +-------------------------------------------------------+
@@ -130,9 +130,73 @@ return testresult;
 		return 0;
 end;
 
++-------------------------------------------------------+
+|									======4_OF_5======	|
+|			mySQL										|
+|														|
++-------------------------------------------------------+
+
+
+START TRANSACTION;
+DROP function IF EXISTS is_teudat_zehut;
+DELIMITER $$
+CREATE FUNCTION `is_teudat_zehut`(
+ inTeudatZehut varchar(9)
+) RETURNS int
+    DETERMINISTIC
+BEGIN
+    DECLARE area INT;
+	 DECLARE cont INTEGER; 
+	 DECLARE inTzChar VARCHAR(1);
+	 declare inTzDigit INTEGER;
+	 DECLARE tzInteger INTEGER;
+	 DECLARE total_length INTEGER; 
+	 declare sum_of_items  INTEGER;
+	  declare testresult  INTEGER;
+    SET cont = 1;
+	 SET testresult = -1;
+	DROP  TEMPORARY TABLE IF EXISTS array_table;
+	CREATE TEMPORARY TABLE array_table (idx INT, value INT);
+	INSERT INTO array_table (idx, value) VALUES (1,1)
+	,(2,2)
+	,(3,1)
+	,(4,2)
+	,(5,1)
+	,(6,2)
+	,(7,1)
+	,(8,2)
+	,(9,1);
+	SET total_length = (select count(*) from array_table);
+    SET area = 16;
+	 SET sum_of_items = 0;
+	
+	 WHILE cont < total_length+1 DO
+	SET inTzChar = substring(inTeudatZehut,cont,1);
+	set inTzDigit = convert(inTzChar , unsigned );
+	  SET tzInteger = (SELECT value FROM array_table WHERE idx = cont);
+	 set sum_of_items = sum_of_items + ((inTzDigit*tzInteger) div 10)+mod(inTzDigit*tzInteger,10);
+	 
+	
+	  SET cont = cont + 1; 
+    END WHILE; 
+	
+	 if mod(sum_of_items,10)=0 then
+	 -- yes, it is teudat zehut
+		set testresult =1;
+	  else
+		set testresult =0;
+	  end if;
+    RETURN testresult;
+END$$
+
+DELIMITER ;
+COMMIT;
+
+
+
 
 +-------------------------------------------------------+
-|									======3_OF_4======	|
+|									======3_OF_5======	|
 |			AWK											|
 |														|
 +-------------------------------------------------------+
