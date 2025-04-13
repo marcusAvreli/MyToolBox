@@ -1,0 +1,23 @@
+https://github.com/nutzam/nutzdemo/blob/2d88a56aa413cade4a7a97f51f68afa373022927/demo/ext_by_jhp/WebRoot/index.jsp#L295
+https://github.com/vriche/pms/blob/87a8638f2ab91e9fcd4d01ad50eb4a464a9de9ab/src/main/webapp/samples/index2.jsp#L99
+https://github.com/suevip1/omeng.cc/blob/dffea0dbc666272712e82ef4ce25e427f97d05a1/management/manager/src/main/webapp/view/merchants/employee.jsp#L98
+expoty to excel by java
+
+//export to excel by js
+https://github.com/loiane/extjs-export-excel/blob/master/WebContent/js/export-grid.js
+
+https://github.com/hmlzs/hmlzs/blob/23fc74a96b4393be0d63f2267dc708968300417b/src/main/webapp/WEB-INF/admin/tree.jsp#L508
+
+//add record excel
+https://github.com/jrjt/j2eeframe/blob/fc1323c508cfb1b3d59a77100b46a26a5f46d6da/com-sit-framework/src/main/webapp/module/view/CsContractInfoList.js#L750
+https://fiddle.sencha.com/#fiddle/17j&view/editor
+https://druckit.wordpress.com/2013/10/26/generate-an-excel-file-from-an-ext-js-4-grid/
+
+https://github.com/UMich-Johns-Hopkins-Transmart/WorkflowMangement/blob/934786a28b1286275ca6f3893d91209e21234857/JHU-demo-page/js/datasetExplorer/datasetExplorer.js#L3493
+
+https://github.com/heron-mc/heron-mc/blob/20bffbce57c53cc2a9faed8c0b1a862bfeeb6f1c/heron/lib/widgets/search/FeaturePanel.js#L587
+https://github.com/Intermesh/groupoffice/blob/d1637edc5898a752c0e0fc6e1e4b0ed1158dfd62/www/go/core/views/extjs3/links/CreateLinkButton.js#L153
+https://stackoverflow.com/questions/10993045/creating-a-dynamic-grid-with-extjs
+https://github.com/JanesenGit/FastChar-ExtJs/blob/31a99c0d1241c23af24e5f8c44380f6e80f02528/web/base/utils/src/fast-ext-grid.ts#L4863
+
+https://stackoverflow.com/questions/21432441/has-no-method-getcolumnmodel-extjs4
