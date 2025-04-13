@@ -21,3 +21,5 @@ https://stackoverflow.com/questions/10993045/creating-a-dynamic-grid-with-extjs
 https://github.com/JanesenGit/FastChar-ExtJs/blob/31a99c0d1241c23af24e5f8c44380f6e80f02528/web/base/utils/src/fast-ext-grid.ts#L4863
 
 https://stackoverflow.com/questions/21432441/has-no-method-getcolumnmodel-extjs4
+var cm = this.grid.getColumnModel(); extjs3
+var columns = this.grid.getView().getHeaderCt().getGridColumns(); extjs4
