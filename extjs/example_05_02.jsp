@@ -170,7 +170,7 @@ Ext.override(Ext.grid.GridPanel, {
 //      Calculate cell data types and extra class names which affect formatting
         var cellType = [];
         var cellTypeClass = []  ;
-	    console.log("create_wrok_sheet_started");
+	    console.log("create_wrok_sheet_started_1");
         var cm = this.getView().getHeaderCt().getGridColumns();
         var totalWidthInPixels = 0;
         var colXml = '';
@@ -179,20 +179,28 @@ Ext.override(Ext.grid.GridPanel, {
             if (includeHidden || !cm[i].isHidden()) {
                 var w = cm[i].getWidth(i)
 		  var headerC = this.getView().getHeaderCt().items.length;
-		     var header = this.getView().getHeaderCt().getHeaderAtIndex(i)
+		     var header = this.getView().getHeaderCt().getHeaderAtIndex(i);
+		    var records = this.getStore().getRange();
+
+		    console.log("records:"+records);
+		    console.log("records:"+records.length);
 		    console.log("headerC:"+headerC);
 		    console.log("headerC:"+header);
+		     console.log("headerC:"+header.text);
                 totalWidthInPixels += w;
                 colXml += '<ss:Column ss:AutoFitWidth="1" ss:Width="' + w + '" />';
                 headerXml += '<ss:Cell ss:StyleID="headercell">' +
-                    '<ss:Data ss:Type="String">' + header + '</ss:Data>' +
+                    '<ss:Data ss:Type="String">' + header.text + '</ss:Data>' +
                     '<ss:NamedCell ss:Name="Print_Titles" /></ss:Cell>';
 		     var record = this.store.getAt(i);
-console.log("record:"+(record.type));
+		    
+			console.log("record:"+(record.type));
+		    console.log("column_name:"+cm[i].dataIndex);
 		     var fld2 = this.store.model.prototype.fields.map[cm[i].dataIndex];
-		    console.log("fld2:"+fld2);
-		    console.log("fld2:"+fld2.type);
-		    console.log("fld2:"+fld2.type.type);
+		    console.log("fld:"+fld2);
+		   
+		    console.log("fld_type:"+fld2.type);
+		    console.log("fld_type_type:"+fld2.type.type);
                 //var fld = this.store.recordType.prototype.fields.get(cm.getDataIndex(i));
                 switch(fld2.type.type) {
                     case "int":
@@ -209,8 +217,8 @@ console.log("record:"+(record.type));
                         cellTypeClass.push("");
                         break;
                     case "date":
-                        cellType.push("DateTime");
-                        cellTypeClass.push("date");
+                        cellType.push("String");
+                        cellTypeClass.push("");
                         break;
                     default:
                         cellType.push("String");
@@ -248,27 +256,44 @@ console.log("record:"+(record.type));
 
 //      Generate the data rows from the data in the Stor
 	    console.log("cm:"+cm);
-	    console.log("cm:"+cm.items);
-        for (var i = 0, it = cm, l = cm.length; i < l; i++) {
+	    console.log("cm_items_object:"+cm[0]);
+        for (var i = 0, it = records, l = records.length; i < l; i++) {
             t += '<ss:Row>';
             var cellClass = (i & 1) ? 'odd' : 'even';
-            r = it[i];
-		console.log("checkPost_1");
+            r = it[i].data;
+		console.log("row_initialized:"+r);
+		console.log("row_initialized:"+it[i].itemi);
             var k = 0;
             for (var j = 0; j < cm.length; j++) {
 		    console.log("checkPost_2");
+		     console.log("cm_items_object_2:"+cm[0].dataIndex);
                 if (includeHidden || !cm[j].isHidden()) {
 			console.log("checkPost_3:"+cm);
-			console.log("checkPost_3:"+r);
-                    var v = cm[j].dataIndex;
-			console.log("checkPost_table:"+v.dataIndex);
+			console.log("checkPost_row_as_object:"+r);
+			console.log("row_as_string_1:"+JSON.stringify(r));
+                   var  col = cm[j];
+			console.log("cm[j]index:"+j);
+console.log("cm_value_of_j:"+col.dataIndex);
+                       var  v = r[col.dataIndex];
 
+			console.log("checkPost_table_1_v:"+v);
+console.log("checkPost_table_1_cellClass:"+cellClass);
+			console.log("checkPost_table_1_cellTypeClass:"+cellTypeClass[k]);
+			 console.log("checkPost_table_1_cellType:"+cellType[k]);
                     t += '<ss:Cell ss:StyleID="' + cellClass + cellTypeClass[k] + '"><ss:Data ss:Type="' + cellType[k] + '">';
-			console.log("checkPost_4");
+			
                         if (cellType[k] == 'DateTime') {
-                            t += v;
+				console.log("setting_dateTime:"+v);
+
+				console.log("setting_dateTime:"+Ext.Date.format(v,'Y-m-d'));
+                    //       t += Ext.Date.format(v,'Y-m-d');
+					v = new Date(v);
+                            t += v.format('Y-m-d\\TH:i:s');
+				console.log("setting_dateTime_1:"+t);
+		//	  t += v.format('Y-m-d');
                         } else {
-                            t += v;
+				console.log("setting_other_type");
+                            t += Ext.htmlEncode(v);
                         }
                     t +='</ss:Data></ss:Cell>';
                     k++;

@@ -1,6 +1,0 @@
-+-------------------------------------------------------+
-|									======1_OF_5======	|
-|	EXPORT TO EXCEL										|
-|														|
-+-------------------------------------------------------+
-https://stackoverflow.com/questions/17715833/how-to-export-extjs-grid-data-to-excel

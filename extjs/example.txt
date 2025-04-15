@@ -1,12 +1,41 @@
++-------------------------------------------------------+
+|									======1_OF_5======	|
+|	EXPORT TO EXCEL										|
+|														|
++-------------------------------------------------------+
+	https://stackoverflow.com/questions/17715833/how-to-export-extjs-grid-data-to-excel
+	For extjs < 4 http://edspencer.net/2009/11/24/ext-ux-exporter-export-any-grid-to-excel-or-csv/
+
+	For extjs >= 4 http://www.sencha.com/forum/showthread.php?136598-Export-store-to-Excel	
+		<script type="text/javascript" src="Base64.js"></script>
+		<script type="text/javascript" src="Button.js"></script>
+		<script type="text/javascript" src="Formatter.js"></script>
+		<script type="text/javascript" src="./excelFormatter/ExcelFormatter.js"></script>
+		<script type="text/javascript" src="./excelFormatter/Workbook.js"></script>
+		<script type="text/javascript" src="./excelFormatter/Worksheet.js"></script>
+		<script type="text/javascript" src="./excelFormatter/Cell.js"></script>
+		<script type="text/javascript" src="./excelFormatter/Style.js"></script>
+		<script type="text/javascript" src="Exporter.js"></script>
+		
+Ext.data.SimpleStore
+https://www.tutorialspoint.com/extjs/extjs_quick_guide.htm
+
 https://github.com/nutzam/nutzdemo/blob/2d88a56aa413cade4a7a97f51f68afa373022927/demo/ext_by_jhp/WebRoot/index.jsp#L295
+Ext.data.Store type: 'ajax'
+
 https://github.com/vriche/pms/blob/87a8638f2ab91e9fcd4d01ad50eb4a464a9de9ab/src/main/webapp/samples/index2.jsp#L99
+Ext.data.ArrayStore
+
+
 https://github.com/suevip1/omeng.cc/blob/dffea0dbc666272712e82ef4ce25e427f97d05a1/management/manager/src/main/webapp/view/merchants/employee.jsp#L98
 expoty to excel by java
-
+//https://github.com/cdjackson/HABmin/blob/1d5621ecf73497dfdeac28f97dbe4994d41d75a9/app/app.js#L578
+//language extrenal variables
 //export to excel by js
 https://github.com/loiane/extjs-export-excel/blob/master/WebContent/js/export-grid.js
 
 https://github.com/hmlzs/hmlzs/blob/23fc74a96b4393be0d63f2267dc708968300417b/src/main/webapp/WEB-INF/admin/tree.jsp#L508
+//Ext.data.JsonStore
 
 //add record excel
 https://github.com/jrjt/j2eeframe/blob/fc1323c508cfb1b3d59a77100b46a26a5f46d6da/com-sit-framework/src/main/webapp/module/view/CsContractInfoList.js#L750

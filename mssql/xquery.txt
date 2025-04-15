@@ -1,0 +1,8 @@
+ELECT sptLink.ID
+    , TO1.Chassis.value('entry[@key="field_name1"][1]/@value','VARCHAR(100)') AS shalom
+   
+   
+    FROM spt_link sptLink CROSS APPLY (select CAST( sptLink.attributes AS xml)) as T(X)
+      CROSS APPLY T.X.nodes('/Attributes/Map') AS TO1(Chassis)
+      inner join spt_application sptApplication on sptApplication.id=sptLink.application
+      where sptApplication.name='app_name'

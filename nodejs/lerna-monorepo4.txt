@@ -14,6 +14,9 @@
 	cd C:\nodeDev && git init my-Lerna && cd my-Lerna && lerna init && npm install
 	
 	
+
+	
+	
 +-----------------------------------------------------------+
 |															|
 |	ADD PACKAGE cli-reporter								|
@@ -36,6 +39,16 @@
 	
 +-----------------------------------------------------------+
 |															|
+|	ADD PACKAGE update root									|
+|															|
++-----------------------------------------------------------+	
+	
+npm i @babel/core@^7.14.6 @babel/plugin-proposal-class-properties@^7.14.5 @babel/plugin-proposal-export-default-from@^7.14.5 @babel/plugin-proposal-export-namespace-from@^7.14.5 @babel/plugin-transform-runtime@^7.14.5 @babel/preset-env@^7.14.7 @babel/runtime@^7.14.6 @commitlint/cli@^13.1.0 @commitlint/config-conventional@^13.1.0 @percy/cli@^1.0.0-beta.61 @testing-library/dom@^8.1.0 @testing-library/jest-dom@^5.14.1 @testing-library/user-event@^13.2.1 all-contributors-cli@^6.19.0 cross-env@^5.2.0 cross-spawn@^6.0.5 doctoc@^1.4.0 eslint@^7.28.0 fs-extra@^8.1.0 glob@^7.1.4 husky@^7.0.0 jest@^27.0.6 jest-junit@^10.0.0  lint-staged@^11.1.1 node-gyp@^7.1.2 prettier@^2.2.1 rimraf@^3.0.0 stylelint@^13.13.1 --save-dev
+
+lerna add @lerna-monorepo4/cli@^1.0.0 --dev
+	
++-----------------------------------------------------------+
+|															|
 |	ADD PACKAGE scss-generator								|
 |															|
 +-----------------------------------------------------------+
@@ -49,7 +62,8 @@
 	lerna create @lerna-monorepo4/layout --yes
 	
 
-	
+	lerna exec npm i "core-js@^3.6.5 rimraf@^3.0.0 --save-dev" --scope=@lerna-monorepo4/layout
+
 		
 	lerna add @lerna-monorepo4/cli@^1.0.0 --dev --scope=@lerna-monorepo4/layout
 	lerna add @lerna-monorepo4/cli-reporter@^1.0.0 --dev --scope=@lerna-monorepo4/layout
