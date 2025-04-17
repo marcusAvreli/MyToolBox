@@ -30,4 +30,11 @@
 
 	# Windows
 	javac -cp .;path\to\antlr-4.8-complete.jar .\com\sevan\pond\*.java
-	
+
+
++-------------------------------------------------------+
+|										======20======	|
+|	JAVA CFR DECOMPILER									|
+|														|
++-------------------------------------------------------+
+	java -jar cfr-0.137.jar <PATH_TO_TARGET_JAR_FILE> --outputdir <PATH_TO_OUTPUT_DIR>

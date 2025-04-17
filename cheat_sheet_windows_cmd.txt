@@ -216,14 +216,6 @@
 |														|
 +-------------------------------------------------------+
 	net user <SAMACCOUNT_NAME> /DOMAIN
- 
-
-+-------------------------------------------------------+
-|										======20======	|
-|	JAVA CFR DECOMPILER									|
-|														|
-+-------------------------------------------------------+
-	java -jar cfr-0.137.jar <PATH_TO_TARGET_JAR_FILE> --outputdir <PATH_TO_OUTPUT_DIR>
 
 
 +-------------------------------------------------------+
@@ -246,6 +238,20 @@
 	https://technet.microsoft.com/en-us/library/bb490995.aspx
 		*make sure you have a space between the = and the new name (ie. displayname= "New Name", NOT displayname="New Name")
 
+	
++-------------------------------------------------------+
+|										======23======	|
+|	RESTART SERVICE										|
+|														|
++-------------------------------------------------------+
+	https://stackoverflow.com/questions/7831519/how-to-restart-service-using-command-prompt
+	net stop "my service name"
+	net start "my service name"
+	
+	net.exe stop "servicename" && net.exe start "servicename"
+
+	net stop "service name" && net start "service name"
+
 
 +-------------------------------------------------------+
 |										======23======	|
@@ -263,17 +269,3 @@
 |														|
 +-------------------------------------------------------+
 	shutdown /r /m \\<hostname> \t 1
-	
-	
-+-------------------------------------------------------+
-|										======23======	|
-|	RESTRART SERVICE									|
-|														|
-+-------------------------------------------------------+
-	https://stackoverflow.com/questions/7831519/how-to-restart-service-using-command-prompt
-	net stop "my service name"
-	net start "my service name"
-	
-	net.exe stop "servicename" && net.exe start "servicename"
-
-net stop "service name" && net start "service name"
