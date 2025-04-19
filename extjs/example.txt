@@ -16,7 +16,86 @@
 		<script type="text/javascript" src="./excelFormatter/Cell.js"></script>
 		<script type="text/javascript" src="./excelFormatter/Style.js"></script>
 		<script type="text/javascript" src="Exporter.js"></script>
-		
+	https://github.com/pimcore/admin-ui-classic-bundle/blob/b83f5fc28d1873a7f4750cfca1e643f6872bd3c3/public/js/pimcore/asset/gridexport/csv.js
+	//export to excel by js
+	https://github.com/loiane/extjs-export-excel/blob/master/WebContent/js/export-grid.js
+
+
++-------------------------------------------------------+
+|									======1_OF_5======	|
+|	STORE TYPES											|
+|														|
++-------------------------------------------------------+
+	Ext.data.SimpleStore
+	Ext.data.ArrayStore
+	Ext.data.JsonStore
+
+
++-------------------------------------------------------+
+|									======1_OF_5======	|
+|	JSON STRING TO JSON OBJECT							|
+|														|
++-------------------------------------------------------+
+	var jsonObject = Ext.decode(jsonString);
+
+
++-------------------------------------------------------+
+|									======1_OF_5======	|
+|	BEST PRACTICES MVC									|
+|														|
++-------------------------------------------------------+
+	https://github.com/Fredric/ExtJS-Basecamp/tree/ce53b436cd0210218c9022d44b17a5e742ca5d08/resources/images/icons
+
+
++-------------------------------------------------------+
+|									======1_OF_5======	|
+|	DYNAMIC PAGES										|
+|														|
++-------------------------------------------------------+
+	https://stackoverflow.com/questions/33867941/extjs4-1-1-pagingtoolbar-not-worked-on-firefox
+	https://stackoverflow.com/questions/7118800/extjs-paging-problem-with-arraystore
+
+
++-------------------------------------------------------+
+|									======1_OF_5======	|
+|	VERSIONING											|
+|														|
++-------------------------------------------------------+
+	https://stackoverflow.com/questions/21432441/has-no-method-getcolumnmodel-extjs4
+	var cm = this.grid.getColumnModel(); extjs3
+	var columns = this.grid.getView().getHeaderCt().getGridColumns(); extjs4
+
+
++-------------------------------------------------------+
+|									======1_OF_5======	|
+|	CMS													|
+|														|
++-------------------------------------------------------+
+	https://github.com/cetera-labs/fastsite-cms/blob/b95c4df12fc1b43cc0162e4342f237996a8b3475/cms/app/eventlog/Panel.js#L81
+	https://github.com/rukzuk/rukzuk/blob/41d84a6b03d88e5bd4a05d99ea7d96f005fcc620/app/js/CMS/ModuleGrid.js#L21
+
+
++-------------------------------------------------------+
+|									======1_OF_5======	|
+|	RTL													|
+|														|
++-------------------------------------------------------+
+	https://github.com/yyzwz/rental-housing/blob/c3e049f5c0696c35b5b8b23f2cba819b0f80f68c/WebContent/static/ext/examples/portal/portal.js#L460
+	https://github.com/open-city/OpenTripPlanner/blob/853161b44a90ef49614f8e33e94c01f478ac15c7/opentripplanner-webapp/src/main/webapp/js/otp/core/UI.js#L54
+	
+	https://github.com/bradyhouse/bradyhouse.github.io/blob/ceab39f5e75f4865c72e763fdf86f425f9bcf9f7/extjs5/fiddle-20150926-PivotGrid/app.js#L3849
+	//onBeforeGridRendered rowTpl
+	https://github.com/brianhealey/jaffa-framework/blob/9a36f30a820d761209cb56c5a748dd9e889e2da8/jaffa-ria/source/html/js/extjs/extjs-jaffaria-rtl.js
+
+
++-------------------------------------------------------+
+|									======1_OF_5======	|
+|	PET PROJECT											|
+|														|
++-------------------------------------------------------+
+	https://github.com/open-city/OpenTripPlanner/blob/853161b44a90ef49614f8e33e94c01f478ac15c7/opentripplanner-webapp/src/main/webapp/js/otp/config.js
+
+
 Ext.data.SimpleStore
 https://www.tutorialspoint.com/extjs/extjs_quick_guide.htm
 
@@ -31,8 +110,7 @@ https://github.com/suevip1/omeng.cc/blob/dffea0dbc666272712e82ef4ce25e427f97d05a
 expoty to excel by java
 //https://github.com/cdjackson/HABmin/blob/1d5621ecf73497dfdeac28f97dbe4994d41d75a9/app/app.js#L578
 //language extrenal variables
-//export to excel by js
-https://github.com/loiane/extjs-export-excel/blob/master/WebContent/js/export-grid.js
+
 
 https://github.com/hmlzs/hmlzs/blob/23fc74a96b4393be0d63f2267dc708968300417b/src/main/webapp/WEB-INF/admin/tree.jsp#L508
 //Ext.data.JsonStore
@@ -49,6 +127,6 @@ https://github.com/Intermesh/groupoffice/blob/d1637edc5898a752c0e0fc6e1e4b0ed115
 https://stackoverflow.com/questions/10993045/creating-a-dynamic-grid-with-extjs
 https://github.com/JanesenGit/FastChar-ExtJs/blob/31a99c0d1241c23af24e5f8c44380f6e80f02528/web/base/utils/src/fast-ext-grid.ts#L4863
 
-https://stackoverflow.com/questions/21432441/has-no-method-getcolumnmodel-extjs4
-var cm = this.grid.getColumnModel(); extjs3
-var columns = this.grid.getView().getHeaderCt().getGridColumns(); extjs4
+
+
+https://github.com/gustavohenrique/django-cash/blob/f82d4261f17c86e8adc8ed34f754c817d6ce7623/media/js/apps/money.js#L132
