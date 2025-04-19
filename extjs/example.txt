@@ -73,6 +73,7 @@
 +-------------------------------------------------------+
 	https://github.com/cetera-labs/fastsite-cms/blob/b95c4df12fc1b43cc0162e4342f237996a8b3475/cms/app/eventlog/Panel.js#L81
 	https://github.com/rukzuk/rukzuk/blob/41d84a6b03d88e5bd4a05d99ea7d96f005fcc620/app/js/CMS/ModuleGrid.js#L21
+		i18n
 
 
 +-------------------------------------------------------+
@@ -81,6 +82,7 @@
 |														|
 +-------------------------------------------------------+
 	https://github.com/yyzwz/rental-housing/blob/c3e049f5c0696c35b5b8b23f2cba819b0f80f68c/WebContent/static/ext/examples/portal/portal.js#L460
+		//multilanguage rtl
 	https://github.com/open-city/OpenTripPlanner/blob/853161b44a90ef49614f8e33e94c01f478ac15c7/opentripplanner-webapp/src/main/webapp/js/otp/core/UI.js#L54
 	
 	https://github.com/bradyhouse/bradyhouse.github.io/blob/ceab39f5e75f4865c72e763fdf86f425f9bcf9f7/extjs5/fiddle-20150926-PivotGrid/app.js#L3849
@@ -90,11 +92,18 @@
 
 +-------------------------------------------------------+
 |									======1_OF_5======	|
+|	GRID ROW SELECTION									|
+|														|
++-------------------------------------------------------+
+
+
++-------------------------------------------------------+
+|									======1_OF_5======	|
 |	PET PROJECT											|
 |														|
 +-------------------------------------------------------+
 	https://github.com/open-city/OpenTripPlanner/blob/853161b44a90ef49614f8e33e94c01f478ac15c7/opentripplanner-webapp/src/main/webapp/js/otp/config.js
-
+		//multilanguage rtl
 
 Ext.data.SimpleStore
 https://www.tutorialspoint.com/extjs/extjs_quick_guide.htm

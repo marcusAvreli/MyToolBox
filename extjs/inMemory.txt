@@ -1,0 +1,80 @@
+//https://fiddle.sencha.com/#fiddle/13vo&view/editor
+Ext.application({
+    name : 'Fiddle',
+    
+    launch : function() {
+        Ext.create('Ext.data.Store', {
+            autoLoad: false,
+            storeId:'simpsonsStore',
+            fields:['name', 'email', 'phone'],
+            data:{'items':[
+                { 'name': 'Lisa',  "email":"lisa@simpsons.com",  "phone":"555-111-1224"  },
+                { 'name': 'Bart',  "email":"bart@simpsons.com",  "phone":"555-222-1234" },
+                { 'name': 'Homer', "email":"homer@simpsons.com",  "phone":"555-222-1244"  },
+                { 'name': 'Marge', "email":"marge@simpsons.com", "phone":"555-222-1254"  }
+            ]},
+            proxy: {
+                type: 'memory',
+                reader: {
+                    type: 'json',
+                    root: 'items'
+                }
+            }
+        });
+        
+        Ext.create('Ext.grid.Panel', {
+            id: 'myGrid',
+            title: 'Simpsons',
+            store: Ext.data.StoreManager.lookup('simpsonsStore'),
+            columns: [
+                { text: 'Name',  dataIndex: 'name', flex: 1 },
+                { text: 'Email', dataIndex: 'email', flex: 2 },
+                { text: 'Phone', dataIndex: 'phone', flex: 1 }
+            ],
+            dockedItems: [
+                {
+                    xtype: 'toolbar',
+                    dock: 'top',
+                    items: [
+                        {
+                            xtype: 'label',
+                            text: 'Store records count:',
+                        },
+                        {
+                            xtype: 'displayfield',
+                            value: 'not loaded yet'
+                        },
+                        {
+                            xtype: 'button',
+                            action: 'test',
+                            text: 'Test'
+                        }
+                    ]
+                }
+            ],
+            listeners: {
+                afterrender: {
+                    fn: function(grid) {
+                        var myStore = grid.getStore();
+                        myStore.on({
+                            load: {
+                                fn: function(store) {
+                                    var gridRecordsCount = store.getTotalCount(),
+                                        testButton = grid.down('button[action=test]');
+                                    grid.down('displayfield').setValue(gridRecordsCount);
+                                    if(gridRecordsCount > 0) {
+                                        testButton.show();
+                                    } else {
+                                        testButton.hide();
+                                    }
+                                }
+                            }
+                        });
+                        myStore.load();
+                    }
+                }
+            },
+            renderTo: Ext.getBody()
+        });
+    }
+});
