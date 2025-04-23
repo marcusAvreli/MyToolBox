@@ -1,0 +1,1 @@
+select   DATEADD(SECOND, CAST(sptLink.created as BIGINT)/1000 ,'1970/1/1') ,sptLink.display_name,sptIdentity.name identity_name,sptApplication.name from spt_link sptLink 
