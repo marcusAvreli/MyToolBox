@@ -194,7 +194,7 @@
 	tail -f log_file.log | grep subject_string
 	find . -cnewer log_file.log | xargs grep "subject_string"	
 	grep -Rnw . -e 'testCertificationRemediation'
-	
+	grep -RnwI /opt/tomcat90/webapps/iiq -e 'n/d/Y' --exclude="ext-all.js"
 +---------------------------------------------------+
 |													|
 |	REMOVE ONLY FILES FROM CURRENT DIRECTORY        |
@@ -398,3 +398,10 @@ https://unix.stackexchange.com/questions/718295/awk-check-date-if-today-then-fil
 https://unix.stackexchange.com/questions/256791/how-to-get-filenames-when-using-find-and-sed
 https://superuser.com/questions/1536840/convert-dates-to-epoch-value-on-multiple-columns-using-awk
 https://unix.stackexchange.com/questions/751665/select-everything-between-two-timestamps-in-a-log-file
+
++---------------------------------------------------+
+|													|
+|	LIST OF MAKE TARGETS							|
+|													|
++---------------------------------------------------+
+	make -qp | awk -F':' '/^[a-zA-Z0-9][^$#\/\t=]*:([^=]|$)/ {split($1,A,/ /);for(i in A)print A[i]}' |     sort -u | grep -w "^install$\|^uninstall$\|^clean$\|^distclean$\|^clean-all$\|^cleanall$"

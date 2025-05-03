@@ -4,7 +4,7 @@ msgbox "START"
 Dim VRstatmt
 Dim resultFileName: resultFileName="output.csv"
 Dim targetSchema : targetSchema = "IDENTITYIQ"
-Dim targetTable : targetTable = "umtb_rprt_ad"
+Dim targetTable : targetTable = "test_rprt_ad"
 Dim originalString : originalString = "insert into """ & targetSchema & """."  &"""" & targetTable & """"
 Dim sql_text :    sql_text = "Select * FROM [" & targetTable & "$]" & VRstatmt
 
@@ -107,7 +107,7 @@ function parseAndFormatValues(ByRef targetTable,ByRef csvFields,ByRef fields)
 					csvValues(j) = csvValue
 			end select    
 		end if
-		if targetTable = "umtb_rprt_ad" then
+		if targetTable = "test_rprt_ad" then
 			select case currentFieldName
 				case  "ad_field_3"
 					csvValue = Cstr(fields.item(currentFieldName))

@@ -39,7 +39,7 @@
 	3. FIND FILE SKIPPING DIRECTORIES
 		(source: https://stackoverflow.com/questions/54978756/exclude-windows-folder-in-cmd-search)
 		dir /S /B /A:-D *.mp3 *.mp4 *.jpg | findstr /V /I /C:"\\Microsoft\\" /C:"\\Windows\\" > "C:\output.txt"
-
+		dir /S /B /A:-D /c:"AccessRequestRunner" "C:\Users\markg\OneDrive\Desktop\identityiq-8.4\identityiq2\*.js" | findstr /V /I /C:"\\Microsoft\\" /C:"\\Windows\\"
 
 +-------------------------------------------------------+
 |										======4======	|

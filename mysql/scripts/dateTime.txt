@@ -1,0 +1,2 @@
+select  from_unixtime (created/1000) from spt_task_result
+select date_format(timestamp(from_unixtime (created/1000)+0),'%m/%d/%Y %h:%i') from spt_task_result

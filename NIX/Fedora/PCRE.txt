@@ -1,10 +1,15 @@
-get list of MakeFile targets
- make -qp | awk -F':' '/^[a-zA-Z0-9][^$#\/\t=]*:([^=]|$)/ {split($1,A,/ /);for(i in A)print A[i]}' |     sort -u | grep -w "^install$\|^uninstall$\|^clean$\|^distclean$\|^clean-all$\|^cleanall$"
-
-1. COMPILER
++-------------------------------------------------------+
+|									======1_of_8======	|
+|	COMPILER											|
+|														|
++-------------------------------------------------------+
 	dnf install gcc-c++ gcc
 	
-2. M4
++-------------------------------------------------------+
+|									======2_of_8======	|
+|	M4													|
+|														|
++-------------------------------------------------------+
 	cd /home/admin
 	curl -L http://ftp.gnu.org/gnu/m4/m4-1.4.19.tar.gz --output /home/admin/m4-1.4.19.tar.gz
 		tar -zxvf m4-1.4.19.tar.gz
@@ -13,14 +18,18 @@ get list of MakeFile targets
 		./configure --prefix=/usr
           make && make install 
 		
-3.BISON 
++-------------------------------------------------------+
+|									======3_of_8======	|
+|	BISON												|
+|														|
++-------------------------------------------------------+
 	[source: https://www.linuxfromscratch.org/lfs/view/development/chapter07/bison.html ]
 	cd /home/admin
 	curl -L http://ftp.gnu.org/gnu/bison/bison-3.8.1.tar.gz --output bison-3.8.1.tar.gz
 		tar -zxvf bison-3.8.1.tar.gz
 		mv /home/admin/bison-3.8.1 /home/admin/bison
 		cd /home/admin/bison
-		./configure --prefix=/usr --docdir=/usr/share/doc/bison-3.8.2
+		./configure --prefix=/usr --docdir=/usr/share/doc/bison-3.8.1
 		make
 		make install
 	OPTIONS:
@@ -28,7 +37,11 @@ get list of MakeFile targets
 		make uninstall
 		make clean
 
-4. NCURSES
++-------------------------------------------------------+
+|									======4_of_8======	|
+|	NCURSES												|
+|														|
++-------------------------------------------------------+
 	[sources: https://www.linuxfromscratch.org/lfs/view/development/chapter06/ncurses.html ]
 	Cross Compiling Temporary Tools
 	
@@ -61,13 +74,17 @@ get list of MakeFile targets
 		make install
 		make uninstall
 		make clean
-5. BZIP2	
++-------------------------------------------------------+
+|									======5_of_8======	|
+|	BZIP2												|
+|														|
++-------------------------------------------------------+	
 	[source: https://www.linuxfromscratch.org/lfs/view/9.1/chapter05/bzip2.html ]
 
 //does not contain configure script
 		cd /home/admin
-		curl -L https://www.sourceware.org/pub/bzip2/bzip2-latest.tar.gz --output bzip2-latest.tar.gz
-			tar -zxvf bzip2-latest.tar.gz
+		curl -L https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz --output bzip2-1.0.8.tar.gz
+			tar -zxvf bzip2-1.0.8.tar.gz
 			mv bzip2-1.0.8 bzip2
 			cd /home/admin/bzip2
 			make -f Makefile-libbz2_so
@@ -79,11 +96,15 @@ get list of MakeFile targets
 			ln -sv libbz2.so.1.0 /tools/lib/libbz2.so
 	
 
-6. ZLIB
++-------------------------------------------------------+
+|									======6_of_8======	|
+|	ZLIB												|
+|														|
++-------------------------------------------------------+
 	[source: https://www.linuxfromscratch.org/lfs/view/9.1/chapter06/zlib.html ]
 	
 	cd /home/admin
-	curl -L  https://zlib.net/zlib-1.2.11.tar.gz --output /home/admin/zlib-1.2.11.tar.gz
+	curl -L  https://zlib.net/fossils/zlib-1.2.11.tar.gz --output /home/admin/zlib-1.2.11.tar.gz
 	tar -zxvf /home/admin/zlib-1.2.11.tar.gz zlib-1.2.11
 	mv /home/admin/zlib-1.2.11 /home/admin/zlib
 	cd /home/admin/zlib
@@ -97,7 +118,11 @@ install
 uninstall
 
 
-7. READLINE	
++-------------------------------------------------------+
+|									======7_of_8======	|
+|	READLINE											|
+|														|
++-------------------------------------------------------+
 	[source: https://www.linuxfromscratch.org/lfs/view/9.0/chapter06/readline.html ]
 
 	cd /home/admin
@@ -123,7 +148,11 @@ distclean
 install
 uninstall
 
-8.PCRE
++-------------------------------------------------------+
+|									======8_of_8======	|
+|	PCRE												|
+|														|
++-------------------------------------------------------+
 //required
 //bzlib 
 	cd /home/admin

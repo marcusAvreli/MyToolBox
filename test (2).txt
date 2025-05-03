@@ -1,0 +1,213 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule created="1746160007247" id="7f000001968c199a81968f3f384f02f2" language="beanshell" modified="1746292071526" name="Update Task Details" significantModified="1746292071526" type="Workflow">
+  <Description>A rule used by a Workflow to determine a step action or variable value.
+
+Note that an Attributes map of all variables from the current WorkflowContext, merged with the arguments from the Step, is also passed into the workflow rule.</Description>
+  <Signature returnType="Object">
+    <Inputs>
+      <Argument name="log" type="org.apache.commons.logging.Log">
+        <Description>
+          The log object associated with the SailPointContext.
+        </Description>
+      </Argument>
+      <Argument name="context" type="sailpoint.api.SailPointContext">
+        <Description>
+          A sailpoint.api.SailPointContext object that can be used to query the database if necessary.
+        </Description>
+      </Argument>
+      <Argument name="wfcontext">
+        <Description>
+          The current WorkflowContext.
+        </Description>
+      </Argument>
+      <Argument name="handler">
+        <Description>
+          The workflow handler associated with the current WorkflowContext.
+        </Description>
+      </Argument>
+      <Argument name="workflow">
+        <Description>
+          The current Workflow definition.
+        </Description>
+      </Argument>
+      <Argument name="step">
+        <Description>
+          The current Step.
+        </Description>
+      </Argument>
+      <Argument name="approval">
+        <Description>
+          The current Approval.
+        </Description>
+      </Argument>
+      <Argument name="item">
+        <Description>
+          The WorkItem being processed.
+        </Description>
+      </Argument>
+    </Inputs>
+    <Returns>
+      <Argument name="Object">
+        <Description>
+          The result of the workflow rule; dependent on the rule itself.
+        </Description>
+      </Argument>
+    </Returns>
+  </Signature>
+  <Source>
+  
+  import sailpoint.object.TaskResult;
+  import sailpoint.object.ProvisioningPlan;
+    import sailpoint.object.ProvisioningPlan.AccountRequest;
+      import sailpoint.object.ProvisioningPlan.AttributeRequest;
+import sailpoint.api.Workflower;
+   import sailpoint.tools.Message;
+   Message msg = new Message();
+   msg.setType(Message.Type.Warn);
+   msg.setKey("test_message_1");
+  
+  public Map getDetails(String identityName , ProvisioningPlan plan){
+    log.warn("getDetails_start");
+    Map resultMap = null;
+    Map entitlementsBundle = null;
+    Map accountByApplication = 	null;
+		Map typesByAction = null;
+		List valuesByType = null;
+		//Map maValuesByType = null;
+    
+    if(void != plan &amp;&amp;  null != plan &amp;&amp; plan.hasRequests()){
+      List accountRequests = plan.getAccountRequests();
+      if(null != accountRequests &amp;&amp; !accountRequests.isEmpty()){
+        for(AccountRequest accountRequest : accountRequests){
+          String nativeIdentity = accountRequest.getNativeIdentity();
+            log.warn("checkPost_1");
+          String appName = accountRequest.getApplication();
+          List attributeRequests = accountRequest.getAttributeRequests();
+          if(null != attributeRequests &amp;&amp; !attributeRequests.isEmpty()){
+            for(AttributeRequest attributeRequest : attributeRequests){
+              String attReqName  = attributeRequest.getName();
+              Object attReqValueObject = attributeRequest.getValue();
+                 log.warn("checkPost_1");
+              ProvisioningPlan.Operation attReqOperation = attributeRequest.getOperation();
+              if(null != attReqValueObject){
+                   log.warn("checkPost_2");
+                 if(null == entitlementsBundle){
+                      entitlementsBundle = new HashMap();
+                 }
+                 if(appName.equals("IIQ")){                   	
+                   accountByApplication = entitlementsBundle.get("Bundle");
+                  }else{
+                    accountByApplication = entitlementsBundle.get("Entitlements");
+                  }
+                   log.warn("checkPost_3");
+                boolean accountByApplicationJustCreated = false;
+                if(null == accountByApplication){
+                  accountByApplicationJustCreated = true;
+                  accountByApplication = new HashMap();
+                }
+                 if(accountByApplicationJustCreated){
+                    if(appName.equals("IIQ")){
+                       log.warn("checkPost_4");
+                   	 accountByApplication.put("nativeIdentity",identityName);
+                     accountByApplication.put("nativeIdentityDisplayName",identityName);
+                      entitlementsBundle.put("Bundle",accountByApplication);
+                    }else{
+                       log.warn("checkPost_5");
+                      accountByApplication.put("nativeIdentity",nativeIdentity);
+                      accountByApplication.put("nativeIdentityDisplayName",nativeIdentity);
+                      entitlementsBundle.put("Entitlements",accountByApplication);
+                    }
+                  }
+                if(attReqValueObject instanceof String){
+                    log.warn("requested_Value:"+attReqValueObject);
+                 	Map typesByAction =	accountByApplication.get(attReqOperation);
+                  boolean  typesByActionFirstTime = false;
+                  if(null == typesByAction){
+                    typesByActionFirstTime = true;
+                    typesByAction = new HashMap();
+                    
+                  }
+                	 valuesByType = typesByAction.get(attReqName);
+                  boolean valuesByTypeFirstTime = false;
+                  if(null == valuesByType){
+                    valuesByTypeFirstTime = true;
+                    valuesByType = new ArrayList();
+                  }
+                  Map maValuesByType = new HashMap();
+                   maValuesByType.put("maValue",attReqValueObject);
+                 
+                  if(valuesByTypeFirstTime){
+                    valuesByType.add(maValuesByType);
+                    typesByAction.put(attReqName,valuesByType);
+                    
+                  }
+                  if(typesByActionFirstTime){
+                    accountByApplication.put(attReqOperation,typesByAction);
+                  }
+                   log.warn("checkPost_1:"+accountByApplication);
+                   log.warn("typesByAction:"+typesByAction);
+                   log.warn("checkPost_2:"+entitlementsBundle);
+                  
+                  
+                }else{
+                  if(attReqValueObject instanceof List){
+                  }
+                }
+                
+                
+                
+              }              
+            }
+          }
+        }
+      }
+    }
+    log.warn("getDetails_finish");
+    return entitlementsBundle;
+  }
+  
+  
+  
+  
+  
+String artName ="Update Task Details";
+ TaskResult current = wfcase.getTaskResult();
+Workflower workflower = wfcontext.getWorkflower();
+if(null != current ){
+log.warn("current_task_result_is_not_null");
+//current .addMessage(msg);
+  wfcase.setTaskResult(current);
+//wfcase.addMessage(msg);
+Map planArguments = plan.getArguments();
+String identityRequestId = planArguments .get("identityRequestId");
+Map details = getDetails(identityName, plan);  
+  log.warn("prov_details:"+details);
+  
+log.warn("identityRequestId:"+"1111");
+current.setAttribute("identityRequestId",identityRequestId);
+current.setAttribute("checkPost","11111");
+
+//log.warn("wfcase_as_is:"+wfcase.toXml());
+//log.warn("wfcase_root:"+wfcontext.getRootWorkflowCase().toXml());
+log.warn("wfcase_from_context:"+wfcontext.getWorkflowCase().toXml());
+ Workflower workflower2 = wfcontext.getRootContext().getWorkflower();
+ workflower2.updateTaskResult(wfcontext, current);
+  /*workflower.updateTaskResult(wfcontext, current);
+                            context.saveObject(current);
+                            wfcase.setTaskResult(current);
+context.saveObject(wfcase);
+context.commitTransaction();
+workflower.terminate(wfcase);
+*/
+}else{
+log.warn("current_task_resul_is_nullt");
+}
+if(void !=plan &amp;&amp; null !=plan &amp;&amp; plan.hasRequests()){
+log.warn("plan_provisioning_identity_endt:"+plan.getIdentity() );
+log.warn("plan_provisioning_end:"+plan.toXml() );
+
+}else{
+log.warn("plan_provisioning_is_empty_or_null" );
+}</Source>
+</Rule>

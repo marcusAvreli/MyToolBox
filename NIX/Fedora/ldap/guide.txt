@@ -1,0 +1,55 @@
++-------------------------------------------------------+
+|									======1_of_9======	|
+|	DEVELOPMENT TOOLS									|
+|														|
++-------------------------------------------------------+
+	#dnf4
+	dnf group install "Development Tools"
+
+	#dnf5
+	dnf install @development-tools
+
+
++-------------------------------------------------------+
+|									======1_of_9======	|
+|	DEVELOPMENT TOOLS									|
+|														|
++-------------------------------------------------------+
+	#install by bit number
+	dnf install openssl-devel*64* cyrus-sasl*64* cyrus-sasl-devel*64*
+	openssl-devel.x86_64  cyrus-sasl  cyrus-sasl-devel	
+
+
++-------------------------------------------------------+
+|									======1_of_9======	|
+|	PCRE												|
+|														|
++-------------------------------------------------------+	
+
+	
++-------------------------------------------------------+
+|									======1_of_9======	|
+|	BERKLEY DB											|
+|														|
++-------------------------------------------------------+	
+https://github.com/narkoleptik/os-x-berkeleydb-patch
+	curl -L  https://anduin.linuxfromscratch.org/BLFS/bdb/db-5.3.28.tar.gz --output /home/admin/db-5.3.28.tar.gz
+	cd /home/admin
+	tar -zxvf db-5.3.28.tar.gz
+	mv db-5.3.28 db
+	cd /home/admin/db/build_unix
+chmod -R 755 /home/admin/db
+	../dist/configure CFLAGS="-Wno-error=implicit-function-declaration"	--enable-compat185 --enable-dbm  --disable-static              --enable-cxx
+
+	
++-------------------------------------------------------+
+|									======1_of_9======	|
+|	OPENLDAP											|
+|														|
++-------------------------------------------------------+		
+	curl -L  https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.4.50.tgz --output /home/admin/openldap-2.4.50.tgz
+	cd /home/admin
+	tar -zxvf openldap-2.4.50.tgz
+	mv openldap-2.4.50 openldap
+	cd /home/admin/openldap
+	env CPPFLAGS="-I/usr/local/BerkeleyDB.5.3/include" LDFLAGS="-L/usr/local/BerkeleyDB.5.3/lib" ./configure --sysconfdir=/etc  --enable-ldap    --enable-slapd  --enable-bdb --with-cyrus-sasl  --with-tls=openssl   --enable-rewrite --enable-rlookups    --enable-dynamic --enable-ppolicy  --enable-memberof  --enable-refint --enable-sssvlv;make depend;make;make install
