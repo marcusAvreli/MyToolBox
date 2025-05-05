@@ -1,0 +1,84 @@
+public class BaseIIQConnect {
+
+public static BaseIIQConnect client;
+public static SailPointContext context;
+private static SpringStarter starter;
+public static Logger log = Logger.getLogger(BaseIIQConnect.class);
+private static Logger rootlog = Logger.getRootLogger();
+
+
+static {
+System.setProperty("log4j.configurationFile", "<>/log4j2.properties");
+System.setProperty("sailpoint.home", "<localtomcatinstall>");
+System.setProperty("allowNoBroker", "true");
+
+try {
+initialize();
+} catch (Exception e) {
+e.printStackTrace();
+}
+}
+
+public BaseIIQConnect() {
+
+}
+
+
+public static void initialize() throws GeneralException {
+//IIQ propeties file must be present in java project.
+rootlog.setLevel(Level.OFF);
+final String dflt = BrandingServiceFactory.getService().getSpringConfig();
+SpringStarter.minimizeServices();
+starter = new SpringStarter(dflt);
+//starter = new SpringStarter("iiqBeans");
+
+System.out.print("Fetching Context...");
+starter.start();
+context = SailPointFactory.createContext("<context_name>");
+
+//Print env specific info (so we know where we are)
+Custom c = context.getObject(Custom.class, "ffff");
+System.out.println("Done: " + c.get("environment"));
+
+rootlog.setLevel(Level.OFF);
+}
+
+public static void close() throws GeneralException {
+SailPointFactory.releaseContext(context);
+starter.close();
+}
+
+public static void shutdown() throws GeneralException {
+close();
+}
+
+public static SailPointContext getContext() {
+return context;
+}
+
+@Override
+protected void finalize() throws Throwable {
+this.shutdown();
+}
+
+public static AbstractXmlObject xmlToObj(String xml) throws Throwable {
+       try {
+           if (xml == null) {
+               throw new GeneralException("XML empty");
+           }
+           final XMLObjectFactory factory = XMLObjectFactory.getInstance();
+           final Object obj = factory.parseXml(context, xml, false);
+           if (!(obj instanceof AbstractXmlObject)) {
+               throw new GeneralException("Invalid object in input XML");
+           }
+           AbstractXmlObject spObj = (AbstractXmlObject) obj;
+           return spObj;
+       }
+       catch (Throwable t) {
+           throw t;
+       }
+}
+
+
+
+}
