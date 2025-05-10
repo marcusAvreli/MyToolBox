@@ -1,6 +1,19 @@
++-------------------------------------------------------+
+|									======1_of_2======	|
+|	IDM PLUGIN URL										|
+|														|
++-------------------------------------------------------+
+	http://<host_name:port>/identityiq/plugins/pluginPage.jsf?pn=ScaffoldingPlugin
+	https://community.sailpoint.com/t5/IdentityIQ-Forum/Storing-huge-data-set-in-Sailpoint/m-p/104900
+
+
++-------------------------------------------------------+
+|									======2_of_2======	|
+|	GENERATE OAUTH2 TOKEN								|
+|														|
++-------------------------------------------------------+
+	http://base_path/iiq/oauth2/generateToken
+
+
 https://community.sailpoint.com/t5/IdentityIQ-Articles/Building-IdentityIQ-Plugin-Projects-with-Gradle-and-Angular-4/ta-p/78820
 https://community.sailpoint.com/t5/Technical-White-Papers/IdentityIQ-REST-API-Integration/ta-p/76814
-
-Idm_Plugin_Url
-http://<host_name:port>/identityiq/plugins/pluginPage.jsf?pn=ScaffoldingPlugin
-https://community.sailpoint.com/t5/IdentityIQ-Forum/Storing-huge-data-set-in-Sailpoint/m-p/104900
