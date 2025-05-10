@@ -30,7 +30,7 @@
 
 	# Windows
 	javac -cp .;path\to\antlr-4.8-complete.jar .\com\sevan\pond\*.java
-
+	javac  -classpath lib/*  src\myAntHelloWorld\*.java -d result
 
 +-------------------------------------------------------+
 |										======20======	|
