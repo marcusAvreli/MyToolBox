@@ -42,7 +42,7 @@ https://www.linuxfromscratch.org/lfs/view/9.1-systemd/chapter06/perl.html#conten
 	tar -zxvf autoconf-2.71.tar.gz
 	mv autoconf-2.71 autoconf
 		cd /home/admin/autoconf
-		./configure --prefix=/opt/autoconf 		make && 		make install
+		./configure --prefix=/opt/autoconf 	&&	make && 		make install
 		ln -s /opt/autoconf/bin/autoconf /usr/bin/autoconf
 
 		

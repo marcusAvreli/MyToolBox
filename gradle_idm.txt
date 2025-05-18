@@ -154,10 +154,23 @@ task deploy(type: Exec, dependsOn: build) {
 |														|
 +-------------------------------------------------------+
 
+import org.apache.tools.ant.filters.ReplaceTokens
+
+task clean (type: Delete){
+	delete 'build'
+}
+
+task build(type: Copy){
+	from {'src'}
+	into {'build/plugin'}
+	filter (ReplaceTokens, tokens: [VERSION: version, PluginName: pluginName])
+}
 
 gradlew build
 
 http://192.168.243.143:8080/iiq/plugins/pluginPage.jsf?pn=mgPluginReport
 http://192.168.243.143:8080/iiq/plugins/pluginPage.jsf?pn=myInterceptor2
 http://192.168.243.143:8080/iiq/plugins/pluginPage.jsf?pn=ScaffoldingPlugin
+http://192.168.46.128:8080/iiq/plugins/pluginPage.jsf?pn=ScaffoldingPlugin
+http://192.168.46.128:8080/iiq/plugins/pluginPage.jsf?pn=idmPlugin
 http://<host_name:port>/identityiq/plugins/pluginPage.jsf?pn=ScaffoldingPlugin

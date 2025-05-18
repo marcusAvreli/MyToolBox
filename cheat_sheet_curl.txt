@@ -1,20 +1,47 @@
 +-------------------------------------------------------+
-|										======1======	|
-|			SEND REQUEST TO REST						|
+|									======1_of_5======	|
+|	GET													|
 |														|
 +-------------------------------------------------------+
+	curl -v http://localhost:8080/myRestApi/rprts/getAll -X GET -H "Content-Type" : "application/json"
+	curl -v -X GET -H "Content-Type" : "application/json" http://localhost:5000/users/b0beff37-00a4-44a3-a7ea-cbc655625816
+	curl -X GET -H "Content-type" : "application/json" -H "Accept" : "application/json" -d {"name":"name1"} http://localhost:8080/reportRest1/report
 
-curl -v -k "path" -X POST -d 'data' -H "Content-Type: application/json" --cookie ./cookies.txt
-curl -v -k -H "Content-type":"application/json" -H "Accept":"application/json"  -c cookies.txt -X POST -d 'data' path
 
-curl -X GET -H "Content-type: application/json" -H "Accept: application/json" -d {"name":"name1"} http://localhost:8080/reportRest1/report
-curl -v -k   -X POST   -d "{\"email\":\"test\",\"password\":\"test\"}" -H "Content-Type: application/json"  http://localhost:8080/myRestApi/user/authenticate
++-------------------------------------------------------+
+|									======2_of_5======	|
+|	POST												|
+|														|
++-------------------------------------------------------+
+	curl -v -k http://localhost:8080/myRestApi/user/register -X POST -H "Content-Type: application/json" -d "{\"login\":\"123\",\"email\":\"markgav19@gmail.com\",\"password\":\"12345\",\"langKey\":\"en\"}" 
+	curl -v -k http://localhost:8080/myRestApi/rprts/insert -X POST -H "Content-Type: application/json" -d "{\"id\":1,\"name\":\"markgav19@gmail.com\",\"displayName\":\"12345\",\"description\":\"en\",\"disabled\":0}" 
+	curl -v -k http://localhost:8080/myRestApi/rprts/insert -X POST -H "Content-Type: application/json" -d "{\"id\":-1,\"name\":\"dsadsa\",\"displayName\":null,\"description\":\"asdas\",\"disabled\":0}"
 
-curl -v -k http://localhost:8080/myRestApi/user/register -X POST -H "Content-Type: application/json" -d "{\"login\":\"123\",\"email\":\"markgav19@gmail.com\",\"password\":\"12345\",\"langKey\":\"en\"}" 
-curl -v -k http://localhost:8080/myRestApi/rprts/insert -X POST -H "Content-Type: application/json" -d "{\"id\":1,\"name\":\"markgav19@gmail.com\",\"displayName\":\"12345\",\"description\":\"en\",\"disabled\":0}" 
-curl -v -k http://localhost:8080/myRestApi/rprts/insert -X POST -H "Content-Type: application/json" -d "{\"id\":-1,\"name\":\"dsadsa\",\"displayName\":null,\"description\":\"asdas\",\"disabled\":0}"
-curl -v -k http://localhost:8080/myRestApi/rprts/getAll -X GET -H "Content-Type: application/json"
-curl -v -k -X GET -H "Content-Type: application/json" http://localhost:5000/users/b0beff37-00a4-44a3-a7ea-cbc655625816
+
++-------------------------------------------------------+
+|									======3_of_5======	|
+|	COOKIES												|
+|														|
++-------------------------------------------------------+
+	curl -v -k "path" -X POST -d 'data' -H "Content-Type: application/json" --cookie ./cookies.txt
+	curl -v -k -H "Content-type":"application/json" -H "Accept":"application/json"  -c cookies.txt -X POST -d 'data' path
+
+
++-------------------------------------------------------+
+|									======4_of_5======	|
+|	DOWNLOAD FILE										|
+|														|
++-------------------------------------------------------+
+	curl -L https://www.cpan.org/src/5.0/perl-5.34.0.tar.gz --output perl-5.34.0.tar.gz 
+
+
++-------------------------------------------------------+
+|									======5_of_5======	|
+|	AUTHORIZATION										|
+|														|
++-------------------------------------------------------+
+	curl -v -k -H "Content-type":"application/json" -H "Accept":"application/json" -H "Authorization":"Basic c3BhZG1pbjphZG1pbg=="  -H "X-XSRF-TOKEN": "qyQFC/OlsUx81xtw2d/W2LGfeQfLjDlGtnPjKWy0Yvo=" <http://url>
+
 
 Note: Unnecessary use of -X or --request, POST is already inferred.
 *   Trying [::1]:8080...
@@ -46,10 +73,3 @@ jersey 2 error
 
 https://stackoverflow.com/questions/978061/http-get-with-request-body
 
-+-------------------------------------------------------+
-|										======1======	|
-|			DOWNLOAD FILE								|
-|														|
-+-------------------------------------------------------+
-
-curl -L https://www.cpan.org/src/5.0/perl-5.34.0.tar.gz --output perl-5.34.0.tar.gz 

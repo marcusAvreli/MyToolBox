@@ -4,7 +4,9 @@
 |														|
 +-------------------------------------------------------+
 	http://<host_name:port>/identityiq/plugins/pluginPage.jsf?pn=ScaffoldingPlugin
-	https://community.sailpoint.com/t5/IdentityIQ-Forum/Storing-huge-data-set-in-Sailpoint/m-p/104900
+	
+	BasePluginResource
+	http://<host_name:port>/iiq/plugin/rest/<base_path>/<method_path>/query_param
 
 
 +-------------------------------------------------------+
@@ -12,8 +14,10 @@
 |	GENERATE OAUTH2 TOKEN								|
 |														|
 +-------------------------------------------------------+
-	http://base_path/iiq/oauth2/generateToken
+	http://<host_name:port>/iiq/oauth2/generateToken
 
 
+https://github.com/sergevoina/identityiq-plugin-scaffolding/blob/1d48d36914793aacf5365ed5e83e3f74e50d9783/ng2page/src/app/csrf.interceptor.ts#L21
 https://community.sailpoint.com/t5/IdentityIQ-Articles/Building-IdentityIQ-Plugin-Projects-with-Gradle-and-Angular-4/ta-p/78820
 https://community.sailpoint.com/t5/Technical-White-Papers/IdentityIQ-REST-API-Integration/ta-p/76814
+https://community.sailpoint.com/t5/IdentityIQ-Forum/Storing-huge-data-set-in-Sailpoint/m-p/104900

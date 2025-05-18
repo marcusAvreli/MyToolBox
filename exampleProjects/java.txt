@@ -57,7 +57,7 @@ JWT
 https://github.com/bbarbs/spring-boot-jwt
 https://www.benchresources.net/jersey-2-x-web-service-integrating-with-spring-security/
 https://github.com/palominolabs/jersey-cors-filter/tree/master/src/main/java
-
+https://github.com/kylinsystems/kbs-plugin-icreated-webstore-api/blob/d22c7fecc16cf07b2877535a843f799fd75ec17c/src/org/icreated/wstore/WStoreApplication.java#L19
 login/logout example jersey 1.19
 https://github.com/HuygensING/elaborate4-backend
 
