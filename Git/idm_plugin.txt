@@ -1,0 +1,29 @@
+git init
+git remote add origin <repo_url>
+
+
+
+echo "node_modules/" >> .gitignore
+echo "dist/" >> .gitignore
+
+echo ".project" >> .gitignore
+echo ".classpath" >> .gitignore
+echo ".settings/" >> .gitignore
+echo ".gradle/" >> .gitignore
+echo "bin/" >> .gitignore
+echo "build/" >> .gitignore
+echo "**/build/" >> .gitignore
+echo "dist/" >> .gitignore
+echo "**/dist/" >> .gitignore
+echo "**/node_modules/" >> .gitignore
+echo "**/.vscode/" >> .gitignore
+echo "**/.angular/" >> .gitignore
+
+
+
+git add -- . :!"**/node_modules/" :!"**/dist/" :!"**/.angular/" :!"**/.vscode/"  :!"dist/" :!"**/build/" :!"build/" :!"bin/" :!".gradle/" :!".settings/" :!".classpath" :!".project"
+git rm -r --cached node_modules
+git rm -r --cached dist
+git commit -am "initial_commit"
+git push origin master
+git push origin -d main

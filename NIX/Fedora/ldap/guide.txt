@@ -8,6 +8,7 @@
 
 	#dnf5
 	dnf install @development-tools
+	dnf install @build-essential
 
 
 +-------------------------------------------------------+
@@ -52,4 +53,48 @@ chmod -R 755 /home/admin/db
 	tar -zxvf openldap-2.4.50.tgz
 	mv openldap-2.4.50 openldap
 	cd /home/admin/openldap
-	env CPPFLAGS="-I/usr/local/BerkeleyDB.5.3/include" LDFLAGS="-L/usr/local/BerkeleyDB.5.3/lib" ./configure --sysconfdir=/etc  --enable-ldap    --enable-slapd  --enable-bdb --with-cyrus-sasl  --with-tls=openssl   --enable-rewrite --enable-rlookups    --enable-dynamic --enable-ppolicy  --enable-memberof  --enable-refint --enable-sssvlv;make depend;make;make install
+	env CPPFLAGS="-I/usr/local/BerkeleyDB.5.3/include -I/usr/include" LDFLAGS="-L/usr/local/BerkeleyDB.5.3/lib -L/usr/lib -L/usr/lib64" ./configure --sysconfdir=/etc  --enable-ldap    --enable-slapd  --enable-bdb --with-cyrus-sasl  --with-tls=openssl   --enable-rewrite --enable-rlookups    --enable-dynamic --enable-ppolicy  --enable-memberof  --enable-refint --enable-sssvlv;make depend;make;make install
+env CPPFLAGS="-I/usr/local/BerkeleyDB.5.3/include -I/usr/include -I/usr/include/sys -I/usr/include/c++/14" LDFLAGS="-L/usr/local/BerkeleyDB.5.3/lib -L/usr/lib -L/usr/lib64 " ./configure --sysconfdir=/etc  --enable-ldap    --enable-slapd  --enable-bdb   --with-tls=openssl   --enable-rewrite --enable-rlookups    --enable-dynamic --enable-ppolicy  --enable-memberof  --enable-refint --enable-sssvlv;make depend;make;make install
+
+
+
+
+# specify the password generated above for [olcRootPW] section
+dn: olcDatabase={0}config,cn=config
+changetype: modify
+add: olcRootPW
+olcRootPW: {SSHA}M42P+h+HECqBlym1atskYRPcDY6zMeiU
+
+#replace to your own domain name for [dc=***,dc=***] section
+dn: dc=maccabi,dc=com
+objectClass: top
+objectClass: dcObject
+objectclass: organization
+o: Server com
+dc: maccabi
+
+dn: cn=Manager,dc=maccabi,dc=com
+objectClass: organizationalRole
+cn: Manager
+description: Directory Manager
+
+dn: ou=People,dc=maccabi,dc=com
+objectClass: organizationalUnit
+ou: People
+
+dn: ou=Group,dc=maccabi,dc=com
+objectClass: organizationalUnit
+ou: Group
+
+
+ldapadd -x -D cn=Manager,dc=maccabi,dc=com -W -f basedomain.ldif
+
+firewall-cmd --add-service={ldap}
+
+firewall-cmd --add-service={ldap}
+success
+
+firewall-cmd  --add-port=389/tcp
+firewall-cmd  --add-port=3268/tcp
+firewall-cmd --runtime-to-permanent
+firewall-cmd --reload

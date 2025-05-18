@@ -3,7 +3,7 @@
 |	IDM PLUGIN URL										|
 |														|
 +-------------------------------------------------------+
-	http://<host_name:port>/identityiq/plugins/pluginPage.jsf?pn=ScaffoldingPlugin
+	http://<host_name:port>/iiq/plugins/pluginPage.jsf?pn=ScaffoldingPlugin
 	
 	BasePluginResource
 	http://<host_name:port>/iiq/plugin/rest/<base_path>/<method_path>/query_param
