@@ -167,10 +167,3 @@ task build(type: Copy){
 }
 
 gradlew build
-
-http://192.168.243.143:8080/iiq/plugins/pluginPage.jsf?pn=mgPluginReport
-http://192.168.243.143:8080/iiq/plugins/pluginPage.jsf?pn=myInterceptor2
-http://192.168.243.143:8080/iiq/plugins/pluginPage.jsf?pn=ScaffoldingPlugin
-http://192.168.46.128:8080/iiq/plugins/pluginPage.jsf?pn=ScaffoldingPlugin
-http://192.168.46.128:8080/iiq/plugins/pluginPage.jsf?pn=idmPlugin
-http://<host_name:port>/identityiq/plugins/pluginPage.jsf?pn=ScaffoldingPlugin
