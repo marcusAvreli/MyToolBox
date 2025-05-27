@@ -1,0 +1,67 @@
+source: https://stackoverflow.com/questions/45625925/what-exactly-is-the-resourceconfig-class-in-jersey-2
++-------------------------------------------------------+
+|										======1_OF_3==	|
+|	WITH ONLY WEB.XML									|
+|														|
++-------------------------------------------------------+
+	<web-app>
+		<servlet>
+			<servlet-name>jersey-servlet</servlet-name>
+			<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+			<init-param>
+				<param-name>jersey.config.server.provider.packages</param-name>
+				<param-value>com.mypackage.to.scan</param-value>
+			</init-param>
+		</servlet>
+		...
+		<servlet-mapping>
+			<servlet-name>jersey-servlet</servlet-name>
+			<url-pattern>/api/*</url-pattern>
+		</servlet-mapping>
+		...
+	</web-app>
+
+
++-------------------------------------------------------+
+|										======2_OF_3==	|
+|	WITH BOTH WEB.XML AND APPLICATION/RESOURCECONFIG	|
+|														|
++-------------------------------------------------------+
+	<web-app>
+		<servlet>
+			<servlet-name>jersey-servlet</servlet-name>
+			<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+			<init-param>
+				<param-name>javax.ws.rs.Application</param-name>
+				<param-value>com.example.JerseyApplication</param-value>
+			</init-param>
+			
+		</servlet>
+
+		<servlet-mapping>
+				<servlet-name>jersey-servlet</servlet-name>
+				<url-pattern>/api/*</url-pattern>
+			</servlet-mapping>
+	</web-app>
+
+
++-------------------------------------------------------+
+|										======3_OF_3==	|
+|		WITH ONLY APPLICATION/RESOURCECONFIG			|
+|														|
++-------------------------------------------------------+
+
+	// 'services', '/services', or '/services/*'
+	// is all the same. Jersey will change it to be '/services/*'
+	@ApplicationPath("services")
+	public class JerseyApplication extends ResourceConfig {
+		public JerseyApplication() {
+			packages("com.abc.jersey.services");
+		}
+	}
+	<web-app>
+	<servlet-mapping>
+		<servlet-name>JerseyApplication</servlet-name>
+		<url-pattern>/services/*</url-pattern>
+	</servlet-mapping>
+	</web-app>

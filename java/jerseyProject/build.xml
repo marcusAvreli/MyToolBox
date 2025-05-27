@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!--
+https://github.com/owlcs/ore-framework/blob/3f4b2d2394e2af91603a0d963330692f15b2489d/build-input.xml
+https://github.com/OPENDAP/olfs
+https://github.com/i2p/i2p.i2p-bote/blob/0775c4dd499ccc09ab4332e7d5faf7bb3b9e8540/win32installer/build.xml.old#L433
+https://github.com/ezScrum/ezScrum/tree/16651e1c4f7cc365cc05db08e8d2e870a6c4cca3/java/ntut
+https://github.com/shyam3001/Java-Workshop/blob/373b8aab087061a0f60c90d82c9882bbbefd70c9/Day5/HelloRestService/nbproject/build-impl.xml
+https://github.com/ConcurrentSystems/pasta/blob/master/build.xml
+https://stackoverflow.com/questions/45625925/what-exactly-is-the-resourceconfig-class-in-jersey-2
+//secured
+https://github.com/FulvioValenza/TAMELESS/tree/627c1b91a6538bed94c5dc413d54ef982751d50a
+//jersey with war
+https://github.com/kgary/ser422asu_public/blob/f66739c8f3cc313fd28c20a477b3d4fcfbabacd4/BooktownREST/web.xml#L9
+//jersey with war
+https://github.com/MadrasJUG/rest.io/blob/3c18fced8b59b40256ab5545d1736e809637d8a9/build.xml
+//jersey with war
+https://github.com/genepattern/genepattern-server/tree/78a6c284e432d968a6e723a942ae54a9defe3b5f/src/org/genepattern/server/webapp/rest/api/v1
+//
+src
+	myAntHelloWorld
+		Application.java
+		Context.java
+lib	
+	*.jar
+resources
+	appllication.properties
+	logging.properties
+-->
+
+<project name="REST.IO" default="war" basedir=".">
+	
+	<property file="${basedir}/build.properties"/>
+	
+	<!-- project specific parameters -->
+	<property name="src.dir" value="${basedir}/src"/>
+	<property name="classes.dir" value="${basedir}/classes"/>
+	<property name="output.dir" value="${basedir}/output"/>
+	  <echo message="Compiling java classes: ${java.srcdir}/qml/${module} excludes: ${module.excludes}"/>
+	<path id="project.class.path">
+        <fileset dir="WEB-INF/lib">
+            <include name="*.jar"/>
+      </fileset>
+	</path>
+	
+	<target name="clean">
+		<delete dir="${output.dir}"/>
+		<delete dir="${classes.dir}"/>
+	</target>
+	
+	<target name="compile">
+		<mkdir dir="${classes.dir}" />
+		<javac srcdir="${src.dir}"
+               destdir="${classes.dir}"
+               classpathref="project.class.path"
+               debug="${javac.debug}"
+               debuglevel="${javac.debuglevel}"
+               optimize="${javac.optimize}"
+               deprecation="${javac.deprecation}"
+				
+			
+		/>
+	</target>
+	
+	<target name="jar" depends="compile">
+		<mkdir dir="${output.dir}" />
+		<jar destfile="${output.dir}/${project.name}.jar">
+			<fileset dir="${classes.dir}" />
+		</jar>
+	</target>
+	
+	<target name="war" depends="jar">
+		<war destfile="${output.dir}/${project.name}.war" webxml="${basedir}/WEB-INF/web.xml">
+			<zipfileset dir="${output.dir}" includes="${project.name}.jar" prefix="WEB-INF/lib" />
+			<zipfileset dir="WEB-INF/lib" includes="**" prefix="WEB-INF/lib" />
+			<!--
+			<zipfileset dir="${basedir}" includes="home.html" />
+			
+			<zipfileset dir="${basedir}/web/css" includes="*.css" prefix="css"/>
+			<zipfileset dir="${basedir}/web/js" includes="*.js" prefix="js"/>
+			<zipfileset dir="${basedir}/web/images" includes="*.*" prefix="images"/>
+			-->
+		</war>
+	</target>
+	
+	 <target name="copy" description="Copy the war into tomcat directory">
+		<copy todir="${tomcat.home}/webapps" verbose="true">
+			<fileset dir="${output.dir}" includes="*.war"/>
+		</copy>
+	</target>
+</project>
