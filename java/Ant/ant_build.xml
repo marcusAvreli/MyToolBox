@@ -11,6 +11,8 @@ lib
 resources
 	appllication.properties
 	logging.properties
+	
+including all jars in one resultant jar
 -->
 <project default="build">
     <property name="runner" value="myAntHelloWorld.Application"/>
