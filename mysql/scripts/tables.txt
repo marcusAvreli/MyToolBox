@@ -1,3 +1,16 @@
++-------------------------------------------------------+
+|									======1_of_5======	|
+|	CREATE DATABASE										|
+|														|
++-------------------------------------------------------+
+CREATE DATABASE galerieart;
+
+CREATE USER 'admin'@'%' IDENTIFIED BY 'zubur1';
+
+GRANT ALL PRIVILEGES ON galerieart.* TO 'admin'@'%' WITH GRANT OPTION;
+
+
+
 tbl_Report_Stored_Procs - information about stored procedures that are used for running reports
 
 CREATE TABLE IF NOT EXISTS `tbl_Report_Stored_Procs` (

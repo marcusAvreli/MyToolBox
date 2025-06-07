@@ -1,8 +1,9 @@
 +-------------------------------------------------------+
 |										======1======	|
 |					GRADLE								|
-|														|
+|			ALWAYS CHECK JAVA VERSION					|
 +-------------------------------------------------------+
+
 Initializing the Project
 	mkdir <dir_name>
 	cd <dir_name>
