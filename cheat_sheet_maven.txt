@@ -15,21 +15,19 @@ ${sys:catalina.base}
 |	WINDOWS ENVIRONMENT VARIABLES						|
 |														|
 +-------------------------------------------------------+
----Maven
-MAVEN_HOME	c:\maven
-PATH		%MAVEN_HOME%\bin
+	---Maven
+		MAVEN_HOME	c:\maven
+		PATH		%MAVEN_HOME%\bin
 
 
----Ant
+	---Ant
+		ANT_HOME	c:\ant
+		PATH		%ANT_HOME%\bin
 
-ANT_HOME	c:\ant
-PATH		%ANT_HOME%\bin
 
-
----Gradle
-
-GRADLE_HOME	c:\gradle
-PATH		%GRADLE_HOME%\bin
+	---Gradle
+		GRADLE_HOME	c:\gradle
+		PATH		%GRADLE_HOME%\bin
 
 
 +-------------------------------------------------------+
@@ -62,21 +60,18 @@ mvn archetype:generate -DgroupId=idmx3RestFrontEnd  -DartifactId=idmManager3 -Da
 |														|
 +-------------------------------------------------------+
 
-<properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-  </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
   
-   <properties>
-    
-    
-	 <maven.compiler.release>11</maven.compiler.release>
-	 <java.version>11</java.version>
-    <maven.compiler.source>${java.version}</maven.compiler.source>
-    <maven.compiler.target>${java.version}</maven.compiler.target>
-    
-  </properties>
+	<properties>
+		<java.version>11</java.version>
+		<maven.compiler.release>${java.version}</maven.compiler.release>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+	</properties>
   
 +-------------------------------------------------------+
 |														|
