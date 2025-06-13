@@ -10,12 +10,12 @@ export PATH=$M2:$PATH
 //https://winterbe.com/posts/2018/08/29/migrate-maven-projects-to-java-11-jigsaw/
 maven log4j2.properties
 ${sys:catalina.base}
-+-----------------------------------------------------------+
-|															|
-|	Windows environment variables							|
-|															|
-+-----------------------------------------------------------+
-Variable Name	Variable Value
++-------------------------------------------------------+
+|														|
+|	WINDOWS ENVIRONMENT VARIABLES						|
+|														|
++-------------------------------------------------------+
+---Maven
 MAVEN_HOME	c:\maven
 PATH		%MAVEN_HOME%\bin
 
@@ -32,22 +32,22 @@ GRADLE_HOME	c:\gradle
 PATH		%GRADLE_HOME%\bin
 
 
-+-----------------------------------------------------------+
-|															|
-|	download only dependencies								|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|														|
+|	DOWNLOAD ONLY DEPENDENCIES							|
+|														|
++-------------------------------------------------------+
 1. create directory
 	mkdir project
 	cd project
 2. create pom.xml like showed in maven/downloadOnly
 	mvn dependency:copy-dependencies -DoutputDirectory=yourfoldername -Dhttps.protocols=TLSv1.2
 
-+-----------------------------------------------------------+
-|															|
-|	create maven project									|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|														|
+|	CREATE MAVEN PROJECT								|
+|														|
++-------------------------------------------------------+
 
 ---web
 mvn archetype:generate -DgroupId=reportRest  -DartifactId=reportRest -DarchetypeArtifactId=maven-archetype-webapp -DarchetypeVersion=1.0 -DinteractiveMode=false
@@ -56,11 +56,11 @@ mvn archetype:generate -DgroupId=reportRest  -DartifactId=reportRest -Darchetype
 mvn archetype:generate -DgroupId=idmx3RestFrontEnd  -DartifactId=idmManager3 -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.1 -DinteractiveMode=false
 
 
-+-----------------------------------------------------------+
-|															|
-|	source compiler properties								|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|														|
+|	SOURCE COMPILER PROPERTIES							|
+|														|
++-------------------------------------------------------+
 
 <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -78,11 +78,11 @@ mvn archetype:generate -DgroupId=idmx3RestFrontEnd  -DartifactId=idmManager3 -Da
     
   </properties>
   
-+-----------------------------------------------------------+
-|															|
-|	INSTALL CUSTOM JAR LIBRARY IN LOCAL MAVEN				|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|														|
+|	INSTALL CUSTOM JAR LIBRARY IN LOCAL MAVEN			|
+|														|
++-------------------------------------------------------+
   
   mvn install:install-file -Dfile=identityiq.jar -DgroupId=identityiq81 -DartifactId=identityiq -Dversion=8 -Dpackaging=jar
 
@@ -133,11 +133,11 @@ MAKE PROJECT WEB
 
 	Change packaging of tutorial2 to <packaging>war</packaging>
 
-+-----------------------------------------------------------+
-|															|
-|	BUILDING MULTI MODULE PROJECT tutorial2					|
-|															|
-+-----------------------------------------------------------+
++-------------------------------------------------------+
+|														|
+|	BUILDING MULTI MODULE PROJECT tutorial2				|
+|														|
++-------------------------------------------------------+
 
 
 	mvn archetype:generate -DgroupId=tutorial2  -DartifactId=tutorial2 -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
