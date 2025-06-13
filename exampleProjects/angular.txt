@@ -93,17 +93,23 @@ https://github.com/dispatchlabs/scanner/blob/4302a5742fced2c1ac000be0e890e643b19
 //charts
 https://github.com/Marcelfrueh/streampipes/blob/dev/ui/src/app/data-explorer/echarts-renderer/echarts-grid-generator.service.ts#L20
 
-database client request counter
-//https://github.com/dashjoin/platform
+database client request counter isInRole Widget
+	//https://github.com/dashjoin/platform
+	//https://github.com/rpietzsch/platform/blob/c3f58231f37bf9691c220fbb92366315d26cbf09/angular/src/app/instance/instance.component.ts#L89
+
 //sso refresh service
 https://github.com/ncats/GSRSFrontend/blob/development_3.0/src/app/fda/service/sso-refresh.service.ts#L10
 
 https://medium.com/@afilipovich.qu/angular-state-management-how-we-replaced-ngrx-with-our-own-system-9b308428f549
+
+##ngrx
 https://github.com/dispatchlabs/scanner/tree/master
+
+##no ngrx
 https://github.com/saconnolly/ng-conf-demo-mono-repo/tree/6f7d01bea128f8c6f8b3e7668b590244c4af77bc
   //protected componentFactoryResolver: ComponentFactoryResolver;
 
-https://github.com/rpietzsch/platform/blob/c3f58231f37bf9691c220fbb92366315d26cbf09/angular/src/app/instance/instance.component.ts#L89
+
 https://github.com/gonetwork-project/gonetwork-framework/tree/0c8a77e4d49367b817d67e480752661f211c1f23
 https://github.com/takaakit/uml-diagram-for-javascript-design-pattern-examples/blob/master/behavioral-patterns/mediator/DiagramMap.html
 https://github.com/Itchimonji/design-patterns-in-typescript/blob/main/readme/images/13.%20Mediator%20example.jpg
@@ -241,6 +247,7 @@ https://github.com/auth0-blog/mean-rsvp-auth0/blob/0ef1fd599ff4bf77244823b5e4763
 
 STRONG UI shared core
 	https://github.com/Lumeer/web-ui/blob/b8eaf4ac135f47ffcedb046f278141ab6421912c/src/app/auth/auth.service.ts#L20
+	//hasRoles isAdmin
 https://github.com/Code4SocialGood/c4sg-web/blob/f3ce8b0205b1d3450c75879a511d1e4a76704232/src/app/auth.service.ts#L486
 https://github.com/GSA/srt-ui/blob/4f89b3e9beed3a0ac714fc293f02fd109fc0b9df/src/app/user/masq/masq.service.ts
 https://github.com/chris-amaya/fh-chat/blob/9f75ceb3bc6f4667664ba1ea4fb4926e17d5b4af/packages/backend/src/helpers/jwt.ts
@@ -248,7 +255,7 @@ https://github.com/mxtommy/Kip/blob/44d073c62b92562cbbfd7a62b29e86aa764bb2c6/src
 https://github.com/acgnhiki/blrec/blob/1ac194ef4dcc73f3271df3fce8d5b71a7f6aa4a4/webapp/src/app/tasks/shared/services/task.service.ts
 
 resolveComponentFactory
-	https://github.com/SUSE/stratos/blob/d32e3f2eaca14e055689da7e658e8545481ce930/src/frontend/packages/core/src/features/about/about-page/about-page.component.ts#L32
+	#ngrx	https://github.com/SUSE/stratos/blob/d32e3f2eaca14e055689da7e658e8545481ce930/src/frontend/packages/core/src/features/about/about-page/about-page.component.ts#L32
 	
 BaseEntityService api base sevice generic http client with ngrx store
 	https://github.com/wthapps/portal-frontend/blob/afc96afa941c33e7d32e40d055de85fe22326f01/src/note/app.component.ts#L182
