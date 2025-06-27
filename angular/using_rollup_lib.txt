@@ -1,0 +1,10 @@
+update angular.json
+add @angular-builders/custom-webpack in dev dependencies
+"moment": "^2.29.4",
+"path": "^0.12.7",
+"process": "^0.11.10",
+create extra-webpack.config.js
+create empty file src/process.ts
+update tsconfig.app.json
+update tsconfig.json
+add  ,schemas: [CUSTOM_ELEMENTS_SCHEMA] in app.module.ts
