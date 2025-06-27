@@ -3,7 +3,6 @@
 |	LOG OUTPUT OF SH SCRIPT									|
 |															|
 +-----------------------------------------------------------+
-
 	strace -o mylog.txt -f -e trace=file ./startup.sh
 	
 
@@ -12,7 +11,6 @@
 |	CHECK KERBEROS CONNECTIVITY								|
 |															|
 +-----------------------------------------------------------+
-
 	env KRB5_TRACE=/pathToLog/krb5.log 
 	kinit -V
 	kinit -p <username>@domain.name
@@ -23,7 +21,6 @@
 |	DELETE FILES BY EXTENSION								|
 |															|
 +-----------------------------------------------------------+
-
 	#List file to be deleted
 		find . -name "*.bak" -type f
 
@@ -36,7 +33,6 @@
 |	DELETE FILES BY DATE OF CHANGE RANGE					|
 |															|
 +-----------------------------------------------------------+
-
 	#List files that were modified between dates
 		find . -type f -newermt '01 jan 2009 00:00:00' -not -newermt '01 jan 2012 00:00:00' -ls
 
@@ -48,8 +44,7 @@
 |															|
 |	FIND LOCKS ON FILES										|
 |															|
-+-----------------------------------------------------------+ 
-
++-----------------------------------------------------------+
 	lsof +g | grep sailpoint.log | sed "s/[a-z]\+\s\+\([0-9]\+\)\s.*/\\1/" | xargs ps
 
 
@@ -58,7 +53,6 @@
 |	FILE ENCODING											|
 |															|
 +-----------------------------------------------------------+
-
 	#Text editor
 		vim file
 		:set bomb
@@ -73,7 +67,6 @@
 |	JQ														|
 |															|
 +-----------------------------------------------------------+
-
 	cat fileName.json | jq -c '. | select(.)' #if this works then json file is correct
 	cat fileName.json | jq -c '.groups.name[] | select(.)'
 	cat fileName.json | jq -c '.groups.name[] | select(.=="valueToFind")'
@@ -85,7 +78,6 @@
 |	TR														|
 |															|
 +-----------------------------------------------------------+
-
 	cat fileName.json | tr ‘\r\n’ ‘ ’ | jq .
 	
 
@@ -94,18 +86,17 @@
 |	RECODE													|
 |															|
 +-----------------------------------------------------------+
-
 	#from hebrew to entity
 		echo 'טסט מחרוזת' |recode ..html
 	#from entity to hebrew	
 		echo 'ffff- &#1504' | recode html..utf8
 
+
 +-----------------------------------------------------------+
 |															|
 |	PERMISSIONS OCTAL PRESENTATION							|
 |															|
-+-----------------------------------------------------------+	
-
++-----------------------------------------------------------+
 	stat -c '%A %a %n' /etc/passwd
 
 
@@ -113,8 +104,7 @@
 |															|
 |	LS														|
 |															|
-+-----------------------------------------------------------+	
-
++-----------------------------------------------------------+
 	ls -ltr --block-size=M
 	
 
@@ -123,7 +113,6 @@
 |	SIZE													|
 |															|
 +-----------------------------------------------------------+
-
 	#disk space usage in linux
 		df -H 
 
@@ -136,19 +125,17 @@
 |				SORT FILES BY SIZE IN DIRECTORY				|
 |															|
 +-----------------------------------------------------------+
-
 	#native
 		ls -lSh
 	#reverse
 		ls -lShr
-	
-	
+
+
 +-----------------------------------------------------------+
 |															|
 |	FIND FILES LARGER THAN 4G								|
 |															|
 +-----------------------------------------------------------+
-
 	find . -type f -size +4G
 
 
@@ -168,7 +155,7 @@
 |	FIND CLASSES IN JARS									|
 |															|
 +-----------------------------------------------------------+
-	find . -name '*.jar' -exec sh -c 'export i; for i do     zipinfo -1 "$i" | awk '\''/SignonEJB.*\.class$/{       print ENVIRON["i"] ": " $0}'\''; done' sh {} +
+	
 	
 
 +---------------------------------------------------+
@@ -218,12 +205,14 @@
 
 +---------------------------------------------------+
 |													|
-|	FIND JAVA CLASSES								|
+|	FIND_CLASS_IN_JAR								|
 |													|
 +---------------------------------------------------+
+	#method 1 (checked
 	for i in *.jar; do jar -tvf "$i" | grep -Hsi ClassName && echo "$i"; done
    
-
+	#method 2 (never checked)
+	find . -name '*.jar' -exec sh -c 'export i; for i do     zipinfo -1 "$i" | awk '\''/SignonEJB.*\.class$/{       print ENVIRON["i"] ": " $0}'\''; done' sh {} +
 +---------------------------------------------------+
 |                                                   |
 |	SIZE OF DIRECTORY								|
