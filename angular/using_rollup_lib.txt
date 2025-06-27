@@ -8,3 +8,4 @@ create empty file src/process.ts
 update tsconfig.app.json
 update tsconfig.json
 add  ,schemas: [CUSTOM_ELEMENTS_SCHEMA] in app.module.ts
+all javascript elements must have prefix-name convention
