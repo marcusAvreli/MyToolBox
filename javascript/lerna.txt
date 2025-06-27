@@ -1,0 +1,137 @@
+git init my-themes && cd my-themes && lerna init && npm install
+
+lerna create @my-themes/cli-reporter --yes
+lerna create @my-themes/cli --yes
+lerna create @my-themes/scss-generator --yes	
+lerna create @my-themes/layout --yes
+lerna create @my-themes/colors --yes
+lerna create @my-themes/type --yes
+lerna create @my-themes/import-once  --yes
+lerna create @my-themes/themes --yes
+
+
++-------------------------------------------------------+
+|										======2_OF_19==	|
+|	UPDATE CLI-REPORTER PACKAGE							|
+|														|
++-------------------------------------------------------+
+	lerna exec npm i "chalk@^4.1.1" --scope=@my-themes/cli-reporter
+
+
+
++-------------------------------------------------------+
+|										======2_OF_19==	|
+|	UPDATE CLI PACKAGE									|
+|														|
++-------------------------------------------------------+
+	lerna add @my-themes/cli-reporter@^1.0.0  --scope=@my-themes/cli
+
+	
+	lerna exec npm i "@rollup/plugin-babel@^5.3.0" --scope=@my-themes/cli
+	lerna exec npm i "@rollup/plugin-commonjs@^18.0.0" --scope=@my-themes/cli
+	lerna exec npm i "@rollup/plugin-node-resolve@^11.2.1" --scope=@my-themes/cli
+	
+	lerna exec npm i "change-case@^4.1.2" --scope=@my-themes/cli
+    lerna exec npm i "child-process-promise@^2.2.1" --scope=@my-themes/cli
+	lerna exec npm i "clipboardy@^2.1.0" --scope=@my-themes/cli
+	lerna exec npm i "enquirer@^2.3.6" --scope=@my-themes/cli
+	lerna exec npm i "fast-glob@^3.2.7" --scope=@my-themes/cli
+	lerna exec npm i "fs-extra@^8.0.1" --scope=@my-themes/cli
+	lerna exec npm i "inquirer@^6.4.1" --scope=@my-themes/cli
+	lerna exec npm i "klaw-sync@^6.0.0" --scope=@my-themes/cli
+	lerna exec npm i "lodash.template@^4.5.0" --scope=@my-themes/cli
+	lerna exec npm i "markdown-toc@^1.2.0" --scope=@my-themes/cli
+	lerna exec npm i "prettier@^2.2.1" --scope=@my-themes/cli
+	lerna exec npm i "prettier-config-carbon@^0.6.0" --scope=@my-themes/cli
+	lerna exec npm i "progress-estimator@^0.2.2" --scope=@my-themes/cli
+	lerna exec npm i "remark@^10.0.1" --scope=@my-themes/cli
+	lerna exec npm i "replace-in-file@^6.1.0" --scope=@my-themes/cli
+	lerna exec npm i "rollup@^2.46.0" --scope=@my-themes/cli
+	lerna exec npm i "sass@^1.41.0" --scope=@my-themes/cli
+	lerna exec npm i "sassdoc@^2.7.3" --scope=@my-themes/cli
+	lerna exec npm i "yargs@^17.0.1" --scope=@my-themes/cli
+	
++-------------------------------------------------------+
+|										======2_OF_19==	|
+|	UPDATE SCSS-GENERATOR PACKAGE						|
+|														|
++-------------------------------------------------------+
+	lerna exec npm i "prettier@^2.0.0" --scope=@my-themes/scss-generator
+
+
++-------------------------------------------------------+
+|										======2_OF_19==	|
+|	UPDATE LAYOUT PACKAGE								|
+|														|
++-------------------------------------------------------+
+	lerna add @my-themes/cli@^1.0.0 --scope=@my-themes/layout
+	lerna add @my-themes/cli-reporter@^1.0.0 --scope=@my-themes/layout
+	lerna add @my-themes/scss-generator@^1.0.0 --scope=@my-themes/layout
+	
+	lerna exec npm i "core-js@^3.16.0"  --scope=@my-themes/layout
+	lerna exec npm i "rimraf@^3.0.0"  --scope=@my-themes/layout
+
+
++-------------------------------------------------------+
+|										======2_OF_19==	|
+|	UPDATE COLORS PACKAGE								|
+|														|
++-------------------------------------------------------+
+	lerna add @my-themes/cli@^1.0.0 --scope=@my-themes/colors
+	lerna add @my-themes/cli-reporter@^1.0.0 --scope=@my-themes/colors
+	lerna add @my-themes/scss-generator@^1.0.0 --scope=@my-themes/colors
+	
+	lerna exec npm i "change-case@^4.1.1" --scope=@my-themes/colors
+    lerna exec npm i "fs-extra@^8.1.0" --scope=@my-themes/colors
+	#lerna exec npm i "node-sass@^6.0.1" --scope=@my-themes/colors
+    lerna exec npm i "rimraf@^3.0.0" --scope=@my-themes/colors
+
+
++-------------------------------------------------------+
+|										======2_OF_19==	|
+|	UPDATE TYPE PACKAGE									|
+|														|
++-------------------------------------------------------+	
+	lerna add @my-themes/cli@^1.0.0 --scope=@my-themes/type
+	lerna add @my-themes/layout@^1.0.0 --scope=@my-themes/type
+	lerna add @my-themes/import-once@^1.0.0 --scope=@my-themes/type
+	lerna exec npm i "change-case@^4.1.1"  --scope=@my-themes/type
+	lerna exec npm i "rimraf@^3.0.0"  --scope=@my-themes/type
+
++-------------------------------------------------------+
+|										======2_OF_19==	|
+|	UPDATE THEMES PACKAGE								|
+|														|
++-------------------------------------------------------+
+	lerna add @my-themes/cli@^1.0.0 --scope=@my-themes/themes
+	lerna add @my-themes/cli-reporter@^1.0.0 --scope=@my-themes/themes
+	lerna add @my-themes/scss-generator@^1.0.0 --scope=@my-themes/themes
+	lerna add @my-themes/type@^1.0.0 --scope=@my-themes/themes
+	lerna add @my-themes/colors@^1.0.0 --scope=@my-themes/themes
+	lerna exec npm i "@babel/node@^7.14.2"  --scope=@my-themes/themes
+	lerna exec npm i "@babel/preset-env@^7.14.2"	--scope=@my-themes/themes
+
+	lerna exec npm i "change-case@^4.1.1" --scope=@my-themes/themes
+	lerna exec npm i "core-js@^3.16.0" --scope=@my-themes/themes
+	lerna exec npm i "fs-extra@^8.1.0" --scope=@my-themes/themes
+	lerna exec npm i "js-yaml@^3.13.0" --scope=@my-themes/themes
+	lerna exec npm i "node-sass@^6.0.1" --scope=@my-themes/themes
+	lerna exec npm i "rimraf@^3.0.0" --scope=@my-themes/themes
+	lerna exec npm i "color@^3.1.2" --scope=@my-themes/themes
+
+	lerna add  "@my-themes/colors@^1.0.0" --scope=@my-themes/themes
+	lerna add  "@my-themes/layout@^1.0.0" --scope=@my-themes/themes
+
+    
+	
+	
+"dependencies": {
+    "@carbon/import-once": "^10.6.0",
+   
+  },
+  "devDependencies": {
+ 
+   
+    "change-case": "^4.1.1",
+    "rimraf": "^3.0.0"
+  },
