@@ -8,6 +8,8 @@
 	
 	##windows
 	for /R %G in (*.jar) do @jar -tvf "%G" | find "ClassName" > NUL && echo %G
+	
+
 +-------------------------------------------------------+
 |									======2_of_4======	|
 |	ECLIPSE DONT SHOW UP								|
