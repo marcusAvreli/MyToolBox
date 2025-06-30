@@ -41,8 +41,15 @@ https://github.com/PublicisSapient/enable-a11y/blob/d170968c4ae6549f363636f4f249
 	https://github.com/feesler/JezveJS/blob/29a1a2327cc6f84f00b4538b2a31fc4bdb2e7d91/packages/jezvejs/src/Components/ListContainer/ListContainer.js
 	https://github.com/feesler/JezveMoney/tree/e8c602e1a82ac97abb7c342fecb1d4edeb03a3a5/src/view/Components/Transaction/ExportDialog/components
 
-
-
++-------------------------------------------------------+
+|										======1======	|
+|	COLLECTIONS											|
+|														|
++-------------------------------------------------------+
+https://github.com/logaretm/collectionsjs/blob/master/src/collection.js
+https://github.com/georapbox/js-utils/tree/master/packages/arrays
+https://github.com/Weerapat1993/array-collection/tree/master/src
+https://github.com/sparkie11/Ds-and-Algorithms
 
 
 
