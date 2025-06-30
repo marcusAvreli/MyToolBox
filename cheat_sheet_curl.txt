@@ -82,3 +82,24 @@ jersey 2 error
 
 https://stackoverflow.com/questions/978061/http-get-with-request-body
 
+
+
+       https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/web-api-types-operations
+
+                https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/reference/businessunit?view=dataverse-latest
+
+ 
+
+https://learn.microsoft.com/en-us/power-apps/developer/model-driven-apps/clientapi/reference/attributes/fireonchange
+
+ 
+
+ 
+crm dynamics
+curl -H "Content-Type: application/x-www-form-urlencoded" -X POST -d "grant_type=CLIENT_CREDENTIALS&client_id=<>ca&client_secret=<>&scope=https://yourhost.dynamics.com/.default" https://login.microsoftonline.com/tenantid/oauth2/v2.0/token
+
+ 
+
+success code 204
+
+curl -v  -X PATCH   -H "Content-Type: application/json" -H "Authorization:  Bearer token_value" https://yourhost. /api/data/v9.2/systemusers(systemuserid) -d "{\businessunitid@odata.bind\:\"businessunits(businessunit)\"}"
