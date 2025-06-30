@@ -1,5 +1,5 @@
 +-------------------------------------------------------+
-|									======1_of_6======	|
+|									======1_of_9======	|
 |	GET													|
 |														|
 +-------------------------------------------------------+
@@ -9,7 +9,7 @@
 
 
 +-------------------------------------------------------+
-|									======2_of_6======	|
+|									======2_of_9======	|
 |	POST												|
 |														|
 +-------------------------------------------------------+
@@ -19,7 +19,7 @@
 
 
 +-------------------------------------------------------+
-|									======3_of_6======	|
+|									======3_of_9======	|
 |	COOKIES												|
 |														|
 +-------------------------------------------------------+
@@ -28,7 +28,7 @@
 
 
 +-------------------------------------------------------+
-|									======4_of_6======	|
+|									======4_of_9======	|
 |	DOWNLOAD FILE										|
 |														|
 +-------------------------------------------------------+
@@ -36,7 +36,7 @@
 
 
 +-------------------------------------------------------+
-|									======5_of_6======	|
+|									======5_of_9======	|
 |	UPLOAD FILE											|
 |														|
 +-------------------------------------------------------+
@@ -45,7 +45,7 @@ curl http://username:password@receiveing_server_point(without_http)   --form fil
 
 
 +-------------------------------------------------------+
-|									======6_of_6======	|
+|									======6_of_9======	|
 |	AUTHORIZATION										|
 |														|
 +-------------------------------------------------------+
@@ -83,23 +83,28 @@ jersey 2 error
 https://stackoverflow.com/questions/978061/http-get-with-request-body
 
 
-
-       https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/web-api-types-operations
-
-                https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/reference/businessunit?view=dataverse-latest
-
- 
-
-https://learn.microsoft.com/en-us/power-apps/developer/model-driven-apps/clientapi/reference/attributes/fireonchange
-
- 
++-------------------------------------------------------+
+|									======7_of_9======	|
+|	CRM_DYNAMICS_365: LEARN								|
+|														|
++-------------------------------------------------------+
+	https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/web-api-types-operations
+	https://learn.microsoft.com/en-us/power-apps/developer/data-platform/webapi/reference/businessunit?view=dataverse-latest
+	https://learn.microsoft.com/en-us/power-apps/developer/model-driven-apps/clientapi/reference/attributes/fireonchange
 
  
-crm dynamics
-curl -H "Content-Type: application/x-www-form-urlencoded" -X POST -d "grant_type=CLIENT_CREDENTIALS&client_id=<>ca&client_secret=<>&scope=https://yourhost.dynamics.com/.default" https://login.microsoftonline.com/tenantid/oauth2/v2.0/token
++-------------------------------------------------------+
+|									======8_of_9======	|
+|	CRM_DYNAMICS_365: GENERATE_TOKEN					|
+|														|
++-------------------------------------------------------+
+	curl -H "Content-Type: application/x-www-form-urlencoded" -X POST -d "grant_type=CLIENT_CREDENTIALS&client_id=<>ca&client_secret=<>&scope=https://yourhost.dynamics.com/.default" https://login.microsoftonline.com/tenantid/oauth2/v2.0/token
 
  
-
-success code 204
-
-curl -v  -X PATCH   -H "Content-Type: application/json" -H "Authorization:  Bearer token_value" https://yourhost. /api/data/v9.2/systemusers(systemuserid) -d "{\businessunitid@odata.bind\:\"businessunits(businessunit)\"}"
++-------------------------------------------------------+
+|									======9_of_9======	|
+|	CRM_DYNAMICS_365: UPDATE_BUSINESS_UNIT				|
+|														|
++-------------------------------------------------------+
+	curl -v  -X PATCH   -H "Content-Type: application/json" -H "Authorization:  Bearer token_value" https://yourhost. /api/data/v9.2/systemusers(systemuserid) -d "{\businessunitid@odata.bind\:\"businessunits(businessunit)\"}"
+	success code 204
