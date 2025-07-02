@@ -49,12 +49,26 @@ windows
 	jq-windows-amd64.exe select(.)[].employee_number output.txt
 	
 	
-On windows
 
-jq-windows-amd64.exe -r -f my_program.jq data_file > output.csv
++-------------------------------------------------------+
+|											=====2====	|
+|	FILTER_BY_FILE										|
+|														|
++-------------------------------------------------------+
+	On windows
 
- 
+	jq-windows-amd64.exe -r -f my_program.jq data_file > output.csv
 
-contents of my_program.jq
+	 
 
-["display_name1","display_name2"],([.[]][1]|.[]| [.fieldName1, . fieldName2]) | @csv
+	contents of my_program.jq
+	["display_name1","display_name2"],([.[]][1]|.[]| [.fieldName1, . fieldName2]) | @csv
+
++-------------------------------------------------------+
+|											=====2====	|
+|	CRM_DYNAMICS_365									|
+|														|
++-------------------------------------------------------+
+	: teams,securityRoles,systemUsers,businessUnits
+	["display_name1","display_name2"],([.[]][1]|.[]| [.fieldName1, . fieldName2]) | @csv
+
