@@ -54,19 +54,41 @@ add dependencies
 	npm install @angular/http
 
 
-https://github.com/gothinkster/angular-realworld-example-app/blob/main/package.json
-https://github.com/Webiks/ng2tips/blob/36ebe34d0cae2e9dae643afb22a544f1925e7eaf/ng-cli-offline/ng-cli-offline.md?plain=1#L1
-https://github.com/search?q=repo%3Achatatechnologies%2Fautoql%20tabulator&type=code
-https://stackoverflow.com/questions/42841600/how-to-install-angular-cli-without-internet
-https://github.com/gothinkster/angular-realworld-example-app/tree/main/src/app/core/interceptors
+
+
 https://github.com/ankasamanyan/Railway_ticketing/tree/main/frontend/src/app
+
+
+
+
+
 npm i angular-cli --cache C:\Users\markg\npm-offline\node_modules --cache-min 999999999 --no-shrinkwrap
+
+//TABULATOR utils
 https://github.com/grocerist/grocerist-app/blob/716dd754749ae2d2e7a7cf5fecf92e540cc4fdbe/html/js/documents.js#L309
+https://github.com/search?q=repo%3Achatatechnologies%2Fautoql%20tabulator&type=code
 npm config set cache C:\Users\markg\AppData\Roaming\npm-cache
 npm config set cache C:\Users\markg\npm-offline\node_modules
-npm config set cache C:\Users\markg\npm-offline\npm-cache
-npm config get prefix 
-npm config set prefix C:\Users\markg\npm-offline\npm
+
++-------------------------------------------------------+
+|														|
+|			OFFLINE PATHS								|
+|														|
++-------------------------------------------------------+
+https://github.com/Webiks/ng2tips/blob/36ebe34d0cae2e9dae643afb22a544f1925e7eaf/ng-cli-offline/ng-cli-offline.md?plain=1#L1
+https://stackoverflow.com/questions/42841600/how-to-install-angular-cli-without-internet
+	npm i @angular/cli@15.2.11 --cache C:\Users\markg\npm-offline\npm-cache --cache-min 999999999 --no-shrinkwrap
+	npm config set cache C:\Users\markg\npm-offline\npm-cache
+	npm config set prefix C:\Users\markg\npm-offline\npm
+	
+	npm config set cache ""
+	npm config set prefix ""
+	
+	npm config set cache min 999999999
+	npm config shrinkwrap false
+	
+	npm config get cache
+	npm config get prefix
 
 C:\Python27
 

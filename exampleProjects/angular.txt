@@ -1,8 +1,62 @@
 +-------------------------------------------------------+
 |														|
+|	STATE Management									|
+|														|
++-------------------------------------------------------+
+	Angular State Management … Without NgRx
+	https://github.com/hclatomic/angular-state-management
+
+
++-------------------------------------------------------+
+|														|
+|	core - features - layout - shared					|
+|														|
++-------------------------------------------------------+
+https://github.com/Remousses/ModularAngularApp/blob/main/ModularWebApp/src/app/abstract/KnowOurDatas.abstract.ts
+https://github.com/gothinkster/angular-realworld-example-app/blob/main/package.json
+https://github.com/eslam148/AngularRestaurantProject/tree/05c4e0daaea2309b7f3ab9f7a93e4d79317e73eb
+https://github.com/felissedano/daily-reflect/tree/main/ui/src/app
+https://github.com/Dhouib-Mohamed/learnroom-frontend-angular/blob/f654fa0a303e1beb7e7e4f2f7ebc037f4c4c7c52/src/app/core/core.module.ts#L79
+https://github.com/carlkuesters/anselm-kuesters-frontend/tree/bfd262d44b77480491e49d176e7add1a54d07c66/src/app
+https://github.com/MoneyStats/Angular-MoneyStats-Application/tree/b480c23c90214cb5d9d6204a0c25c5360becb0df/src/app/pages/crypto/crypto-dashboard
+https://github.com/xujian/enigma/tree/6bda73a39afd92a75eb414c239929282336b1512/projects/client/src/app
+https://github.com/shahdhesham5/KMC-frontend/tree/f83f0e764b2ab163127fb59c61a7a09b46faf874
+--no material
+https://github.com/SkeeTech/turex-finance-app/blob/437887349f8b3cd976f5356414b8b7744bb9db74/src/app/core/core.module.ts#L97
+--no material
+https://github.com/Innovatiq1/Corporate-FE/blob/33718e23c7e76008dabe0e685357485da28a87d6/src/app/app.module.ts#L51
+https://github.com/ParagUnhale1998/Daily-Practice/blob/6320a5bcf9dd2dc95d7244d177f934171163efb6/Github%20Upload%20Hotel/src/app/modules/user/components/login/login.component.scss
+https://github.com/hamedahmed100/test/blob/f96a481ab37c0ecbcedece61a6283a42f5903122/src/core/core.module.ts#L107
+https://github.com/hamedahmed100/test/blob/f96a481ab37c0ecbcedece61a6283a42f5903122/src/core/core.module.ts#L107
+https://github.com/yassa-alqess/Technopharm-WebSite/blob/dbdcdd33846588aeca096c4bddc6763430d10e8a/src/app/modules/core/core.module.ts#L62
+
+frontend backend
+https://github.com/BurningOKR/BurningOKR/tree/a6438f9202f01eff4f82408bfd9bc36f30357ffb
+
+animations
+https://github.com/PoMaKoM/CulturePortal-Training/blob/dd4e8638d633da8440e14ada0c730f514a4e13e1/src/app/animations/fly-in-out.animation.ts
+jwt
+https://github.com/ertprs/authentication_oauth2_jwt/blob/6d57908dcb8d29accae84d059fd38e2f69f706a5/ui/src/app/core/core.module.ts#L33
+
+
+//teacher student session management
+https://github.com/schassande/referee-course-test/blob/master/src/app/service/crud.ts#L4
+
+//injector.get
+https://github.com/mathkruger/litefy/tree/a667a7485c373eebd421df82805ae720467799a7
+two factor
+https://github.com/ORCID/orcid-angular/blob/7a825929423c098294f10f81d483414dd2b6e95c/src/app/account-trusted-parties/components/dialog-revoke-trusted-individuals/dialog-revoke-trusted-individuals.component.ts
+
+https://github.com/zhqseven/NFT-Token-Teleport/blob/adfb3ac3ce1a9e932ce5212139f386f20b49f9ce/src/app/core/core.module.ts#L46
+
+https://github.com/emiliocastilo/hope-front/tree/872a5599e4cee921021970b40c03900ac65c69d3
++-------------------------------------------------------+
+|														|
 |	ANGULAR UI	 										|
 |														|
 +-------------------------------------------------------+
+https://github.com/search?q=repo%3ASunbird-RC%2FAdmin-Portal%20translate.getLangs().forEach&type=code
+https://github.com/DevCloudFE/ng-devui/blob/master/devui/tree-select/demo/append-to/tree-select-append-to.component.ts
 fullObserver
 https://medium.com/angular-in-depth/learn-to-combine-rxjs-sequences-with-super-intuitive-interactive-diagrams-20fce8e6511
 https://stackblitz.com/edit/combining-sequences-race-b-is-ignored?file=utils.ts
@@ -10,6 +64,13 @@ https://github.com/UXAspects/UXAspects/blob/9a060e14c8a55351dd682107b6d1944fe126
 
 RTL
 https://github.com/arenasjuanf/bancojj/blob/b947b2efb390a0293daadcab1f7a64a242823f51/src/app/app.service.ts#L14
+https://github.com/hamedahmed100/test/blob/main/src/core/store/selectors/app-settings.selector.ts#L12
+https://github.com/paulbinju/HILALCMSUI/blob/main/src/app/core/models/config.interface.ts#L1
+RTL Dynymic css
+https://github.com/tomtsabar9/medicine-query/blob/5b089a9733c7fcf509a40924a663e9577bdcf63c/src/app/nav-bar/language/language.component.ts#L32
+
+
+
 reporting
 https://github.com/Mgiepz/saiku-reporting-ui/tree/master/js/backbone
 https://github.com/boldreports/javascript-samples?tab=readme-ov-file#online-demos
@@ -274,6 +335,9 @@ CMS
 	https://github.com/breadhead/cms/tree/master/src/front/components
 	https://github.com/aducin/Angular4-CMS/tree/master
 	https://github.com/dev-tom-0108/Build_App_CMS-Angular4/blob/72967af56ba2c164cbe8e6959979b05f5651763f/src/app/structure/push-notification/push-notification.component.ts
+	
+	https://github.com/gentics/mesh/tree/dev
+	https://github.com/gentics/mesh-ui/tree/develop?tab=readme-ov-file
 	
 	
 Data bus(Common Service)
