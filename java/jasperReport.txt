@@ -294,3 +294,22 @@ public class Application {
       </band>
    </summary>
 </jasperReport>
+
+
+
++-------------------------------------------------------+
+|											=====2====	|
+|	JASPER_HEBREW										|
+|														|
++-------------------------------------------------------+
+final PrintStream stream = new PrintStream(new PersistedFileOutputStream(this.getContext(), this.csvFile), false, "UTF-8");
+
+//Add BOM to fix hebrew shown as Gibberish in Excel
+
+stream.write('\ufeef'); // emits 0xef
+
+stream.write('\ufebb'); // emits 0xbb
+
+stream.write('\ufebf'); // emits 0xbf
+
+ 

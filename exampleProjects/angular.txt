@@ -20,6 +20,8 @@ https://github.com/Dhouib-Mohamed/learnroom-frontend-angular/blob/f654fa0a303e1b
 https://github.com/carlkuesters/anselm-kuesters-frontend/tree/bfd262d44b77480491e49d176e7add1a54d07c66/src/app
 https://github.com/MoneyStats/Angular-MoneyStats-Application/tree/b480c23c90214cb5d9d6204a0c25c5360becb0df/src/app/pages/crypto/crypto-dashboard
 https://github.com/xujian/enigma/tree/6bda73a39afd92a75eb414c239929282336b1512/projects/client/src/app
+
+--ngrx
 https://github.com/shahdhesham5/KMC-frontend/tree/f83f0e764b2ab163127fb59c61a7a09b46faf874
 --no material
 https://github.com/SkeeTech/turex-finance-app/blob/437887349f8b3cd976f5356414b8b7744bb9db74/src/app/core/core.module.ts#L97
@@ -50,6 +52,16 @@ https://github.com/ORCID/orcid-angular/blob/7a825929423c098294f10f81d483414dd2b6
 https://github.com/zhqseven/NFT-Token-Teleport/blob/adfb3ac3ce1a9e932ce5212139f386f20b49f9ce/src/app/core/core.module.ts#L46
 
 https://github.com/emiliocastilo/hope-front/tree/872a5599e4cee921021970b40c03900ac65c69d3
+
+role based access
+https://github.com/PacificEMIS/Pacific-SIS/blob/Master/UI/src/app/services/roll-based-access.service.ts#L12
+
+role-based-access.directive.ts 
+https://github.com/GMF-GSE-Training/gse-client/blob/e6fce473aaa3f2c8f7a0657cd647d2d72f87dcfb/src/app/app.config.ts
+
+RoleBasedAccessDirective PermissionBasedAccessDirective hasPermission viewContainer
+https://github.com/Sriharyi/skill-sail-frontend/blob/a3407a4a1042ba827ead8cea64f1805a7d3f8f74/src/app/core/core.module.ts#L9
+
 +-------------------------------------------------------+
 |														|
 |	ANGULAR UI	 										|
@@ -141,8 +153,8 @@ https://github.com/ng-book/angular2-redux-chat/blob/54d78b2a0413c01dfd6d64d1eba1
 https://github.com/thelgevold/bazel-angular-samples/blob/d2289e64451266a1151f73272d3cccfa4d01c6a4/src/apps/demo/shared-components/lazy-loaded-tree-view/redux/store.ts
 https://github.com/DSpace/dspace-angular/blob/41eccbbfe156e15f133f1f519c49844b5921ee80/src/app/store.actions.ts#L11
 https://stackblitz.com/edit/angular-rxjs-store-custom-state-management?file=src%2Fapp%2Fapp.component.ts
-
-
+hasPermission ngrx
+https://github.com/MuhammadAbubakar23/engage_2.0/tree/main/src/app/layouts/engage2
 https://github.com/kylecannon/angular-dream-stack/tree/c47a95f11332ff606a56559f92df4e882f213d72
 
 //rxjs only containers
@@ -328,17 +340,7 @@ metareducer
 
 
 	
-CMS
-	
-	https://github.com/alexabbott/firebase-cms/tree/master/src/app/storefront-components
-	https://github.com/search?q=repo%3Ascriptclump%2Fmean-stack-cms%20drag&type=code
-	https://github.com/breadhead/cms/tree/master/src/front/components
-	https://github.com/aducin/Angular4-CMS/tree/master
-	https://github.com/dev-tom-0108/Build_App_CMS-Angular4/blob/72967af56ba2c164cbe8e6959979b05f5651763f/src/app/structure/push-notification/push-notification.component.ts
-	
-	https://github.com/gentics/mesh/tree/dev
-	https://github.com/gentics/mesh-ui/tree/develop?tab=readme-ov-file
-	
+
 	
 Data bus(Common Service)
 	https://github.com/yduartep/angular-full-sample
@@ -1294,7 +1296,7 @@ https://github.com/anhnga244255/myblog-portal/tree/39de4bb02ac1e4d473e6433c49cb0
 
 https://github.com/codingmaniac2138/saby_redux_app/blob/3ad8d92d205ed7deb2c101e4341974f701edc302/src/app/main/appStore/authStore/auth.effects.ts
 
-https://github.com/ultimatejetvacations/booking-engine/tree/master/angular-hotels/app
+
 
 https://github.com/sevich/my-docker-net-core-test-app/tree/4ed5580c483a3108c84a168424b6643ee5ff90f3
 
@@ -1420,6 +1422,19 @@ CMS
 	https://github.com/breadhead/cms/tree/master/src/front/components
 	https://github.com/aducin/Angular4-CMS/tree/master
 	https://github.com/dev-tom-0108/Build_App_CMS-Angular4/blob/72967af56ba2c164cbe8e6959979b05f5651763f/src/app/structure/push-notification/push-notification.component.ts
+	https://github.com/alexabbott/firebase-cms/tree/master/src/app/storefront-components
+	https://github.com/search?q=repo%3Ascriptclump%2Fmean-stack-cms%20drag&type=code
+	https://github.com/breadhead/cms/tree/master/src/front/components
+	https://github.com/aducin/Angular4-CMS/tree/master
+	https://github.com/dev-tom-0108/Build_App_CMS-Angular4/blob/72967af56ba2c164cbe8e6959979b05f5651763f/src/app/structure/push-notification/push-notification.component.ts	
+	https://github.com/gentics/mesh/tree/dev
+	https://github.com/gentics/mesh-ui/tree/develop?tab=readme-ov-file
+	https://github.com/alexabbott/firebase-cms/tree/master/src/app/storefront-components
+	https://github.com/search?q=repo%3Ascriptclump%2Fmean-stack-cms%20drag&type=code
+	https://github.com/breadhead/cms/tree/master/src/front/components
+	https://github.com/aducin/Angular4-CMS/tree/master
+	https://github.com/dev-tom-0108/Build_App_CMS-Angular4/blob/72967af56ba2c164cbe8e6959979b05f5651763f/src/app/structure/push-notification/push-notification.component.ts
+	
 	
 	
 Data bus(Common Service)
@@ -1996,13 +2011,7 @@ metareducer
 
 
 	
-CMS
-	
-	https://github.com/alexabbott/firebase-cms/tree/master/src/app/storefront-components
-	https://github.com/search?q=repo%3Ascriptclump%2Fmean-stack-cms%20drag&type=code
-	https://github.com/breadhead/cms/tree/master/src/front/components
-	https://github.com/aducin/Angular4-CMS/tree/master
-	https://github.com/dev-tom-0108/Build_App_CMS-Angular4/blob/72967af56ba2c164cbe8e6959979b05f5651763f/src/app/structure/push-notification/push-notification.component.ts
+
 	
 	
 Data bus(Common Service)
