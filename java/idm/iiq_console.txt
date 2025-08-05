@@ -1,0 +1,6 @@
+#deletes:
+#1. workflow case
+#2. task result
+#3. workitem
+sql "select concat ('delete workflowcase ',id) as command from spt_workflow_case where name like 'Refresh Identity %'" > workflowcase.txt
+iiq console < idm_input_commands.txt

@@ -108,3 +108,19 @@ https://stackoverflow.com/questions/978061/http-get-with-request-body
 +-------------------------------------------------------+
 	curl -v  -X PATCH   -H "Content-Type: application/json" -H "Authorization:  Bearer token_value" https://yourhost. /api/data/v9.2/systemusers(systemuserid) -d "{\businessunitid@odata.bind\:\"businessunits(businessunit)\"}"
 	success code 204
+	
++-------------------------------------------------------+
+|									======9_of_9======	|
+|	CRM_DYNAMICS_365: GET MAILBOX BY OWNER				|
+|														|
++-------------------------------------------------------+
+	--get 
+	{0}/api/data/v9.2/mailboxes?$filter=_ownerid_value%20eq%20''{required_owner_id}''
+
+	
++-------------------------------------------------------+
+|									======9_of_9======	|
+|	CRM_DYNAMICS_365: select specific field on mail box	|
+|														|
++-------------------------------------------------------+
+	{0}/api/data/v9.2/mailboxes?$select=_ownerid_value - select specific field on mailboxes

@@ -1,0 +1,10 @@
+Create User
+Update USer
+Add Permission
+Remove Permission
+Enable Account
+disable Account
+Get Accounts
+Get Account
+Get All permissions
+Test Connection

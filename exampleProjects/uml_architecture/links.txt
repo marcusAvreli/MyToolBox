@@ -1,0 +1,2 @@
+Scalable Angular app architecture
+https://georgebyte.com/scalable-angular-app-architecture/
