@@ -40,31 +40,48 @@ function IsTeudatZehut{
 |			JAVA										|
 |														|
 +-------------------------------------------------------+
-public boolean isTeudatZehut(String testIdNum){
-	boolean validTZ=false;
-	char[] arrayString=testIdNum.toCharArray();
-	int sum=0;
-	if(Util.isNotNullOrEmpty(testIdNum)){         
-		int size=arrayString.length;
-		int[] arrConverted=new int[size];
-		int[] supportString=new int[]{1,2,1,2,1,2,1,2,1};
-		for(int i=0;i<size;i++){
-			 arrConverted[i]=Integer.parseInt(arrayString[i].toString());
+	public static boolean isTeudatZehut(String inIdNum) {		
+		boolean validTZ = false;
+		int diff = 9 - inIdNum.length();
+		String resultString = null;
+
+		if (diff > 0)	resultString = String.format("%0" + diff + "d", 0);
+
+		if (null != resultString) {
+			inIdNum = resultString + inIdNum;
 		}
-		for(int i=0;i<size;i++){         
-		int item=arrConverted[i]*supportString[i];           
-		sum+=(((item/10)+(item%10)));
-		testDebug("devide " +(item/10) + " modulo " +               (item%10));
-		}             
-		if(sum%10==0){
-			 validTZ=true;
-		}
-		if(sum%10!=0){
-			 validTZ=false;
-		}
-   }
-   return  validTZ;
-}
+
+		Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
+		
+		if (pattern.matcher(inIdNum).matches()) {
+			char[] arrayString = inIdNum.toCharArray();
+			int sum = 0;
+
+			if (null != inIdNum && !inIdNum.isEmpty() && !inIdNum.isBlank()) {
+				int size = arrayString.length;
+				int[] arrConverted = new int[size];
+				int[] supportString = new int[] { 1, 2, 1, 2, 1, 2, 1, 2, 1 };
+
+				for (int i = 0; i < size; i++) {
+					arrConverted[i] = Integer.parseInt(String.valueOf(arrayString[i]));
+				}
+
+				for (int i = 0; i < size; i++) {
+					int item = arrConverted[i] * supportString[i];
+					sum += (((item / 10) + (item % 10)));
+				}
+
+				if (sum % 10 == 0) {
+					validTZ = true;
+				}
+
+				if (sum % 10 != 0) {
+					validTZ = false;
+				}
+			}
+		}		
+		return validTZ;
+	}
 
 
 +-------------------------------------------------------+

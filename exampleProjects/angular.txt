@@ -62,6 +62,20 @@ https://github.com/GMF-GSE-Training/gse-client/blob/e6fce473aaa3f2c8f7a0657cd647
 RoleBasedAccessDirective PermissionBasedAccessDirective hasPermission viewContainer
 https://github.com/Sriharyi/skill-sail-frontend/blob/a3407a4a1042ba827ead8cea64f1805a7d3f8f74/src/app/core/core.module.ts#L9
 
+hasPermission role permission
+https://github.com/Carfox/anonify-frontend/blob/0ce66aa059ec409ad5824a6f3f8290f6c3ca2ed7/src/app/core/services/websocket.service.ts
+
+haspermission
+https://github.com/juliordguez/residential-app/tree/5b105afd13ef8ab777f07d62a46faacc8600bb28/src/app/demo
+https://github.com/search?q=repo%3Adatanimbus%2Fdnio-ui-author%20hasPermission%20language%3AHTML&type=code
+https://github.com/ibrahimrizq87/Main_ERP_Front/blob/99e8a6e47ddb0c0a42c14c49aacba03f5cf5ecaa/src/app/app.routes.ts
+//seo servie analytics service
+https://github.com/Kelvince01/xtra-hrms-client/tree/41c677049f91778ce36d1080438ac556d4a12153/src/app/core/services
+
+logger service uam roles
+https://github.com/Kelvince01/xtra-hrms-client/blob/41c677049f91778ce36d1080438ac556d4a12153/src/app/ui/finance-portal/partials/sidenav/sidenav.component.ts
+https://github.com/saigirishpabbathi/RestroRealm/tree/105dd550dfa9ee2493766f29ef413ffe10d165ab/src/restrorealm/src/app/core/components/settings
+https://github.com/Fabrizio230403/Agro-Front_Tesis/blob/a76adc645f2599da22b68a6beb77acc43f738de8/src/app/components/roles/role-manager/role-manager.component.ts#L171
 +-------------------------------------------------------+
 |														|
 |	ANGULAR UI	 										|
@@ -156,6 +170,8 @@ https://stackblitz.com/edit/angular-rxjs-store-custom-state-management?file=src%
 hasPermission ngrx
 https://github.com/MuhammadAbubakar23/engage_2.0/tree/main/src/app/layouts/engage2
 https://github.com/kylecannon/angular-dream-stack/tree/c47a95f11332ff606a56559f92df4e882f213d72
+https://github.com/owsolutions/angular5-iot-dashboard/blob/master/src/app/definitions.ts#L34
+
 
 //rxjs only containers
 https://github.com/blove/ngrx-tour-of-heros/blob/master/client/src/app/%2Bheroes/components/heroes/heroes.component.ts
