@@ -129,6 +129,24 @@
 	taskkill /f /im java.exe
 
 
+
+
++-------------------------------------------------------+
+|									=====10_of_26======	|
+|	KILL TOMCAT PROCESS ON WINDOWS						|
+|														|
++-------------------------------------------------------+
+	https://stackoverflow.com/questions/48198/how-do-i-find-out-which-process-is-listening-on-a-tcp-or-udp-port-on-windows
+	##using netstat. -o column shows owning process id. lets say 33800
+	netstat -a -n -o  | findstr :8080	
+	
+	##check if process id really exists
+	tasklist /fi "pid eq 33800"
+	
+	##kill the process
+	taskkill /F /PID 33800
+	
+
 +-------------------------------------------------------+
 |									=====11_of_26======	|
 |	KILL BY PORT NUMBER									|

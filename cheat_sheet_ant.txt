@@ -1,0 +1,19 @@
++-------------------------------------------------------+
+|									=====10_of_26======	|
+|	CHECK WICH XSLT PROCESSOR IS USED					|
+|														|
++-------------------------------------------------------+
+	#windows (verified)
+	ant -diagnostics | find /i "xslt"
+	
+	#correct output
+XSLT Processor information
+XSLT Processor : net.sf.saxon.jaxp.IdentityTransformer
+XSLT Processor Location: file:/C:/Users/markg/.ant/lib/checkstyle-8.32-all.jar
+
++-------------------------------------------------------+
+|									=====10_of_26======	|
+|	CHECK THAT ANT SEES XALAN							|
+|														|
++-------------------------------------------------------+
+ant -diagnostics | find "xalan"
