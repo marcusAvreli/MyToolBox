@@ -1,0 +1,43 @@
+<fetch>
+  <entity name="queue">
+    <attribute name="name" />
+    <attribute name="queueid" />
+    <attribute name="ownerid" /> <!-- GUID of owner -->
+    <attribute name="owneridtype" /> <!-- Logical name of owner entity -->
+    
+    <!-- Join to systemuser to get owner name if owner is a user -->
+    <link-entity name="systemuser" from="systemuserid" to="ownerid" alias="ou" link-type="outer">
+      <attribute name="fullname" alias="owner_user_name" />
+    </link-entity>
+    
+    <!-- Join to team to get owner name if owner is a team -->
+    <link-entity name="team" from="teamid" to="ownerid" alias="ot" link-type="outer">
+      <attribute name="name" alias="owner_team_name" />
+    </link-entity>
+    
+    <!-- Outer join to include queues without members -->
+    <link-entity name="queuemembership" from="queueid" to="queueid" link-type="outer" alias="qm">
+      <link-entity name="systemuser" from="systemuserid" to="systemuserid" alias="u" link-type="outer">
+        <attribute name="fullname" alias="member_name" />
+        <attribute name="domainname" />
+      </link-entity>
+    </link-entity>
+  </entity>
+</fetch>
+
+
+name → Queue name
+
+queueid → Queue GUID
+
+ownerid → Owner GUID
+
+owneridtype → "systemuser" or "team"
+
+owner_user_name → If owner is a user
+
+owner_team_name → If owner is a team
+
+member_name → Queue member’s full name (user)
+
+domainname → Member’s domain login
