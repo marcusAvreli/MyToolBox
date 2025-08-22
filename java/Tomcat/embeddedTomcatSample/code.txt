@@ -1,0 +1,153 @@
+
+import java.io.File;
+
+import org.apache.catalina.Context;
+import org.apache.catalina.connector.Connector;
+import org.apache.catalina.startup.Tomcat;
+import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.servlet.ServletContainer;
+
+public class Application {
+	   public static void main(String[] args) throws Exception {
+	    	  int port = 8080; // choose a free port
+	          Tomcat tomcat = new Tomcat();
+	          tomcat.setPort(port);
+	          tomcat.setBaseDir("temp");
+
+	          
+	          // Solution 2, make server listen on 2 ports
+	          Connector connector1 = tomcat.getConnector();
+	          connector1.setPort(8080);
+	          Connector connector2 = new Connector();
+	          connector2.setPort(8090);
+	          // Root context
+	          Context context = tomcat.addContext("", new File(".").getAbsolutePath());
+
+	          // Jersey configuration
+	          ResourceConfig config = new ResourceConfig().packages("testableRest5");
+	          //.register(org.glassfish.jersey.jackson.JacksonFeature.class);;
+	          ServletContainer servlet = new ServletContainer(config);
+
+	          // Add servlet and mapping
+	          Tomcat.addServlet(context, "jersey-servlet", servlet);
+	          context.addServletMappingDecoded("/api/*", "jersey-servlet");
+
+	          // Start server
+	          tomcat.start();
+	          System.out.println("Server running at http://localhost:" + port + "/api/hello");
+	       //  tomcat.getService().addConnector(connector1);
+	          //tomcat.getService().addConnector(connector2);
+	          // Keep JVM alive
+	          tomcat.getServer().await();
+	       // Thread.currentThread().join();
+	          
+	        
+	    }
+}
+
+
+package testableRest5;
+import javax.ws.rs.GET;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Path("/hello")
+public class HelloResource {
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String sayHello() {
+        return "Hello, Jersey 2.36 i run from ant on Embedded Tomcat 9 with modules!";
+    }
+}
+
+
+
+<!--
+https://github.com/owlcs/ore-framework/blob/3f4b2d2394e2af91603a0d963330692f15b2489d/build-input.xml
+https://github.com/OPENDAP/olfs
+https://github.com/i2p/i2p.i2p-bote/blob/0775c4dd499ccc09ab4332e7d5faf7bb3b9e8540/win32installer/build.xml.old#L433
+https://github.com/ezScrum/ezScrum/tree/16651e1c4f7cc365cc05db08e8d2e870a6c4cca3/java/ntut
+//
+src
+	testableRest5
+		Application.java
+		Context.java
+lib	
+	*.jar
+resources
+	appllication.properties
+	logging.properties
+-->
+<project default="build">
+	<property name="runner" value="testableRest5.Application" />
+	<property name="lib" location="lib" />
+	<property name="build" value="build" />
+	<property name="src" location="src/testableRest5" />
+	<property name="doc" location="${build}/javadoc" />
+
+	<path id="classpath">
+		<fileset dir="lib">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="build" depends="jar" />
+
+	<!-- Clean -->
+	<target name="clean" description="Cleaning up build files...">
+		<delete dir="${build}" />
+	</target>
+
+	<!-- Compile -->
+	<target name="compile" description="Compile source files" depends="clean">
+		<mkdir dir="${build}" />
+		<mkdir dir="${build}/resources" />
+		<mkdir dir="${build}/lib" />
+		<javac srcdir="${src}" destdir="${build}" debug="yes" deprecation="yes" includes="**.java" includeantruntime="false">
+		
+			<classpath refid="classpath" />
+			
+		</javac>
+
+	</target>
+
+	<!-- Create JAR -->
+	<target name="jar" depends="compile">
+		<pathconvert dirsep="/" pathsep=" " property="Class-Path">
+			<map from="${lib}/" to="./lib/" />
+			<map from="${lib}\" to="./lib/" />
+			<path>
+				<fileset dir="lib">
+					<include name="**/*.jar" />
+				</fileset>
+			</path>
+		</pathconvert>
+		<!--
+		<copy todir="${build}/resources">
+
+			<fileset dir="./resources">
+				<include name="**/*" />
+
+			</fileset>
+		</copy>
+		-->
+		<copy todir="${build}/lib">
+			<fileset dir="./lib">
+				<include name="**/*" />
+
+			</fileset>
+
+		</copy>
+		<jar jarfile="${build}/InputVerifier.jar" basedir="${build}" excludes="**/*.jar">
+			
+			<manifest>
+				<attribute name="Class-Path" value="${Class-Path}" />
+				<attribute name="Main-Class" value="${runner}" />
+			</manifest>
+		</jar>
+	</target>
+
+
+</project>

@@ -1,3 +1,10 @@
+
+https://stackoverflow.com/questions/9170832/list-of-java-class-file-format-major-version-numbers
+https://docs.oracle.com/javase/specs/jvms/se24/html/jvms-4.html#jvms-4.1-200-B.2
+Java class file
+https://en.wikipedia.org/wiki/Java_class_file#General_layout
+https://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html
+
 +-------------------------------------------------------+
 |									======1_of_4======	|
 |			FIND_CLASS_IN_JAR							|
