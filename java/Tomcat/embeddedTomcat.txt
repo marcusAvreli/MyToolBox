@@ -61,30 +61,42 @@
 |														|
 +-------------------------------------------------------+
 
+<?xml version="1.0" encoding="UTF-8"?>
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+<!-- hello world jersey project. this file will download dependencies -->
+<!--this is pom file for download only -->
+<!-- run following command -->
 
-  <groupId>tomcatEmbedded</groupId>
-  <artifactId>tomcatEmbedded</artifactId>
+<!-- mvn dependency:copy-dependencies -DoutputDirectory=yourfoldername -Dhttps.protocols=TLSv1.2 -->
+
+   <groupId>derbyClientWeb</groupId>
+  <artifactId>derbyClientWeb</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <packaging>war</packaging>
 
-  <name>tomcatEmbedded</name>
-  <url>http://maven.apache.org</url>
+  <name>derbyClientWeb Maven Webapp</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	 <java.version>11</java.version>
-	 <maven.compiler.release>${java.version}</maven.compiler.release>
-	
-    <maven.compiler.source>${java.version}</maven.compiler.source>
-    <maven.compiler.target>${java.version}</maven.compiler.target>
-	<jersey.version>2.35</jersey.version>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>11</java.version>
+		<maven.compiler.release>${java.version}</maven.compiler.release>	
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<jersey.version>2.36</jersey.version>
 		<tomcat.version>9.0.55</tomcat.version>
-  </properties>
+		<log4j2.version>2.0.15</log4j2.version>
+		<javax.rs.version>2.1.1</javax.rs.version>
+		<mysql.version>8.0.27</mysql.version>		
+		<junit.version>4.13.2</junit.version>
+	</properties>
 
   <dependencies>
+  
   	<dependency>
 			<groupId>org.glassfish.jersey.media</groupId>
 			<artifactId>jersey-media-json-jackson</artifactId>
@@ -103,15 +115,15 @@
 		<dependency>
 			<groupId>javax.ws.rs</groupId>
 			<artifactId>javax.ws.rs-api</artifactId>
-			<version>2.1.1</version>
+			<version>${javax.rs.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.27</version>
+			<version>${mysql.version}</version>
 		</dependency>
-
+<!--
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-jasper</artifactId>
@@ -127,12 +139,59 @@
 			<artifactId>jaxb-runtime</artifactId>
 			<version>2.3.5</version>
 		</dependency>
+-->
 
+  <!-- Jersey core / server -->
+  <!--
+    <dependency>
+        <groupId>org.glassfish.jersey.core</groupId>
+        <artifactId>jersey-server</artifactId>
+        <version>2.36</version>
+    </dependency>
+-->
+
+    <!-- Jersey Test Framework (Grizzly container) -->
+	
+    <dependency>
+        <groupId>org.glassfish.jersey.test-framework.providers</groupId>
+        <artifactId>jersey-test-framework-provider-grizzly2</artifactId>
+        <version>${jersey.version}</version>
+        <scope>test</scope>
+    </dependency>
+ <dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-api</artifactId>
+    <version>${log4j2.version}</version>
+</dependency>
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-core</artifactId>
+        <version>${log4j2.version}</version>
+</dependency>
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-slf4j-impl</artifactId>
+        <version>${log4j2.version}</version>
+</dependency>
+	<!--
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-jul</artifactId>
+        <version>2.15.0</version>
+        <scope>test</scope>
+    </dependency>
+	-->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+     <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
+	
   </dependencies>
+
+<build>
+  
+  
+</build>
 </project>

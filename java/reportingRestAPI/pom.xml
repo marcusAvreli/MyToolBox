@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+<!-- hello world jersey project. this file will download dependencies -->
+<!--this is pom file for download only -->
+<!-- run following command -->
+
+<!-- mvn dependency:copy-dependencies -DoutputDirectory=yourfoldername -Dhttps.protocols=TLSv1.2 -->
+
+  <groupId>reportingRestApi</groupId>
+  <artifactId>reportingRestApi</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <name>reportingRestApi Maven Webapp</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>11</java.version>
+		<maven.compiler.release>${java.version}</maven.compiler.release>	
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		
+		
+		
+		<!-- JERSEY 1_of_8 -->
+		<jersey.version>2.36</jersey.version>
+		<javax.rs.version>2.1.1</javax.rs.version>		
+		
+		<!-- MYSQL DATABASE	 2_of_8 -->
+		<mysql.version>8.0.27</mysql.version>	
+		
+		<!-- HIBERNATE 3_of_8 -->
+		<hibernate.version>5.6.15.Final</hibernate.version>
+		
+		
+		<!-- 	JNDI / Servlet API 4_of_8 -->		
+		<javax.servlet.version>3.1.0</javax.servlet.version>
+		
+		<!-- LOGGING 5_of_8 -->
+		<log4j2.version>2.15.0</log4j2.version>
+		
+		<!-- Jersey Test Framework (Grizzly container) 6_of_8 -->
+		<!-- intentionally left blank -->
+		
+		<!-- TESTING 7_of_8 -->
+		<junit.version>4.13.2</junit.version>
+		<commons.io.version>2.5</commons.io.version>
+		<junit.toolbox.version>2.4</junit.toolbox.version>
+		<mockito.core.version>1.9.5</mockito.core.version>
+		<objenesis.version>1.0</objenesis.version>		
+		
+		<!-- ENDORSED 8_of_8 -->
+		<saxon.version>11.7</saxon.version>
+		<xalan.version>2.7.3</xalan.version>
+		<xmlresolver.version>5.3.3</xmlresolver.version>
+	</properties>
+
+  <dependencies>
+  <!--
+  
+#########################################################
+|									======1_of_8======	|
+|	JERSEY												|
+|														|
+#########################################################
+  
+  -->
+  <!--
+  	<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-jackson</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.inject</groupId>
+			<artifactId>jersey-hk2</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>${javax.rs.version}</version>
+		</dependency>
+		-->
+ <!--
+  
+#########################################################
+|									======2_of_8======	|
+|	MYSQL DATABASE										|
+|														|
+#########################################################
+  
+  -->
+  <!--
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
+		</dependency>
+	-->	
+<!--
+#########################################################
+|									======3_of_8======	|
+|	HIBERNATE 											|
+|														|
+#########################################################
+
+-->
+<!--
+    <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>${hibernate.version}</version>
+    </dependency>
+-->
+   
+   <!--
+#########################################################
+|									======4_of_8======	|
+|	JNDI / Servlet API									|
+|														|
+#########################################################
+
+-->
+   <!--
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${javax.servlet.version}</version>
+            <scope>provided</scope>
+        </dependency>
+-->
+
+
+
+   <!--
+#########################################################
+|									======5_of_8======	|
+|	LOGGING												|
+|														|
+#########################################################
+
+-->
+<!--
+ <dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-api</artifactId>
+    <version>${log4j2.version}</version>
+</dependency>
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-core</artifactId>
+        <version>${log4j2.version}</version>
+</dependency>
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-slf4j-impl</artifactId>
+        <version>${log4j2.version}</version>
+</dependency>
+-->
+
+
+   <!--
+#########################################################
+|									======6_of_8======	|
+|	Jersey Test Framework (Grizzly container)			|
+|														|
+#########################################################
+
+-->
+   <!--
+	
+    <dependency>
+        <groupId>org.glassfish.jersey.test-framework.providers</groupId>
+        <artifactId>jersey-test-framework-provider-grizzly2</artifactId>
+        <version>${jersey.version}</version>
+        <scope>test</scope>
+    </dependency>
+-->
+
+   <!--
+#########################################################
+|									======7_of_8======	|
+|	TESTING												|
+|														|
+#########################################################
+
+-->
+<!--
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+     <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+	
+	
+
+<dependency>
+    <groupId>commons-io</groupId>
+    <artifactId>commons-io</artifactId>
+    <version>${commons.io.version}</version>
+</dependency>
+
+<dependency>
+    <groupId>com.googlecode.junit-toolbox</groupId>
+    <artifactId>junit-toolbox</artifactId>
+    <version>${junit.toolbox.version}</version>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>org.mockito</groupId>
+    <artifactId>mockito-core</artifactId>
+    <version>${mockito.core.version}</version>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>org.objenesis</groupId>
+    <artifactId>objenesis</artifactId>
+    <version>${objenesis.version}</version>
+</dependency>
+-->
+	<!--
+#########################################################
+|									======8_of_8======	|
+|	ENDORSED for test reports							|
+|														|
+#########################################################
+
+-->
+<!--
+<dependency>
+    <groupId>net.sf.saxon</groupId>
+    <artifactId>Saxon-HE</artifactId>
+    <version>${saxon.version}</version>
+</dependency>
+
+
+<dependency>
+    <groupId>xalan</groupId>
+    <artifactId>serializer</artifactId>
+    <version>${xalan.version}</version>
+</dependency>
+
+
+<dependency>
+    <groupId>org.xmlresolver</groupId>
+    <artifactId>xmlresolver</artifactId>
+    <version>${xmlresolver.version}</version>
+</dependency>
+
+-->
+
+
+  </dependencies>
+
+<build>
+  
+</build>
+</project>
