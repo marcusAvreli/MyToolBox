@@ -6,7 +6,7 @@ https://en.wikipedia.org/wiki/Java_class_file#General_layout
 https://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html
 
 +-------------------------------------------------------+
-|									======1_of_4======	|
+|									======1_of_5======	|
 |			FIND_CLASS_IN_JAR							|
 |														|
 +-------------------------------------------------------+
@@ -18,7 +18,7 @@ https://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.
 	
 
 +-------------------------------------------------------+
-|									======2_of_4======	|
+|									======2_of_5======	|
 |	ECLIPSE DONT SHOW UP								|
 |														|
 +-------------------------------------------------------+
@@ -31,7 +31,7 @@ https://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.
 
 
 +-------------------------------------------------------+
-|									======3_of_4======	|
+|									======3_of_5======	|
 |			JAVA COMPILE FROM CMD						|
 |														|
 +-------------------------------------------------------+	
@@ -43,8 +43,17 @@ https://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.
 	javac  -classpath lib/*  src\myAntHelloWorld\*.java -d result
 
 +-------------------------------------------------------+
-|									======3_of_4======	|
+|									======4_of_5======	|
 |	JAVA CFR DECOMPILER									|
 |														|
 +-------------------------------------------------------+
 	java -jar cfr-0.137.jar <PATH_TO_TARGET_JAR_FILE> --outputdir <PATH_TO_OUTPUT_DIR>
+	
++-------------------------------------------------------+
+|									======5_of_5======	|
+|	JAVA VINEFLOWER DECOMPILER							|
+|														|
++-------------------------------------------------------+
+	
+	java -jar vineflower-1.11.1.jar --excluded-classes="^[^s].*" <PATH_TO_TARGET_JAR_FILE> .
+	#pay attention on dot. dot say to save into file

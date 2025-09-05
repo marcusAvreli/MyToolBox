@@ -1,0 +1,43 @@
+-- Users
+CREATE TABLE users (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- Roles
+CREATE TABLE roles (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- Permissions
+CREATE TABLE permissions (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    entity VARCHAR(50) NOT NULL,
+    action VARCHAR(50) NOT NULL
+);
+
+-- User ↔ Role (with validity)
+CREATE TABLE user_roles (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    role_id BIGINT NOT NULL,
+    valid_from DATETIME NULL,
+    valid_until DATETIME NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (role_id) REFERENCES roles(id),
+    UNIQUE KEY user_role_unique(user_id, role_id)
+);
+
+-- Role ↔ Permission (with validity)
+CREATE TABLE role_permissions (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    role_id BIGINT NOT NULL,
+    permission_id BIGINT NOT NULL,
+    valid_from DATETIME NULL,
+    valid_until DATETIME NULL,
+    FOREIGN KEY (role_id) REFERENCES roles(id),
+    FOREIGN KEY (permission_id) REFERENCES permissions(id),
+    UNIQUE KEY role_permission_unique(role_id, permission_id)
+);

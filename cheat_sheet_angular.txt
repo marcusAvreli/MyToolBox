@@ -1,0 +1,16 @@
+ng generate component shared/ui-elements/loginForm
+ng generate component core/components/toast
+ng generate component core/components/header
+
+ng generate service core/services/config
+ng generate service core/services/auth
+ng generate service core/services/toast
+ng generate service core/services/logging
+ng generate interceptor core/interceptors/abstract
+ng generate interceptor core/interceptors/api
+
+ng generate component core/components/header
+
+ng generate component  provTransaction2/components/list/tabulatorTableComponent
+
+ng generate module shared
