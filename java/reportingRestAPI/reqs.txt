@@ -1,0 +1,5 @@
+provide possible layout for the following angular application with future authentication and future saml
+appplication manages three entities: user,  role, permission. all  of them can be temporary
+application does not have routing, application must use container-component concept
+application provides: add/edit/delete/list functionality for all entities
+application shows dashboard with status for all entities

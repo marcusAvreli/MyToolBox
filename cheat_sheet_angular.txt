@@ -14,3 +14,9 @@ ng generate component core/components/header
 ng generate component  provTransaction2/components/list/tabulatorTableComponent
 
 ng generate module shared
+
+
+ng generate component user/components/add/add-user
+ng generate component user/components/list/user-table
+ng generate component user/container/user-container
+ng generate component dynamic-container/dynamic-container

@@ -78,13 +78,22 @@ npm config set cache C:\Users\markg\npm-offline\node_modules
 https://github.com/Webiks/ng2tips/blob/36ebe34d0cae2e9dae643afb22a544f1925e7eaf/ng-cli-offline/ng-cli-offline.md?plain=1#L1
 https://stackoverflow.com/questions/42841600/how-to-install-angular-cli-without-internet
 	npm i @angular/cli@15.2.11 --cache C:\Users\markg\npm-offline\npm-cache --cache-min 999999999 --no-shrinkwrap
+	
+	
+	npm config list -l
+	
 	npm config set cache C:\Users\markg\npm-offline\npm-cache
 	npm config set prefix C:\Users\markg\npm-offline\npm
 	
-	npm config set cache ""
-	npm config set prefix ""
+	npm config delete prefer-offline
+	npm config delete offline
+	npm config delete cache
+	npm config delete prefix
+	npm config delete cache-min
+	npm config delete shrinkwrap
 	
-	npm config set cache min 999999999
+	
+	npm config set cache-min 999999999
 	npm config shrinkwrap false
 	
 	npm config get cache
@@ -93,6 +102,105 @@ https://stackoverflow.com/questions/42841600/how-to-install-angular-cli-without-
 C:\Python27
 
 npm i angular-cli --cache C:\Users\markg\npm-offline\npm-cache --cache-min 999999999 --no-shrinkwrap
+
+
++-------------------------------------------------------+
+|														|
+|			OFFLINE INSTALL								|
+|														|
++-------------------------------------------------------+
+
+
+
+npm config set cache-min 999999999
+npm config set shrinkwrap false
+
+npm config set cache C:\Users\markg\npm-offline3\npm-cache
+npm config set prefix C:\Users\markg\npm-offline3\npm
+
+
+export NG_DISABLE_VERSION_CHECK=1     # Linux / macOS
+setx NG_DISABLE_VERSION_CHECK 1       # Windows (cmd)
+$env:NG_DISABLE_VERSION_CHECK="1"     # Windows (PowerShell)
+
+ng analytics off
+
+npm i -g @angular/cli@15.2.0
+
+
+npm config set offline true
+npm config set registry "file:///C:/Users/markg/npm-offline3/npm-cache"
+
+
+ng new my-app2 --skip-install
+cd my-app2 
+npm install --offline
+
+
+
++-------------------------------------------------------+
+|														|
+|			Online profile (.npmrc-online)				|
+|														|
++-------------------------------------------------------+
+	# Online defaults
+	registry=https://registry.npmjs.org/
+	prefer-offline=false
+	offline=false
+
+
+
+
++-------------------------------------------------------+
+|														|
+|			Offline profile (.npmrc-offline)			|
+|														|
++-------------------------------------------------------+
+	# Force offline mode
+	prefer-offline=true
+	offline=true
+
+	# Use local cache (default location is ~/.npm/_cacache)
+	# or point to your local Verdaccio registry if you have one
+	# registry=http://localhost:4873/
+
+
+~/npm-profiles/.npmrc-online
+~/npm-profiles/.npmrc-offline
+
+
+# Switch to offline
+cp ~/npm-profiles/.npmrc-offline ~/.npmrc
+
+# Switch to online
+cp ~/npm-profiles/.npmrc-online ~/.npmrc
+
+
+npm config list
+
+Create the batch script
+@echo off
+REM Usage: npm-profile online | offline
+
+SET PROFILE_DIR=C:\npm-profiles
+SET NPMRC=%USERPROFILE%\.npmrc
+
+IF "%1"=="online" (
+    COPY /Y "%PROFILE_DIR%\npmrc-online" "%NPMRC%"
+    ECHO Switched npm to ONLINE profile.
+    GOTO :EOF
+)
+
+IF "%1"=="offline" (
+    COPY /Y "%PROFILE_DIR%\npmrc-offline" "%NPMRC%"
+    ECHO Switched npm to OFFLINE profile.
+    GOTO :EOF
+)
+
+ECHO Invalid option. Usage: npm-profile online ^| offline
+
+
+
 
 
 

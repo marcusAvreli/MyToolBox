@@ -1,0 +1,84 @@
+C:\> npm-profile
+Current npm profile: ONLINE
+Active registry: https://registry.npmjs.org/
+Cache directory: C:\Users\Mark\AppData\Local\npm-cache
+
+C:\> npm-profile offline
+Switched npm to OFFLINE profile.
+
+C:\> npm-profile status
+Current npm profile: OFFLINE
+Active registry: https://registry.npmjs.org/
+Cache directory: C:\Users\Mark\AppData\Local\npm-cache
+
+C:\> npm-profile reset
+Reset npm profile to DEFAULT (no .npmrc).
+
+C:\> npm-profile
+Current npm profile: DEFAULT (no .npmrc)
+Active registry: https://registry.npmjs.org/
+Cache directory: C:\Users\Mark\AppData\Local\npm-cache
+
+
+npm-profile.bat Capabilities
+
+
+Profiles
+
+online → Switches npm to online mode using npmrc-online
+
+offline=false, prefer-offline=false
+
+Registry: https://registry.npmjs.org/ (or whatever you set)
+
+offline → Switches npm to offline mode using npmrc-offline
+
+offline=true, prefer-offline=true
+
+Registry can still be npmjs.org or a local Verdaccio registry
+
+toggle → Flips between online and offline
+
+If profile is DEFAULT (no .npmrc), it switches to offline
+
+✅ Defaults
+
+reset → Deletes %USERPROFILE%\.npmrc and restores npm’s factory defaults
+
+Registry goes back to https://registry.npmjs.org/
+
+Cache location goes back to npm’s default
+
+✅ Status & Info
+
+status (or just running npm-profile with no arguments)
+Shows:
+
+Current profile: ONLINE, OFFLINE, or DEFAULT
+
+Active registry URL (from npm config get registry)
+
+Active cache directory (from npm config get cache)
+
+Example:
+
+C:\> npm-profile
+Current npm profile: OFFLINE
+Active registry: https://registry.npmjs.org/
+Cache directory: C:\Users\Mark\AppData\Local\npm-cache
+
+✅ Convenience
+
+Works with case-insensitive arguments (online, ONLINE, OnLiNe → same)
+
+Provides usage help if you pass an invalid option
+
+Runs with minimal output (only relevant messages)
+
+🔹 Usage Summary
+npm-profile               # Show current profile, registry, cache
+npm-profile status        # Same as above
+npm-profile online        # Switch to online profile
+npm-profile offline       # Switch to offline profile
+npm-profile toggle        # Switch from online ↔ offline
+npm-profile reset         # Delete .npmrc and restore defaults

@@ -41,3 +41,66 @@ CREATE TABLE role_permissions (
     FOREIGN KEY (permission_id) REFERENCES permissions(id),
     UNIQUE KEY role_permission_unique(role_id, permission_id)
 );
+
+
+-- =====================================================
+-- Database: reporting
+-- =====================================================
+CREATE DATABASE IF NOT EXISTS reporting
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+USE reporting;
+
+-- =====================================================
+-- Renderer Types (for columns)
+-- =====================================================
+CREATE TABLE IF NOT EXISTS renderer_types (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(50) NOT NULL UNIQUE,
+    description VARCHAR(255),
+    renderer_class VARCHAR(255)
+);
+
+-- Sample renderer types
+INSERT INTO renderer_types (code, description, renderer_class) VALUES
+('TEXT', 'Plain text', 'com.example.reporting.renderer.TextRenderer'),
+('NUMBER', 'Number formatting', 'com.example.reporting.renderer.NumberRenderer'),
+('CURRENCY', 'Currency formatting', 'com.example.reporting.renderer.CurrencyRenderer'),
+('DATE', 'Date formatting', 'com.example.reporting.renderer.DateRenderer'),
+('BOOLEAN', 'Boolean display', 'com.example.reporting.renderer.BooleanRenderer');
+
+-- =====================================================
+-- Reports Table
+-- =====================================================
+CREATE TABLE IF NOT EXISTS reports (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    description TEXT
+);
+
+-- =====================================================
+-- Report Column Metadata
+-- =====================================================
+CREATE TABLE IF NOT EXISTS report_columns (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    report_id BIGINT NOT NULL,
+    name VARCHAR(100) NOT NULL,       -- column key
+    renderer_type_id BIGINT NOT NULL, -- foreign key to renderer_types
+    display_order INT DEFAULT 0,
+    visible BOOLEAN DEFAULT TRUE,
+    FOREIGN KEY (report_id) REFERENCES reports(id),
+    FOREIGN KEY (renderer_type_id) REFERENCES renderer_types(id)
+);
+
+-- =====================================================
+-- Example Report
+-- =====================================================
+INSERT INTO reports (name, description) VALUES
+('Sales Report', 'Monthly sales report with revenue and users');
+
+-- Example columns for the report
+INSERT INTO report_columns (report_id, name, renderer_type_id, display_order, visible) VALUES
+(1, 'Date', 4, 1, TRUE),          -- DATE
+(1, 'Revenue', 3, 2, TRUE),       -- CURRENCY
+(1, 'ActiveUsers', 2, 3, TRUE);   -- NUMBER

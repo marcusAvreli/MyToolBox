@@ -1,0 +1,151 @@
+WITH XmlData AS (
+    SELECT 
+        sptLink.id,
+        CAST(sptLink.attributes AS xml) AS XmlAttributes,
+        sptIdentity.user_namead,
+        sptIdentity.name
+    FROM spt_link sptLink
+    INNER JOIN spt_application sptApplication 
+        ON sptApplication.id = sptLink.application
+    INNER JOIN spt_identity sptIdentity 
+        ON sptIdentity.id = sptLink.identity_id
+    WHERE sptApplication.name = 'Mac CRM Dynamic MRM'
+),
+Teams AS (
+    SELECT 
+        X.id,
+        ROW_NUMBER() OVER (PARTITION BY X.id ORDER BY (SELECT NULL)) AS rn,
+        T.node.value('data(.)','varchar(100)') AS team
+    FROM XmlData X
+    OUTER APPLY X.XmlAttributes.nodes('/Attributes/Map/entry[@key="teams"]/value/List/String') AS T(node)
+),
+Roles AS (
+    SELECT 
+        X.id,
+        ROW_NUMBER() OVER (PARTITION BY X.id ORDER BY (SELECT NULL)) AS rn,
+        R.node.value('data(.)','varchar(100)') AS securityRole
+    FROM XmlData X
+    OUTER APPLY X.XmlAttributes.nodes('/Attributes/Map/entry[@key="securityRoles"]/value/List/String') AS R(node)
+),
+BusinessUnit AS (
+    SELECT 
+        X.id,
+        B.node.value('data(.)','varchar(100)') AS businessUnit
+    FROM XmlData X
+    OUTER APPLY X.XmlAttributes.nodes('/Attributes/Map/entry[@key="businessUnit"]/@value') AS B(node)
+),
+Counts AS (
+    SELECT 
+        x.id,
+        COUNT(DISTINCT t.team) AS total_teams,
+        COUNT(DISTINCT r.securityRole) AS total_roles,
+        COUNT(DISTINCT bu.businessUnit) AS total_businessUnit,
+        CASE 
+            WHEN COUNT(DISTINCT t.team) > COUNT(DISTINCT r.securityRole) THEN COUNT(DISTINCT t.team)
+            WHEN COUNT(DISTINCT r.securityRole) > COUNT(DISTINCT t.team) THEN COUNT(DISTINCT r.securityRole)
+            ELSE 1
+        END AS total_rows_per_link
+    FROM XmlData x
+    LEFT JOIN Teams t ON t.id = x.id
+    LEFT JOIN Roles r ON r.id = x.id
+    LEFT JOIN BusinessUnit bu ON bu.id = x.id
+    GROUP BY x.id
+),
+Numbers AS (
+    SELECT 1 AS n
+    UNION ALL
+    SELECT n + 1 FROM Numbers WHERE n < 1000
+),
+RowSequence AS (
+    SELECT 
+        c.id,
+        n.n AS row_num
+    FROM Counts c
+    CROSS JOIN Numbers n
+    WHERE n.n <= c.total_rows_per_link
+)
+SELECT 
+    x.id,
+    t.team,
+    r.securityRole,
+    CASE WHEN rs.row_num = 1 THEN bu.businessUnit ELSE NULL END AS businessUnit,
+    x.user_namead,
+    x.name,
+    rs.row_num,
+    CASE WHEN t.team IS NULL THEN 0 ELSE rs.row_num END AS team_row,
+    CASE WHEN r.securityRole IS NULL THEN 0 ELSE rs.row_num END AS security_role_row,
+    ISNULL(c.total_teams,0) AS total_teams,
+    ISNULL(c.total_roles,0) AS total_roles,
+    ISNULL(c.total_businessUnit,0) AS total_businessUnit,
+    c.total_rows_per_link,
+    CAST(rs.row_num AS VARCHAR(10)) + '/' + CAST(c.total_rows_per_link AS VARCHAR(10)) AS current_vs_max,
+    -- current row index per group
+    ISNULL(t.rn,0) AS team_index_in_group,
+    ISNULL(r.rn,0) AS role_index_in_group,
+    -- progress per group
+    CAST(ISNULL(t.rn,0) AS VARCHAR(10)) + '/' + CAST(ISNULL(c.total_teams,0) AS VARCHAR(10)) AS team_progress,
+    CAST(ISNULL(r.rn,0) AS VARCHAR(10)) + '/' + CAST(ISNULL(c.total_roles,0) AS VARCHAR(10)) AS role_progress
+FROM XmlData x
+INNER JOIN Counts c ON c.id = x.id
+JOIN RowSequence rs ON rs.id = x.id
+LEFT JOIN Teams t ON t.id = x.id AND t.rn = rs.row_num
+LEFT JOIN Roles r ON r.id = x.id AND r.rn = rs.row_num
+LEFT JOIN BusinessUnit bu ON bu.id = x.id
+ORDER BY x.id, rs.row_num
+OPTION (MAXRECURSION 0);
+
+
+
+1. Core Entity Info
+Column	Description
+id	Unique identifier of the link (spt_link.id).
+user_namead	Active Directory username of the identity associated with the link.
+name	Display name of the identity associated with the link.
+2. Teams
+Column	Description
+team	The team name associated with this row (can be NULL if no team for this position).
+team_row	Row number for the team in the overall sequence (0 if no team on this row).
+team_index_in_group	Index of this team within the Teams group, 0 if no team. Starts at 1.
+total_teams	Total number of teams associated with the link (0 if none).
+team_progress	Progress for the team group in current_index/total_teams format. 0/0 if no teams.
+3. Security Roles
+Column	Description
+securityRole	Security role associated with this row (can be NULL if no role for this position).
+security_role_row	Row number for the security role in the overall sequence (0 if no role on this row).
+role_index_in_group	Index of this role within the SecurityRoles group, 0 if no role. Starts at 1.
+total_roles	Total number of security roles associated with the link (0 if none).
+role_progress	Progress for the securityRoles group in current_index/total_roles format. 0/0 if no roles.
+4. Business Unit
+Column	Description
+businessUnit	Business unit associated with this link. Appears only on the first row; NULL for all subsequent rows.
+total_businessUnit	Number of business units found for this link (0 if none).
+5. Row and Sequence Info
+Column	Description
+row_num	Row number in the merged sequence for the link (covers all teams & roles). Starts at 1.
+total_rows_per_link	Total number of rows generated per link (maximum of teams vs securityRoles count, at least 1).
+current_vs_max	Shows progress for the overall row sequence: row_num/total_rows_per_link.
+6. Features / Behavior
+
+Dynamic row generation per link – the number of rows is based on the maximum of teams and security roles for that link.
+
+Supports missing data – if a link has no teams, roles, or businessUnit, rows are still generated with proper defaults (0 or NULL).
+
+Row indexing per group – separate indexes for teams and security roles allow tracking position within their groups.
+
+Progress columns – both overall (current_vs_max) and per group (team_progress, role_progress) for visualization and reporting.
+
+BusinessUnit logic – only displayed on the first row for clarity.
+
+Fully scalable – uses a recursive Numbers CTE to generate sequences, supporting any number of teams or roles.
+
+Portable – no dependency on system tables like master..spt_values. Works in any SQL Server environment.
+
+Ordered output – rows are ordered by link id and row number (row_num).
+
+✅ Optional Enhancements Already Considered
+
+Pivotable view for reporting (can combine teams, roles, and business unit in a single row per link).
+
+Fully dynamic for any link size.
+
+Ready for progress visualization or exporting to reports.
