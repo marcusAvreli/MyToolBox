@@ -1,0 +1,35 @@
+ng generate component components/user/user-table
+ng generate component components/user/user-form
+ng generate component components/user/user-edit
+
+
+
+ng generate component components/role/role-table
+ng generate component components/role/role-form
+
+ng generate component containers/role-container
+
+ng generate component containers/report-container
+
+ng generate component components/report/report-component
+
+
+ng generate service core/services/report
+
+
+
+ng generate component containers/fullscreenModal
+
+
+ng generate service core/services/role
+
+
+ng generate component components/permission/permission-table
+ng generate component components/permission/permission-form
+
+ng generate component containers/permission-container
+
+ng generate service core/services/permission
+
+
+ng generate component  shared/components/dropdown

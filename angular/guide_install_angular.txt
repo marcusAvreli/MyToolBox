@@ -109,7 +109,9 @@ npm i angular-cli --cache C:\Users\markg\npm-offline\npm-cache --cache-min 99999
 |			OFFLINE INSTALL								|
 |														|
 +-------------------------------------------------------+
-
+node v18.10.0
+npm 8.19.2
+angular 15.2.0
 
 
 npm config set cache-min 999999999

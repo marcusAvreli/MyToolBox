@@ -1,0 +1,60 @@
+src/app/
+│
+├── core/
+│   ├── services/
+│   │   ├── base.service.ts
+│   │   ├── auth.service.ts
+│   │   ├── user.service.ts
+│   │   ├── role.service.ts
+│   │   └── permission.service.ts
+│   ├── interceptors/
+│   │   └── auth.interceptor.ts
+│   └── models/
+│       ├── user.model.ts
+│       ├── role.model.ts
+│       └── permission.model.ts
+│
+├── shared/
+│   ├── components/
+│   │   ├── modal/
+│   │   └── table/
+│   └── utils/
+│
+├── containers/
+│   ├── app-container/
+│   │   ├── app-container.component.ts
+│   │   ├── app-container.component.html
+│   │   └── app-container.component.scss
+│   │
+│   ├── dashboard-container/
+│   │   ├── dashboard-container.component.ts
+│   │   └── dashboard-container.component.html
+│   │
+│   ├── user-container/
+│   │   ├── user-container.component.ts
+│   │   └── user-container.component.html
+│   │
+│   ├── role-container/
+│   │   ├── role-container.component.ts
+│   │   └── role-container.component.html
+│   │
+│   └── permission-container/
+│       ├── permission-container.component.ts
+│       └── permission-container.component.html
+│
+├── components/
+│   ├── user/
+│   │   ├── user-table.component.ts
+│   │   ├── user-form.component.ts
+│   │   └── user-card.component.ts
+│   │
+│   ├── role/
+│   │   ├── role-table.component.ts
+│   │   └── role-form.component.ts
+│   │
+│   └── permission/
+│       ├── permission-table.component.ts
+│       └── permission-form.component.ts
+│
+├── app.component.ts
+└── app.module.ts
