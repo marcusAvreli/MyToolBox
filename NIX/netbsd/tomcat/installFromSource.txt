@@ -6,6 +6,8 @@
 	command: uname -a
 	output: NetBSD netbsd 9.2 NetBSD 9.2 (GENERIC) #0: Wed May 12 13:15:55 UTC 2021  mkrepro@mkrepro.NetBSD.org:/usr/src/sys/arch/amd64/compile/GENERIC amd64
 	
+	NetBSD localhost 9.4 NetBSD 9.4 (GENERIC) #0: Sat Apr 20 13:32:22 UTC 2024  mkrepro@mkrepro.NetBSD.org:/usr/src/sys/arch/amd64/compile/GENERIC amd64
+
 	
 +-------------------------------------------------------+
 |										======2======	|
@@ -95,9 +97,8 @@
 |										======12======	|
 |	configure npf (network packet filter)				|
 |														|
-+-------------------------------------------------------+		
-	see npf.conf
-
++-------------------------------------------------------+	
+	npf conf must be lacted in /etc/npf.conf
 	npfctl debug
 
 	//-----if no errors
@@ -177,3 +178,17 @@
 		maxsize 1G
 		create 0644 tomcat tomcat
 	}
+	
++-------------------------------------------------------+
+|										======20======	|
+|	default directories inside webapps					|
+|														|
++-------------------------------------------------------+	
+
+drwxr-xr-x  16 root  wheel  1536 Sep 20 12:48 docs
+drwxr-xr-x   7 root  wheel   512 Sep 20 12:48 examples
+drwxr-xr-x   3 root  wheel   512 Sep 20 12:48 ROOT
+drwxr-xr-x   6 root  wheel   512 Sep 20 12:48 host-manager
+drwxr-xr-x   6 root  wheel   512 Sep 20 12:48 manager
+localhost# pwd
+/opt/tomcat90/webapps

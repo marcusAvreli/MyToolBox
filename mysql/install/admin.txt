@@ -1,0 +1,10 @@
+show users
+
+SELECT User, Host FROM mysql.user;
+
+
+CREATE USER 'idmadmin'@'%' IDENTIFIED BY 'zubur1';
+
+GRANT ALL PRIVILEGES ON identityiq.* TO 'idmadmin'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+jdbc:mysql://192.168.46.129:3306/identityiq?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true

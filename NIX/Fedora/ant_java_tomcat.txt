@@ -36,7 +36,8 @@
 	./bootstrap.sh
 	bootstrap/bin/ant -f fetch.xml -Ddest=system || true && cp -v lib/*.jar lib/optional/
 	./build.sh -Ddist.dir=$PWD/apache-ant-1.10.15 dist
-	 cp -rv apache-ant-1.10.15 /opt/            && chown -R root:root /opt/apache-ant-1.10.15 && ln -sfv apache-ant-1.10.15 /opt/ant
+	 
+
 	
 	
 +-------------------------------------------------------+
