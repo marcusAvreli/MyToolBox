@@ -232,6 +232,17 @@ ECHO Invalid option. Usage: npm-profile online ^| offline
 
 
 
++-------------------------------------------------------+
+|														|
+|			Offline profile (.npmrc-offline)			|
+|														|
++-------------------------------------------------------+
+
+	npm i -g flatpickr@^4
+	you installed flatpickr globally.
+	That doesn’t affect your Angular project, because Angular expects dependencies to be local (in node_modules inside your project).
+
+	Also: npm cache isn’t automatically updated just because you installed something — the cache is updated when npm actually fetches packages
 
 
 
