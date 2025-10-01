@@ -139,6 +139,33 @@ cd my-app2
 npm install --offline
 
 
++-------------------------------------------------------+
+|														|
+|			CHECK CURRENT CACHE							|
+|														|
++-------------------------------------------------------+
+	npm config get cache
+	
+	#example output on windows
+	C:\Users\markg\AppData\Local\npm-cache
+
++-------------------------------------------------------+
+|														|
+|			CHECK CACHED PACKAGES						|
+|														|
++-------------------------------------------------------+
+	npm cache ls | findstr flat
+
+	#example output on windows
+	
+	make-fetch-happen:request-cache:https://registry.npmjs.org/array-flatten
+	make-fetch-happen:request-cache:https://registry.npmjs.org/array-flatten/-/array-flatten-1.1.1.tgz
+	make-fetch-happen:request-cache:https://registry.npmjs.org/flat-cache
+	make-fetch-happen:request-cache:https://registry.npmjs.org/flat-cache/-/flat-cache-3.2.0.tgz
+	make-fetch-happen:request-cache:https://registry.npmjs.org/flatpickr
+	make-fetch-happen:request-cache:https://registry.npmjs.org/flatpickr/-/flatpickr-4.6.13.tgz
+	make-fetch-happen:request-cache:https://registry.npmjs.org/flatted
+	make-fetch-happen:request-cache:https://registry.npmjs.org/flatted/-/flatted-3.3.3.tgz
 
 +-------------------------------------------------------+
 |														|
