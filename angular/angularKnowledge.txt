@@ -53,6 +53,14 @@
   },
  
   
+i got node v18.10.0,npm 8.19.2,angular 15.2.0. which version should i use?
+
+
+npm install tabulator-tables@6.3.1 @types/tabulator-tables@6.2.4 --save
+npm install @ngx-translate/core@^14.0.0 @ngx-translate/http-loader@^7 uuid@^9 --save
+
+  
+  
 +-------------------------------------------------------+
 |										======3======	|
 |	NODE JS AND JAVASCRIPT								|

@@ -16,7 +16,23 @@ UNINSTALL ANGULAR
 	npm uninstall -g @angular/cli
 
 CURRENT ANGULAR CLI VERSION
-	ng -v
+	ng version
+	
+	#example output
+	Angular CLI: 15.2.11
+	Node: 18.10.0
+	Package Manager: npm 8.19.2
+	OS: win32 x64
+	
+	Angular:
+	...
+
+	Package                      Version
+	------------------------------------------------------
+	@angular-devkit/architect    0.1502.11 (cli-only)
+	@angular-devkit/core         15.2.11 (cli-only)
+	@angular-devkit/schematics   15.2.11 (cli-only)
+	@schematics/angular          15.2.11 (cli-only)
 
 
 
