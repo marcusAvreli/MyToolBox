@@ -1,3 +1,8 @@
+ng new project_name --skip-git --style=scss --routing=false
+
+
+
+
 +-------------------------------------------------------+
 |														|
 |					ONLINE								|
