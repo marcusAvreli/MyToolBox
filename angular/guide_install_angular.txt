@@ -88,12 +88,10 @@ npm config set cache C:\Users\markg\npm-offline\node_modules
 
 +-------------------------------------------------------+
 |														|
-|			OFFLINE PATHS								|
+|			WORKING WITH NPM CONFIG						|
 |														|
 +-------------------------------------------------------+
-https://github.com/Webiks/ng2tips/blob/36ebe34d0cae2e9dae643afb22a544f1925e7eaf/ng-cli-offline/ng-cli-offline.md?plain=1#L1
-https://stackoverflow.com/questions/42841600/how-to-install-angular-cli-without-internet
-	npm i @angular/cli@15.2.11 --cache C:\Users\markg\npm-offline\npm-cache --cache-min 999999999 --no-shrinkwrap
+
 	
 	
 	npm config list -l
@@ -115,9 +113,6 @@ https://stackoverflow.com/questions/42841600/how-to-install-angular-cli-without-
 	npm config get cache
 	npm config get prefix
 
-C:\Python27
-
-npm i angular-cli --cache C:\Users\markg\npm-offline\npm-cache --cache-min 999999999 --no-shrinkwrap
 
 
 +-------------------------------------------------------+
@@ -129,31 +124,50 @@ node v18.10.0
 npm 8.19.2
 angular 15.2.0
 
-
-npm config set cache-min 999999999
-npm config set shrinkwrap false
-
-npm config set cache C:\Users\markg\npm-offline3\npm-cache
-npm config set prefix C:\Users\markg\npm-offline3\npm
-
-
-export NG_DISABLE_VERSION_CHECK=1     # Linux / macOS
-setx NG_DISABLE_VERSION_CHECK 1       # Windows (cmd)
-$env:NG_DISABLE_VERSION_CHECK="1"     # Windows (PowerShell)
-
-ng analytics off
-
-npm i -g @angular/cli@15.2.0
+1. on online machine check current cache directory
+	npm config get cache
+2. copy npm-cache directory from previous step to offline machine
+3. on online machine chek current prefix directory
+	npm config get prefix
+4. copy npm directory from previous step to offline machine
 
 
-npm config set offline true
-npm config set registry "file:///C:/Users/markg/npm-offline3/npm-cache"
+5.
+	npm config set cache-min 999999999
+	npm config set shrinkwrap false
+
+	npm config set cache C:\<any_path_on_offline_machine>\npm-cache
+	npm config set prefix C:\<any_path_on_offline_machine>\npm
+
+
+6. skip version checks on offline machine
+	export NG_DISABLE_VERSION_CHECK=1     # Linux / macOS
+	setx NG_DISABLE_VERSION_CHECK 1       # Windows (cmd)
+	$env:NG_DISABLE_VERSION_CHECK="1"     # Windows (PowerShell)
+
+	ng analytics off
+	
+
+	npm i -g @angular/cli@15.2.0
+	npm config set offline true
+	npm config set registry "file:///C:/Users/markg/npm-offline3/npm-cache"
 
 
 ng new my-app2 --skip-install
 cd my-app2 
 npm install --offline
 
+
+	https://github.com/Webiks/ng2tips/blob/36ebe34d0cae2e9dae643afb22a544f1925e7eaf/ng-cli-offline/ng-cli-offline.md?plain=1#L1
+
+
+#install in your current project on on-line machine 
+npm install <pacage_name> --save
+
+#check package was cached for future copy to offline machine
+
+#on windows
+npm cache ls | findstr <part_of_pack_name>
 
 +-------------------------------------------------------+
 |														|
