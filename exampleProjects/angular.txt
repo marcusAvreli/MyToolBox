@@ -1,5 +1,22 @@
 +-------------------------------------------------------+
 |														|
+|	TEST EDITORS										|
+|														|
++-------------------------------------------------------+
+
+https://github.com/tinymce/tinymce
+https://github.com/jaredreich/pell
+https://github.com/daniel3735928559/guppy
+https://github.com/fvilers/tiny-editor
+https://github.com/marcellov7/tex?tab=readme-ov-file
+
+
+https://github.com/celsowm/markdown-wysiwyg?tab=readme-ov-file
+
+https://github.com/sonnh-ttdesignco/Kothing-Editor?tab=readme-ov-file
+
++-------------------------------------------------------+
+|														|
 |	STATE Management									|
 |														|
 +-------------------------------------------------------+

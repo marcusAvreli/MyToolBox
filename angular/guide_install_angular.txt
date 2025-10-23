@@ -202,6 +202,53 @@ npm cache ls | findstr <part_of_pack_name>
 	make-fetch-happen:request-cache:https://registry.npmjs.org/flatted
 	make-fetch-happen:request-cache:https://registry.npmjs.org/flatted/-/flatted-3.3.3.tgz
 
+
++-------------------------------------------------------+
+|														|
+|			Make sure your workspace has a single node_modules folder containing						|
+|														|
++-------------------------------------------------------+
+for example @microsoft/eslint-plugin-sdl
+
+npm ls @microsoft/eslint-plugin-sdl
+
+
++-------------------------------------------------------+
+|														|
+|			compodoc									|
+|														|
++-------------------------------------------------------+
+node v18.10.0
+npm 8.19.2
+angular 15.2.0
+
+		node -r ./file-polyfill.js node_modules/@compodoc/compodoc/bin/index-cli.js -p tsconfig.app.json -s --port 5002 -w
+
+		file-polyfill.js
+		if (typeof File === 'undefined') {
+		  global.File = class File {};
+		}
+
+		contents of tsconfig.app.json
+
+		/* To learn more about this file see: https://angular.io/config/tsconfig. */
+		{
+		  "extends": "./tsconfig.json",
+		  "compilerOptions": {
+			"outDir": "./out-tsc/app",
+			"types": []
+		  },
+		  "files": [
+			"src/main.ts"
+		  ],
+		  "include": [
+			"src/**/*.d.ts","src/**/*.ts"
+		  ],
+		   "exclude": ["src/test.ts", "src/**/*.spec.ts"]
+		}
+
+
+
 +-------------------------------------------------------+
 |														|
 |			Online profile (.npmrc-online)				|
