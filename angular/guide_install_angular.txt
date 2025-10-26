@@ -221,6 +221,14 @@ npm ls @microsoft/eslint-plugin-sdl
 node v18.10.0
 npm 8.19.2
 angular 15.2.0
+@angular-devkit/architect       0.1502.11
+@angular-devkit/build-angular   15.2.11
+@angular-devkit/core            15.2.11
+@angular-devkit/schematics      15.2.11
+@angular/cli                    15.2.11
+@schematics/angular             15.2.11
+rxjs                            7.8.2
+typescript                      4.9.5
 
 		node -r ./file-polyfill.js node_modules/@compodoc/compodoc/bin/index-cli.js -p tsconfig.app.json -s --port 5002 -w
 
@@ -325,6 +333,46 @@ ECHO Invalid option. Usage: npm-profile online ^| offline
 	That doesn’t affect your Angular project, because Angular expects dependencies to be local (in node_modules inside your project).
 
 	Also: npm cache isn’t automatically updated just because you installed something — the cache is updated when npm actually fetches packages
+
+
++-------------------------------------------------------+
+|														|
+|	CODE RULES AND DOCS FOR ANGULAR						|
+|														|
++-------------------------------------------------------+
+node v18.10.0
+npm 8.19.2
+angular 15.2.0
+@angular-devkit/architect       0.1502.11
+@angular-devkit/build-angular   15.2.11
+@angular-devkit/core            15.2.11
+@angular-devkit/schematics      15.2.11
+@angular/cli                    15.2.11
+@schematics/angular             15.2.11
+rxjs                            7.8.2
+typescript                      4.9.5
+
+	npm i --save-dev @angular-eslint/builder@^15.2.1
+	npm i --save-dev @angular-eslint/eslint-plugin@^15.2.0
+	npm i --save-dev @angular-eslint/eslint-plugin-template@^15.2.0
+	npm i --save-dev @angular-eslint/schematics@^15.2.0
+	npm i --save-dev @angular-eslint/template-parser@^15.2.0
+	npm i --save-dev @compodoc/compodoc@^1.1.19
+	npm i --save-dev @microsoft/eslint-plugin-sdl@^0.2.0
+	npm i --save-dev @typescript-eslint/eslint-plugin@^5.62.0
+	npm i --save-dev @typescript-eslint/parser@^5.62.0
+	npm i --save-dev eslint@^8.37.0
+	npm i --save-dev eslint-config-prettier@^9.0.0
+	npm i --save-dev eslint-import-resolver-typescript@^3.5.5
+	npm i --save-dev eslint-plugin-autofix@^2.2.0
+	npm i --save-dev eslint-plugin-import@^2.32.0
+	npm i --save-dev eslint-plugin-jsdoc@^43.2.0
+	npm i --save-dev eslint-plugin-prettier@^4.2.1
+	npm i --save-dev eslint-plugin-sort-keys-fix@^1.1.2
+	npm i --save-dev eslint-plugin-unicorn@^45.0.2
+	npm i --save-dev eslint-plugin-unused-imports@^2.0.0
+	npm i --save-dev prettier@^2.8.8
+
 
 
 
