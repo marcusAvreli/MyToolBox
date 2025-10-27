@@ -1,0 +1,54 @@
+WITH JobData AS (
+    SELECT
+        CONVERT(VARCHAR(MAX), CAST(JOB_DATA AS VARBINARY(MAX)))
+            COLLATE Latin1_General_100_CI_AS_SC_UTF8 AS JobText
+    FROM QRTZ221_JOB_DETAILS
+   
+)
+-- Step 2: Extract fields from the text
+SELECT
+    -- Extract TaskSchedule.host
+    CASE
+        WHEN CHARINDEX('TaskSchedule.host=', JobText) > 0
+        THEN LTRIM(RTRIM(SUBSTRING(
+                JobText,
+                CHARINDEX('TaskSchedule.host=', JobText) + LEN('TaskSchedule.host='),
+                CHARINDEX(CHAR(13)+CHAR(10), JobText + CHAR(13)+CHAR(10), CHARINDEX('TaskSchedule.host=', JobText))
+                    - CHARINDEX('TaskSchedule.host=', JobText) - LEN('TaskSchedule.host=')
+            )))
+    END AS TaskScheduleHost,
+
+    -- Extract executor
+    CASE
+        WHEN CHARINDEX('executor=', JobText) > 0
+        THEN LTRIM(RTRIM(SUBSTRING(
+                JobText,
+                CHARINDEX('executor=', JobText) + LEN('executor='),
+                CHARINDEX(CHAR(13)+CHAR(10), JobText + CHAR(13)+CHAR(10), CHARINDEX('executor=', JobText))
+                    - CHARINDEX('executor=', JobText) - LEN('executor=')
+            )))
+    END AS Executor,
+
+    -- Extract nextActualFireTime
+    CASE
+        WHEN CHARINDEX('nextActualFireTime=', JobText) > 0
+        THEN LTRIM(RTRIM(SUBSTRING(
+                JobText,
+                CHARINDEX('nextActualFireTime=', JobText) + LEN('nextActualFireTime='),
+                CHARINDEX(CHAR(13)+CHAR(10), JobText + CHAR(13)+CHAR(10), CHARINDEX('nextActualFireTime=', JobText))
+                    - CHARINDEX('nextActualFireTime=', JobText) - LEN('nextActualFireTime=')
+            )))
+    END AS NextActualFireTime,
+
+    -- Extract launcher
+    CASE
+        WHEN CHARINDEX('launcher=', JobText) > 0
+        THEN LTRIM(RTRIM(SUBSTRING(
+                JobText,
+                CHARINDEX('launcher=', JobText) + LEN('launcher='),
+                CHARINDEX(CHAR(13)+CHAR(10), JobText + CHAR(13)+CHAR(10), CHARINDEX('launcher=', JobText))
+                    - CHARINDEX('launcher=', JobText) - LEN('launcher=')
+            )))
+    END AS Launcher
+
+FROM JobData;
