@@ -12,6 +12,3 @@ FRESH INSTALLED
 	service sshd start
 5. get software sources
 	refer to pkgsrc.txt
-	
-	
-	
