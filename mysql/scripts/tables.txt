@@ -205,14 +205,11 @@ CREATE TABLE IF NOT EXISTS umtb_rprt_bo (
 	bo_field_1 varchar(255)
 	,bo_field_2 varchar(255)
 	,bo_field_3 varchar(255)
-	,bo_field_4 varchar(255)
-	
-)
+	,bo_field_4 varchar(255)	
+);
 
 CREATE TABLE IF NOT EXISTS umtb_rprt_sap (
 	sap_1 varchar(255)
 	,sap_2 varchar(255)
 	,sap_3 varchar(255)
-	
-	
 )
