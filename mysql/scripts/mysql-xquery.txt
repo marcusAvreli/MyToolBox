@@ -1,0 +1,133 @@
+<Attributes>
+<Map>
+<entry key="memberOf">
+<value>
+<List>
+<String>1234</String>
+<String>123ddd4</String>
+</List>
+</value>
+</entry>
+<entry key="distinguishedName" value="ccccc"/>
+<entry key="sAMAccountName" value="dddd"/>
+</Map>
+</Attributes>
+
+CREATE TABLE xml_store (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    xml_data LONGTEXT NOT NULL,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+INSERT INTO xml_store (xml_data)
+VALUES ('<report><id>123</id><name>Sales Report</name><date>2025-11-01</date></report>');
+INSERT INTO xml_store (xml_data)
+VALUES ('<Attributes> <Map> <entry key="memberOf"> <value> <List> <String>1234</String> <String>123ddd4</String> </List> </value> </entry> </Map> </Attributes>')
+INSERT INTO xml_store (xml_data)
+VALUES (' <Attributes> <Map> <entry key="memberOf"> <value> <List> <String>1234</String> <String>123ddd4</String> </List> </value> </entry> <entry key="distinguishedName" value="ccccc"/> <entry key="sAMAccountName" value="dddd"/> </Map> </Attributes> ')
+
+
+
+
+
+extract distinguishedName, sAMAccountName. output should have two rows
+distinguishedName sAMAccountName memberOf
+distinguishedName2 sAMAccountName2 memberOf2
+
+in case memberOf is null or does not exist, make row like this
+distinguishedName sAMAccountName null
+
+instead of inserting empty string insert null value
+
+upgrade get_memberOf
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS get_memberOf $$
+
+CREATE PROCEDURE get_memberOf()
+BEGIN
+    DECLARE done INT DEFAULT 0;
+    DECLARE xml_val TEXT;
+    DECLARE xml_len INT;
+    DECLARE idx INT;
+
+    DECLARE dest_table_name VARCHAR(64) DEFAULT 'umtb_rprt_ad';
+    DECLARE sql_stmt TEXT;
+
+    -- Cursor for xml_store
+    DECLARE cur CURSOR FOR SELECT xml_data FROM xml_store;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+
+    -- Check if destination table exists
+    IF EXISTS (
+        SELECT 1
+        FROM INFORMATION_SCHEMA.TABLES
+        WHERE TABLE_SCHEMA = DATABASE()
+          AND TABLE_NAME = dest_table_name
+    ) THEN
+
+        -- Clear destination table
+        SET @sql_stmt = CONCAT('DELETE FROM ', dest_table_name);
+        PREPARE stmt FROM @sql_stmt;
+        EXECUTE stmt;
+        DEALLOCATE PREPARE stmt;
+
+        -- Open cursor
+        OPEN cur;
+
+        read_loop: LOOP
+            FETCH cur INTO xml_val;
+            IF done THEN
+                LEAVE read_loop;
+            END IF;
+
+            -- Extract distinguishedName and sAMAccountName; convert empty to NULL
+            SET @distinguishedName := NULLIF(ExtractValue(xml_val, '/Attributes/Map/entry[@key="distinguishedName"]/@value'), '');
+            SET @sAMAccountName := NULLIF(ExtractValue(xml_val, '/Attributes/Map/entry[@key="sAMAccountName"]/@value'), '');
+
+            -- Count <String> elements in memberOf
+            SET xml_len = (LENGTH(xml_val) - LENGTH(REPLACE(xml_val, '<String>', ''))) / LENGTH('<String>');
+
+            -- If memberOf exists, insert one row per <String>
+            IF xml_len > 0 THEN
+                SET idx = 1;
+                WHILE idx <= xml_len DO
+                    SET @memberOf := NULLIF(ExtractValue(xml_val, CONCAT(
+                        '/Attributes/Map/entry[@key="memberOf"]/value/List/String[', idx, ']'
+                    )), '');
+
+                    -- Insert row
+                    SET @sql_stmt = CONCAT(
+                        'INSERT INTO ', dest_table_name,
+                        ' (distinguishedName, sAMAccountName, memberOf) VALUES (?, ?, ?)'
+                    );
+                    PREPARE stmt FROM @sql_stmt;
+                    EXECUTE stmt USING @distinguishedName, @sAMAccountName, @memberOf;
+                    DEALLOCATE PREPARE stmt;
+
+                    SET idx = idx + 1;
+                END WHILE;
+            ELSE
+                -- memberOf does not exist → insert single row with NULL
+                SET @sql_stmt = CONCAT(
+                    'INSERT INTO ', dest_table_name,
+                    ' (distinguishedName, sAMAccountName, memberOf) VALUES (?, ?, NULL)'
+                );
+                PREPARE stmt FROM @sql_stmt;
+                EXECUTE stmt USING @distinguishedName, @sAMAccountName;
+                DEALLOCATE PREPARE stmt;
+            END IF;
+
+        END LOOP;
+
+        CLOSE cur;
+
+    ELSE
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Destination table does not exist';
+    END IF;
+
+END $$
+
+DELIMITER ;
