@@ -1,70 +1,8 @@
- WITH AllowedSystems AS (
-    SELECT 'Active Directory' AS system_name, 1 AS exact_count
-    UNION ALL
-    SELECT 'SAP HR', 1
-    UNION ALL
-    SELECT 'Oracle', 3
-),
--- 2. Count accounts per system per identity
-IdentitySystemCounts AS (
-    SELECT
-        i.id AS identity_id,
-        i.name AS identity_name,
-        a.name AS system_name,
-        SUM(CASE WHEN l.iiq_disabled = 0 OR l.iiq_disabled IS NULL THEN 1 ELSE 0 END) AS enabled_count,
-        COUNT(*) AS total_count
-    FROM spt_link l
-    INNER JOIN spt_identity i ON i.id = l.identity_id
-    INNER JOIN spt_application a ON a.id = l.application
-    GROUP BY i.id, i.name, a.name
-),
--- 3. Validate against rules
-IdentityChecks AS (
-    SELECT
-        isc.identity_id,
-        isc.identity_name,
-        SUM(CASE
-                WHEN isc.system_name = al.system_name
-                     AND isc.enabled_count = al.exact_count   -- exact match required
-                     AND isc.total_count = isc.enabled_count  -- no disabled duplicates
-                THEN 1 ELSE 0
-            END) AS systems_ok,
-        COUNT(DISTINCT al.system_name) AS expected_systems
-    FROM IdentitySystemCounts isc
-    INNER JOIN AllowedSystems al ON isc.system_name = al.system_name
-    GROUP BY isc.identity_id, isc.identity_name
-)
--- 4. Keep only identities that satisfy all rules
-SELECT
-    DATEADD(SECOND, CAST(i.created AS BIGINT)/1000, '1970-01-01') AS identity_created,
-    i.user_namead,
-    i.name AS identity_name,
-    i.display_name
-FROM IdentityChecks c
-INNER JOIN spt_identity i ON i.id = c.identity_id
-CROSS JOIN (SELECT COUNT(*) AS cnt FROM AllowedSystems) ac
-WHERE c.systems_ok = ac.cnt    -- all systems passed their rule
-  AND c.expected_systems = ac.cnt; -- no missing systems
-  
-  
-  
-  
-  
-  
-  
-  +-------------------------------------------------------+
-
-|                                                                                                                                                                       |
-
-|           NUMBER OF ENABLED ACCOUNT PER APPLICATION                              |
-
-|                                                                                                                                                                       |
-
 +-------------------------------------------------------+
-
- 
-
-  
+|														|
+|	NUMBER OF ENABLED ACCOUNT PER APPLICATION			|
+|														|
++-------------------------------------------------------+
 
   WITH AllowedSystems AS (
 
@@ -163,20 +101,11 @@ WHERE c.systems_ok = ac.cnt    -- all systems passed their rule
  
 
  
-
 +-------------------------------------------------------+
-
-|                                                                                                                                                                       |
-
-|           NUMBER OF  ACCOUNTS PER APPLICATION                                                        |
-
-|                                                                                                                                                                       |
-
+|														|
+|	NUMBER OF  ACCOUNTS PER APPLICATION					|
+|														|
 +-------------------------------------------------------+
-
- 
-
- 
 
 WITH AllowedSystems AS (
 
@@ -268,24 +197,12 @@ WHERE c.systems_ok = ac.cnt    -- all systems passed their rule
 
   AND c.expected_systems = ac.cnt; -- no missing systems
 
- 
-
- 
-
- 
 
 +-------------------------------------------------------+
-
-|                                                                                                                                                                       |
-
-|           NUMBER OF  ACCOUNTS PER WUTH FIRST LINK CREATED                    |
-
-|                                                                                                                                                                       |
-
+|														|
+|	NUMBER OF  ACCOUNTS PER WUTH FIRST LINK CREATED		|
+|														|
 +-------------------------------------------------------+
-
- 
-
  
 
  
@@ -398,23 +315,12 @@ GROUP BY i.user_namead, i.name, i.display_name
 
 ORDER BY i.name;
 
- 
 
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
++-------------------------------------------------------+
+|														|
+|	NUMBER OF  ACCOUNTS COMPLIANCE						|
+|														|
++-------------------------------------------------------+
 
 WITH AllowedSystems AS (
 

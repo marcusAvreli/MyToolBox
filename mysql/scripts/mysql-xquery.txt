@@ -31,14 +31,14 @@ VALUES (' <Attributes> <Map> <entry key="memberOf"> <value> <List> <String>1234<
 
 
 
-extract distinguishedName, sAMAccountName. output should have two rows
-distinguishedName sAMAccountName memberOf
-distinguishedName2 sAMAccountName2 memberOf2
+1. extract distinguishedName, sAMAccountName. output should have two rows
+	distinguishedName sAMAccountName memberOf
+	distinguishedName2 sAMAccountName2 memberOf2
 
-in case memberOf is null or does not exist, make row like this
-distinguishedName sAMAccountName null
+2. in case memberOf is null or does not exist, make row like this
+		distinguishedName sAMAccountName null
 
-instead of inserting empty string insert null value
+3. instead of inserting empty string insert null value
 
 upgrade get_memberOf
 
