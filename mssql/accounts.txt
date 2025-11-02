@@ -45,3 +45,439 @@ INNER JOIN spt_identity i ON i.id = c.identity_id
 CROSS JOIN (SELECT COUNT(*) AS cnt FROM AllowedSystems) ac
 WHERE c.systems_ok = ac.cnt    -- all systems passed their rule
   AND c.expected_systems = ac.cnt; -- no missing systems
+  
+  
+  
+  
+  
+  
+  
+  +-------------------------------------------------------+
+
+|                                                                                                                                                                       |
+
+|           NUMBER OF ENABLED ACCOUNT PER APPLICATION                              |
+
+|                                                                                                                                                                       |
+
++-------------------------------------------------------+
+
+ 
+
+  
+
+  WITH AllowedSystems AS (
+
+    SELECT 'Active Directory' AS system_name, 1 AS exact_count
+
+    UNION ALL
+
+    SELECT 'SAP HR', 1
+
+    UNION ALL
+
+    SELECT 'Azure AD', 1
+
+),
+
+-- 2. Count accounts per system per identity
+
+IdentitySystemCounts AS (
+
+    SELECT
+
+        i.id AS identity_id,
+
+        i.name AS identity_name,
+
+        a.name AS system_name,
+
+        SUM(CASE WHEN l.iiq_disabled = 0 OR l.iiq_disabled IS NULL THEN 1 ELSE 0 END) AS enabled_count,
+
+        COUNT(*) AS total_count
+
+    FROM spt_link l
+
+    INNER JOIN spt_identity i ON i.id = l.identity_id
+
+    INNER JOIN spt_application a ON a.id = l.application
+
+    GROUP BY i.id, i.name, a.name
+
+),
+
+-- 3. Validate against rules
+
+IdentityChecks AS (
+
+    SELECT
+
+        isc.identity_id,
+
+        isc.identity_name,
+
+        SUM(CASE
+
+                WHEN isc.system_name = al.system_name
+
+                     AND isc.enabled_count = al.exact_count   -- exact match required
+
+                     AND isc.total_count = isc.enabled_count  -- no disabled duplicates
+
+                THEN 1 ELSE 0
+
+            END) AS systems_ok,
+
+        COUNT(DISTINCT al.system_name) AS expected_systems
+
+    FROM IdentitySystemCounts isc
+
+    INNER JOIN AllowedSystems al ON isc.system_name = al.system_name
+
+    GROUP BY isc.identity_id, isc.identity_name
+
+)
+
+-- 4. Keep only identities that satisfy all rules
+
+SELECT
+
+    FORMAT(DATEADD(SECOND, CAST(i.created AS BIGINT)/1000, '1970-01-01'), 'yyyy-MM-dd HH:mm') AS identity_created,
+
+    i.user_namead,
+
+    i.name AS identity_name,
+
+    i.display_name
+
+FROM IdentityChecks c
+
+INNER JOIN spt_identity i ON i.id = c.identity_id
+
+CROSS JOIN (SELECT COUNT(*) AS cnt FROM AllowedSystems) ac
+
+WHERE c.systems_ok = ac.cnt    -- all systems passed their rule
+
+  AND c.expected_systems = ac.cnt; -- no missing systems
+
+ 
+
+ 
+
++-------------------------------------------------------+
+
+|                                                                                                                                                                       |
+
+|           NUMBER OF  ACCOUNTS PER APPLICATION                                                        |
+
+|                                                                                                                                                                       |
+
++-------------------------------------------------------+
+
+ 
+
+ 
+
+WITH AllowedSystems AS (
+
+    SELECT 'Active Directory' AS system_name, 1 AS exact_count
+
+    UNION ALL
+
+    SELECT 'SAP HR', 1
+
+    UNION ALL
+
+    SELECT 'CRM Dynamic MRM', 2
+
+),
+
+-- 1. Count accounts per system per identity (ignore enabled/disabled)
+
+IdentitySystemCounts AS (
+
+    SELECT
+
+        i.id AS identity_id,
+
+        i.name AS identity_name,
+
+        a.name AS system_name,
+
+        COUNT(*) AS account_count
+
+    FROM spt_link l
+
+    INNER JOIN spt_identity i ON i.id = l.identity_id
+
+    INNER JOIN spt_application a ON a.id = l.application
+
+    GROUP BY i.id, i.name, a.name
+
+),
+
+-- 2. Validate against rules
+
+IdentityChecks AS (
+
+    SELECT
+
+        isc.identity_id,
+
+        isc.identity_name,
+
+        SUM(CASE
+
+                WHEN isc.system_name = al.system_name
+
+                     AND isc.account_count = al.exact_count   -- match required number
+
+                THEN 1 ELSE 0
+
+            END) AS systems_ok,
+
+        COUNT(DISTINCT al.system_name) AS expected_systems
+
+    FROM IdentitySystemCounts isc
+
+    INNER JOIN AllowedSystems al ON isc.system_name = al.system_name
+
+    GROUP BY isc.identity_id, isc.identity_name
+
+)
+
+-- 3. Keep only identities that satisfy all rules
+
+SELECT
+
+    FORMAT(DATEADD(SECOND, CAST(i.created AS BIGINT)/1000, '1970-01-01'), 'yyyy-MM-dd HH:mm') AS identity_created,
+
+    i.user_namead,
+
+    i.name AS identity_name,
+
+    i.display_name
+
+FROM IdentityChecks c
+
+INNER JOIN spt_identity i ON i.id = c.identity_id
+
+CROSS JOIN (SELECT COUNT(*) AS cnt FROM AllowedSystems) ac
+
+WHERE c.systems_ok = ac.cnt    -- all systems passed their rule
+
+  AND c.expected_systems = ac.cnt; -- no missing systems
+
+ 
+
+ 
+
+ 
+
++-------------------------------------------------------+
+
+|                                                                                                                                                                       |
+
+|           NUMBER OF  ACCOUNTS PER WUTH FIRST LINK CREATED                    |
+
+|                                                                                                                                                                       |
+
++-------------------------------------------------------+
+
+ 
+
+ 
+
+ 
+
+WITH AllowedSystems AS (
+
+    SELECT 'Active Directory' AS system_name, 1 AS exact_count
+
+    UNION ALL
+
+    SELECT 'SAP HR', 1
+
+    UNION ALL
+
+    SELECT 'CRM Dynamic MRM', 2
+
+),
+
+-- Count accounts per system per identity (ignore enable/disable)
+
+IdentitySystemCounts AS (
+
+    SELECT
+
+        i.id AS identity_id,
+
+        i.name AS identity_name,
+
+        a.name AS system_name,
+
+        COUNT(*) AS account_count,
+
+        MIN(l.created) AS link_created -- earliest link creation per identity-system
+
+    FROM spt_link l
+
+    INNER JOIN spt_identity i ON i.id = l.identity_id
+
+    INNER JOIN spt_application a ON a.id = l.application
+
+    GROUP BY i.id, i.name, a.name
+
+),
+
+-- Keep only allowed systems with required count
+
+FilteredSystems AS (
+
+    SELECT
+
+        isc.identity_id,
+
+        isc.identity_name,
+
+        isc.system_name,
+
+        isc.link_created,
+
+        al.exact_count
+
+    FROM IdentitySystemCounts isc
+
+    INNER JOIN AllowedSystems al
+
+        ON isc.system_name = al.system_name
+
+    WHERE isc.account_count = al.exact_count
+
+),
+
+-- Ensure identity has all allowed systems
+
+ValidIdentities AS (
+
+    SELECT fs.identity_id, fs.identity_name
+
+    FROM FilteredSystems fs
+
+    GROUP BY fs.identity_id, fs.identity_name
+
+    HAVING COUNT(DISTINCT fs.system_name) = (SELECT COUNT(*) FROM AllowedSystems)
+
+)
+
+-- Pivot to get one row per identity with link_created per system
+
+SELECT
+
+    i.user_namead,
+
+    i.name AS identity_name,
+
+    i.display_name,
+
+            FORMAT(MIN(DATEADD(SECOND, CAST(i.created AS BIGINT)/1000, '1970-01-01')), 'yyyy-MM-dd HH:mm') AS identity_created,   
+
+    FORMAT(MAX(CASE WHEN fs.system_name = 'Active Directory' THEN DATEADD(SECOND, CAST(fs.link_created AS BIGINT)/1000, '1970-01-01') END), 'yyyy-MM-dd HH:mm') AS ActiveDirectory_created,
+
+    FORMAT(MAX(CASE WHEN fs.system_name = 'SAP HR' THEN DATEADD(SECOND, CAST(fs.link_created AS BIGINT)/1000, '1970-01-01') END), 'yyyy-MM-dd HH:mm') AS SAPHR_created,
+
+    FORMAT(MAX(CASE WHEN fs.system_name = 'CRM Dynamic MRM' THEN DATEADD(SECOND, CAST(fs.link_created AS BIGINT)/1000, '1970-01-01') END), 'yyyy-MM-dd HH:mm') AS CRMDynamicMRM_created
+
+FROM spt_identity i
+
+INNER JOIN ValidIdentities vi ON i.id = vi.identity_id
+
+INNER JOIN FilteredSystems fs ON i.id = fs.identity_id
+
+GROUP BY i.user_namead, i.name, i.display_name
+
+ORDER BY i.name;
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+WITH AllowedSystems AS (
+
+    SELECT 'Active Directory' AS system_name, 1 AS exact_count
+
+  
+
+),
+
+IdentitySystemCounts AS (
+
+    SELECT
+
+        i.id AS identity_id,
+
+        i.name AS identity_name,
+
+        a.name AS system_name,
+
+        COUNT(*) AS account_count
+
+    FROM spt_link l
+
+    INNER JOIN spt_identity i ON i.id = l.identity_id
+
+    INNER JOIN spt_application a ON a.id = l.application
+
+    GROUP BY i.id, i.name, a.name
+
+)
+
+,mac_status as(
+
+SELECT
+
+    i.name AS identity_name,
+
+    i.display_name,
+
+    isc.system_name,
+
+    isc.account_count,
+
+    al.exact_count,
+
+    CASE
+
+        WHEN isc.account_count = al.exact_count THEN 'OK'
+
+        WHEN isc.account_count > al.exact_count THEN 'TOO MANY'
+
+        WHEN isc.account_count < al.exact_count THEN 'MISSING'
+
+    END AS status
+
+FROM IdentitySystemCounts isc
+
+INNER JOIN AllowedSystems al ON isc.system_name = al.system_name
+
+INNER JOIN spt_identity i ON i.id = isc.identity_id
+
+--ORDER BY i.name, isc.system_name
+
+)
+
+select * from mac_status where status <> 'OK'
