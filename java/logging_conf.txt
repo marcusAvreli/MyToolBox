@@ -1,0 +1,118 @@
+######################################
+## Global log4j2 properties
+######################################
+name=identityiq_default
+status=warn
+monitorInterval=20
+packages=sailpoint.api.logging
+
+######################################
+## sailpoint properties
+######################################
+property.logLocation=<log_location>
+property.discardsFilename=sailpointDiscardedMessages 
+
+#######################################
+## Appenders
+#######################################
+
+ 
+
+### direct log messages to stdout ###
+
+appender.stdout.type=Console
+
+appender.stdout.name=stdout
+
+appender.stdout.target=SYSTEM_OUT
+
+appender.stdout.layout.type=PatternLayout
+
+appender.stdout.layout.pattern=%d{ISO8601} %5p %t %c{4}:%L - %m%n
+
+appender.file.layout.charset = UTF-8
+
+ 
+
+# CRLF log injection can reduce the value of application logs. CRLF log injection can
+
+# be neutralized by applying log4j2's replace conversion pattern to a log message. If
+
+# log4j2 environment is set up to use the PatternLayout, then while in stdout or file
+
+# write, an administrator can use the 'replace' conversion pattern to a log message to
+
+# neutralize CRLF sequence to double underscore. In the example below, the inner replace
+
+# pattern replaces a sequence of line feed (\n) and carriage return (\r) to two underscores
+
+# respectively, whereas the outer replace pattern replaces the carriage return and line feed
+
+# sequence of a log message to two underscores respectively. Adjust double underscore from
+
+# both the places as per one's own choice of sequence.
+
+#appender.stdout.layout.pattern=%d{ISO8601} %5p %t %c{4}:%L - %replace{%replace{%m}{\n\r}{__}}{\r\n}{__}%n
+
+ 
+
+### direct log messages to the db
+
+appender.syslog.type=spsyslog
+
+appender.syslog.name=spsyslog
+
+ 
+
+# Below is an example of how to create a logger that writes to a file.
+
+# Uncomment the following five lines, then uncomment the
+
+# rootLogger.appenderRef.file.ref definition below
+
+appender.file.type=RollingFile
+
+appender.file.name=file
+
+appender.file.fileName=${logLocation}sailpoint.log
+
+appender.file.filePattern = ${logLocation}sailpoint.log.%d{yyyy-MM-dd}-%i.log
+
+appender.file.layout.type=PatternLayout
+
+appender.file.layout.pattern=%d{ISO8601} %5p %t %c{4}:%L - %m%n
+
+appender.file.policies.type=Policies
+
+appender.file.policies.size.type=SizeBasedTriggeringPolicy
+
+appender.file.policies.size.size=200MB
+
+appender.file.strategy.type=DefaultRolloverStrategy
+
+appender.file.strategy.max=10
+
+#Filter CSRF messages:
+appender.file.filter.dropOne.type=StringMatchFilter
+appender.file.filter.dropOne.text=CSRF validation failed
+appender.file.filter.dropOne.onMatch=DENY
+appender.file.filter.dropOne.onMismatch=ACCEPT
+
+ 
+
+# used by queue processing to log messages that could not be processed
+appender.discards.type=RollingFile
+appender.discards.name=discards
+appender.discards.fileName=${logLocation}${discardsFilename}.log
+appender.discards.filePattern=${discardsFilename}-%d{MM-dd-yyyy}-%i.log
+appender.discards.layout.type=PatternLayout
+appender.discards.layout.pattern=%m%n
+appender.discards.policies.type=Policies
+
+appender.discards.policies.size.type=SizeBasedTriggeringPolicy
+
+appender.discards.policies.size.size=100MB
+
+appender.discards.strategy.type=DefaultRolloverStrategy
+
+appender.discards.strategy.max=5

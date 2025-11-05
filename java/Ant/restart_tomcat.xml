@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<!-- ======================================================================= -->
+	<!-- eXist build file                                                        -->
+	<!-- ======================================================================= -->
+
+	<project basedir="../.." default="all" name="exist">
+		  <taskdef resource="net/sf/antcontrib/antlib.xml">
+		        <classpath>
+		            <pathelement location="lib/ant-contrib.jar"/>
+		        </classpath>
+		    </taskdef>
+	    <!-- setup properties -->
+	    <property file="${basedir}/build.properties" />
+		 <property name="tomcat.port" value="${tomcat.port}"/>
+		
+		<!--
+		<property name="runner" value="teudatZehut.Application" />
+	 	<import file="./junit.xml"/>
+	 	-->
+		<target name="clean" description="Cleaning up build files...">
+					<delete dir="WEB-INF/lib" />
+				</target>
+		 <property name="tomcat.startup.file" value="${tomcat.home}/bin/startup.bat"/>
+			       <property name="tomcat.shutdown.file" value="${tomcat.home}/bin/shutdown.bat"/>	
+	<property name="lib" location="lib" />
+		 <property name="build" value="./build"/>
+		  <property name="build.scripts" value="${build}/scripts"/>
+		<property name="classes.dir" value="${basedir}/classes"/>
+	 	 <path id="classpath.external">
+	        <fileset dir="${lib.core}">
+	            <include name="*.jar"/>
+	        </fileset>
+	        <!--
+	        <fileset dir="${lib.optional}">
+	            <include name="*.jar"/>
+	        </fileset>
+	        -->
+	        <fileset dir="${lib.endorsed}">
+	            <include name="*.jar"/>
+	        </fileset>
+			<!--
+	        <fileset dir="${lib.user}">
+	            <include name="*.jar"/>
+	        </fileset>
+	        <fileset dir="${lib.extensions}" erroronmissingdir="false">
+	            <include name="*.jar"/>
+	        </fileset>
+
+	        <fileset dir="extensions" erroronmissingdir="false">
+	            <include name="**/lib/*.jar"/>
+	        </fileset>
+	        -->
+	        <!--
+	        <fileset dir="${tools.ant}/lib">
+	            <include name="*.jar"/>
+	        </fileset>
+	        <pathelement path="tools/yajsw/wrapper.jar"/>
+	        <fileset dir="tools/yajsw/lib/core/commons">
+	            <include name="commons-configuration*.jar"/>
+	        </fileset>
+	        -->
+	    </path>
+	 	
+	 	 <!-- setup class path -->
+	    <path id="classpath.core">
+			<pathelement location="${classes.dir}"/>
+			<pathelement path="${java.class.path}"/>
+			<fileset dir="lib">
+				<include name="test/tomcat/*.jar"/>
+			</fileset>
+			<fileset dir="lib">
+				<include name="jersey/*.jar"/>
+			</fileset>
+			<fileset dir="lib">
+				<include name="database/hibernate/*.jar"/>
+			</fileset>
+			<fileset dir="lib">
+				<include name="database/mysql/*.jar"/>
+			</fileset>
+			<fileset dir="lib">
+				<include name="logging/*.jar"/>
+			</fileset>
+			 <fileset dir="lib">
+				<include name="test/endorsed/*.jar"/>
+			</fileset>
+	    </path>
+		
+	 <path id="classpath.core.test">
+		<pathelement location="${classes.dir}"/>
+	 		    	<fileset dir="lib">
+	 		    				<include name="**/*.jar" />
+	 		    			</fileset>
+		    </path>
+	    
+		
+	     <!-- =================================================================== -->
+	    <!-- Prepare the build                                                   -->
+	    <!-- =================================================================== -->
+	    <target name="prepare" depends="clean">
+	     <echo message=""/>
+	        <echo message="Java Vendor: ${java.vendor}"/>
+	        <echo message="Java Version: ${java.runtime.version}"/>
+	        <echo message="Java VM: ${java.vm.name} ${java.vm.version}"/>
+	        <echo message="${ant.version}"/>
+	        <echo message="---------------------------------------------"/>
+	        <echo/>
+	        <echo message="basedir=${basedir}"/>
+	    	
+	    	 <!-- Ensure classes directory exists -->
+	    	    <mkdir dir="${classes.dir}" />
+
+	    	    <!-- Clean its contents if it already exists -->
+	    	    <delete includeemptydirs="true">
+	    	        <fileset dir="${classes.dir}">
+	    	            <include name="**/*" />
+	    	        </fileset>
+	    	    </delete>
+
+	    	<!--
+	    	<mkdir dir="${classes.dir}"/>
+
+	        <mkdir dir="${module.exist-core}/${build.classes}"/>
+	        <mkdir dir="${module.exist-start}/${build.classes}"/>
+	        <mkdir dir="${module.exist-testkit}/${build.classes}"/>
+	        <mkdir dir="${jetty.dir}/logs"/>
+	        <mkdir dir="${jetty.dir}/work"/>
+	    	-->
+
+	    	
+	        </target>
+	    
+	<!-- =================================================================== -->
+	    <!-- Compiles the source code                                            -->
+	    <!-- =================================================================== -->
+	    <target name="compile" description="Compiles the source code" depends="prepare">
+
+	        <echo
+	            message="Compiling with Java ${ant.java.version} from ${build.compiler.source} source to ${build.compiler.target} target, debug ${build.debug}, optimize ${build.optimize}, deprecation ${build.deprecation}"/>
+
+	    
+
+     <javac includeAntRuntime="false" debug="${build.debug}" deprecation="${build.deprecation}" destdir="${classes.dir}"
+            encoding="UTF-8" optimize="${build.optimize}" srcdir="${module.exist-core}/${src}"
+            source="${build.compiler.source}" target="${build.compiler.target}"
+            fork="true" memoryInitialSize="512m" memoryMaximumSize="1024m">
+	            
+
+	            <!-- Do not compile Aspects here, compiled below by iajc -->
+	  <!--          <exclude name="org/exist/security/PermissionRequiredAspect.java"/>
+	            <exclude name="org/exist/storage/lock/EnsureLockingAspect.java"/>
+	-->
+	            <classpath>
+	                <path refid="classpath.core"/>
+	             
+	             
+	             
+	            </classpath>
+	        </javac>
+
+	        <!-- <ant antfile="build.xml" dir="extensions/indexes" target="compile" /> -->
+	    </target>
+	 	    <!-- ================================================================== -->
+	    <!-- Create jar files                                                   -->
+	    <!-- ================================================================== -->
+		<target name="jar" depends="compile">
+			
+				<mkdir dir="${output.dir}" />
+					<jar destfile="${output.dir}/${project.name}.jar">
+						<fileset dir="${classes.dir}" />
+					</jar>
+			<copy todir="WEB-INF/lib" verbose="false">
+				<fileset dir="./lib/jersey" includes="*.jar"/>
+				<fileset dir="./lib/logging" includes="*.jar"/>
+				<fileset dir="./lib/database/mysql" includes="*.jar"/>
+				<fileset dir="./lib/database/hibernate" includes="*.jar"/>
+			</copy>
+				
+			</target>
+		
+		<!--
+	<target name="angular" depends="jar" description="Building angular in Production mode">
+			<echo>Building angular files...</echo>
+			<exec executable="cmd" dir="WebContent/${angular.project.name}/">
+				<arg value="/c" />
+				<arg value="ng build  base-href ./" />
+
+			</exec>
+		</target>
+		-->
+	<!--
+	<target name="copyAngular" depends="compileAng2ForProd" description="Copy the war into tomcat directory">
+				
+				<copy todir="${output.dir}/ui/ng" verbose="true">
+					<fileset dir="WebContent/${angular.project.name}/dist" />
+				</copy>
+			</target>
+		-->
+		
+			<target name="war" depends="jar">
+				<war destfile="${output.dir}/${project.name}.war" webxml="${basedir}/src/main/webapp/WEB-INF/web.xml">
+					<zipfileset dir="${output.dir}" includes="${project.name}.jar" prefix="WEB-INF/lib" />
+					<zipfileset dir="WEB-INF/lib"  includes="**/*.jar" prefix="WEB-INF/lib" >
+						
+						</zipfileset>
+					<zipfileset dir="src/main/webapp/WEB-INF"  includes="*.properties" prefix="WEB-INF/" />
+					<zipfileset dir="classes"  includes="**/*.class" prefix="WEB-INF/classes" />
+					<zipfileset dir="src/main/resources/META-INF"  includes="**/*.xml" prefix="WEB-INF/classes/META-INF" /> 
+					<zipfileset dir="src/main/webapp/META-INF"  includes="**/*.xml" prefix="META-INF" />
+					 <zipfileset dir="src/main/webapp/WEB-INF/data" includes="**/*" prefix="WEB-INF/data" />
+				<!--	<zipfileset dir="WebContent/${angular.project.name}/dist/reporting" includes="*" prefix="/"/> -->
+				<!--	<zipfileset dir="src/main/webapp/META-INF"  includes="*.xml" prefix="META-INF/" /> -->
+				</war>
+			</target>
+	  <!-- ================================================================== -->
+	    <!-- Build all                                                          -->
+	    <!-- ================================================================== -->
+	    <target name="all"
+	        depends="compile"
+	        description="Build all">
+
+	       
+
+	       
+	    </target>
+		 <target name="start" description="Start the Tomcat server">
+			           <echo message="Starting Tomcat at ${tomcat.home}"/>
+			           <exec executable="${tomcat.startup.file}" failonerror="true"/>
+			       </target>
+
+			       <target name="stop" description="Stop the Tomcat server">
+			           <echo message="Stopping Tomcat at ${tomcat.home}"/>
+			           <exec executable="${tomcat.shutdown.file}" failonerror="true"/>
+			       	
+			       	
+			        <!-- Wait until Tomcat is really stopped -->
+			           <echo message="Waiting for Tomcat to stop..."/>
+			           
+			           <waitfor maxwait="30" maxwaitunit="second" checkevery="2" checkeveryunit="second">
+			               <!-- Condition: port 8080 is not open (Tomcat stopped) -->
+			               <not>
+			                   <socket server="localhost" port="8080"/>
+			               </not>
+			           </waitfor>
+
+			           <echo message="Tomcat stopped."/>
+			       	
+			       	
+			       </target>
+		
+		<!-- ========================= -->
+		<!-- Check if Tomcat is running -->
+		<!-- ========================= -->
+	    <!-- =============================================== -->
+	    <!-- Check if Tomcat is running (robust version) -->
+	    <!-- =============================================== -->
+	    <target name="check-tomcat-running" description="Detect running Tomcat process">
+	        <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+	            <classpath>
+	                <pathelement location="lib/ant-contrib.jar"/>
+	            </classpath>
+	        </taskdef>
+
+	        <!-- Step 1: Run tomcat.bat to detect port 8080 -->
+	        <exec executable="cmd"
+	              failonerror="false"
+	              outputproperty="tomcat.output"
+	              resultproperty="tomcat.exit.code">
+	            <arg value="/C"/>
+	            <arg value="call tomcat.bat ${tomcat.port} 2>&amp;1"/>
+	        </exec>
+
+	        <echo>Tomcat batch output: ${tomcat.output}</echo>
+	        <echo>Exit code: ${tomcat.exit.code}</echo>
+
+	        <!-- Step 2: Extract numeric PID only if exit code == 0 -->
+	        <if>
+	            <equals arg1="${tomcat.exit.code}" arg2="0"/>
+	            <then>
+	                <propertyregex property="tomcat.pid"
+	                               input="${tomcat.output}"
+	                               regexp="([0-9]+)"
+	                               select="\1"/>
+	                <if>
+	                    <isset property="tomcat.pid"/>
+	                    <then>
+	                        <echo>Extracted PID from netstat (exit=0): ${tomcat.pid}</echo>
+	                    </then>
+	                    <else>
+	                        <echo>No PID extracted even though exit code = 0.</echo>
+	                    </else>
+	                </if>
+	            </then>
+	            <else>
+	                <echo>tomcat.bat exited with code ${tomcat.exit.code}; skipping PID extraction.</echo>
+	            </else>
+	        </if>
+
+	        <!-- Step 3: Always run jps -l -->
+	        <exec executable="jps"
+	              failonerror="false"
+	              outputproperty="jps.output"
+	              resultproperty="jps.exit">
+	            <arg value="-l"/>
+	        </exec>
+
+	        <echo>JPS output: ${jps.output}</echo>
+
+	        <!-- Step 4: Try to locate Tomcat by PID (if we have one) -->
+	        <if>
+	            <isset property="tomcat.pid"/>
+	            <then>
+	                <propertyregex property="tomcat.is.real"
+	                               input="${jps.output}"
+	                               regexp="([0-9]+)\s+org\.apache\.catalina\.startup\.Bootstrap"
+	                               select="\1"/>
+	                <if>
+	                    <isset property="tomcat.is.real"/>
+	                    <then>
+	                        <echo>✅ Tomcat verified via PID: ${tomcat.pid}</echo>
+	                    </then>
+	                    <else>
+	                        <echo>⚠ PID ${tomcat.pid} not matched in JPS output; checking for any Tomcat.</echo>
+	                    </else>
+	                </if>
+	            </then>
+	            <else>
+	                <echo>tomcat.pid not set; skipping PID match check.</echo>
+	            </else>
+	        </if>
+
+	        <!-- Step 5: If no PID match, try to find *any* Tomcat -->
+	        <propertyregex property="tomcat.pid.from.jps"
+	                       input="${jps.output}"
+	                       regexp="([0-9]+)\s+org\.apache\.catalina\.startup\.Bootstrap"
+	                       select="\1"/>
+
+	        <if>
+	            <isset property="tomcat.pid.from.jps"/>
+	            <then>
+	                <property name="tomcat.pid" value="${tomcat.pid.from.jps}"/>
+	                <property name="tomcat.is.real" value="true"/>
+	                <property name="tomcat.running" value="true"/>
+	                <echo>✅ Found Tomcat in JPS output: PID=${tomcat.pid}</echo>
+	            </then>
+	            <else>
+	                <echo>❌ No Tomcat process found in JPS output.</echo>
+	                <property name="tomcat.running" value="false"/>
+	            </else>
+	        </if>
+
+	        <!-- Step 6: Final validation -->
+	        <if>
+	            <isset property="tomcat.is.real"/>
+	            <then>
+	                <echo>✅ Tomcat is running with PID: ${tomcat.pid}</echo>
+	            </then>
+	            <else>
+	                <echo>❌ No Tomcat process detected via port 8080 or JPS.</echo>
+	            </else>
+	        </if>
+	    </target>
+
+
+		<!-- =============================================== -->
+		<!-- Conditional stop: graceful shutdown + force kill -->
+		<!-- =============================================== -->
+		<target name="conditional-stop" depends="check-tomcat-running" description="Stop Tomcat gracefully, or force-kill by PID">
+		    <if>
+		        <equals arg1="${tomcat.running}" arg2="true"/>
+		        <then>
+		            <echo message="Tomcat is running with PID=${tomcat.pid} — attempting graceful shutdown..."/>
+		      
+		            <exec executable="${tomcat.shutdown.file}" failonerror="false"/>
+
+		            <!-- Wait up to 15 seconds for Tomcat to stop -->
+		            <echo message="Waiting up to 15 seconds for Tomcat to stop..."/>
+		            <sleep seconds="15"/>
+
+		            <!-- Verify if the Tomcat PID still exists -->
+		            <exec executable="cmd"
+		                  outputproperty="tasklist.output"
+		                  failonerror="false">
+		                <arg value="/c"/>
+		                <arg value="tasklist /fi &quot;pid eq ${tomcat.pid}&quot;"/>
+		            </exec>
+
+		            <echo message="Tasklist check for PID ${tomcat.pid}: ${tasklist.output}"/>
+
+		            <!-- Determine if Tomcat still alive -->
+		            <condition property="tomcat.still.running">
+		                <and>
+		                    <isset property="tasklist.output"/>
+		                    <contains string="${tasklist.output}" substring="${tomcat.pid}"/>
+		                </and>
+		            </condition>
+
+		            <if>
+		                <isset property="tomcat.still.running"/>
+		                <then>
+		                    <echo message="Tomcat (PID ${tomcat.pid}) still running — forcing process termination..."/>
+		                    <exec executable="cmd" failonerror="false">
+		                        <arg value="/c"/>
+		                        <arg value="taskkill /F /PID ${tomcat.pid}"/>
+		                    </exec>
+
+		                    <!-- Double-check kill result -->
+		                    <exec executable="cmd"
+		                          outputproperty="tasklist.afterkill"
+		                          failonerror="false">
+		                        <arg value="/c"/>
+		                        <arg value="tasklist /fi &quot;pid eq ${tomcat.pid}&quot;"/>
+		                    </exec>
+
+		                    <if>
+		                        <contains string="${tasklist.afterkill}" substring="${tomcat.pid}"/>
+		                        <then>
+		                            <echo message="Tomcat PID ${tomcat.pid} still appears in task list after kill attempt!"/>
+		                        </then>
+		                        <else>
+		                            <echo message="Tomcat process ${tomcat.pid} terminated successfully."/>
+		                        </else>
+		                    </if>
+		                </then>
+		                <else>
+		                    <echo message="Tomcat stopped gracefully within timeout."/>
+		                </else>
+		            </if>
+		        </then>
+		        <else>
+		            <echo message="Tomcat is not running — skipping shutdown."/>
+		        </else>
+		    </if>
+		</target>
+		<!-- ======================================= -->
+		<!-- Skip stop if Tomcat is not running -->
+		<!-- ======================================= -->
+		<target name="skip-stop" depends="check-tomcat-running" unless="tomcat.running">
+		    <echo message="Tomcat not running — skipping stop step."/>
+		</target>
+
+		<!-- =============================== -->
+		<!-- Deploy WAR into Tomcat webapps -->
+		<!-- =============================== -->
+		<target name="deploy" depends="war" description="Copy the war into tomcat directory">
+		    <copy todir="${tomcat.webapps}" verbose="true">
+		        <fileset dir="${output.dir}" includes="*.war"/>
+		    </copy>
+		</target>
+
+		<!-- ======================================= -->
+		<!-- Restart sequence: stop if needed, deploy, start -->
+		<!-- ======================================= -->
+		<target name="restart" depends="conditional-stop, skip-stop, deploy" description="Conditional restart Tomcat">
+		    <echo message="Restarting Tomcat after successful deployment..."/>
+		    <exec executable="${tomcat.startup.file}" failonerror="true"/>
+		    <echo message="Tomcat started successfully."/>
+		</target>
+			 <!-- <target name="restart"  description="Restart the Tomcat server" depends="stop,deploy, start"/> -->
+	</project>

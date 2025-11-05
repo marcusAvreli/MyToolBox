@@ -1,0 +1,112 @@
+<project name="RunTomcatCheck" default="run-batch" basedir=".">
+    <!-- Ant-Contrib for propertyregex and advanced flow -->
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+        <classpath>
+            <pathelement location="lib/ant-contrib.jar"/>
+        </classpath>
+    </taskdef>
+
+    <target name="run-batch">
+
+        <!-- Step 1: Run tomcat.bat to get PID listening on 8080 -->
+        <exec executable="cmd"
+              failonerror="false"
+              outputproperty="tomcat.output"
+              resultproperty="tomcat.exit.code">
+            <arg value="/C"/>
+            <arg value="call tomcat.bat 2>&amp;1"/>
+        </exec>
+
+        <echo>Tomcat batch output: ${tomcat.output}</echo>
+        <echo>Exit code: ${tomcat.exit.code}</echo>
+
+        <!-- Step 2: Extract numeric PID only if exit code == 0 -->
+        <if>
+            <equals arg1="${tomcat.exit.code}" arg2="0"/>
+            <then>
+                <propertyregex property="tomcat.pid"
+                               input="${tomcat.output}"
+                               regexp="([0-9]+)"
+                               select="\1"/>
+                <if>
+                    <isset property="tomcat.pid"/>
+                    <then>
+                        <echo>Extracted PID from netstat (exit=0): ${tomcat.pid}</echo>
+                    </then>
+                    <else>
+                        <echo>No PID extracted even though exit code = 0.</echo>
+                    </else>
+                </if>
+            </then>
+            <else>
+                <echo>tomcat.bat exited with code ${tomcat.exit.code}; skipping PID extraction.</echo>
+            </else>
+        </if>
+
+        <!-- Step 3: Always run jps -l -->
+        <exec executable="jps"
+              failonerror="false"
+              outputproperty="jps.output"
+              resultproperty="jps.exit">
+            <arg value="-l"/>
+        </exec>
+
+        <echo>JPS output: ${jps.output}</echo>
+
+        <!-- Step 4: Try to locate Tomcat by PID (only if tomcat.pid exists) -->
+        <if>
+            <isset property="tomcat.pid"/>
+            <then>
+                <!-- Normalize spacing and check for Bootstrap -->
+                <propertyregex property="tomcat.is.real"
+                               input="${jps.output}"
+                               regexp="(?m)^\\s*${tomcat.pid}\\s+org\\.apache\\.catalina\\.startup\\.Bootstrap\\b"
+                               select="0"/>
+                <if>
+                    <isset property="tomcat.is.real"/>
+                    <then>
+                        <echo>✅ Tomcat verified via PID: ${tomcat.pid}</echo>
+                    </then>
+                    <else>
+                        <echo>⚠ PID ${tomcat.pid} not matched in JPS output; checking for any Tomcat.</echo>
+                    </else>
+                </if>
+            </then>
+            <else>
+                <echo>tomcat.pid not set; skipping PID match check.</echo>
+            </else>
+        </if>
+
+        <!-- Step 5: If no PID match, try to find *any* Tomcat -->
+         <!-- Step 5: Always check JPS output for any Tomcat process -->
+        <propertyregex property="tomcat.pid.from.jps"
+                       input="${jps.output}"
+                       regexp="(?m)^([0-9]+)\s+org\.apache\.catalina\.startup\.Bootstrap"
+                       select="\1"/>
+
+        <if>
+            <isset property="tomcat.pid.from.jps"/>
+            <then>
+                <property name="tomcat.pid" value="${tomcat.pid.from.jps}"/>
+                <property name="tomcat.is.real" value="true"/>
+                <echo>✅ Found Tomcat in JPS output: PID=${tomcat.pid}</echo>
+            </then>
+            <else>
+                <echo>❌ No Tomcat process found in JPS output.</echo>
+            </else>
+        </if>
+
+        <!-- Step 6: Final validation -->
+        <if>
+            <isset property="tomcat.is.real"/>
+            <then>
+                <echo>✅ Tomcat is running with PID: ${tomcat.pid}</echo>
+            </then>
+            <else>
+                <echo>❌ No Tomcat process detected via port 8080 or JPS.</echo>
+                <fail message="Tomcat is not running (Bootstrap not found)"/>
+            </else>
+        </if>
+
+    </target>
+</project>
