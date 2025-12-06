@@ -1,0 +1,82 @@
+
+DELIMITER //
+DROP PROCEDURE IF EXISTS copy_to_target //
+
+CREATE PROCEDURE humanResources.copy_to_target()
+BEGIN
+   
+
+    -- Insert data into target table
+    INSERT INTO iiq_hr.hr_source (id
+,created
+,modified
+,company_code
+,company_name
+,contract_code
+,cost_center
+,email
+,firstName
+,image
+,job_key
+,job_name
+,lastName
+,name
+,org_unit_code
+,phoneNumber
+,position_code
+,title
+,manager_id
+,branch_code
+,beranch_name
+,parent_company_code
+,parent_company_name)
+   SELECT
+	cemp.id,
+	cemp.created,
+	cemp.modified,      
+	cemp.company_code,
+	c.company_name AS company_name,       
+cemp.contract_code
+,cemp.cost_center
+,cemp.email
+,cemp.firstName
+,cemp.image
+,cemp.job_key
+,cemp.job_name
+,cemp.lastName
+,cemp.name
+,cemp.org_unit_code
+,cemp.phoneNumber
+,cemp.position_code
+,cemp.title
+ ,cemp.manager_id,
+
+       
+      
+        br.branch_code branch_code,
+        br.branch_name branch_name,
+
+         CASE WHEN pc.company_code IS NOT NULL THEN pc.company_code ELSE '' END as company_parent_id ,
+        CASE WHEN pc.company_name IS NOT NULL THEN pc.company_name ELSE '' END as company_parent_name
+        
+    FROM employee cemp
+  
+    LEFT JOIN company c ON c.company_code = cemp.company_code
+    LEFT JOIN company pc ON pc.id = c.parent_id
+left join branch br on br.id = cemp.branch_id;
+END //
+
+DELIMITER ;
+
+
+
+
+DROP DATABASE identityiq;
+
+CREATE DATABASE identityiq;
+
+CREATE USER 'identityiq'@'%' IDENTIFIED BY 'identityiq';
+
+GRANT ALL PRIVILEGES ON identityiq.* TO 'identityiq'@'%' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;

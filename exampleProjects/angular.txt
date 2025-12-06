@@ -1,3 +1,65 @@
+D3 
+
+https://github.com/navidboloorian/debate_visualizer/tree/main
+https://github.com/apache/yunikorn-web/blob/bd16bbea8a973403e2b50a07972279c84cd5bbe0/src/app/components/queue-v2/queues-v2.component.ts#L193
+https://github.com/GSoumyaSri/HRMSWeb/blob/80c17ded6690108adf1f1a3f2ec9e94d0cc4b4f8/src/app/admin/project/d3-org-chart/d3-org-chart.component.ts#L11
+https://github.com/tolubydesign/angular-story/tree/8c986cd64dc734914e6c6d9152eaa677d6f56811/src/app/shared/components/extra/d3-components
+https://github.com/search?q=repo%3Ajustinwidney%2Fangular_complexity%20search&type=code
+https://github.com/bolcom/avro-schema-viewer/blob/0277a9949088fe5a79ac403ac9e6d632e7337741/src/app/viewer/visualizer/visualizer.component.ts#L62
+
+https://stackblitz.com/edit/d3-tree-angular11?file=src%2Fapp%2Fshared%2Ftree%2Ftree.component.ts
+
+//search tree
+https://github.com/aueb-wim/DataCatalogue/blob/6cf0c68c5d8510670c007c998659b2e8806de217/frontend/src/app/visuals/tree/tree.component.ts#L97
+
+//searchResult
+https://github.com/vins667/vendor-portal/blob/48ed5d865bc0675891c03859dad4c821efc48e08/src/main/webapp/app/entities/employee-hierarchy/employee-hierarchy.component.ts#L11
+
+//children collapsed/visible
+https://github.com/Rabrigido/mm-frontend/blob/6dce42e3f4e5d31b22794f457beafb68e67641dd/src/app/components/files-metric/files-tree/files-tree.component.ts#L13
+
+//
+https://github.com/ivankrn/org-structure-app/blob/main/org-structure-app-frontend/src/app/model/organizational-unit.model.ts#L5
+
+//d3-org-chart
+https://github.com/ritzdacanay24/the-fi-company-front-end/blob/main/src/app/core/api/field-service/user.service.ts#L12
+
+//highlightSelected
+https://github.com/prodipdatta7/angular-dependency-visualizer/blob/a75b38eea9e424eaf092a564812f78be901c4340/src/app/components/graph-viewer/graph-viewer.component.ts#L235
+
+
+https://github.com/NovaBG03/H3/blob/95bf9b12226155d2ff9ccf1b98f76cbceb6a8b0c/h3-front-end/src/app/member/view-graph/view-graph.component.ts#L9
+
+//https://github.com/k-gintaras/taskorator/blob/main/src/app/services/api/task-list-api.service.ts#L140
+
+
+
+// https://github.com/CDCgov/MicrobeTraceNext/blob/16711d829bb5135c41d47368efc42347c47e5161/visualizationComponents/ThreeDComponent/threeD-plugin-component.ts#L4
+
+
+https://github.com/aliveairush/angular-monorepo/tree/0caad28d7d263c79c333b8c9ece6e63f1333b5b2/apps
+
+
+//adjustNodePositions
+https://github.com/FelSiq/nyata-random-forest-visualization/blob/58921f0c7768fa9f3ee87e9a5966ece1d4190a80/frontend/model-dt/src/app/dt-model/tree-displayer/tree-d3-model/tree-d3-model.component.ts#L2
+
+//
+https://github.com/modeseven-os-climate/sostrades-webgui/blob/e3b0d4ddb1895a4ec240befe0bcace1f12686410/src/app/modules/visualisation/visualisation-coupling-graph/visualisation-coupling-graph.component.ts#L707
+
+
+//https://github.com/IPVS-AS/MMP-Frontend/blob/b89257de82c026007adeb75875ce68b64d591358/src/app/views/collapsible-tree/collapsible-tree.component.ts#L169
+
+//searchData
+https://github.com/i-Asset/frontend-service/blob/f66a63d35ff300ec8926126eb5e9db90d52ce1f0/src/app/explorative-search/explorative-search-details.component.ts#L143
+
+//interesting css
+https://github.com/melisandres/tag-you-write/blob/main/assets/js/treeVisualizer.js#L3
+
+
+//big sample data
+https://github.com/ivismesh/ivismesh.github.io/tree/1985344e577d4b86c74ef82fc25d827d20da43f7/individual/MeSHTree/data
+
+
 +-------------------------------------------------------+
 |														|
 |	TEST EDITORS										|

@@ -1,0 +1,15 @@
+import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
+
+SQLServerDataSource ds = new SQLServerDataSource();
+
+ds.setServerName("dbServerName");
+
+ds.setPortNumber(1433);
+
+ds.setIntegratedSecurity(true);
+
+ds.setAuthenticationScheme("NTLM");
+
+ds.setDomain("domain");
+
+ds.setUser("user_name");
