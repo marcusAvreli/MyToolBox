@@ -1,5 +1,4 @@
-ng new project_name --skip-git --style=scss --routing=false
-
+ng new beforeOffline6 --skip-install --skip-git --style=scss --routing=false
 
 
 
@@ -88,21 +87,22 @@ npm i angular-cli --cache C:\Users\markg\npm-offline\node_modules --cache-min 99
 //TABULATOR utils
 https://github.com/grocerist/grocerist-app/blob/716dd754749ae2d2e7a7cf5fecf92e540cc4fdbe/html/js/documents.js#L309
 https://github.com/search?q=repo%3Achatatechnologies%2Fautoql%20tabulator&type=code
-npm config set cache C:\Users\markg\AppData\Roaming\npm-cache
-npm config set cache C:\Users\markg\npm-offline\node_modules
+
 
 +-------------------------------------------------------+
 |														|
 |			WORKING WITH NPM CONFIG						|
 |														|
 +-------------------------------------------------------+
-
+default online locations
+	cache: C:\Users\user\AppData\Local\npm-cache
+	prefix: C:\Users\user\AppData\Roaming\npm
 	
 	
 	npm config list -l
 	
-	npm config set cache C:\Users\markg\npm-offline\npm-cache
-	npm config set prefix C:\Users\markg\npm-offline\npm
+	npm config set cache C:\Users\user\npm-offline\npm-cache
+	npm config set prefix C:\Users\user\npm-offline\npm
 	
 	npm config delete prefer-offline
 	npm config delete offline
@@ -117,6 +117,7 @@ npm config set cache C:\Users\markg\npm-offline\node_modules
 	
 	npm config get cache
 	npm config get prefix
+	npm config get registry
 
 
 
@@ -158,9 +159,6 @@ angular 15.2.0
 	npm config set registry "file:///C:/Users/markg/npm-offline3/npm-cache"
 
 
-ng new my-app2 --skip-install --skip-git --style=scss --routing=false
-cd my-app2 
-npm install --offline
 
 
 	https://github.com/Webiks/ng2tips/blob/36ebe34d0cae2e9dae643afb22a544f1925e7eaf/ng-cli-offline/ng-cli-offline.md?plain=1#L1
