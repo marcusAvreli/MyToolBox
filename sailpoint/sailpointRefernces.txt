@@ -21,3 +21,5 @@ https://github.com/sergevoina/identityiq-plugin-scaffolding/blob/1d48d36914793aa
 https://community.sailpoint.com/t5/IdentityIQ-Articles/Building-IdentityIQ-Plugin-Projects-with-Gradle-and-Angular-4/ta-p/78820
 https://community.sailpoint.com/t5/Technical-White-Papers/IdentityIQ-REST-API-Integration/ta-p/76814
 https://community.sailpoint.com/t5/IdentityIQ-Forum/Storing-huge-data-set-in-Sailpoint/m-p/104900
+https://github.com/instrumental-id/iiq-common-public/tree/59ecf9efd682cf9755e088f7d093f7476cb81f65?tab=readme-ov-file#utilities-included
+https://github.com/sailpoint-oss/colab-org-chart-plugin/tree/main/src-ui

@@ -1,0 +1,18 @@
++-------------------------------------------------------+
+|										======1======	|
+|	RTRIM LTRIM											|
+|														|
++-------------------------------------------------------+
+
+	REASON
+
+		LTRIM() and RTRIM() only remove ASCII space (CHAR(32)),
+		
+		NBSP IS CHAR(160) another characters 9 - tab, 10 - cr, 13 - lf
+		
+
+	How to detect the problem
+	
+		SELECT UNICODE(RIGHT('ברכה לוקשינסקי ', 1))	
+	
+		SELECT LTRIM(RTRIM(REPLACE('ברכה לוקשינסקי ', CHAR(160), ' ')))
