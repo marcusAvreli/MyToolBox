@@ -1,0 +1,200 @@
+1️⃣ computeInitialTransform() — what it is REALLY for
+Purpose (one sentence)
+
+Compute the very first camera position so the root appears centered at the top BEFORE any user interaction.
+
+That’s it.
+Not layout.
+Not resizing.
+Not overflow handling.
+
+What it consumes
+
+Virtual layout (vx, vy, vWidth)
+
+Projection scale (pxPerVirtualX / Y)
+
+Screen width/height
+
+rootPxX = root.vx * pxPerVirtualX
+rootPxW = root.vWidth * pxPerVirtualX
+
+
+This is projection math, but the output is a zoom transform.
+
+What it produces
+
+A pure translation-only zoom transform:
+
+d3.zoomIdentity.translate(tx, ty)
+
+
+⚠️ No scaling here
+⚠️ No fitting logic
+⚠️ No dynamic response
+
+This transform answers:
+
+“Where should the camera start so the root is visible and centered?”
+
+Why tx formula is correct
+tx = (screenWidth - rootPxW) / 2 - rootPxX;
+
+
+This means:
+
+(screenWidth - rootWidth)/2 → desired root center
+
+- rootPxX → cancel layout offset
+
+📌 Result: root appears centered even if its virtual vx ≠ 0
+
+Why ty is simple
+ty = paddingTop - rootPxY;
+
+
+Root is:
+
+always at top
+
+never vertically centered
+
+tree grows downward
+
+✔ Correct design for hierarchy trees
+
+2️⃣ tryInit() — why it exists
+Purpose (one sentence)
+
+Delay initialization until BOTH view size and data are known, then apply the initial camera transform exactly once.
+
+What problem it solves
+
+Angular lifecycle timing:
+
+Problem	Result
+SVG not ready	width = 0
+Data not ready	no matrix
+Zoom attached too early	broken transforms
+
+tryInit() prevents half-initialized zoom.
+
+What tryInit() does step-by-step
+1️⃣ Guard
+if (!viewReady || !dataReady) return;
+
+
+Prevents race conditions.
+
+2️⃣ Build rendering infrastructure
+createSvg();
+updateViewSize();
+initVirtualScale();
+update();
+
+
+At this point:
+
+matrix exists
+
+virtual layout exists
+
+projection exists
+
+nodes are rendered
+
+3️⃣ Apply initial camera position (CRITICAL)
+requestAnimationFrame(() => {
+  const t = computeInitialTransform();
+  outerG.attr('transform', t.toString());
+  svg.call(zoom.transform, t);
+});
+
+
+This does two important things:
+
+Action	Why
+outerG.attr(...)	visual positioning
+zoom.transform(...)	sync zoom’s internal state
+
+⚠️ If you skip one → zoom breaks
+
+4️⃣ Enable user zoom
+enableZoom();
+
+
+From now on:
+
+user controls camera
+
+layout no longer touched
+
+projection stays fixed
+
+3️⃣ Why this must run ONLY ONCE
+computeInitialTransform must NOT be used for:
+
+❌ auto-fit on expand
+❌ reacting to tree growth
+❌ zoom-out logic
+❌ Y overflow correction
+
+Those are projection responsibilities, not zoom.
+
+If you reapply it on update:
+
+zoom jumps
+
+Y axis “locks”
+
+user zoom gets overridden
+
+4️⃣ Why your logged numbers make sense
+{
+  "rootPxX": 0,
+  "rootPxW": 93.33,
+  "screen": 1592.88,
+  "tx": 749.77,
+  "root_vWidth": 0.533,
+  "pxPerVirtualX": 175
+}
+
+
+Let’s validate:
+
+rootPxW = 0.533 * 175 ≈ 93.3
+tx = (1592.8 - 93.3)/2 ≈ 749.7
+
+
+✅ Perfect centering
+✅ No scaling
+✅ Correct math
+
+Your implementation is correct.
+
+5️⃣ Final mental model (memorize this)
+Method	Role
+update()	layout + projection
+computeInitialTransform()	initial camera position
+tryInit()	lifecycle synchronization
+autoZoomToFit()	❌ (should not exist if projection is correct)
+mouse wheel zoom	user camera control
+6️⃣ Key rule (this explains ALL your Y-axis issues)
+
+Zoom must never be used to fix layout overflow.
+
+If Y overflow isn’t detected → projection is wrong
+If zoom-out doesn’t trigger → bounds are wrong
+If tree grows but zoom doesn’t → pxPerVirtualY is frozen
+
+If you want next:
+
+✅ remove autoZoomToFit completely
+
+📐 define a proper virtual Y frame
+
+🧪 add debug overlay for virtual bounds
+
+🔧 refactor update() into 3 clean phases
+
+Just tell me.

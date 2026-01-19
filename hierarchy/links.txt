@@ -1,0 +1,29 @@
+https://www.edrawsoft.com/hierarchy-diagram.html?srsltid=AfmBOopCgIIUIs_ttZeSdMFx198afoHd9CPhS-zv-mgpRLs5UkCdf76E
+https://www.google.com/search?q=displacement+algorithm+hierarchical+tree+org+chart&sca_esv=21fd1ad54828f0e3&udm=2&biw=1422&bih=701&aic=0&sxsrf=ANbL-n4ECMRk_BQsWb_H0YTBfXxTrFgMqQ%3A1768110689451&ei=YTpjabOnG7Pv7_UPz_LmkA8&ved=0ahUKEwjz28XM5YKSAxWz97sIHU-5GfIQ4dUDCBI&uact=5&oq=displacement+algorithm+hierarchical+tree+org+chart&gs_lp=Egtnd3Mtd2l6LWltZyIyZGlzcGxhY2VtZW50IGFsZ29yaXRobSBoaWVyYXJjaGljYWwgdHJlZSBvcmcgY2hhcnRIvxtQtQlYwhpwAXgAkAEAmAGMAaABiwqqAQQwLjEwuAEDyAEA-AEBmAIBoAIDwgIHECMYJxjJApgDAIgGAZIHATGgB8IDsgcAuAcAwgcDMC4xyAcCgAgA&sclient=gws-wiz-img#sv=CAMSVhoyKhBlLUpIWm5UTE51cWh0YlRNMg5KSFpuVExOdXFodGJUTToOZW5YX1hBODFjZkw2N00gBCocCgZtb3NhaWMSEGUtSkhablRMTnVxaHRiVE0YADABGAcg4vWmkwkwAkoKCAIQAhgCIAIoAg
+https://stackoverflow.com/questions/44723962/org-chart-layout-algorithm-with-a-special-need
+https://github.com/behrangsa/walker-algorithm/tree/master/src/main/java/org/behrang/algorithm/tree
+https://rachel53461.wordpress.com/2014/04/20/algorithm-for-drawing-trees/
+https://blacketernal.wordpress.com/2013/06/20/a-c-implementation-of-the-reingold-tilford-tree-layout-algorithm-for-heuristiclab/
+https://medium.com/data-science/reingold-tilford-algorithm-explained-with-walkthrough-be5810e8ed93
+https://williamyaoh.com/posts/2023-04-22-drawing-trees-functionally.html
+https://www.google.com/search?sca_esv=1c9ddcd99aa53bbd&udm=2&sxsrf=ANbL-n4Jb3n9YmNC0S6qo5OUBqKRimZgkQ:1768120398731&q=Buchheim+Algorithm&spell=1&sa=X&ved=2ahUKEwjFkKXiiYOSAxX7UKQEHeCPGAYQBSgAegQICRAB&biw=1422&bih=701&dpr=1.35&aic=0#sv=CAMSVhoyKhBlLUQ4R2swYS1TZHY1emZNMg5EOEdrMGEtU2R2NXpmTToOLUVmSWt2Z3hiNm1tVE0gBCocCgZtb3NhaWMSEGUtRDhHazBhLVNkdjV6Zk0YADABGAcglpjknAIwAkoKCAIQAhgCIAIoAg
+https://github.com/is55555/layoutTree/blob/master/buchheim__Improving_Walker's_Algorithm_to_Run_in_Linear_Time.pdf
+https://github.com/abego/treelayout
+file:///C:/Users/markg/Downloads/Compact_Layout_of_Layered_Trees.pdf
+
+🔄 Add expand/collapse with no sibling drift
+
+📐 Add subtree width “budget” logic on top
+
+🔍 Plug into your auto-zoom logic
+
+🧠 Hybrid: RT for X, your matrix for Y
+
+🎬 Smooth expand animation (no jump)
+
+
+
+
+https://github.com/bumbeishvili/org-chart/blob/master/src/d3-org-chart.js
+https://github.com/m-gallesio/d3-org-chart-lazy/blob/master/src/index.ts
+https://bumbeishvili.medium.com/introducing-a-new-v3-version-of-the-org-chart-ca1b63320a4b

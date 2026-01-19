@@ -1,0 +1,55 @@
+	
+/*
+| Concept        | What it does                            | When it runs      |
+| -------------- | --------------------------------------- | ----------------- |
+| **Projection** | Converts *virtual layout* → *pixels*    | **Before render** |
+| **Zoom**       | Scales & pans *already-rendered pixels* | **After render**  |
+
+*/
+/*	
+	RAW DATA
+   ↓
+VIRTUAL LAYOUT (vx, vy)
+   ↓
+VIRTUAL BOUNDS
+   ↓
+PROJECTION (pxPerVirtual)
+   ↓
+PIXEL POSITIONS (x, y)
+   ↓
+RENDER
+   ↓
+ZOOM (camera)
+*/
+
+OuterG - You can think of it as the camera.
+
+	Pan (translate)
+
+	Zoom (scale)
+
+	Fit-to-view
+
+	Centering
+
+	Animating zoom / reset
+
+	Clamping to virtual bounds
+	
+Inner <g> → world / layout
+
+	Node positioning (x/y)
+
+	Tree layout changes
+
+	Expand / collapse
+
+	Collision avoidance
+
+	Row spacing, depth spacing
+
+	Dynamic width/height growth
+	
+	
+	
+	

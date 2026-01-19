@@ -1,5 +1,11 @@
-D3 
++-------------------------------------------------------+
+|														|
+|	D3													|
+|														|
++-------------------------------------------------------+
 
+
+https://gist.github.com/isaacplmann/a20dfe530b83dd0db3b022123040b981
 https://github.com/navidboloorian/debate_visualizer/tree/main
 https://github.com/apache/yunikorn-web/blob/bd16bbea8a973403e2b50a07972279c84cd5bbe0/src/app/components/queue-v2/queues-v2.component.ts#L193
 https://github.com/GSoumyaSri/HRMSWeb/blob/80c17ded6690108adf1f1a3f2ec9e94d0cc4b4f8/src/app/admin/project/d3-org-chart/d3-org-chart.component.ts#L11
@@ -42,6 +48,8 @@ https://github.com/aliveairush/angular-monorepo/tree/0caad28d7d263c79c333b8c9ece
 
 //adjustNodePositions
 https://github.com/FelSiq/nyata-random-forest-visualization/blob/58921f0c7768fa9f3ee87e9a5966ece1d4190a80/frontend/model-dt/src/app/dt-model/tree-displayer/tree-d3-model/tree-d3-model.component.ts#L2
+
+
 
 //
 https://github.com/modeseven-os-climate/sostrades-webgui/blob/e3b0d4ddb1895a4ec240befe0bcace1f12686410/src/app/modules/visualisation/visualisation-coupling-graph/visualisation-coupling-graph.component.ts#L707
