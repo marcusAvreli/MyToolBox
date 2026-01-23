@@ -166,7 +166,7 @@ angular 15.2.0
 
 
 #install in your current project on on-line machine 
-npm install <pacage_name> --save
+npm install <package_name> --save
 
 #check package was cached for future copy to offline machine
 
@@ -255,6 +255,31 @@ typescript                      4.9.5
 		}
 
 
+
+
++-------------------------------------------------------+
+|														|
+|	CONFIGURE CUSTOM PORT								|
+|														|
++-------------------------------------------------------+
+in angular.json
+
+"serve": {
+  "builder": "@angular-devkit/build-angular:dev-server",
+   "options": {
+	  "host": "127.0.0.1",
+	  "port": 5002
+	},
+  "configurations": {
+	"production": {
+	  "browserTarget": "zoomableTree9:build:production"
+	},
+	"development": {
+	  "browserTarget": "zoomableTree9:build:development"
+	}
+  },
+  "defaultConfiguration": "development"
+}
 
 +-------------------------------------------------------+
 |														|
