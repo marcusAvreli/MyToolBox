@@ -6,8 +6,10 @@
 	git init
 	git remote add origin <repo_address>
 	echo "node_modules/" >> .gitignore
-	echo "dist/" >> .gitignore
-	git add -- . :!"node_modules" :!"dist"	
+	echo "dist/" >> .gitignore	
+	echo ".vscode/" >> .gitignore
+	echo ".angular/" >> .gitignore
+	git add -- . :!"node_modules" :!"dist" :!".vscode" :!".angular"
 	git rm -r --cached node_modules
 	git rm -r --cached dist
 	git commit -am "initial_commit"
@@ -22,7 +24,7 @@
 +-------------------------------------------------------+
 	git status
 	git add tomcat.txt
-	[ git add -- . :!"node_modules" :!"dist"]//add all
+	[ git add -- . :!"node_modules" :!"dist" :!".vscode" :!".angular"]//add all
 	git commit -am "new regex added"
 	git push origin master
 	
