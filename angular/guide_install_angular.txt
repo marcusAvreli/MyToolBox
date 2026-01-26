@@ -1,3 +1,6 @@
+ng new beforeOffline6 --skip-git --style=scss --routing=false
+
+
 ng new beforeOffline6 --skip-install --skip-git --style=scss --routing=false
 set PROJECT=hierarchyTree9 && ng new %PROJECT% --skip-git --style=scss --routing=false && cd %PROJECT% && ng serve
 
@@ -40,54 +43,6 @@ CURRENT ANGULAR CLI VERSION
 	@schematics/angular          15.2.11 (cli-only)
 
 
-
-+-------------------------------------------------------+
-|														|
-|					OFFLINE								|
-|														|
-+-------------------------------------------------------+
-https://stackoverflow.com/questions/50811578/how-to-check-if-npm-cache-already-contains-a-tarball
-//install node js of latest version
-https://nodejs.org/dist/v18.16.0/node-v18.16.0-x64.msi
-
-//install python 2.7.10
-//install Microsoft Visual C++ Redistributable latest supported downloads
-
-
-
-
-
-//path to global installation of angular
-//Set up the correct NPM PATH on Windows
-npm config get prefix
-
-
-//link your project to the globally installed Angular package
-npm link @angular/cli
-
-//ng command should work now
-
-//new project
-ng new exmapleWorker3 --skipt-git
-
-add dependencies
-	npm install moment
-	npm install @angular/http
-
-
-
-
-https://github.com/ankasamanyan/Railway_ticketing/tree/main/frontend/src/app
-
-
-
-
-
-npm i angular-cli --cache C:\Users\markg\npm-offline\node_modules --cache-min 999999999 --no-shrinkwrap
-
-//TABULATOR utils
-https://github.com/grocerist/grocerist-app/blob/716dd754749ae2d2e7a7cf5fecf92e540cc4fdbe/html/js/documents.js#L309
-https://github.com/search?q=repo%3Achatatechnologies%2Fautoql%20tabulator&type=code
 
 
 +-------------------------------------------------------+
@@ -162,7 +117,7 @@ angular 15.2.0
 
 
 
-	https://github.com/Webiks/ng2tips/blob/36ebe34d0cae2e9dae643afb22a544f1925e7eaf/ng-cli-offline/ng-cli-offline.md?plain=1#L1
+	
 
 
 #install in your current project on on-line machine 
@@ -411,3 +366,54 @@ references:
 	https://nodejs.org/en/download/releases
 	https://stackoverflow.com/questions/43344600/how-to-install-a-specific-version-of-angular-with-angular-cli
 	https://blog.webiks.com/working-offline-with-angular-cli/
+	
+
+https://github.com/Webiks/ng2tips/blob/36ebe34d0cae2e9dae643afb22a544f1925e7eaf/ng-cli-offline/ng-cli-offline.md?plain=1#L1
+
+legacy install before angular 5
+
+# Angular-Cli Offline
+### Purpose: 
+Install  (locally or globally) and work with [angular-cli](https://github.com/angular/angular-cli) offline
+### Process in general: 
+Cache your packages, copy the cache folder to the offiline machine, then force npm to use that cache folder instead of accessing the internet.
+
+We wrote a [post](http://webiks.com/working-offline-with-angular-cli/) on this subject.
+
+### Step 1 : Cache it
+From terminal: 
+You may clean the cache befor we start (this step is optional, in case you want the minimal code to migrate)
+```bash
+npm cache clean 
+```
+
+than simply make npm cache angular-cli by installing it and start a nw project (in any folder you choose)
+```bash
+npm install angular-cli -g
+ng new dummyproject
+```
+
+### Step 2: Move it
+Copy your cache folder and move it to offline machine. the [location](https://docs.npmjs.com/cli/cache#cache) of it depend on your OS.
+Note: nodejs should be installed on the offline machine as well
+
+### Step 3: Install it 
+Copy cache folder (in this example: "my_cache_folder") to a folder in your offline machine (in this example: "my_project")
+From the terminal change the working directory to my_project and run the following command:
+```bash
+npm i angular-cli --cache my_cache_folder --cache-min 999999999 --no-shrinkwrap
+```
+(for installing globally, add the "-g" flag)
+
+### Step 3 alternative: Set permanent cache (User level) and install normally 
+You can copt and edit the .npmrc file (in this folder) or simply type the following command on terminal:
+
+set reference to cache folder (can be skipped if you use the npm [default cache location](https://docs.npmjs.com/cli/cache#cache))
+```bash
+npm config set cache PATH_TO_CACHE_FOLDER
+```
+
+Now add the other configs
+```bash
+npm config set cache min 999999999
+npm config shrinkwrap false
