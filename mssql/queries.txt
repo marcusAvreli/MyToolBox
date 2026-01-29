@@ -16,3 +16,16 @@
 		SELECT UNICODE(RIGHT('ברכה לוקשינסקי ', 1))	
 	
 		SELECT LTRIM(RTRIM(REPLACE('ברכה לוקשינסקי ', CHAR(160), ' ')))
+		
++-------------------------------------------------------+
+|										======1======	|
+|	RTRIM LTRIM											|
+|														|
++-------------------------------------------------------+
+SELECT
+  CASE 
+    WHEN @s LIKE N'%'+NCHAR(160)+N'%' THEN 1 ELSE 0 
+  END AS HasNBSP,
+  CASE 
+    WHEN @s LIKE N'%'+NCHAR(8239)+N'%' THEN 1 ELSE 0 
+  END AS HasNarrowNBSP;
