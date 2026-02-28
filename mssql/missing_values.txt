@@ -16,7 +16,14 @@ LEFT JOIN spt_link t ON el.identity_id = t.identity_id AND el.application = t.ap
 inner join spt_application sptApplication on sptApplication.id = el.application
 inner join spt_identity sptIdentity on sptIdentity.id = el.identity_id
 where sptIdentity.name='<identity_name>' and sptApplication.name='<app_name>' and t.identity_id is null
-
+  AND EXISTS (
+        SELECT 1
+        FROM spt_link adLink
+        INNER JOIN spt_application adApp
+                ON adApp.id = adLink.application
+        WHERE adLink.identity_id = el.identity_id
+          AND adApp.name = 'Active Directory'
+  );
 
 
 https://stackoverflow.com/questions/14163312/t-sql-cross-join-to-get-missing-values

@@ -124,3 +124,28 @@ https://stackoverflow.com/questions/978061/http-get-with-request-body
 |														|
 +-------------------------------------------------------+
 	{0}/api/data/v9.2/mailboxes?$select=_ownerid_value - select specific field on mailboxes
+	
+
++-------------------------------------------------------+
+|									======9_of_9======	|
+|	CRM_DYNAMICS_365: SYNC_MAIL	|
+|														|
++-------------------------------------------------------+
+%s/api/data/%s/mailboxes(%s),envUrl,version,mailboxid
+method patch
+fields: outgoingemailstatus,incomingemailstatus
+
+
+	
++-------------------------------------------------------+
+|									======9_of_9======	|
+|	AZURE: DIRECTORY ROLES members	|
+|														|
++-------------------------------------------------------+
+	curl -X GET "https://graph.microsoft.com/v1.0/directoryRoles(roleTemplateId='{ROLE_ID}')/members?$select=id,displayName,@data.type"   -H "Authorization: Bearer Token_Value"   -H "Accept: application/json"	 
+
+	IN RESPONSE CHECK
+
+	"@odata.type":"#microsoft.graph.group" - is group
+
+	"@odata.type":"#microsoft.graph.user" - is user

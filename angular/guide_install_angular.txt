@@ -331,6 +331,28 @@ angular 15.2.0
 rxjs                            7.8.2
 typescript                      4.9.5
 
+
+npm i -g @angular-eslint/builder@^15.2.1
+npm i -g @angular-eslint/eslint-plugin@^15.2.0
+npm i -g @angular-eslint/eslint-plugin-template@^15.2.0
+npm i -g @angular-eslint/schematics@^15.2.0
+npm i -g @angular-eslint/template-parser@^15.2.0
+npm i -g @compodoc/compodoc@^1.1.19
+npm i -g @microsoft/eslint-plugin-sdl@^0.2.0
+npm i -g @typescript-eslint/eslint-plugin@^5.62.0
+npm i -g @typescript-eslint/parser@^5.62.0
+npm i -g eslint@^8.37.0
+npm i -g eslint-config-prettier@^9.0.0
+npm i -g eslint-import-resolver-typescript@^3.5.5
+npm i -g eslint-plugin-autofix@^2.2.0
+npm i -g eslint-plugin-import@^2.32.0
+npm i -g eslint-plugin-jsdoc@^43.2.0
+npm i -g eslint-plugin-prettier@^4.2.1
+npm i -g eslint-plugin-sort-keys-fix@^1.1.2
+npm i -g eslint-plugin-unicorn@^45.0.2
+npm i -g eslint-plugin-unused-imports@^2.0.0
+npm i -g prettier@^2.8.8
+
 npm i --save-dev @angular-eslint/builder@^15.2.1
 npm i --save-dev @angular-eslint/eslint-plugin@^15.2.0
 npm i --save-dev @angular-eslint/eslint-plugin-template@^15.2.0
