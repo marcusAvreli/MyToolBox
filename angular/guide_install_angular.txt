@@ -297,9 +297,15 @@ IF "%1"=="offline" (
 
 ECHO Invalid option. Usage: npm-profile online ^| offline
 
++-------------------------------------------------------+
+|														|
+|	show available versions								|
+|														|
++-------------------------------------------------------+
 
-
-
+npm view cami versions
+npm view cami@0.0.26 peerDependencies
+npm install cami --legacy-peer-deps
 
 +-------------------------------------------------------+
 |														|

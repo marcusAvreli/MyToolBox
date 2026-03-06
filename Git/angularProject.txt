@@ -47,3 +47,17 @@ git add . -- ':!somefolder' ':!**/some_deep_nested_folder/*'
 	git push origin master
 	git push origin -d main
 	
+	
++-------------------------------------------------------+
+|										======3======	|
+|	BRANCHING											|
+|														|
++-------------------------------------------------------+
+so you created kind of "chapter". for example, you integrated state management
+
+currently this works. you want to keep that state. cleanup unnecessary files and go
+
+git checkout -b basic_state_management
+git add -- . :!"node_modules" :!"dist" :!".vscode" :!".angular"
+git commit -m "basic_state_management"
+git push -u origin basic_state_management
