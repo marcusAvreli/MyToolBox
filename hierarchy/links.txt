@@ -22,7 +22,7 @@ file:///C:/Users/markg/Downloads/Compact_Layout_of_Layered_Trees.pdf
 🎬 Smooth expand animation (no jump)
 
 
-
+https://github.com/Nicolai8/org-chart/blob/4b115fecbe8b0083cb77f0764973801c37544ff9/src/render/connections.ts
 
 https://github.com/bumbeishvili/org-chart/blob/master/src/d3-org-chart.js
 https://github.com/m-gallesio/d3-org-chart-lazy/blob/master/src/index.ts
