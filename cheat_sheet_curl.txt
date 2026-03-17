@@ -1,4 +1,20 @@
 +-------------------------------------------------------+
+|									======9_of_9======	|
+|	OAUTH2: GET TOKEN									|
+|														|
++-------------------------------------------------------+
+curl -H "Content-Type: application/json" -X POST -d "{\"username\": \"<username>\", \"passwird\": \"<passwird>\"}" <getTokenUrl>
+
+
++-------------------------------------------------------+
+|									======9_of_9======	|
+|	OAUTH2: USE TOKEN									|
+|														|
++-------------------------------------------------------+
+curl -H "Content-Type: application/json"  -H "Authorization: Bearer <token_value>"  <needed data>
+
+
++-------------------------------------------------------+
 |									======1_of_9======	|
 |	GET													|
 |														|
@@ -139,7 +155,7 @@ fields: outgoingemailstatus,incomingemailstatus
 	
 +-------------------------------------------------------+
 |									======9_of_9======	|
-|	AZURE: DIRECTORY ROLES members	|
+|	AZURE: DIRECTORY ROLES members						|
 |														|
 +-------------------------------------------------------+
 	curl -X GET "https://graph.microsoft.com/v1.0/directoryRoles(roleTemplateId='{ROLE_ID}')/members?$select=id,displayName,@data.type"   -H "Authorization: Bearer Token_Value"   -H "Accept: application/json"	 
