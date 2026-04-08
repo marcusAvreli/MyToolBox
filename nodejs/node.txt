@@ -31,3 +31,83 @@ npm config get msvs_version
 npm config get msvs_version
 C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools
 VCINSTALLDIR
+
+
+
++-------------------------------------------------------+
+|										======5======	|
+|	SEVERAL NODE VERSIONS NVM							|
+|														|
++-------------------------------------------------------+
+	https://github.com/coreybutler/nvm-windows?tab=readme-ov-file#readme		
+	https://github.com/coreybutler/nvm-windows/releases	
+	download nvm-setup
+	uninstall current nodejs
+	install nvm
+	nvm install 18.10.0
+	nvm install 20.20.2
+	by default no version will be selected for use
+	nvm use 8.17.0
+	mkdir <project_name> && cd <project_name> && npm init -y
+source:	https://blog.logrocket.com/how-switch-node-js-versions-nvm/
+==1===> To install a Node version
+		nvm install 18.12.0
+	
+==2===> list installed versions
+	nvm ls
+		output
+			18.12.0
+		  * 14.20.1 (Currently using 64-bit executable)
+			8.17.0
+			
+==3===> switch node versions
+	nvm use 8.17.0
+
+	
+==4===> uninstal node verions
+	nvm uninstall 18.12.0
+	nvm uninstall 14.20.1
+	nvm uninstall 8.17.0 
+	
+	
++-------------------------------------------------------+
+|										======5======	|
+|	SEVERAL NODE VERSIONS NVM							|
+|														|
++-------------------------------------------------------+
+
+# 1) upgrade Node first
+# install Node 18.20.x or 20.x LTS
+
+# 2) then enable pnpm through Corepack
+npm install --global corepack@latest
+corepack enable pnpm
+
+# 3) verify
+pnpm --version
+
+
+
+pnpm --filter web-components add -D  rollup@3.25.2
+pnpm --filter web-components add -D  @rollup/plugin-node-resolve@15.1.0 ^
+  @rollup/plugin-commonjs@29.0.2
+pnpm --filter web-components add -D  @rollup/plugin-json@6.0.0 ^
+  @rollup/plugin-terser@0.4.4 ^
+  rollup-plugin-copy@3.4.0 ^
+  rollup-plugin-license@3.0.1 ^
+  rollup-plugin-postcss@4.0.2 ^
+  autoprefixer@10.4.14 ^
+  clean-css@5.2.2 ^
+  html-minifier-terser@6.1.0 ^
+  sass@1.76.0
+  postcss@8.4.24
+  
+  
+pnpm --filter web-components add -D sass@1.76.0
+pnpm --filter web-components add -D  postcss@8.4.24
+
+
+And if you truly want consumers to bring their own moment, keep it in peerDependencies instead of bundling it.
+
+peerDependencies for consumers
+devDependencies for your local package development
