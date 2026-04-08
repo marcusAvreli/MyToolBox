@@ -1,12 +1,3 @@
-rem Lists all files with their last modified dates.
-
-rem Writes them to a temp file.
-
-rem Sorts them by date (ascending).
-
-rem Displays the sorted result.
-
-
 @echo off
 setlocal EnableDelayedExpansion
 
@@ -14,53 +5,59 @@ set "base=%CD%"
 set "tmpfile=%TEMP%\file_dates.tmp"
 set "showDates=false"
 
-rem Top-level directory names to skip (space-separated)
-set "skipDirs=scss dist .git"
+rem Directory names to skip at any depth
+set "skipDirs=scss dist .git node_modules .angular .vscode"
 
-rem Clear temp file
 > "%tmpfile%" type nul
 
-rem Collect file paths with optional creation + modification dates
-for /R "%base%" %%f in (*) do (
-    set "rel=%%f"
-    set "rel=!rel:%base%\=!"
+call :walk "%base%"
 
-    rem Extract first directory name from relative path
-    set "top="
-    for /f "tokens=1 delims=\" %%d in ("!rel!") do set "top=%%d"
+sort "%tmpfile%"
+del "%tmpfile%" >nul 2>&1
 
-    rem Decide whether to skip this file
-    set "skipFile="
-    for %%s in (%skipDirs%) do (
-        if /I "!top!"=="%%s" set "skipFile=1"
-    )
+echo Done
+endlocal
+exit /b
 
-    if not defined skipFile (
-        if /I "!showDates!"=="true" (
-            rem Modified date
-            set "moddate=%%~tf"
 
-            rem Creation date from DIR /TC
-            set "created="
-            for /f "delims=" %%L in ('dir /a:-d /tc "%%f" ^| findstr /R "^[ ]*[0-9]"') do (
-                set "line=%%L"
-                for /f "tokens=1,2" %%x in ("!line!") do (
-                    set "created=%%x %%y"
+:walk
+set "curr=%~1"
+
+rem Write files in current directory
+for %%f in ("%curr%\*") do (
+    if exist "%%~ff" (
+        if /I not "%%~af"=="d" (
+            set "full=%%~ff"
+            set "rel=!full:%base%\=!"
+
+            if /I "!showDates!"=="true" (
+                set "moddate=%%~tf"
+
+                set "created="
+                for /f "delims=" %%L in ('dir /a:-d /tc "%%~ff" ^| findstr /R "^[ ]*[0-9]"') do (
+                    set "line=%%L"
+                    for /f "tokens=1,2" %%x in ("!line!") do (
+                        set "created=%%x %%y"
+                    )
                 )
-            )
 
-            >> "%tmpfile%" echo !created!    !moddate!    !rel!
-        ) else (
-            >> "%tmpfile%" echo !rel!
+                >> "%tmpfile%" echo !created!    !moddate!    !rel!
+            ) else (
+                >> "%tmpfile%" echo !rel!
+            )
         )
     )
 )
 
-rem Sort output
-sort "%tmpfile%"
+rem Recurse only into directories that are not skipped
+for /D %%d in ("%curr%\*") do (
+    set "skipDir="
+    for %%s in (%skipDirs%) do (
+        if /I "%%~nxd"=="%%s" set "skipDir=1"
+    )
+    if not defined skipDir (
+        call :walk "%%~fd"
+    )
+)
 
-rem Optional: delete temp file
-del "%tmpfile%" >nul 2>&1
-
-endlocal
-pause
+exit /b

@@ -105,8 +105,9 @@ pnpm --filter web-components add -D  @rollup/plugin-json@6.0.0 ^
   
 pnpm --filter web-components add -D sass@1.76.0
 pnpm --filter web-components add -D  postcss@8.4.24
+pnpm --filter web-components add -D d3-selection@2.0.0
 
-
+pnpm --filter angular-demo add uuid
 And if you truly want consumers to bring their own moment, keep it in peerDependencies instead of bundling it.
 
 peerDependencies for consumers
