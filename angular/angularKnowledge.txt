@@ -83,32 +83,7 @@ https://medium.com/reactbrasil/reuse-your-eslint-prettier-config-in-a-monorepo-w
 		a BehaviorSubject, as recommended by @Abdulrahman in a comment, or
 		a ReplaySubject, as recommended by @Jason Goemaat in a comment
 
-+-------------------------------------------------------+
-|										======5======	|
-|	SEVERAL NODE VERSIONS NVM							|
-|														|
-+-------------------------------------------------------+
-																 
-																								 
-source:	https://blog.logrocket.com/how-switch-node-js-versions-nvm/
-==1===> To install a Node version
-		nvm install 18.12.0
-	
-==2===> list installed versions
-	nvm ls
-		output
-			18.12.0
-		  * 14.20.1 (Currently using 64-bit executable)
-			8.17.0
-			
-==3===> switch node versions
-	nvm use 8.17.0
 
-	
-==4===> uninstal node verions
-	nvm uninstall 18.12.0
-	nvm uninstall 14.20.1
-	nvm uninstall 8.17.0 
 +-------------------------------------------------------+
 |										======6======	|
 |	SEVERAL ANGULAR VERSIONS							|
