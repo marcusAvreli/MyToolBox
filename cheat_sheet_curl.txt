@@ -3,7 +3,7 @@
 |	OAUTH2: GET TOKEN									|
 |														|
 +-------------------------------------------------------+
-curl -H "Content-Type: application/json" -X POST -d "{\"username\": \"<username>\", \"passwird\": \"<passwird>\"}" <getTokenUrl>
+	curl -H "Content-Type: application/json" -X POST -d "{\"username\": \"<username>\", \"password\": \"<password>\"}" <getTokenUrl>
 
 
 +-------------------------------------------------------+
@@ -11,7 +11,7 @@ curl -H "Content-Type: application/json" -X POST -d "{\"username\": \"<username>
 |	OAUTH2: USE TOKEN									|
 |														|
 +-------------------------------------------------------+
-curl -H "Content-Type: application/json"  -H "Authorization: Bearer <token_value>"  <needed data>
+	curl -H "Content-Type: application/json"  -H "Authorization: Bearer <token_value>"  <needed data>
 
 
 +-------------------------------------------------------+
