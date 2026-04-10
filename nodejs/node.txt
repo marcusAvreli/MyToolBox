@@ -87,6 +87,29 @@ corepack enable pnpm
 pnpm --version
 
 
+installation into devDependencies in root package.json using pnpm
+
+pnpm add -Dw rollup@3.25.2 ^
+@rollup/plugin-node-resolve@15.1.0 ^
+@rollup/plugin-commonjs@29.0.2 ^
+@rollup/plugin-json@6.0.0 ^
+@rollup/plugin-terser@0.4.4 ^
+rollup-plugin-copy@3.4.0 ^
+rollup-plugin-license@3.0.1 ^
+rollup-plugin-postcss@4.0.2 ^
+autoprefixer@10.4.14 ^
+clean-css@5.2.2 ^
+html-minifier-terser@6.1.0 ^
+sass@1.76.0 ^
+postcss@8.4.24
+
+
+
+
+
+
+
+
 
 pnpm --filter web-components add -D  rollup@3.25.2
 pnpm --filter web-components add -D  @rollup/plugin-node-resolve@15.1.0 ^
@@ -116,3 +139,8 @@ devDependencies for your local package development
 
 pnpm --filter web-components run build
 pnpm --filter angular-demo run start
+
+
+validate junction point in monorepo
+pnpm install
+dir applications\angular-demo\node_modules\@your-scope
