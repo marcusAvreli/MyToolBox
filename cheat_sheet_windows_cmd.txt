@@ -163,6 +163,20 @@
 	netstat -a -o -n | findstr :3000
 	taskkill /F /PID (yourprocessID)
 
++-------------------------------------------------------+
+|									=====11_of_26======	|
+|	KILL JAVA PPROCESS									|
+|														|
++-------------------------------------------------------+
+	squirrel client squirrel_sql
+	jps -l
+
+		13888 net.sourceforge.squirrel_sql.client.Main
+		23504 Eclipse
+		24976 org.eclipse.lemminx.XMLServerLauncher
+		31420 jdk.jcmd/sun.tools.jps.Jps
+
+	taskkill /F /PID 13888
 
 +-------------------------------------------------------+
 |									=====12_of_26======	|
