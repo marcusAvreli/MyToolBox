@@ -178,6 +178,7 @@
 
 	taskkill /F /PID 13888
 
+	for /f "tokens=1" %i in ('jps -l ^| findstr /I "net.sourceforge.squirrel_sql.client.Main"') do taskkill /F /PID %i
 +-------------------------------------------------------+
 |									=====12_of_26======	|
 |	KILL EXECUTABLE										|

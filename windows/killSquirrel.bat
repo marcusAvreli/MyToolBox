@@ -1,0 +1,1 @@
+for /f "tokens=1" %%i in ('jps -l ^| findstr /I "net.sourceforge.squirrel_sql.client.Main"') do taskkill /F /PID %%i
