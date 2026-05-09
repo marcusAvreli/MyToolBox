@@ -1,3 +1,11 @@
+ng generate module shared
+ng generate module core
+
+ng generate service core/services/config
+ng generate interceptor core/interceptors/abstract
+ng generate interceptor core/interceptors/api
+
+
 ng generate component shared/ui-elements/loginForm
 ng generate component core/components/toast
 ng generate component core/components/header
@@ -17,7 +25,7 @@ ng generate component user/container/user-container
 ng generate component dynamic-container/dynamic-container
 
 
-ng generate module shared
+
 ng generate component shared/components/OrgTree
 
 ng generate component containers/app-app-container

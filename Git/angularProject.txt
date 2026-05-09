@@ -82,3 +82,18 @@ git commit -m "basic_state_management"
 
 ##upload changes to branch
 git push -u origin basic_state_management
+
+
+
+error: The following untracked working tree files would be overwritten by checkout:
+        .settings/org.eclipse.core.resources.prefs
+        .settings/org.eclipse.jdt.core.prefs
+		
+preview
+git clean -n .settings
+
+remove 
+
+git clean -f .settings
+
+git switch projectedTree

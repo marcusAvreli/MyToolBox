@@ -395,6 +395,17 @@ references:
 	https://stackoverflow.com/questions/43344600/how-to-install-a-specific-version-of-angular-with-angular-cli
 	https://blog.webiks.com/working-offline-with-angular-cli/
 	
+	
+ng generate service core/services/config
+ng generate interceptor core/interceptors/api
+
+ng generate module shared
+
+ng generate component containers/app-app-container
+ng generate component containers/org-tree-container
+
+ng generate component components/org-tree/org-tree-title
+ng generate component components/org-tree/org-tree-main
 
 https://github.com/Webiks/ng2tips/blob/36ebe34d0cae2e9dae643afb22a544f1925e7eaf/ng-cli-offline/ng-cli-offline.md?plain=1#L1
 
