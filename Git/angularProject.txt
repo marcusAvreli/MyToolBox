@@ -118,3 +118,34 @@ git switch projectedTree
 
 	git switch master
 	git pull origin master
+	
+	
+	
+	
++-------------------------------------------------------+
+|										======6_OF_6===	|
+|	cancel before commit								|
+|														|
++-------------------------------------------------------+
+
+cancel this opperation. dont pull
+
+warning: in the working copy of '.vscode/extensions.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.vscode/launch.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.vscode/tasks.json', LF will be replaced by CRLF the next time Git touches it
+
+C:\DEVEL\angularDev\fluxOrgTree>git commit -m "update"
+[master 6e5db40] update
+ 3 files changed, 66 insertions(+)
+ create mode 100644 .vscode/extensions.json
+ create mode 100644 .vscode/launch.json
+ create mode 100644 .vscode/tasks.json
+ 
+ remove the commit but keep the files as uncommitted changes
+ git reset --soft HEAD~1
+ 
+ Then check:
+ git status
+ 
+ If you want them unstaged too:
+ git reset
