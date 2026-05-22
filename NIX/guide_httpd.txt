@@ -1,17 +1,36 @@
-STATIC IP
++-------------------------------------------------------+
+|										======1======	|
+|	STATIC IP											|
+|														|
++-------------------------------------------------------+
 	https://www.putorius.net/2012/10/how-to-configure-static-ip-address-in.html
 	https://ie.technion.ac.il/~bravo/secret/Other/apache_compile.phtml
 	
-OPENSSH
+
++-------------------------------------------------------+
+|										======1======	|
+|	OPENSSH												|
+|														|
++-------------------------------------------------------+
 	Start on boot: chkconfig sshd on
 
-DEVELOPMENT TOOLS
+
++-------------------------------------------------------+
+|										======1======	|
+|	DEVELOPMENT TOOLS									|
+|														|
++-------------------------------------------------------+
 	yum groupinstall "Development Tools"
 	yum install expat-devel
 	yum install libxml2-devel
 	yum install libXpm-devel
 
-AUTOCONF
+
++-------------------------------------------------------+
+|										======1======	|
+|	AUTOCONF											|
+|														|
++-------------------------------------------------------+
 	tar -zxvf autoconf-2.69.tar.gz
 	mv autoconf-2.69 autoconf
 	mv /home/admin/autoconf /usr/src/
@@ -20,7 +39,12 @@ AUTOCONF
 	./configure;make;make install
 	cd /home/admin
 
-AUTOMAKE
+
++-------------------------------------------------------+
+|										======1======	|
+|	AUTOMAKE											|
+|														|
++-------------------------------------------------------+
 	tar -zxvf automake-1.15.tar.gz
 	mv automake-1.15 automake
 	mv /home/admin/automake /usr/src/
@@ -29,33 +53,77 @@ AUTOMAKE
 	./configure;make;make install
 	cd /home/admin
 
-PCRE
-	tar -zxvf pcre-8.42.tar.gz
-	mv pcre-8.42 pcre
-	mv /home/admin/pcre /usr/src/
-	chmod -R 700 /usr/src/pcre
-	cd /usr/src/pcre
-	./configure;make;make install
 
-HTTPD
++-------------------------------------------------------+
+|										======1======	|
+|	PCRE												|
+|														|
++-------------------------------------------------------+
+cd /home/admin
+curl -L  https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.47/pcre2-10.47.tar.gz  --output pcre2-10.47.tar.gz
+	cd /home/admin && tar -zxvf pcre2-10.47.tar.gz
+	mv pcre2-10.47 pcre2
+	cd pcre2
+	./configure   --prefix=/usr/local/pcre2
+
++-------------------------------------------------------+
+|										======1======	|
+|	APR+APR UTIL										|
+|														|
++-------------------------------------------------------+
 	cd /home/admin
-	tar -zxvf httpd-2.4.33.tar.gz
+	curl -L  https://dlcdn.apache.org//apr/apr-1.7.6.tar.gz --output apr-1.7.6.tar.gz
+	cd /home/admin
+	curl -L  https://dlcdn.apache.org//apr/apr-util-1.6.3.tar.gz --output apr-util-1.6.3.tar.gz
+	cd /home/admin
+	tar -zxvf apr-1.7.6.tar.gz
+	cd /home/admin
+	tar -zxvf apr-util-1.6.3.tar.gz
+	mv apr-1.7.6 apr
+	mv apr-util-1.6.3 apr-util
+	
+	cd /home/admin
+	cd apr
+	./configure  --prefix=/usr/local/apr
+	make
+	make install
+	
+	cd /home/admin
+	cd apr-util
+	./configure  --prefix=/usr/local/apr-util  --with-apr=/usr/local/apr
+	make
+	make install
+	
+	cd /home/admin
+
++-------------------------------------------------------+
+|										======1======	|
+|	HTTPD												|
+|														|
++-------------------------------------------------------+
+	cd /home/admin
+	curl -L  https://dlcdn.apache.org/httpd/httpd-2.4.67.tar.gz --output httpd-2.4.67.tar.gz
+	tar -zxvf httpd-2.4.67.tar.gz
 	mv httpd-2.4.33 httpd
-	mv /home/admin/httpd /usr/src
-	chmod -R 700 /usr/src/httpd
-	cd /home/admin
+	
+	cd /home/admin/httpd
 
-APR+APR UTIL
-	tar -zxvf apr-1.6.3.tar.gz
-	tar -zxvf apr-util-1.6.1.tar.gz
-	mv apr-1.6.3 apr
-	mv apr-util-1.6.1 apr-util
-	cp -r /home/admin/apr /usr/src/httpd/srclib
-	cp -r /home/admin/apr-util /usr/src/httpd/srclib
-	chmod -R 700 /usr/src/httpd/srclib/apr
-	chmod -R 700 /usr/src/httpd/srclib/apr-util
+	./configure \
+	  --prefix=/usr/local/httpd \
+	  --with-apr=/usr/local/apr \
+	  --with-apr-util=/usr/local/apr-util \
+	    --with-pcre=/usr/local/pcre2/bin/pcre2-config \
+	  --enable-so \
+	  --enable-ssl \
+	  --enable-rewrite
 
-OPENSSL
+
+
++-------------------------------------------------------+
+|										======1======	|
+|	OPENSSL												|
+|														|
++-------------------------------------------------------+
 	yum install openssl-devel
 
 	cd /usr/src/httpd/srclib/apr
@@ -66,14 +134,20 @@ OPENSSL
 	##Run the below-mentioned command to ensure that there are no errors in the above step. (if it returns 0, so there were no errors)
 	echo $?
 
-LIST MODULES
-	/usr/local/apache2/bin/apachectl -M
 
++-------------------------------------------------------+
+|										======1======	|
+|	LIST MODULES										|
+|														|
++-------------------------------------------------------+
+	/usr/local/apache2/bin/apachectl -M
+/usr/local/httpd/bin/apachectl -M
 
 
 cd /home/admin
 
 /usr/local/apache2/conf/httpd.conf
+/usr/local/httpd/conf/httpd.conf
 navigate to LINE 215:
 change DocumentRoot to be /var/www/html/
 navigate to LINE 216
@@ -85,15 +159,8 @@ cd /usr/local/apache2/bin/
 
 
 
-GD PNG
-	mv libpng /usr/src/
-	mv libgd /usr/src/
 
-	cd /usr/src/libpng;make distclean;./configure --prefix=/usr/src/;make;make install
-	cd /usr/src/libjpeg;make distclean;./configure --prefix=/usr/src;make;make install
-	cd /usr/src/libgd;make disclean; ./configure --prefix=/usr/src --with-png=/usr/src/lib --with-jpeg=/usr/src/lib;make;make install
 
-php -r 'print_r(gd_info());'
 
 
 ##which opensll
@@ -186,7 +253,8 @@ cd /usr/local/apache2/bin/
 /usr/local/apache2/bin/apachectl restart
 /usr/local/apache2/bin/apachectl stop
 /usr/local/apache2/bin/apachectl start
-
+/usr/local/httpd/bin/apachectl restart
+/usr/local/httpd/bin/httpd -M | grep php
 SERVER VERSION
 	/usr/local/apache2/bin/apachectl -v
 	/usr/local/apache2/bin/apachectl -V

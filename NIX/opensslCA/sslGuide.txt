@@ -175,6 +175,12 @@ done
 openssl manual version 
 
 ============= U N I X =============
+openssl s_client   -connect dlcdn.apache.org:443   -servername dlcdn.apache.org   -verify_return_error
+export PKG_PATH="http://cdn.NetBSD.org/pub/pkgsrc/packages/NetBSD/$(uname -p)/$(uname -r | cut -d. -f1-2)/All"
+echo "$PKG_PATH"
+pkg_add mozilla-rootcerts-openssl
+
+
 mozilla-rootcerts
 bmake
 bmake install
