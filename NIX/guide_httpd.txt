@@ -277,3 +277,14 @@ CREATE USER 'identityiq'@'localhost' IDENTIFIED BY 'identityiq';
 mySql check version
 mysql -V
 SHOW VARIABLES LIKE "%version%";
+
+
+ALTER USER 'drupal'@'192.168.46.50'   IDENTIFIED BY 'zubur1';
+
+CREATE USER 'drupal'@'%'   IDENTIFIED BY 'zubur1';
+GRANT ALL PRIVILEGES ON drupal11.*   TO 'drupal'@'%';
+GRANT ALL PRIVILEGES ON drupal11.*   TO 'drupal'@'%';
+GRANT ALL PRIVILEGES ON drupal11.*   TO 'drupal'@'%';
+
+
+jdbc:mysql://192.168.46.129:3306/drupal11?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true

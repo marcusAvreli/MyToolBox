@@ -7,7 +7,30 @@ https://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.
 
 +-------------------------------------------------------+
 |									======1_of_5======	|
-|			FIND_CLASS_IN_JAR							|
+|	WINDOWS SSL SNAP IN						|
+|														|
++-------------------------------------------------------+
+
+	Select Run from the Start menu, and then enter mmc
+
+	##use ssl certificates that are installed in mmc. no need in java keystore
+	System.setProperty("javax.net.ssl.trustStoreType", "Windows-ROOT");
+	System.setProperty("javax.net.ssl.trustStore", "NONE");
+
++-------------------------------------------------------+
+|									======1_of_5======	|
+|	FIND_MENTIONS_OF_CLASS_IN_JAR						|
+|														|
++-------------------------------------------------------+
+
+	System.getProperty("java.library.path") where native classes are loaded from. meaning .dll or .so
+
+	System.getProperty("java.class.path") where pure java classes are loaded from 
+	Because JsonUtil.class is Java bytecode, not a native DLL.
+
++-------------------------------------------------------+
+|									======1_of_5======	|
+|	FIND_MENTIONS_OF_CLASS_IN_JAR						|
 |														|
 +-------------------------------------------------------+
 	##linux
@@ -15,7 +38,25 @@ https://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.
 	
 	##windows
 	for /R %G in (*.jar) do @jar -tvf "%G" | find "ClassName" > NUL && echo %G
-	
+
++-------------------------------------------------------+
+|									======1_of_5======	|
+|	FIND_IMPLEMENTATION_OF_CLASS_IN_JAR					|
+|														|
++-------------------------------------------------------+	
+
+
+	##linux
+	find /path/to/WEB-INF/lib-connectors -name "*.jar" -type f | while read -r f; do
+	  if jar tf "$f" | grep -qi "connector/common/JsonUtil.class"; then
+		echo "FOUND IN $f"
+	  fi
+	done
+
+	##windows
+	for %f in (*.jar) do @jar tf "%f" | findstr /i "connector/common/JsonUtil.class" && echo FOUND IN %f
+
+
 
 +-------------------------------------------------------+
 |									======2_of_5======	|
