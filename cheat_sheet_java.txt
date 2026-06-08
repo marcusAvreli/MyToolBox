@@ -14,6 +14,7 @@ https://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.
 	Select Run from the Start menu, and then enter mmc
 
 	##use ssl certificates that are installed in mmc. no need in java keystore
+	## similar to java/Tomcat/catalina.properties
 	System.setProperty("javax.net.ssl.trustStoreType", "Windows-ROOT");
 	System.setProperty("javax.net.ssl.trustStore", "NONE");
 
