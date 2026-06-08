@@ -5,9 +5,19 @@ Java class file
 https://en.wikipedia.org/wiki/Java_class_file#General_layout
 https://javarevisited.blogspot.com/2011/07/javalangunsupportedclassversionerror.html
 
+
+
 +-------------------------------------------------------+
 |									======1_of_5======	|
-|	WINDOWS SSL SNAP IN						|
+|	PATH TO LOG4J file									|
+|														|
++-------------------------------------------------------+
+
+	System.setProperty("log4j.configurationFile", "file:///C:/Users/<path>/resources/log4j2.properties");
+
++-------------------------------------------------------+
+|									======1_of_5======	|
+|	WINDOWS SSL SNAP IN									|
 |														|
 +-------------------------------------------------------+
 
