@@ -1,5 +1,9 @@
-//java call
+//sample call #1
 Logger corLogger = Logger.getLogger("com.loggerClass.iiq.PrintBeanshellNamespace");
+//sample call #2
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+Log macLogger = LogFactory.getLog("logger_name");
 
 log4j2 properties
 appender.loggerClass.type=RollingFile
