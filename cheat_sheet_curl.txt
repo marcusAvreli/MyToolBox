@@ -4,6 +4,8 @@
 |														|
 +-------------------------------------------------------+
 	curl -H "Content-Type: application/json" -X POST -d "{\"username\": \"<username>\", \"password\": \"<password>\"}" <getTokenUrl>
+	
+	curl -X POST token_url   -H "Content-Type: application/x-www-form-urlencoded"   -d "grant_type=client_credentials&scope=scope_value&client_id=client_id_value&client_secret= client_secret_value"
 
 
 +-------------------------------------------------------+

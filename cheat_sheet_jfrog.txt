@@ -1,0 +1,21 @@
++-------------------------------------------------------+
+|									======1_of_9======	|
+|	Jfrog												|
+|														|
++-------------------------------------------------------+
+
+
+
+In Jfrog – use the "set me up" link
+Select NuGet
+Select the repo 'powershell-gallery'
+Select Client: powershell (new menu that opens after selecting repo)
+Create credentials
+Open a new Powershell session as admin
+Copy the '$credential = New-Object …' line from jfrog and run
+Add the repo as a trusted source (note the source name that you use – it should be the same throughout all the commands):
+Register-PackageSource -Name "powershell-gallery" -Location url/artifactory/api/nuget/powershell-gallery -Credential $credential -ProviderName "NuGet" -Trusted -Force
+Add a new Source repository
+Register-PSRepository -Name powershell-gallery -SourceLocation url/artifactory/api/nuget/powershell-gallery -InstallationPolicy Trusted -Credential $credential
+Install your module:
+install-Module -Name ExchangeOnlineManagement -Repository powershell-gallery -Credential $credential -RequiredVersion 3.9.2
