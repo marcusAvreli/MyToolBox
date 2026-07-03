@@ -61,42 +61,22 @@
 
 curl http://username:password@receiveing_server_point(without_http)   --form file=@local_zip_name.zip;fileName=remote_zip.zip
 
-
 +-------------------------------------------------------+
 |									======8_of_9======	|
+|	RETRY												|
+|														|
++-------------------------------------------------------+
+	curl -H "Content-Type: application/json" -H "Authorization: Bearer token_value" --retry 10      --retry-delay 5          --connect-timeout 60      --max-time 160            "target_url"
+	
+	#meaning
+	--retry 10 = try up to 10 times
+	--retry-delay 5 = wait 5 seconds between tries
+	--connect-timeout 10 = wait max 10 seconds to connect
+	--max-time 60 = max 60 seconds per attempt
+
++-------------------------------------------------------+
+|									======9_of_9======	|
 |	AUTHORIZATION										|
 |														|
 +-------------------------------------------------------+
 	curl -v -k -H "Content-type":"application/json" -H "Accept":"application/json" -H "Authorization":"Basic c3BhZG1pbjphZG1pbg=="  -H "X-XSRF-TOKEN": "qyQFC/OlsUx81xtw2d/W2LGfeQfLjDlGtnPjKWy0Yvo=" <http://url>
-
-
-Note: Unnecessary use of -X or --request, POST is already inferred.
-*   Trying [::1]:8080...
-* Connected to localhost (::1) port 8080
-> POST /myRestApi/user/register HTTP/1.1
-> Host: localhost:8080
-> User-Agent: curl/8.4.0
-> Accept: */*
-> Content-Type: application/json
-> Content-Length: 79
->
-< HTTP/1.1 400
-###########CORS INCLUDED FLAGS
-< Access-Control-Allow-Origin: *
-< Access-Control-Allow-Headers: CSRF-Token, X-Requested-By, Authorization, Content-Type
-< Access-Control-Request-Method: GET, POST, PUT, DELETE, OPTIONS, HEAD
-< Access-Control-Request-Headers: CSRF-Token, X-Requested-By, Authorization, Content-Type
-< Access-Control-Allow-Credentials: true
-< Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS, HEAD
-< Content-Type: text/plain
-< Content-Length: 368
-< Date: Mon, 25 Mar 2024 16:01:08 GMT
-< Connection: close
-
-
-jersey 2 error
-	Unrecognized field "login" (class myRestApi.model.UserSecurity), not marked as ignorable (7 known properties: "lastname", "role", "token", "id", "email", "firstname", "password"])
-	at [Source: (org.glassfish.jersey.message.internal.ReaderInterceptorExecutor$UnCloseableInputStream); line: 1, column: 11] (through reference chain: myRestApi.model.UserSecurity["login"])* Closing connectio
-
-https://stackoverflow.com/questions/978061/http-get-with-request-body
-
