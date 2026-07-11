@@ -50,8 +50,8 @@
 |	DOWNLOAD FILE										|
 |														|
 +-------------------------------------------------------+
-	curl -L https://www.cpan.org/src/5.0/perl-5.34.0.tar.gz --output perl-5.34.0.tar.gz 
-
+	curl -fL https://www.cpan.org/src/5.0/perl-5.34.0.tar.gz --output perl-5.34.0.tar.gz 
+	use fL This fails if the download returns a 404 or other HTTP error.
 
 +-------------------------------------------------------+
 |									======7_of_9======	|

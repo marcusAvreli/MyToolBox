@@ -26,32 +26,79 @@
 	yum install libXpm-devel
 
 
+
+
++-------------------------------------------------------+
+|										======1======	|
+|	M4													|
+|														|
++-------------------------------------------------------+
+	
+	Place manually downloaded source code under:
+	sudo mkdir -p /usr/local/src
+	cd /usr/local/src
+	sudo curl -L https://ftp.gnu.org/gnu/m4/m4-1.4.21.tar.gz --output m4-1.4.21.tar.gz
+	sudo tar -xzf m4-1.4.21.tar.gz
+	cd /usr/local/src/m4-1.4.21
+
+	sudo ./configure --prefix=/usr/local
+	sudo make -j"$(nproc)"
+	sudo make check
+	sudo make install
+
+verify:
+
+	/usr/local/bin/m4 --version
+	command -v m4
+	m4 --version
+
+echo 'export PATH=/usr/local/bin:$PATH' >> /root/.bashrc
+source /root/.bashrc
 +-------------------------------------------------------+
 |										======1======	|
 |	AUTOCONF											|
 |														|
 +-------------------------------------------------------+
-	tar -zxvf autoconf-2.69.tar.gz
-	mv autoconf-2.69 autoconf
-	mv /home/admin/autoconf /usr/src/
-	chmod -R 700 /usr/src/autoconf
-	cd /usr/src/autoconf
-	./configure;make;make install
-	cd /home/admin
+	Place manually downloaded source code under:
+	https://ftp.gnu.org/gnu/autoconf/?C=N;O=D
+	
+	sudo mkdir -p /usr/local/src
+	cd /usr/local/src
+
+	sudo curl -fL   https://ftp.gnu.org/gnu/autoconf/autoconf-2.73.tar.gz   -o autoconf-2.73.tar.gz
+
+	sudo tar -xzf autoconf-2.73.tar.gz
+	cd /usr/local/src/autoconf-2.73
+
+	sudo ./configure --prefix=/usr/local
+	 make -j"$(nproc)"
+	sudo make install
 
 
+	
+	verify
+		which autoconf
+		autoconf --version
+		Check that Autoconf can invoke M4
+		cd /usr/local/src/autoconf-2.73
+		autoconf --trace='AC_INIT:$1'
 +-------------------------------------------------------+
 |										======1======	|
 |	AUTOMAKE											|
 |														|
 +-------------------------------------------------------+
-	tar -zxvf automake-1.15.tar.gz
-	mv automake-1.15 automake
-	mv /home/admin/automake /usr/src/
-	chmod -R 700 /usr/src/automake
-	cd /usr/src/automake
-	./configure;make;make install
-	cd /home/admin
+	
+	Place manually downloaded source code under:
+	sudo mkdir -p /usr/local/src
+	cd /usr/local/src
+	sudo curl -fL https://ftp.gnu.org/gnu/automake/automake-1.18.1.tar.gz --output automake-1.18.1.tar.gz
+	sudo tar -xzf /usr/local/src/automake-1.18.1.tar.gz
+	cd /usr/local/src/automake-1.18.1
+
+	sudo ./configure --prefix=/usr/local
+	 sudo make -j"$(nproc)"
+	
+	sudo make install
 
 
 +-------------------------------------------------------+
@@ -59,64 +106,220 @@
 |	PCRE												|
 |														|
 +-------------------------------------------------------+
-cd /home/admin
-curl -L  https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.47/pcre2-10.47.tar.gz  --output pcre2-10.47.tar.gz
-	cd /home/admin && tar -zxvf pcre2-10.47.tar.gz
-	mv pcre2-10.47 pcre2
-	cd pcre2
-	./configure   --prefix=/usr/local/pcre2
+Because PCRE2 is a system-installed tool under /usr/local, make the PATH available system-wide:
+echo 'export PATH=/usr/local/pcre2/bin:$PATH' \
+  | sudo tee /etc/profile.d/pcre2.sh > /dev/null
+
+sudo chmod 644 /etc/profile.d/pcre2.sh
+source /etc/profile.d/pcre2.sh
+
+Place manually downloaded source code under:
+	sudo mkdir -p /usr/local/src
+	cd /usr/local/src
+	
+	sudo curl -fL  https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.47/pcre2-10.47.tar.gz  --output /usr/local/src/pcre2-10.47.tar.gz
+	sudo tar -zxf /usr/local/src/pcre2-10.47.tar.gz
+	cd /usr/local/src/pcre2-10.47
+	./configure   --prefix=/usr/local/pcre2   --enable-pcre2-16   --enable-pcre2-32   --enable-jit
+
+	make -j"$(nproc)"
+	make check
+	sudo make install
+	
+	
+	
+Verify installation
+	/usr/local/pcre2/bin/pcre2-config --version
+	/usr/local/pcre2/bin/pcre2grep -V
+	/usr/local/pcre2/bin/pcre2test -C
+
+command -v pcre2-config
+pcre2-config --version
 
 +-------------------------------------------------------+
 |										======1======	|
 |	APR+APR UTIL										|
 |														|
 +-------------------------------------------------------+
-	cd /home/admin
-	curl -L  https://dlcdn.apache.org//apr/apr-1.7.6.tar.gz --output apr-1.7.6.tar.gz
-	cd /home/admin
-	curl -L  https://dlcdn.apache.org//apr/apr-util-1.6.3.tar.gz --output apr-util-1.6.3.tar.gz
-	cd /home/admin
-	tar -zxvf apr-1.7.6.tar.gz
-	cd /home/admin
-	tar -zxvf apr-util-1.6.3.tar.gz
-	mv apr-1.7.6 apr
-	mv apr-util-1.6.3 apr-util
+	https://downloads.apache.org/apr/?C=N;O=D
+	review installation of 
+	apr-1.7.6.tar.gz
+	apr-util-1.6.3.tar.gz
 	
-	cd /home/admin
-	cd apr
-	./configure  --prefix=/usr/local/apr
-	make
-	make install
+	if required make system available. my user mark
 	
-	cd /home/admin
-	cd apr-util
-	./configure  --prefix=/usr/local/apr-util  --with-apr=/usr/local/apr
-	make
-	make install
+	Place manually downloaded source code under:
+	sudo mkdir -p /usr/local/src
+	cd /usr/local/src
 	
-	cd /home/admin
+	sudo curl -fL https://dlcdn.apache.org//apr/apr-1.7.6.tar.gz  --output /usr/local/src/apr-1.7.6.tar.gz
+	sudo curl -fL https://dlcdn.apache.org//apr/apr-util-1.6.3.tar.gz  --output /usr/local/src/apr-util-1.6.3.tar.gz
+	
+	sudo tar -zxf /usr/local/src/apr-1.7.6.tar.gz
+	sudo tar -zxf /usr/local/src/apr-util-1.6.3.tar.gz
+	cd /usr/local/src/apr-1.7.6
+	
+	sudo ./configure   --prefix=/usr/local/apr
 
+	sudo make -j"$(nproc)"
+	sudo make test
+	sudo make install
+	
+	
+	Verify:
+		/usr/local/apr/bin/apr-1-config --version
+		/usr/local/apr/bin/apr-1-config --prefix
+		
+		
+		
+	cd /usr/local/src/apr-util-1.6.3
+	sudo ./configure   --prefix=/usr/local/apr-util  --with-apr=/usr/local/apr
+	sudo make -j"$(nproc)"
+	sudo make test
+	sudo make install
+	
+	Register the shared libraries system-wide
+	find /usr/local/apr /usr/local/apr-util   -type f -name '*.so*'
+	 expected output 
+		/usr/local/apr/lib
+		/usr/local/apr-util/lib
+	Register them
+		printf '%s\n'   '/usr/local/apr/lib'   '/usr/local/apr-util/lib'   | sudo tee /etc/ld.so.conf.d/apache-apr.conf > /dev/null
+	
+sudo ldconfig
+ldconfig -p | grep -E 'libapr|libaprutil'
+
+Make commands available for both mark and root
+	cat <<'EOF' | sudo tee /etc/profile.d/apache-apr.sh > /dev/null
+	export PATH=/usr/local/apr/bin:/usr/local/apr-util/bin:$PATH
+	EOF
+
+	sudo chmod 644 /etc/profile.d/apache-apr.sh
+	
+Load it in the current shell:
+	source /etc/profile.d/apache-apr.sh
+	hash -r
+Verify	
+command -v apr-1-config
+command -v apu-1-config
+
+apr-1-config --version
+apu-1-config --version
+	Expected:
+		/usr/local/apr/bin/apr-1-config
+		/usr/local/apr-util/bin/apu-1-config
+		1.7.6
+		1.6.3
+		
+		
++-------------------------------------------------------+
+|										======1======	|
+|	OPENSSL3												|
+|														|
++-------------------------------------------------------+
+sudo apt update
+sudo apt install -y libssl-dev pkg-config
+
+openssl version
+
+test -f /usr/include/openssl/ssl.h \
+  && echo "OpenSSL headers found" \
+  || echo "OpenSSL headers missing"
+
+pkg-config --modversion openssl
+pkg-config --cflags --libs openssl
+Check which metadata file is used:
+On Ubuntu 24.04 amd64 it will normally resolve under a multiarch directory such as:
+pkg-config --variable=pcfiledir openssl
+
+Remove variables that might force pkg-config to search only custom locations:
+unset PKG_CONFIG_LIBDIR
+unset OPENSSL_CFLAGS
+unset OPENSSL_LIBS
+
+Inspect the active search path:
+pkg-config --variable pc_path pkg-config
+
+Confirm OpenSSL is visible in the same shell:
+pkg-config --exists openssl \
+  && echo "OpenSSL development files detected" \
+  || echo "OpenSSL development files NOT detected"
+  
++-------------------------------------------------------+
+|										======1======	|
+|	nghttp2												|
+|														|
++-------------------------------------------------------+
+  
+  Apache’s HTTP/2 module also requires the nghttp2 development library. Install it before configuring:
+  
+  sudo apt install -y libnghttp2-dev
+  
 +-------------------------------------------------------+
 |										======1======	|
 |	HTTPD												|
 |														|
 +-------------------------------------------------------+
-	cd /home/admin
-	curl -L  https://dlcdn.apache.org/httpd/httpd-2.4.67.tar.gz --output httpd-2.4.67.tar.gz
-	tar -zxvf httpd-2.4.67.tar.gz
-	mv httpd-2.4.33 httpd
+
+Preserve your custom zlib paths
+export CPPFLAGS="-I/usr/local/zlib/include"
+export LDFLAGS="-L/usr/local/zlib/lib -Wl,-rpath,/usr/local/zlib/lib"
+
+
+
+
+Clean the previous failed Apache configuration first:
+
+make distclean 2>/dev/null || true
+rm -f config.cache
+
+
+
 	
-	cd /home/admin/httpd
+		review install of httpd-2.4.68.tar.gz . if required make it system wide available. keep using /usr/local/src not /usr/local/src/mark
+	final target is to compile php-8.5.6.tar.gz from source AND install drupal
+
+	Place manually downloaded source code under:
+	sudo mkdir -p /usr/local/src
+	cd /usr/local/src
+	
+	sudo curl -fL  https://dlcdn.apache.org/httpd/httpd-2.4.68.tar.gz --output  /usr/local/src/httpd-2.4.68.tar.gz
+	sudo tar -zxf /usr/local/src/httpd-2.4.68.tar.gz
+	cd /usr/local/src/httpd-2.4.68
+	
+	
 
 	./configure \
 	  --prefix=/usr/local/httpd \
 	  --with-apr=/usr/local/apr \
 	  --with-apr-util=/usr/local/apr-util \
-	    --with-pcre=/usr/local/pcre2/bin/pcre2-config \
+	  --with-pcre=/usr/local/pcre2/bin/pcre2-config \
 	  --enable-so \
 	  --enable-ssl \
 	  --enable-rewrite
 
+sudo ./configure \
+  --prefix=/usr/local/httpd \
+  --with-apr=/usr/local/apr \
+  --with-apr-util=/usr/local/apr-util \
+  --with-pcre=/usr/local/pcre2/bin/pcre2-config \
+  --with-z=/usr/local/zlib \
+  --with-ssl=/usr \
+  --enable-so \
+  --enable-rewrite \
+  --enable-ssl=shared \
+  --enable-http2=shared \
+  --enable-deflate=shared \
+  --enable-expires=shared \
+  --enable-headers=shared \
+  --enable-proxy=shared \
+  --enable-proxy-fcgi=shared
+make -j"$(nproc)"
+sudo make install
+
+--enable-mods-shared=all
+
+It enables many modules that Drupal does not require and can introduce additional dependency failures. Explicitly selecting the needed modules makes the build easier to maintain.
 
 
 +-------------------------------------------------------+
