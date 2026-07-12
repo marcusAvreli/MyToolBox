@@ -1,0 +1,201 @@
+#!/usr/bin/env bash
+
+set -u
+
+JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
+CATALINA_HOME="/usr/local/tomcat9"
+CATALINA_BASE="/usr/local/tomcat9"
+CATALINA_PID="${CATALINA_BASE}/temp/tomcat.pid"
+TOMCAT_USER="tomcat"
+SHUTDOWN_WAIT=20
+
+export JAVA_HOME
+export CATALINA_HOME
+export CATALINA_BASE
+export CATALINA_PID
+export PATH="${JAVA_HOME}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+RESET='\033[0m'
+
+usage() {
+    echo "Usage: $0 {start|stop|restart|status|kill}"
+}
+
+check_root() {
+    if [ "$(id -u)" -ne 0 ]; then
+        echo -e "${RED}This command must be run with sudo.${RESET}"
+        exit 1
+    fi
+}
+
+check_installation() {
+    if ! id "${TOMCAT_USER}" >/dev/null 2>&1; then
+        echo -e "${RED}Tomcat user '${TOMCAT_USER}' does not exist.${RESET}"
+        exit 1
+    fi
+
+    if [ ! -x "${CATALINA_HOME}/bin/catalina.sh" ]; then
+        echo -e "${RED}Tomcat was not found under ${CATALINA_HOME}.${RESET}"
+        exit 1
+    fi
+
+    if [ ! -x "${JAVA_HOME}/bin/java" ]; then
+        echo -e "${RED}Java was not found under ${JAVA_HOME}.${RESET}"
+        exit 1
+    fi
+}
+
+tomcat_pid() {
+    if [ -f "${CATALINA_PID}" ]; then
+        local pid
+        pid="$(cat "${CATALINA_PID}" 2>/dev/null || true)"
+
+        if [ -n "${pid}" ] &&
+           kill -0 "${pid}" 2>/dev/null &&
+           ps -p "${pid}" -o args= | grep -q 'org.apache.catalina.startup.Bootstrap'; then
+            echo "${pid}"
+            return 0
+        fi
+    fi
+
+    pgrep -u "${TOMCAT_USER}" -f \
+        "org.apache.catalina.startup.Bootstrap.*${CATALINA_BASE}" \
+        2>/dev/null | head -n 1
+}
+
+run_as_tomcat() {
+    sudo -u "${TOMCAT_USER}" \
+        env \
+        JAVA_HOME="${JAVA_HOME}" \
+        CATALINA_HOME="${CATALINA_HOME}" \
+        CATALINA_BASE="${CATALINA_BASE}" \
+        CATALINA_PID="${CATALINA_PID}" \
+        PATH="${PATH}" \
+        "$@"
+}
+
+status_tomcat() {
+    local pid
+    pid="$(tomcat_pid)"
+
+    if [ -n "${pid}" ]; then
+        echo -e "${GREEN}Tomcat is running with PID ${pid}.${RESET}"
+        return 0
+    fi
+
+    echo -e "${RED}Tomcat is not running.${RESET}"
+    return 3
+}
+
+start_tomcat() {
+    local pid
+    pid="$(tomcat_pid)"
+
+    if [ -n "${pid}" ]; then
+        echo -e "${YELLOW}Tomcat is already running with PID ${pid}.${RESET}"
+        return 0
+    fi
+
+    mkdir -p "${CATALINA_BASE}/temp" \
+             "${CATALINA_BASE}/logs" \
+             "${CATALINA_BASE}/work"
+
+    chown -R "${TOMCAT_USER}:${TOMCAT_USER}" \
+        "${CATALINA_BASE}/temp" \
+        "${CATALINA_BASE}/logs" \
+        "${CATALINA_BASE}/work"
+
+    rm -f "${CATALINA_PID}"
+
+    echo -e "${GREEN}Starting Tomcat...${RESET}"
+
+    if ! run_as_tomcat "${CATALINA_HOME}/bin/startup.sh"; then
+        echo -e "${RED}Tomcat startup command failed.${RESET}"
+        return 1
+    fi
+
+    sleep 2
+    status_tomcat
+}
+
+stop_tomcat() {
+    local pid
+    pid="$(tomcat_pid)"
+
+    if [ -z "${pid}" ]; then
+        echo -e "${YELLOW}Tomcat is not running.${RESET}"
+        rm -f "${CATALINA_PID}"
+        return 0
+    fi
+
+    echo -e "${YELLOW}Stopping Tomcat with PID ${pid}...${RESET}"
+
+    run_as_tomcat "${CATALINA_HOME}/bin/shutdown.sh" || true
+
+    local count=0
+
+    while kill -0 "${pid}" 2>/dev/null; do
+        if [ "${count}" -ge "${SHUTDOWN_WAIT}" ]; then
+            echo -e "${RED}Tomcat did not stop after ${SHUTDOWN_WAIT} seconds.${RESET}"
+            echo -e "${RED}Sending SIGKILL to PID ${pid}.${RESET}"
+            kill -9 "${pid}"
+            break
+        fi
+
+        sleep 1
+        count=$((count + 1))
+        printf '.'
+    done
+
+    echo
+    rm -f "${CATALINA_PID}"
+    echo -e "${GREEN}Tomcat stopped.${RESET}"
+}
+
+kill_tomcat() {
+    local pid
+    pid="$(tomcat_pid)"
+
+    if [ -z "${pid}" ]; then
+        echo -e "${YELLOW}Tomcat is not running.${RESET}"
+        rm -f "${CATALINA_PID}"
+        return 0
+    fi
+
+    echo -e "${RED}Force-stopping Tomcat with PID ${pid}.${RESET}"
+    kill -9 "${pid}"
+    rm -f "${CATALINA_PID}"
+}
+
+restart_tomcat() {
+    stop_tomcat
+    start_tomcat
+}
+
+check_root
+check_installation
+
+case "${1:-}" in
+    start)
+        start_tomcat
+        ;;
+    stop)
+        stop_tomcat
+        ;;
+    restart)
+        restart_tomcat
+        ;;
+    status)
+        status_tomcat
+        ;;
+    kill)
+        kill_tomcat
+        ;;
+    *)
+        usage
+        exit 2
+        ;;
+esac
