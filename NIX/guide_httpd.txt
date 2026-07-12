@@ -267,9 +267,9 @@ export LDFLAGS="-L/usr/local/zlib/lib -Wl,-rpath,/usr/local/zlib/lib"
 
 
 
-
+sudo chown -R mark:mark   /usr/local/src/httpd-2.4.68
 Clean the previous failed Apache configuration first:
-
+cd /usr/local/src/httpd-2.4.68
 make distclean 2>/dev/null || true
 rm -f config.cache
 
@@ -298,13 +298,19 @@ rm -f config.cache
 	  --enable-ssl \
 	  --enable-rewrite
 
-sudo ./configure \
+cd /usr/local/src/httpd-2.4.68
+
+make distclean 2>/dev/null || true
+rm -f config.cache
+
+./configure \
   --prefix=/usr/local/httpd \
   --with-apr=/usr/local/apr \
   --with-apr-util=/usr/local/apr-util \
   --with-pcre=/usr/local/pcre2/bin/pcre2-config \
   --with-z=/usr/local/zlib \
   --with-ssl=/usr \
+  --with-mpm=prefork \
   --enable-so \
   --enable-rewrite \
   --enable-ssl=shared \

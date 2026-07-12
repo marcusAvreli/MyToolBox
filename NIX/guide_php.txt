@@ -289,6 +289,99 @@ export LDFLAGS="-L/usr/local/zlib/lib -L/usr/local/libpng/lib -L/usr/local/onigu
   sudo make install
   
   
+  Because you used:
+
+--with-apxs2=/usr/local/httpd/bin/apxs
+
+the installation should also place the Apache PHP module under:
+
+/usr/local/httpd/modules/libphp.so
+
+Verify:
+
+ls -l /usr/local/httpd/modules/libphp.so
+4. Install php.ini
+sudo mkdir -p \
+  /usr/local/php-8.5.6/etc \
+  /usr/local/php-8.5.6/etc/conf.d
+
+sudo cp \
+  /usr/local/src/php-8.5.6/php.ini-production \
+  /usr/local/php-8.5.6/etc/php.ini
+
+Verify:
+
+/usr/local/php-8.5.6/bin/php --ini
+
+Expected:
+
+Loaded Configuration File: /usr/local/php-8.5.6/etc/php.ini
+Scan for additional .ini files in: /usr/local/php-8.5.6/etc/conf.d
+5. Create stable PHP symlink
+sudo ln -sfn /usr/local/php-8.5.6 /usr/local/php
+
+Make PHP available system-wide:
+
+sudo tee /etc/profile.d/php.sh >/dev/null <<'EOF'
+export PATH=/usr/local/php/bin:/usr/local/php/sbin:$PATH
+EOF
+
+source /etc/profile.d/php.sh
+
+Verify:
+
+which php
+php -v
+
+Expected:
+
+/usr/local/php/bin/php
+PHP 8.5.6
+6. Verify extensions
+php -m | sort
+
+Check the important Drupal extensions:
+
+php -m | grep -Ei \
+'^(curl|dom|gd|intl|json|libxml|mbstring|mysqli|openssl|opcache|pdo|pdo_mysql|simplexml|xml|xmlreader|xmlwriter|zip|zlib)$'
+
+Check versions and MySQL support:
+
+php -r 'echo PHP_VERSION, PHP_EOL;'
+php -r 'echo OPENSSL_VERSION_TEXT, PHP_EOL;'
+php -r 'echo LIBXML_DOTTED_VERSION, PHP_EOL;'
+php -r 'print_r(PDO::getAvailableDrivers());'
+
+PDO::getAvailableDrivers() should include:
+
+mysql
+sqlite
+7. Configure PHP settings for Drupal
+
+Edit:
+
+sudo vi /usr/local/php-8.5.6/etc/php.ini
+  
+  
+  
+  sudo tee /usr/local/httpd/htdocs/phpinfo.php >/dev/null <<'PHP'
+<?php
+phpinfo();
+PHP
+  sudo /usr/local/httpd/bin/httpd -t
+sudo /usr/local/httpd/bin/apachectl restart
+  
+  sudo rm /usr/local/httpd/htdocs/phpinfo.php
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
 vim /usr/local/apache2/conf/httpd.conf 
 AddType text/html .php
@@ -304,3 +397,16 @@ phpinfo();
 cd /usr/local/apache2/bin/
 ./apachectl restart
 
+CREATE DATABASE IF NOT EXISTS drupal11
+    CHARACTER SET utf8mb4
+    COLLATE utf8mb4_unicode_ci;
+
+CREATE USER 'drupal'@'77.137.79.134'
+    IDENTIFIED BY 'Bombardier~!678';
+CREATE USER IF NOT EXISTS 'drupal'@'%'
+     IDENTIFIED BY 'Bombardier~!678';
+GRANT ALL PRIVILEGES
+ON drupal11.*
+TO 'drupal'@'77.137.79.134';
+
+FLUSH PRIVILEGES;

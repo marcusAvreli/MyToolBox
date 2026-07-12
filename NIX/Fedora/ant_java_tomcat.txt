@@ -28,73 +28,201 @@
 |														|
 +-------------------------------------------------------+
 	COPYRIGHT: https://fr.linuxfromscratch.org/view/blfs-8.2-fr/general/apache-ant.html
-	curl -L 	https://dlcdn.apache.org//ant/source/apache-ant-1.10.15-src.tar.gz --output apache-ant-1.10.15-src.tar.gz
+	cd /tmp
 
-	tar -zxvf apache-ant-1.10.15-src.tar.gz
-	
-	
-	./bootstrap.sh
-	bootstrap/bin/ant -f fetch.xml -Ddest=system || true && cp -v lib/*.jar lib/optional/
-	./build.sh -Ddist.dir=$PWD/apache-ant-1.10.15 dist
+	curl -fL \
+	  https://dlcdn.apache.org/ant/source/apache-ant-1.10.17-src.tar.gz \
+	  -o apache-ant-1.10.17-src.tar.gz
 	 
+sudo mkdir -p /usr/local/src
 
+	sudo tar -xzf apache-ant-1.10.17-src.tar.gz \
+  -C /usr/local/src
+  sudo chown -R mark:mark /usr/local/src/apache-ant-1.10.17
+  cd /usr/local/src/apache-ant-1.10.17
+	./bootstrap.sh
+	
+	Fetch optional library dependencies:
+	bootstrap/bin/ant -f fetch.xml -Ddest=system
+	
+	Build the distributable installation:
 	
 	
+	
+	
+	
+	
+	
+	The build reached the Javadoc stage, but the JUnit 5 dependencies were not available. LegacyXmlResultFormatter needs org.junit.platform.launcher.TestPlan.
+
+Most likely this command did not fully populate Ant’s optional libraries:
+
+bootstrap/bin/ant -f fetch.xml -Ddest=system
+
+For a standalone source build, use -Ddest=optional, which downloads dependencies directly into Ant’s lib/optional directory. Apache’s installation documentation says fetch.xml retrieves the auxiliary JARs required by optional Ant tasks.
+
+From the Ant source directory, run:
+
+cd /usr/local/src/apache-ant-1.10.17
+	
+Clean the failed build:	
+	./build.sh clean
+rm -rf bootstrap build
+
+Bootstrap again:
+	./bootstrap.sh
+	
+Fetch the optional libraries into the source tree:
+	bootstrap/bin/ant -f fetch.xml -Ddest=optional
+Check that the JUnit Platform JARs now exist:
+find lib/optional -maxdepth 1 -type f \
+  \( -name 'junit-platform-*.jar' -o -name 'junit-jupiter-*.jar' \) \
+  -printf '%f\n' | sort
+  
+  
+  expected output
+	junit-jupiter-api-5.10.2.jar
+	junit-jupiter-engine-5.10.2.jar
+	junit-jupiter-params-5.10.2.jar
+	junit-platform-commons-1.10.2.jar
+	junit-platform-engine-1.10.2.jar
+	junit-platform-launcher-1.10.2.jar
+
+Now rebuild:
+./build.sh \
+  -Ddist.dir=/tmp/apache-ant-1.10.17-dist \
+  dist
+
 +-------------------------------------------------------+
 |									======4_of_9======	|
 |			ANT ENVIRONMENTAL VARIABLES					|
 |														|
 +-------------------------------------------------------+
-	echo 'export ANT_HOME="/opt/ant/apache-ant-1.10.15"' >> /etc/profile
-	echo 'export PATH=${PATH}:${ANT_HOME}/bin' >> /etc/profile
-	source /etc/profile
+make ant system wide available. 
+Assuming your built Ant distribution is here:
 
+/tmp/apache-ant-1.10.17-dist
+
+install it system-wide under /usr/local/lib:
+
+sudo rm -rf /usr/local/lib/apache-ant-1.10.17
+
+sudo mkdir -p /usr/local/lib/apache-ant-1.10.17
+
+sudo cp -a \
+  /tmp/apache-ant-1.10.17-dist/. \
+  /usr/local/lib/apache-ant-1.10.17/
+
+Create a stable Ant location:
+
+sudo ln -sfn \
+  /usr/local/lib/apache-ant-1.10.17 \
+  /usr/local/ant
+
+Create the system-wide executable link:
+
+sudo ln -sfn \
+  /usr/local/ant/bin/ant \
+  /usr/local/bin/ant
+
+Set ANT_HOME for all login users:
+
+sudo tee /etc/profile.d/ant.sh >/dev/null <<'EOF'
+export ANT_HOME=/usr/local/ant
+export PATH="$ANT_HOME/bin:$PATH"
+EOF
+
+Set permissions:
+
+sudo chmod 644 /etc/profile.d/ant.sh
+
+Load it in your current shell:
+
+source /etc/profile.d/ant.sh
+
+Verify:
+
+ant -version
+echo "$ANT_HOME"
+command -v ant
+readlink -f "$(command -v ant)"
+
+Expected:
+
+Apache Ant(TM) version 1.10.17
+/usr/local/ant
+/usr/local/bin/ant
+/usr/local/lib/apache-ant-1.10.17/bin/ant
+
+Verify another system user can run it:
+
+sudo -u www-data /usr/local/bin/ant -version
 
 +-------------------------------------------------------+
 |									======5_of_9======	|
 |	INSTALL TOMCAT										|
 |														|
 +-------------------------------------------------------+
-	curl -L 	https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.73/src/apache-tomcat-9.0.73-src.tar.gz --output apache-tomcat-9.0.73-src.tar.gz
-	tar -zxvf apache-tomcat-9.0.73-src.tar.gz //RUNS ON JAVA 11+
-	tar -zxvf apache-tomcat-9.0.98-src.tar.gz //runs ON java 17+
-	
-	mv  apache-tomcat-9.0.73-src tomcat90Source
-	cd tomcat90Source
-	ant		
-	
-	mkdir /opt/tomcat90
-	#result server is in output/build
-	cp -r output/build/*	/opt/tomcat90	
 
+	cd /usr/local/src
 
+sudo curl -fL \
+https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.120/src/apache-tomcat-9.0.120-src.tar.gz \
+-o apache-tomcat-9.0.120-src.tar.gz
+
+sudo tar -xzf apache-tomcat-9.0.120-src.tar.gz
+cd apache-tomcat-9.0.120-src
+
+ant release
 +-------------------------------------------------------+
 |									======6_of_9======	|
 |	USERS AND PERMISSIONS								|
 |														|
 +-------------------------------------------------------+
-	useradd -r -s /bin/false tomcat &&	groupadd --system tomcat
-	
-	#We put the tomcat user as the owner of the folder of tomcat:
-	chown -R tomcat:tomcat /opt/tomcat90
-	
-	#Users can not modify the configuration of tomcat:
-	chmod -R g+r /opt/tomcat90/conf
-	
-	#Users can modify the other folders:
 
-		chmod -R g+w /opt/tomcat90/logs;
-		chmod -R g+w /opt/tomcat90/temp;
-		chmod -R g+w /opt/tomcat90/webapps;
-		#chmod -R g+w /opt/tomcat/work;
-	#Activate the sticky-bit for new files keep permissions defined:
-		chmod -R g+s /opt/tomcat90/conf
-		chmod -R g+s /opt/tomcat90/logs
-		chmod -R g+s /opt/tomcat90/temp
-		chmod -R g+s /opt/tomcat90/webapps
-		chmod -R g+s /opt/tomcat90/work
-	#Finally, we add the tomcat group we want users who can use the tomcat:
-		usermod -a -G tomcat root
+
+and the stable symbolic link is: /usr/local/tomcat9
+lrwxrwxrwx 1 root root 36 Jul 11 14:42 tomcat9 -> /usr/local/lib/apache-tomcat-9.0.120
+	
+
+	
+# Actual versioned Tomcat installation
+TOMCAT_HOME=/usr/local/lib/apache-tomcat-9.0.120
+
+# Base installation is controlled by root
+chown root:tomcat "$TOMCAT_HOME"
+chmod 750 "$TOMCAT_HOME"
+
+# Binaries: root-controlled, readable and executable by Tomcat
+chown -R root:tomcat "$TOMCAT_HOME/bin"
+find "$TOMCAT_HOME/bin" -type d -exec chmod 750 {} \;
+find "$TOMCAT_HOME/bin" -type f -exec chmod 640 {} \;
+chmod 750 "$TOMCAT_HOME"/bin/*.sh
+
+# Configuration: root-controlled, readable by Tomcat
+chown -R root:tomcat "$TOMCAT_HOME/conf"
+find "$TOMCAT_HOME/conf" -type d -exec chmod 750 {} \;
+find "$TOMCAT_HOME/conf" -type f -exec chmod 640 {} \;
+
+# Applications: deploy only through root or sudo
+chown -R root:tomcat "$TOMCAT_HOME/webapps"
+find "$TOMCAT_HOME/webapps" -type d -exec chmod 750 {} \;
+find "$TOMCAT_HOME/webapps" -type f -exec chmod 640 {} \;
+
+# Runtime locations must be writable by Tomcat
+chown -R tomcat:tomcat \
+    "$TOMCAT_HOME/logs" \
+    "$TOMCAT_HOME/temp" \
+    "$TOMCAT_HOME/work"
+
+find "$TOMCAT_HOME/logs" "$TOMCAT_HOME/temp" "$TOMCAT_HOME/work" \
+    -type d -exec chmod 750 {} \;
+
+find "$TOMCAT_HOME/logs" "$TOMCAT_HOME/temp" "$TOMCAT_HOME/work" \
+    -type f -exec chmod 640 {} \;
+
+# Stable symbolic link remains controlled by root
+chown -h root:root /usr/local/tomcat9
 
 
 +-------------------------------------------------------+
@@ -289,3 +417,25 @@ export ANT_HOME=/opt/ant
 EOF
 export PATH=$PATH:$ANT_HOME/bin
 export ANT_HOME=$ANT_HOME:/opt/ant-1.10.2
+
+
+
+
+"C:\Program Files\PuTTY\pageant.exe" "C:\Users\markg\.ssh\myPrivateKey.ppk"
+
+"C:\Program Files\PuTTY\plink.exe" ^
+More?   -v ^
+More?   -batch ^
+More?   -P 22 ^
+More?   -hostkey "ssh-ed25519 255 SHA256:8iVSCZeLSTX7TMPseCN5o+kZbSom60xEv/5BejiobBQ" ^
+More?   mark@161.35.6.53 ^
+More?   "echo SSH connection successful"
+Looking up host "161.35.6.53" for SSH connection
+
+
+
+
+how to change and save changes. sudo visudo -f /etc/sudoers.d/tomcat9-deploy
+Press Ctrl + O
+Press Enter
+Press Ctrl + X
