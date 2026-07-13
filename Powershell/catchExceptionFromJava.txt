@@ -1,0 +1,59 @@
+$iiqCommand={ Param ([string]$spuser,[string]$sppassword,[string]$importfile)
+
+                  write-host "Start-Job: Import "$importfile
+
+                  $SPHOME = "path\"
+
+                  $CLASSPATH= "target_jar.jar"
+
+                  $JAVA_OPTS = "-cp", $CLASSPATH, "-Xms128m", "-Xmx256m", "-Dsun.lang.ClassLoader.allowArraySyntax=true", "-Dcom.ibm.jsse2.overrideDefaultTLS=true"
+
+                  $JAVA_OPTS += "--add-exports=java.naming/com.sun.jndi.ldap=ALL-UNNAMED"
+
+                  $JAVA_OPTS += "-DbootstrapFirst=true"
+
+ 
+
+                  #echo "$JAVA_OPTS sailpoint.launch.Launcher  console -u $spuser -p $sppassword -c `"import WEB-INF\$importfile`""
+
+                  $output = & java $JAVA_OPTS sailpoint.launch.Launcher  console -u $spuser -p $sppassword -c "import WEB-INF\config\$importfile"
+
+                  write-host "End-Job: Import "$importfile
+
+                  write-host "Exit code: "$LASTEXITCODE
+
+                  return [PSCustomObject]@{
+
+                                  ExitCode = $LASTEXITCODE
+
+                                  Output   = $output
+
+                  }
+
+  }             
+
+ 
+
+ 
+
+$res = Invoke-command -ComputerName $serverName -ScriptBlock $iiqCommand -ArgumentList $spuser,$sppassword,$importfile -Credential $credential 2>&1
+
+    $res.Output
+
+    write-host "Invoke-command exit code:" $res.ExitCode
+
+    if ($res.ExitCode -ne 0) {
+
+      write-host "ERROR after Invoke-command"
+
+      exit 1
+
+    }
+
+    else{
+
+      write-host "iiqCommand succeded"
+
+      exit 0
+
+    }
