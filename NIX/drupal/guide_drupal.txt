@@ -1,6 +1,72 @@
 DRUPAL
 
+the intended Composer layout was:
+/var/www/drupal/
+├── composer.json
+├── composer.lock
+├── vendor/
+└── web/
 
+
+locate the actual installation
+
+sudo find /var/www /usr/local \
+    -maxdepth 6 \
+    -type f \
+    -name composer.json \
+    2>/dev/null
+
+sudo find /var/www /usr/local \
+    -type f \
+    -path '*/core/lib/Drupal.php' \
+    2>/dev/null
+
+A result such as:
+/var/www/drupal/web/core/lib/Drupal.php
+
+Means
+Composer root: /var/www/drupal
+Drupal web:    /var/www/drupal/web
+
+check for drush
+sudo ls -l /var/www/drupal/vendor/bin/drush
+
+
++-------------------------------------------------------+
+|									======1_of_9======	|
+|	INSTALL DRUSH										|
+|														|
++-------------------------------------------------------+
+	Check whether Drush is installed
+	sudo ls -l /var/www/drupal/vendor/bin/drush
+	
+	install drush
+	cd /var/www/drupal
+	sudo /usr/local/bin/composer require drush/drush
+	
+	which php: /usr/local/php/bin
+	
+	sudo /usr/local/php/bin/php \
+    /usr/local/bin/composer \
+    require drush/drush
+	
+	
+	verify
+	/var/www/drupal/vendor/bin/drush --version
+	
+	Test Drupal:
+	sudo -u www-data \
+    /usr/local/php/bin/php \
+    /var/www/drupal/vendor/bin/drush \
+    --root=/var/www/drupal/web \
+    status
+	
+	
+	
+	Permanent PHP command fix
+	which php: /usr/local/php/bin
+	sudo ln -sfn /usr/local/php/bin/php /usr/local/bin/php
+	/usr/local/bin/php -v
 
 cd /home/admin
 curl -k -L https://www.drupal.org/download-latest/tar.gz --output /home/admin/drupal.tar.gz

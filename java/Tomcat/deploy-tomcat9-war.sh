@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-#manage script located in /usr/local/sbin/tomcat
+# Deployment script: /usr/local/sbin/deploy-tomcat9-war.sh
+# Tomcat control script: /usr/local/sbin/tomcat
 set -Eeuo pipefail
 
 # ==================================================
@@ -29,7 +30,17 @@ TOMCAT_CONTROL="/usr/local/sbin/tomcat"
 #SERVICE_COMMAND="/usr/sbin/service"
 
 TIMESTAMP="$(date '+%Y%m%d-%H%M%S')"
+# Last successfully deployed WAR, stored outside webapps
+CURRENT_WAR="${BACKUP_DIR}/${APPLICATION_NAME}-current.war"
+
+# Timestamped backup of the previous successful WAR
 BACKUP_WAR="${BACKUP_DIR}/${APPLICATION_NAME}-${TIMESTAMP}.war"
+
+# Temporary candidate retained until health verification succeeds
+CANDIDATE_WAR="${BACKUP_DIR}/.${APPLICATION_NAME}-${TIMESTAMP}.candidate.war"
+
+# Temporary extraction directory
+STAGING_APP="${TOMCAT_WEBAPPS}/.${APPLICATION_NAME}.deploy.$$"
 
 HAD_PREVIOUS_WAR="false"
 DEPLOYMENT_COMPLETED="false"
@@ -46,11 +57,56 @@ fail() {
     log "ERROR: $*"
     exit 1
 }
+# ==================================================
+# Application extraction
+# ==================================================
+
+extract_application() {
+    local war_file="$1"
+    local destination="$2"
+
+    log "Extracting ${war_file} into staging directory ${STAGING_APP}."
+
+    [[ -f "$war_file" ]] ||
+        fail "WAR file does not exist: ${war_file}"
+
+    rm -rf "$STAGING_APP"
+
+    install \
+        --directory \
+        --owner=root \
+        --group=tomcat \
+        --mode=0750 \
+        "$STAGING_APP"
+
+    unzip -q "$war_file" -d "$STAGING_APP"
+
+    chown -R root:tomcat "$STAGING_APP"
+
+    find "$STAGING_APP" \
+        -type d \
+        -exec chmod 0750 {} \;
+
+    find "$STAGING_APP" \
+        -type f \
+        -exec chmod 0640 {} \;
+
+    # Tomcat is stopped, so replacing the directory is safe
+    rm -rf "$destination"
+    mv "$STAGING_APP" "$destination"
+
+    log "Application extracted successfully into ${destination}."
+}
 
 # ==================================================
 # Validation
 # ==================================================
+command -v curl >/dev/null 2>&1 ||
+    fail "curl is not installed."
 
+command -v unzip >/dev/null 2>&1 ||
+    fail "unzip is not installed."
+	
 [[ -n "$UPLOAD_WAR" ]] ||
     fail "Missing uploaded WAR path."
 
@@ -89,8 +145,15 @@ unzip -tq "$UPLOAD_WAR" >/dev/null ||
 # Rollback
 # ==================================================
 
+
+
+trap rollback ERR INT TERM
+
 rollback() {
     local exit_code=$?
+
+    # Prevent rollback failures from triggering rollback recursively
+    trap - ERR INT TERM
 
     if [[ "$DEPLOYMENT_COMPLETED" == "true" ]]; then
         exit "$exit_code"
@@ -100,30 +163,30 @@ rollback() {
 
     "$TOMCAT_CONTROL" stop >/dev/null 2>&1 || true
 
+    rm -rf "$STAGING_APP"
     rm -rf "$EXPLODED_APP"
     rm -f "$TARGET_WAR"
+    rm -f "$CANDIDATE_WAR"
+    rm -f "$UPLOAD_WAR"
 
-    if [[ "$HAD_PREVIOUS_WAR" == "true" && -f "$BACKUP_WAR" ]]; then
-        log "Restoring previous WAR from ${BACKUP_WAR}"
+    if [[ -f "$CURRENT_WAR" ]]; then
+        log "Restoring previous application from ${CURRENT_WAR}."
 
-        install \
-            --owner=root \
-            --group=tomcat \
-            --mode=0640 \
-            "$BACKUP_WAR" \
-            "$TARGET_WAR"
+        if extract_application "$CURRENT_WAR" "$EXPLODED_APP"; then
+            "$TOMCAT_CONTROL" start >/dev/null 2>&1 || true
+            log "Previous application restored."
+        else
+            log "ERROR: Rollback extraction failed."
+        fi
     else
-        log "No previous WAR was available for rollback."
+        log "No previous successful WAR exists for rollback."
     fi
 
-    "$TOMCAT_CONTROL" start >/dev/null 2>&1 || true
-
-    rm -f "$UPLOAD_WAR"
+    log "Rollback finished."
 
     exit "$exit_code"
 }
 
-trap rollback ERR INT TERM
 
 # ==================================================
 # Deployment
@@ -134,31 +197,34 @@ mkdir -p "$BACKUP_DIR"
 chown root:root "$BACKUP_ROOT" "$BACKUP_DIR"
 chmod 0750 "$BACKUP_ROOT" "$BACKUP_DIR"
 
+trap rollback ERR INT TERM
+
 log "Stopping ${TOMCAT_SERVICE}."
 
-"$TOMCAT_CONTROL" stop
+if "$TOMCAT_CONTROL" status >/dev/null 2>&1; then
+    "$TOMCAT_CONTROL" stop
+else
+    log "Tomcat is already stopped."
+fi
 
-if [[ -f "$TARGET_WAR" ]]; then
-    HAD_PREVIOUS_WAR="true"
-
-    log "Backing up current WAR to ${BACKUP_WAR}."
+# Support migration from the previous deployment model where
+# the WAR was retained inside webapps.
+if [[ ! -f "$CURRENT_WAR" && -f "$TARGET_WAR" ]]; then
+    log "Saving existing webapps WAR as the current rollback artifact."
 
     install \
         --owner=root \
         --group=root \
         --mode=0640 \
         "$TARGET_WAR" \
-        "$BACKUP_WAR"
+        "$CURRENT_WAR"
 fi
 
-# Remove previous exploded deployment to prevent stale files
-if [[ -d "$EXPLODED_APP" ]]; then
-    log "Removing old exploded application directory."
-
-    rm -rf "$EXPLODED_APP"
+if [[ -f "$CURRENT_WAR" ]]; then
+    HAD_PREVIOUS_WAR="true"
 fi
 
-log "Installing new WAR as ${TARGET_WAR}."
+log "Installing uploaded WAR temporarily as ${TARGET_WAR}."
 
 install \
     --owner=root \
@@ -167,12 +233,26 @@ install \
     "$UPLOAD_WAR" \
     "$TARGET_WAR"
 
+# Retain the candidate outside webapps until verification succeeds
+install \
+    --owner=root \
+    --group=root \
+    --mode=0640 \
+    "$TARGET_WAR" \
+    "$CANDIDATE_WAR"
+
+# Manually expand because unpackWARs=false
+extract_application "$TARGET_WAR" "$EXPLODED_APP"
+
+# WAR is no longer required inside webapps
+log "Removing WAR from Tomcat webapps after extraction."
+
+rm -f "$TARGET_WAR"
 rm -f "$UPLOAD_WAR"
 
 log "Starting ${TOMCAT_SERVICE}."
 
 "$TOMCAT_CONTROL" start
-
 # ==================================================
 # Health verification
 # ==================================================
@@ -190,11 +270,30 @@ while (( SECONDS < deadline )); do
         "$HEALTH_URL" \
         >/dev/null 2>&1; then
 
-        DEPLOYMENT_COMPLETED="true"
+      log "Application health check succeeded."
 
-        log "Application health check succeeded."
+# Archive the previous successful release
+if [[ -f "$CURRENT_WAR" ]]; then
+    install \
+        --owner=root \
+        --group=root \
+        --mode=0640 \
+        "$CURRENT_WAR" \
+        "$BACKUP_WAR"
+fi
 
-        break
+# Promote the new candidate as the current successful release
+install \
+    --owner=root \
+    --group=root \
+    --mode=0640 \
+    "$CANDIDATE_WAR" \
+    "$CURRENT_WAR"
+
+rm -f "$CANDIDATE_WAR"
+
+DEPLOYMENT_COMPLETED="true"
+break
     fi
 
     sleep 2
@@ -229,4 +328,5 @@ fi
 trap - ERR INT TERM
 
 log "Deployment completed successfully."
-log "Installed WAR: ${TARGET_WAR}"
+log "Exploded application: ${EXPLODED_APP}"
+log "Rollback WAR: ${CURRENT_WAR}"

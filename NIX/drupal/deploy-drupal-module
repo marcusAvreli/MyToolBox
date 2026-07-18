@@ -1,0 +1,517 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+# ==================================================
+# Fixed deployment configuration
+# ==================================================
+
+MODULE_NAME="angular_org_tree"
+BLOCK_PLUGIN_ID="angular_org_tree_block"
+
+DRUPAL_ROOT="/var/www/drupal"
+DRUPAL_WEB="${DRUPAL_ROOT}/web"
+
+MODULE_PARENT="${DRUPAL_WEB}/modules/custom"
+TARGET_MODULE="${MODULE_PARENT}/${MODULE_NAME}"
+
+PHP="/usr/local/php/bin/php"
+DRUSH="${DRUPAL_ROOT}/vendor/bin/drush"
+APACHECTL="/usr/local/httpd/bin/apachectl"
+
+WEB_USER="www-data"
+WEB_GROUP="www-data"
+
+EXPECTED_ARCHIVE="/tmp/${MODULE_NAME}/${MODULE_NAME}.tar.gz"
+EXPECTED_CHECKSUM="${EXPECTED_ARCHIVE}.sha256"
+
+BACKUP_ROOT="/var/backups/drupal-modules/${MODULE_NAME}"
+BACKUPS_KEEP=10
+
+HEALTH_URL="http://127.0.0.1/"
+HEALTH_TIMEOUT=60
+
+TIMESTAMP="$(date '+%Y%m%d-%H%M%S')"
+
+EXTRACT_ROOT="${MODULE_PARENT}/.${MODULE_NAME}.extract.$$"
+STAGED_MODULE="${EXTRACT_ROOT}/${MODULE_NAME}"
+PREVIOUS_MODULE="${MODULE_PARENT}/.${MODULE_NAME}.previous.$$"
+
+BACKUP_FILE="${BACKUP_ROOT}/${MODULE_NAME}-${TIMESTAMP}.tar.gz"
+
+ARCHIVE="${1:-}"
+CHECKSUM_FILE="${2:-}"
+
+HAD_PREVIOUS="false"
+MODULE_WAS_ENABLED="false"
+DEPLOYMENT_COMPLETED="false"
+HEALTH_OK="false"
+
+# ==================================================
+# Logging
+# ==================================================
+
+log() {
+    printf '[%s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*"
+}
+
+fail() {
+    log "ERROR: $*"
+    return 1
+}
+
+# ==================================================
+# Drush helpers
+# ==================================================
+
+drush_as_web() {
+    runuser \
+        --user="$WEB_USER" \
+        -- \
+        env \
+            HOME=/tmp \
+            PATH=/usr/local/php/bin:/usr/local/bin:/usr/bin:/bin \
+        "$DRUSH" \
+        --root="$DRUPAL_WEB" \
+        "$@"
+}
+
+module_is_known() {
+    drush_as_web pm:list \
+        --type=module \
+        --field=name \
+        --format=list |
+        grep -Fxq "$MODULE_NAME"
+}
+
+module_is_enabled() {
+    drush_as_web pm:list \
+        --type=module \
+        --status=enabled \
+        --field=name \
+        --format=list |
+        grep -Fxq "$MODULE_NAME"
+}
+
+block_plugin_is_found() {
+    drush_as_web php:eval \
+        "\$definitions = \Drupal::service('plugin.manager.block')->getDefinitions();
+         print isset(\$definitions['${BLOCK_PLUGIN_ID}'])
+             ? \"FOUND\n\"
+             : \"NOT FOUND\n\";" |
+        grep -Fxq "FOUND"
+}
+
+clear_block_plugin_definitions() {
+    drush_as_web php:eval \
+        "\Drupal::service('plugin.manager.block')->clearCachedDefinitions();
+         print \"Block plugin definitions cleared\n\";"
+}
+
+# ==================================================
+# Rollback
+# ==================================================
+
+rollback() {
+    local exit_code=$?
+
+    trap - ERR INT TERM
+
+    if [[ "$DEPLOYMENT_COMPLETED" == "true" ]]; then
+        exit "$exit_code"
+    fi
+
+    log "Deployment failed. Starting rollback."
+
+    # If this deployment enabled a previously disabled module,
+    # uninstall it before removing its files.
+    if [[ "$MODULE_WAS_ENABLED" == "false" ]] &&
+       [[ -d "$TARGET_MODULE" ]] &&
+       module_is_enabled; then
+
+        log "Uninstalling module enabled during failed deployment."
+
+        drush_as_web pm:uninstall "$MODULE_NAME" -y \
+            >/dev/null 2>&1 || true
+    fi
+
+    rm -rf "$TARGET_MODULE"
+
+    if [[ "$HAD_PREVIOUS" == "true" && -d "$PREVIOUS_MODULE" ]]; then
+        log "Restoring previous module directory."
+
+        mv "$PREVIOUS_MODULE" "$TARGET_MODULE"
+    fi
+
+    rm -rf "$EXTRACT_ROOT"
+
+    drush_as_web cache:rebuild >/dev/null 2>&1 || true
+
+    "$APACHECTL" configtest >/dev/null 2>&1 &&
+        "$APACHECTL" graceful >/dev/null 2>&1 || true
+
+    rm -f "$ARCHIVE" "$CHECKSUM_FILE"
+    rm -f "${CHECKSUM_FILE}.unix"
+
+    log "Rollback finished."
+
+    exit "$exit_code"
+}
+
+# ==================================================
+# Validation
+# ==================================================
+
+[[ "$(id -u)" -eq 0 ]] ||
+    fail "This script must run as root."
+
+[[ "$ARCHIVE" == "$EXPECTED_ARCHIVE" ]] ||
+    fail "Unexpected archive path: ${ARCHIVE}"
+
+[[ "$CHECKSUM_FILE" == "$EXPECTED_CHECKSUM" ]] ||
+    fail "Unexpected checksum path: ${CHECKSUM_FILE}"
+
+[[ -s "$ARCHIVE" ]] ||
+    fail "Archive is missing or empty: ${ARCHIVE}"
+
+[[ -s "$CHECKSUM_FILE" ]] ||
+    fail "Checksum is missing or empty: ${CHECKSUM_FILE}"
+
+[[ -d "$DRUPAL_WEB/core" ]] ||
+    fail "Drupal core directory is missing: ${DRUPAL_WEB}/core"
+
+[[ -d "$DRUPAL_WEB/modules" ]] ||
+    fail "Drupal modules directory is missing: ${DRUPAL_WEB}/modules"
+
+# Create modules/custom during the first deployment.
+install \
+    --directory \
+    --owner=root \
+    --group="$WEB_GROUP" \
+    --mode=0750 \
+    "$MODULE_PARENT"
+
+[[ -x "$PHP" ]] ||
+    fail "PHP is missing or not executable: ${PHP}"
+
+[[ -x "$DRUSH" ]] ||
+    fail "Drush is missing or not executable: ${DRUSH}"
+
+[[ -x "$APACHECTL" ]] ||
+    fail "apachectl is missing or not executable: ${APACHECTL}"
+
+command -v tar >/dev/null 2>&1 ||
+    fail "tar is not installed."
+
+command -v sha256sum >/dev/null 2>&1 ||
+    fail "sha256sum is not installed."
+
+command -v curl >/dev/null 2>&1 ||
+    fail "curl is not installed."
+
+command -v runuser >/dev/null 2>&1 ||
+    fail "runuser is not installed."
+
+command -v grep >/dev/null 2>&1 ||
+    fail "grep is not installed."
+
+# ==================================================
+# Check archive checksum
+# ==================================================
+
+CHECKSUM_NORMALIZED="${CHECKSUM_FILE}.unix"
+
+tr -d '\r' < "$CHECKSUM_FILE" > "$CHECKSUM_NORMALIZED"
+
+(
+    cd "$(dirname "$ARCHIVE")"
+
+    sha256sum \
+        --check \
+        "$(basename "$CHECKSUM_NORMALIZED")"
+)
+
+rm -f "$CHECKSUM_NORMALIZED"
+
+# ==================================================
+# Validate archive paths
+# ==================================================
+
+while IFS= read -r entry; do
+    case "$entry" in
+        "$MODULE_NAME"|"$MODULE_NAME/"|"$MODULE_NAME/"*)
+            ;;
+        *)
+            fail "Unsafe archive entry: ${entry}"
+            ;;
+    esac
+
+    [[ "$entry" != /* ]] ||
+        fail "Absolute archive entry is forbidden: ${entry}"
+
+    [[ "$entry" != "../"* && "$entry" != *"/../"* ]] ||
+        fail "Parent traversal is forbidden: ${entry}"
+
+done < <(tar -tzf "$ARCHIVE")
+
+trap rollback ERR INT TERM
+
+# ==================================================
+# Determine current module state
+# ==================================================
+
+log "Checking current Drupal module state."
+
+if module_is_enabled; then
+    MODULE_WAS_ENABLED="true"
+    log "Module ${MODULE_NAME} is currently enabled."
+elif module_is_known; then
+    log "Module ${MODULE_NAME} is currently known but disabled."
+else
+    log "Module ${MODULE_NAME} is not currently registered."
+fi
+
+# ==================================================
+# Extract and validate candidate
+# ==================================================
+
+rm -rf "$EXTRACT_ROOT" "$PREVIOUS_MODULE"
+
+install \
+    --directory \
+    --owner=root \
+    --group="$WEB_GROUP" \
+    --mode=0750 \
+    "$EXTRACT_ROOT"
+
+tar \
+    --extract \
+    --gzip \
+    --file="$ARCHIVE" \
+    --directory="$EXTRACT_ROOT" \
+    --no-same-owner \
+    --no-same-permissions
+
+[[ -d "$STAGED_MODULE" ]] ||
+    fail "Extracted module directory is missing."
+
+[[ -f "$STAGED_MODULE/${MODULE_NAME}.info.yml" ]] ||
+    fail "Module info.yml is missing."
+
+[[ -f "$STAGED_MODULE/${MODULE_NAME}.libraries.yml" ]] ||
+    fail "Module libraries.yml is missing."
+
+[[ -f "$STAGED_MODULE/src/Plugin/Block/AngularOrgTreeBlock.php" ]] ||
+    fail "AngularOrgTreeBlock.php is missing."
+
+[[ -f "$STAGED_MODULE/angular-app/main.js" ]] ||
+    fail "Angular main.js is missing."
+
+[[ -f "$STAGED_MODULE/angular-app/runtime.js" ]] ||
+    fail "Angular runtime.js is missing."
+
+[[ -f "$STAGED_MODULE/angular-app/polyfills.js" ]] ||
+    fail "Angular polyfills.js is missing."
+
+log "Checking block plugin PHP syntax."
+
+"$PHP" -l \
+    "$STAGED_MODULE/src/Plugin/Block/AngularOrgTreeBlock.php"
+
+chown -R root:"$WEB_GROUP" "$STAGED_MODULE"
+
+find "$STAGED_MODULE" \
+    -type d \
+    -exec chmod 0750 {} \;
+
+find "$STAGED_MODULE" \
+    -type f \
+    -exec chmod 0640 {} \;
+
+# ==================================================
+# Atomic replacement
+# ==================================================
+
+if [[ -d "$TARGET_MODULE" ]]; then
+    HAD_PREVIOUS="true"
+
+    log "Moving current module to temporary rollback location."
+
+    mv "$TARGET_MODULE" "$PREVIOUS_MODULE"
+fi
+
+log "Installing new module directory."
+
+mv "$STAGED_MODULE" "$TARGET_MODULE"
+rmdir "$EXTRACT_ROOT"
+
+# ==================================================
+# Drupal module discovery
+# ==================================================
+
+log "Checking whether Drupal recognizes ${MODULE_NAME}."
+
+if ! module_is_known; then
+    log "Module was not found before cache rebuild."
+    log "Rebuilding Drupal caches to refresh extension discovery."
+
+    drush_as_web cache:rebuild
+fi
+
+if ! module_is_known; then
+    fail "Drupal does not recognize module: ${MODULE_NAME}"
+fi
+
+log "Drupal recognizes module ${MODULE_NAME}."
+
+# ==================================================
+# Enable and verify module
+# ==================================================
+
+if module_is_enabled; then
+    log "Module ${MODULE_NAME} is already enabled."
+else
+    log "Enabling Drupal module ${MODULE_NAME}."
+
+    drush_as_web pm:install "$MODULE_NAME" -y
+fi
+
+if ! module_is_enabled; then
+    fail "Drupal module was not enabled: ${MODULE_NAME}"
+fi
+
+log "Module ${MODULE_NAME} is enabled."
+
+log "Current module status:"
+
+drush_as_web pm:list \
+    --type=module \
+    --fields=name,status,path \
+    --format=table |
+    grep -E "(^|[[:space:]])${MODULE_NAME}([[:space:]]|$)"
+
+# ==================================================
+# Cache rebuild
+# ==================================================
+
+log "Rebuilding Drupal caches."
+
+drush_as_web cache:rebuild
+
+# ==================================================
+# Block plugin discovery verification
+# ==================================================
+
+log "Checking Drupal block plugin ${BLOCK_PLUGIN_ID}."
+
+if ! block_plugin_is_found; then
+    log "Block plugin was not found after cache rebuild."
+    log "Clearing cached block plugin definitions and retrying."
+
+    clear_block_plugin_definitions
+    drush_as_web cache:rebuild
+fi
+
+if ! block_plugin_is_found; then
+    fail "Drupal block plugin was not found: ${BLOCK_PLUGIN_ID}"
+fi
+
+log "Drupal block plugin ${BLOCK_PLUGIN_ID} was found."
+
+# ==================================================
+# Apache validation and graceful reload
+# ==================================================
+
+log "Validating Apache configuration."
+
+"$APACHECTL" configtest
+
+log "Gracefully reloading Apache."
+
+"$APACHECTL" graceful
+
+# ==================================================
+# Health verification
+# ==================================================
+
+log "Waiting up to ${HEALTH_TIMEOUT} seconds for ${HEALTH_URL}."
+
+deadline=$((SECONDS + HEALTH_TIMEOUT))
+
+while (( SECONDS < deadline )); do
+    if curl \
+        --fail \
+        --silent \
+        --show-error \
+        --max-time 5 \
+        "$HEALTH_URL" \
+        >/dev/null 2>&1; then
+
+        HEALTH_OK="true"
+        log "Drupal health check succeeded."
+        break
+    fi
+
+    sleep 2
+done
+
+[[ "$HEALTH_OK" == "true" ]] ||
+    fail "Drupal did not become healthy within ${HEALTH_TIMEOUT} seconds."
+
+# ==================================================
+# Preserve previous deployment as backup
+# ==================================================
+
+mkdir -p "$BACKUP_ROOT"
+chown root:root "$BACKUP_ROOT"
+chmod 0750 "$BACKUP_ROOT"
+
+if [[ "$HAD_PREVIOUS" == "true" && -d "$PREVIOUS_MODULE" ]]; then
+    log "Archiving previous module to ${BACKUP_FILE}."
+
+    tar \
+        --create \
+        --gzip \
+        --file="$BACKUP_FILE" \
+        --directory="$PREVIOUS_MODULE" \
+        .
+
+    chown root:root "$BACKUP_FILE"
+    chmod 0640 "$BACKUP_FILE"
+
+    rm -rf "$PREVIOUS_MODULE"
+fi
+
+# ==================================================
+# Retain only recent backups
+# ==================================================
+
+mapfile -t old_backups < <(
+    find "$BACKUP_ROOT" \
+        -maxdepth 1 \
+        -type f \
+        -name "${MODULE_NAME}-*.tar.gz" \
+        -printf '%T@ %p\n' |
+    sort -rn |
+    tail -n "+$((BACKUPS_KEEP + 1))" |
+    cut -d' ' -f2-
+)
+
+if (( ${#old_backups[@]} > 0 )); then
+    rm -f -- "${old_backups[@]}"
+fi
+
+# ==================================================
+# Cleanup and completion
+# ==================================================
+
+rm -f "$ARCHIVE" "$CHECKSUM_FILE"
+
+DEPLOYMENT_COMPLETED="true"
+
+trap - ERR INT TERM
+
+log "Drupal module deployment completed successfully."
+log "Installed module: ${TARGET_MODULE}"
+log "Module status: enabled"
+log "Block plugin found: ${BLOCK_PLUGIN_ID}"
