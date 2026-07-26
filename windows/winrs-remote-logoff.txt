@@ -1,0 +1,641 @@
+@echo off
+setlocal EnableExtensions EnableDelayedExpansion
+
+rem ============================================================
+rem ENVIRONMENT CONFIGURATION
+rem
+rem Change server names only in this section.
+rem Server names must be separated by spaces.
+rem ============================================================
+
+set "SERVERS_PRP=server_name"
+
+set "SERVERS_TEST=server_name1 server_name2"
+
+set "SERVERS_PROD=server_name1 server_name2"
+
+
+rem ============================================================
+rem ENVIRONMENT SELECTION
+rem
+rem Supported:
+rem   query-user.bat
+rem   query-user.bat prp
+rem   query-user.bat test
+rem   query-user.bat prod
+rem ============================================================
+
+set "REQUESTED_ENVIRONMENT=%~1"
+
+if defined REQUESTED_ENVIRONMENT (
+    call :ResolveEnvironment "%REQUESTED_ENVIRONMENT%"
+
+    if errorlevel 1 (
+        exit /b 1
+    )
+) else (
+    call :SelectEnvironment
+
+    if errorlevel 1 (
+        echo.
+        echo Operation cancelled.
+        exit /b 0
+    )
+)
+
+rem Retrieve the server list belonging to the selected environment.
+
+for %%E in (!ENVIRONMENT!) do (
+    set "SERVERS=!SERVERS_%%E!"
+)
+
+if not defined SERVERS (
+    echo.
+    echo [ERROR] No servers are configured for !ENVIRONMENT!.
+    exit /b 1
+)
+
+echo.
+echo ============================================================
+echo Environment: !ENVIRONMENT!
+echo Servers:     !SERVERS!
+echo ============================================================
+echo.
+
+call :QueryAllServers
+
+if not defined AVAILABLE_TARGETS (
+    echo ============================================================
+    echo No logged-on user sessions were found.
+    echo ============================================================
+
+    if not "!QUERY_FAILED!"=="0" (
+        echo.
+        echo [WARNING] !QUERY_FAILED! server query or queries failed.
+    )
+
+    exit /b 0
+)
+
+echo ============================================================
+echo Available session targets
+echo ============================================================
+echo.
+
+for %%T in (!AVAILABLE_TARGETS!) do (
+    echo   %%T
+)
+
+echo.
+echo Enter:
+echo.
+echo   yes
+echo       Log off every listed session in !ENVIRONMENT!.
+echo.
+echo   15 22
+echo       Log off sessions by ID.
+echo       This works only when each ID exists on one server.
+echo.
+echo   IDM-IIQ-T01:15 IDM-IIQ-T02:22
+echo       Log off sessions on explicitly selected servers.
+echo.
+echo   no
+echo       Cancel.
+echo.
+
+set "SELECTION="
+set /p "SELECTION=Your selection: "
+
+if not defined SELECTION (
+    echo.
+    echo No selection entered. Operation cancelled.
+    exit /b 0
+)
+
+if /i "!SELECTION!"=="no" (
+    echo.
+    echo Operation cancelled.
+    exit /b 0
+)
+
+set "VALID_TARGETS="
+
+if /i "!SELECTION!"=="yes" (
+    set "VALID_TARGETS=!AVAILABLE_TARGETS!"
+
+    echo.
+    echo All sessions in !ENVIRONMENT! were selected.
+) else (
+    echo.
+
+    for %%T in (!SELECTION!) do (
+        call :ResolveTarget "%%T"
+    )
+)
+
+if not defined VALID_TARGETS (
+    echo.
+    echo No valid session targets were selected.
+    exit /b 1
+)
+
+echo.
+echo ============================================================
+echo Sessions selected for logoff
+echo ============================================================
+echo.
+
+for %%T in (!VALID_TARGETS!) do (
+    echo   %%T
+)
+
+echo.
+echo ============================================================
+echo Sending logoff commands
+echo ============================================================
+echo.
+
+for %%T in (!VALID_TARGETS!) do (
+    for /f "tokens=1,2 delims=:" %%A in ("%%T") do (
+        call :LogoffSession "%%A" "%%B"
+    )
+)
+
+echo.
+echo ============================================================
+echo Remaining sessions in !ENVIRONMENT!
+echo ============================================================
+echo.
+
+call :QueryAllServers
+
+echo.
+echo ============================================================
+echo Logoff verification
+echo ============================================================
+echo.
+
+set /a VERIFY_SUCCESS=0
+set /a VERIFY_FAILED=0
+set /a VERIFY_UNKNOWN=0
+
+for %%T in (!VALID_TARGETS!) do (
+    for /f "tokens=1,2 delims=:" %%A in ("%%T") do (
+        set "TARGET_STILL_PRESENT="
+
+        if "!QUERY_OK_%%A!"=="1" (
+            for %%R in (!AVAILABLE_TARGETS!) do (
+                if /i "%%R"=="%%T" (
+                    set "TARGET_STILL_PRESENT=1"
+                )
+            )
+
+            if defined TARGET_STILL_PRESENT (
+                echo [FAILED]  %%T is still logged on.
+                set /a VERIFY_FAILED+=1
+            ) else (
+                echo [SUCCESS] %%T is no longer logged on.
+                set /a VERIFY_SUCCESS+=1
+            )
+        ) else (
+            echo [UNKNOWN] Could not verify %%T because %%A could not be queried.
+            set /a VERIFY_UNKNOWN+=1
+        )
+    )
+)
+
+echo.
+echo ============================================================
+echo Summary
+echo ============================================================
+echo Environment:           !ENVIRONMENT!
+echo Successfully logged off: !VERIFY_SUCCESS!
+echo Still logged on:         !VERIFY_FAILED!
+echo Could not verify:        !VERIFY_UNKNOWN!
+echo ============================================================
+
+if not "!VERIFY_FAILED!"=="0" (
+    endlocal
+    exit /b 1
+)
+
+if not "!VERIFY_UNKNOWN!"=="0" (
+    endlocal
+    exit /b 1
+)
+
+endlocal
+exit /b 0
+
+
+rem ============================================================
+rem SelectEnvironment
+rem ============================================================
+
+:SelectEnvironment
+echo ============================================================
+echo Select environment
+echo ============================================================
+echo.
+echo   [1] PRP
+echo   [2] TEST
+echo   [3] PROD
+echo   [Q] Cancel
+echo.
+
+choice /c 123Q /n /m "Selection: "
+
+if errorlevel 4 (
+    exit /b 1
+)
+
+if errorlevel 3 (
+    set "ENVIRONMENT=PROD"
+    exit /b 0
+)
+
+if errorlevel 2 (
+    set "ENVIRONMENT=TEST"
+    exit /b 0
+)
+
+if errorlevel 1 (
+    set "ENVIRONMENT=PRP"
+    exit /b 0
+)
+
+exit /b 1
+
+
+rem ============================================================
+rem ResolveEnvironment
+rem
+rem Argument:
+rem   %1 = PRP, TEST, PROD, 1, 2, or 3
+rem ============================================================
+
+:ResolveEnvironment
+set "ENVIRONMENT="
+set "ENVIRONMENT_ARGUMENT=%~1"
+
+if /i "!ENVIRONMENT_ARGUMENT!"=="1" (
+    set "ENVIRONMENT=PRP"
+)
+
+if /i "!ENVIRONMENT_ARGUMENT!"=="PRP" (
+    set "ENVIRONMENT=PRP"
+)
+
+if /i "!ENVIRONMENT_ARGUMENT!"=="PPR" (
+    set "ENVIRONMENT=PRP"
+)
+
+if /i "!ENVIRONMENT_ARGUMENT!"=="PREPROD" (
+    set "ENVIRONMENT=PRP"
+)
+
+if /i "!ENVIRONMENT_ARGUMENT!"=="2" (
+    set "ENVIRONMENT=TEST"
+)
+
+if /i "!ENVIRONMENT_ARGUMENT!"=="TEST" (
+    set "ENVIRONMENT=TEST"
+)
+
+if /i "!ENVIRONMENT_ARGUMENT!"=="3" (
+    set "ENVIRONMENT=PROD"
+)
+
+if /i "!ENVIRONMENT_ARGUMENT!"=="PROD" (
+    set "ENVIRONMENT=PROD"
+)
+
+if /i "!ENVIRONMENT_ARGUMENT!"=="PRODUCTION" (
+    set "ENVIRONMENT=PROD"
+)
+
+if not defined ENVIRONMENT (
+    echo.
+    echo [ERROR] Invalid environment: !ENVIRONMENT_ARGUMENT!
+    echo.
+    echo Supported environments:
+    echo   PRP
+    echo   TEST
+    echo   PROD
+    echo.
+    echo Examples:
+    echo   %~nx0 prp
+    echo   %~nx0 test
+    echo   %~nx0 prod
+
+    exit /b 1
+)
+
+exit /b 0
+
+
+rem ============================================================
+rem QueryAllServers
+rem ============================================================
+
+:QueryAllServers
+set "AVAILABLE_TARGETS="
+set /a QUERY_SUCCEEDED=0
+set /a QUERY_FAILED=0
+
+rem Reset query status for every configured server.
+
+for %%S in (!SERVERS!) do (
+    set "QUERY_OK_%%S=0"
+)
+
+for %%S in (!SERVERS!) do (
+    call :QueryServer "%%S"
+)
+
+exit /b 0
+
+
+rem ============================================================
+rem QueryServer
+rem
+rem Argument:
+rem   %1 = server name
+rem ============================================================
+
+:QueryServer
+set "CURRENT_SERVER=%~1"
+
+set "CURRENT_TEMP_FILE=%TEMP%\query_user_!CURRENT_SERVER!_%RANDOM%_%RANDOM%.txt"
+
+echo ------------------------------------------------------------
+echo Server: !CURRENT_SERVER!
+echo ------------------------------------------------------------
+
+winrs -r:!CURRENT_SERVER! query user > "!CURRENT_TEMP_FILE!" 2>&1
+
+set "CURRENT_QUERY_RESULT=!ERRORLEVEL!"
+
+type "!CURRENT_TEMP_FILE!"
+echo.
+
+rem WINRS may return a nonzero exit code even when QUERY USER
+rem successfully returns a session table. Therefore, check the
+rem output rather than relying only on ERRORLEVEL.
+
+findstr /i /c:"USERNAME" "!CURRENT_TEMP_FILE!" >nul
+
+if not errorlevel 1 (
+    set /a QUERY_SUCCEEDED+=1
+    set "QUERY_OK_!CURRENT_SERVER!=1"
+
+    call :ExtractSessionIds "!CURRENT_SERVER!" "!CURRENT_TEMP_FILE!"
+
+    del "!CURRENT_TEMP_FILE!" >nul 2>&1
+    exit /b 0
+)
+
+rem Normal response when the server has no user sessions.
+
+findstr /i /c:"No User exists" "!CURRENT_TEMP_FILE!" >nul
+
+if not errorlevel 1 (
+    set /a QUERY_SUCCEEDED+=1
+    set "QUERY_OK_!CURRENT_SERVER!=1"
+
+    echo No users are currently logged on to !CURRENT_SERVER!.
+    echo.
+
+    del "!CURRENT_TEMP_FILE!" >nul 2>&1
+    exit /b 0
+)
+
+set /a QUERY_FAILED+=1
+
+echo [ERROR] Could not retrieve sessions from !CURRENT_SERVER!.
+echo [ERROR] WINRS exit code: !CURRENT_QUERY_RESULT!
+echo.
+
+del "!CURRENT_TEMP_FILE!" >nul 2>&1
+exit /b 1
+
+
+rem ============================================================
+rem ExtractSessionIds
+rem
+rem Arguments:
+rem   %1 = server name
+rem   %2 = QUERY USER output file
+rem ============================================================
+
+:ExtractSessionIds
+set "EXTRACT_SERVER=%~1"
+set "EXTRACT_FILE=%~2"
+
+for /f "usebackq delims=" %%L in ("!EXTRACT_FILE!") do (
+    set "LINE=%%L"
+
+    rem Remove the marker shown beside the current session.
+
+    set "LINE=!LINE:>=!"
+    set "FOUND_SESSION_ID="
+
+    for %%T in (!LINE!) do (
+        if not defined FOUND_SESSION_ID (
+            set "TOKEN=%%T"
+            set "NON_NUMERIC="
+
+            rem Find the first completely numeric token.
+            rem In QUERY USER output, this is the session ID.
+
+            for /f "delims=0123456789" %%N in ("!TOKEN!") do (
+                set "NON_NUMERIC=%%N"
+            )
+
+            if not defined NON_NUMERIC (
+                set "FOUND_SESSION_ID=!TOKEN!"
+
+                set "AVAILABLE_TARGETS=!AVAILABLE_TARGETS! !EXTRACT_SERVER!:!TOKEN!"
+            )
+        )
+    )
+)
+
+exit /b 0
+
+
+rem ============================================================
+rem ResolveTarget
+rem
+rem Supported values:
+rem   15
+rem   IDM-IIQ-T01:15
+rem
+rem Argument:
+rem   %1 = entered target
+rem ============================================================
+
+:ResolveTarget
+set "RAW_TARGET=%~1"
+
+set "TARGET_SERVER="
+set "TARGET_ID="
+set "EXTRA_PART="
+set "RESOLVED_TARGET="
+set "NON_NUMERIC="
+
+rem Parse an optional server name.
+
+for /f "tokens=1,2,* delims=:" %%A in ("!RAW_TARGET!") do (
+    set "FIRST_PART=%%A"
+    set "SECOND_PART=%%B"
+    set "EXTRA_PART=%%C"
+)
+
+rem ============================================================
+rem Server-qualified input: SERVER:SESSION_ID
+rem ============================================================
+
+if defined SECOND_PART (
+    set "TARGET_SERVER=!FIRST_PART!"
+    set "TARGET_ID=!SECOND_PART!"
+
+    if defined EXTRA_PART (
+        echo [SKIPPED] "!RAW_TARGET!" has an invalid format.
+        exit /b 1
+    )
+
+    for /f "delims=0123456789" %%N in ("!TARGET_ID!") do (
+        set "NON_NUMERIC=%%N"
+    )
+
+    if defined NON_NUMERIC (
+        echo [SKIPPED] "!TARGET_ID!" is not a numeric session ID.
+        exit /b 1
+    )
+
+    for %%A in (!AVAILABLE_TARGETS!) do (
+        if /i "%%A"=="!TARGET_SERVER!:!TARGET_ID!" (
+            set "RESOLVED_TARGET=%%A"
+        )
+    )
+
+    if not defined RESOLVED_TARGET (
+        echo [SKIPPED] Session !TARGET_ID! was not found on !TARGET_SERVER!.
+        exit /b 1
+    )
+
+    call :AddValidTarget "!RESOLVED_TARGET!"
+    exit /b 0
+)
+
+rem ============================================================
+rem Session-ID-only input: SESSION_ID
+rem
+rem Accept it only when it exists on exactly one server.
+rem ============================================================
+
+set "TARGET_ID=!FIRST_PART!"
+
+for /f "delims=0123456789" %%N in ("!TARGET_ID!") do (
+    set "NON_NUMERIC=%%N"
+)
+
+if defined NON_NUMERIC (
+    echo [SKIPPED] "!TARGET_ID!" is not a numeric session ID.
+    exit /b 1
+)
+
+set /a TARGET_MATCH_COUNT=0
+
+for %%A in (!AVAILABLE_TARGETS!) do (
+    for /f "tokens=1,2 delims=:" %%B in ("%%A") do (
+        if "%%C"=="!TARGET_ID!" (
+            set /a TARGET_MATCH_COUNT+=1
+            set "RESOLVED_TARGET=%%A"
+        )
+    )
+)
+
+if "!TARGET_MATCH_COUNT!"=="0" (
+    echo [SKIPPED] Session !TARGET_ID! was not found in !ENVIRONMENT!.
+    exit /b 1
+)
+
+if not "!TARGET_MATCH_COUNT!"=="1" (
+    echo [SKIPPED] Session ID !TARGET_ID! exists on multiple servers.
+    echo           Enter the full target shown in the list.
+    echo           Example: SERVER:!TARGET_ID!
+    exit /b 1
+)
+
+call :AddValidTarget "!RESOLVED_TARGET!"
+exit /b 0
+
+
+rem ============================================================
+rem AddValidTarget
+rem
+rem Argument:
+rem   %1 = server:sessionId
+rem ============================================================
+
+:AddValidTarget
+set "TARGET_TO_ADD=%~1"
+set "TARGET_ALREADY_ADDED="
+
+for %%A in (!VALID_TARGETS!) do (
+    if /i "%%A"=="!TARGET_TO_ADD!" (
+        set "TARGET_ALREADY_ADDED=1"
+    )
+)
+
+if defined TARGET_ALREADY_ADDED (
+    echo [SKIPPED] !TARGET_TO_ADD! was entered more than once.
+    exit /b 0
+)
+
+set "VALID_TARGETS=!VALID_TARGETS! !TARGET_TO_ADD!"
+
+echo [SELECTED] !TARGET_TO_ADD!
+
+exit /b 0
+
+
+rem ============================================================
+rem LogoffSession
+rem
+rem Arguments:
+rem   %1 = server name
+rem   %2 = session ID
+rem ============================================================
+
+:LogoffSession
+set "LOGOFF_SERVER=%~1"
+set "LOGOFF_SESSION_ID=%~2"
+
+set "LOGOFF_TEMP_FILE=%TEMP%\logoff_!LOGOFF_SERVER!_!LOGOFF_SESSION_ID!_%RANDOM%.txt"
+
+echo [LOGOFF] Session !LOGOFF_SESSION_ID! on !LOGOFF_SERVER!...
+
+winrs -r:!LOGOFF_SERVER! logoff !LOGOFF_SESSION_ID! > "!LOGOFF_TEMP_FILE!" 2>&1
+
+set "LOGOFF_RESULT=!ERRORLEVEL!"
+
+for %%F in ("!LOGOFF_TEMP_FILE!") do (
+    if %%~zF GTR 0 (
+        type "!LOGOFF_TEMP_FILE!"
+    )
+)
+
+if "!LOGOFF_RESULT!"=="0" (
+    echo [SENT] Logoff command completed for !LOGOFF_SERVER!:!LOGOFF_SESSION_ID!.
+) else (
+    echo [WARNING] WINRS returned exit code !LOGOFF_RESULT!.
+    echo [WARNING] The final query will verify the actual result.
+)
+
+del "!LOGOFF_TEMP_FILE!" >nul 2>&1
+
+echo.
+exit /b 0

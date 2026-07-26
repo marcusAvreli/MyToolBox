@@ -1,0 +1,26 @@
+Final script order
+Arguments
+Tomcat configuration
+Logging functions
+extract_application function
+Validation
+rollback function
+trap registration
+Create backup directory
+Stop Tomcat
+Back up existing WAR
+Install new WAR
+extract_application
+Delete uploaded temporary WAR
+Start Tomcat
+Health verification
+Backup retention
+Remove traps
+Success message
+
+deploy-drupal-module
+
+cache rebuild 
+chek module is enabled
+enable module
+check wehter module is found

@@ -8,7 +8,6 @@ set -Eeuo pipefail
 
 MODULE_NAME="angular_org_tree"
 BLOCK_PLUGIN_ID="angular_org_tree_block"
-PROXY_SERVICE_ID="angular_org_tree.external_api_client"
 
 DRUPAL_ROOT="/var/www/drupal"
 DRUPAL_WEB="${DRUPAL_ROOT}/web"
@@ -27,12 +26,10 @@ EXPECTED_ARCHIVE="/tmp/${MODULE_NAME}/${MODULE_NAME}.tar.gz"
 EXPECTED_CHECKSUM="${EXPECTED_ARCHIVE}.sha256"
 
 BACKUP_ROOT="/var/backups/drupal-modules/${MODULE_NAME}"
+BACKUPS_KEEP=10
 
-# The Ant build passes these non-sensitive deployment controls from
-# build.properties. Defaults preserve direct/manual script compatibility.
-HEALTH_URL="${3:-http://127.0.0.1/}"
-HEALTH_TIMEOUT="${4:-60}"
-BACKUPS_KEEP="${5:-10}"
+HEALTH_URL="http://127.0.0.1/"
+HEALTH_TIMEOUT=60
 
 TIMESTAMP="$(date '+%Y%m%d-%H%M%S')"
 
@@ -44,7 +41,6 @@ BACKUP_FILE="${BACKUP_ROOT}/${MODULE_NAME}-${TIMESTAMP}.tar.gz"
 
 ARCHIVE="${1:-}"
 CHECKSUM_FILE="${2:-}"
-CHECKSUM_NORMALIZED="${CHECKSUM_FILE}.unix"
 
 HAD_PREVIOUS="false"
 MODULE_WAS_ENABLED="false"
@@ -112,61 +108,6 @@ clear_block_plugin_definitions() {
          print \"Block plugin definitions cleared\n\";"
 }
 
-verify_proxy_components() {
-    drush_as_web php:eval \
-        "\$container = \Drupal::getContainer();
-         \$provider = \$container->get('router.route_provider');
-         \$ok = TRUE;
-
-         if (\$container->has('${PROXY_SERVICE_ID}')) {
-           print \"FOUND service: ${PROXY_SERVICE_ID}\n\";
-         }
-         else {
-           print \"MISSING service: ${PROXY_SERVICE_ID}\n\";
-           \$ok = FALSE;
-         }
-
-         \$expected_routes = [
-           'angular_org_tree.settings' =>
-             '/admin/config/services/angular-org-tree',
-           'angular_org_tree.proxy_status' =>
-             '/api/angular-org-tree/status',
-           'angular_org_tree.proxy_mac_org_tree' =>
-             '/api/angular-org-tree/plugin/rest/macOrgTree',
-           'angular_org_tree.proxy_mac_org_tree_operation' =>
-             '/api/angular-org-tree/plugin/rest/macOrgTree/{operation}',
-           'angular_org_tree.proxy_health' =>
-             '/api/angular-org-tree/health',
-         ];
-
-         foreach (\$expected_routes as \$route_name => \$expected_path) {
-           try {
-             \$route = \$provider->getRouteByName(\$route_name);
-             \$actual_path = \$route->getPath();
-
-             if (\$actual_path === \$expected_path) {
-               print \"FOUND route: {\$route_name} => {\$actual_path}\n\";
-             }
-             else {
-               print \"WRONG route path: {\$route_name} => {\$actual_path}; expected {\$expected_path}\n\";
-               \$ok = FALSE;
-             }
-           }
-           catch (\Throwable \$exception) {
-             print \"MISSING route: {\$route_name}; {\$exception->getMessage()}\n\";
-             \$ok = FALSE;
-           }
-         }
-
-         if (!\$ok) {
-           throw new \RuntimeException(
-             'Angular Org Tree proxy component verification failed.',
-           );
-         }
-
-         print \"PROXY_COMPONENTS_OK\n\";"
-}
-
 # ==================================================
 # Rollback
 # ==================================================
@@ -182,6 +123,8 @@ rollback() {
 
     log "Deployment failed. Starting rollback."
 
+    # If this deployment enabled a previously disabled module,
+    # uninstall it before removing its files.
     if [[ "$MODULE_WAS_ENABLED" == "false" ]] &&
        [[ -d "$TARGET_MODULE" ]] &&
        module_is_enabled; then
@@ -196,6 +139,7 @@ rollback() {
 
     if [[ "$HAD_PREVIOUS" == "true" && -d "$PREVIOUS_MODULE" ]]; then
         log "Restoring previous module directory."
+
         mv "$PREVIOUS_MODULE" "$TARGET_MODULE"
     fi
 
@@ -206,7 +150,8 @@ rollback() {
     "$APACHECTL" configtest >/dev/null 2>&1 &&
         "$APACHECTL" graceful >/dev/null 2>&1 || true
 
-    rm -f "$ARCHIVE" "$CHECKSUM_FILE" "$CHECKSUM_NORMALIZED"
+    rm -f "$ARCHIVE" "$CHECKSUM_FILE"
+    rm -f "${CHECKSUM_FILE}.unix"
 
     log "Rollback finished."
 
@@ -232,21 +177,13 @@ rollback() {
 [[ -s "$CHECKSUM_FILE" ]] ||
     fail "Checksum is missing or empty: ${CHECKSUM_FILE}"
 
-[[ "$HEALTH_URL" =~ ^https?://(127\.0\.0\.1|localhost)(:[0-9]+)?(/.*)?$ ]] ||
-    fail "Health URL must target localhost: ${HEALTH_URL}"
-
-[[ "$HEALTH_TIMEOUT" =~ ^[1-9][0-9]*$ ]] ||
-    fail "Health timeout must be a positive integer: ${HEALTH_TIMEOUT}"
-
-[[ "$BACKUPS_KEEP" =~ ^[1-9][0-9]*$ ]] ||
-    fail "Backup retention must be a positive integer: ${BACKUPS_KEEP}"
-
 [[ -d "$DRUPAL_WEB/core" ]] ||
     fail "Drupal core directory is missing: ${DRUPAL_WEB}/core"
 
 [[ -d "$DRUPAL_WEB/modules" ]] ||
     fail "Drupal modules directory is missing: ${DRUPAL_WEB}/modules"
 
+# Create modules/custom during the first deployment.
 install \
     --directory \
     --owner=root \
@@ -263,16 +200,26 @@ install \
 [[ -x "$APACHECTL" ]] ||
     fail "apachectl is missing or not executable: ${APACHECTL}"
 
-for required_command in \
-    tar sha256sum curl runuser grep find sort tail cut; do
+command -v tar >/dev/null 2>&1 ||
+    fail "tar is not installed."
 
-    command -v "$required_command" >/dev/null 2>&1 ||
-        fail "${required_command} is not installed."
-done
+command -v sha256sum >/dev/null 2>&1 ||
+    fail "sha256sum is not installed."
+
+command -v curl >/dev/null 2>&1 ||
+    fail "curl is not installed."
+
+command -v runuser >/dev/null 2>&1 ||
+    fail "runuser is not installed."
+
+command -v grep >/dev/null 2>&1 ||
+    fail "grep is not installed."
 
 # ==================================================
 # Check archive checksum
 # ==================================================
+
+CHECKSUM_NORMALIZED="${CHECKSUM_FILE}.unix"
 
 tr -d '\r' < "$CHECKSUM_FILE" > "$CHECKSUM_NORMALIZED"
 
@@ -287,7 +234,7 @@ tr -d '\r' < "$CHECKSUM_FILE" > "$CHECKSUM_NORMALIZED"
 rm -f "$CHECKSUM_NORMALIZED"
 
 # ==================================================
-# Validate archive paths and entry types
+# Validate archive paths
 # ==================================================
 
 while IFS= read -r entry; do
@@ -306,18 +253,6 @@ while IFS= read -r entry; do
         fail "Parent traversal is forbidden: ${entry}"
 
 done < <(tar -tzf "$ARCHIVE")
-
-while IFS= read -r verbose_entry; do
-    entry_type="${verbose_entry:0:1}"
-
-    case "$entry_type" in
-        -|d)
-            ;;
-        *)
-            fail "Archive contains a forbidden entry type: ${verbose_entry}"
-            ;;
-    esac
-done < <(tar -tvzf "$ARCHIVE")
 
 trap rollback ERR INT TERM
 
@@ -357,48 +292,31 @@ tar \
     --no-same-owner \
     --no-same-permissions
 
-if find "$EXTRACT_ROOT" \
-    \( -type l -o -type b -o -type c -o -type p -o -type s \) \
-    -print -quit |
-    grep -q .; then
+[[ -d "$STAGED_MODULE" ]] ||
+    fail "Extracted module directory is missing."
 
-    fail "Extracted archive contains a forbidden filesystem entry."
-fi
+[[ -f "$STAGED_MODULE/${MODULE_NAME}.info.yml" ]] ||
+    fail "Module info.yml is missing."
 
-required_files=(
-    "$STAGED_MODULE/${MODULE_NAME}.info.yml"
-    "$STAGED_MODULE/${MODULE_NAME}.libraries.yml"
-    "$STAGED_MODULE/${MODULE_NAME}.permissions.yml"
-    "$STAGED_MODULE/${MODULE_NAME}.routing.yml"
-    "$STAGED_MODULE/${MODULE_NAME}.services.yml"
-    "$STAGED_MODULE/${MODULE_NAME}.links.menu.yml"
-    "$STAGED_MODULE/config/install/${MODULE_NAME}.settings.yml"
-    "$STAGED_MODULE/config/schema/${MODULE_NAME}.schema.yml"
-    "$STAGED_MODULE/src/Form/AngularOrgTreeSettingsForm.php"
-    "$STAGED_MODULE/src/Controller/ExternalApiProxyController.php"
-    "$STAGED_MODULE/src/Service/ExternalApiClient.php"
+[[ -f "$STAGED_MODULE/${MODULE_NAME}.libraries.yml" ]] ||
+    fail "Module libraries.yml is missing."
+
+[[ -f "$STAGED_MODULE/src/Plugin/Block/AngularOrgTreeBlock.php" ]] ||
+    fail "AngularOrgTreeBlock.php is missing."
+
+[[ -f "$STAGED_MODULE/angular-app/main.js" ]] ||
+    fail "Angular main.js is missing."
+
+[[ -f "$STAGED_MODULE/angular-app/runtime.js" ]] ||
+    fail "Angular runtime.js is missing."
+
+[[ -f "$STAGED_MODULE/angular-app/polyfills.js" ]] ||
+    fail "Angular polyfills.js is missing."
+
+log "Checking block plugin PHP syntax."
+
+"$PHP" -l \
     "$STAGED_MODULE/src/Plugin/Block/AngularOrgTreeBlock.php"
-    "$STAGED_MODULE/angular-app/main.js"
-    "$STAGED_MODULE/angular-app/runtime.js"
-    "$STAGED_MODULE/angular-app/polyfills.js"
-    "$STAGED_MODULE/angular-app/styles.css"
-)
-
-for required_file in "${required_files[@]}"; do
-    [[ -f "$required_file" ]] ||
-        fail "Required deployment file is missing: ${required_file}"
-done
-
-log "Checking all module PHP files."
-
-while IFS= read -r -d '' php_file; do
-    "$PHP" -l "$php_file"
-done < <(
-    find "$STAGED_MODULE" \
-        -type f \
-        -name '*.php' \
-        -print0
-)
 
 chown -R root:"$WEB_GROUP" "$STAGED_MODULE"
 
@@ -428,47 +346,41 @@ mv "$STAGED_MODULE" "$TARGET_MODULE"
 rmdir "$EXTRACT_ROOT"
 
 # ==================================================
-# Drupal discovery, enablement and verification
+# Drupal module discovery
 # ==================================================
 
-log "Rebuilding Drupal caches for extension discovery."
+log "Checking whether Drupal recognizes ${MODULE_NAME}."
 
-drush_as_web cache:rebuild
+if ! module_is_known; then
+    log "Module was not found before cache rebuild."
+    log "Rebuilding Drupal caches to refresh extension discovery."
 
-module_is_known ||
+    drush_as_web cache:rebuild
+fi
+
+if ! module_is_known; then
     fail "Drupal does not recognize module: ${MODULE_NAME}"
+fi
+
+log "Drupal recognizes module ${MODULE_NAME}."
+
+# ==================================================
+# Enable and verify module
+# ==================================================
 
 if module_is_enabled; then
     log "Module ${MODULE_NAME} is already enabled."
 else
     log "Enabling Drupal module ${MODULE_NAME}."
+
     drush_as_web pm:install "$MODULE_NAME" -y
 fi
 
-module_is_enabled ||
+if ! module_is_enabled; then
     fail "Drupal module was not enabled: ${MODULE_NAME}"
-
-log "Applying Drupal module database and configuration updates."
-
-drush_as_web updatedb -y
-
-log "Rebuilding Drupal caches."
-
-drush_as_web cache:rebuild
-
-log "Checking Drupal block plugin ${BLOCK_PLUGIN_ID}."
-
-if ! block_plugin_is_found; then
-    clear_block_plugin_definitions
-    drush_as_web cache:rebuild
 fi
 
-block_plugin_is_found ||
-    fail "Drupal block plugin was not found: ${BLOCK_PLUGIN_ID}"
-
-log "Checking configuration route and proxy components."
-
-verify_proxy_components
+log "Module ${MODULE_NAME} is enabled."
 
 log "Current module status:"
 
@@ -477,6 +389,34 @@ drush_as_web pm:list \
     --fields=name,status,path \
     --format=table |
     grep -E "(^|[[:space:]])${MODULE_NAME}([[:space:]]|$)"
+
+# ==================================================
+# Cache rebuild
+# ==================================================
+
+log "Rebuilding Drupal caches."
+
+drush_as_web cache:rebuild
+
+# ==================================================
+# Block plugin discovery verification
+# ==================================================
+
+log "Checking Drupal block plugin ${BLOCK_PLUGIN_ID}."
+
+if ! block_plugin_is_found; then
+    log "Block plugin was not found after cache rebuild."
+    log "Clearing cached block plugin definitions and retrying."
+
+    clear_block_plugin_definitions
+    drush_as_web cache:rebuild
+fi
+
+if ! block_plugin_is_found; then
+    fail "Drupal block plugin was not found: ${BLOCK_PLUGIN_ID}"
+fi
+
+log "Drupal block plugin ${BLOCK_PLUGIN_ID} was found."
 
 # ==================================================
 # Apache validation and graceful reload
@@ -491,7 +431,7 @@ log "Gracefully reloading Apache."
 "$APACHECTL" graceful
 
 # ==================================================
-# Drupal health verification
+# Health verification
 # ==================================================
 
 log "Waiting up to ${HEALTH_TIMEOUT} seconds for ${HEALTH_URL}."
@@ -573,6 +513,5 @@ trap - ERR INT TERM
 
 log "Drupal module deployment completed successfully."
 log "Installed module: ${TARGET_MODULE}"
-log "Configuration page: /admin/config/services/angular-org-tree"
-log "Proxy endpoint base: /api/angular-org-tree"
-log "No workstation environment file is required."
+log "Module status: enabled"
+log "Block plugin found: ${BLOCK_PLUGIN_ID}"

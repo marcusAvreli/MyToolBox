@@ -1,0 +1,520 @@
+@echo off
+setlocal EnableExtensions EnableDelayedExpansion
+
+rem ============================================================
+rem Allowed environments
+rem
+rem Production servers are intentionally NOT defined.
+rem ============================================================
+
+set "SERVERS_PRP=a"
+set "SERVERS_TEST=b1 b2"
+
+rem ============================================================
+rem Tomcat configuration
+rem ============================================================
+
+set "SERVICE=tomcat9"
+set "PORT=8080"
+set "STOP_WAIT_SECONDS=20"
+set "START_WAIT_SECONDS=5"
+set "PROCESS_CLEANUP_WAIT_SECONDS=2"
+
+rem ============================================================
+rem Validate command-line argument
+rem ============================================================
+
+if "%~1"=="" (
+    call :ShowUsage
+    endlocal
+    exit /b 2
+)
+
+if not "%~2"=="" (
+    echo.
+    echo ERROR: Only one environment argument is allowed.
+    call :ShowUsage
+    endlocal
+    exit /b 2
+)
+
+set "ENVIRONMENT=%~1"
+set "SELECTED_SERVERS="
+set "ENVIRONMENT_DISPLAY="
+
+if /I "%ENVIRONMENT%"=="PRP" (
+    set "ENVIRONMENT_DISPLAY=PRP"
+    set "SELECTED_SERVERS=%SERVERS_PRP%"
+    goto EnvironmentSelected
+)
+
+if /I "%ENVIRONMENT%"=="TEST" (
+    set "ENVIRONMENT_DISPLAY=TEST"
+    set "SELECTED_SERVERS=%SERVERS_TEST%"
+    goto EnvironmentSelected
+)
+
+if /I "%ENVIRONMENT%"=="PROD" (
+    echo.
+    echo ============================================================
+    echo PRODUCTION RESTART BLOCKED
+    echo ============================================================
+    echo.
+    echo Production servers are intentionally excluded from this script.
+    echo No production server was changed.
+    echo.
+
+    endlocal
+    exit /b 3
+)
+
+echo.
+echo ERROR: Unknown environment "%ENVIRONMENT%".
+call :ShowUsage
+
+endlocal
+exit /b 2
+
+
+rem ============================================================
+rem Confirm selected environment
+rem ============================================================
+
+:EnvironmentSelected
+
+echo.
+echo ============================================================
+echo Remote Tomcat Restart
+echo ============================================================
+echo.
+echo Environment:
+echo   %ENVIRONMENT_DISPLAY%
+echo.
+echo Servers:
+for %%S in (%SELECTED_SERVERS%) do (
+    echo   %%S
+)
+echo.
+echo Service:
+echo   %SERVICE%
+echo.
+echo These servers will be restarted sequentially.
+echo.
+
+choice /C YN /N /M "Restart Tomcat on all %ENVIRONMENT_DISPLAY% servers? [Y/N]: "
+
+if errorlevel 2 (
+    echo.
+    echo Operation cancelled.
+    echo No servers were restarted.
+
+    endlocal
+    exit /b 0
+)
+
+echo.
+echo Restart confirmed.
+
+rem ============================================================
+rem Restart selected servers
+rem ============================================================
+
+set /A TOTAL_SERVERS=0
+set /A SUCCESSFUL_SERVERS=0
+set /A FAILED_SERVERS=0
+
+set "SUCCESSFUL_SERVER_LIST="
+set "FAILED_SERVER_LIST="
+
+for %%S in (%SELECTED_SERVERS%) do (
+    set /A TOTAL_SERVERS+=1
+
+    call :RestartTomcat "%%S"
+
+    if errorlevel 1 (
+        set /A FAILED_SERVERS+=1
+
+        if defined FAILED_SERVER_LIST (
+            set "FAILED_SERVER_LIST=!FAILED_SERVER_LIST! %%S"
+        ) else (
+            set "FAILED_SERVER_LIST=%%S"
+        )
+    ) else (
+        set /A SUCCESSFUL_SERVERS+=1
+
+        if defined SUCCESSFUL_SERVER_LIST (
+            set "SUCCESSFUL_SERVER_LIST=!SUCCESSFUL_SERVER_LIST! %%S"
+        ) else (
+            set "SUCCESSFUL_SERVER_LIST=%%S"
+        )
+    )
+)
+
+rem ============================================================
+rem Final summary
+rem ============================================================
+
+echo.
+echo ============================================================
+echo Restart summary
+echo ============================================================
+echo.
+echo Environment     : %ENVIRONMENT_DISPLAY%
+echo Total servers   : !TOTAL_SERVERS!
+echo Successful      : !SUCCESSFUL_SERVERS!
+echo Failed          : !FAILED_SERVERS!
+echo.
+
+if defined SUCCESSFUL_SERVER_LIST (
+    echo Successfully restarted:
+    echo   !SUCCESSFUL_SERVER_LIST!
+    echo.
+)
+
+if defined FAILED_SERVER_LIST (
+    echo Failed:
+    echo   !FAILED_SERVER_LIST!
+    echo.
+)
+
+if !FAILED_SERVERS! GTR 0 (
+    echo One or more server restarts failed.
+    echo Review the output above for details.
+
+    endlocal
+    exit /b 1
+)
+
+echo All %ENVIRONMENT_DISPLAY% servers were restarted successfully.
+
+endlocal
+exit /b 0
+
+
+rem ============================================================
+rem Restart Tomcat on one server
+rem
+rem Argument:
+rem   %%1 = server name
+rem ============================================================
+
+:RestartTomcat
+setlocal EnableExtensions EnableDelayedExpansion
+
+set "SERVER=%~1"
+
+set "NETSTAT_FILE=%TEMP%\tomcat-netstat-!SERVER!-!RANDOM!-!RANDOM!.txt"
+set "TASK_FILE=%TEMP%\tomcat-task-!SERVER!-!RANDOM!-!RANDOM!.txt"
+set "FINAL_NETSTAT_FILE=%TEMP%\tomcat-final-!SERVER!-!RANDOM!-!RANDOM!.txt"
+
+echo.
+echo.
+echo ############################################################
+echo Server: !SERVER!
+echo ############################################################
+echo.
+
+rem ============================================================
+rem Verify WinRS connectivity
+rem ============================================================
+
+echo [1/7] Verifying remote access...
+
+winrs -r:!SERVER! hostname >nul 2>&1
+
+if errorlevel 1 (
+    echo.
+    echo ERROR: WinRS could not connect to !SERVER!.
+    echo No restart was performed on this server.
+
+    call :DeleteTemporaryFiles
+
+    endlocal
+    exit /b 1
+)
+
+echo Remote access verified.
+
+rem ============================================================
+rem Request graceful Tomcat shutdown
+rem ============================================================
+
+echo.
+echo [2/7] Requesting graceful shutdown of !SERVICE!...
+
+winrs -r:!SERVER! net stop !SERVICE!
+
+if errorlevel 1 (
+    echo.
+    echo WARNING: NET STOP returned an error.
+    echo The service may already be stopped.
+    echo Shutdown verification will continue.
+)
+
+rem ============================================================
+rem Wait for graceful shutdown
+rem ============================================================
+
+echo.
+echo [3/7] Waiting !STOP_WAIT_SECONDS! seconds...
+
+timeout /T !STOP_WAIT_SECONDS! /NOBREAK >nul
+
+rem ============================================================
+rem Retrieve remote netstat output
+rem ============================================================
+
+echo.
+echo [4/7] Checking port !PORT!...
+
+winrs -r:!SERVER! netstat -a -n -o >"!NETSTAT_FILE!" 2>&1
+
+if errorlevel 1 (
+    echo.
+    echo ERROR: Failed to retrieve NETSTAT output from !SERVER!.
+
+    type "!NETSTAT_FILE!"
+
+    call :DeleteTemporaryFiles
+
+    endlocal
+    exit /b 1
+)
+
+echo.
+echo Connections involving port !PORT!:
+echo ------------------------------------------------------------
+
+findstr /C:":!PORT!" "!NETSTAT_FILE!"
+
+if errorlevel 1 (
+    echo No connections were found for port !PORT!.
+)
+
+echo ------------------------------------------------------------
+
+rem ============================================================
+rem Find and kill any remaining listener
+rem ============================================================
+
+echo.
+echo [5/7] Checking for a remaining listener...
+
+set "FOUND_LISTENER=0"
+set "KILL_FAILED=0"
+
+for /F "usebackq tokens=5" %%P in (`
+    findstr /R /C:":!PORT! .*LISTENING" "!NETSTAT_FILE!"
+`) do (
+    if not "%%P"=="0" (
+        if not defined PID_ALREADY_HANDLED_%%P (
+            set "PID_ALREADY_HANDLED_%%P=1"
+            set "FOUND_LISTENER=1"
+            set "TASK_EXISTS=0"
+
+            echo.
+            echo A non-zero listening PID was found: %%P
+            echo Verifying that the task exists...
+
+            winrs -r:!SERVER! tasklist /FI "PID eq %%P" /FO CSV /NH >"!TASK_FILE!" 2>&1
+
+            type "!TASK_FILE!"
+
+            for /F "usebackq tokens=1,2 delims=," %%A in ("!TASK_FILE!") do (
+                if "%%~B"=="%%P" (
+                    set "TASK_EXISTS=1"
+                )
+            )
+
+            if "!TASK_EXISTS!"=="0" (
+                echo.
+                echo PID %%P no longer exists.
+                echo No forced termination is required.
+            ) else (
+                echo.
+                echo PID %%P still exists.
+                echo Forcefully terminating PID %%P...
+
+                winrs -r:!SERVER! taskkill /F /PID %%P
+
+                if errorlevel 1 (
+                    echo.
+                    echo ERROR: Failed to terminate PID %%P.
+                    set "KILL_FAILED=1"
+                ) else (
+                    echo PID %%P was terminated successfully.
+                )
+            )
+        )
+    )
+)
+
+if "!FOUND_LISTENER!"=="0" (
+    echo No non-zero listening PID remains on port !PORT!.
+    echo Tomcat completed its graceful shutdown.
+)
+
+if "!KILL_FAILED!"=="1" (
+    echo.
+    echo ERROR: A remaining process could not be terminated.
+    echo Tomcat will not be started while port !PORT! may be occupied.
+
+    call :DeleteTemporaryFiles
+
+    endlocal
+    exit /b 1
+)
+
+echo.
+echo Waiting !PROCESS_CLEANUP_WAIT_SECONDS! seconds after cleanup...
+
+timeout /T !PROCESS_CLEANUP_WAIT_SECONDS! /NOBREAK >nul
+
+rem ============================================================
+rem Verify port is free
+rem ============================================================
+
+echo.
+echo [6/7] Verifying that port !PORT! is free...
+
+winrs -r:!SERVER! netstat -a -n -o >"!FINAL_NETSTAT_FILE!" 2>&1
+
+if errorlevel 1 (
+    echo.
+    echo ERROR: Failed to verify port status on !SERVER!.
+
+    type "!FINAL_NETSTAT_FILE!"
+
+    call :DeleteTemporaryFiles
+
+    endlocal
+    exit /b 1
+)
+
+findstr /R /C:":!PORT! .*LISTENING" "!FINAL_NETSTAT_FILE!" >nul
+
+if not errorlevel 1 (
+    echo.
+    echo ERROR: Port !PORT! still has a listening process.
+    echo Tomcat will not be started to avoid a port conflict.
+    echo.
+
+    findstr /R /C:":!PORT! .*LISTENING" "!FINAL_NETSTAT_FILE!"
+
+    call :DeleteTemporaryFiles
+
+    endlocal
+    exit /b 1
+)
+
+echo Port !PORT! has no listening process.
+
+rem ============================================================
+rem Start Tomcat
+rem ============================================================
+
+echo.
+echo [7/7] Starting !SERVICE!...
+
+winrs -r:!SERVER! net start !SERVICE!
+
+if errorlevel 1 (
+    echo.
+    echo ERROR: Failed to start !SERVICE! on !SERVER!.
+
+    call :DeleteTemporaryFiles
+
+    endlocal
+    exit /b 1
+)
+
+echo.
+echo Waiting !START_WAIT_SECONDS! seconds for Tomcat to initialize...
+
+timeout /T !START_WAIT_SECONDS! /NOBREAK >nul
+
+rem ============================================================
+rem Final verification
+rem ============================================================
+
+echo.
+echo ============================================================
+echo Final verification for !SERVER!
+echo ============================================================
+echo.
+
+echo Service status:
+winrs -r:!SERVER! sc query !SERVICE!
+
+echo.
+echo Port !PORT! status:
+
+winrs -r:!SERVER! netstat -a -n -o >"!FINAL_NETSTAT_FILE!" 2>&1
+
+findstr /R /C:":!PORT! .*LISTENING" "!FINAL_NETSTAT_FILE!"
+
+if errorlevel 1 (
+    echo.
+    echo ERROR: !SERVICE! was started, but port !PORT! is not listening.
+    echo Tomcat may require additional startup time.
+
+    call :DeleteTemporaryFiles
+
+    endlocal
+    exit /b 1
+)
+
+echo.
+echo SUCCESS: !SERVICE! is running on !SERVER!.
+echo Port !PORT! is listening.
+
+call :DeleteTemporaryFiles
+
+endlocal
+exit /b 0
+
+
+rem ============================================================
+rem Delete temporary files belonging to the current server
+rem ============================================================
+
+:DeleteTemporaryFiles
+
+if defined NETSTAT_FILE (
+    del /Q "!NETSTAT_FILE!" >nul 2>&1
+)
+
+if defined TASK_FILE (
+    del /Q "!TASK_FILE!" >nul 2>&1
+)
+
+if defined FINAL_NETSTAT_FILE (
+    del /Q "!FINAL_NETSTAT_FILE!" >nul 2>&1
+)
+
+exit /b 0
+
+
+rem ============================================================
+rem Usage
+rem ============================================================
+
+:ShowUsage
+
+echo.
+echo ============================================================
+echo Usage
+echo ============================================================
+echo.
+echo Restart PRP:
+echo.
+echo   %~nx0 prp
+echo.
+echo Restart TEST:
+echo.
+echo   %~nx0 test
+echo.
+echo Production is not supported by this script.
+echo.
+
+exit /b 0
