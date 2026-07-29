@@ -218,7 +218,13 @@ Replace with: <empty>
 	
 	^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2},\d{3}) +\w+ +(?:(?!Thread-471[^\r\n])+.*?)(?=^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2},\d{3}|\z)
 
-
++-------------------------------------------------------+
+|										=====21_OF_21==	|
+|	contents between parentheses						|
+|														|
++-------------------------------------------------------+
+	find what: ^.*\(([^()]*)\).*$
+	replace with: \1
 
 https://stackoverflow.com/questions/63123224/how-do-i-exclude-a-list-of-folders-in-search-in-notepad
 To accomplish what you're describing, you could try:
