@@ -149,3 +149,22 @@ C:\DEVEL\angularDev\fluxOrgTree>git commit -m "update"
  
  If you want them unstaged too:
  git reset
+ 
+ 
+ 
++-------------------------------------------------------+
+|										======4_OF_6===	|
+|	REMOVE STAGED FILES after "git add ."				|
+|														|
++-------------------------------------------------------+
+verify
+	git status
+	
+while keeping all file changes on disk:
+	git restore --staged .
+verify
+	git status
+	
+unstage one file
+	git restore --staged path\to\file
+
