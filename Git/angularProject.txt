@@ -48,22 +48,36 @@ git add . -- ':!somefolder' ':!**/some_deep_nested_folder/*'
 	git push origin -d main
 	
 	
+
+
 +-------------------------------------------------------+
 |										======4_OF_6===	|
-|	BRANCHING											|
+|	BRANCHING: Modern Branch Creation					|
 |														|
 +-------------------------------------------------------+
-so you created kind of "chapter". for example, you integrated state management
+	git status
+	git switch -c feat/lazy-org-tree-tested
+	git add .
+	git status
+	git --no-pager diff --cached
+	git commit -m "feat:  tree is collapsable. javascript tested"
+	git push -u origin feat/lazy-org-tree-tested
 
-currently this works. you want to keep that state. cleanup unnecessary files and go
 
-##short version
++-------------------------------------------------------+
+|										======4_OF_6===	|
+|	BRANCHING: Legacy Branch Creation					|
+|														|
++-------------------------------------------------------+
+	git status
+	git checkout -b feat/lazy-org-tree-tested 
+	git add -- . 
+	git commit -m "feat/lazy-org-tree-tested" 
+	git push -u origin feat/lazy-org-tree-tested
 
-git status
-git checkout -b basic_state_management
-git add -- . :!"node_modules" :!"dist" :!".vscode" :!".angular"
-git commit -m "basic_state_management"
-git push -u origin basic_state_management
+
+
+
 
 
 ##elaborated version
