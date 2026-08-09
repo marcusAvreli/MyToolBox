@@ -188,6 +188,21 @@ module.exports = {
 };
 +-------------------------------------------------------+
 |										======10======	|
+|	TESTING										|
+|														|
++-------------------------------------------------------+
+
+JAVASCRIPT
+	npm install --save-dev   @web/test-runner   @web/test-runner-playwright   @web/test-runner-junit-reporter   @open-wc/testing   --workspaces=false
+	npx playwright install chromium
+
+ANGULAR
+	npm install --save-dev   karma-junit-reporter   --workspaces=false
+ROOT
+npm install --save-dev xunit-viewer --workspaces=false
+
++-------------------------------------------------------+
+|										======10======	|
 |	COMPAITABLITIY										|
 |														|
 +-------------------------------------------------------+
@@ -651,3 +666,31 @@ function OPERATOR() {
 }
 
 Sass 3.5 will support var() as an argument to plain-CSS color functions, similarly to how calc() is treated in 3.4. See sass/sass#2175 for details and sass/sass-spec#1002 for specs.
+
+
++-------------------------------------------------------+
+|										======15======	|
+|	VERIFY:that anglar-app "linked" to package. 
+|														|
++-------------------------------------------------------+
+
+orchestrator project
+|
+|-angular-app - client application that uses package
+|-package - vanilla javascript project library
+Verify npm sees the package dependency
+
+	npm run verify:web-components-link
+	npm --prefix ./angular-app list @org-atlas/web-components --depth=0 --workspaces=false
+	expected output 
+	org-atlas-angular-host@0.1.0 C:\DEVEL\angularDev\OrgAtlas\angular-app
+		`-- @org-atlas/web-components@0.1.0 -> .\..\package
+		
+Stronger verification: check physical link target
+
+cd /d C:\DEVEL\angularDev\OrgAtlas\angular-app
+
+node -e "const fs=require('fs'); const path=require('path'); const p=path.resolve('node_modules/@org-atlas/web-components'); console.log('LINK:',p); console.log('REAL:',fs.realpathSync(p));"
+expected output
+LINK: C:\DEVEL\angularDev\OrgAtlas\angular-app\node_modules\@org-atlas\web-components
+REAL: C:\DEVEL\angularDev\OrgAtlas\package
