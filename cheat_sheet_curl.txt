@@ -7,7 +7,8 @@
 	
 	curl -X POST token_url   -H "Content-Type: application/x-www-form-urlencoded"   -d "grant_type=client_credentials&scope=scope_value&client_id=client_id_value&client_secret= client_secret_value"
 
-
+	#sailpoint
+	curl  -X POST   -u "clientId:clientSecret"   -H "Content-Type: application/x-www-form-urlencoded"   -H "Accept: application/json"   -d "grant_type=client_credentials"   https://host/iiq/oauth2/token
 +-------------------------------------------------------+
 |									======2_of_9======	|
 |	OAUTH2: USE TOKEN									|
