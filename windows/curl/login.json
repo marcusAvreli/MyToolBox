@@ -1,0 +1,7 @@
+{
+  "clientId": "<CLIENT_ID>",
+  "clientSecret": "<CLIENT_SECRET>",
+  "baseUrl": "https://example.internal",
+  "tokenPath": "/oauth2/token",
+  "scope": "<OAUTH_SCOPE>"
+}
