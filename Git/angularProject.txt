@@ -62,7 +62,30 @@ git add . -- ':!somefolder' ':!**/some_deep_nested_folder/*'
 	git --no-pager diff --cached
 	git commit -m "feat:  tree is collapsable. javascript tested"
 	git push -u origin feat/lazy-org-tree-tested
+	
+	
 
+subsequent pushes
+
+git status
+git add .
+git status
+git --no-pager diff --cached
+git commit -m "specs moved"
+git push
+
+if git status returns
+
+On branch <branch_name>
+Your branch is up to date with 'origin/<branch-name>'.
+
+nothing to commit, working tree clean
+
+git status
+
+git switch -c feat/search
+
+git push -u origin feat/search
 
 +-------------------------------------------------------+
 |										======4_OF_6===	|
