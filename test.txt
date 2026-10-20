@@ -1,0 +1,22 @@
+C:\Users\markg\Downloads\orgatlas-section26-governance-tests-installer\orgatlas-section26-governance-tests-installer>C:\GIT_GIT_GIT\OrgAtlas-TestRunner-Rewrite\scripts\test-system-health\run-section26-governance-tests.cmd
+============================================================
+SECTION 26 GOVERNANCE BEHAVIOR TESTS
+============================================================
+[PASS] GOV-TEST-IDENTITY-001 - duplicate testCaseId detection
+       GOV-TEST-IDENTITY-001 duplicate identity behavior verified
+[PASS] GOV-TEST-RUN-002 - Git-state capture
+       GOV-TEST-RUN-002 clean/dirty Git-state capture verified
+[PASS] GOV-TEST-NORMALIZE-002 - JUnit normalization
+       GOV-TEST-NORMALIZE-002 JUnit status/failure normalization verified
+[PASS] GOV-TEST-NORMALIZE-003 - Karma normalization
+       GOV-TEST-NORMALIZE-003 Angular/Karma frontend-fragment normalization verified
+[PASS] GOV-TEST-NORMALIZE-004 - Playwright normalization
+       GOV-TEST-NORMALIZE-004 Playwright frontend-fragment normalization verified
+[PASS] GOV-TEST-COVERAGE-001 - coverage status calculation
+       GOV-TEST-COVERAGE-001 layer/requirement coverage status calculation verified
+
+Behavior tests: 6
+Failed        : 0
+SECTION26_GOVERNANCE_BEHAVIOR : PASS
+
+C:\Users\markg\Downloads\orgatlas-section26-governance-tests-installer\orgatlas-section26-governance-tests-installer>

@@ -210,6 +210,79 @@ DELIMITER ;
 COMMIT;
 
 
++-------------------------------------------------------+
+|									======4_OF_5======	|
+|			T-SQL										|
+|														|
++-------------------------------------------------------+
+
+
+USE [identityiq];
+GO
+
+CREATE OR ALTER FUNCTION dbo.IsValidTeudatZehut
+(
+    @teudatZehut NVARCHAR(50)
+)
+RETURNS BIT
+AS
+BEGIN
+    DECLARE @tz BIGINT;
+    DECLARE @checksum INT;
+
+    DECLARE @d8 INT;
+    DECLARE @d6 INT;
+    DECLARE @d4 INT;
+    DECLARE @d2 INT;
+
+    /* Validate input */
+    IF @teudatZehut IS NULL
+       OR @teudatZehut = N''
+       OR @teudatZehut COLLATE Latin1_General_100_BIN2
+          LIKE N'%[^0-9]%'
+    BEGIN
+        RETURN 0;
+    END;
+
+    SET @tz = TRY_CONVERT(BIGINT, @teudatZehut);
+
+    IF @tz IS NULL
+       OR @tz < 0
+       OR @tz > 999999999
+    BEGIN
+        RETURN 0;
+    END;
+
+    /* Extract digits multiplied by 2 */
+    SET @d8 = (@tz / 10)       % 10;
+    SET @d6 = (@tz / 1000)     % 10;
+    SET @d4 = (@tz / 100000)   % 10;
+    SET @d2 = (@tz / 10000000) % 10;
+
+    /* Israeli Teudat Zehut checksum */
+    SET @checksum =
+          @tz % 10
+        + (@tz / 100)       % 10
+        + (@tz / 10000)     % 10
+        + (@tz / 1000000)   % 10
+        + (@tz / 100000000) % 10
+
+        + 2 * (@d8 + @d6 + @d4 + @d2)
+
+        - 9 * (
+              @d8 / 5
+            + @d6 / 5
+            + @d4 / 5
+            + @d2 / 5
+        );
+
+    IF @checksum % 10 = 0
+        RETURN 1;
+
+    RETURN 0;
+END;
+GO
+
 
 
 +-------------------------------------------------------+
