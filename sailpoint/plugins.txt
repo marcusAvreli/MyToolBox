@@ -1,0 +1,3 @@
+plugin status
+plugin status PluginName
+plugin export PluginName dir <destination_dir>
