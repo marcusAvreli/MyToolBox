@@ -1,0 +1,43 @@
+// Add these imports to your EXISTING Application.java if missing:
+import java.io.File;
+import java.io.IOException;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParserFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.sax.SAXSource;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
+
+// Replace only the existing main() method. Keep initApp(), the logger,
+// the existing getters/setters and the remainder of Application unchanged.
+public static void main(String[] args) throws IOException {
+    initApp();
+
+    String xmlPathName = "./resources/Custom-Mac_config.xml";
+    String xslPathName = "./resources/stylesheet.xsl";
+    String outputPathName = "./resources/Custom-Mac_config.pretty.xml";
+
+    try {
+        SAXParserFactory factory = SAXParserFactory.newInstance();
+        factory.setNamespaceAware(true);
+        XMLReader reader = factory.newSAXParser().getXMLReader();
+
+        // Source references sailpoint.dtd, which need not exist for formatting.
+        reader.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+        reader.setFeature("http://xml.org/sax/features/external-general-entities", false);
+        reader.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+
+        Transformer transformer = TransformerFactory.newInstance()
+                .newTransformer(new StreamSource(new File(xslPathName)));
+        transformer.transform(
+                new SAXSource(reader, new InputSource(new File(xmlPathName).toURI().toString())),
+                new StreamResult(new File(outputPathName)));
+    } catch (ParserConfigurationException | SAXException | TransformerException e) {
+        throw new IOException("Cannot format Custom-Mac_config.xml", e);
+    }
+}
